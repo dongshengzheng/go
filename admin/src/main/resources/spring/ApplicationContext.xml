@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="spring-mybatis.xml"/>
+    <!--属性占位文件引入，可以通过${属性名}获得属性文件中的内容 -->
+    <context:property-placeholder location="classpath:properties/application.properties" />
+
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="cacheSeconds" value="5"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="basenames">
+            <list>
+                <value>classpath:messages/message</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- ================ Shiro start ================ -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroRealm"/>
+    </bean>
+
+    <!--Realm -->
+    <bean id="shiroRealm" class="com.fish.idle.admin.base.interceptor.shiro.ShiroRealm"/>
+
+    <!-- rights -->
+    <bean id="gvrts" class="com.fish.idle.admin.base.filter.shiro.RightsFilter"/>
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/"/>
+        <property name="successUrl" value="/main"/>
+        <property name="unauthorizedUrl" value="/login_toLogin"/>
+        <property name="filters">
+            <map>
+                <entry key="gvrts" value-ref="gvrts"/>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /static/** = anon
+                /assets/** = anon
+                /code = anon
+                /login_login = anon
+                /logout = anon
+                /sys/index = anon
+                /user/unauthorized = anon
+                /user/editPwd = anon
+                /** = gvrts
+            </value>
+        </property>
+    </bean>
+    <!-- ================ Shiro end ================ -->
+
+</beans>
