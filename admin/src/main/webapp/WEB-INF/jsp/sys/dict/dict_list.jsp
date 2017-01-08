@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%@ taglib prefix="xianyu" uri="http://www.xianyu.com.cn/jsp/jstl/common" %>
+<%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<xianyu:navigater path="dict"></xianyu:navigater>
+<go:navigater path="dict"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
