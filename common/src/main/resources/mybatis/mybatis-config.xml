@@ -11,24 +11,24 @@
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.fish.idle.service.modules.sys.entity.Menu" alias="Menu"/>
-        <typeAlias type="com.fish.idle.service.modules.sys.entity.Button" alias="Button"/>
-        <typeAlias type="com.fish.idle.service.modules.sys.entity.User" alias="User"/>
-        <typeAlias type="com.fish.idle.service.modules.sys.entity.AppUser" alias="AppUser"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.City" alias="City"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.Province" alias="Province"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.Area" alias="Area"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.WorksLevel" alias="WorksLevel"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.Consumer" alias="Consumer"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.Works" alias="Works"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.TransferHistory" alias="TransferHistory"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.FollowHistory" alias="FollowHistory"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.Interpretation" alias="Interpretation"/>
-        <typeAlias type="com.fish.idle.service.modules.jsdd.entity.Images" alias="Images"/>
+        <typeAlias type="com.ctoangels.go.common.modules.sys.entity.Menu" alias="Menu"/>
+        <typeAlias type="com.ctoangels.go.common.modules.sys.entity.Button" alias="Button"/>
+        <typeAlias type="com.ctoangels.go.common.modules.sys.entity.User" alias="User"/>
+        <typeAlias type="com.ctoangels.go.common.modules.sys.entity.AppUser" alias="AppUser"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.City" alias="City"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.Province" alias="Province"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.Area" alias="Area"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.WorksLevel" alias="WorksLevel"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.Consumer" alias="Consumer"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.Works" alias="Works"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.TransferHistory" alias="TransferHistory"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.FollowHistory" alias="FollowHistory"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.Interpretation" alias="Interpretation"/>
+        <typeAlias type="com.ctoangels.go.common.modules.jsdd.entity.Images" alias="Images"/>
     </typeAliases>
     <!-- 映射map -->
     <mappers>
-        <package name="com.fish.idle.service.**.mapper"/>
+        <package name="com.ctoangels.go.common.**.mapper"/>
     </mappers>
 
 </configuration>

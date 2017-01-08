@@ -28,10 +28,10 @@
     </bean>
 
     <!--Realm -->
-    <bean id="shiroRealm" class="com.fish.idle.admin.base.interceptor.shiro.ShiroRealm"/>
+    <bean id="shiroRealm" class="com.ctoangels.go.admin.base.interceptor.shiro.ShiroRealm"/>
 
     <!-- rights -->
-    <bean id="gvrts" class="com.fish.idle.admin.base.filter.shiro.RightsFilter"/>
+    <bean id="gvrts" class="com.ctoangels.go.admin.base.filter.shiro.RightsFilter"/>
 
     <!-- Shiro Filter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

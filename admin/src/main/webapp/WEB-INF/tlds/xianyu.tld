@@ -16,7 +16,7 @@
             根据菜单path生成页头导航条，会自动补充菜单的层级关系
         </description>
         <name>navigater</name>
-        <tag-class>com.fish.idle.admin.base.tag.NavigaterTag</tag-class>
+        <tag-class>com.ctoangels.go.admin.base.tag.NavigaterTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>path</name>
