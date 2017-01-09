@@ -20,7 +20,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>每石文化管理后台登录</title>
+    <title><fmt:message key="sys.site.title"/></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <base href="<%=basePath%>">
