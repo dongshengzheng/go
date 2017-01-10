@@ -12,7 +12,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="">
-                <img src="${ctx}/static/img/banner.png" alt="logo" class="logo-default"/>
+                <img src="${ctx}/static/img/banner.png" alt="logo" /> <!-- class="logo-default"/ -->
             </a>
             <div class="menu-toggler sidebar-toggler">
                 <span></span>
