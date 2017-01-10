@@ -75,12 +75,6 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-all</artifactId>
         </dependency>
-        <!-- DB + DataSource start -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-        </dependency>
-
         <!--myBatis + spring end-->
         <dependency>
             <groupId>net.sourceforge.jexcelapi</groupId>

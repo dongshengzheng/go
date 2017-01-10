@@ -65,12 +65,7 @@
                 <artifactId>shiro-all</artifactId>
                 <version>1.2.3</version>
             </dependency>
-            <!-- DB + DataSource start -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>1.0.18</version>
-            </dependency>
+
             <dependency>
                 <groupId>net.sourceforge.jexcelapi</groupId>
                 <artifactId>jxl</artifactId>

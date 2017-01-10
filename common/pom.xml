@@ -94,9 +94,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- DB + DataSource start -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
+            <version>1.0.18</version>
         </dependency>
         <!--Mybatis及Mybatis-Spring依赖请勿加入项目配置，以免引起版本冲突！！！-->
         <dependency>
