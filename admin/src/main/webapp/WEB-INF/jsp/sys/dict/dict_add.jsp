@@ -41,7 +41,7 @@
                 <label for="sort" class="col-sm-2 control-label">排序值</label>
                 <div class="col-sm-7">
                     <input id="sort" name="sort" type="text" maxlength="32"
-                           minlength="2" class="form-control required" placeholder="请输入排序值">
+                           minlength="1" class="form-control required" placeholder="请输入排序值">
                 </div>
             </div>
 
@@ -62,5 +62,24 @@
     </div>
 </form>
 <script type="text/javascript">
-    $("#defForm").validate();
+    $("#defForm").validate({
+        rules:{
+            value:{
+                digits:true,
+                required:true
+            },
+            sort:{
+                digits:true,
+            }
+        },
+        messages:{
+            value:{
+                digits:"请输入数字",
+                required:"数据值必填"
+            },
+            sort:{
+                digits:"请输入数字",
+            }
+        }
+    });
 </script>
