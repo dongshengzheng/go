@@ -1,4 +1,4 @@
-package com.ctoangels.go.admin.modules.jsdd.controller;
+package com.ctoangels.go.admin.modules.go.controller;
 
 import org.springframework.stereotype.Controller;
 

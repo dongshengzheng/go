@@ -1,4 +1,4 @@
-package com.ctoangels.go.admin.modules.jsdd.controller;
+package com.ctoangels.go.admin.modules.go.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
