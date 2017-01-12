@@ -1,0 +1,868 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF8">
+    <title></title>
+    <style type="text/css">
+        #container {
+            margin: 8px;
+        }
+
+        .param-table {
+            background: #E6E6E6;
+            border: 1px solid #FFF;
+            margin: 12px 0;
+            border-collapse: collapse;
+        }
+
+        .param-table th {
+            background: gray;
+            color: #FFF;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #FFF;
+            padding: 5px;
+        }
+
+        .param-table td {
+            border-collapse: collapse;
+            border: 1px solid #FFF;
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        .param-table .th-name {
+            min-width: 140px;
+        }
+
+        .param-table .th-identifier {
+            min-width: 140px;
+        }
+
+        .param-table .th-type {
+            min-width: 100px;
+        }
+
+        .param-table .th-remark {
+            min-width: 200px;
+        }
+
+        .param-table .td-name {}
+
+        .param-table .td-identifier {}
+
+        .param-table .td-type   { color: #990000; }
+
+        .param-table .td-remark { color: #666; }
+
+        .param-table .tr-level-1 { background: #F5F5F5; }
+        .param-table .tr-level-1 .td-identifier { padding-left: 5px; }
+
+        .param-table .tr-level-2 { background: #E6E6E6; }
+        .param-table .tr-level-2 .td-identifier { padding-left: 15px; }
+
+        .param-table .tr-level-3 { background: #CCCCCC; }
+        .param-table .tr-level-3 .td-identifier { padding-left: 25px; }
+
+        .param-table .tr-level-4 { background: #E6E6E6; }
+        .param-table .tr-level-4 .td-identifier { padding-left: 35px; }
+
+        .param-table .tr-level-5 { background: #CCCCCC; }
+        .param-table .tr-level-5 .td-identifier { padding-left: 45px; }
+
+        .param-table .tr-level-6 { background: #E6E6E6; }
+        .param-table .tr-level-6 .td-identifier { padding-left: 55px; }
+
+        .param-table .tr-level-7 { background: #CCCCCC; }
+        .param-table .tr-level-7 .td-identifier { padding-left: 65px; }
+
+        .param-table .tr-level-8 { background: #E6E6E6; }
+        .param-table .tr-level-8 .td-identifier { padding-left: 75px; }
+
+        .param-table .tr-level-9 { background: #CCCCCC; }
+        .param-table .tr-level-9 .td-identifier { padding-left: 85px; }
+
+        .param-table .tr-level-10 { background: #E6E6E6; }
+        .param-table .tr-level-10 .td-identifier { padding-left: 95px; }
+
+        .param-table .tr-level-11 {
+            background: #CCCCCC;
+        }
+        .param-table .tr-level-11 .td-identifier { padding-left: 105px; }
+
+        .param-table .tr-level-12 {
+            background: #E6E6E6;
+        }
+        .param-table .tr-level-12 .td-identifier { padding-left: 115px; }
+
+        .param-table .tr-level-13 {
+            background: #CCCCCC;
+        }
+        .param-table .tr-level-13 .td-identifier { padding-left: 125px; }
+    </style>
+</head>
+<body>
+<div id="container">
+            <div class="module">
+            <h1>1&nbsp;基础信息</h1>
+                            <div class="page">
+                    <h2>1.1&nbsp;公司信息</h2>
+                                            <div class="action">
+                            <h3>1.1.1&nbsp;添加公司资料</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/addCompany</div>
+
+                            <h3>Method</h3>
+                            <div>POST</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">公司</td><td class="td-identifier">company</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司logo</td><td class="td-identifier">logo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司电话</td><td class="td-identifier">tel</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司网址</td><td class="td-identifier">website</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司法人</td><td class="td-identifier">legalPerson</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---联系方式</td><td class="td-identifier">contactMethods</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司传真</td><td class="td-identifier">fax</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---联系姓名</td><td class="td-identifier">contactName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---邮政编码</td><td class="td-identifier">postalCode</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否添加成功</td><td class="td-identifier">isOk</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.1.2&nbsp;查看公司的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryCompanyInfo</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">公司</td><td class="td-identifier">company</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司法人</td><td class="td-identifier">legalPerson</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司传真</td><td class="td-identifier">fax</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---联系方式</td><td class="td-identifier">contactMethods</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司logo</td><td class="td-identifier">logo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---邮政编码</td><td class="td-identifier">postalCode</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司网址</td><td class="td-identifier">website</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---联系姓名</td><td class="td-identifier">contactName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司电话</td><td class="td-identifier">tel</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                            <div class="page">
+                    <h2>1.2&nbsp;船舶信息</h2>
+                                            <div class="action">
+                            <h3>1.2.1&nbsp;查看单个船的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/shipInfo</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：型号</td><td class="td-identifier">meType</td><td class="td-type"></td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.2.2&nbsp;删除单个船的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/delete</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否删除成功</td><td class="td-identifier">isOk</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.2.3&nbsp;修改单个船的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/updateBefore</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船的id</td><td class="td-identifier">shipId</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：型号</td><td class="td-identifier">meType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.2.4&nbsp;添加单个船的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/add</div>
+
+                            <h3>Method</h3>
+                            <div>POST</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：型号</td><td class="td-identifier">meType</td><td class="td-type"></td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否添加成功</td><td class="td-identifier">isOk</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.2.5&nbsp;添加界面中根据imo查找船的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryByImo</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船的imo</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：型号</td><td class="td-identifier">meType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.2.6&nbsp;提交修改单个船的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/update</div>
+
+                            <h3>Method</h3>
+                            <div>POST</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：型号</td><td class="td-identifier">meType</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否添加成功</td><td class="td-identifier">isOk</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.2.7&nbsp;分页查询</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/shipList</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前页的页号</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">查询的条件：船的imo</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">查询的条件：船的名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">每页记录的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查询到的船的集合</td><td class="td-identifier">ships</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：型号</td><td class="td-identifier">meType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.2.8&nbsp;搜索船的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryByImoOrName</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">每页显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark">@mock=10</td></tr><tr class="tr-level-1"><td class="td-name">船的名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">当前页号</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark">@mock=0</td></tr><tr class="tr-level-1"><td class="td-name">船的imo号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">根据条件查询到的船的集合</td><td class="td-identifier">ships</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：型号</td><td class="td-identifier">meType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.2.9&nbsp;查看所有船的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryShipList</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">每页显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">所有船的集合</td><td class="td-identifier">ships</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：型号</td><td class="td-identifier">meType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                            <div class="page">
+                    <h2>1.3&nbsp;船厂信息</h2>
+                                            <div class="action">
+                            <h3>1.3.1&nbsp;查看所有的船厂的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryShipYardList</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">每页显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">所有船厂的信息</td><td class="td-identifier">shipYards</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船厂</td><td class="td-identifier">shipYard</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------电子邮件</td><td class="td-identifier">email</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------经度</td><td class="td-identifier">longitude</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船厂短名称</td><td class="td-identifier">shortName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------地址</td><td class="td-identifier">address</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------区域</td><td class="td-identifier">area</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------纬度</td><td class="td-identifier">latitude</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------位置</td><td class="td-identifier">location</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船厂名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------网站</td><td class="td-identifier">website</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------国家</td><td class="td-identifier">country</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------电话</td><td class="td-identifier">tel</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.3.2&nbsp;添加船厂的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/addShipYard</div>
+
+                            <h3>Method</h3>
+                            <div>POST</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船厂</td><td class="td-identifier">shipYard</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船厂商标</td><td class="td-identifier">logo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---地址</td><td class="td-identifier">address</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---电子邮件</td><td class="td-identifier">email</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---区域</td><td class="td-identifier">area</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船厂名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船厂短名称</td><td class="td-identifier">shortName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---经度</td><td class="td-identifier">longitude</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---纬度</td><td class="td-identifier">latitude</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---网站</td><td class="td-identifier">website</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---一般信息</td><td class="td-identifier">generalDetails</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------该船厂的所有Convemsion项目集合</td><td class="td-identifier">convemsionProjects</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------Convemsion项目</td><td class="td-identifier">convemsionProject</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------项目</td><td class="td-identifier">item</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------该船厂的所有的维修项目的集合</td><td class="td-identifier">repairingProjects</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------维修项目</td><td class="td-identifier">repairingProject</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------项目</td><td class="td-identifier">item</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------该船厂所有的大客户集合</td><td class="td-identifier">majorClients</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------大客户</td><td class="td-identifier">majorClient</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------大客户姓名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---设施信息</td><td class="td-identifier">facilityDetail</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------该船厂所有泊位信息的集合</td><td class="td-identifier">berthDetails</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------泊位信息</td><td class="td-identifier">berthDetail</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------草案</td><td class="td-identifier">protocol</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------总长</td><td class="td-identifier">loa</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------起重机</td><td class="td-identifier">cranes</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------能力</td><td class="td-identifier">capacity</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------该船厂的设施</td><td class="td-identifier">facilities</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------该船厂所有的起重机信息的集合</td><td class="td-identifier">cranesDetails</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------起重机信息</td><td class="td-identifier">cranesDetail</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-6"><td class="td-name">---------------单元</td><td class="td-identifier">unit</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-6"><td class="td-name">---------------能力</td><td class="td-identifier">capacity</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-6"><td class="td-name">---------------备注</td><td class="td-identifier">remark</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-6"><td class="td-name">---------------类型</td><td class="td-identifier">type</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------该船厂所有的拖船信息的集合</td><td class="td-identifier">tugboatsDetails</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------拖船信息</td><td class="td-identifier">tugboatsDetail</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-6"><td class="td-name">---------------能力</td><td class="td-identifier">capacity</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-6"><td class="td-name">---------------备注</td><td class="td-identifier">remark</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-6"><td class="td-name">---------------类型</td><td class="td-identifier">type</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-6"><td class="td-name">---------------单元</td><td class="td-identifier">unit</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------该船厂所有其他设施信息的集合</td><td class="td-identifier">Others</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------数量</td><td class="td-identifier">count</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------类型</td><td class="td-identifier">type</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------该船厂所有的码头信息集合</td><td class="td-identifier">terminalInfos</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------码头信息</td><td class="td-identifier">terminalInfo</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------维：长度</td><td class="td-identifier">length</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------维：宽度</td><td class="td-identifier">width</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------能力</td><td class="td-identifier">capacity</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------起重机</td><td class="td-identifier">cranes</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------提升能力</td><td class="td-identifier">liftCapacity</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------姓名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------维：草案</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------类型</td><td class="td-identifier">type</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-5"><td class="td-name">------------备注</td><td class="td-identifier">remark</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---电话</td><td class="td-identifier">tel</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---国家</td><td class="td-identifier">country</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---位置</td><td class="td-identifier">location</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead></table>
+                        </div>
+                                            <div class="action">
+                            <h3>1.3.3&nbsp;搜索船厂的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryShipYardByName</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船厂的名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">所有船厂的信息</td><td class="td-identifier">shipYards</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船厂</td><td class="td-identifier">shipYard</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------纬度</td><td class="td-identifier">latitude</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船厂名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------网站</td><td class="td-identifier">website</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船厂短名称</td><td class="td-identifier">shortName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------电话</td><td class="td-identifier">tel</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------位置</td><td class="td-identifier">location</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------地址</td><td class="td-identifier">address</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------区域</td><td class="td-identifier">area</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------国家</td><td class="td-identifier">country</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------经度</td><td class="td-identifier">longitude</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------电子邮件</td><td class="td-identifier">email</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                    </div>
+            <div class="module">
+            <h1>2&nbsp;维修工程单</h1>
+                            <div class="page">
+                    <h2>2.1&nbsp;维修工程单</h2>
+                                            <div class="action">
+                            <h3>2.1.1&nbsp;查看所有的维修工程单的信息</h3>
+
+                            <h3>URL</h3>
+                            <div></div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">条件参数船的名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">每页显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">条件参数船的名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">条件参数船的名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">条件参数船的名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.1.2&nbsp;点击搜索查看维修工程单</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryOrderByName</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>通过输入船舶名称，点击搜索查看维修工程单</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">没有显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.1.3&nbsp;删除维修工程单</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/deleteProjectSheet</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修工程单的id</td><td class="td-identifier">id</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否删除成功</td><td class="td-identifier">isOk</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.1.4&nbsp;修改维修工程单</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/updateBefore</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修工程单的id</td><td class="td-identifier">id</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.1.5&nbsp;点击上下页查询</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/quryPageProjectSheet</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>点击上下页，的查询</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">条件参数船的名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">每页显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.1.6&nbsp;点击维修单号</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryOrderInfo</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>点击维修单号，可以查看这条船的维修工程单的详细信息</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修工程单的id</td><td class="td-identifier">id</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.1.7&nbsp;发送工程单询价</h3>
+
+                            <h3>URL</h3>
+                            <div></div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>将维修工程单生成Excel文件，发送给船厂的邮箱</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">发件人</td><td class="td-identifier">addresser</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">收件人</td><td class="td-identifier">recipients</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">Excel文件</td><td class="td-identifier">file</td><td class="td-type">object</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否发送成功</td><td class="td-identifier">isOK</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                            <div class="page">
+                    <h2>2.2&nbsp;工程单比价</h2>
+                                            <div class="action">
+                            <h3>2.2.1&nbsp;点击搜索工程单比价的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryBiJia</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">没有显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------询价</td><td class="td-identifier">enquiry</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------询价标题</td><td class="td-identifier">title</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------供应商</td><td class="td-identifier">supplier</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------状态</td><td class="td-identifier">status</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价总额</td><td class="td-identifier">quoteTotal</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价日期</td><td class="td-identifier">quoteDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.2.2&nbsp;点击上下页查询</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryPageBiJia</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">没有显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------询价</td><td class="td-identifier">enquiry</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------供应商</td><td class="td-identifier">supplier</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------询价标题</td><td class="td-identifier">title</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价总额</td><td class="td-identifier">quoteTotal</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------状态</td><td class="td-identifier">status</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价日期</td><td class="td-identifier">quoteDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.2.3&nbsp;查看所有工程单比价信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryBiJias</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">每页显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------询价</td><td class="td-identifier">enquiry</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价总额</td><td class="td-identifier">quoteTotal</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价日期</td><td class="td-identifier">quoteDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------询价标题</td><td class="td-identifier">title</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------状态</td><td class="td-identifier">status</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------供应商</td><td class="td-identifier">supplier</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.2.4&nbsp;点击维修单号</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryOrderInfo</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>点击维修单号，可以查看这条船的维修工程单的详细信息</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修工程单的id</td><td class="td-identifier">id</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.2.5&nbsp;查看比价</h3>
+
+                            <h3>URL</h3>
+                            <div></div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">获取选中的几家船厂的id</td><td class="td-identifier">ids</td><td class="td-type"></td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">报价总额</td><td class="td-identifier">quoteTotal</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                            <div class="page">
+                    <h2>2.3&nbsp;工程单询价</h2>
+                                            <div class="action">
+                            <h3>2.3.1&nbsp;点击上下页查询</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryPageEnquiry</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">没有显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------询价</td><td class="td-identifier">enquiry</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------状态</td><td class="td-identifier">status</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------询价标题</td><td class="td-identifier">title</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价日期</td><td class="td-identifier">quoteDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价总额</td><td class="td-identifier">quoteTotal</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------供应商</td><td class="td-identifier">supplier</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.3.2&nbsp;查看所有的工程单询价的信息</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryEnquirys</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>将已经发送过询价的的工程单给查出来</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">没有显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheetss</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------询价</td><td class="td-identifier">enquiry</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价日期</td><td class="td-identifier">quoteDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价总额</td><td class="td-identifier">quoteTotal</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------询价标题</td><td class="td-identifier">title</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------供应商</td><td class="td-identifier">supplier</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------状态</td><td class="td-identifier">status</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.3.3&nbsp;点击搜索查询工程单询价</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryEnquiry</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">没有显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------询价</td><td class="td-identifier">enquiry</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价日期</td><td class="td-identifier">quoteDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------供应商</td><td class="td-identifier">supplier</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------询价标题</td><td class="td-identifier">title</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------报价总额</td><td class="td-identifier">quoteTotal</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-4"><td class="td-name">---------状态</td><td class="td-identifier">status</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.3.4&nbsp;点击维修单号</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryOrderInfo</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>点击维修单号，可以查看该船的维修详细工程单</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修工程单的id</td><td class="td-identifier">id</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>2.3.5&nbsp;导入报价单</h3>
+
+                            <h3>URL</h3>
+                            <div></div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>导入船厂返回来的报价单</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">报价单</td><td class="td-identifier">file</td><td class="td-type">object</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">提交成功</td><td class="td-identifier">isOk</td><td class="td-type"></td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                    </div>
+            <div class="module">
+            <h1>3&nbsp;系统设置</h1>
+                            <div class="page">
+                    <h2>3.1&nbsp;账号管理</h2>
+                                            <div class="action">
+                            <h3>3.1.1&nbsp;修改密码</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/updatePassword</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">新密码</td><td class="td-identifier">newPassword</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">原密码</td><td class="td-identifier">oldPassword</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">确认密码</td><td class="td-identifier">confirmPassword</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否修改成功</td><td class="td-identifier">isOK</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>3.1.2&nbsp;修改电子邮箱</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/updateEmail</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">验证码</td><td class="td-identifier">captcha</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">新电子邮箱</td><td class="td-identifier">newEmail</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否修改成功</td><td class="td-identifier">isOk</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>3.1.3&nbsp;姓名修改</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/updateUserName</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">验证码</td><td class="td-identifier">captcha</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">要修改的用户名</td><td class="td-identifier">username</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否修改成功</td><td class="td-identifier">isOk</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>3.1.4&nbsp;手机号码绑定</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/updateTel</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前手机号码</td><td class="td-identifier">oldTel</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">新手机号码</td><td class="td-identifier">newTel</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">验证码</td><td class="td-identifier">captcha</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">是否修改成功或绑定成功</td><td class="td-identifier">isOK</td><td class="td-type">boolean</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                    </div>
+            <div class="module">
+            <h1>4&nbsp;维修进度</h1>
+                            <div class="page">
+                    <h2>4.1&nbsp;维修工程管理</h2>
+                                            <div class="action">
+                            <h3>4.1.1&nbsp;查看所有的正在维修的工程单</h3>
+
+                            <h3>URL</h3>
+                            <div></div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">没有显示的条数</td><td class="td-identifier">pageSize</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-1"><td class="td-name">当前页</td><td class="td-identifier">pageNum</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修进度</td><td class="td-identifier">schedule</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>4.1.2&nbsp;点击维修单号</h3>
+
+                            <h3>URL</h3>
+                            <div>/ship/rest/queryOrderInfo</div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div>点击维修单号，可以查看这条船的维修工程单的详细信息</div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修工程单的id</td><td class="td-identifier">id</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">查看所有的维修工程单的集合</td><td class="td-identifier">repairProjectSheets</td><td class="td-type">array&lt;object&gt;</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>4.1.3&nbsp;点击查看进度</h3>
+
+                            <h3>URL</h3>
+                            <div></div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修船的id</td><td class="td-identifier">id</td><td class="td-type">number</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">正在维修的船</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                            <div class="page">
+                    <h2>4.2&nbsp;维修工程单的看板</h2>
+                                            <div class="action">
+                            <h3>4.2.1&nbsp;点击维修单号</h3>
+
+                            <h3>URL</h3>
+                            <div></div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">维修工程单</td><td class="td-identifier">repairProjectSheet</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---进厂日期</td><td class="td-identifier">date</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修类别</td><td class="td-identifier">repairCategory</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---维修单号</td><td class="td-identifier">repairOrder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---创建人</td><td class="td-identifier">creater</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司名称</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---计划金额</td><td class="td-identifier">planMoney</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---计划天数</td><td class="td-identifier">planDays</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---创建日期</td><td class="td-identifier">createDate</td><td class="td-type">object</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                            <div class="action">
+                            <h3>4.2.2&nbsp;点击船舶名称</h3>
+
+                            <h3>URL</h3>
+                            <div></div>
+
+                            <h3>Method</h3>
+                            <div>GET</div>
+
+                            <h3>Description</h3>
+                            <div></div>
+
+                            <h3>Request Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">船舶名称</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+
+                            <h3>Response Param List</h3>
+                            <table class="param-table"><thead><th class="th-name">Name</th><th class="th-identifier">Identifier</th><th class="th-type">Type</th><th class="th-remark">Remark</th></thead><tr class="tr-level-1"><td class="td-name">当前查到的船</td><td class="td-identifier">ship</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：型号</td><td class="td-identifier">boilerType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：缸径</td><td class="td-identifier">meCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：工作压力</td><td class="td-identifier">boilerPressure</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：数量</td><td class="td-identifier">auxQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船级社</td><td class="td-identifier">classificationSociety</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社id</td><td class="td-identifier">classificationSId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船级社名称</td><td class="td-identifier">classificationSName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：厂家</td><td class="td-identifier">boilerMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：型号</td><td class="td-identifier">meType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造船厂</td><td class="td-identifier">builder</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：数量</td><td class="td-identifier">boilerQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：型号</td><td class="td-identifier">auxType</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：厂家</td><td class="td-identifier">meMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：马力/转速</td><td class="td-identifier">meBhpRpm</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---载重吨</td><td class="td-identifier">dwt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---总重吨</td><td class="td-identifier">gt</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船号</td><td class="td-identifier">imo</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船名</td><td class="td-identifier">name</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船舶呼号</td><td class="td-identifier">callSign</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船长</td><td class="td-identifier">loa</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的id</td><td class="td-identifier">shipId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：额定功率</td><td class="td-identifier">auxRatedOR</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---主机：数量</td><td class="td-identifier">meQty</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：蒸发量</td><td class="td-identifier">boilerEvaporation</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船宽</td><td class="td-identifier">beam</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---锅炉：热交换面积</td><td class="td-identifier">boilerHeatingArea</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---吃水</td><td class="td-identifier">draft</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：缸径</td><td class="td-identifier">auxCylBore</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船高</td><td class="td-identifier">high</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---辅机：厂家</td><td class="td-identifier">auxMaker</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---建造日期</td><td class="td-identifier">buildeYear</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---公司名</td><td class="td-identifier">companyName</td><td class="td-type">string</td><td class="td-remark"></td></tr><tr class="tr-level-2"><td class="td-name">---船的类型</td><td class="td-identifier">type</td><td class="td-type">object</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的类型id</td><td class="td-identifier">typeId</td><td class="td-type">number</td><td class="td-remark"></td></tr><tr class="tr-level-3"><td class="td-name">------船的种类名称</td><td class="td-identifier">category</td><td class="td-type">string</td><td class="td-remark"></td></tr></table>
+                        </div>
+                                    </div>
+                    </div>
+    </div>
+</body>
+</html>
