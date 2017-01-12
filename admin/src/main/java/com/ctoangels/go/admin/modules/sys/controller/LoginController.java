@@ -89,7 +89,7 @@ public class LoginController extends BaseController {
             boolean useValiCode = true;
             if (useValiCode && (null == code || "".equals(code))) {
                 // 验证码为空
-                errInfo = "nullcode";
+                errInfo = "null code";
             } else {
                 String loginName = keyDatas[0];
                 String password = keyDatas[1];
@@ -118,10 +118,10 @@ public class LoginController extends BaseController {
                             errInfo = "身份验证失败！";
                         }
                     } else {
-                        errInfo = "usererror"; // 用户名或密码有误
+                        errInfo = "user error"; // 用户名或密码有误
                     }
                 } else {
-                    errInfo = "codeerror"; // 验证码输入有误
+                    errInfo = "code error"; // 验证码输入有误
                 }
                 if (Tools.isEmpty(errInfo)) {
                     errInfo = "success"; // 验证成功

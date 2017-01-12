@@ -8,7 +8,6 @@
 %>
 <go:navigater path="works"></go:navigater>
 <div class="row">
-    <input type="hidden" value='<fmt:message key="sys.site.url"/>' id="siteUrl">
     <div class="col-md-12">
         <div class="portlet light bordered">
             <div class="portlet-body">

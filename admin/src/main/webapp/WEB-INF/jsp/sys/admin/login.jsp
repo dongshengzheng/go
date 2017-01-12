@@ -50,10 +50,10 @@
           id="loginForm">
         <h3 class="form-title"><fmt:message key="sys.user.plogin"/></h3>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">用户名</label>
+            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="login_username"/></label>
             <div class="input-icon">
                 <i class="fa fa-user"></i>
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="请输入用户名" name="loginName" id="loginName" /> </div>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="<fmt:message key="login_username_input"/>" name="loginName" id="loginName" /> </div>
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">密码</label>
@@ -144,11 +144,12 @@
 
         // init background slide images
         $.backstretch([
-                "${ctx}/assets/layouts/layout/img/bg/6.jpg",
                 "${ctx}/assets/layouts/layout/img/bg/1.jpg",
+                "${ctx}/assets/layouts/layout/img/bg/2.jpg",
+                "${ctx}/assets/layouts/layout/img/bg/3.jpg",
                 "${ctx}/assets/layouts/layout/img/bg/4.jpg",
-                "${ctx}/assets/layouts/layout/img/bg/5.jpg"
-
+                "${ctx}/assets/layouts/layout/img/bg/5.jpg",
+                "${ctx}/assets/layouts/layout/img/bg/6.jpg"
             ], {
                 fade: 1000,
                 duration: 8000
