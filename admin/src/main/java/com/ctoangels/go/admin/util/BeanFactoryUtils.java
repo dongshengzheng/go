@@ -1,8 +1,3 @@
-/*
- * Copyright(c) 2015 xianyu.com.cn All rights reserved.
- * distributed with this file and available online at
- * http://www.xianyu.com.cn/
- */
 package com.ctoangels.go.admin.util;
 
 import org.springframework.beans.BeansException;
