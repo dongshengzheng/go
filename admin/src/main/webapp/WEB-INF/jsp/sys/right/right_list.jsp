@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%@ taglib prefix="xianyu" uri="http://www.ctoangels.com/jsp/jstl/common" %>
+<%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li><a href="./"><i class="icon-home"></i> 主页</a></li>
-        <li><i class='fa fa-circle'></i>系统管理</li>
-        <li><i class='fa fa-circle'></i><a href="right" data-target="navTab">菜单信息</a></li>
-    </ul>
-</div>
+<go:navigater path="right"></go:navigater>
+
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
