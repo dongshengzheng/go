@@ -9,7 +9,7 @@
   <display-name>JSTL functions sys</display-name>
   <tlib-version>1.1</tlib-version>
   <short-name>fns</short-name>
-  <uri>http://www.xianyu.com.cn/jsp/jstl/fnc</uri>
+  <uri>http://www.ctoangels.com/jsp/jstl/fnc</uri>
 
   <!-- DictUtils -->
   <function>
