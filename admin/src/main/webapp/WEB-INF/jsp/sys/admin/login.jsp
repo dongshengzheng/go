@@ -56,15 +56,15 @@
                 <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="<fmt:message key="login_username_input"/>" name="loginName" id="loginName" /> </div>
         </div>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">密码</label>
+            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="login_password"/></label>
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
-                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="请输入密码" name="password" id="password" /> </div>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="<fmt:message key="login_pwd_input"/>" name="password" id="password" /> </div>
         </div>
         <div class="form-group">
-            <input class="form-control" placeholder="验证码" type="text"
+            <input class="form-control" placeholder="<fmt:message key="login_verify_code"/>" type="text"
                    id="code" name="code" style="width: 30%; float: left;">
-            <img id="codeImg" alt="点击更换" title="点击更换"
+            <img id="codeImg" alt="<fmt:message key="login_click_change"/>" title="<fmt:message key="login_click_change"/>"
                  style="width: 40%; height: 34px; margin-left: 12px;" src="">
         </div>
         <div class="form-actions">
@@ -77,7 +77,7 @@
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"> 2016 &copy; <a href="http://www.mschuangyi.com/">每石文化</a> 版权保留. </div>
+<div class="copyright"> <fmt:message key="login_since_year"/> &copy; <a href="http://a.goshipyard.com/"><fmt:message key="sys.site.title"/></a> <fmt:message key="login_copyrights_reserved"/> </div>
 
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
@@ -107,18 +107,18 @@
                     if ("success" == data.result) {
                         saveCookie();
                         window.location.href = "<%=basePath%>";
-                    } else if ("usererror" == data.result) {
+                    } else if ("user error" == data.result) {
                         $("#loginName").tips({
                             side: 1,
-                            msg: "用户名或密码有误",
+                            msg: "<fmt:message key="login_username_pwd_false"/>",
                             bg: '#FF5080',
                             time: 15
                         });
                         $("#loginName").focus();
-                    } else if ("codeerror" == data.result) {
+                    } else if ("code error" == data.result) {
                         $("#code").tips({
                             side: 1,
-                            msg: "验证码输入有误",
+                            msg: "<fmt:message key="login_incorrect_verifycode"/>",
                             bg: '#FF5080',
                             time: 15
                         });
@@ -127,7 +127,7 @@
                     } else {
                         $("#loginName").tips({
                             side: 1,
-                            msg: "缺少参数",
+                            msg: "<fmt:message key="login_lackofparameter"/>",
                             bg: '#FF5080',
                             time: 15
                         });
@@ -180,7 +180,7 @@
 
             $("#loginName").tips({
                 side: 2,
-                msg: '用户名不得为空',
+                msg: '<fmt:message key="login_username_empty"/>',
                 bg: '#AE81FF',
                 time: 3
             });
@@ -195,7 +195,7 @@
 
             $("#password").tips({
                 side: 2,
-                msg: '密码不得为空',
+                msg: '<fmt:message key="login_pwd_empty"/>',
                 bg: '#AE81FF',
                 time: 3
             });
@@ -207,7 +207,7 @@
 
             $("#code").tips({
                 side: 1,
-                msg: '验证码不得为空',
+                msg: '<fmt:message key="login_verifycode_empty"/>',
                 bg: '#AE81FF',
                 time: 3
             });
@@ -218,7 +218,7 @@
 
         $("#loginbox").tips({
             side: 1,
-            msg: '正在登录 , 请稍后 ...',
+            msg: '<fmt:message key="login_tuning"/>',
             bg: '#68B500',
             time: 10
         });
