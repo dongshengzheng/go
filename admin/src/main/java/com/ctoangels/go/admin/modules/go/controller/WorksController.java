@@ -89,7 +89,7 @@ public class WorksController  extends BaseController {
     public String level(@RequestParam Integer worksId, ModelMap map) {
         WorksLevel worksLevel = worksLevelService.selectOne(new WorksLevel(worksId));
         map.put("worksLevel", worksLevel);
-        return "jsdd/works/level";
+        return "go/works/level";
     }
 
 
@@ -97,14 +97,14 @@ public class WorksController  extends BaseController {
     public String provider(@RequestParam Integer worksId, ModelMap map) {
         Consumer provider = consumerService.selectOne(new Consumer(Const.CONSUMER_TYPE_PROVIDER,worksId));
         map.put("provider", provider);
-        return "jsdd/works/provider";
+        return "go/works/provider";
     }
 
     @RequestMapping(value = "/collect", method = RequestMethod.GET)
     public String collect(@RequestParam Integer worksId, ModelMap map) {
         Consumer collect = consumerService.selectOne(new Consumer(Const.CONSUMER_TYPE_COLLECT,worksId));
         map.put("collect", collect);
-        return "jsdd/works/collect";
+        return "go/works/collect";
     }
 
 
@@ -112,6 +112,6 @@ public class WorksController  extends BaseController {
     public String toEdit(@RequestParam Integer worksId, ModelMap map) {
         Report works = reportService.selectOne(new Report(worksId));
         map.put("works", works);
-        return "jsdd/works/report";
+        return "go/works/report";
     }
 }

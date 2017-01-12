@@ -77,8 +77,8 @@
 </div>
 <div class="page-footer">
     <div class="page-footer-inner"> 2016 &copy;
-        <a href="http://www.mschuangyi.com/" style="color:#337ab7"
-           title="每石文化" target="_blank">每石文化</a>版权保留
+        <a href="http://a.goshipyard.com/" style="color:#337ab7"
+           title="<fmt:message key="sys.site.title"/>" target="_blank"><fmt:message key="sys.site.title"/></a><fmt:message key="login_copyrights_reserved"/>
     </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>
