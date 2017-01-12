@@ -44,7 +44,7 @@ public class WorksController  extends BaseController {
 
     @RequestMapping
     public String page() {
-        return "jsdd/works/works_list";
+        return "go/works/works_list";
     }
 
     @RequestMapping(value = "/list")
