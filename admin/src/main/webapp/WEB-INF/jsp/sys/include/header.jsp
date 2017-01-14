@@ -25,7 +25,7 @@
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                            data-close-others="true">
                             <span class="username username-hide-on-mobile"> ${user.name} </span>
-                            <img alt="" class="img-circle" src="${ctx}/assets/layouts/layout/img/avatar.jpg"/>
+                            <img alt="" class="img-circle" src="${ctx}/assets/layouts/layout/img/avatar.png"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
