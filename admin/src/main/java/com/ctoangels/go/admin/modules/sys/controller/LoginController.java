@@ -48,6 +48,9 @@ public class LoginController extends BaseController {
     @Value("${site_path}")
     private String sitePath;
 
+    @Value("${SYSNAME}")
+    private String sysName;
+
     @RequestMapping(value = "path")
     @ResponseBody
     public String path(){
@@ -63,7 +66,7 @@ public class LoginController extends BaseController {
     public String toLogin() throws Exception {
         JSONObject jsonObject = new JSONObject();
         // TODO: 29/11/2016 改成读取properties 此处系统中似乎没有用的上
-        jsonObject.put("sysname", Tools.readTxtFile(Const.SYSNAME));
+        jsonObject.put("sysname", sysName);
         return "sys/admin/login";
     }
 
@@ -81,7 +84,7 @@ public class LoginController extends BaseController {
         if (null != keyDatas && keyDatas.length == 3) {
             // shiro管理的session
             Subject currentUser = SecurityUtils.getSubject();
-              Session session = currentUser.getSession();
+            Session session = currentUser.getSession();
             String sessionCode = (String) session.getAttribute(Const.SESSION_SECURITY_CODE); // 获取session中的验证码
             // TODO: 29/11/2016 此处明显有问题，后续进行逻辑修复：登录超过三次才显示验证码
             String code = keyDatas[2];
@@ -140,8 +143,8 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/sys/index")
     public String login_index(ModelMap map) {
         // 加载所有菜单
-        map.put("changeMenu", "yes"); // TODO: 29/11/2016 ??
-        map.put("sysname", Tools.readTxtFile(Const.SYSNAME)); // 读取系统名称
+        map.put("changeMenu", "yes");
+        map.put("sysname", sysName); // 读取系统名称
         try {
             // shiro管理的session
             Subject currentUser = SecurityUtils.getSubject();
@@ -247,7 +250,7 @@ public class LoginController extends BaseController {
         // shiro销毁登录，logout的时候shiro会删掉所有session
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        map.put("sysname", Tools.readTxtFile(Const.SYSNAME)); // 读取系统名称 TODO:更改读取方式
+        map.put("sysname", sysName);
         return "sys/admin/login";
     }
 
