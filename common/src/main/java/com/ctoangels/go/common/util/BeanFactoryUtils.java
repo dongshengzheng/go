@@ -1,4 +1,4 @@
-package com.ctoangels.go.admin.util;
+package com.ctoangels.go.common.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;

@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import com.ctoangels.go.admin.util.BeanFactoryUtils;
+import com.ctoangels.go.common.util.BeanFactoryUtils;
 import com.ctoangels.go.common.modules.sys.entity.Menu;
 import com.ctoangels.go.common.modules.sys.service.MenuService;
 
