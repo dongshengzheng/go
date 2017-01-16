@@ -14,7 +14,6 @@
         <typeAlias type="com.ctoangels.go.common.modules.sys.entity.Menu" alias="Menu"/>
         <typeAlias type="com.ctoangels.go.common.modules.sys.entity.Button" alias="Button"/>
         <typeAlias type="com.ctoangels.go.common.modules.sys.entity.User" alias="User"/>
-        <typeAlias type="com.ctoangels.go.common.modules.sys.entity.AppUser" alias="AppUser"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.Works" alias="Works"/>
     </typeAliases>
     <!-- 映射map -->
