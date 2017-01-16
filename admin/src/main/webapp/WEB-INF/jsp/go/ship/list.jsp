@@ -12,6 +12,19 @@
         <div class="portlet light bordered">
             <div class="portlet-body">
                 <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <shiro:hasPermission name="ship/addBtn">
+                                    <button data-url="ship/addBtn" data-model="dialog" class="btn btn-outline btn-circle btn-sm green"> 新增
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </shiro:hasPermission>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
                 </div>
                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
                        id="default_table">
