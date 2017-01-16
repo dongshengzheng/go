@@ -15,16 +15,7 @@
         <typeAlias type="com.ctoangels.go.common.modules.sys.entity.Button" alias="Button"/>
         <typeAlias type="com.ctoangels.go.common.modules.sys.entity.User" alias="User"/>
         <typeAlias type="com.ctoangels.go.common.modules.sys.entity.AppUser" alias="AppUser"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.City" alias="City"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.Province" alias="Province"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.Area" alias="Area"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.WorksLevel" alias="WorksLevel"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.Consumer" alias="Consumer"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.Works" alias="Works"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.TransferHistory" alias="TransferHistory"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.FollowHistory" alias="FollowHistory"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.Interpretation" alias="Interpretation"/>
-        <typeAlias type="com.ctoangels.go.common.modules.go.entity.Images" alias="Images"/>
     </typeAliases>
     <!-- 映射map -->
     <mappers>
