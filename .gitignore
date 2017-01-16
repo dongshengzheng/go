@@ -8,3 +8,4 @@
 **/gen.xml
 **/.DS_Store
 commons/
+**/CustomGenerator.java
