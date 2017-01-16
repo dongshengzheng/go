@@ -1,11 +1,11 @@
-package com.ctoangels.go.admin.modules.go.controller;
+package com.ctoangels.go.common.modules.go.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.ctoangels.go.admin.controller.BaseController;
-import com.ctoangels.go.common.modules.go.entity.Works;
-import com.ctoangels.go.common.modules.go.service.IWorksService;
+import com.ctoangels.go.common.modules.go.entity.Ship;
+import com.ctoangels.go.common.modules.go.service.IShipService;
+import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,26 +16,26 @@ import org.springframework.web.bind.annotation.*;
  * Works 控制层
  */
 @Controller
-@RequestMapping("works")
-public class WorksController extends BaseController {
+@RequestMapping("shipinfo")
+public class ShipController extends BaseController {
     @Autowired
-    private IWorksService worksService;
+    private IShipService shipService;
 
     @RequestMapping
     public String page() {
-        return "go/works/works_list";
+        return "go/ships/ships_list";
     }
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public JSONObject list(Works works) {
-        EntityWrapper<Works> ew = getEntityWrapper();
+    public JSONObject list(Ship ship) {
+        EntityWrapper<Ship> ew = getEntityWrapper();
         ew.addFilter("status <> {0}", Const.WORKS_STATUS_DRAFT);
-        if (!StringUtils.isEmpty(works.getName()))
-            ew.addFilter("name={0}", works.getName());
-        Page<Works> page = worksService.selectPage(getPage(), ew);
-        for (Works works_infor : page.getRecords()){
-            works_infor.setCollector("James");
+        if (!StringUtils.isEmpty(ship.getName()))
+            ew.addFilter("name={0}", ship.getName());
+        Page<Ship> page = shipService.selectPage(getPage(), ew);
+        for (Ship ship_infor : page.getRecords()){
+//            ship_infor.setCollector("James");
         }
         return jsonPage(page);
     }
@@ -45,8 +45,8 @@ public class WorksController extends BaseController {
      */
     @RequestMapping(value = "check", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean check(Works works) {
-        return worksService.updateSelectiveById(new Works(works.getId(), works.getStatus()));
+    public Boolean check(Ship ship) {
+        return shipService.updateSelectiveById(new Ship(ship.getId(), ship.getStatus()));
 
     }
 
@@ -56,10 +56,10 @@ public class WorksController extends BaseController {
     @RequestMapping(value = "slide", method = RequestMethod.POST)
     @ResponseBody
     public Boolean slide(Integer id, Integer slide) {
-        Works works = new Works();
+        Ship works = new Ship();
         works.setId(id);
         works.setSlide(slide);
-        return worksService.updateSelectiveById(works);
+        return shipService.updateSelectiveById(works);
 
     }
 }

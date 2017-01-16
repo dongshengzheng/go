@@ -1,7 +1,6 @@
-package com.ctoangels.go.admin.modules.sys.controller;
+package com.ctoangels.go.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ctoangels.go.admin.controller.BaseController;
 import com.ctoangels.go.common.modules.sys.entity.Button;
 import com.ctoangels.go.common.modules.sys.entity.Menu;
 import com.ctoangels.go.common.modules.sys.entity.User;

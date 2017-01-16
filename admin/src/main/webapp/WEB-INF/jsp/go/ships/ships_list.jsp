@@ -6,7 +6,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="works"></go:navigater>
+<go:navigater path="shipinfo"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -20,10 +20,8 @@
                         <th width="10px">
                             <input type='checkbox' id="defaultCheck"/>
                         </th>
-                        <th>物品名称</th>
-                        <th>递交日期</th>
-                        <th>收藏者</th>
-                        <th>审核状态</th>
+                        <th>船舶名称</th>
+                        <th>建造日期</th>
                         <th>首页推荐</th>
                     </tr>
                     </thead>
@@ -42,7 +40,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "works/list",
+                "url": "shipinfo/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
@@ -60,7 +58,7 @@
                 {
                     "data": "name",
                     "render": function (data,type,row) {
-                        return  '<a href="javascript:;" onclick="goIntoWorkInfo('+row.id+')" >' + row.name + '</a>'
+                        return  row.name;
                     }
                 },
                 {
@@ -68,20 +66,6 @@
                     "render": function (data) {
                         var date = new Date(data);
                         return date.Format("yyyy-MM-dd");
-                    }
-                },
-                {"data": "collector"},
-                {
-                    "data": "status",
-                    "render": function (data, type, row) {
-                        if (data == 1) {
-                            return '<a href="javascript:;" onclick="check(' + row.id + ',3)" class="btn btn-success btn-xs">通过</a>'
-                                    + '<a href="javascript:;" onclick="check(' + row.id + ',2)" class="btn btn-danger btn-xs">不通过</a>';
-                        } else if (data == 3) {
-                            return "通过"
-                        } else {
-                            return "不通过";
-                        }
                     }
                 },
                 {
@@ -100,14 +84,14 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "搜索字典类型");
+                initSearchForm(null, "搜索船舶类型");
             }
         });
     });
 
     function check(id, status) {
         if (confirm("确定审核？")) {
-            $.post("/works/check", {id: id, status: status}, function () {
+            $.post("/shipinfo/check", {id: id, status: status}, function () {
                 refreshTable();
             });
 
@@ -117,7 +101,7 @@
 
     function slide(id, slide) {
         if (confirm("确定提交？")) {
-            $.post("/works/slide", {id: id, slide: slide}, function () {
+            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
                 refreshTable();
             });
         }
@@ -133,11 +117,4 @@
         }
     }
 
-    function goIntoWorkInfo(id){
-        console.log(id);
-        console.log($("#siteUrl").val()+"1111111111111");
-        if(id !=null){
-            window.open($("#siteUrl").val()+"works/detail/"+id,"_self");
-        }
-    }
 </script>

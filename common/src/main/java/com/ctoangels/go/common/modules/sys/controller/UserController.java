@@ -1,8 +1,7 @@
-package com.ctoangels.go.admin.modules.sys.controller;
+package com.ctoangels.go.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.ctoangels.go.admin.controller.BaseController;
 import com.ctoangels.go.common.modules.sys.entity.Role;
 import com.ctoangels.go.common.modules.sys.entity.User;
 import com.ctoangels.go.common.modules.sys.service.RoleService;

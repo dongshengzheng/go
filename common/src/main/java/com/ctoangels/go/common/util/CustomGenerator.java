@@ -13,14 +13,14 @@ public class CustomGenerator {
         cg.setDbPassword("root");
         cg.setDbUrl("jdbc:mysql://127.0.0.1:3306/go?characterEncoding=utf8");
         // 配置包名
-        cg.setEntityPackage("com.ctoangels.go.common.modules.sys.entity");
-        cg.setMapperPackage("com.ctoangels.go.common.modules.sys.mapper");
-        cg.setServicePackage("com.ctoangels.go.common.modules.sys.service");
-        cg.setXmlPackage("com.ctoangels.go.common.modules.sys.mapper.xml");
-        cg.setServiceImplPackage("com.ctoangels.go.common.modules.sys.service.impl");
-        cg.setControllerPackage("com.ctoangels.go.common.modules.sys.controller");
+        cg.setEntityPackage("com.ctoangels.go.common.modules.go.entity");
+        cg.setMapperPackage("com.ctoangels.go.common.modules.go.mapper");
+        cg.setServicePackage("com.ctoangels.go.common.modules.go.service");
+        cg.setXmlPackage("com.ctoangels.go.common.modules.go.mapper.xml");
+        cg.setServiceImplPackage("com.ctoangels.go.common.modules.go.service.impl");
+        cg.setControllerPackage("com.ctoangels.go.common.modules.go.controller");
 
-        String[] tables= {"sys_app_user",
+        String[] tables= {"go_ship",
         };
         cg.setTableNames(tables);
         cg.setDbPrefix(true);
