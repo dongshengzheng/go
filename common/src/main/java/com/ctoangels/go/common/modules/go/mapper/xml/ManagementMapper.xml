@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.go.common.modules.go.mapper.ManagementMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, remarks, del_flag AS delFlag, `no`, public_flag AS publicFlag, `name`, breed, `type`, gy_type AS gyType, level_zk AS levelZk, works_meaning AS worksMeaning, `status`, recommend, reason, kqdy, maker, make_time AS makeTime, slide, slide_till AS slideTill, browser_count AS browserCount, follow_count AS followCount, `value`, value_till AS valueTill, certified, working_status AS workingStatus, create_by AS createBy, `length`, width, height, weight
+	</sql>
+
+</mapper>

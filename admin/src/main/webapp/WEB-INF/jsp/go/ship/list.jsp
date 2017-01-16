@@ -6,7 +6,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="shipinfo"></go:navigater>
+<go:navigater path="ship"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -40,7 +40,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "shipinfo/list",
+                "url": "ship/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();

@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.*;
  * Works 控制层
  */
 @Controller
-@RequestMapping("shipinfo")
+@RequestMapping("ship")
 public class ShipController extends BaseController {
     @Autowired
     private IShipService shipService;
 
     @RequestMapping
     public String page() {
-        return "go/ships/ships_list";
+        return "go/ship/list";
     }
 
     @RequestMapping(value = "/list")
     @ResponseBody
     public JSONObject list(Ship ship) {
         EntityWrapper<Ship> ew = getEntityWrapper();
-        ew.addFilter("status <> {0}", Const.WORKS_STATUS_DRAFT);
+        ew.addFilter("status <> {0}", Const.DEL_FLAG_NORMAL);
         if (!StringUtils.isEmpty(ship.getName()))
             ew.addFilter("name={0}", ship.getName());
         Page<Ship> page = shipService.selectPage(getPage(), ew);

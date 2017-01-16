@@ -59,65 +59,13 @@ public class Const {
     public static final String RECORDSFILTERED = "recordsFiltered";
     public static final String NDATA = "data";
 
-
     public static ApplicationContext WEB_APP_CONTEXT = null; //该值会在web容器启动时由WebAppContextListener初始化
 
 
     public static final String ADMIN_ROLE = "1";
 
-    public static final String BUSINESS_ROLE = "2";
-
-    public static final String CHANNEL_ROLE = "3";
-
-
     public static final int DEL_FLAG_NORMAL = 0; //正常
     public static final int DEL_FLAG_DELETE = 1; // 删除
 
-    /**
-     * 作品状态
-     */
-    public static final String WORKS_STATUS_DRAFT = "0";    // 草稿
-    public static final String WORKS_STATUS_COMMIT = "1";    // 审核中
-    public static final String WORKS_STATUS_UNPASS = "2";    // 未通过
-    public static final String WORKS_STATUS_PASS = "3";      // 已通过
-
-    public static final String WORKS_STATUS_TRANSFER = "10";      // 已通过 在转让中
-
-    /**
-     * 转让状态
-     */
-    public static final int TRANSFER_STATUS_HAVE = 1;    // 已转出、转入
-    public static final int TRANSFER_STATUS_WAIT = 2;    // 待确认
-
-    /**
-     * 转让类型
-     */
-    public static final int TRANSFER_TYPE_SELL = 1;    // 售卖
-    public static final int TRANSFER_TYPE_GIVE = 2;    // 赠送
-
-    /**
-     * 图片表中图片类型
-     */
-    public static final String IMAGES_WORKS = "0";    // 作品普通图片
-    public static final String IMAGES_REPORT_CERTIFICATE = "1";    // 作品认证图片
-    public static final String IMAGES_REPORT_DES = "2";    // 评估报告
-    public static final String IMAGES_INTERPRETATION = "3";    // 作品诠释图片
-
-
-    //consumer类型
-    public static final String CONSUMER_TYPE_PROVIDER = "1";  //提供者
-    public static final String CONSUMER_TYPE_COLLECT = "2";  //收藏者
-
-    public static final String CONSUMER_PUB_YES = "1";    // 公开
-    public static final String CONSUMER_PUB_NO = "２";    // 不公开
-
-    //follow history类型
-    public static final int FOLLOW_HISTORY_TYPE_COLLECT = 0;   // 收藏作品
-    public static final int FOLLOW_HISTORY_TYPE_FOCUS = 1;   // 关注用户
-    public static final int FOLLOW_HISTORY_TYPE_BROWSE = 2;   // 浏览作品
-
-
     public static final String SITE_SESSION_USER = "siteSessionUser";
-
-
 }

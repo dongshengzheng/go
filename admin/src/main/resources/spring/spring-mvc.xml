@@ -20,7 +20,6 @@
     <mvc:default-servlet-handler/>
 
     <!-- 对静态资源文件的访问  restful-->
-    <mvc:resources mapping="/admin/**" location="/admin/"/>
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:resources mapping="/static/**" location="/static/"/>
 

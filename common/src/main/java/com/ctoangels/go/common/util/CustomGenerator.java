@@ -20,7 +20,7 @@ public class CustomGenerator {
         cg.setServiceImplPackage("com.ctoangels.go.common.modules.go.service.impl");
         cg.setControllerPackage("com.ctoangels.go.common.modules.go.controller");
 
-        String[] tables= {"go_ship",
+        String[] tables= {
         };
         cg.setTableNames(tables);
         cg.setDbPrefix(true);
