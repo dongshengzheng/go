@@ -46,44 +46,52 @@
     <a href="index.html"></a>
 </div>
 <div class="content">
-    <form role="form" method="post" action="" name="loginForm"
-          id="loginForm">
-        <h3 class="form-title"><fmt:message key="sys.user.plogin"/></h3>
-        <p><fmt:message key="login_no_account"/><a class="color-green" href="register"><fmt:message
-                key="sys.user.register"/></a>!</p>
+    <form role="form" method="post" action="" name="registerForm"
+          id="registerForm">
+        <h3 class="form-title"><fmt:message key="sys.user.pregister"/></h3>
+        <p><fmt:message key="register_have_account"/><a class="color-green" href="login_toLogin"><fmt:message
+                key="sys.user.login"/></a>!</p>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="login_username"/></label>
+            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="register_username"/></label>
             <div class="input-icon">
                 <i class="fa fa-user"></i>
                 <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
-                       placeholder="<fmt:message key="login_username_input"/>" name="loginName" id="loginName"/></div>
+                       placeholder="<fmt:message key="register_username_input"/>" name="registerName"
+                       id="registerName"/></div>
         </div>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="login_password"/></label>
+            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="register_password"/></label>
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
                 <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
-                       placeholder="<fmt:message key="login_pwd_input"/>" name="password" id="password"/></div>
+                       placeholder="<fmt:message key="register_pwd_input"/>" name="password" id="password"/></div>
         </div>
         <div class="form-group">
-            <input class="form-control" placeholder="<fmt:message key="login_verify_code"/>" type="text"
+            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="register_email"/></label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                <input class="form-control placeholder-no-fix" type="email" autocomplete="off"
+                       placeholder="<fmt:message key="register_email_input"/>" name="email" id="email"/></div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" placeholder="<fmt:message key="register_verify_code"/>" type="text"
                    id="code" name="code" style="width: 30%; float: left;">
-            <img id="codeImg" alt="<fmt:message key="login_click_change"/>"
-                 title="<fmt:message key="login_click_change"/>"
+            <img id="codeImg" alt="<fmt:message key="register_click_change"/>"
+                 title="<fmt:message key="register_click_change"/>"
                  style="width: 40%; height: 34px; margin-left: 12px;" src="">
         </div>
         <div class="form-actions">
             <button onclick="severCheck();" type="button" class="btn green">
-                <fmt:message key="sys.user.login"/></button>
+                <fmt:message key="sys.user.register"/></button>
         </div>
     </form>
 
 
 </div>
-<!-- END LOGIN -->
+<!-- END REGISTER -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="http://a.goshipyard.com/"><fmt:message
-        key="sys.site.title"/></a> <fmt:message key="login_copyrights_reserved"/></div>
+<div class="copyright"><fmt:message key="register_since_year"/> &copy; <a href="http://a.goshipyard.com/"><fmt:message
+        key="sys.site.title"/></a> <fmt:message key="register_copyrights_reserved"/></div>
 
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
@@ -93,13 +101,14 @@
     function severCheck() {
         if (check()) {
 
-            var loginName = $("#loginName").val();
+            var registerName = $("#registerName").val();
             var password = $("#password").val();
-            var code = "ksbadmtn1f2izwqy" + loginName + ",00," + password
-                    + "ipvb5cxat0zn9eg7" + ",00," + $("#code").val();
+            var email = $("#email").val();
+            var code = "ksbadmtn1f2izwqy" + registerName + ",00," + password
+                    + "ipvb5cxat0zn9eg7" + ",00," + email + ",00," + $("#code").val();
             $.ajax({
                 type: "POST",
-                url: 'login_login',
+                url: 'register_register',
                 data: {
                     keyData: code,
                     tm: new Date().getTime()
@@ -112,32 +121,44 @@
 
                     if ("success" == data.result) {
                         saveCookie();
-                        window.location.href = "<%=basePath%>";
+                        alert("注册成功!请前往邮箱验证");
+                        window.location.href = "login_toLogin";
                     } else if ("user error" == data.result) {
-                        $("#loginName").tips({
+                        $("#registerName").tips({
                             side: 1,
-                            msg: "<fmt:message key="login_username_pwd_false"/>",
+                            msg: "<fmt:message key="register_username_false"/>",
                             bg: '#FF5080',
                             time: 15
                         });
-                        $("#loginName").focus();
+                        $("#registerName").focus();
                     } else if ("code error" == data.result) {
                         $("#code").tips({
                             side: 1,
-                            msg: "<fmt:message key="login_incorrect_verifycode"/>",
+                            msg: "<fmt:message key="register_incorrect_verifycode"/>",
                             bg: '#FF5080',
                             time: 15
                         });
                         changeCode();
                         $("#code").focus();
-                    } else {
-                        $("#loginName").tips({
+
+                    } else if ("email error" == data.result) {
+                        $("#email").tips({
                             side: 1,
-                            msg: "<fmt:message key="login_lackofparameter"/>",
+                            msg: "<fmt:message key="register_incorrect_email"/>",
                             bg: '#FF5080',
                             time: 15
                         });
-                        $("#loginName").focus();
+                        changeCode();
+                        $("#email").focus();
+
+                    } else {
+                        $("#registerName").tips({
+                            side: 1,
+                            msg: "<fmt:message key="register_lackofparameter"/>",
+                            bg: '#FF5080',
+                            time: 15
+                        });
+                        $("#registerName").focus();
                     }
                 }
             });
@@ -182,26 +203,26 @@
     //客户端校验
     function check() {
 
-        if ($("#loginName").val() == "") {
+        if ($("#registerName").val() == "") {
 
-            $("#loginName").tips({
+            $("#registerName").tips({
                 side: 2,
-                msg: '<fmt:message key="login_username_empty"/>',
+                msg: '<fmt:message key="register_username_empty"/>',
                 bg: '#AE81FF',
                 time: 3
             });
 
-            $("#loginName").focus();
+            $("#registerName").focus();
             return false;
         } else {
-            $("#loginName").val(jQuery.trim($('#loginName').val()));
+            $("#registerName").val(jQuery.trim($('#registerName').val()));
         }
 
         if ($("#password").val() == "") {
 
             $("#password").tips({
                 side: 2,
-                msg: '<fmt:message key="login_pwd_empty"/>',
+                msg: '<fmt:message key="register_pwd_empty"/>',
                 bg: '#AE81FF',
                 time: 3
             });
@@ -209,11 +230,25 @@
             $("#password").focus();
             return false;
         }
+
+        if ($("#email").val() == "") {
+
+            $("#email").tips({
+                side: 2,
+                msg: '<fmt:message key="register_email_empty"/>',
+                bg: '#AE81FF',
+                time: 3
+            });
+
+            $("#email").focus();
+            return false;
+        }
+
         if ($("#code").val() == "") {
 
             $("#code").tips({
                 side: 1,
-                msg: '<fmt:message key="login_verifycode_empty"/>',
+                msg: '<fmt:message key="register_verifycode_empty"/>',
                 bg: '#AE81FF',
                 time: 3
             });
@@ -222,9 +257,9 @@
             return false;
         }
 
-        $("#loginbox").tips({
+        $("#registerbox").tips({
             side: 1,
-            msg: '<fmt:message key="login_tuning"/>',
+            msg: '<fmt:message key="register_tuning"/>',
             bg: '#68B500',
             time: 10
         });
@@ -234,20 +269,20 @@
 
     function savePaw() {
         if (!$("#saveid").attr("checked")) {
-            $.cookie('loginName', $("#loginName").val(), {
+            $.cookie('registerName', $("#registerName").val(), {
                 expires: -1
             });
             $.cookie('password', $("#password").val(), {
                 expires: -1
             });
-            //$("#loginName").val('');
+            //$("#registerName").val('');
             //$("#password").val('');
         }
     }
 
     function saveCookie() {
         if ($("#saveid").attr("checked")) {
-            $.cookie('loginName', $("#loginName").val(), {
+            $.cookie('registerName', $("#registerName").val(), {
                 expires: 7
             });
             $.cookie('password', $("#password").val(), {
@@ -256,16 +291,16 @@
         }
     }
     function quxiao() {
-        $("#loginName").val('');
+        $("#registerName").val('');
         $("#password").val('');
     }
 
     jQuery(function () {
-        var loginName = $.cookie('loginName');
+        var registerName = $.cookie('registerName');
         var password = $.cookie('password');
-        if (typeof (loginName) != "undefined"
+        if (typeof (registerName) != "undefined"
                 && typeof (password) != "undefined") {
-            $("#loginName").val(loginName);
+            $("#registerName").val(registerName);
             $("#password").val(password);
             $("#saveid").attr("checked", true);
             $("#code").focus();

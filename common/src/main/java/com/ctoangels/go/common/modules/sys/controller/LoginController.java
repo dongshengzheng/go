@@ -2,11 +2,13 @@ package com.ctoangels.go.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.go.common.modules.sys.entity.Button;
+import com.ctoangels.go.common.modules.sys.entity.MailAuthenticator;
 import com.ctoangels.go.common.modules.sys.entity.Menu;
 import com.ctoangels.go.common.modules.sys.entity.User;
 import com.ctoangels.go.common.modules.sys.service.LoginService;
 import com.ctoangels.go.common.modules.sys.service.UserService;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.MD5;
 import com.ctoangels.go.common.util.Tools;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -21,8 +23,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.security.Security;
 import java.util.*;
 
 /**
@@ -50,9 +62,25 @@ public class LoginController extends BaseController {
     @Value("${SYSNAME}")
     private String sysName;
 
+    @Value("${fromAddress}")
+    private String fromAddress;
+
+    @Value("${fromPassword}")
+    private String fromPassword;
+
+    @Value("${mail.smtp.host}")
+    private String mailSmtpHost;
+
+    @Value("${mail.smtp.port}")
+    private String mailSmtpPort;
+
+    @Value("${effectiveTime}")
+    private String effectiveTime;
+
+
     @RequestMapping(value = "path")
     @ResponseBody
-    public String path(){
+    public String path() {
         return sitePath;
     }
 
@@ -135,6 +163,106 @@ public class LoginController extends BaseController {
         jsonObject.put("result", errInfo);
         return jsonObject;
     }
+
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register() {
+        return "sys/admin/register";
+    }
+
+    @RequestMapping(value = "/register_register", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject register(String keyData) throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        String errInfo = "";
+        keyData = keyData.replaceAll("ksbadmtn1f2izwqy", "");
+        keyData = keyData.replaceAll("ipvb5cxat0zn9eg7", "");
+        String keyDatas[] = keyData.split(",00,");
+        if (null != keyDatas && keyDatas.length == 4) {
+            // shiro管理的session
+            String sessionCode = (String) session.getAttribute(Const.SESSION_SECURITY_CODE); // 获取session中的验证码
+            String code = keyDatas[3];
+            // 关闭验证码
+            boolean useValiCode = true;
+            if (useValiCode && (null == code || "".equals(code))) {
+                // 验证码为空
+                errInfo = "null code";
+            } else {
+                String registerName = keyDatas[0];
+                String password = keyDatas[1];
+                String email = keyDatas[2];
+                if (!useValiCode || (Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code))) {
+                    User user = new User();
+                    user.setLoginName(registerName);
+                    user.setEmailStatus(null);
+                    user = userService.selectOne(user);
+                    // 用于验证用户名和密码，改方法名需要改良
+                    if (user == null) {
+                        User emailUser = new User();
+                        emailUser.setEmail(email);
+                        emailUser = userService.selectOne(emailUser);
+                        if (emailUser != null) {
+                            errInfo = "email error";//邮箱已被使用
+                        }
+                        session.removeAttribute(Const.SESSION_SECURITY_CODE);
+                    } else {
+                        errInfo = "user error"; // 用户名已存在
+                    }
+                } else {
+                    errInfo = "code error"; // 验证码输入有误
+                }
+                if (Tools.isEmpty(errInfo)) {
+                    errInfo = "success"; // 验证成功
+                    String validateCode = MD5.md5(email);
+                    String passwd = new SimpleHash("SHA-1", registerName, password).toString(); // 密码加密
+                    User newUser = new User();
+                    newUser.setLoginName(registerName);
+                    newUser.setName(registerName);
+                    newUser.setPassword(passwd);
+                    newUser.setEmail(email);
+                    newUser.setEmailStatus(Const.EMAIL_ACTIVATE_STATUS_NOT);
+                    newUser.setEmailTime(new Date());
+                    newUser.setEmailCode(validateCode);
+                    userService.insert(newUser);
+                    sendActivateEmail(email, validateCode);
+                }
+            }
+        } else {
+            errInfo = "error"; // 缺少参数
+        }
+        jsonObject.put("result", errInfo);
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/register/activate", method = RequestMethod.GET)
+    public String registerActivate() throws Exception {
+        return "sys/admin/activate";
+    }
+
+    @RequestMapping(value = "/register/activateConfirm", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject registerActivateConfirm(@RequestParam(required = false) String email,
+                                              @RequestParam(required = false) String validateCode) throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        String errInfo = "";
+        User u = new User();
+        u.setEmail(email);
+        u.setEmailStatus(Const.EMAIL_ACTIVATE_STATUS_NOT);
+        User newUser = userService.selectOne(u);
+        if (newUser != null &&
+                newUser.getEmailStatus() == Const.EMAIL_ACTIVATE_STATUS_NOT &&
+                (newUser.getEmailTime().getTime() + 1000 * 60 * Integer.parseInt(effectiveTime)) >= new Date().getTime() &&
+                newUser.getEmailCode().equals(validateCode)) {
+            newUser.setEmailStatus(Const.EMAIL_ACTIVATE_STATUS_HAVE);
+            errInfo = "activate success";
+            userService.updateById(newUser);
+        } else {
+            errInfo = "activate failure";
+        }
+        jsonObject.put("errInfo", errInfo);
+        return jsonObject;
+    }
+
 
     /**
      * 访问系统首页
@@ -251,6 +379,54 @@ public class LoginController extends BaseController {
         subject.logout();
         map.put("sysname", sysName);
         return "sys/admin/login";
+    }
+
+
+    public void sendActivateEmail(String toAddress, String validateCode) {
+        Properties props = new Properties();
+        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+        props.put("mail.smtp.host", mailSmtpHost); //smtp服务器地址
+        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        props.put("mail.smtp.port", mailSmtpPort);
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.auth", true);  //是否需要认证
+
+        MailAuthenticator myauth = new MailAuthenticator(fromAddress, fromPassword);
+        //获得一个带有authenticator的session实例
+        javax.mail.Session session = javax.mail.Session.getInstance(props, myauth);
+        session.setDebug(true);//打开debug模式，会打印发送细节到console
+        Message message = new MimeMessage(session); //实例化一个MimeMessage集成自abstract Message 。参数为session
+        try {
+            message.setFrom(new InternetAddress(fromAddress)); //设置发出方,使用setXXX设置单用户，使用addXXX添加InternetAddress[]
+            StringBuffer sb = new StringBuffer();
+            sb.append("<html><body>");
+            sb.append("点击下面链接激活账号，" + effectiveTime + "分钟生效，否则重新注册账号，链接只能使用一次，请尽快激活！");
+            sb.append("<a href=\"" + sitePath + "/register/activate?action=activate&email=");
+            sb.append(toAddress);
+            sb.append("&validateCode=");
+            sb.append(validateCode);
+            sb.append("\">" + sitePath + "/register/activate?action=activate&email=");
+            sb.append(toAddress);
+            sb.append("&validateCode=");
+            sb.append(validateCode);
+            sb.append("</a>");
+            sb.append("</body></html>");
+            message.setText(sb.toString()); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
+
+            message.setSubject("欢迎注册！"); //设置标题
+
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(toAddress)); //设置接收方
+
+            Transport.send(message); //使用Transport静态方法发送邮件
+
+        } catch (AddressException e) {
+            //此处处理AddressException异常  [The exception thrown when a wrongly formatted address is encountered.]
+
+        } catch (MessagingException e) {
+            //此处处理MessagingException异常 [The base class for all exceptions thrown by the Messaging classes ]
+        }
     }
 
 }

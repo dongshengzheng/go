@@ -112,7 +112,7 @@
 
     }
 
-    function slide(id, slide) {
+    function      slide(id, slide) {
         if (confirm("确定提交？")) {
             $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
                 refreshTable();

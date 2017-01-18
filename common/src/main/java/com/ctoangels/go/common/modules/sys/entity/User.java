@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.go.common.util.Const;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -39,6 +40,13 @@ public class User implements Serializable {
     private String prefer;//偏好
     private String address;//地址
     private String headImgUrl;//头像
+
+    @TableField(value = "email_code")//邮箱激活码
+    private String emailCode;
+    @TableField(value = "email_status")//邮箱激活状态
+    private Integer emailStatus = Const.EMAIL_ACTIVATE_STATUS_HAVE;
+    @TableField(value = "email_time")//邮箱激活时间
+    private Date emailTime;
 
     @TableField(value = "open_id")
     private String openId; // 微信openId
@@ -250,5 +258,30 @@ public class User implements Serializable {
 
     public void setHeadImgUrl(String headImgUrl) {
         this.headImgUrl = headImgUrl;
+    }
+
+    public String getEmailCode() {
+        return emailCode;
+    }
+
+    public void setEmailCode(String emailCode) {
+        this.emailCode = emailCode;
+    }
+
+
+    public Date getEmailTime() {
+        return emailTime;
+    }
+
+    public void setEmailTime(Date emailTime) {
+        this.emailTime = emailTime;
+    }
+
+    public Integer getEmailStatus() {
+        return emailStatus;
+    }
+
+    public void setEmailStatus(Integer emailStatus) {
+        this.emailStatus = emailStatus;
     }
 }

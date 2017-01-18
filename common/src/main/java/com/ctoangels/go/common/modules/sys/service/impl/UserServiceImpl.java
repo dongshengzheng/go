@@ -2,6 +2,7 @@ package com.ctoangels.go.common.modules.sys.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.sys.mapper.RoleMapper;
 import com.ctoangels.go.common.modules.sys.mapper.UserMapper;
 import com.ctoangels.go.common.modules.sys.mapper.UserRoleMapper;
@@ -139,4 +140,5 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     public List<User> searchFollowHistoryUsers(Integer followHistoryType, Integer targetId) {
         return userMapper.searchFollowHistoryUsers(followHistoryType, targetId);
     }
+
 }

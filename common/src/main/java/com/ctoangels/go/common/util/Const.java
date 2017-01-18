@@ -68,4 +68,8 @@ public class Const {
     public static final int DEL_FLAG_DELETE = 1; // 删除
 
     public static final String SITE_SESSION_USER = "siteSessionUser";
+
+
+    public static final Integer EMAIL_ACTIVATE_STATUS_NOT = 0;//未进行邮箱验证
+    public static final Integer EMAIL_ACTIVATE_STATUS_HAVE = 1;//已经行邮箱验证
 }

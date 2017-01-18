@@ -48,6 +48,8 @@
                 /code = anon
                 /login_login = anon
                 /logout = anon
+                /register_register = anon
+                /register/activateConfirm = anon
                 /sys/index = anon
                 /user/unauthorized = anon
                 /user/editPwd = anon

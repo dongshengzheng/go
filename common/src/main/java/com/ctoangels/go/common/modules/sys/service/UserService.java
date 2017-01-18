@@ -40,4 +40,5 @@ public interface UserService extends ISuperService<User> {
     //根据target_id和type查找followHistory中的user_id对应的user集合
     List<User> searchFollowHistoryUsers(Integer followHistoryType, Integer targetId);
 
+
 }

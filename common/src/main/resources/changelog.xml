@@ -3,9 +3,13 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="James" id="18964317375-001">
+    <changeSet author="WangShun" id="15950097942-001">
         <addColumn tableName="sys_user">
-            <column name="open_id" remarks="openId" type="VARCHAR(200)">
+            <column name="email_status" remarks="邮箱验证状态" type="int(3)">
+            </column>
+            <column name="email_time" remarks="邮箱验证开始时间" type="datetime">
+            </column>
+            <column name="email_code" remarks="邮箱验证码" type="varchar(200)">
             </column>
         </addColumn>
     </changeSet>
