@@ -35,11 +35,11 @@
     <link href="${global}/plugins/bootstrap-dialog/bootstrap-dialog.min.css" rel="stylesheet"
           type="text/css"/>
     <%--<link href="${global}/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />--%>
-    <link href="${global}/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="${global}/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
 
     <link href="${global}/plugins/icheck/skins/flat/blue.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/icheck/skins/minimal/blue.css" rel="stylesheet" type="text/css">
-    <link href="${global}/plugins/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet"type="text/css">
+    <link href="${global}/plugins/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/Editor-1.5.4/css/editor.dataTables.min.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css">
@@ -51,13 +51,13 @@
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="${ctx}/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/assets/layouts/layout/css/themes/default.min.css" rel="stylesheet" type="text/css"
+    <link href="${ctx}/assets/layouts/layout/css/themes/${style}.min.css" rel="stylesheet" type="text/css"
           id="style_color"/>
     <link href="${ctx}/static/css/custom.css" rel="stylesheet" type="text/css"/>
 
     <!-- END THEME LAYOUT STYLES -->
     <link type="image/png" href="${ctx}/static/img/great_vision.png" rel="shortcut icon">
-    <link rel="shortcut icon" href="${ctx}/favicon.ico" />
+    <link rel="shortcut icon" href="${ctx}/favicon.ico"/>
 </head>
 <body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
@@ -69,7 +69,7 @@
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <div class="page-content">
-            <div class="page-content-body"  id="navTab">
+            <div class="page-content-body" id="navTab">
             </div>
         </div>
     </div>
@@ -78,7 +78,8 @@
 <div class="page-footer">
     <div class="page-footer-inner"> 2016 &copy;
         <a href="http://a.goshipyard.com/" style="color:#337ab7"
-           title="<fmt:message key="sys.site.title"/>" target="_blank"><fmt:message key="sys.site.title"/></a><fmt:message key="login_copyrights_reserved"/>
+           title="<fmt:message key="sys.site.title"/>" target="_blank"><fmt:message
+                key="sys.site.title"/></a><fmt:message key="login_copyrights_reserved"/>
     </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>
@@ -126,7 +127,7 @@
 </body>
 <script>
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         intPage();
     });
 
@@ -137,13 +138,13 @@
         else
             url = "user";
 
-        if($("a[href='"+url+"']").length > 0){
-            $("a[href='"+url+"']").click();
-        }else{
+        if ($("a[href='" + url + "']").length > 0) {
+            $("a[href='" + url + "']").click();
+        } else {
             Layout.loadAjaxContent(url);
         }
     }
-    function hashChange(){
+    function hashChange() {
         intPage();
     }
 </script>

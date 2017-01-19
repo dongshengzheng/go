@@ -85,7 +85,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     public boolean isNameExist(String loginName) {
         User user = new User();
         user.setLoginName(loginName);
-        user.setDelFlag(1);
+        user.setDelFlag(Const.DEL_FLAG_NORMAL);
         int count = userMapper.selectCount(user);
         return count > 0;
     }

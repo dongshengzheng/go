@@ -282,6 +282,7 @@ public class LoginController extends BaseController {
                 session.setAttribute(Const.SESSION_USERNAME, user.getLoginName()); // 放入用户名
                 map.put("user", user);
                 map.put("menuList", session.getAttribute(Const.SESSION_ALLMENULIST));
+                map.put("style", "blue");
                 return "sys/index";
             }
 
