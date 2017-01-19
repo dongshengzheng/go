@@ -401,18 +401,11 @@ public class LoginController extends BaseController {
         try {
             message.setFrom(new InternetAddress(fromAddress)); //设置发出方,使用setXXX设置单用户，使用addXXX添加InternetAddress[]
             StringBuffer sb = new StringBuffer();
-            sb.append("<html><body>");
-            sb.append("点击下面链接激活账号，" + effectiveTime + "分钟生效，否则重新注册账号，链接只能使用一次，请尽快激活！");
-            sb.append("<a href=\"" + sitePath + "/register/activate?action=activate&email=");
+            sb.append("点击下面链接激活账号，" + effectiveTime + "分钟生效，否则重新注册账号，链接只能使用一次，请尽快激活！\r\n");
+            sb.append(sitePath + "/register/activate?action=activate&email=");
             sb.append(toAddress);
             sb.append("&validateCode=");
             sb.append(validateCode);
-            sb.append("\">" + sitePath + "/register/activate?action=activate&email=");
-            sb.append(toAddress);
-            sb.append("&validateCode=");
-            sb.append(validateCode);
-            sb.append("</a>");
-            sb.append("</body></html>");
             message.setText(sb.toString()); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
 
             message.setSubject("欢迎注册！"); //设置标题

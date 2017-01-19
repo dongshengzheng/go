@@ -48,7 +48,8 @@
 <div class="content">
     <form role="form" action="" name="loginForm"
           id="loginForm">
-        <p>等待验证...</p>
+        <p id="activate-info"><fmt:message key="waiting"/></p>
+        <div id="time-div"><span id="time">5</span><span><fmt:message key="activate_time"/></span></div>
     </form>
 </div>
 <!-- END LOGIN -->
@@ -73,11 +74,18 @@
             cache: false,
             success: function (data) {
                 console.log(data);
-                alert(data.errInfo);
                 if (data.errInfo == "activate success") {
-                    location.href = "login_toLogin";
+                    $('#time-div').css("display", "block");
+                    $('#activate-info').html("<fmt:message key="activate_success"/>");
+                    setInterval(function () {
+                        changeTime("login_toLogin")
+                    }, 1000);
                 } else {
-                    location.href = "register";
+                    $('#time-div').css("display", "block");
+                    $('#activate-info').html("<fmt:message key="activate_faliure"/>");
+                    setInterval(function () {
+                        changeTime("register")
+                    }, 1000);
                 }
             }
         });
@@ -95,6 +103,19 @@
                     duration: 8000
                 }
         );
+
+        function changeTime(url) {
+            var time;
+            time = $("#time").text();
+            time = parseInt(time);
+            time--;
+            if (time <= 0) {
+                window.location.href = url;
+            } else {
+                $("#time").text(time);
+            }
+        }
+
 
     });
 

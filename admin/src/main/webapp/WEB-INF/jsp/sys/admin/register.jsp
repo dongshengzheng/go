@@ -69,7 +69,7 @@
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9"><fmt:message key="register_email"/></label>
             <div class="input-icon">
-                <i class="fa fa-lock"></i>
+                <i class="fa fa-envelope"></i>
                 <input class="form-control placeholder-no-fix" type="email" autocomplete="off"
                        placeholder="<fmt:message key="register_email_input"/>" name="email" id="email"/></div>
         </div>
@@ -83,6 +83,9 @@
         <div class="form-actions">
             <button onclick="severCheck();" type="button" class="btn green">
                 <fmt:message key="sys.user.register"/></button>
+            <span id="waiting" style="display: none"><fmt:message key="waiting"/></span>
+            <div id="time-div" style="display: none"><fmt:message key="register_success_pre"/><span
+                    id="time">5</span><fmt:message key="register_success_suf"/></div>
         </div>
     </form>
 
@@ -106,6 +109,7 @@
             var email = $("#email").val();
             var code = "ksbadmtn1f2izwqy" + registerName + ",00," + password
                     + "ipvb5cxat0zn9eg7" + ",00," + email + ",00," + $("#code").val();
+            $('#waiting').css("display", "inline-block");
             $.ajax({
                 type: "POST",
                 url: 'register_register',
@@ -121,8 +125,11 @@
 
                     if ("success" == data.result) {
                         saveCookie();
-                        alert("注册成功!请前往邮箱验证");
-                        window.location.href = "login_toLogin";
+                        $('#waiting').css("display", "none");
+                        $('#time-div').css("display", "inline-block");
+                        setInterval(function () {
+                            changeTime("login_toLogin")
+                        }, 1000);
                     } else if ("user error" == data.result) {
                         $("#registerName").tips({
                             side: 1,
@@ -162,6 +169,18 @@
                     }
                 }
             });
+        }
+    }
+
+    function changeTime(url) {
+        var time;
+        time = $("#time").text();
+        time = parseInt(time);
+        time--;
+        if (time <= 0) {
+            window.location.href = url;
+        } else {
+            $("#time").text(time);
         }
     }
 
@@ -231,11 +250,31 @@
             return false;
         }
 
-        if ($("#email").val() == "") {
+        var email = $("#email").val();
 
+        function checkMail(mail) {
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (filter.test(mail)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if (email == "") {
             $("#email").tips({
                 side: 2,
                 msg: '<fmt:message key="register_email_empty"/>',
+                bg: '#AE81FF',
+                time: 3
+            });
+
+            $("#email").focus();
+            return false;
+        } else if (!checkMail(email)) {
+            $("#email").tips({
+                side: 2,
+                msg: '<fmt:message key="register_incorrect_email2"/>',
                 bg: '#AE81FF',
                 time: 3
             });
