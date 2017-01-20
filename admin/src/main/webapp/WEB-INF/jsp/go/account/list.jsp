@@ -14,7 +14,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-title tabbable-line">
                     <div class="caption caption-md">
-                        <i class="icon-globe theme-font hide"></i>
+                        <i class="fa fa-user"></i>
                         <span class="caption-subject font-blue-madison bold uppercase">账号管理</span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                                 <label style="margin-right: 2%">个人姓名</label>
                                 <button class="btn blue-dark" style="margin-right: 2%"> 已设置
                                 </button>
-                                <label class="">个人姓名</label>
+                                <label class="">您当前姓名为:${sessionScope.sessionUser.name}</label>
                                 <shiro:hasPermission name="account/editName">
                                     <button style="float:right" data-url="account/editName" data-model="dialog"
                                             class="btn green-haze"> 修改
@@ -46,7 +46,7 @@
                                 <label style="margin-right: 2%">手机号码</label>
                                 <button class="btn blue-dark" style="margin-right: 2%"> 已设置
                                 </button>
-                                <label class="">您的手机号码是</label>
+                                <label class="">您当前的手机号码为:${sessionScope.sessionUser.phone}</label>
                                 <shiro:hasPermission name="account/editPhone">
                                     <button style="float:right" data-url="account/editPhone" data-model="dialog"
                                             class="btn green-haze"> 修改
@@ -58,7 +58,7 @@
                                 <label style="margin-right: 2%">电子邮箱</label>
                                 <button class="btn blue-dark" style="margin-right: 2%"> 已设置
                                 </button>
-                                <label class="">您绑定的邮箱是</label>
+                                <label class="">您绑定的邮箱是:${sessionScope.sessionUser.email}</label>
                                 <shiro:hasPermission name="account/editEmail">
                                     <button style="float:right" data-url="account/editEmail" data-model="dialog"
                                             class="btn green-haze"> 修改
@@ -94,7 +94,7 @@
                     <div class="portlet box blue-dark">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-lock"></i>其他设置
+                                <i class="fa fa-cog"></i>其他设置
                             </div>
                             <div class="tools">
                                 <a href="javascript:;" class="collapse"> </a>

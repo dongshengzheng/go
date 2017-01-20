@@ -30,8 +30,9 @@
                 <div class="col-sm-7">
                     <input class="form-control required" placeholder="<fmt:message key="login_verify_code"/>"
                            type="text"
-                           id="code" name="code" style="width: 30%; float: left;">
-                    <button type="button">发送验证码</button>
+                           id="code" name="code" style="width: 30%; float: left;margin-right: 2%">
+                    <button class="btn blue-dark"> 发送验证码
+                    </button>
                 </div>
             </div>
         </div>
