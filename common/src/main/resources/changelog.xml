@@ -13,4 +13,11 @@
             </column>
         </addColumn>
     </changeSet>
+
+    <changeSet author="LuZhen" id="17317309132-001">
+        <addColumn tableName="sys_user">
+            <column name="style_id" remarks="风格id" type="int(3)"/>
+            <column name="company_id" remarks="公司id" type="int(3)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
