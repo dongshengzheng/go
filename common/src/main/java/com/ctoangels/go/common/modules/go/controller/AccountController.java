@@ -29,12 +29,7 @@ public class AccountController {
         return "go/account/list";
     }
 
-
-    @RequestMapping(value = "/editStyle")
-    public String changeStyle() {
-        return "go/account/edit_style";
-    }
-
+    //修改姓名
     @RequestMapping(value = "/editName", method = RequestMethod.GET)
     public String editName() {
         return "go/account/edit_name";
@@ -68,4 +63,66 @@ public class AccountController {
         }
         return jsonObject;
     }
+
+    //修改Email
+    @RequestMapping(value = "/editEmail", method = RequestMethod.GET)
+    public String editEmail() {
+        return "go/account/edit_email";
+    }
+
+    @RequestMapping(value = "/editEmail", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editEmailComplete(@RequestParam(required = false) String name,
+                                        @RequestParam(required = false) String code,
+                                        HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        return jsonObject;
+    }
+
+    //修改密码
+    @RequestMapping(value = "/editPassword", method = RequestMethod.GET)
+    public String editPassword() {
+        return "go/account/edit_password";
+    }
+
+    @RequestMapping(value = "/editPassword", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editPasswordComplete(@RequestParam(required = false) String name,
+                                           @RequestParam(required = false) String code,
+                                           HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        return jsonObject;
+    }
+
+    //修改电话
+    @RequestMapping(value = "/editPhone", method = RequestMethod.GET)
+    public String editPhone() {
+        return "go/account/edit_phone";
+    }
+
+    @RequestMapping(value = "/editPhone", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editPhoneComplete(@RequestParam(required = false) String name,
+                                        @RequestParam(required = false) String code,
+                                        HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        return jsonObject;
+    }
+
+    //修改样式
+    @RequestMapping(value = "/editStyle", method = RequestMethod.GET)
+    public String changeStyle() {
+        return "go/account/edit_style";
+    }
+
+    @RequestMapping(value = "/editStyle", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editStyleComplete(@RequestParam(required = false) String name,
+                                        @RequestParam(required = false) String code,
+                                        HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        return jsonObject;
+    }
+
+
 }

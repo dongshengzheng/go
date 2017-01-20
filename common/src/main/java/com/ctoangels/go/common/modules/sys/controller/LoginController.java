@@ -1,6 +1,7 @@
 package com.ctoangels.go.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.sys.entity.Button;
 import com.ctoangels.go.common.modules.sys.entity.MailAuthenticator;
 import com.ctoangels.go.common.modules.sys.entity.Menu;
@@ -194,6 +195,7 @@ public class LoginController extends BaseController {
                 if (!useValiCode || (Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code))) {
                     User user = new User();
                     user.setLoginName(registerName);
+                    EntityWrapper ew = new EntityWrapper();
                     user.setEmailStatus(null);
                     user = userService.selectOne(user);
                     // 用于验证用户名和密码，改方法名需要改良
@@ -215,7 +217,14 @@ public class LoginController extends BaseController {
                     errInfo = "success"; // 验证成功
                     String validateCode = MD5.md5(email);
                     String passwd = new SimpleHash("SHA-1", registerName, password).toString(); // 密码加密
+                    //若之前有注册了未激活的邮箱,则覆盖掉
                     User newUser = new User();
+                    newUser.setEmail(email);
+                    newUser.setEmailStatus(Const.EMAIL_ACTIVATE_STATUS_NOT);
+                    newUser = userService.selectOne(newUser);
+                    if (newUser == null) {
+                        newUser = new User();
+                    }
                     newUser.setLoginName(registerName);
                     newUser.setName(registerName);
                     newUser.setPassword(passwd);
@@ -223,7 +232,7 @@ public class LoginController extends BaseController {
                     newUser.setEmailStatus(Const.EMAIL_ACTIVATE_STATUS_NOT);
                     newUser.setEmailTime(new Date());
                     newUser.setEmailCode(validateCode);
-                    userService.insert(newUser);
+                    userService.insertOrUpdate(newUser);
                     sendActivateEmail(email, validateCode);
                 }
             }
