@@ -20,4 +20,13 @@
             <column name="company_id" remarks="公司id" type="int(3)"/>
         </addColumn>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-002">
+        <sql>
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改样式','account/editStyle',0);
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改个人姓名','account/editName',0);
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改密码','account/editPassword',0);
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改手机号码','account/editPhone',0);
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改电子邮箱','account/editEmail',0);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
