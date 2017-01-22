@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <form class="form-horizontal" action="account/editEmail" method="post"
-      id="defForm" callfn="refreshTable">
+      id="defForm">
     <div class="modal-header">
         <div class='bootstrap-dialog-header'>
             <div class='bootstrap-dialog-close-button'
@@ -19,19 +19,19 @@
     <div class="modal-body">
         <div class="container-fluid">
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">新电子邮箱</label>
-                <div class="col-sm-7">
-                    <input id="name" name="name" type="text" maxlength="32"
-                           minlength="2" class="form-control required" placeholder="请输入邮箱地址">
+                <label for="email" class="col-sm-3 control-label">新电子邮箱</label>
+                <div class="col-sm-6">
+                    <input id="email" name="email" type="email" maxlength="32" class="form-control required"
+                           placeholder="请输入邮箱地址">
                 </div>
             </div>
             <div class="form-group">
                 <label for="code" class="col-sm-3 control-label">验证码</label>
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <input class="form-control required" placeholder="<fmt:message key="login_verify_code"/>"
                            type="text"
                            id="code" name="code" style="width: 30%; float: left;margin-right: 2%">
-                    <button class="btn blue-dark"> 发送验证码
+                    <button type="button" onclick="sendCode()" class="btn blue-dark"> 发送验证码
                     </button>
                 </div>
             </div>
@@ -47,91 +47,52 @@
 <script type="text/javascript">
     $('#defForm').validate({
         rules: {
-            loginName: {
-                required: true,
-                remote: {
-                    type: "post",
-                    url: "account/editEmail",
-                    dataType: "json",
-                    dataFilter: function (data, type) {
-                        if (data == 1) {
-                            return false;
-                        } else {
-                            return true;
-                        }
+            required: true,
+            remote: {
+                type: "post",
+                url: "account/editEmail",
+                dataType: "json",
+                dataFilter: function (data, type) {
+                    if (data == 1) {
+                        return false;
+                    } else {
+                        return true;
                     }
                 }
             }
         },
         messages: {
-            loginName: {
-                required: "请输入用户名",
-                remote: "用户名重复"
+            email: {
+                required: "请输入邮箱",
+                remote: "该邮箱已被使用",
+                email: "邮箱格式错误"
+            },
+            code: {
+                required: "请输入验证码",
+                remote: "验证码错误"
             }
         }
     });
 
 
-    $(document).ready(function () {
-        changeCode();
-        $("#codeImg").bind("click", changeCode);
-    });
+    function sendCode() {
+        $.post("account/editEmail/sendCode", {email: $('#email').val()}, function (data) {
+            if (data.suc) {
+                alert("验证码已发送,请前往邮箱接受");
+            } else {
+                if (data.errInfo == "email used") {
+                    alert("邮箱已被使用");
+                } else if (data.errInfo == "email empty") {
+                    alert("邮箱不能为空");
+                }
+            }
+        });
+    }
 
     $(document).keyup(function (event) {
         if (event.keyCode == 13) {
             $("#to-recover").trigger("click");
         }
     });
-
-    function genTimestamp() {
-        var time = new Date();
-        return time.getTime();
-    }
-
-    function changeCode() {
-        $("#codeImg").attr("src", "code?t=" + genTimestamp());
-    }
-
-    //客户端校验
-    function check() {
-
-        if ($("#loginName").val() == "") {
-
-            $("#loginName").tips({
-                side: 2,
-                msg: '<fmt:message key="login_username_empty"/>',
-                bg: '#AE81FF',
-                time: 3
-            });
-
-            $("#loginName").focus();
-            return false;
-        } else {
-            $("#loginName").val(jQuery.trim($('#loginName').val()));
-        }
-
-        if ($("#code").val() == "") {
-
-            $("#code").tips({
-                side: 1,
-                msg: '<fmt:message key="login_verifycode_empty"/>',
-                bg: '#AE81FF',
-                time: 3
-            });
-
-            $("#code").focus();
-            return false;
-        }
-
-        $("#loginbox").tips({
-            side: 1,
-            msg: '<fmt:message key="login_tuning"/>',
-            bg: '#68B500',
-            time: 10
-        });
-
-        return true;
-    }
-
 
 </script>

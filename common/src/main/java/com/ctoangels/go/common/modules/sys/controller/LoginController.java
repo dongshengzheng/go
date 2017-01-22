@@ -195,7 +195,6 @@ public class LoginController extends BaseController {
                 if (!useValiCode || (Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code))) {
                     User user = new User();
                     user.setLoginName(registerName);
-                    EntityWrapper ew = new EntityWrapper();
                     user.setEmailStatus(null);
                     user = userService.selectOne(user);
                     // 用于验证用户名和密码，改方法名需要改良
@@ -392,44 +391,16 @@ public class LoginController extends BaseController {
     }
 
 
+    //发送注册时的验证邮件
     public void sendActivateEmail(String toAddress, String validateCode) {
-        Properties props = new Properties();
-        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-        props.put("mail.smtp.host", mailSmtpHost); //smtp服务器地址
-        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
-        props.setProperty("mail.smtp.socketFactory.fallback", "false");
-        props.put("mail.smtp.port", mailSmtpPort);
-        props.put("mail.smtp.ssl.enable", "true");
-        props.put("mail.smtp.auth", true);  //是否需要认证
-
-        MailAuthenticator myauth = new MailAuthenticator(fromAddress, fromPassword);
-        //获得一个带有authenticator的session实例
-        javax.mail.Session session = javax.mail.Session.getInstance(props, myauth);
-        session.setDebug(true);//打开debug模式，会打印发送细节到console
-        Message message = new MimeMessage(session); //实例化一个MimeMessage集成自abstract Message 。参数为session
-        try {
-            message.setFrom(new InternetAddress(fromAddress)); //设置发出方,使用setXXX设置单用户，使用addXXX添加InternetAddress[]
-            StringBuffer sb = new StringBuffer();
-            sb.append("点击下面链接激活账号，" + effectiveTime + "分钟生效，否则重新注册账号，链接只能使用一次，请尽快激活！\r\n");
-            sb.append(sitePath + "/register/activate?action=activate&email=");
-            sb.append(toAddress);
-            sb.append("&validateCode=");
-            sb.append(validateCode);
-            message.setText(sb.toString()); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
-
-            message.setSubject("欢迎注册！"); //设置标题
-
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(toAddress)); //设置接收方
-
-            Transport.send(message); //使用Transport静态方法发送邮件
-
-        } catch (AddressException e) {
-            //此处处理AddressException异常  [The exception thrown when a wrongly formatted address is encountered.]
-
-        } catch (MessagingException e) {
-            //此处处理MessagingException异常 [The base class for all exceptions thrown by the Messaging classes ]
-        }
+        StringBuffer sb = new StringBuffer();
+        sb.append("点击下面链接激活账号，" + effectiveTime + "分钟生效，否则重新注册账号，链接只能使用一次，请尽快激活！\r\n");
+        sb.append(sitePath + "/register/activate?action=activate&email=");
+        sb.append(toAddress);
+        sb.append("&validateCode=");
+        sb.append(validateCode);
+        sendEmail(toAddress, sb.toString(), "欢迎注册");
     }
+
 
 }

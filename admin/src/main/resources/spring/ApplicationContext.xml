@@ -50,6 +50,7 @@
                 /logout = anon
                 /account/editName = anon
                 /account/editEmail = anon
+                /account/editEmail/sendCode == anon
                 /account/editPassword = anon
                 /account/editPhone = anon
                 /register_register = anon

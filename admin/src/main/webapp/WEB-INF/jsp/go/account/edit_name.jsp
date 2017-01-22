@@ -48,25 +48,23 @@
 <script type="text/javascript">
     $('#defForm').validate({
         rules: {
-            loginName: {
-                required: true,
-                remote: {
-                    type: "post",
-                    url: "account/editName",
-                    dataType: "json",
-                    dataFilter: function (data, type) {
-                        if (data == 1) {
-                            return false;
-                        } else {
-                            return true;
-                        }
+            required: true,
+            remote: {
+                type: "post",
+                url: "account/editName",
+                dataType: "json",
+                dataFilter: function (data, type) {
+                    if (data == 1) {
+                        return false;
+                    } else {
+                        return true;
                     }
                 }
             }
         },
         messages: {
-            loginName: {
-                required: "请输入用户名",
+            name: {
+                required: "请输入个人姓名",
                 remote: "用户名重复"
             }
         }
@@ -91,47 +89,6 @@
 
     function changeCode() {
         $("#codeImg").attr("src", "code?t=" + genTimestamp());
-    }
-
-    //客户端校验
-    function check() {
-
-        if ($("#loginName").val() == "") {
-
-            $("#loginName").tips({
-                side: 2,
-                msg: '<fmt:message key="login_username_empty"/>',
-                bg: '#AE81FF',
-                time: 3
-            });
-
-            $("#loginName").focus();
-            return false;
-        } else {
-            $("#loginName").val(jQuery.trim($('#loginName').val()));
-        }
-
-        if ($("#code").val() == "") {
-
-            $("#code").tips({
-                side: 1,
-                msg: '<fmt:message key="login_verifycode_empty"/>',
-                bg: '#AE81FF',
-                time: 3
-            });
-
-            $("#code").focus();
-            return false;
-        }
-
-        $("#loginbox").tips({
-            side: 1,
-            msg: '<fmt:message key="login_tuning"/>',
-            bg: '#68B500',
-            time: 10
-        });
-
-        return true;
     }
 
 

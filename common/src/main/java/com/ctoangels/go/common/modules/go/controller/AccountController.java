@@ -1,6 +1,7 @@
 package com.ctoangels.go.common.modules.go.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.modules.sys.entity.User;
 import com.ctoangels.go.common.modules.sys.service.UserService;
 import com.ctoangels.go.common.util.Const;
@@ -14,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Random;
 
 /**
  * Account 控制层
  */
 @Controller
 @RequestMapping("account")
-public class AccountController {
+public class AccountController extends BaseController {
     @Autowired
     private UserService userService;
 
@@ -55,6 +57,7 @@ public class AccountController {
                 user.setName(name);
                 userService.updateById(user);
                 session.removeAttribute(Const.SESSION_SECURITY_CODE);
+                jsonObject.put("msg", "修改成功!");
                 jsonObject.put("status", 1);
             } else {
                 // 验证码输入有误
@@ -73,12 +76,54 @@ public class AccountController {
 
     @RequestMapping(value = "/editEmail", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject editEmailComplete(@RequestParam(required = false) String name,
-                                        @RequestParam(required = false) String code,
+    public JSONObject editEmailComplete(@RequestParam(required = false) String code,
                                         HttpSession session) {
         JSONObject jsonObject = new JSONObject();
+        int status = 0;
+        String msg = "";
+        if (Tools.notEmpty(code)) {
+            if (code.equals(session.getAttribute("sessionChangeEmailCode"))) {
+                User user = getCurrentUser();
+                user.setEmail((String) session.getAttribute("sessionChangeEmail"));
+                userService.updateById(user);
+                status = 1;
+                msg = "更改成功";
+                session.removeAttribute("sessionChangeEmail");
+                session.removeAttribute("sessionChangeEmailCode");
+            }
+        }
+        if (status == 0) {
+            msg = "验证码错误!";
+        }
+        jsonObject.put("msg", msg);
+        jsonObject.put("status", status);
         return jsonObject;
     }
+
+    @RequestMapping(value = "/editEmail/sendCode", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject sendCode(@RequestParam(required = false) String email,
+                               HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        if (Tools.notEmpty(email)) {
+            User user = new User();
+            user.setEmailStatus(Const.EMAIL_ACTIVATE_STATUS_HAVE);
+            user.setEmail(email);
+            user = userService.selectOne(user);
+            if (user == null) {
+                sendChangeEmailCode(email, session);
+                jsonObject.put("suc", true);
+            } else {
+                jsonObject.put("errInfo", "email used");//邮箱已被使用
+                jsonObject.put("suc", false);
+            }
+        } else {
+            jsonObject.put("errInfo", "email empty");//邮箱为空
+            jsonObject.put("suc", false);
+        }
+        return jsonObject;
+    }
+
 
     //修改密码
     @RequestMapping(value = "/editPassword", method = RequestMethod.GET)
@@ -148,5 +193,22 @@ public class AccountController {
         return jsonObject;
     }
 
+
+    //发送更改邮箱时的验证邮件
+    public void sendChangeEmailCode(String toAddress, HttpSession session) {
+        StringBuffer sb = new StringBuffer();
+        String base = "0123456789";
+        Random random = new Random();
+        StringBuilder code = new StringBuilder();
+        for (int i = 0; i < 6; ++i) {
+            int number = random.nextInt(base.length());
+            code.append(base.charAt(number));
+        }
+        session.setAttribute("sessionChangeEmail", toAddress);
+        session.setAttribute("sessionChangeEmailCode", code.toString());
+        sb.append("请尽快使用下面的验证码进行验证");
+        sb.append(code.toString());
+        sendEmail(toAddress, sb.toString(), "更换邮箱");
+    }
 
 }
