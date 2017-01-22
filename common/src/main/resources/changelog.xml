@@ -13,6 +13,13 @@
             </column>
         </addColumn>
     </changeSet>
+
+    <changeSet author="LuZhen" id="17317309132-001">
+        <addColumn tableName="sys_user">
+            <column name="style_id" remarks="风格id" type="int(3)"/>
+            <column name="company_id" remarks="公司id" type="int(3)"/>
+        </addColumn>
+    </changeSet>
     <changeSet author="WangShun" id="15950097942-002">
         <sql>
             insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改样式','account/editStyle',0);
