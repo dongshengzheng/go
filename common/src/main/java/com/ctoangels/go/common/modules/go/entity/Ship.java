@@ -2,7 +2,6 @@ package com.ctoangels.go.common.modules.go.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.math.BigDecimal;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -12,136 +11,151 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  *
- * 物品/作品
+ * 
  *
  */
-@TableName("go_ship")
+@TableName("t_ship")
 public class Ship implements Serializable {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
 
-	/** 主键 */
+	/** 船的id */
 	@TableId(type = IdType.AUTO)
 	private Integer id;
+
+	/** 公司id */
+	@TableField(value = "company_id")
+	private Integer companyId;
+
+	/** 船的imo号 */
+	private String imo;
+
+	/** 船名 */
+	private String name;
+
+	/** 船舶类型 */
+	private String type;
+
+	/** 船级社 */
+	@TableField(value = "ship_class")
+	private String shipClass;
+
+	/** 船的建造者 */
+	private String builder;
+
+	/** 建造日期 */
+	@TableField(value = "builde_year")
+	private Date buildeYear;
+
+	/** 船舶呼号 */
+	@TableField(value = "call_sign")
+	private String callSign;
+
+	/** 公司名称 */
+	@TableField(value = "company_name")
+	private String companyName;
+
+	/** 吃水 */
+	private Integer draft;
+
+	/** 载重吨 */
+	private Integer dwt;
+
+	/** 总吨 */
+	private Integer gt;
+
+	/** 型深 */
+	private Integer depth;
+
+	/** 船宽 */
+	private Integer beam;
+
+	/** 船长 */
+	private Integer loa;
+
+	/** 主机：厂家 */
+	@TableField(value = "me_maker")
+	private String meMaker;
+
+	/** 主机：型号 */
+	@TableField(value = "me_type")
+	private String meType;
+
+	/** 主机：马力/转速 */
+	@TableField(value = "me_bhp_rpm")
+	private String meBhpRpm;
+
+	/** 主机：数量 */
+	@TableField(value = "me_qty")
+	private Integer meQty;
+
+	/** 主机：缸径 */
+	@TableField(value = "me_cyl_bore")
+	private Integer meCylBore;
+
+	/** 辅机：厂家 */
+	@TableField(value = "aux_maker")
+	private String auxMaker;
+
+	/** 辅机：型号 */
+	@TableField(value = "aux_type")
+	private String auxType;
+
+	/** 辅机：额定功率 */
+	@TableField(value = "aux_rated_or")
+	private String auxRatedOr;
+
+	/** 辅机：数量 */
+	@TableField(value = "aux_qty")
+	private Integer auxQty;
+
+	/** 辅机：缸径 */
+	@TableField(value = "aux_cyl_bore")
+	private Integer auxCylBore;
+
+	/** 锅炉：厂家 */
+	@TableField(value = "boiler_maker")
+	private String boilerMaker;
+
+	/** 锅炉：型号 */
+	@TableField(value = "boiler_type")
+	private String boilerType;
+
+	/** 锅炉：工作压力 */
+	@TableField(value = "boiler_pressure")
+	private String boilerPressure;
+
+	/** 锅炉：数量 */
+	@TableField(value = "boiler_qty")
+	private Integer boilerQty;
+
+	/** 锅炉：热交换面积 */
+	@TableField(value = "boiler_heating_area")
+	private Integer boilerHeatingArea;
+
+	/** 锅炉：蒸发量 */
+	@TableField(value = "boiler_evaporation")
+	private Integer boilerEvaporation;
 
 	/** 创建时间 */
 	@TableField(value = "create_date")
 	private Date createDate;
 
-	/** 更新者 */
-	@TableField(value = "update_by")
-	private String updateBy;
+	/** 创建用户 */
+	@TableField(value = "create_user")
+	private String createUser;
 
-	/** 更新时间 */
-	@TableField(value = "update_date")
-	private Date updateDate;
+	/** 修改时间 */
+	@TableField(value = "modify_date")
+	private Date modifyDate;
 
-	/** 备注信息 */
-	private String remarks;
+	/** 修改用户 */
+	@TableField(value = "modify_user")
+	private String modifyUser;
 
-	/** 逻辑删除标记（0：正常；1：删除） */
-	@TableField(value = "del_flag")
-	private Integer delFlag;
-
-	/** 编号 */
-	private String no;
-
-	/** 是否公开（0：隐藏；1：公开） */
-	@TableField(value = "public_flag")
-	private String publicFlag;
-
-	/** 作品名称 */
-	private String name;
-
-	/** 品种 */
-	private String breed;
-
-	/** 作品类型 */
-	private String type;
-
-	/** 工艺制作 */
-	@TableField(value = "gy_type")
-	private String gyType;
-
-	/** 篆刻级别 */
-	@TableField(value = "level_zk")
-	private String levelZk;
-
-	/** 作品诠释 */
-	@TableField(value = "works_meaning")
-	private String worksMeaning;
-
-	/** 审核状态 */
-	private String status;
-
-	/**  */
-	private String recommend;
-
-	/**  */
-	private String reason;
-
-	/**  */
-	private String kqdy;
-
-	/**  */
-	private String maker;
-
-	/**  */
-	@TableField(value = "make_time")
-	private Date makeTime;
-
-	/** 是否轮播 字典表：是，否，随机 （作品轮播：） */
-	private Integer slide;
-
-	/** 截止日期（和slide联合判断） */
-	@TableField(value = "slide_till")
-	private Date slideTill;
-
-	/** 浏览次数：（ip） */
-	@TableField(value = "browser_count")
-	private Integer browserCount;
-
-	/** 关注数量，冗余字段 */
-	@TableField(value = "follow_count")
-	private Integer followCount;
-
-	/** 价值 */
-	private BigDecimal value;
-
-	/** 价值有效时间 */
-	@TableField(value = "value_till")
-	private Date valueTill;
-
-	/** 是否认证(如果认证了，则页面有大红章，才能在页面显示value) */
-	private Integer certified;
-
-	/** 作品状态字典表 完成、加工中 */
-	@TableField(value = "working_status")
-	private Integer workingStatus;
-
-	/** 创建者 */
-	@TableField(value = "create_by")
-	private Integer createBy;
-
-	/** 长度 */
-	private BigDecimal length;
-
-	/** 宽度 */
-	private BigDecimal width;
-
-	/** 高度 */
-	private BigDecimal height;
-
-	/** 重量 */
-	private BigDecimal weight;
-
-	public Ship() {}
-
-	public Ship(Integer id, String status) {
-		this.id = id;
-		this.status = status;
-	}
+	/** 状态 */
+	private Integer status;
 
 
 	public Integer getId() {
@@ -152,60 +166,20 @@ public class Ship implements Serializable {
 		this.id = id;
 	}
 
-	public Date getCreateDate() {
-		return this.createDate;
+	public Integer getCompanyId() {
+		return this.companyId;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCompanyId(Integer companyId) {
+		this.companyId = companyId;
 	}
 
-	public String getUpdateBy() {
-		return this.updateBy;
+	public String getImo() {
+		return this.imo;
 	}
 
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-
-	public String getRemarks() {
-		return this.remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
-	public Integer getDelFlag() {
-		return this.delFlag;
-	}
-
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-	}
-
-	public String getNo() {
-		return this.no;
-	}
-
-	public void setNo(String no) {
-		this.no = no;
-	}
-
-	public String getPublicFlag() {
-		return this.publicFlag;
-	}
-
-	public void setPublicFlag(String publicFlag) {
-		this.publicFlag = publicFlag;
+	public void setImo(String imo) {
+		this.imo = imo;
 	}
 
 	public String getName() {
@@ -216,14 +190,6 @@ public class Ship implements Serializable {
 		this.name = name;
 	}
 
-	public String getBreed() {
-		return this.breed;
-	}
-
-	public void setBreed(String breed) {
-		this.breed = breed;
-	}
-
 	public String getType() {
 		return this.type;
 	}
@@ -232,180 +198,260 @@ public class Ship implements Serializable {
 		this.type = type;
 	}
 
-	public String getGyType() {
-		return this.gyType;
+	public String getShipClass() {
+		return this.shipClass;
 	}
 
-	public void setGyType(String gyType) {
-		this.gyType = gyType;
+	public void setShipClass(String shipClass) {
+		this.shipClass = shipClass;
 	}
 
-	public String getLevelZk() {
-		return this.levelZk;
+	public String getBuilder() {
+		return this.builder;
 	}
 
-	public void setLevelZk(String levelZk) {
-		this.levelZk = levelZk;
+	public void setBuilder(String builder) {
+		this.builder = builder;
 	}
 
-	public String getWorksMeaning() {
-		return this.worksMeaning;
+	public Date getBuildeYear() {
+		return this.buildeYear;
 	}
 
-	public void setWorksMeaning(String worksMeaning) {
-		this.worksMeaning = worksMeaning;
+	public void setBuildeYear(Date buildeYear) {
+		this.buildeYear = buildeYear;
 	}
 
-	public String getStatus() {
+	public String getCallSign() {
+		return this.callSign;
+	}
+
+	public void setCallSign(String callSign) {
+		this.callSign = callSign;
+	}
+
+	public String getCompanyName() {
+		return this.companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public Integer getDraft() {
+		return this.draft;
+	}
+
+	public void setDraft(Integer draft) {
+		this.draft = draft;
+	}
+
+	public Integer getDwt() {
+		return this.dwt;
+	}
+
+	public void setDwt(Integer dwt) {
+		this.dwt = dwt;
+	}
+
+	public Integer getGt() {
+		return this.gt;
+	}
+
+	public void setGt(Integer gt) {
+		this.gt = gt;
+	}
+
+	public Integer getDepth() {
+		return this.depth;
+	}
+
+	public void setDepth(Integer depth) {
+		this.depth = depth;
+	}
+
+	public Integer getBeam() {
+		return this.beam;
+	}
+
+	public void setBeam(Integer beam) {
+		this.beam = beam;
+	}
+
+	public Integer getLoa() {
+		return this.loa;
+	}
+
+	public void setLoa(Integer loa) {
+		this.loa = loa;
+	}
+
+	public String getMeMaker() {
+		return this.meMaker;
+	}
+
+	public void setMeMaker(String meMaker) {
+		this.meMaker = meMaker;
+	}
+
+	public String getMeType() {
+		return this.meType;
+	}
+
+	public void setMeType(String meType) {
+		this.meType = meType;
+	}
+
+	public String getMeBhpRpm() {
+		return this.meBhpRpm;
+	}
+
+	public void setMeBhpRpm(String meBhpRpm) {
+		this.meBhpRpm = meBhpRpm;
+	}
+
+	public Integer getMeQty() {
+		return this.meQty;
+	}
+
+	public void setMeQty(Integer meQty) {
+		this.meQty = meQty;
+	}
+
+	public Integer getMeCylBore() {
+		return this.meCylBore;
+	}
+
+	public void setMeCylBore(Integer meCylBore) {
+		this.meCylBore = meCylBore;
+	}
+
+	public String getAuxMaker() {
+		return this.auxMaker;
+	}
+
+	public void setAuxMaker(String auxMaker) {
+		this.auxMaker = auxMaker;
+	}
+
+	public String getAuxType() {
+		return this.auxType;
+	}
+
+	public void setAuxType(String auxType) {
+		this.auxType = auxType;
+	}
+
+	public String getAuxRatedOr() {
+		return this.auxRatedOr;
+	}
+
+	public void setAuxRatedOr(String auxRatedOr) {
+		this.auxRatedOr = auxRatedOr;
+	}
+
+	public Integer getAuxQty() {
+		return this.auxQty;
+	}
+
+	public void setAuxQty(Integer auxQty) {
+		this.auxQty = auxQty;
+	}
+
+	public Integer getAuxCylBore() {
+		return this.auxCylBore;
+	}
+
+	public void setAuxCylBore(Integer auxCylBore) {
+		this.auxCylBore = auxCylBore;
+	}
+
+	public String getBoilerMaker() {
+		return this.boilerMaker;
+	}
+
+	public void setBoilerMaker(String boilerMaker) {
+		this.boilerMaker = boilerMaker;
+	}
+
+	public String getBoilerType() {
+		return this.boilerType;
+	}
+
+	public void setBoilerType(String boilerType) {
+		this.boilerType = boilerType;
+	}
+
+	public String getBoilerPressure() {
+		return this.boilerPressure;
+	}
+
+	public void setBoilerPressure(String boilerPressure) {
+		this.boilerPressure = boilerPressure;
+	}
+
+	public Integer getBoilerQty() {
+		return this.boilerQty;
+	}
+
+	public void setBoilerQty(Integer boilerQty) {
+		this.boilerQty = boilerQty;
+	}
+
+	public Integer getBoilerHeatingArea() {
+		return this.boilerHeatingArea;
+	}
+
+	public void setBoilerHeatingArea(Integer boilerHeatingArea) {
+		this.boilerHeatingArea = boilerHeatingArea;
+	}
+
+	public Integer getBoilerEvaporation() {
+		return this.boilerEvaporation;
+	}
+
+	public void setBoilerEvaporation(Integer boilerEvaporation) {
+		this.boilerEvaporation = boilerEvaporation;
+	}
+
+	public Date getCreateDate() {
+		return this.createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getCreateUser() {
+		return this.createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public Date getModifyDate() {
+		return this.modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+	public String getModifyUser() {
+		return this.modifyUser;
+	}
+
+	public void setModifyUser(String modifyUser) {
+		this.modifyUser = modifyUser;
+	}
+
+	public Integer getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
-	}
-
-	public String getRecommend() {
-		return this.recommend;
-	}
-
-	public void setRecommend(String recommend) {
-		this.recommend = recommend;
-	}
-
-	public String getReason() {
-		return this.reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
-
-	public String getKqdy() {
-		return this.kqdy;
-	}
-
-	public void setKqdy(String kqdy) {
-		this.kqdy = kqdy;
-	}
-
-	public String getMaker() {
-		return this.maker;
-	}
-
-	public void setMaker(String maker) {
-		this.maker = maker;
-	}
-
-	public Date getMakeTime() {
-		return this.makeTime;
-	}
-
-	public void setMakeTime(Date makeTime) {
-		this.makeTime = makeTime;
-	}
-
-	public Integer getSlide() {
-		return this.slide;
-	}
-
-	public void setSlide(Integer slide) {
-		this.slide = slide;
-	}
-
-	public Date getSlideTill() {
-		return this.slideTill;
-	}
-
-	public void setSlideTill(Date slideTill) {
-		this.slideTill = slideTill;
-	}
-
-	public Integer getBrowserCount() {
-		return this.browserCount;
-	}
-
-	public void setBrowserCount(Integer browserCount) {
-		this.browserCount = browserCount;
-	}
-
-	public Integer getFollowCount() {
-		return this.followCount;
-	}
-
-	public void setFollowCount(Integer followCount) {
-		this.followCount = followCount;
-	}
-
-	public BigDecimal getValue() {
-		return this.value;
-	}
-
-	public void setValue(BigDecimal value) {
-		this.value = value;
-	}
-
-	public Date getValueTill() {
-		return this.valueTill;
-	}
-
-	public void setValueTill(Date valueTill) {
-		this.valueTill = valueTill;
-	}
-
-	public Integer getCertified() {
-		return this.certified;
-	}
-
-	public void setCertified(Integer certified) {
-		this.certified = certified;
-	}
-
-	public Integer getWorkingStatus() {
-		return this.workingStatus;
-	}
-
-	public void setWorkingStatus(Integer workingStatus) {
-		this.workingStatus = workingStatus;
-	}
-
-	public Integer getCreateBy() {
-		return this.createBy;
-	}
-
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
-	}
-
-	public BigDecimal getLength() {
-		return this.length;
-	}
-
-	public void setLength(BigDecimal length) {
-		this.length = length;
-	}
-
-	public BigDecimal getWidth() {
-		return this.width;
-	}
-
-	public void setWidth(BigDecimal width) {
-		this.width = width;
-	}
-
-	public BigDecimal getHeight() {
-		return this.height;
-	}
-
-	public void setHeight(BigDecimal height) {
-		this.height = height;
-	}
-
-	public BigDecimal getWeight() {
-		return this.weight;
-	}
-
-	public void setWeight(BigDecimal weight) {
-		this.weight = weight;
 	}
 
 }

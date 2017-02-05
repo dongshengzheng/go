@@ -1,6 +1,9 @@
 package com.ctoangels.go.common.modules.go.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.go.common.modules.go.entity.Style;
+import com.ctoangels.go.common.modules.go.service.IStyleService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.modules.sys.entity.User;
 import com.ctoangels.go.common.modules.sys.service.UserService;
@@ -9,12 +12,14 @@ import com.ctoangels.go.common.util.Tools;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -25,6 +30,9 @@ import java.util.Random;
 public class AccountController extends BaseController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private IStyleService styleService;
 
 
     @RequestMapping
@@ -180,16 +188,24 @@ public class AccountController extends BaseController {
 
     //修改样式
     @RequestMapping(value = "/editStyle", method = RequestMethod.GET)
-    public String changeStyle() {
+    public String changeStyle(ModelMap map) {
+        List<Style> styleList = styleService.selectList(new EntityWrapper<>(new Style()));
+        map.put("styleList", styleList);
         return "go/account/edit_style";
     }
 
     @RequestMapping(value = "/editStyle", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject editStyleComplete(@RequestParam(required = false) String name,
-                                        @RequestParam(required = false) String code,
-                                        HttpSession session) {
+    public JSONObject editStyleComplete(@RequestParam(required = false) Integer styleId) {
         JSONObject jsonObject = new JSONObject();
+        if (styleId != 0) {
+            User currentUser = getCurrentUser();
+            currentUser.setStyleId(styleId);
+            userService.updateById(currentUser);
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+        }
         return jsonObject;
     }
 

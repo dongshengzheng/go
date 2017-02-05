@@ -56,49 +56,12 @@ public class User implements Serializable {
     @TableField(exist = false)
     private String roleIds;
 
+    @TableField(value = "style_id")
+    private Integer styleId;
 
-    // 业务字段
+    @TableField(value = "company_id")
+    private Integer companyId;
 
-    /**
-     * 粉丝数量，冗余字段
-     */
-    @TableField(exist = false)
-    private int followCount;
-
-    /**
-     * 作品数量，冗余字段
-     */
-    @TableField(exist = false)
-    private int worksCount;
-
-    /**
-     * 关注他人数量，冗余字段
-     */
-    @TableField(exist = false)
-    private Integer focusOtherCount;
-
-    /**
-     * 收藏作品数量，冗余字段
-     */
-    @TableField(exist = false)
-    private Integer collectionCount;
-
-
-    public int getWorksCount() {
-        return worksCount;
-    }
-
-    public void setWorksCount(int worksCount) {
-        this.worksCount = worksCount;
-    }
-
-    public int getFollowCount() {
-        return followCount;
-    }
-
-    public void setFollowCount(int followCount) {
-        this.followCount = followCount;
-    }
 
     public String getRoleIds() {
         return roleIds;
@@ -212,22 +175,6 @@ public class User implements Serializable {
         this.score = score;
     }
 
-    public Integer getFocusOtherCount() {
-        return focusOtherCount;
-    }
-
-    public void setFocusOtherCount(Integer focusOtherCount) {
-        this.focusOtherCount = focusOtherCount;
-    }
-
-    public Integer getCollectionCount() {
-        return collectionCount;
-    }
-
-    public void setCollectionCount(Integer collectionCount) {
-        this.collectionCount = collectionCount;
-    }
-
     public String getIdentification() {
         return identification;
     }
@@ -268,7 +215,6 @@ public class User implements Serializable {
         this.emailCode = emailCode;
     }
 
-
     public Date getEmailTime() {
         return emailTime;
     }
@@ -283,5 +229,21 @@ public class User implements Serializable {
 
     public void setEmailStatus(Integer emailStatus) {
         this.emailStatus = emailStatus;
+    }
+
+    public Integer getStyleId() {
+        return styleId;
+    }
+
+    public void setStyleId(Integer styleId) {
+        this.styleId = styleId;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 }

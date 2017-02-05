@@ -684,7 +684,7 @@ CREATE TABLE `sys_user` (
   `prefer` varchar(64) DEFAULT NULL COMMENT '偏好',
   `address` varchar(64) DEFAULT NULL COMMENT '地址',
   `head_img_url` varchar(200) DEFAULT NULL COMMENT '头像图片地址',
-  `style_id` int(11) DEFAULT NULL,
+  `style_id` int(11) DEFAULT NULL COMMENT '主题偏好',
   `company_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;

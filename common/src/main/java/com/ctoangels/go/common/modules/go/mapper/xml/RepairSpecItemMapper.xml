@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.go.common.modules.go.mapper.RepairSpecItemMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, repair_spec_detail_id AS repairSpecDetailId, catagory, code, content, unit, `count`, remark, info, parentid, repair_spec_id AS repairSpecId, `status`
+	</sql>
+
+</mapper>

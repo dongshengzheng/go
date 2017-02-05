@@ -2,6 +2,8 @@ package com.ctoangels.go.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.go.common.modules.go.entity.Style;
+import com.ctoangels.go.common.modules.go.service.IStyleService;
 import com.ctoangels.go.common.modules.sys.entity.Button;
 import com.ctoangels.go.common.modules.sys.entity.MailAuthenticator;
 import com.ctoangels.go.common.modules.sys.entity.Menu;
@@ -56,6 +58,9 @@ public class LoginController extends BaseController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private IStyleService iStyleService;
 
     @Value("${site_path}")
     private String sitePath;
@@ -290,7 +295,17 @@ public class LoginController extends BaseController {
                 session.setAttribute(Const.SESSION_USERNAME, user.getLoginName()); // 放入用户名
                 map.put("user", user);
                 map.put("menuList", session.getAttribute(Const.SESSION_ALLMENULIST));
-                map.put("style", "blue");
+                Integer styleId = user.getStyleId();
+                Style style;
+                if (styleId == null) {
+                    style = iStyleService.selectById(1);
+                } else {
+                    style = iStyleService.selectById(styleId);
+                    if (style == null) {
+                        style = iStyleService.selectById(1);
+                    }
+                }
+                map.put("style", style);
                 return "sys/index";
             }
 

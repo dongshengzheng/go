@@ -13,8 +13,8 @@
         margin-bottom: 3%;
     }
 </style>
-<form class="form-horizontal" action="account/editEmail" method="post"
-      id="defForm" callfn="refreshTable">
+<form class="form-horizontal" action="account/editStyle" method="post"
+      id="defForm">
     <div class="modal-header">
         <div class='bootstrap-dialog-header'>
             <div class='bootstrap-dialog-close-button'
@@ -26,20 +26,16 @@
     </div>
     <div class="modal-body">
         <div class="container-fluid">
-            <a href="javascript:;" class="btn btn-lg default">default</a>
-            <a href="javascript:;" class="btn btn-lg default">default-rtl</a>
-            <a href="javascript:;" class="btn btn-lg blue">blue</a>
-            <a href="javascript:;" class="btn btn-lg blue">blue-rtl</a>
-            <a href="javascript:;" class="btn btn-lg green-steel">darkblue</a>
-            <a href="javascript:;" class="btn btn-lg green-soft">darkblue-rtl</a>
-            <a href="javascript:;" class="btn btn-lg red-pink">grey</a>
-            <a href="javascript:;" class="btn btn-lg yellow">light</a>
-            <a href="javascript:;" class="btn btn-lg purple">light2</a>
+            <c:forEach items="${styleList}" var="style">
+                <a href="javascript:;" data-id="${style.id}" class="btn btn-lg ${style.color}">${style.des}</a>
+            </c:forEach>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <shiro:hasPermission name="account/editEmail">
+        <shiro:hasPermission name="account/editStyle">
+            <input type="hidden" value="0" name="styleId" id="styleId">
+            <input type="hidden" value="0" id="styleDes">
             <button type="submit" class="btn btn-primary">保存</button>
         </shiro:hasPermission>
     </div>
@@ -47,6 +43,21 @@
 
 <script>
     $('.btn-lg').on('click', function () {
-        $('#style_color').attr('href', "${ctx}/assets/layouts/layout/css/themes/" + $(this).html() + ".min.css");
+        $('#styleId').val($(this).attr('data-id'));
+        $('#styleDes').val($(this).html());
+        $('#style_color').attr('href', "${ctx}/assets/layouts/layout/css/themes/" +  $('#styleDes').val() + ".min.css");
+        <!--$('#style_color').attr('href', "${ctx}/assets/layouts/layout/css/themes/" + $(this).html() + ".min.css");-->
     })
+
+    $('#defForm').validate({
+        rules: {
+            remote: {
+                type: "post",
+                url: "account/editStyle",
+                dataType: "json",
+            }
+        }
+    });
+
+
 </script>

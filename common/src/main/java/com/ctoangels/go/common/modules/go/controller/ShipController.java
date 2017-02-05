@@ -40,26 +40,4 @@ public class ShipController extends BaseController {
         return jsonPage(page);
     }
 
-    /**
-     * 审核作品
-     */
-    @RequestMapping(value = "check", method = RequestMethod.POST)
-    @ResponseBody
-    public Boolean check(Ship ship) {
-        return shipService.updateSelectiveById(new Ship(ship.getId(), ship.getStatus()));
-
-    }
-
-    /**
-     * 作品轮播
-     */
-    @RequestMapping(value = "slide", method = RequestMethod.POST)
-    @ResponseBody
-    public Boolean slide(Integer id, Integer slide) {
-        Ship works = new Ship();
-        works.setId(id);
-        works.setSlide(slide);
-        return shipService.updateSelectiveById(works);
-
-    }
 }

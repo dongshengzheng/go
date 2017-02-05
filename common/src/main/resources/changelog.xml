@@ -13,13 +13,6 @@
             </column>
         </addColumn>
     </changeSet>
-
-    <changeSet author="LuZhen" id="17317309132-001">
-        <addColumn tableName="sys_user">
-            <column name="style_id" remarks="风格id" type="int(3)"/>
-            <column name="company_id" remarks="公司id" type="int(3)"/>
-        </addColumn>
-    </changeSet>
     <changeSet author="WangShun" id="15950097942-002">
         <sql>
             insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改样式','account/editStyle',0);
@@ -27,6 +20,26 @@
             insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改密码','account/editPassword',0);
             insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改手机号码','account/editPhone',0);
             insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改电子邮箱','account/editEmail',0);
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-003">
+        <sql>
+            ALTER TABLE `t_ship` CHANGE COLUMN `class` `ship_class` varchar(45) DEFAULT NULL COMMENT '船级社';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-004">
+        <sql>
+            ALTER TABLE `t_style` CHANGE COLUMN `desc` `des` varchar(30) DEFAULT NULL COMMENT '描述';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-005">
+        <sql>
+            insert INTO t_style(des,color) VALUES('default','dark');
+            insert INTO t_style(des,color) VALUES('blue','blue');
+            insert INTO t_style(des,color) VALUES('darkblue','blue-dark');
+            insert INTO t_style(des,color) VALUES('grey','grey');
+            insert INTO t_style(des,color) VALUES('light','white');
+            insert INTO t_style(des,color) VALUES('light2','grey-cararra');
         </sql>
     </changeSet>
 </databaseChangeLog>
