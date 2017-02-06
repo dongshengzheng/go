@@ -33,20 +33,26 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <input type="hidden" value="" id="oldStyle">
         <shiro:hasPermission name="account/editStyle">
             <input type="hidden" value="0" name="styleId" id="styleId">
-            <input type="hidden" value="0" id="styleDes">
             <button type="submit" class="btn btn-primary">保存</button>
         </shiro:hasPermission>
     </div>
 </form>
 
 <script>
+    $(document).ready(function () {
+        $('#oldStyle').val($('#style_color').attr('href'));
+    })
+    $('.btn-default').on('click', function () {
+        $('#style_color').attr('href', $('#oldStyle').val());
+    })
+
+
     $('.btn-lg').on('click', function () {
         $('#styleId').val($(this).attr('data-id'));
-        $('#styleDes').val($(this).html());
-        $('#style_color').attr('href', "${ctx}/assets/layouts/layout/css/themes/" +  $('#styleDes').val() + ".min.css");
-        <!--$('#style_color').attr('href', "${ctx}/assets/layouts/layout/css/themes/" + $(this).html() + ".min.css");-->
+        $('#style_color').attr('href', " ${ctx}/assets/layouts/layout/css/themes/" + $(this).html() + ".min.css");
     })
 
     $('#defForm').validate({
@@ -58,6 +64,4 @@
             }
         }
     });
-
-
 </script>

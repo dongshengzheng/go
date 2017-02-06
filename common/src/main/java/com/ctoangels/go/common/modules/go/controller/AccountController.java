@@ -204,6 +204,7 @@ public class AccountController extends BaseController {
             userService.updateById(currentUser);
             jsonObject.put("status", 1);
         } else {
+            jsonObject.put("msg", "请选择一个样式");
             jsonObject.put("status", 0);
         }
         return jsonObject;
