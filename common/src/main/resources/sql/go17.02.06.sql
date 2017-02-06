@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-01-20 18:00:32
+Date: 2017-02-06 14:49:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,6 +39,11 @@ CREATE TABLE `databasechangelog` (
 -- ----------------------------
 -- Records of databasechangelog
 -- ----------------------------
+INSERT INTO `databasechangelog` VALUES ('15950097942-001', 'WangShun', 'src/main/resources/changelog.xml', '2017-01-20 18:08:43', '1', 'EXECUTED', '7:8c9d2dcf821c9cb4f7ea5506967568bf', 'addColumn tableName=sys_user', '', null, '3.5.3', null, null, '4906922107');
+INSERT INTO `databasechangelog` VALUES ('15950097942-002', 'WangShun', 'src/main/resources/changelog.xml', '2017-01-20 18:25:53', '2', 'EXECUTED', '7:cadf4500b8903664980db191b6cf5c76', 'sql', '', null, '3.5.3', null, null, '4907953654');
+INSERT INTO `databasechangelog` VALUES ('15950097942-003', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-06 09:44:27', '3', 'EXECUTED', '7:f1c4e3941d7812821879aeeb2e88b1ec', 'sql', '', null, '3.5.3', null, null, '6345467392');
+INSERT INTO `databasechangelog` VALUES ('15950097942-004', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-06 09:44:27', '4', 'EXECUTED', '7:6f50631b2628966e7876addf59d1d002', 'sql', '', null, '3.5.3', null, null, '6345467392');
+INSERT INTO `databasechangelog` VALUES ('15950097942-005', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-06 09:44:27', '5', 'EXECUTED', '7:e2ff4cb0eb561d55445a0198ee2af072', 'sql', '', null, '3.5.3', null, null, '6345467392');
 
 -- ----------------------------
 -- Table structure for databasechangeloglock
@@ -58,459 +63,6 @@ CREATE TABLE `databasechangeloglock` (
 INSERT INTO `databasechangeloglock` VALUES ('1', '\0', null, null);
 
 -- ----------------------------
--- Table structure for go_account
--- ----------------------------
-DROP TABLE IF EXISTS `go_account`;
-CREATE TABLE `go_account` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_account
--- ----------------------------
-
--- ----------------------------
--- Table structure for go_archiv
--- ----------------------------
-DROP TABLE IF EXISTS `go_archiv`;
-CREATE TABLE `go_archiv` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_archiv
--- ----------------------------
-
--- ----------------------------
--- Table structure for go_compare
--- ----------------------------
-DROP TABLE IF EXISTS `go_compare`;
-CREATE TABLE `go_compare` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_compare
--- ----------------------------
-
--- ----------------------------
--- Table structure for go_inquiry
--- ----------------------------
-DROP TABLE IF EXISTS `go_inquiry`;
-CREATE TABLE `go_inquiry` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_inquiry
--- ----------------------------
-
--- ----------------------------
--- Table structure for go_management
--- ----------------------------
-DROP TABLE IF EXISTS `go_management`;
-CREATE TABLE `go_management` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_management
--- ----------------------------
-
--- ----------------------------
--- Table structure for go_owner
--- ----------------------------
-DROP TABLE IF EXISTS `go_owner`;
-CREATE TABLE `go_owner` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_owner
--- ----------------------------
-
--- ----------------------------
--- Table structure for go_progress
--- ----------------------------
-DROP TABLE IF EXISTS `go_progress`;
-CREATE TABLE `go_progress` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_progress
--- ----------------------------
-
--- ----------------------------
--- Table structure for go_repairlist
--- ----------------------------
-DROP TABLE IF EXISTS `go_repairlist`;
-CREATE TABLE `go_repairlist` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_repairlist
--- ----------------------------
-
--- ----------------------------
--- Table structure for go_ship
--- ----------------------------
-DROP TABLE IF EXISTS `go_ship`;
-CREATE TABLE `go_ship` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_ship
--- ----------------------------
-INSERT INTO `go_ship` VALUES ('1', '2016-12-25 20:00:53', '1', '2016-12-25 23:53:46', '', '0', '身份证', '1', '阿拉伯黑石号', '2', '2', '1', '3', '123213', '3', null, null, '70', '123', '2016-12-25 00:00:00', '1', null, null, null, null, null, null, null, '1', '123.00', '213.00', '123.00', '213.00');
-INSERT INTO `go_ship` VALUES ('2', '2016-12-26 20:08:39', '1', '2016-12-26 20:08:42', '', '0', '', '1', '123', '', '', '', '', '', '3', null, null, '', '', null, '1', null, null, null, null, null, null, null, '1', null, null, null, null);
-INSERT INTO `go_ship` VALUES ('3', '2016-12-28 20:14:55', '1', '2016-12-28 20:14:57', '', '0', '', '1', 'asda', '', '', '', '', '', '3', null, null, '', '', null, '0', null, null, null, null, null, null, null, '1', null, null, null, null);
-
--- ----------------------------
--- Table structure for go_yard
--- ----------------------------
-DROP TABLE IF EXISTS `go_yard`;
-CREATE TABLE `go_yard` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
-  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
-  `del_flag` int(3) NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：正常；1：删除）',
-  `no` varchar(64) DEFAULT NULL COMMENT '编号',
-  `public_flag` varchar(64) DEFAULT '1' COMMENT '是否公开（0：隐藏；1：公开）',
-  `name` varchar(64) DEFAULT NULL COMMENT '作品名称',
-  `breed` varchar(64) DEFAULT NULL COMMENT '品种',
-  `type` varchar(64) DEFAULT NULL COMMENT '作品类型',
-  `gy_type` varchar(64) DEFAULT NULL COMMENT '工艺制作',
-  `level_zk` varchar(64) DEFAULT NULL COMMENT '篆刻级别',
-  `works_meaning` varchar(1000) DEFAULT NULL COMMENT '作品诠释',
-  `status` varchar(64) DEFAULT NULL COMMENT '审核状态',
-  `recommend` varchar(64) DEFAULT '0',
-  `reason` varchar(255) DEFAULT NULL,
-  `kqdy` varchar(45) DEFAULT NULL,
-  `maker` varchar(45) DEFAULT NULL,
-  `make_time` datetime DEFAULT NULL,
-  `slide` mediumint(11) DEFAULT NULL COMMENT '是否轮播 字典表：是，否，随机 （作品轮播：）',
-  `slide_till` datetime DEFAULT NULL COMMENT '截止日期（和slide联合判断）',
-  `browser_count` int(11) DEFAULT NULL COMMENT '浏览次数：（ip）',
-  `follow_count` int(11) DEFAULT NULL COMMENT '关注数量，冗余字段',
-  `value` decimal(11,2) DEFAULT NULL COMMENT '价值',
-  `value_till` datetime DEFAULT NULL COMMENT '价值有效时间',
-  `certified` mediumint(8) DEFAULT NULL COMMENT '是否认证(如果认证了，则页面有大红章，才能在页面显示value)',
-  `working_status` mediumint(8) DEFAULT NULL COMMENT '作品状态字典表 完成、加工中',
-  `create_by` int(11) DEFAULT NULL COMMENT '创建者',
-  `length` decimal(11,2) DEFAULT NULL COMMENT '长度',
-  `width` decimal(11,2) DEFAULT NULL COMMENT '宽度',
-  `height` decimal(11,2) DEFAULT NULL COMMENT '高度',
-  `weight` decimal(11,2) DEFAULT NULL COMMENT '重量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品/作品';
-
--- ----------------------------
--- Records of go_yard
--- ----------------------------
-
--- ----------------------------
 -- Table structure for sys_button
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_button`;
@@ -521,7 +73,7 @@ CREATE TABLE `sys_button` (
   `button_url` varchar(255) NOT NULL COMMENT '按钮路径',
   `del_flag` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_button
@@ -547,6 +99,11 @@ INSERT INTO `sys_button` VALUES ('18', '4', '删除', 'role/delete', '0');
 INSERT INTO `sys_button` VALUES ('19', '4', '批量删除', 'role/batchDelete', '0');
 INSERT INTO `sys_button` VALUES ('20', '4', '编辑权限', 'role/editRight', '0');
 INSERT INTO `sys_button` VALUES ('35', '101', '新增船舶', 'ship/addBtn', '0');
+INSERT INTO `sys_button` VALUES ('36', '106', '更改样式', 'account/editStyle', '0');
+INSERT INTO `sys_button` VALUES ('37', '106', '更改个人姓名', 'account/editName', '0');
+INSERT INTO `sys_button` VALUES ('38', '106', '更改密码', 'account/editPassword', '0');
+INSERT INTO `sys_button` VALUES ('39', '106', '更改手机号码', 'account/editPhone', '0');
+INSERT INTO `sys_button` VALUES ('40', '106', '更改电子邮箱', 'account/editEmail', '0');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -684,15 +241,19 @@ CREATE TABLE `sys_user` (
   `prefer` varchar(64) DEFAULT NULL COMMENT '偏好',
   `address` varchar(64) DEFAULT NULL COMMENT '地址',
   `head_img_url` varchar(200) DEFAULT NULL COMMENT '头像图片地址',
-  `style_id` int(11) DEFAULT NULL COMMENT '主题偏好',
+  `style_id` int(11) DEFAULT NULL,
   `company_id` int(11) DEFAULT NULL,
+  `email_status` int(11) DEFAULT NULL COMMENT '邮箱验证状态',
+  `email_time` datetime DEFAULT NULL COMMENT '邮箱验证开始时间',
+  `email_code` varchar(200) DEFAULT NULL COMMENT '邮箱验证码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'dd94709528bb1c83d08f3088d4043f4742891f4f', 'admin', '2017-01-20 10:34:39', '0:0:0:0:0:0:0:1', '0', '123', '1234', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'dd94709528bb1c83d08f3088d4043f4742891f4f', 'admin', '2017-01-20 10:34:39', '0:0:0:0:0:0:0:1', '0', '123', '1234', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-06 10:03:09', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', null, '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -703,12 +264,13 @@ CREATE TABLE `sys_user_role` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `role_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户和角色';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户和角色';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', '1', '1');
+INSERT INTO `sys_user_role` VALUES ('2', '3', '1');
 
 -- ----------------------------
 -- Table structure for t_berth_detail
@@ -721,6 +283,11 @@ CREATE TABLE `t_berth_detail` (
   `protocol` int(11) DEFAULT NULL COMMENT '草案',
   `capacity` int(11) DEFAULT NULL COMMENT '能力',
   `cranes` varchar(45) DEFAULT NULL COMMENT '起重机',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建者',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改者',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -745,10 +312,10 @@ CREATE TABLE `t_company` (
   `contact_tel` varchar(45) DEFAULT NULL COMMENT '详细方式',
   `logo` varchar(45) DEFAULT NULL COMMENT '公司Logo',
   `create_date` date DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建用户',
-  `modify_date` date DEFAULT NULL COMMENT '修改时间',
-  `modify_user` varchar(45) DEFAULT NULL COMMENT '修改用户',
-  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -765,6 +332,11 @@ CREATE TABLE `t_dict` (
   `type` varchar(45) DEFAULT NULL,
   `value` varchar(45) DEFAULT NULL,
   `desc` varchar(45) DEFAULT NULL,
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -791,7 +363,7 @@ CREATE TABLE `t_enquiry` (
   `create_user` varchar(45) DEFAULT NULL COMMENT '创建用户',
   `modify_date` date DEFAULT NULL COMMENT '修改日期',
   `modify_user` varchar(45) DEFAULT NULL COMMENT '修改用户',
-  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -811,6 +383,11 @@ CREATE TABLE `t_facility_detail` (
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   `unit` varchar(10) DEFAULT NULL COMMENT '单元',
   `faci_category` varchar(45) DEFAULT NULL COMMENT '设施类型',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -827,6 +404,11 @@ CREATE TABLE `t_general_detail` (
   `shipyard_id` int(11) DEFAULT NULL COMMENT '船厂id',
   `item` varchar(45) DEFAULT NULL COMMENT '项目',
   `item_category` varchar(45) DEFAULT NULL COMMENT '项目类型',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -844,10 +426,10 @@ CREATE TABLE `t_repair_model` (
   `desc` varchar(500) DEFAULT NULL COMMENT '维修类型',
   `version` varchar(30) DEFAULT NULL COMMENT '红本版本号',
   `create_date` date DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建用户',
-  `modify_date` date DEFAULT NULL COMMENT '修改时间',
-  `modify_user` varchar(45) DEFAULT NULL COMMENT '修改用户',
-  `status` varchar(45) DEFAULT NULL COMMENT '状态',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -871,6 +453,11 @@ CREATE TABLE `t_repair_model_item` (
   `parentid` varchar(45) DEFAULT NULL COMMENT '父id',
   `status` varchar(45) DEFAULT NULL COMMENT '状态',
   `repair_model_id` int(11) DEFAULT NULL COMMENT '维修红本id',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -893,10 +480,10 @@ CREATE TABLE `t_repair_prog` (
   `type` varchar(45) DEFAULT NULL COMMENT '维修类型',
   `enquiry_id` int(11) DEFAULT NULL COMMENT '询价id',
   `create_date` date DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建用户\n',
-  `modify_date` date DEFAULT NULL COMMENT '修改时间',
-  `modify_user` varchar(45) DEFAULT NULL COMMENT '修改用户',
-  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -925,6 +512,11 @@ CREATE TABLE `t_repair_prog_detail` (
   `damage` varchar(500) DEFAULT NULL COMMENT '损坏程度',
   `repair_tech` varchar(300) DEFAULT NULL COMMENT '修理工艺',
   `repair_tech_desc` varchar(500) DEFAULT NULL COMMENT '详细修理工艺',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -942,6 +534,11 @@ CREATE TABLE `t_repair_prog_detail_req` (
   `unit` varchar(45) DEFAULT NULL COMMENT '单位',
   `count` int(11) DEFAULT NULL COMMENT '数量',
   `repair_prog_detail_id` int(11) DEFAULT NULL COMMENT '维修进度详细的信息id',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -966,6 +563,11 @@ CREATE TABLE `t_repair_prog_item` (
   `info` text COMMENT '维修信息',
   `task_status` varchar(45) DEFAULT NULL COMMENT '任务状态',
   `repair_prog_id` int(11) DEFAULT NULL COMMENT '维修进度id',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -987,11 +589,11 @@ CREATE TABLE `t_repair_spec` (
   `s_days` int(11) DEFAULT NULL COMMENT '计划天数',
   `s_cost` int(11) DEFAULT NULL COMMENT '计划金额',
   `type` varchar(45) DEFAULT NULL COMMENT '维修类型',
-  `create_date` date DEFAULT NULL COMMENT '创建日期',
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建用户',
-  `modify_date` date DEFAULT NULL COMMENT '修改日期',
-  `modify_user` varchar(45) DEFAULT NULL COMMENT '修改用户',
-  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1020,6 +622,11 @@ CREATE TABLE `t_repair_spec_detail` (
   `damage` varchar(500) DEFAULT NULL COMMENT '损坏程度',
   `repair_tech` varchar(300) DEFAULT NULL COMMENT '修理工艺',
   `repair_tech_desc` varchar(500) DEFAULT NULL COMMENT '详细修理工艺',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1037,6 +644,11 @@ CREATE TABLE `t_repair_spec_detail_req` (
   `unit` varchar(45) DEFAULT NULL COMMENT '单位',
   `count` varchar(45) DEFAULT NULL COMMENT '数量',
   `repair_spec_detail_id` int(11) DEFAULT NULL COMMENT '维修工程单范本的id',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1061,6 +673,11 @@ CREATE TABLE `t_repair_spec_item` (
   `parentid` int(11) DEFAULT NULL COMMENT '父id',
   `repair_spec_id` int(11) DEFAULT NULL COMMENT '维修工程的id',
   `status` int(11) DEFAULT NULL COMMENT '是否需要维修的状态',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1096,7 +713,7 @@ CREATE TABLE `t_ship` (
   `imo` varchar(45) DEFAULT NULL COMMENT '船的imo号',
   `name` varchar(45) DEFAULT NULL COMMENT '船名',
   `type` varchar(45) DEFAULT NULL COMMENT '船舶类型',
-  `class` varchar(45) DEFAULT NULL COMMENT '船级社',
+  `ship_class` varchar(45) DEFAULT NULL COMMENT '船级社',
   `builder` varchar(45) DEFAULT NULL COMMENT '船的建造者',
   `builde_year` date DEFAULT NULL COMMENT '建造日期',
   `call_sign` varchar(45) DEFAULT NULL COMMENT '船舶呼号',
@@ -1124,10 +741,10 @@ CREATE TABLE `t_ship` (
   `boiler_heating_area` int(11) DEFAULT NULL COMMENT '锅炉：热交换面积',
   `boiler_evaporation` int(11) DEFAULT NULL COMMENT '锅炉：蒸发量',
   `create_date` date DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建用户',
-  `modify_date` date DEFAULT NULL COMMENT '修改时间',
-  `modify_user` varchar(45) DEFAULT NULL COMMENT '修改用户',
-  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1156,11 +773,11 @@ CREATE TABLE `t_shipyard` (
   `email` varchar(45) DEFAULT NULL COMMENT '电子邮件',
   `website` varchar(45) DEFAULT NULL COMMENT '网站',
   `logo` varchar(45) DEFAULT NULL COMMENT '船厂logo',
-  `create_date` varchar(45) DEFAULT NULL COMMENT '创建时间',
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建用户',
-  `modify_date` varchar(45) DEFAULT NULL COMMENT '修改时间',
-  `modify_user` varchar(45) DEFAULT NULL COMMENT '修改用户',
-  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1174,14 +791,25 @@ CREATE TABLE `t_shipyard` (
 DROP TABLE IF EXISTS `t_style`;
 CREATE TABLE `t_style` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '风格id',
-  `desc` varchar(30) DEFAULT NULL COMMENT '描述',
+  `des` varchar(30) DEFAULT NULL COMMENT '描述',
   `color` varchar(30) DEFAULT NULL,
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_style
 -- ----------------------------
+INSERT INTO `t_style` VALUES ('1', 'default', 'dark', null, null, null, null, '0');
+INSERT INTO `t_style` VALUES ('2', 'blue', 'blue', null, null, null, null, '0');
+INSERT INTO `t_style` VALUES ('3', 'darkblue', 'blue-dark', null, null, null, null, '0');
+INSERT INTO `t_style` VALUES ('4', 'grey', 'grey', null, null, null, null, '0');
+INSERT INTO `t_style` VALUES ('5', 'light', 'white', null, null, null, null, '0');
+INSERT INTO `t_style` VALUES ('6', 'light2', 'grey-cararra', null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_wharf_detail
@@ -1199,6 +827,11 @@ CREATE TABLE `t_wharf_detail` (
   `protocol` int(11) DEFAULT NULL COMMENT '''维：草案''',
   `cranes` varchar(45) DEFAULT NULL COMMENT '起重机',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
