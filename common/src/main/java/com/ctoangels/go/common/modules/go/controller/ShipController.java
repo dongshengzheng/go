@@ -29,7 +29,7 @@ public class ShipController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public JSONObject list(Ship ship) {
-        EntityWrapper<Ship> ew = getEntityWrapper();
+        EntityWrapper<Ship> ew = new EntityWrapper<>();
         ew.addFilter("status <> {0}", Const.DEL_FLAG_NORMAL);
         if (!StringUtils.isEmpty(ship.getName()))
             ew.addFilter("name={0}", ship.getName());
