@@ -14,15 +14,16 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
+                            船舶信息
+                        </div>
+                        <div class="col-md-2">
                             <div class="btn-group">
-                                <shiro:hasPermission name="ship/addBtn">
-                                    <button data-url="ship/addBtn" data-model="dialog" class="btn btn-outline btn-circle btn-sm green"> 新增
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+                                <shiro:hasPermission name="ship/add">
+                                    <a href="ship/add" data-target="navTab"
+                                            class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
+                                    </a>
                                 </shiro:hasPermission>
                             </div>
-                        </div>
-                        <div class="col-md-6">
                         </div>
                     </div>
                 </div>
@@ -30,12 +31,13 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th width="10px">
-                            <input type='checkbox' id="defaultCheck"/>
-                        </th>
                         <th>船舶名称</th>
-                        <th>建造日期</th>
-                        <th>首页推荐</th>
+                        <th>IMO</th>
+                        <th>船舶类型</th>
+                        <th>载重吨</th>
+                        <th>船级社</th>
+                        <th>公司名称</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                 </table>
@@ -62,16 +64,14 @@
             "language": {
                 "url": "<%=basePath%>assets/global/plugins/datatables/cn.txt"
             },
-            "createdRow": function (row, data, index) {
-                $('td:eq(0)', row).html("<input type='checkbox' name='chx_default' value='" + data.id + "'/>");
-            },
+
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
                 {"data": "id"},
                 {
                     "data": "name",
-                    "render": function (data,type,row) {
-                        return  row.name;
+                    "render": function (data, type, row) {
+                        return row.name;
                     }
                 },
                 {
@@ -81,25 +81,50 @@
                         return date.Format("yyyy-MM-dd");
                     }
                 },
-                {
-                    "data": "slide",
-                    "render": function (data, type, row) {
-                        if (data == 0 || typeof data == 'undefined') {
-                            return '<a href="javascript:;" onclick="slide(' + row.id + ',1)" class="btn btn-success btn-xs">轮播</a>'
-                        } else {
-                            return '<a href="javascript:;" onclick="slide(' + row.id + ',0)" class="btn btn-danger btn-xs">不轮播</a>';
-                        }
-                    }
-                },
+//                {
+//                    "data": "slide",
+//                    "render": function (data, type, row) {
+//                        if (data == 0 || typeof data == 'undefined') {
+//                            return '<a href="javascript:;" onclick="slide(' + row.id + ',1)" class="btn btn-success btn-xs">轮播</a>'
+//                        } else {
+//                            return '<a href="javascript:;" onclick="slide(' + row.id + ',0)" class="btn btn-danger btn-xs">不轮播</a>';
+//                        }
+//                    }
+//                },
 
             ],
+
+            "columnDefs": [{
+                "targets": 6,
+                "render": function (data, type, row) {
+                    return ""
+                            <shiro:hasPermission name="right/editRole">
+                            + '<a href="user/editRole?id=' + row.id + '" class="btn btn-sm grey-mint" data-model="dialog"></i>查看</a>'
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="right/editBtn">
+                            + '<a href="user/edit?id=' + row.id + '" class="btn  btn-sm blue" data-model="dialog"></i>编辑</a>'
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="right/deleteBtn">
+                            + '<a href="user/delete?id=' + row.id +
+                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
+                            </shiro:hasPermission>
+                            ;
+                }
+            }],
+
             "drawCallback": function (settings) {
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "搜索船舶类型");
+                initSearchForm(null, "搜索船舶名称");
             }
         });
+
+        $('#myInput').on('keyup', function () {
+            defTable.search(this.value).draw();
+        });
+
+
     });
 
     function check(id, status) {
@@ -111,14 +136,14 @@
         }
 
     }
-
-    function      slide(id, slide) {
-        if (confirm("确定提交？")) {
-            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
-                refreshTable();
-            });
-        }
-    }
+    //
+    //    function      slide(id, slide) {
+    //        if (confirm("确定提交？")) {
+    //            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
+    //                refreshTable();
+    //            });
+    //        }
+    //    }
 
 
     function refreshTable(toFirst) {
