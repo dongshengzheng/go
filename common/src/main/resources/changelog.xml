@@ -42,20 +42,4 @@
             insert INTO t_style(des,color) VALUES('light2','grey-cararra');
         </sql>
     </changeSet>
-    <changeSet author="WangShun" id="15950097942-006">
-        <sql>
-            ALTER TABLE `sys_user` CHANGE COLUMN `del_flag` `status` int(3) DEFAULT 0 COMMENT '状态';
-            ALTER TABLE `sys_button` CHANGE COLUMN `del_flag` `status` int(3) DEFAULT 0 COMMENT '状态';
-            ALTER TABLE `sys_menu` CHANGE COLUMN `del_flag` `status` int(3) DEFAULT 0 COMMENT '状态';
-            ALTER TABLE `sys_role` CHANGE COLUMN `del_flag` `status` int(3) DEFAULT 0 COMMENT '状态';
-        </sql>
-    </changeSet>
-    <changeSet author="WangShun" id="15950097942-007">
-        <sql>
-            ALTER TABLE `sys_user` CHANGE COLUMN `status` `del_flag` int(3) DEFAULT 0 COMMENT '状态';
-            ALTER TABLE `sys_button` CHANGE COLUMN `status` `del_flag` int(3) DEFAULT 0 COMMENT '状态';
-            ALTER TABLE `sys_menu` CHANGE COLUMN `status` `del_flag` int(3) DEFAULT 0 COMMENT '状态';
-            ALTER TABLE `sys_role` CHANGE COLUMN `status` `del_flag` int(3) DEFAULT 0 COMMENT '状态';
-        </sql>
-    </changeSet>
 </databaseChangeLog>
