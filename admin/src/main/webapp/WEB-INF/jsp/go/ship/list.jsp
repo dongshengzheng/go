@@ -20,7 +20,7 @@
                             <div class="btn-group">
                                 <shiro:hasPermission name="ship/add">
                                     <a href="ship/add" data-target="navTab"
-                                            class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
                                     </a>
                                 </shiro:hasPermission>
                             </div>
@@ -67,7 +67,6 @@
 
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
-                {"data": "id"},
                 {
                     "data": "name",
                     "render": function (data, type, row) {
@@ -75,37 +74,41 @@
                     }
                 },
                 {
-                    "data": "createDate", "type": "date",
-                    "render": function (data) {
-                        var date = new Date(data);
-                        return date.Format("yyyy-MM-dd");
-                    }
+                    "data": "imo",
+                },
+                {
+                    "data": "type",
+                },
+                {
+                    "data": "dwt",
+                },
+                {
+                    "data": "shipClass",
+                },
+                {
+                    "data": "companyName",
                 },
 //                {
-//                    "data": "slide",
-//                    "render": function (data, type, row) {
-//                        if (data == 0 || typeof data == 'undefined') {
-//                            return '<a href="javascript:;" onclick="slide(' + row.id + ',1)" class="btn btn-success btn-xs">轮播</a>'
-//                        } else {
-//                            return '<a href="javascript:;" onclick="slide(' + row.id + ',0)" class="btn btn-danger btn-xs">不轮播</a>';
-//                        }
+//                    "data": "createDate", "type": "date",
+//                    "render": function (data) {
+//                        var date = new Date(data);
+//                        return date.Format("yyyy-MM-dd");
 //                    }
 //                },
-
             ],
 
             "columnDefs": [{
                 "targets": 6,
                 "render": function (data, type, row) {
                     return ""
-                            <shiro:hasPermission name="right/editRole">
-                            + '<a href="user/editRole?id=' + row.id + '" class="btn btn-sm grey-mint" data-model="dialog"></i>查看</a>'
+                            <shiro:hasPermission name="ship/look">
+                            + '<a href="ship/look?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="right/editBtn">
-                            + '<a href="user/edit?id=' + row.id + '" class="btn  btn-sm blue" data-model="dialog"></i>编辑</a>'
+                            <shiro:hasPermission name="ship/edit">
+                            + '<a href="ship/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="right/deleteBtn">
-                            + '<a href="user/delete?id=' + row.id +
+                            <shiro:hasPermission name="ship/delete">
+                            + '<a href="ship/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
                             </shiro:hasPermission>
                             ;

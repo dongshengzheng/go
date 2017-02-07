@@ -2,13 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.go.common.modules.go.mapper.StyleMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-<<<<<<< HEAD
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
 		id, des, color, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
-=======
-		id, des, color
->>>>>>> f6c7b5dca9dca606005be741a5f7ebee26262b8c
 	</sql>
 
 </mapper>

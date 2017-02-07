@@ -11,146 +11,120 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  *
- * 
+ *
  *
  */
 @TableName("t_style")
 public class Style implements Serializable {
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+    /**
+     * 风格id
+     */
+    @TableId(type = IdType.AUTO)
+    private Integer id;
 
-	/** 风格id */
-	@TableId(type = IdType.AUTO)
-	private Integer id;
+    /**
+     * 描述
+     */
+    private String des;
 
-	/** 描述 */
-	private String des;
+    /**  */
+    private String color;
 
-	/**  */
-	private String color;
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_date")
+    private Date createDate;
 
-	/** 创建时间 */
-	@TableField(value = "create_date")
-	private Date createDate;
+    /**
+     * 创建用户
+     */
+    @TableField(value = "create_by")
+    private String createBy;
 
-	/** 创建用户 */
-	@TableField(value = "create_by")
-	private String createBy;
+    /**
+     * 修改时间
+     */
+    @TableField(value = "update_date")
+    private Date updateDate;
 
-	/** 修改时间 */
-	@TableField(value = "update_date")
-	private Date updateDate;
+    /**
+     * 修改用户
+     */
+    @TableField(value = "update_by")
+    private String updateBy;
 
-	/** 修改用户 */
-	@TableField(value = "update_by")
-	private String updateBy;
-
-	/** 状态 */
-	@TableField(value = "del_flag")
-	private Integer delFlag;
+    /**
+     * 状态
+     */
+    @TableField(value = "del_flag")
+    private Integer delFlag;
 
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getDes() {
-		return this.des;
-	}
+    public String getDes() {
+        return this.des;
+    }
 
-	public void setDes(String des) {
-		this.des = des;
-	}
+    public void setDes(String des) {
+        this.des = des;
+    }
 
-	public String getColor() {
-		return this.color;
-	}
+    public String getColor() {
+        return this.color;
+    }
 
-	public void setColor(String color) {
-		this.color = color;
-	}
+    public void setColor(String color) {
+        this.color = color;
+    }
 
-	public Date getCreateDate() {
-		return this.createDate;
-	}
+    public Date getCreateDate() {
+        return this.createDate;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public String getCreateBy() {
-		return this.createBy;
-	}
-=======
+    public String getCreateBy() {
+        return this.createBy;
+    }
 
-	/** 风格id */
-	@TableId(type = IdType.AUTO)
-	private Integer id;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
-	/** 描述 */
-	private String des;
+    public Date getUpdateDate() {
+        return updateDate;
+    }
 
-	/**  */
-	private String color;
->>>>>>> f6c7b5dca9dca606005be741a5f7ebee26262b8c
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
+    public String getUpdateBy() {
+        return updateBy;
+    }
 
-<<<<<<< HEAD
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public Integer getDelFlag() {
+        return delFlag;
+    }
 
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	public Integer getDelFlag() {
-		return this.delFlag;
-	}
-
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-=======
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getDes() {
-		return this.des;
-	}
-
-	public void setDes(String des) {
-		this.des = des;
-	}
-
-	public String getColor() {
-		return this.color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
->>>>>>> f6c7b5dca9dca606005be741a5f7ebee26262b8c
-	}
-
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
 }

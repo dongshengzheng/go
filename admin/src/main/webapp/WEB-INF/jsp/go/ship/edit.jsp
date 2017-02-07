@@ -23,15 +23,16 @@
     }
 </style>
 <go:navigater path="ship"></go:navigater>
-<form class="form-horizontal" action="ship/add" method="post"
+<form class="form-horizontal" action="ship/edit" method="post"
       id="defForm" callfn="refreshTable">
+    <input id="id" name="id" type="hidden" value="${ship.id}"/>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light portlet-fit bordered">
                 <div class="portlet-title tabbable-line">
                     <div class="caption caption-md">
                         <i class="icon-microphone font-green"></i>
-                        <span class="caption-subject bold font-green uppercase"> 新增船舶信息</span>
+                        <span class="caption-subject bold font-green uppercase"> 编辑船舶信息</span>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -49,7 +50,7 @@
                                         <label for="name" class="col-sm-3 control-label">船舶名称<span class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="name" name="name" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   minlength="2" class="form-control required" value="${ship.name}"
                                                    placeholder="请填写船舶名称">
                                         </div>
                                     </div>
@@ -57,7 +58,7 @@
                                         <label for="builder" class="col-sm-3 control-label">建造船厂</label>
                                         <div class="col-sm-6">
                                             <input id="builder" name="builder" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   minlength="2" class="form-control required" value="${ship.builder}"
                                                    placeholder="请填写建造船厂">
                                         </div>
                                     </div>
@@ -66,7 +67,7 @@
                                                 class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="imo" name="imo" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   minlength="2" class="form-control required" value="${ship.imo}"
                                                    placeholder="请填写IMO">
                                         </div>
                                     </div>
@@ -87,7 +88,7 @@
                                                 class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="shipClass" name="shipClass" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   minlength="2" class="form-control required" value="${ship.shipClass}"
                                                    placeholder="请选择船级社">
                                         </div>
                                     </div>
@@ -95,7 +96,7 @@
                                         <label for="callSign" class="col-sm-3 control-label">船舶呼号</label>
                                         <div class="col-sm-6">
                                             <input id="callSign" name="callSign" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   minlength="2" class="form-control required" value="${ship.callSign}"
                                                    placeholder="请填写船舶呼号">
                                         </div>
                                     </div>
@@ -103,7 +104,7 @@
                                         <label for="type" class="col-sm-3 control-label">船舶类型<span class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="type" name="natypeme" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   minlength="2" class="form-control required" value="${ship.type}"
                                                    placeholder="请选择船舶类型">
                                         </div>
                                     </div>
@@ -123,7 +124,7 @@
                                                     class="red">* </span></label>
                                             <div class="col-sm-6">
                                                 <input id="loa" name="loa" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       minlength="2" class="form-control required" value="${ship.loa}"
                                                        placeholder="请填写船长姓名">
                                             </div>
                                         </div>
@@ -132,7 +133,7 @@
                                                     class="red">* </span></label>
                                             <div class="col-sm-6">
                                                 <input id="draft" name="draft" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       minlength="2" class="form-control required" value="${ship.draft}"
                                                        placeholder="请填写吃水深度">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:米)</label>
@@ -142,7 +143,7 @@
                                                     class="red">* </span></label>
                                             <div class="col-sm-6">
                                                 <input id="beam" name="beam" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       minlength="2" class="form-control required" value="${ship.beam}"
                                                        placeholder="请填写船宽长度">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:米)</label>
@@ -152,7 +153,7 @@
                                             <label for="dwt" class="col-sm-3 control-label">载重吨</label>
                                             <div class="col-sm-6">
                                                 <input id="dwt" name="dwt" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       minlength="2" class="form-control required" value="${ship.dwt}"
                                                        placeholder="请填写载重吨">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨)</label>
@@ -161,7 +162,7 @@
                                             <label for="depth" class="col-sm-3 control-label">型深</label>
                                             <div class="col-sm-6">
                                                 <input id="depth" name="depth" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       minlength="2" class="form-control required" value="${ship.depth}"
                                                        placeholder="请填写型深">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:米)</label>
@@ -171,6 +172,7 @@
                                             <div class="col-sm-6">
                                                 <input id="gt" name="gt" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship['gt']}"
                                                        placeholder="请填写总吨">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨)</label>
@@ -197,6 +199,7 @@
                                             <div class="col-sm-6">
                                                 <input id="meMaker" name="meMaker" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.meMaker}"
                                                        placeholder="请填写厂家名称">
                                             </div>
                                         </div>
@@ -205,6 +208,7 @@
                                             <div class="col-sm-6">
                                                 <input id="meType" name="meType" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.meType}"
                                                        placeholder="请填写型号">
                                             </div>
                                         </div>
@@ -213,6 +217,7 @@
                                             <div class="col-sm-6">
                                                 <input id="meBhpRpm" name="meBhpRpm" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.meBhpRpm}"
                                                        placeholder="请填写马力/转速">
                                             </div>
                                         </div>
@@ -220,7 +225,7 @@
                                             <label for="meQty" class="col-sm-3 control-label">数量</label>
                                             <div class="col-sm-6">
                                                 <input id="meQty" name="meQty" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       minlength="2" class="form-control required" value="${ship.meQty}"
                                                        placeholder="请填写数量">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:台)</label>
@@ -230,6 +235,7 @@
                                             <div class="col-sm-6">
                                                 <input id="meCylBore" name="meCylBore" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.meCylBore}"
                                                        placeholder="请填写缸径">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:毫米)</label>
@@ -250,6 +256,7 @@
                                             <div class="col-sm-6">
                                                 <input id="auxMaker" name="auxMaker" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.auxMaker}"
                                                        placeholder="请填写厂家名称">
                                             </div>
                                         </div>
@@ -258,6 +265,7 @@
                                             <div class="col-sm-6">
                                                 <input id="auxType" name="auxType" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.auxType}"
                                                        placeholder="请填写型号">
                                             </div>
                                         </div>
@@ -266,6 +274,7 @@
                                             <div class="col-sm-6">
                                                 <input id="auxRatedOr" name="auxRatedOr" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.auxRatedOr}"
                                                        placeholder="请填写额定功率">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:千瓦)</label>
@@ -275,6 +284,7 @@
                                             <div class="col-sm-6">
                                                 <input id="auxQty" name="auxQty" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.auxQty}"
                                                        placeholder="请填写数量">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:台)</label>
@@ -284,6 +294,7 @@
                                             <div class="col-sm-6">
                                                 <input id="auxCylBore" name="auxCylBore" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.auxCylBore}"
                                                        placeholder="请填写缸径">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:毫米)</label>
@@ -303,6 +314,7 @@
                                             <div class="col-sm-6">
                                                 <input id="boilerMaker" name="boilerMaker" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.boilerMaker}"
                                                        placeholder="请填写厂家名称">
                                             </div>
                                         </div>
@@ -311,6 +323,7 @@
                                             <div class="col-sm-6">
                                                 <input id="boilerType" name="boilerType" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.boilerType}"
                                                        placeholder="请填写型号">
                                             </div>
                                         </div>
@@ -320,6 +333,7 @@
                                                 <input id="boilerPressure" name="boilerPressure" type="text"
                                                        maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.boilerPressure}"
                                                        placeholder="请填写工作压力">
                                             </div>
                                         </div>
@@ -328,6 +342,7 @@
                                             <div class="col-sm-6">
                                                 <input id="boilerQty" name="boilerQty" type="text" maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.boilerQty}"
                                                        placeholder="请填写数量">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:台)</label>
@@ -338,6 +353,7 @@
                                                 <input id="boilerHeatingArea" name="boilerHeatingArea" type="text"
                                                        maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.boilerHeatingArea}"
                                                        placeholder="请填写热交换面积">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:平方米)</label>
@@ -348,6 +364,7 @@
                                                 <input id="boilerEvaporation" name="boilerEvaporation" type="text"
                                                        maxlength="32"
                                                        minlength="2" class="form-control required"
+                                                       value="${ship.boilerEvaporation}"
                                                        placeholder="请填写蒸发量">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨/时)</label>
@@ -365,7 +382,7 @@
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <shiro:hasPermission name="ship/add">
+                                            <shiro:hasPermission name="ship/edit">
                                                 <button type="submit" class="btn btn-primary">提交</button>
                                             </shiro:hasPermission>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">取消
