@@ -16,9 +16,9 @@ import com.baomidou.mybatisplus.annotations.TableName;
  */
 @TableName("t_style")
 public class Style implements Serializable {
-
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
     /**
      * 风格id
      */
@@ -105,7 +105,7 @@ public class Style implements Serializable {
     }
 
     public Date getUpdateDate() {
-        return updateDate;
+        return this.updateDate;
     }
 
     public void setUpdateDate(Date updateDate) {
@@ -113,7 +113,7 @@ public class Style implements Serializable {
     }
 
     public String getUpdateBy() {
-        return updateBy;
+        return this.updateBy;
     }
 
     public void setUpdateBy(String updateBy) {
@@ -121,10 +121,11 @@ public class Style implements Serializable {
     }
 
     public Integer getDelFlag() {
-        return delFlag;
+        return this.delFlag;
     }
 
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
     }
+
 }

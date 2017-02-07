@@ -30,10 +30,11 @@ public class ShipController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public JSONObject list(Ship ship, @RequestParam(required = false) String keyword) {
-        ship.setDelFlag(Const.DEL_FLAG_NORMAL);
+        int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<Ship> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
-            ew.like("name", keyword);
+            ew.addFilter("name={0}", keyword);
+        ew.addFilter("company_id={0}", companyId);
         Page<Ship> page = shipService.selectPage(getPage(), ew);
         return jsonPage(page);
     }

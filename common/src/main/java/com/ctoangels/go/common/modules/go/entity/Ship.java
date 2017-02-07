@@ -45,8 +45,8 @@ public class Ship implements Serializable {
 	private String builder;
 
 	/** 建造日期 */
-	@TableField(value = "builde_year")
-	private Date buildeYear;
+	@TableField(value = "build_year")
+	private Date buildYear;
 
 	/** 船舶呼号 */
 	@TableField(value = "call_sign")
@@ -215,12 +215,12 @@ public class Ship implements Serializable {
 		this.builder = builder;
 	}
 
-	public Date getBuildeYear() {
-		return this.buildeYear;
+	public Date getBuildYear() {
+		return this.buildYear;
 	}
 
-	public void setBuildeYear(Date buildeYear) {
-		this.buildeYear = buildeYear;
+	public void setBuildYear(Date buildYear) {
+		this.buildYear = buildYear;
 	}
 
 	public String getCallSign() {

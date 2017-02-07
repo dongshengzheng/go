@@ -42,4 +42,9 @@
             insert INTO t_style(des,color) VALUES('light2','grey-cararra');
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-001">
+        <sql>
+            alter table t_ship CHANGE  builde_year build_year date;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
