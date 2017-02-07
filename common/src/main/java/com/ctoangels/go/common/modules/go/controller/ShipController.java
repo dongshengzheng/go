@@ -28,16 +28,33 @@ public class ShipController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
+<<<<<<< HEAD
     public JSONObject list(Ship ship) {
         EntityWrapper<Ship> ew = getEntityWrapper();
         ew.addFilter("del_flag <> {0}", Const.DEL_FLAG_NORMAL);
         if (!StringUtils.isEmpty(ship.getName()))
             ew.addFilter("name={0}", ship.getName());
+=======
+    public JSONObject list(Ship ship, @RequestParam(required = false) String keyword) {
+        ship.setStatus(Const.DEL_FLAG_NORMAL);
+        EntityWrapper<Ship> ew = getEntityWrapper();
+        if (!StringUtils.isEmpty(keyword))
+            ew.addFilter("name={0}", keyword);
+>>>>>>> f6c7b5dca9dca606005be741a5f7ebee26262b8c
         Page<Ship> page = shipService.selectPage(getPage(), ew);
-        for (Ship ship_infor : page.getRecords()){
-//            ship_infor.setCollector("James");
-        }
         return jsonPage(page);
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add() {
+        return "go/ship/add";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject add(Ship ship) {
+        JSONObject jsonObject = new JSONObject();
+        return jsonObject;
     }
 
 }

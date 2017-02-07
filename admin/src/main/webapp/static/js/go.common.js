@@ -43,14 +43,16 @@ function drawICheck(cId, oName) {
 function initSearchForm(others, placeholderText) {
     others = others || "";
     placeholderText = placeholderText || "关键字搜索";
-    $("#defTool")
+    $(".table-toolbar .row")
         .append(
             others
+            + '<div class="col-md-3">'
             + '<div class="input-group input-group-sm input-adjust">'
             + '<input type="text" placeholder="' + placeholderText + '" name="keyword" id="keyword" class="form-control">'
             + '<span class="input-group-btn">'
-            + '<button type="button" class="btn btn-primary btn-flat" id="mybtn" onclick="javacript:refreshTable(1);">搜索</button>'
-            + '</span>' + '</div>');
+            + '<button type="button" class="btn btn-primary btn-flat" id="mybtn" onclick="javacript:refreshTable(1);"><i class="fa fa-search"></i> 搜索</button>'
+            + '</span>' + '</div>')
+            + '</div>';
     $("#defTool").keydown(function (e) {
         var curKey = e.which;
         if (curKey == 13) {
