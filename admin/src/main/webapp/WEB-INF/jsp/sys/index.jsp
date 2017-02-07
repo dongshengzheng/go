@@ -124,6 +124,7 @@
 <script src="${ctx}/static/js/jquery-gv-validate.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/admin.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/go.common.js"></script>
+<script src="${ctx}/static/js/api.js"></script>
 </body>
 <script>
 
@@ -148,4 +149,5 @@
         intPage();
     }
 </script>
+
 </html>

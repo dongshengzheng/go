@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-02-06 16:56:01
+Date: 2017-02-07 15:35:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,6 +44,7 @@ INSERT INTO `databasechangelog` VALUES ('15950097942-002', 'WangShun', 'src/main
 INSERT INTO `databasechangelog` VALUES ('15950097942-003', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-06 09:44:27', '3', 'EXECUTED', '7:f1c4e3941d7812821879aeeb2e88b1ec', 'sql', '', null, '3.5.3', null, null, '6345467392');
 INSERT INTO `databasechangelog` VALUES ('15950097942-004', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-06 09:44:27', '4', 'EXECUTED', '7:6f50631b2628966e7876addf59d1d002', 'sql', '', null, '3.5.3', null, null, '6345467392');
 INSERT INTO `databasechangelog` VALUES ('15950097942-005', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-06 09:44:27', '5', 'EXECUTED', '7:e2ff4cb0eb561d55445a0198ee2af072', 'sql', '', null, '3.5.3', null, null, '6345467392');
+INSERT INTO `databasechangelog` VALUES ('17317309132-001', 'LuZhen', 'src/main/resources/changelog.xml', '2017-02-07 15:31:24', '6', 'EXECUTED', '7:912a34a33ff4db5522b5132c1d497138', 'sql', '', null, '3.5.3', null, null, '6452684121');
 
 -- ----------------------------
 -- Table structure for databasechangeloglock
@@ -253,7 +254,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'dd94709528bb1c83d08f3088d4043f4742891f4f', 'admin', '2017-01-20 10:34:39', '0:0:0:0:0:0:0:1', '0', '123', '1234', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-06 16:48:36', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', null, '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
+INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-07 15:34:22', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', '1', '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -317,11 +318,12 @@ CREATE TABLE `t_company` (
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_company
 -- ----------------------------
+INSERT INTO `t_company` VALUES ('1', '上海东曦船务有限公司', '刘小姐', '023-68100000', '021-65426650', 'http://www.cosic.com.cn', '上海浦东新区陆家嘴假日酒店', '2010000', '张小姐', '13600001234', null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_dict
@@ -715,7 +717,7 @@ CREATE TABLE `t_ship` (
   `type` varchar(45) DEFAULT NULL COMMENT '船舶类型',
   `ship_class` varchar(45) DEFAULT NULL COMMENT '船级社',
   `builder` varchar(45) DEFAULT NULL COMMENT '船的建造者',
-  `builde_year` date DEFAULT NULL COMMENT '建造日期',
+  `build_year` date DEFAULT NULL,
   `call_sign` varchar(45) DEFAULT NULL COMMENT '船舶呼号',
   `company_name` varchar(45) DEFAULT NULL COMMENT '公司名称',
   `draft` int(11) DEFAULT NULL COMMENT '吃水',
@@ -746,11 +748,14 @@ CREATE TABLE `t_ship` (
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_ship
 -- ----------------------------
+INSERT INTO `t_ship` VALUES ('1', '1', '1111', '222', '222', '22', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0');
+INSERT INTO `t_ship` VALUES ('2', '2', '333', '333', '33', '3333', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0');
+INSERT INTO `t_ship` VALUES ('3', '1', '33322', '222', '111', '1111', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_shipyard

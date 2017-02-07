@@ -28,19 +28,12 @@ public class ShipController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-<<<<<<< HEAD
-    public JSONObject list(Ship ship) {
-        EntityWrapper<Ship> ew = getEntityWrapper();
-        ew.addFilter("del_flag <> {0}", Const.DEL_FLAG_NORMAL);
-        if (!StringUtils.isEmpty(ship.getName()))
-            ew.addFilter("name={0}", ship.getName());
-=======
     public JSONObject list(Ship ship, @RequestParam(required = false) String keyword) {
-        ship.setStatus(Const.DEL_FLAG_NORMAL);
+        int companyId=getCurrentUser().getCompanyId();
         EntityWrapper<Ship> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.addFilter("name={0}", keyword);
->>>>>>> f6c7b5dca9dca606005be741a5f7ebee26262b8c
+        ew.addFilter("company_id={0}",companyId);
         Page<Ship> page = shipService.selectPage(getPage(), ew);
         return jsonPage(page);
     }

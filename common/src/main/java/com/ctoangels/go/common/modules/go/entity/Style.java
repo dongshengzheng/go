@@ -19,7 +19,6 @@ public class Style implements Serializable {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
 
 	/** 风格id */
 	@TableId(type = IdType.AUTO)
@@ -87,24 +86,11 @@ public class Style implements Serializable {
 	public String getCreateBy() {
 		return this.createBy;
 	}
-=======
-
-	/** 风格id */
-	@TableId(type = IdType.AUTO)
-	private Integer id;
-
-	/** 描述 */
-	private String des;
-
-	/**  */
-	private String color;
->>>>>>> f6c7b5dca9dca606005be741a5f7ebee26262b8c
 
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
 
-<<<<<<< HEAD
 	public Date getUpdateDate() {
 		return this.updateDate;
 	}
@@ -127,30 +113,6 @@ public class Style implements Serializable {
 
 	public void setDelFlag(Integer delFlag) {
 		this.delFlag = delFlag;
-=======
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getDes() {
-		return this.des;
-	}
-
-	public void setDes(String des) {
-		this.des = des;
-	}
-
-	public String getColor() {
-		return this.color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
->>>>>>> f6c7b5dca9dca606005be741a5f7ebee26262b8c
 	}
 
 }
