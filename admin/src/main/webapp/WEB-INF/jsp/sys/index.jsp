@@ -44,10 +44,13 @@
     <link href="${global}/plugins/Editor-1.5.4/css/editor.dataTables.min.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css">
+
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
 
     <link href="${global}/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${global}/css/components.min.css" rel="stylesheet" type="text/css"/>
+
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="${ctx}/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
@@ -99,6 +102,7 @@
 <script src="${global}/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
 <script src="${global}/plugins/icheck/icheck.min.js"></script>
+<script src="${global}/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="${global}/plugins/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="${global}/plugins/daterangepicker/moment.min.js"></script>
 <script src="${global}/plugins/daterangepicker/daterangepicker.js"></script>
