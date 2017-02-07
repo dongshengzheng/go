@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-02-06 14:49:18
+Date: 2017-02-06 16:56:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -253,7 +253,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'dd94709528bb1c83d08f3088d4043f4742891f4f', 'admin', '2017-01-20 10:34:39', '0:0:0:0:0:0:0:1', '0', '123', '1234', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-06 10:03:09', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', null, '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
+INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-06 16:48:36', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', null, '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -359,10 +359,10 @@ CREATE TABLE `t_enquiry` (
   `payment` varchar(45) DEFAULT NULL COMMENT '支付方式',
   `invoice_type` varchar(45) DEFAULT NULL COMMENT '发票类型',
   `t_repair_spec_id` int(11) DEFAULT NULL COMMENT '维修工程单的id',
-  `create_date` date DEFAULT NULL COMMENT '创建日期',
-  `create_user` varchar(45) DEFAULT NULL COMMENT '创建用户',
-  `modify_date` date DEFAULT NULL COMMENT '修改日期',
-  `modify_user` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

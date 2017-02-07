@@ -56,24 +56,25 @@ public class Enquiry implements Serializable {
 	@TableField(value = "t_repair_spec_id")
 	private Integer tRepairSpecId;
 
-	/** 创建日期 */
+	/** 创建时间 */
 	@TableField(value = "create_date")
 	private Date createDate;
 
 	/** 创建用户 */
-	@TableField(value = "create_user")
-	private String createUser;
+	@TableField(value = "create_by")
+	private String createBy;
 
-	/** 修改日期 */
-	@TableField(value = "modify_date")
-	private Date modifyDate;
+	/** 修改时间 */
+	@TableField(value = "update_date")
+	private Date updateDate;
 
 	/** 修改用户 */
-	@TableField(value = "modify_user")
-	private String modifyUser;
+	@TableField(value = "update_by")
+	private String updateBy;
 
 	/** 状态 */
-	private Integer status;
+	@TableField(value = "del_flag")
+	private Integer delFlag;
 
 
 	public Integer getId() {
@@ -164,36 +165,36 @@ public class Enquiry implements Serializable {
 		this.createDate = createDate;
 	}
 
-	public String getCreateUser() {
-		return this.createUser;
+	public String getCreateBy() {
+		return this.createBy;
 	}
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
-	public Date getModifyDate() {
-		return this.modifyDate;
+	public Date getUpdateDate() {
+		return this.updateDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
-	public String getModifyUser() {
-		return this.modifyUser;
+	public String getUpdateBy() {
+		return this.updateBy;
 	}
 
-	public void setModifyUser(String modifyUser) {
-		this.modifyUser = modifyUser;
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
 	}
 
-	public Integer getStatus() {
-		return this.status;
+	public Integer getDelFlag() {
+		return this.delFlag;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setDelFlag(Integer delFlag) {
+		this.delFlag = delFlag;
 	}
 
 }

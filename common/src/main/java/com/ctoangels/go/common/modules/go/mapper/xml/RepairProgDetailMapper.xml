@@ -4,7 +4,7 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, repair_prog_id AS repairProgId, code, catagory, pro_name AS proName, pro_desc AS proDesc, faci_name AS faciName, faci_type AS faciType, faci_no AS faciNo, faci_param AS faciParam, faci_src AS faciSrc, repair_position AS repairPosition, repair_position_desc AS repairPositionDesc, damage, repair_tech AS repairTech, repair_tech_desc AS repairTechDesc
+		id, repair_prog_id AS repairProgId, code, catagory, pro_name AS proName, pro_desc AS proDesc, faci_name AS faciName, faci_type AS faciType, faci_no AS faciNo, faci_param AS faciParam, faci_src AS faciSrc, repair_position AS repairPosition, repair_position_desc AS repairPositionDesc, damage, repair_tech AS repairTech, repair_tech_desc AS repairTechDesc, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
 </mapper>

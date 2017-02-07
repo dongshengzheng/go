@@ -1,6 +1,7 @@
 package com.ctoangels.go.common.modules.go.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -35,6 +36,26 @@ public class RepairSpecDetailReq implements Serializable {
 	/** 维修工程单范本的id */
 	@TableField(value = "repair_spec_detail_id")
 	private Integer repairSpecDetailId;
+
+	/** 创建时间 */
+	@TableField(value = "create_date")
+	private Date createDate;
+
+	/** 创建用户 */
+	@TableField(value = "create_by")
+	private String createBy;
+
+	/** 修改时间 */
+	@TableField(value = "update_date")
+	private Date updateDate;
+
+	/** 修改用户 */
+	@TableField(value = "update_by")
+	private String updateBy;
+
+	/** 状态 */
+	@TableField(value = "del_flag")
+	private Integer delFlag;
 
 
 	public Integer getId() {
@@ -75,6 +96,46 @@ public class RepairSpecDetailReq implements Serializable {
 
 	public void setRepairSpecDetailId(Integer repairSpecDetailId) {
 		this.repairSpecDetailId = repairSpecDetailId;
+	}
+
+	public Date getCreateDate() {
+		return this.createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getCreateBy() {
+		return this.createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public Date getUpdateDate() {
+		return this.updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public String getUpdateBy() {
+		return this.updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public Integer getDelFlag() {
+		return this.delFlag;
+	}
+
+	public void setDelFlag(Integer delFlag) {
+		this.delFlag = delFlag;
 	}
 
 }

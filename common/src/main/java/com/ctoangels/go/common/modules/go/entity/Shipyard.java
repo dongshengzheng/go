@@ -1,6 +1,7 @@
 package com.ctoangels.go.common.modules.go.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -73,22 +74,23 @@ public class Shipyard implements Serializable {
 
 	/** 创建时间 */
 	@TableField(value = "create_date")
-	private String createDate;
+	private Date createDate;
 
 	/** 创建用户 */
-	@TableField(value = "create_user")
-	private String createUser;
+	@TableField(value = "create_by")
+	private String createBy;
 
 	/** 修改时间 */
-	@TableField(value = "modify_date")
-	private String modifyDate;
+	@TableField(value = "update_date")
+	private Date updateDate;
 
 	/** 修改用户 */
-	@TableField(value = "modify_user")
-	private String modifyUser;
+	@TableField(value = "update_by")
+	private String updateBy;
 
 	/** 状态 */
-	private Integer status;
+	@TableField(value = "del_flag")
+	private Integer delFlag;
 
 
 	public Integer getId() {
@@ -219,44 +221,44 @@ public class Shipyard implements Serializable {
 		this.logo = logo;
 	}
 
-	public String getCreateDate() {
+	public Date getCreateDate() {
 		return this.createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public String getCreateUser() {
-		return this.createUser;
+	public String getCreateBy() {
+		return this.createBy;
 	}
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
-	public String getModifyDate() {
-		return this.modifyDate;
+	public Date getUpdateDate() {
+		return this.updateDate;
 	}
 
-	public void setModifyDate(String modifyDate) {
-		this.modifyDate = modifyDate;
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
-	public String getModifyUser() {
-		return this.modifyUser;
+	public String getUpdateBy() {
+		return this.updateBy;
 	}
 
-	public void setModifyUser(String modifyUser) {
-		this.modifyUser = modifyUser;
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
 	}
 
-	public Integer getStatus() {
-		return this.status;
+	public Integer getDelFlag() {
+		return this.delFlag;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setDelFlag(Integer delFlag) {
+		this.delFlag = delFlag;
 	}
 
 }

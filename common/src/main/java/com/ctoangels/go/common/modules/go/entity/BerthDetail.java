@@ -1,6 +1,7 @@
 package com.ctoangels.go.common.modules.go.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -38,6 +39,26 @@ public class BerthDetail implements Serializable {
 
 	/** 起重机 */
 	private String cranes;
+
+	/** 创建时间 */
+	@TableField(value = "create_date")
+	private Date createDate;
+
+	/** 创建者 */
+	@TableField(value = "create_by")
+	private String createBy;
+
+	/** 修改时间 */
+	@TableField(value = "update_date")
+	private Date updateDate;
+
+	/** 修改者 */
+	@TableField(value = "update_by")
+	private String updateBy;
+
+	/** 状态 */
+	@TableField(value = "del_flag")
+	private Integer delFlag;
 
 
 	public Integer getId() {
@@ -86,6 +107,46 @@ public class BerthDetail implements Serializable {
 
 	public void setCranes(String cranes) {
 		this.cranes = cranes;
+	}
+
+	public Date getCreateDate() {
+		return this.createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getCreateBy() {
+		return this.createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public Date getUpdateDate() {
+		return this.updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public String getUpdateBy() {
+		return this.updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public Integer getDelFlag() {
+		return this.delFlag;
+	}
+
+	public void setDelFlag(Integer delFlag) {
+		this.delFlag = delFlag;
 	}
 
 }
