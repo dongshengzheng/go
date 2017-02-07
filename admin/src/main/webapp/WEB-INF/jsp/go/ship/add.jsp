@@ -49,7 +49,7 @@
                                         <label for="name" class="col-sm-3 control-label">船舶名称<span class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="name" name="name" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   class="form-control required"
                                                    placeholder="请填写船舶名称">
                                         </div>
                                     </div>
@@ -57,7 +57,7 @@
                                         <label for="builder" class="col-sm-3 control-label">建造船厂</label>
                                         <div class="col-sm-6">
                                             <input id="builder" name="builder" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   class="form-control "
                                                    placeholder="请填写建造船厂">
                                         </div>
                                     </div>
@@ -66,16 +66,16 @@
                                                 class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="imo" name="imo" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   class="form-control required"
                                                    placeholder="请填写IMO">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="buildeYear" class="col-sm-3 control-label">建造日期</label>
+                                        <label for="buildYear" class="col-sm-3 control-label">建造日期</label>
                                         <div class="col-sm-6">
                                             <div class="input-group">
-                                                <input id="buildeYear" name="buildeYear" type="text"
-                                                       class="form-control required date-picker"
+                                                <input id="buildYear" name="buildYear" type="text"
+                                                       class="form-control date-picker"
                                                        placeholder="请选择建造日期">
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
@@ -87,7 +87,7 @@
                                                 class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="shipClass" name="shipClass" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   class="form-control required"
                                                    placeholder="请选择船级社">
                                         </div>
                                     </div>
@@ -95,15 +95,15 @@
                                         <label for="callSign" class="col-sm-3 control-label">船舶呼号</label>
                                         <div class="col-sm-6">
                                             <input id="callSign" name="callSign" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                                   class="form-control "
                                                    placeholder="请填写船舶呼号">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="type" class="col-sm-3 control-label">船舶类型<span class="red">* </span></label>
                                         <div class="col-sm-6">
-                                            <input id="type" name="natypeme" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required"
+                                            <input id="type" name="type" type="text" maxlength="32"
+                                                   class="form-control required"
                                                    placeholder="请选择船舶类型">
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@
                                                     class="red">* </span></label>
                                             <div class="col-sm-6">
                                                 <input id="loa" name="loa" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control required"
                                                        placeholder="请填写船长姓名">
                                             </div>
                                         </div>
@@ -132,7 +132,7 @@
                                                     class="red">* </span></label>
                                             <div class="col-sm-6">
                                                 <input id="draft" name="draft" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control required"
                                                        placeholder="请填写吃水深度">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:米)</label>
@@ -142,7 +142,7 @@
                                                     class="red">* </span></label>
                                             <div class="col-sm-6">
                                                 <input id="beam" name="beam" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control required"
                                                        placeholder="请填写船宽长度">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:米)</label>
@@ -152,7 +152,7 @@
                                             <label for="dwt" class="col-sm-3 control-label">载重吨</label>
                                             <div class="col-sm-6">
                                                 <input id="dwt" name="dwt" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写载重吨">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨)</label>
@@ -161,7 +161,7 @@
                                             <label for="depth" class="col-sm-3 control-label">型深</label>
                                             <div class="col-sm-6">
                                                 <input id="depth" name="depth" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写型深">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:米)</label>
@@ -170,7 +170,7 @@
                                             <label for="gt" class="col-sm-3 control-label">总吨</label>
                                             <div class="col-sm-6">
                                                 <input id="gt" name="gt" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写总吨">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨)</label>
@@ -196,7 +196,7 @@
                                             <label for="meMaker" class="col-sm-3 control-label">厂家</label>
                                             <div class="col-sm-6">
                                                 <input id="meMaker" name="meMaker" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写厂家名称">
                                             </div>
                                         </div>
@@ -204,7 +204,7 @@
                                             <label for="meType" class="col-sm-3 control-label">型号</label>
                                             <div class="col-sm-6">
                                                 <input id="meType" name="meType" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写型号">
                                             </div>
                                         </div>
@@ -212,7 +212,7 @@
                                             <label for="meBhpRpm" class="col-sm-3 control-label">马力/转速</label>
                                             <div class="col-sm-6">
                                                 <input id="meBhpRpm" name="meBhpRpm" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写马力/转速">
                                             </div>
                                         </div>
@@ -220,7 +220,7 @@
                                             <label for="meQty" class="col-sm-3 control-label">数量</label>
                                             <div class="col-sm-6">
                                                 <input id="meQty" name="meQty" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写数量">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:台)</label>
@@ -229,7 +229,7 @@
                                             <label for="meCylBore" class="col-sm-3 control-label">缸径</label>
                                             <div class="col-sm-6">
                                                 <input id="meCylBore" name="meCylBore" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写缸径">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:毫米)</label>
@@ -249,7 +249,7 @@
                                             <label for="auxMaker" class="col-sm-3 control-label">厂家</label>
                                             <div class="col-sm-6">
                                                 <input id="auxMaker" name="auxMaker" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写厂家名称">
                                             </div>
                                         </div>
@@ -257,7 +257,7 @@
                                             <label for="auxType" class="col-sm-3 control-label">型号</label>
                                             <div class="col-sm-6">
                                                 <input id="auxType" name="auxType" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写型号">
                                             </div>
                                         </div>
@@ -265,7 +265,7 @@
                                             <label for="auxRatedOr" class="col-sm-3 control-label">额定功率</label>
                                             <div class="col-sm-6">
                                                 <input id="auxRatedOr" name="auxRatedOr" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写额定功率">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:千瓦)</label>
@@ -274,7 +274,7 @@
                                             <label for="auxQty" class="col-sm-3 control-label">数量</label>
                                             <div class="col-sm-6">
                                                 <input id="auxQty" name="auxQty" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写数量">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:台)</label>
@@ -283,7 +283,7 @@
                                             <label for="auxCylBore" class="col-sm-3 control-label">缸径</label>
                                             <div class="col-sm-6">
                                                 <input id="auxCylBore" name="auxCylBore" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写缸径">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:毫米)</label>
@@ -302,7 +302,7 @@
                                             <label for="boilerMaker" class="col-sm-3 control-label">厂家</label>
                                             <div class="col-sm-6">
                                                 <input id="boilerMaker" name="boilerMaker" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写厂家名称">
                                             </div>
                                         </div>
@@ -310,7 +310,7 @@
                                             <label for="boilerType" class="col-sm-3 control-label">型号</label>
                                             <div class="col-sm-6">
                                                 <input id="boilerType" name="boilerType" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写型号">
                                             </div>
                                         </div>
@@ -319,7 +319,7 @@
                                             <div class="col-sm-6">
                                                 <input id="boilerPressure" name="boilerPressure" type="text"
                                                        maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写工作压力">
                                             </div>
                                         </div>
@@ -327,7 +327,7 @@
                                             <label for="boilerQty" class="col-sm-3 control-label">数量</label>
                                             <div class="col-sm-6">
                                                 <input id="boilerQty" name="boilerQty" type="text" maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写数量">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:台)</label>
@@ -337,7 +337,7 @@
                                             <div class="col-sm-6">
                                                 <input id="boilerHeatingArea" name="boilerHeatingArea" type="text"
                                                        maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写热交换面积">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:平方米)</label>
@@ -347,7 +347,7 @@
                                             <div class="col-sm-6">
                                                 <input id="boilerEvaporation" name="boilerEvaporation" type="text"
                                                        maxlength="32"
-                                                       minlength="2" class="form-control required"
+                                                       class="form-control "
                                                        placeholder="请填写蒸发量">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨/时)</label>
@@ -366,10 +366,12 @@
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
                                             <shiro:hasPermission name="ship/add">
-                                                <button type="submit" class="btn btn-primary">提交</button>
+                                                <button type="button" onclick="severCheck()" class="btn btn-primary">
+                                                    提交
+                                                </button>
                                             </shiro:hasPermission>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                                            </button>
+                                            <a href="ship" type="button" class="btn btn-default" data-target="navTab">取消
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -386,6 +388,123 @@
     <!-- END CONTENT -->
     <!-- BEGIN QUICK SIDEBAR -->
 </form>
+<a id="ship" href="ship" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>'
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+
+    //服务器校验
+    function severCheck() {
+        if (check()) {
+            $("#defForm").ajaxSubmit({
+                success: function (data) {
+                    if (data.success) {
+                        alert("success");
+                        $('#ship').click()
+                    } else {
+                        alert("false");
+                        alert(data.msg);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                    return;
+                }
+            });
+        }
+    }
+
+    //客户端校验
+    function check() {
+        if ($("#name").val() == "") {
+            $("#name").tips({
+                side: 2,
+                msg: '<fmt:message key="register_username_empty"/>',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#name").focus();
+            return false;
+        } else {
+            $("#name").val(jQuery.trim($('#name').val()));
+        }
+        if ($("#imo").val() == "") {
+            $("#imo").tips({
+                side: 2,
+                msg: 'imo号不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#imo").focus();
+            return false;
+        } else {
+            $("#imo").val(jQuery.trim($('#imo').val()));
+        }
+        if ($("#shipClass").val() == "") {
+            $("#shipClass").tips({
+                side: 2,
+                msg: 'shipClass不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#shipClass").focus();
+            return false;
+        } else {
+            $("#shipClass").val(jQuery.trim($('#shipClass').val()));
+        }
+        if ($("#type").val() == "") {
+            $("#type").tips({
+                side: 2,
+                msg: 'type不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#type").focus();
+            return false;
+        } else {
+            $("#type").val(jQuery.trim($('#type').val()));
+        }
+        if ($("#loa").val() == "") {
+            $("#loa").tips({
+                side: 2,
+                msg: 'loa不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#loa").focus();
+            return false;
+        } else {
+            $("#loa").val(jQuery.trim($('#loa').val()));
+        }
+        if ($("#draft").val() == "") {
+            $("#draft").tips({
+                side: 2,
+                msg: 'draft不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#draft").focus();
+            return false;
+        } else {
+            $("#draft").val(jQuery.trim($('#draft').val()));
+        }
+        if ($("#beam").val() == "") {
+            $("#beam").tips({
+                side: 2,
+                msg: 'beam不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#beam").focus();
+            return false;
+        } else {
+            $("#beam").val(jQuery.trim($('#beam').val()));
+        }
+        return true;
+    }
+
+    $(document).keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("#to-recover").trigger("click");
+        }
+    });
 </script>

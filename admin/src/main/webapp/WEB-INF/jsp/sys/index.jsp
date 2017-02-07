@@ -129,6 +129,8 @@
 <script src="${ctx}/static/js/admin.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/go.common.js"></script>
 <script src="${ctx}/static/js/api.js"></script>
+<script src="${ctx}/static/js/jquery.tips.js"></script>
+
 </body>
 <script>
 

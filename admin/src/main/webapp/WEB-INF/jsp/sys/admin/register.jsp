@@ -41,6 +41,12 @@
     <script src="${ctx}/static/js/jquery.cookie.js"></script>
     <script src="${ctx}/static/js/jquery.tips.js"></script>
     <link rel="shortcut icon" href="${ctx}/favicon.ico"/>
+    <style>
+        .login .content {
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
 <body class=" login">
 <div class="logo">
     <a href="index.html"></a>
