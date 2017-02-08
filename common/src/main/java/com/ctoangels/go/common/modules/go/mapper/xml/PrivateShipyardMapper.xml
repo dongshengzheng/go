@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.go.common.modules.go.mapper.PrivateShipyardMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, `name`, group_company AS groupCompany, country, city, `location`, tel, email, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, company_id AS companyId, shipyard_id AS shipyardId
+	</sql>
+
+</mapper>
