@@ -17,7 +17,7 @@
 
 <div><img src="/img/info.png">&nbsp;&nbsp;&nbsp;<span>公司信息</span></div>
 <c:if test="${! empty company}" var="cp">
-    <div id="up" style="margin-bottom:10px"><img id="img" src="/ship.jpg"/></div>
+    <div id="up" style="margin-bottom:10px"><img id="img" src="/img/ship.jpg"/></div>
     <div id="down" style="margin-top:20px;height: 300px">
         <div id="allmap" style="float:left;margin-right:20px"></div>
         <div style="float:left">

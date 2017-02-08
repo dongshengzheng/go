@@ -47,4 +47,26 @@
             alter table t_ship CHANGE  builde_year build_year date;
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-002">
+        <sql>
+            CREATE TABLE `t_private_shipyard` (
+            `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '船东关联的船厂的id',
+            `name` varchar(45) DEFAULT NULL,
+            `group_company` varchar(45) DEFAULT NULL COMMENT '集团公司',
+            `country` varchar(45) DEFAULT NULL COMMENT '国家',
+            `city` varchar(45) DEFAULT NULL COMMENT '城市',
+            `location` varchar(45) DEFAULT NULL COMMENT '位置',
+            `tel` varchar(45) DEFAULT NULL COMMENT '电话',
+            `email` varchar(45) DEFAULT NULL COMMENT '邮箱',
+            `create_date` date DEFAULT NULL COMMENT '创建时间',
+            `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+            `update_date` date DEFAULT NULL COMMENT '修改时间',
+            `update_by` varchar(45) NOT NULL COMMENT '修改用户',
+            `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+            `company_id` int(11) DEFAULT NULL COMMENT '公司id',
+            `shipyard_id` int(11) DEFAULT NULL COMMENT '船厂的id',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
