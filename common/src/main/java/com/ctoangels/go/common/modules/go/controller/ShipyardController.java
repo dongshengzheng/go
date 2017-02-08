@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("shipyard")
-<<<<<<<HEAD
-
 public class ShipyardController extends BaseController {
 
     @Autowired
