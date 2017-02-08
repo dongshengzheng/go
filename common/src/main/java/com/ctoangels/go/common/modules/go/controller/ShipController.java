@@ -3,7 +3,9 @@ package com.ctoangels.go.common.modules.go.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.ctoangels.go.common.modules.go.entity.Company;
 import com.ctoangels.go.common.modules.go.entity.Ship;
+import com.ctoangels.go.common.modules.go.service.ICompanyService;
 import com.ctoangels.go.common.modules.go.service.IShipService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
@@ -13,6 +15,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 /**
  * Works 控制层
  */
@@ -21,6 +25,9 @@ import org.springframework.web.bind.annotation.*;
 public class ShipController extends BaseController {
     @Autowired
     private IShipService shipService;
+
+    @Autowired
+    private ICompanyService companyService;
 
     @RequestMapping
     public String page() {
@@ -33,7 +40,7 @@ public class ShipController extends BaseController {
         int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<Ship> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
-            ew.addFilter("name={0}", keyword);
+            ew.like("name", keyword);
         ew.addFilter("company_id={0}", companyId);
         Page<Ship> page = shipService.selectPage(getPage(), ew);
         return jsonPage(page);
@@ -48,11 +55,15 @@ public class ShipController extends BaseController {
     @ResponseBody
     public JSONObject add(Ship ship) {
         JSONObject jsonObject = new JSONObject();
+        Company company = companyService.selectById(getCurrentUser().getCompanyId());
+        ship.setCompanyId(company.getId());
+        ship.setCompanyName(company.getName());
+        ship.setDelFlag(Const.DEL_FLAG_NORMAL);
         if (shipService.insert(ship)) {
-            jsonObject.put("status", 1);
+            jsonObject.put("success", true);
         } else {
-            jsonObject.put("status", 0);
-            jsonObject.put("msg", "保存错误,请稍后再试");
+            jsonObject.put("success", false);
+            jsonObject.put("msg", "添加时出错,请稍后再试");
         }
         return jsonObject;
     }
@@ -76,10 +87,10 @@ public class ShipController extends BaseController {
     public JSONObject editComplete(Ship ship) {
         JSONObject jsonObject = new JSONObject();
         if (shipService.updateById(ship)) {
-            jsonObject.put("status", 1);
+            jsonObject.put("success", true);
         } else {
-            jsonObject.put("status", 0);
-            jsonObject.put("msg", "更新错误,请稍后再试");
+            jsonObject.put("success", false);
+            jsonObject.put("msg", "编辑时出错,请稍后再试");
         }
         return jsonObject;
     }
