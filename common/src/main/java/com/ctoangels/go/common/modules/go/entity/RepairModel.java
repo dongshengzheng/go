@@ -28,7 +28,7 @@ public class RepairModel implements Serializable {
 	private String name;
 
 	/** 维修类型 */
-	private String desc;
+	private String des;
 
 	/** 红本版本号 */
 	private String version;
@@ -70,12 +70,12 @@ public class RepairModel implements Serializable {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return this.desc;
+	public String getDes() {
+		return this.des;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDes(String des) {
+		this.des = des;
 	}
 
 	public String getVersion() {

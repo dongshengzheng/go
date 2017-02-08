@@ -25,7 +25,7 @@ public class RepairProgDetailReq implements Serializable {
 	private Integer id;
 
 	/** '要求描述/材料规格' */
-	private String desc;
+	private String des;
 
 	/** 单位 */
 	private String unit;
@@ -66,12 +66,12 @@ public class RepairProgDetailReq implements Serializable {
 		this.id = id;
 	}
 
-	public String getDesc() {
-		return this.desc;
+	public String getDes() {
+		return this.des;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDes(String des) {
+		this.des = des;
 	}
 
 	public String getUnit() {

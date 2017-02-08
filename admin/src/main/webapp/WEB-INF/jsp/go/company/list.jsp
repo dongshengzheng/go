@@ -15,7 +15,7 @@
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=sH45FS0Pd1v58SSDcltpILGWyLkSn959"></script>
 
-<div><img src="/info.png">&nbsp;&nbsp;&nbsp;<span>公司信息</span></div>
+<div><img src="/img/info.png">&nbsp;&nbsp;&nbsp;<span>公司信息</span></div>
 <c:if test="${! empty company}" var="cp">
     <div id="up" style="margin-bottom:10px"><img id="img" src="/ship.jpg"/></div>
     <div id="down" style="margin-top:20px;height: 300px">

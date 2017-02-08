@@ -44,7 +44,7 @@ public class Ship implements Serializable {
 	/** 船的建造者 */
 	private String builder;
 
-	/** 建造日期 */
+	/**  */
 	@TableField(value = "build_year")
 	private Date buildYear;
 

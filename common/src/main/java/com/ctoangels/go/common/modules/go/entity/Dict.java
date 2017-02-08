@@ -31,7 +31,7 @@ public class Dict implements Serializable {
 	private String value;
 
 	/**  */
-	private String desc;
+	private String des;
 
 	/** 创建时间 */
 	@TableField(value = "create_date")
@@ -78,12 +78,12 @@ public class Dict implements Serializable {
 		this.value = value;
 	}
 
-	public String getDesc() {
-		return this.desc;
+	public String getDes() {
+		return this.des;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDes(String des) {
+		this.des = des;
 	}
 
 	public Date getCreateDate() {

@@ -7,9 +7,9 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <go:navigater path="yard"></go:navigater>
-<div><span>查看船厂信息</span></div>
-<div class="xline" style="border-bottom:solid 3px #337ab7; height:2px;"></div>
-<div style="margin-bottom: 30px;margin-top: 20px">
+<div><img src="/img/top.png"/><span>查看船厂信息</span></div>
+<div class="xline" style="border-bottom:solid 2px #337ab7; height:1px;margin-top: 10px"></div>
+<div style="margin-bottom: 30px;margin-top: 3px">
     <div style="display:inline-block;width: 300px;height: 200px;margin-right: 20px">
         <img style="width: 300px;height: 200px" src="/ship.jpg">
     </div>
@@ -20,11 +20,20 @@
             码头修船，2门式起重机（200吨），1门式起重机（400吨）和各种设施，期间近年来，中远（<br/>
             大连）造船厂做了一个修船到船舶和海上修理、转换
         </p>
-        <div></div>
+        <div>
+            <table>
+                <tr>
+                    <td>短名称：</td>
+                    <td>大连远洋运输公司</td>
+                    <td>集团公司：</td>
+                    <td>中远</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 <div style="margin: 0 auto;width:250px;">
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills" style="margin-bottom: 0px">
         <li class="active">
             <a href="#tab11" data-toggle="tab">一般信息</a>
         </li>
@@ -33,7 +42,8 @@
         </li>
     </ul>
 </div>
-<div class="xline" style="border-bottom:solid 3px #337ab7; height:2px;"></div>
+
+<div  style="border-bottom:solid 2px #337ab7; height:1px;"></div>
 <div class="portlet light bordered" >
     <div class="portlet-body">
         <div class="tabbable tabbable-tabdrop">
