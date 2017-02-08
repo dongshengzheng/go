@@ -68,11 +68,11 @@ public class ShipController extends BaseController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/look", method = RequestMethod.GET)
-    public String look(@RequestParam(required = false) Integer id, ModelMap map) {
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         Ship ship = shipService.selectById(id);
         map.put("ship", ship);
-        return "go/ship/look";
+        return "go/ship/info";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -99,7 +99,9 @@ public class ShipController extends BaseController {
     @ResponseBody
     public JSONObject delete(@RequestParam(required = false) Integer id) {
         JSONObject jsonObject = new JSONObject();
-        if (shipService.deleteById(id)) {
+        Ship ship = shipService.selectById(id);
+        ship.setDelFlag(Const.DEL_FLAG_DELETE);
+        if (shipService.updateById(ship)) {
             jsonObject.put("status", 1);
         } else {
             jsonObject.put("status", 0);

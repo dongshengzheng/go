@@ -7,6 +7,7 @@ import com.ctoangels.go.common.modules.go.entity.Ship;
 import com.ctoangels.go.common.modules.go.entity.Shipyard;
 import com.ctoangels.go.common.modules.go.service.IShipyardService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
+import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -84,7 +85,9 @@ public class ShipyardController extends BaseController {
     @ResponseBody
     public JSONObject delete(@RequestParam(required = false) Integer id) {
         JSONObject jsonObject = new JSONObject();
-        if (shipyardService.deleteById(id)) {
+        Shipyard shipyard = shipyardService.selectById(id);
+        shipyard.setDelFlag(Const.DEL_FLAG_DELETE);
+        if (shipyardService.updateById(shipyard)) {
             jsonObject.put("status", 1);
         } else {
             jsonObject.put("status", 0);

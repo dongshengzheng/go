@@ -102,7 +102,7 @@
             ],
 
             "columnDefs": [{
-                "targets": 8,
+                "targets": 7,
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="shipyard/look">

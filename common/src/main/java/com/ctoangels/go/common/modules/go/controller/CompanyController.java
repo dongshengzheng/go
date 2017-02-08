@@ -4,9 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.Company;
-import com.ctoangels.go.common.modules.go.entity.Ship;
+import com.ctoangels.go.common.modules.go.entity.Company;
 import com.ctoangels.go.common.modules.go.service.ICompanyService;
-import com.ctoangels.go.common.modules.go.service.IShipService;
+import com.ctoangels.go.common.modules.go.service.ICompanyService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.modules.sys.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,26 @@ public class CompanyController extends BaseController {
         Company company = companyService.selectOne(ew);
         modelMap.put("company", company);
         return "go/company/list";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String edit(@RequestParam(required = false) Integer id, ModelMap map) {
+        Company company = companyService.selectById(id);
+        map.put("company", company);
+        return "go/company/edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editComplete(Company company) {
+        JSONObject jsonObject = new JSONObject();
+        if (companyService.updateById(company)) {
+            jsonObject.put("success", true);
+        } else {
+            jsonObject.put("success", false);
+            jsonObject.put("msg", "编辑时出错,请稍后再试");
+        }
+        return jsonObject;
     }
 
 }
