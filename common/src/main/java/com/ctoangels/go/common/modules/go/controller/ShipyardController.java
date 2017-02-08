@@ -57,7 +57,7 @@ public class ShipyardController extends BaseController {
     public String look(@RequestParam(required = false) Integer id, ModelMap map) {
         Shipyard shipyard = shipyardService.selectById(id);
         map.put("shipyard", shipyard);
-        return "go/shipyard/look";
+        return "go/shipyard/info";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
