@@ -6,7 +6,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="ship"></go:navigater>
+<go:navigater path="shipyard"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -14,13 +14,13 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            船舶信息
+                            船厂信息
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
-                                <shiro:hasPermission name="ship/add">
-                                    <a href="ship/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
+                                <shiro:hasPermission name="shipyard/add">
+                                    <a href="shipyard/add" data-target="navTab"
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船厂信息
                                     </a>
                                 </shiro:hasPermission>
                             </div>
@@ -31,12 +31,13 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>船舶名称</th>
-                        <th>IMO</th>
-                        <th>船舶类型</th>
-                        <th>载重吨</th>
-                        <th>船级社</th>
-                        <th>公司名称</th>
+                        <th>Logo</th>
+                        <th>船厂名称</th>
+                        <th>集团公司</th>
+                        <th>国家</th>
+                        <th>区域</th>
+                        <th>位置</th>
+                        <th>联系电话</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -55,7 +56,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "ship/list",
+                "url": "shipyard/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
@@ -68,25 +69,28 @@
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
                 {
-                    "data": "name",
-                    "render": function (data, type, row) {
-                        return row.name;
+                    "data": "logo",
+                    "render": function (logo) {
+                        return "<img src='<%=basePath%>assets/global/img/loading.gif'>"
                     }
                 },
                 {
-                    "data": "imo",
+                    "data": "name",
                 },
                 {
-                    "data": "type",
+                    "data": "groupCompany",
                 },
                 {
-                    "data": "dwt",
+                    "data": "country",
                 },
                 {
-                    "data": "shipClass",
+                    "data": "area",
                 },
                 {
-                    "data": "companyName",
+                    "data": "location",
+                },
+                {
+                    "data": "tel",
                 },
 //                {
 //                    "data": "createDate", "type": "date",
@@ -98,17 +102,17 @@
             ],
 
             "columnDefs": [{
-                "targets": 6,
+                "targets": 8,
                 "render": function (data, type, row) {
                     return ""
-                            <shiro:hasPermission name="ship/look">
-                            + '<a href="ship/look?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
+                            <shiro:hasPermission name="shipyard/look">
+                            + '<a href="shipyard/look?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="ship/edit">
-                            + '<a href="ship/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
+                            <shiro:hasPermission name="shipyard/edit">
+                            + '<a href="shipyard/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="ship/delete">
-                            + '<a href="ship/delete?id=' + row.id +
+                            <shiro:hasPermission name="shipyard/delete">
+                            + '<a href="shipyard/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
                             </shiro:hasPermission>
                             ;
@@ -119,7 +123,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船厂名称");
+                initSearchForm(null, "搜索船舶名称");
             }
         });
 

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.go.common.modules.go.mapper.ShipyardMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		id, company_id AS companyId, `name`, `desc`, short_name AS shortName, group_company AS groupCompany, country, area, `location`, address, longitude, latitude, tel, email, website, logo, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+		id, company_id AS companyId, `name`, `des`, short_name AS shortName, group_company AS groupCompany, country, area, `location`, address, longitude, latitude, tel, email, website, logo, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
 </mapper>

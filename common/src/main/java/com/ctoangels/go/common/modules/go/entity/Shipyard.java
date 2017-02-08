@@ -32,7 +32,7 @@ public class Shipyard implements Serializable {
 	private String name;
 
 	/** 船厂简介 */
-	private String desc;
+	private String des;
 
 	/** 短名称 */
 	@TableField(value = "short_name")
@@ -118,11 +118,11 @@ public class Shipyard implements Serializable {
 	}
 
 	public String getDesc() {
-		return this.desc;
+		return this.des;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDesc(String des) {
+		this.des = des;
 	}
 
 	public String getShortName() {
