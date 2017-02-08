@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("yard")
+@RequestMapping("shipyard")
 public class ShipyardController {
 
     @RequestMapping
     public String page() {
-        return "go/yard/info";
+        return "go/shipyard/info";
     }
 }

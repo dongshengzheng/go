@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-02-07 15:35:17
+Date: 2017-02-08 10:53:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -135,8 +135,8 @@ INSERT INTO `sys_menu` VALUES ('93', '维修进度', '#', '0', '30', 'http://win
 INSERT INTO `sys_menu` VALUES ('100', '维修工程管理', 'management', '93', '31', null, '2', '1', '维修工程管理', '0');
 INSERT INTO `sys_menu` VALUES ('101', '基础信息', '#', '0', '10', 'http://windyeel.oss-cn-shanghai.aliyuncs.com/go/sys/nav_10.png', '1', '1', '基础信息', '0');
 INSERT INTO `sys_menu` VALUES ('102', '船舶信息', 'ship', '101', '11', null, '2', '1', '船舶信息', '0');
-INSERT INTO `sys_menu` VALUES ('103', '船厂信息', 'yard', '101', '12', null, '2', '1', '船厂信息', '0');
-INSERT INTO `sys_menu` VALUES ('104', '公司信息', 'owner', '101', '13', null, '2', '1', '公司信息', '0');
+INSERT INTO `sys_menu` VALUES ('103', '船厂信息', 'shipyard', '101', '12', null, '2', '1', '船厂信息', '0');
+INSERT INTO `sys_menu` VALUES ('104', '公司信息', 'company', '101', '13', null, '2', '1', '公司信息', '0');
 INSERT INTO `sys_menu` VALUES ('105', '维修进度汇报', 'progress', '93', '32', null, '2', '1', '维修进度汇报', '0');
 INSERT INTO `sys_menu` VALUES ('106', '账号设置', 'account', '1', '45', null, '2', '1', '账号设置', '0');
 INSERT INTO `sys_menu` VALUES ('107', '公司资料', 'archiv', '1', '46', null, '2', '1', '公司资料', '0');
@@ -254,7 +254,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'dd94709528bb1c83d08f3088d4043f4742891f4f', 'admin', '2017-01-20 10:34:39', '0:0:0:0:0:0:0:1', '0', '123', '1234', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-07 15:34:22', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', '1', '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
+INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-08 10:52:14', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', '1', '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -333,7 +333,7 @@ CREATE TABLE `t_dict` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) DEFAULT NULL,
   `value` varchar(45) DEFAULT NULL,
-  `desc` varchar(45) DEFAULT NULL,
+  `des` varchar(45) DEFAULT NULL,
   `create_date` date DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
   `update_date` date DEFAULT NULL COMMENT '修改时间',
@@ -425,7 +425,7 @@ DROP TABLE IF EXISTS `t_repair_model`;
 CREATE TABLE `t_repair_model` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '维修红本id',
   `name` varchar(100) DEFAULT NULL,
-  `desc` varchar(500) DEFAULT NULL COMMENT '维修类型',
+  `des` varchar(500) DEFAULT NULL COMMENT '维修类型',
   `version` varchar(30) DEFAULT NULL COMMENT '红本版本号',
   `create_date` date DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
@@ -532,7 +532,7 @@ CREATE TABLE `t_repair_prog_detail` (
 DROP TABLE IF EXISTS `t_repair_prog_detail_req`;
 CREATE TABLE `t_repair_prog_detail_req` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '维修进度中修理要求和规格的id',
-  `desc` varchar(500) DEFAULT NULL COMMENT '''要求描述/材料规格''',
+  `des` varchar(500) DEFAULT NULL COMMENT '''要求描述/材料规格''',
   `unit` varchar(45) DEFAULT NULL COMMENT '单位',
   `count` int(11) DEFAULT NULL COMMENT '数量',
   `repair_prog_detail_id` int(11) DEFAULT NULL COMMENT '维修进度详细的信息id',
@@ -642,7 +642,7 @@ CREATE TABLE `t_repair_spec_detail` (
 DROP TABLE IF EXISTS `t_repair_spec_detail_req`;
 CREATE TABLE `t_repair_spec_detail_req` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '修理要求/和材料规格的id',
-  `desc` varchar(500) DEFAULT NULL COMMENT '要求描述/和材料规格',
+  `des` varchar(500) DEFAULT NULL COMMENT '要求描述/和材料规格',
   `unit` varchar(45) DEFAULT NULL COMMENT '单位',
   `count` varchar(45) DEFAULT NULL COMMENT '数量',
   `repair_spec_detail_id` int(11) DEFAULT NULL COMMENT '维修工程单范本的id',
@@ -765,7 +765,7 @@ CREATE TABLE `t_shipyard` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '船厂id',
   `company_id` int(11) DEFAULT NULL COMMENT '公司id',
   `name` varchar(45) DEFAULT NULL COMMENT '船厂名称',
-  `desc` varchar(45) DEFAULT NULL COMMENT '船厂简介',
+  `des` varchar(45) DEFAULT NULL COMMENT '船厂简介',
   `short_name` varchar(45) DEFAULT NULL COMMENT '短名称',
   `group_company` varchar(45) DEFAULT NULL COMMENT '集团公司',
   `country` varchar(45) DEFAULT NULL COMMENT '国家',

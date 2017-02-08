@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("owner")
+@RequestMapping("company")
 public class CompanyController extends BaseController {
     @Autowired
     private ICompanyService companyService;
@@ -33,6 +33,6 @@ public class CompanyController extends BaseController {
         ew.addFilter("id={0}",companyId);
         Company company = companyService.selectOne(ew);
         modelMap.put("company",company);
-        return "go/owner/list";
+        return "go/company/list";
     }
 }
