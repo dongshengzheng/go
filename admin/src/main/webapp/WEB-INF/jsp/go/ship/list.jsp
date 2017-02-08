@@ -119,7 +119,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "搜索船舶名称");
+                initSearchForm(null, "请输入船厂名称");
             }
         });
 

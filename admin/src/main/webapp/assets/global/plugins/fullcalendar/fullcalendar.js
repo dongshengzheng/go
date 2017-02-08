@@ -6843,7 +6843,7 @@ var View = fc.View = Class.extend({
 	name: null, // deprecated. use `type` instead
 	title: null, // the text that will be displayed in the header's title
 
-	calendar: null, // owner Calendar object
+	calendar: null, // company Calendar object
 	options: null, // hash containing all options. already merged with view-specific-options
 	coordMap: null, // a CoordMap object for converting pixel regions to dates
 	el: null, // the view's containing element. set by Calendar
