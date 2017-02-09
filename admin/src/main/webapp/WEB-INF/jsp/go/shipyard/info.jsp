@@ -15,6 +15,10 @@
     .form-group{
         margin-bottom: 0px;
     }
+    .dock{
+        background-color: #9adad6;
+    }
+    table th,td{ text-align:center}
 </style>
 <div><img src="/img/top.png"/><span>查看船厂信息</span></div>
 <div style="border-bottom:solid 2px #337ab7; height:1px;margin-top: 10px"></div>
@@ -91,7 +95,7 @@
 </div>
 
 <div  style="border-bottom:solid 2px #337ab7; height:1px;"></div>
-<div class="portlet light bordered" >
+<div class="portlet light bordered" style="padding: 0px;">
     <div class="portlet-body">
         <div class="tabbable tabbable-tabdrop">
             <div class="tab-content">
@@ -99,7 +103,171 @@
                     <p>中原（广东）建造有限公司Ltd</p>
                 </div>
                 <div class="tab-pane" id="tab12">
-                    <p> Howdy, I'm in Section 2. </p>
+                    <div class="portlet-body">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_1_1" data-toggle="tab"> 码头信息 </a>
+                            </li>
+                            <li>
+                                <a href="#tab_1_2" data-toggle="tab"> 泊位信息 </a>
+                            </li>
+                            <li>
+                                <a href="#tab_1_3" data-toggle="tab"> 设施信息 </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="tab_1_1">
+                                <div class="portlet-body">
+                                    <div class="table-scrollable">
+                                        <table class="table table-hover">
+                                            <thead class="dock">
+                                            <tr >
+                                                <th rowspan="2"> 序号 </th>
+                                                <th rowspan="2"> 类型 </th>
+                                                <th rowspan="2"> 姓名 </th>
+                                                <th rowspan="2"> 能力（T） </th>
+                                                <th rowspan="2"> 提升能力 </th>
+                                                <th colspan="3"> 维</th>
+                                                <th rowspan="2"> 起重机 </th>
+                                                <th rowspan="2"> 备注 </th>
+
+                                            </tr>
+                                            <tr>
+                                                <th>长度（m）</th>
+                                                <th>宽度（m）</th>
+                                                <th>草案（m）</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td> 1 </td>
+                                                <td> 浮船坞 </td>
+                                                <td> 大连 </td>
+                                                <td> 300000 </td>
+                                                <td></td>
+                                                <td>360</td>
+                                                <td>66</td>
+                                                <td>27</td>
+                                                <td>20Tx39Mx1,30Tx39Mx1</td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab_1_2">
+                                <div class="portlet-body">
+                                    <div class="table-scrollable">
+                                        <table class="table table-hover">
+                                            <thead class="dock">
+                                            <tr >
+                                                <th > 序号 </th>
+                                                <th > 总长（m） </th>
+                                                <th > 草案（m） </th>
+                                                <th > 能力（T） </th>
+                                                <th > 起重机 </th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td> 1 </td>
+                                                <td> 240 </td>
+                                                <td> 0 </td>
+                                                <td> 100000 </td>
+                                                <td>20Tx39Mx1,30Tx39Mx1</td>
+                                            </tr>
+                                            <tr>
+                                                <td> 2 </td>
+                                                <td> 240 </td>
+                                                <td> 0 </td>
+                                                <td> 100000 </td>
+                                                <td>20Tx39Mx1,30Tx39Mx1</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab_1_3">
+                                <div >
+                                    <center class="dock">起重机信息</center>
+                                    <div class="portlet-body" style="padding: 0px">
+                                    <div class="table-scrollable">
+                                        <table class="table table-hover">
+                                            <thead >
+                                            <tr >
+                                                <th > 序号 </th>
+                                                <th > 类型 </th>
+                                                <th > 能力（T） </th>
+                                                <th > 单元 </th>
+                                                <th > 备注 </th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td> 1 </td>
+                                                <td> 门式起重机 </td>
+                                                <td> 200 </td>
+                                                <td> 3 </td>
+                                                <td>在车间</td>
+                                            </tr>
+                                            <tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                </div>
+                                <div >
+                                    <center class="dock">拖船信息</center>
+                                    <div class="portlet-body" style="padding: 0px">
+                                        <div class="table-scrollable">
+                                            <table class="table table-hover">
+                                                <thead >
+                                                <tr >
+                                                    <th > 序号 </th>
+                                                    <th > 类型 </th>
+                                                    <th > 能力（T） </th>
+                                                    <th > 单元 </th>
+                                                    <th > 备注 </th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td> 1 </td>
+                                                    <td> 门式起重机 </td>
+                                                    <td> 200 </td>
+                                                    <td> 3 </td>
+                                                    <td>在车间</td>
+                                                </tr>
+                                                <tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div >
+                                    <center class="dock">其他信息</center>
+                                    <div class="portlet-body" style="padding: 0px">
+                                        <div class="table-scrollable">
+                                            <table class="table table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <td> 格构斜臂式起重机 </td>
+                                                    <td> 40台 </td>
+                                                </tr>
+                                                <tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
