@@ -39,9 +39,12 @@ public class CompanyController extends BaseController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String edit(@RequestParam(required = false) Integer id, ModelMap map) {
-        Company company = companyService.selectById(id);
-        map.put("company", company);
+    public String edit(ModelMap map) {
+        Integer companyId = getCurrentUser().getCompanyId();
+        if (companyId != null) {
+            Company company = companyService.selectById(companyId);
+            map.put("company", company);
+        }
         return "go/company/edit";
     }
 
@@ -49,7 +52,7 @@ public class CompanyController extends BaseController {
     @ResponseBody
     public JSONObject editComplete(Company company) {
         JSONObject jsonObject = new JSONObject();
-        if (companyService.updateById(company)) {
+        if (companyService.insertOrUpdate(company)) {
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);

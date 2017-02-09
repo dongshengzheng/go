@@ -112,6 +112,9 @@
 <script src="${global}/plugins/bootstrap-dialog/bootstrap-dialog.min.js"></script>
 <script src="${global}/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 
+<script src="${global}/plugins/plupload-2.1.2/js/moxie.js"></script>
+<script src="${global}/plugins/plupload-2.1.2/js/plupload.dev.js"></script>
+
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="${global}/scripts/app.min.js" type="text/javascript"></script>
@@ -124,6 +127,7 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 
 <%-- 自定义js文件--%>
+<script src="${ctx}/static/js/upload.js"></script>
 <script src="${ctx}/static/js/jquery.form.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/jquery-gv-validate.js" type="text/javascript"></script>
@@ -138,6 +142,17 @@
     $(document).ready(function () {
         intPage();
     });
+
+    function nofind(type) {
+        var img = event.srcElement;
+        if (type == '1') {
+            img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default.png";
+        } else if (type == '2') {
+            img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-man.jpg";
+        } else if (type == '3') {
+            img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png";
+        }
+    }
 
     function intPage() {
         var url;
