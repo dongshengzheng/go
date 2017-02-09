@@ -31,8 +31,8 @@ public class BerthDetail implements Serializable {
 	/** 总长 */
 	private Integer loa;
 
-	/** 草案 */
-	private Integer protocol;
+	/** 吃水 */
+	private Integer draft;
 
 	/** 能力 */
 	private Integer capacity;
@@ -85,12 +85,13 @@ public class BerthDetail implements Serializable {
 		this.loa = loa;
 	}
 
-	public Integer getProtocol() {
-		return this.protocol;
+
+	public Integer getDraft() {
+		return draft;
 	}
 
-	public void setProtocol(Integer protocol) {
-		this.protocol = protocol;
+	public void setDraft(Integer draft) {
+		this.draft = draft;
 	}
 
 	public Integer getCapacity() {

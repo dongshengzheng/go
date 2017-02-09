@@ -42,13 +42,13 @@ public class WharfDetail implements Serializable {
 	private Integer liftCapacity;
 
 	/** 维：长度 */
-	private Integer lengh;
+	private Integer length;
 
 	/** 维：宽度 */
 	private Integer width;
 
-	/** '维：草案' */
-	private Integer protocol;
+	/** '维：吃会' */
+	private Integer draft;
 
 	/** 起重机 */
 	private String cranes;
@@ -125,12 +125,12 @@ public class WharfDetail implements Serializable {
 		this.liftCapacity = liftCapacity;
 	}
 
-	public Integer getLengh() {
-		return this.lengh;
+	public Integer getLength() {
+		return length;
 	}
 
-	public void setLengh(Integer lengh) {
-		this.lengh = lengh;
+	public void setLength(Integer length) {
+		this.length = length;
 	}
 
 	public Integer getWidth() {
@@ -141,12 +141,12 @@ public class WharfDetail implements Serializable {
 		this.width = width;
 	}
 
-	public Integer getProtocol() {
-		return this.protocol;
+	public Integer getDraft() {
+		return draft;
 	}
 
-	public void setProtocol(Integer protocol) {
-		this.protocol = protocol;
+	public void setDraft(Integer draft) {
+		this.draft = draft;
 	}
 
 	public String getCranes() {

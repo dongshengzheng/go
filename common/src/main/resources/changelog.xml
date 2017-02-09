@@ -47,12 +47,6 @@
             alter table t_ship CHANGE builde_year build_year date;
         </sql>
     </changeSet>
-    <changeSet author="WangShun" id="15950097942-006">
-        <sql>
-            ALTER TABLE `t_repair_prog` ADD COLUMN `company_name` varchar(45) DEFAULT NULL COMMENT '公司名称';
-            ALTER TABLE `t_repair_prog` ADD COLUMN `ship_name` varchar(45) DEFAULT NULL COMMENT '船舶名称';
-        </sql>
-    </changeSet>
     <changeSet author="LuZhen" id="17317309132-002">
         <sql>
             CREATE TABLE `t_private_shipyard` (
@@ -73,6 +67,13 @@
             `shipyard_id` int(11) DEFAULT NULL COMMENT '船厂的id',
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-003">
+        <sql>
+            alter table t_wharf_detail CHANGE lengh length int (11);
+            alter table t_wharf_detail CHANGE protocol draft int(11);
+            alter table t_berth_detail CHANGE protocol draft int(11);
         </sql>
     </changeSet>
 </databaseChangeLog>
