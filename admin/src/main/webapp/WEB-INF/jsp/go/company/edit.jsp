@@ -2,6 +2,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -22,14 +23,17 @@
     }
 
 </style>
-<go:navigater path="ship"></go:navigater>
-<form class="form-horizontal" action="ship/edit" method="post"
+<go:navigater path="company"></go:navigater>
+<form class="form-horizontal" action="company/edit" method="post"
       id="defForm" callfn="refreshTable">
-    <input id="id" name="id" type="hidden" value="${ship.id}"/>
-    <input id="createDate" name="createDate" type="hidden" value="<fmt:formatDate value='${ship.createDate}'
+    <c:if test="${!empty company}">
+        <input id="edit" name="edit" type="hidden" value="yes">
+        <input id="id" name="id" type="hidden" value="${company.id}"/>
+        <input id="createDate" name="createDate" type="hidden" value="<fmt:formatDate value='${company.createDate}'
                         pattern="yyyy-MM-dd"/>"/>
-    <input id="createBy" name="createBy" type="hidden" value="${ship.createBy}"/>
-    <input id="delFlag" name="delFlag" type="hidden" value="${ship.delFlag}"/>
+        <input id="createBy" name="createBy" type="hidden" value="${company.createBy}"/>
+        <input id="delFlag" name="delFlag" type="hidden" value="${company.delFlag}"/>
+    </c:if>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light portlet-fit bordered">
@@ -45,79 +49,83 @@
                             <label for="name" class="col-sm-2 control-label"><i class="fa fa-building"></i>
                                 公司名称</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="name" name="name" type="text" maxlength="32" value="${company.name}"
                                        minlength="2" class="form-control required" placeholder="请填写公司名称">
                             </div>
                             <label class="col-sm-3 control-label"><span class="red">* </span>请填写公司名称</label>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label"><i class="fa fa-user"></i>
+                            <label for="legalPerson" class="col-sm-2 control-label"><i class="fa fa-user"></i>
                                 公司法人</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="legalPerson" name="legalPerson" type="text" maxlength="32"
+                                       value="${company.legalPerson}"
                                        minlength="2" class="form-control required" placeholder="请填写公司法人">
                             </div>
                             <label class="col-sm-3 control-label">请填写公司法人</label>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label"><i class="fa fa-phone"></i>
+                            <label for="tel" class="col-sm-2 control-label"><i class="fa fa-phone"></i>
                                 公司电话</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="tel" name="tel" type="text" maxlength="32" value="${company.tel}"
                                        minlength="2" class="form-control required" placeholder="请填写公司电话">
                             </div>
                             <label class="col-sm-3 control-label"><span class="red">* </span>请填写公司电话</label>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label"><i class="fa fa-fax"></i>
+                            <label for="fax" class="col-sm-2 control-label"><i class="fa fa-fax"></i>
                                 公司传真</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="fax" name="fax" type="text" maxlength="32" value="${company.fax}"
                                        minlength="2" class="form-control required" placeholder="请填写公司传真">
                             </div>
                             <label class="col-sm-3 control-label">请填写公司传真</label>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label"><i class="fa fa-internet-explorer"></i>
+                            <label for="website" class="col-sm-2 control-label"><i class="fa fa-internet-explorer"></i>
                                 公司网址</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="website" name="website" type="text" maxlength="32" value="${company.website}"
                                        minlength="2" class="form-control required" placeholder="请填写公司网址">
                             </div>
                             <label class="col-sm-3 control-label">请填写公司网址</label>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label"><i class="fa fa-location-arrow"></i>
+                            <label for="address" class="col-sm-2 control-label"><i class="fa fa-location-arrow"></i>
                                 公司地址</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="address" name="address" type="text" maxlength="32" value="${company.address}"
                                        minlength="2" class="form-control required" placeholder="请填写公司地址">
                             </div>
                             <label class="col-sm-3 control-label"><span class="red">* </span>请填写公司地址</label>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label"><i class="fa fa-envelope"></i>
+                            <label for="postalCode" class="col-sm-2 control-label"><i class="fa fa-envelope"></i>
                                 邮政编码</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="postalCode" name="postalCode" type="text" maxlength="32"
+                                       value="${company.postalCode}"
                                        minlength="2" class="form-control required" placeholder="请填写邮政编码">
                             </div>
                             <label class="col-sm-3 control-label">请填写邮政编码</label>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label"><i class="fa fa-user"></i>
+                            <label for="contactName" class="col-sm-2 control-label"><i class="fa fa-user"></i>
                                 联系姓名</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="contactName" name="contactName" type="text" maxlength="32"
+                                       value="${company.contactName}"
                                        minlength="2" class="form-control required" placeholder="请填写联系人姓名">
                             </div>
                             <label class="col-sm-3 control-label"><span class="red">* </span>请填写联系人姓名</label>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label"><i class="fa fa-weixin"></i>
+                            <label for="contactTel" class="col-sm-2 control-label"><i class="fa fa-weixin"></i>
                                 联系方式</label>
                             <div class="col-sm-7">
-                                <input id="name" name="name" type="text" maxlength="32"
+                                <input id="contactTel" name="contactTel" type="text" maxlength="32"
+                                       value="${company.contactTel}"
                                        minlength="2" class="form-control required" placeholder="请填写联系方式">
                             </div>
                             <label class="col-sm-3 control-label"><span class="red">* </span>请填写联系人联系方式</label>
@@ -125,16 +133,19 @@
                     </div>
                     <div class=" col-md-4">
                         <p>公司logo</p>
-                        <img src="<%=basePath%>assets/global/img/loading.gif"
-                             style="display: block;width: 50%;height: 50%"/>
+                        <img id="logo-img"
+                             src="http://windyeel.img-cn-shanghai.aliyuncs.com/${company.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
+                             style="display: block;width: 50%;height: 50%"
+                             onerror="nofind(1)"/>
+                        <input type="hidden" id="logo" name="logo" value="${company.logo}">
                         <br>
-                        <button class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
+                        <button id="upload_logo" class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <shiro:hasPermission name="account/editName">
-                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" onclick="severCheck()" class="btn btn-primary">保存</button>
                     </shiro:hasPermission>
                 </div>
             </div>
@@ -145,6 +156,8 @@
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
+    initUploaders_logo("upload_logo", "windyeel", "${staticPath}/", "logo-img", "logo");
+
     //服务器校验
     function severCheck() {
         if (check()) {
@@ -152,7 +165,6 @@
                 success: function (data) {
                     if (data.success) {
                         alert("success");
-                        $('#ship').click()
                     } else {
                         alert("false");
                         alert(data.msg);
@@ -180,77 +192,53 @@
         } else {
             $("#name").val(jQuery.trim($('#name').val()));
         }
-        if ($("#imo").val() == "") {
-            $("#imo").tips({
+        if ($("#tel").val() == "") {
+            $("#tel").tips({
                 side: 2,
                 msg: 'imo号不能为空',
                 bg: '#AE81FF',
                 time: 3
             });
-            $("#imo").focus();
+            $("#tel").focus();
             return false;
         } else {
-            $("#imo").val(jQuery.trim($('#imo').val()));
+            $("#tel").val(jQuery.trim($('#tel').val()));
         }
-        if ($("#shipClass").val() == "") {
-            $("#shipClass").tips({
+        if ($("#address").val() == "") {
+            $("#address").tips({
                 side: 2,
-                msg: 'shipClass不能为空',
+                msg: 'address不能为空',
                 bg: '#AE81FF',
                 time: 3
             });
-            $("#shipClass").focus();
+            $("#address").focus();
             return false;
         } else {
-            $("#shipClass").val(jQuery.trim($('#shipClass').val()));
+            $("#address").val(jQuery.trim($('#address').val()));
         }
-        if ($("#type").val() == "") {
-            $("#type").tips({
+        if ($("#contactName").val() == "") {
+            $("#contactName").tips({
                 side: 2,
-                msg: 'type不能为空',
+                msg: 'contactName不能为空',
                 bg: '#AE81FF',
                 time: 3
             });
-            $("#type").focus();
+            $("#contactName").focus();
             return false;
         } else {
-            $("#type").val(jQuery.trim($('#type').val()));
+            $("#contactName").val(jQuery.trim($('#contactName').val()));
         }
-        if ($("#loa").val() == "") {
-            $("#loa").tips({
+        if ($("#contactTel").val() == "") {
+            $("#contactTel").tips({
                 side: 2,
-                msg: 'loa不能为空',
+                msg: 'contactTel不能为空',
                 bg: '#AE81FF',
                 time: 3
             });
-            $("#loa").focus();
+            $("#contactTel").focus();
             return false;
         } else {
-            $("#loa").val(jQuery.trim($('#loa').val()));
-        }
-        if ($("#draft").val() == "") {
-            $("#draft").tips({
-                side: 2,
-                msg: 'draft不能为空',
-                bg: '#AE81FF',
-                time: 3
-            });
-            $("#draft").focus();
-            return false;
-        } else {
-            $("#draft").val(jQuery.trim($('#draft').val()));
-        }
-        if ($("#beam").val() == "") {
-            $("#beam").tips({
-                side: 2,
-                msg: 'beam不能为空',
-                bg: '#AE81FF',
-                time: 3
-            });
-            $("#beam").focus();
-            return false;
-        } else {
-            $("#beam").val(jQuery.trim($('#beam').val()));
+            $("#contactTel").val(jQuery.trim($('#contactTel').val()));
         }
         return true;
     }
