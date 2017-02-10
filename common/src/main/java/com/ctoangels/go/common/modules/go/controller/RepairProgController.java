@@ -41,7 +41,7 @@ public class RepairProgController extends BaseController {
         int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<RepairProg> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
-            ew.like("name", keyword);
+            ew.like("shipName", keyword);
         ew.addFilter("company_id={0}", companyId);
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         return jsonPage(page);
@@ -69,11 +69,11 @@ public class RepairProgController extends BaseController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/look", method = RequestMethod.GET)
-    public String look(@RequestParam(required = false) Integer id, ModelMap map) {
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairProg repairProg = repairProgService.selectById(id);
         map.put("repairProg", repairProg);
-        return "go/repairProg/look";
+        return "go/repairProg/info";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)

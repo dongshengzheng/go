@@ -8,12 +8,6 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <style>
-    .timeline .timeline-icon {
-        padding: 0;
-        text-align: center;
-        line-height: 80px
-    }
-
     .red {
         color: red;
     }
@@ -21,7 +15,6 @@
     .col-sm-3.control-label {
         text-align: left;
     }
-
 </style>
 <go:navigater path="company"></go:navigater>
 <form class="form-horizontal" action="company/edit" method="post"
@@ -38,6 +31,7 @@
         <div class="col-md-12">
             <div class="portlet light portlet-fit bordered">
                 <div class="portlet-title tabbable-line">
+                    <div id="bootstrap_alerts_demo"></div>
                     <div class="caption caption-md">
                         <i class="fa fa-info"></i>
                         <span class="caption-subject bold font-green uppercase"> 公司资料</span>
@@ -131,7 +125,7 @@
                             <label class="col-sm-3 control-label"><span class="red">* </span>请填写联系人联系方式</label>
                         </div>
                     </div>
-                    <div class=" col-md-4">
+                    <div class="col-md-4" style="border-left: 1px dotted lightgrey;">
                         <p>公司logo</p>
                         <img id="logo-img"
                              src="http://windyeel.img-cn-shanghai.aliyuncs.com/${company.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
@@ -142,7 +136,7 @@
                         <button id="upload_logo" class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="text-align: center">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <shiro:hasPermission name="account/editName">
                         <button type="button" onclick="severCheck()" class="btn btn-primary">保存</button>
@@ -164,14 +158,43 @@
             $("#defForm").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
-                        alert("success");
+                        App.alert({
+                            container: "#bootstrap_alerts_demo",
+                            close: true,
+                            icon: 'fa fa-check',
+                            place: "append",
+                            message: "success",
+                            type: 'success',
+                            reset: true,
+                            focus: true,
+                            closeInSeconds: 10,
+                        })
                     } else {
-                        alert("false");
-                        alert(data.msg);
+                        App.alert({
+                            container: "#bootstrap_alerts_demo",
+                            close: true,
+                            icon: 'fa fa-warning',
+                            place: "append",
+                            message: "failure",
+                            type: 'danger',
+                            reset: true,
+                            focus: true,
+                            closeInSeconds: 10,
+                        })
                     }
                 },
                 error: function () {
-                    alert("error");
+                    App.alert({
+                        container: "#bootstrap_alerts_demo",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "error",
+                        type: 'warning',
+                        reset: true,
+                        focus: true,
+                        closeInSeconds: 10,
+                    })
                     return;
                 }
             });
