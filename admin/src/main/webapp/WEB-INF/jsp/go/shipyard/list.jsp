@@ -38,6 +38,7 @@
                         <th>区域</th>
                         <th>位置</th>
                         <th>联系电话</th>
+                        <th>邮箱</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -92,6 +93,9 @@
                 {
                     "data": "tel",
                 },
+                {
+                    "data": "email",
+                },
 //                {
 //                    "data": "createDate", "type": "date",
 //                    "render": function (data) {
@@ -102,7 +106,7 @@
             ],
 
             "columnDefs": [{
-                "targets": 7,
+                "targets": 8,
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="shipyard/look">

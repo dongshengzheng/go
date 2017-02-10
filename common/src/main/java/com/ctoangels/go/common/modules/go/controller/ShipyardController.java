@@ -102,8 +102,6 @@ public class ShipyardController extends BaseController {
         List<GeneralDetail> majors =generalDetailService.selectList(ew6);
         map.put("majors",majors);
 
-
-
         //查看设施信息的中的起重机信息
         EntityWrapper<FacilityDetail> ew = getEntityWrapper();
         ew.addFilter("faci_category={0} and shipyard_id={1}", "Cranes Details",shipyard.getId());
@@ -183,5 +181,7 @@ public class ShipyardController extends BaseController {
         }
         return jsonObject;
     }
+
+
 
 }

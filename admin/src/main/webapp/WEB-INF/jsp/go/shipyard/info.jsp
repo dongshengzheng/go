@@ -10,7 +10,6 @@
 <go:navigater path="yard"></go:navigater>
 <style>
     .col-sm-6 ,.col-sm-12{
-        padding-left: 0px;
         font-size: 10px;
     }
     .form-group{
@@ -26,9 +25,11 @@
     #wharfDetail_paginate,#berthDetail_paginate{
         display: none;
     }
+    #line1{  border-bottom:solid 2px #337ab7; height:1px;margin-top: 10px  }
+    #line2{ border-bottom:solid 2px #337ab7; height:1px;}
 </style>
 <div><img src="/img/top.png"/><span>查看船厂信息</span></div>
-<div style="border-bottom:solid 2px #337ab7; height:1px;margin-top: 10px"></div>
+<div id="line1"></div>
 <div style="margin-bottom: 30px;margin-top: 3px">
     <div style="display:inline-block;width: 35%;margin-right: 10px">
         <img style="width:100%; height: 200px" src="/img/ship.jpg">
@@ -51,40 +52,40 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">国家：${shipyard.country}</label>
+                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">国家：${shipyard.country}</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">区域：${shipyard.area}</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">位置：${shipyard.location}</label>
-                </div>
-                <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">地址：${shipyard.address}</label>
+                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">区域：${shipyard.area}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">经度：${shipyard.longitude}</label>
+                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">位置：${shipyard.location}</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">地址：${shipyard.address}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">经度：${shipyard.longitude}</label>
 
                 </div>
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">纬度：${shipyard.latitude}</label>
+                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">纬度：${shipyard.latitude}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">电话：${shipyard.tel}</label>
+                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">电话：${shipyard.tel}</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">电子邮件：${shipyard.email}</label>
+                    <label  class="col-sm-12 control-label"style="padding-left: 0px;">电子邮件：${shipyard.email}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label">网站：${shipyard.website}</label>
+                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">网站：${shipyard.website}</label>
                 </div>
             </div>
         </div>
@@ -101,7 +102,7 @@
     </ul>
 </div>
 
-<div  style="border-bottom:solid 2px #337ab7; height:1px;"></div>
+<div id="line2"></div>
 <div class="portlet light bordered" style="padding: 0px;">
     <div class="portlet-body">
         <div class="tabbable tabbable-tabdrop">
@@ -208,7 +209,8 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade active in" id="tab_1_1">
-                                <div class="portlet-body">
+                                <div>
+                                    <div class="portlet-body">
                                         <table class="table table-hover" id="wharfDetail">
                                             <thead class="dock">
                                             <tr >
@@ -230,6 +232,7 @@
                                             </thead>
 
                                         </table>
+                                </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab_1_2">
