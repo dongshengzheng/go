@@ -2,6 +2,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -19,6 +20,32 @@
         cursor: pointer;
     }
 
+    .table-striped > tbody > tr.details-control-child:nth-of-type(odd) {
+        background-color: white;
+    }
+
+    .table-striped > tbody > tr.details-control-child:nth-of-type(even) {
+        background-color: #fbfcfd;
+    }
+
+    .table-checkable tr.details-control-child > td:first-child {
+        text-align: right;
+        padding-right: 15px;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #d2f7ff;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(even) {
+        background-color: #bfe3ff;
+    }
+
+    .addRow {
+        background-color: lightseagreen;
+        border: none;
+        color: white;
+    }
 
 </style>
 <go:navigater path="account"></go:navigater>
@@ -130,10 +157,11 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
+                                <%--通用服务开始--%>
                                 <div class="portlet box blue-dark">
                                     <div class="portlet-title" style="background-color: #00aaaa">
                                         <div class="caption">
-                                            <i class="fa fa-cog"></i>通用服务
+                                            <i class="fa fa-cog"></i>坞修服务
                                         </div>
                                         <div class="tools">
                                             <a href="javascript:;" class="collapse"> </a>
@@ -141,65 +169,56 @@
                                     </div>
                                     <div class="portlet-body">
                                         <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                               id="default_table2">
+                                               id="table1">
                                             <thead>
                                             <tr>
-                                                <th>&nbsp;</th>
-                                                <th>项目号</th>
-                                                <th>维修内容</th>
-                                                <th>单位</th>
-                                                <th>数量</th>
-                                                <th>备注</th>
-                                                <th>操作</th>
+                                                <th style="width:10%">&nbsp;</th>
+                                                <th style="width:15%">项目号</th>
+                                                <th style="width:35%">维修内容</th>
+                                                <th style="width:10%">单位</th>
+                                                <th style="width:10%">数量</th>
+                                                <th style="width:10%">备注</th>
+                                                <th style="width:10%">操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>1.1</td>
-                                                <td>码头费</td>
-                                                <td>天</td>
-                                                <td>20</td>
-                                                <td>备注</td>
-                                                <td>操作</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>1.2</td>
-                                                <td>供电费</td>
-                                                <td>天</td>
-                                                <td>20</td>
-                                                <td>备注</td>
-                                                <td>
-                                                    <img src="<%=basePath%>static/img/details_open.png" class="details-control">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>1.2.1</td>
-                                                <td>接拆电缆</td>
-                                                <td>天</td>
-                                                <td>20</td>
-                                                <td>备注</td>
-                                                <td>操作</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>1.2.2</td>
-                                                <td>租用频率转换器</td>
-                                                <td>天</td>
-                                                <td>20</td>
-                                                <td>备注</td>
-                                                <td>操作</td>
-                                            </tr>
+                                            <c:forEach items="${type1}" var="item">
+                                                <c:if test="${item.parentid!=0}">
+                                                    <tr class="details-control-child" parent-id="${item.parentid}" style="display: none">
+                                                </c:if>
+                                                <td><c:if test="${item.status==0}"><input type="checkbox"> </c:if></td>
+                                                <td>${item.code}</td>
+                                                <td>${item.content}</td>
+                                                <td>${item.unit}</td>
+                                                <td><c:if test="${item.status==0}"><input> </c:if></td>
+                                                <td>添加备注</td>
+                                                <c:if test="${item.status==1}">
+                                                    <td class="details-control" data-id="${item.id}">
+                                                        <img src="<%=basePath%>static/img/details_open.png"
+                                                             class="open-png">
+                                                        <img src="<%=basePath%>static/img/details_close.png"
+                                                             class="close-png"
+                                                             style="display: none">
+                                                    </td>
+                                                </c:if>
+                                                <c:if test="${item.status==0}">
+                                                    <td>
+                                                        操作
+                                                    </td>
+                                                </c:if>
+                                                </tr>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                                <%--通用服务结束--%>
+
+                                <%--坞修服务开始--%>
                                 <div class="portlet box blue-dark">
                                     <div class="portlet-title" style="background-color: #00aaaa">
                                         <div class="caption">
-                                            <i class="fa fa-cog"></i>通用服务
+                                            <i class="fa fa-cog"></i>坞修服务
                                         </div>
                                         <div class="tools">
                                             <a href="javascript:;" class="collapse"> </a>
@@ -207,61 +226,52 @@
                                     </div>
                                     <div class="portlet-body">
                                         <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                               id="default_table">
+                                               id="table2">
                                             <thead>
                                             <tr>
-                                                <th>&nbsp;</th>
-                                                <th>项目号</th>
-                                                <th>维修内容</th>
-                                                <th>单位</th>
-                                                <th>数量</th>
-                                                <th>备注</th>
-                                                <th>操作</th>
+                                                <th style="width:10%">&nbsp;</th>
+                                                <th style="width:15%">项目号</th>
+                                                <th style="width:35%">维修内容</th>
+                                                <th style="width:10%">单位</th>
+                                                <th style="width:10%">数量</th>
+                                                <th style="width:10%">备注</th>
+                                                <th style="width:10%">操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>1.1</td>
-                                                <td>码头费</td>
-                                                <td>天</td>
-                                                <td>20</td>
-                                                <td>备注</td>
-                                                <td>操作</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>1.2</td>
-                                                <td>供电费</td>
-                                                <td>天</td>
-                                                <td>20</td>
-                                                <td>备注</td>
-                                                <td>
-                                                    <img src="<%=basePath%>static/img/details_open.png" class="details-control">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>1.2.1</td>
-                                                <td>接拆电缆</td>
-                                                <td>天</td>
-                                                <td>20</td>
-                                                <td>备注</td>
-                                                <td>操作</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>1.2.2</td>
-                                                <td>租用频率转换器</td>
-                                                <td>天</td>
-                                                <td>20</td>
-                                                <td>备注</td>
-                                                <td>操作</td>
-                                            </tr>
+                                            <c:forEach items="${type2}" var="item">
+                                                <c:if test="${item.parentid!=0}">
+                                                    <tr class="details-control-child" parent-id="${item.parentid}" style="display: none">
+                                                </c:if>
+                                                <td><c:if test="${item.status==0}"><input type="checkbox"> </c:if></td>
+                                                <td>${item.code}</td>
+                                                <td>${item.content}</td>
+                                                <td>${item.unit}</td>
+                                                <td><c:if test="${item.status==0}"><input> </c:if></td>
+                                                <td><c:if test="${item.parentid==0}"><a
+                                                        class="btn red btn-outline sbold" data-toggle="modal"
+                                                        href="#responsive"> 添加备注 </a></c:if></td>
+                                                <c:if test="${item.status==1}">
+                                                    <td class="details-control" data-id="${item.id}">
+                                                        <img src="<%=basePath%>static/img/details_open.png"
+                                                             class="open-png">
+                                                        <img src="<%=basePath%>static/img/details_close.png"
+                                                             class="close-png"
+                                                             style="display: none">
+                                                    </td>
+                                                </c:if>
+                                                <c:if test="${item.status==0}">
+                                                    <td>
+                                                        <button type="button" class="addRow">+</button>
+                                                    </td>
+                                                </c:if>
+                                                </tr>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                                <%--坞修服务结束--%>
                             </div>
                         </div>
                     </div>
@@ -270,6 +280,66 @@
         </div>
     </div>
 </form>
+
+<div id="responsive" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">添加备注</h4>
+            </div>
+            <div class="modal-body">
+                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea class="form-control col-md-12" rows="10" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
+                <button type="button" class="btn green">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--DOC: Aplly "modal-cached" class after "modal" class to enable ajax content caching-->
+<div class="modal fade" id="ajax" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="../assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                <span> &nbsp;&nbsp;Loading... </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
+
+    <%--行的展开与折叠--%>
+    $('td.details-control').on('click', function () {
+        var parentId = $(this).attr('data-id');
+        var ele = $("tr.details-control-child[parent-id=" + parentId + "]");
+        ele.toggle();
+        $(this).find('img').toggle();
+        if ($(this).find('.close-png').css('display') == 'none') {
+            ele.each(function () {
+                $(this).find('.close-png').each(function () {
+                    if ($(this).css('display') == 'inline') {
+                        $(this).parent().click();
+                    }
+                })
+            })
+        }
+    })
+
+    <%--复制一行--%>
+    $('.addRow').on('click', function () {
+        var row = $(this).parent().parent();
+        row.after(row.clone());
+    })
 
 </script>
