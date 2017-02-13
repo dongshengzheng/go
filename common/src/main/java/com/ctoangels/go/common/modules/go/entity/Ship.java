@@ -74,6 +74,12 @@ public class Ship implements Serializable {
 	/** 船长 */
 	private Integer loa;
 
+	/** 坞检时间 */
+	private String dd;
+
+	/** 特检时间 */
+	private String ss;
+
 	/** 主机：厂家 */
 	@TableField(value = "me_maker")
 	private String meMaker;
@@ -455,4 +461,19 @@ public class Ship implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public String getDd() {
+		return dd;
+	}
+
+	public void setDd(String dd) {
+		this.dd = dd;
+	}
+
+	public String getSs() {
+		return ss;
+	}
+
+	public void setSs(String ss) {
+		this.ss = ss;
+	}
 }

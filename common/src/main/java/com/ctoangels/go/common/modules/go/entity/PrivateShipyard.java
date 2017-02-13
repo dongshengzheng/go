@@ -24,6 +24,8 @@ public class PrivateShipyard implements Serializable {
 	@TableId(type = IdType.AUTO)
 	private Integer id;
 
+	private String logo;
+
 	/**  */
 	private String name;
 
@@ -45,6 +47,10 @@ public class PrivateShipyard implements Serializable {
 
 	/** 邮箱 */
 	private String email;
+
+    /** 创建时间 */
+    @TableField(value = "contact_name")
+    private String contactName;
 
 	/** 创建时间 */
 	@TableField(value = "create_date")
@@ -195,4 +201,19 @@ public class PrivateShipyard implements Serializable {
 		this.shipyardId = shipyardId;
 	}
 
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 }

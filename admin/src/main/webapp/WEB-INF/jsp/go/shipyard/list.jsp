@@ -35,9 +35,10 @@
                         <th>船厂名称</th>
                         <th>集团公司</th>
                         <th>国家</th>
-                        <th>区域</th>
+                        <th>城市</th>
                         <th>位置</th>
                         <th>联系电话</th>
+                        <th>联系人</th>
                         <th>邮箱</th>
                         <th>操作</th>
                     </tr>
@@ -85,13 +86,16 @@
                     "data": "country",
                 },
                 {
-                    "data": "area",
+                    "data": "city",
                 },
                 {
                     "data": "location",
                 },
                 {
                     "data": "tel",
+                },
+                {
+                    "data": "contactName",
                 },
                 {
                     "data": "email",
@@ -106,7 +110,7 @@
             ],
 
             "columnDefs": [{
-                "targets": 8,
+                "targets": 9,
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="shipyard/look">

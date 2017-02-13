@@ -76,4 +76,21 @@
             alter table t_berth_detail CHANGE protocol draft int(11);
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-005">
+        <sql>
+            alter table t_private_shipyard add contact_name varchar(10)
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-006">
+        <sql>
+            alter table t_ship add dd varchar(45);
+            alter table t_ship add ss varchar(45);
+            alter table t_private_shipyard modify column contact_name varchar(45);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-007">
+        <sql>
+            alter table t_private_shipyard add logo varchar(100);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
