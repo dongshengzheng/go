@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.Company;
+import com.ctoangels.go.common.modules.go.entity.RepairModelItem;
 import com.ctoangels.go.common.modules.go.entity.RepairProg;
 import com.ctoangels.go.common.modules.go.service.ICompanyService;
+import com.ctoangels.go.common.modules.go.service.IRepairModelItemService;
 import com.ctoangels.go.common.modules.go.service.IRepairProgService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * RepairProg 控制层
  */
@@ -26,6 +30,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RepairProgController extends BaseController {
     @Autowired
     private IRepairProgService repairProgService;
+
+    @Autowired
+    private IRepairModelItemService repairModelItemService;
 
     @Autowired
     private ICompanyService companyService;
@@ -41,14 +48,22 @@ public class RepairProgController extends BaseController {
         int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<RepairProg> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
-            ew.like("name", keyword);
+            ew.like("shipName", keyword);
         ew.addFilter("company_id={0}", companyId);
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         return jsonPage(page);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String add() {
+    public String add(ModelMap map) {
+        RepairModelItem repairModelItem = new RepairModelItem();
+        repairModelItem.setRepairModelId(1);
+        repairModelItem.setCatagory("通用服务");
+        List<RepairModelItem> type1List = repairModelItemService.selectList(new EntityWrapper<>(repairModelItem));
+        repairModelItem.setCatagory("坞修服务");
+        List<RepairModelItem> type1List2 = repairModelItemService.selectList(new EntityWrapper<>(repairModelItem));
+        map.put("type1", type1List);
+        map.put("type2", type1List2);
         return "go/repairProg/add";
     }
 
@@ -69,11 +84,11 @@ public class RepairProgController extends BaseController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/look", method = RequestMethod.GET)
-    public String look(@RequestParam(required = false) Integer id, ModelMap map) {
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairProg repairProg = repairProgService.selectById(id);
         map.put("repairProg", repairProg);
-        return "go/repairProg/look";
+        return "go/repairProg/info";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
