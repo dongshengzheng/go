@@ -171,3 +171,8 @@
     }
 
 </script>
+<script>
+    if(${mes}){
+        alert("没有该船厂的详细信息");
+    }
+</script>

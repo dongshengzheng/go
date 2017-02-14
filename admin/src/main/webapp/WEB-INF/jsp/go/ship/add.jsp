@@ -124,7 +124,7 @@
                                             <div class="col-sm-6">
                                                 <input id="loa" name="loa" type="text" maxlength="32"
                                                        class="form-control required"
-                                                       placeholder="请填写船长姓名">
+                                                       placeholder="请填写船长">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
@@ -174,6 +174,30 @@
                                                        placeholder="请填写总吨">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨)</label>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="dd" class="col-sm-3 control-label">坞检</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <input id="dd" name="dd" type="text"
+                                                           class="form-control date-picker"
+                                                           placeholder="请选择坞检日期">
+                                                    <span class="input-group-addon">
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </span></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="ss" class="col-sm-3 control-label">特检</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <input id="ss" name="ss" type="text"
+                                                           class="form-control date-picker"
+                                                           placeholder="请选择特检日期">
+                                                    <span class="input-group-addon">
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </span></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

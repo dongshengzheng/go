@@ -15,11 +15,26 @@
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=sH45FS0Pd1v58SSDcltpILGWyLkSn959"></script>
 
+
+
 <div style="margin-bottom: 10px"><img src="/img/info.png">&nbsp;&nbsp;&nbsp;<span>公司信息</span></div>
 <c:if test="${! empty company}" var="cp">
     <div id="up" style="margin-bottom:10px"><img id="img" src="/img/ship.jpg"/></div>
     <div id="down" style="margin-top:20px;height: 300px">
+<%--
         <div id="allmap" style="float:left;margin-right:20px"></div>
+--%>
+        <div class="span11" style="float: left">
+            <form method="post" id="geocoding_form">
+                <label for="address">Address:</label>
+                <div class="input">
+                    <input type="submit" class="btn" value="Search" />
+                </div>
+            </form>
+            <div class="popin">
+                <div id="map"></div>
+            </div>
+        </div>
         <div style="float:left">
             <div class="com-info"><span>${company.name}</span></div>
             <div class="com-info"><span><fmt:message key="company_legal_person"/>：${company.legalPerson}</span></div>
@@ -35,6 +50,7 @@
 <c:if test="${!cp }">
 
 </c:if>
+<%--
 <script type="text/javascript">
     // 百度地图API功能
     var myGeo = new BMap.Geocoder();
@@ -50,4 +66,21 @@
     map.enableScrollWheelZoom();
     var opts = {type: BMAP_NAVIGATION_CONTROL_LARGE};
     map.addControl(new BMap.NavigationControl(opts));
+</script>--%>
+<script>
+    $(document).ready(function() {
+        GMaps.geocode({
+            address: $('#address').html(),
+            callback: function (results, status) {
+                if (status == 'OK') {
+                    var latlng = results[0].geometry.location;
+                    map.setCenter(latlng.lat(), latlng.lng());
+                    map.addMarker({
+                        lat: latlng.lat(),
+                        lng: latlng.lng()
+                    });
+                }
+            }
+        });
+    });
 </script>

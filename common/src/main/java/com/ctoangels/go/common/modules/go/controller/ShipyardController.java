@@ -68,6 +68,7 @@ public class ShipyardController extends BaseController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
     public JSONObject addComplete(PrivateShipyard privateShipyard) {
         JSONObject jsonObject = new JSONObject();
         int companyId=getCurrentUser().getCompanyId();
@@ -91,6 +92,13 @@ public class ShipyardController extends BaseController {
         EntityWrapper<Shipyard> ew3 = getEntityWrapper();
         ew3.addFilter("name={0}", privateShipyard.getName());
         Shipyard shipyard = shipyardService.selectOne(ew3);
+
+        //判断数据库里面是否有船东写的船厂
+        if(shipyard==null){
+            map.put("mes",true);
+            return "go/shipyard/list";
+        }
+
         map.put("shipyard", shipyard);
 
         //查看一般信息中的Convemsion 项目
@@ -130,6 +138,9 @@ public class ShipyardController extends BaseController {
         map.put("others",others);
         return "go/shipyard/info";
     }
+
+
+
 
     //ajax查看码头信息
     @RequestMapping(value = "/wharf")

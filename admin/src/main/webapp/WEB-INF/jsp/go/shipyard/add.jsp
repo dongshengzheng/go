@@ -23,7 +23,7 @@
 
 </style>
 <go:navigater path="shipyard"></go:navigater>
-<form action="shipyard/add" id="form_sample_1" class="form-horizontal" method="post">
+<form action="shipyard/add" id="defForm" class="form-horizontal" method="post">
     <div class="form-body">
         <div class="col-sm-6">
             <div class="form-group">
@@ -121,7 +121,7 @@
         </div>
     </div>
 </form>
-<a id="shipyard" href="shipyard" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>'
+<a id="shipyard" href="shipyard" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
@@ -130,7 +130,7 @@
     //服务器校验
     function severCheck() {
         if (check()) {
-            $("#form_sample_1").ajaxSubmit({
+            $("#defForm").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
                         alert("success");
