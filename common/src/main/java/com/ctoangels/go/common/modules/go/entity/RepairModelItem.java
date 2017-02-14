@@ -111,6 +111,8 @@ public class RepairModelItem implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    private Integer children;
+
 
     public Integer getId() {
         return this.id;
@@ -246,5 +248,13 @@ public class RepairModelItem implements Serializable {
 
     public void setParamList(List<Param> paramList) {
         this.paramList = paramList;
+    }
+
+    public Integer getChildren() {
+        return children;
+    }
+
+    public void setChildren(Integer children) {
+        this.children = children;
     }
 }

@@ -195,4 +195,9 @@
 
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-010">
+        <sql>
+            alter table t_repair_model_item add children INT NULL COMMENT '判断改项是否有孩子';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
