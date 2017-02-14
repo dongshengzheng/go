@@ -4,7 +4,7 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, `name`, group_company AS groupCompany, country, city, `location`, tel, email, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, company_id AS companyId, shipyard_id AS shipyardId
+		id, logo, `name`, group_company AS groupCompany, country, city, `location`, tel,  contact_name AS contactName, email, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, company_id AS companyId, shipyard_id AS shipyardId
 	</sql>
 
 </mapper>

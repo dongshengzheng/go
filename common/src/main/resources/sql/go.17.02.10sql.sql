@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-02-08 10:53:01
+Date: 2017-02-10 17:17:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,6 +45,12 @@ INSERT INTO `databasechangelog` VALUES ('15950097942-003', 'WangShun', 'src/main
 INSERT INTO `databasechangelog` VALUES ('15950097942-004', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-06 09:44:27', '4', 'EXECUTED', '7:6f50631b2628966e7876addf59d1d002', 'sql', '', null, '3.5.3', null, null, '6345467392');
 INSERT INTO `databasechangelog` VALUES ('15950097942-005', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-06 09:44:27', '5', 'EXECUTED', '7:e2ff4cb0eb561d55445a0198ee2af072', 'sql', '', null, '3.5.3', null, null, '6345467392');
 INSERT INTO `databasechangelog` VALUES ('17317309132-001', 'LuZhen', 'src/main/resources/changelog.xml', '2017-02-07 15:31:24', '6', 'EXECUTED', '7:912a34a33ff4db5522b5132c1d497138', 'sql', '', null, '3.5.3', null, null, '6452684121');
+INSERT INTO `databasechangelog` VALUES ('17317309132-002', 'LuZhen', 'src/main/resources/changelog.xml', '2017-02-08 15:49:01', '7', 'EXECUTED', '7:b6a7f328311cb3dd4fbb072fba56a171', 'sql', '', null, '3.5.3', null, null, '6540141255');
+INSERT INTO `databasechangelog` VALUES ('15950097942-006', 'WangShun', 'src/main/resources/changelog.xml', '2017-02-09 12:18:23', '8', 'EXECUTED', '7:07c1731b9d0f95987ca721fbe9068d96', 'sql', '', null, '3.5.3', null, null, '6613902277');
+INSERT INTO `databasechangelog` VALUES ('17317309132-003', 'LuZhen', 'src/main/resources/changelog.xml', '2017-02-09 12:28:18', '9', 'EXECUTED', '7:94c468585077cc538a533d06e9904c12', 'sql', '', null, '3.5.3', null, null, '6614497679');
+INSERT INTO `databasechangelog` VALUES ('17317309132-005', 'LuZhen', 'src/main/resources/changelog.xml', '2017-02-10 12:05:22', '10', 'EXECUTED', '7:a1b142e2823af82a8bbe7bf1cb9868ac', 'sql', '', null, '3.5.3', null, null, '6699521249');
+INSERT INTO `databasechangelog` VALUES ('17317309132-006', 'LuZhen', 'src/main/resources/changelog.xml', '2017-02-10 14:17:45', '11', 'EXECUTED', '7:cf18da8d347f01233de3f54bda722bfb', 'sql', '', null, '3.5.3', null, null, '6707464354');
+INSERT INTO `databasechangelog` VALUES ('17317309132-007', 'LuZhen', 'src/main/resources/changelog.xml', '2017-02-10 16:28:11', '12', 'EXECUTED', '7:45ef4080c14b2097d8379b5898951868', 'sql', '', null, '3.5.3', null, null, '6715290391');
 
 -- ----------------------------
 -- Table structure for databasechangeloglock
@@ -139,7 +145,7 @@ INSERT INTO `sys_menu` VALUES ('103', '船厂信息', 'shipyard', '101', '12', n
 INSERT INTO `sys_menu` VALUES ('104', '公司信息', 'company', '101', '13', null, '2', '1', '公司信息', '0');
 INSERT INTO `sys_menu` VALUES ('105', '维修进度汇报', 'progress', '93', '32', null, '2', '1', '维修进度汇报', '0');
 INSERT INTO `sys_menu` VALUES ('106', '账号设置', 'account', '1', '45', null, '2', '1', '账号设置', '0');
-INSERT INTO `sys_menu` VALUES ('107', '公司资料', 'archiv', '1', '46', null, '2', '1', '公司资料', '0');
+INSERT INTO `sys_menu` VALUES ('107', '公司资料', 'company/edit', '1', '46', null, '2', '1', '公司资料', '0');
 INSERT INTO `sys_menu` VALUES ('108', '维修工程单', '#', '0', '20', 'http://windyeel.oss-cn-shanghai.aliyuncs.com/go/sys/nav_20.png', '1', '1', '维修工程单', '0');
 INSERT INTO `sys_menu` VALUES ('109', '维修工程单', 'repairlist', '108', '21', null, '2', '1', '维修工程单', '0');
 INSERT INTO `sys_menu` VALUES ('110', '工程单询价', 'inquiry', '108', '22', null, '2', '1', '工程单询价', '0');
@@ -254,7 +260,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'dd94709528bb1c83d08f3088d4043f4742891f4f', 'admin', '2017-01-20 10:34:39', '0:0:0:0:0:0:0:1', '0', '123', '1234', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-08 10:52:14', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', '1', '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
+INSERT INTO `sys_user` VALUES ('3', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', 'luzhen', '2017-02-10 16:41:40', null, null, null, '601590910@qq.com', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', '1', '1', '2017-02-06 09:37:23', '724defcb1555caef02f730ea71a663af');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -281,7 +287,7 @@ CREATE TABLE `t_berth_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '泊位信息id',
   `shipyard_id` int(11) DEFAULT NULL COMMENT '船厂id',
   `loa` int(11) DEFAULT NULL COMMENT '总长',
-  `protocol` int(11) DEFAULT NULL COMMENT '草案',
+  `draft` int(11) DEFAULT NULL,
   `capacity` int(11) DEFAULT NULL COMMENT '能力',
   `cranes` varchar(45) DEFAULT NULL COMMENT '起重机',
   `create_date` date DEFAULT NULL COMMENT '创建时间',
@@ -290,11 +296,15 @@ CREATE TABLE `t_berth_detail` (
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改者',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_berth_detail
 -- ----------------------------
+INSERT INTO `t_berth_detail` VALUES ('1', '2', '221', '10', '100000', '32TX1', null, null, null, null, '0');
+INSERT INTO `t_berth_detail` VALUES ('2', '2', '264', '10', '150000', '40TX2', null, null, null, null, '0');
+INSERT INTO `t_berth_detail` VALUES ('3', '2', '200', '7', '100000', '32Tx1', null, null, null, null, '0');
+INSERT INTO `t_berth_detail` VALUES ('4', '2', '204', '10', '80000', '40TX1,32TX1', null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_company
@@ -323,7 +333,7 @@ CREATE TABLE `t_company` (
 -- ----------------------------
 -- Records of t_company
 -- ----------------------------
-INSERT INTO `t_company` VALUES ('1', '上海东曦船务有限公司', '刘小姐', '023-68100000', '021-65426650', 'http://www.cosic.com.cn', '上海浦东新区陆家嘴假日酒店', '2010000', '张小姐', '13600001234', null, null, null, null, null, '0');
+INSERT INTO `t_company` VALUES ('1', '上海东曦船务有限公司', '刘小姐', '023-68100000', '021-65426650', 'http://www.cosic.com.cn', '上海浦东新区陆家嘴假日酒店', '2010000', '张小姐', '13600001234', 'go/upload-images/W87H86yGyE.jpg', null, '', null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_dict
@@ -391,11 +401,20 @@ CREATE TABLE `t_facility_detail` (
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_facility_detail
 -- ----------------------------
+INSERT INTO `t_facility_detail` VALUES ('1', '2', 'Gantry crane', '600', '', '1', 'Cranes Details', null, null, null, null, '0');
+INSERT INTO `t_facility_detail` VALUES ('2', '2', 'Floating crane', '150', null, '2', 'Cranes Details', null, null, null, null, '0');
+INSERT INTO `t_facility_detail` VALUES ('3', '2', 'Floating crane', '63', null, '1', 'Cranes Details', null, null, null, null, '0');
+INSERT INTO `t_facility_detail` VALUES ('4', '2', 'Floating crane', '60', null, '1', 'Cranes Details', null, null, null, null, '0');
+INSERT INTO `t_facility_detail` VALUES ('5', '2', 'Floating crane', '50', null, '1', 'Cranes Details', null, null, null, null, '0');
+INSERT INTO `t_facility_detail` VALUES ('6', '2', 'Mobile crane', '30', null, '2', 'Cranes Details', null, null, null, null, '0');
+INSERT INTO `t_facility_detail` VALUES ('7', '2', null, '4600', null, '1', 'Tugboats Details', null, null, null, null, '0');
+INSERT INTO `t_facility_detail` VALUES ('8', '2', null, '4000', null, '2', 'Tugboats Details', null, null, null, null, '0');
+INSERT INTO `t_facility_detail` VALUES ('9', '2', 'Cherry Picker', null, '40sets', null, 'Others', null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_general_detail
@@ -412,11 +431,62 @@ CREATE TABLE `t_general_detail` (
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_general_detail
 -- ----------------------------
+INSERT INTO `t_general_detail` VALUES ('1', '2', 'Bulker', 'Convemsion Projects', null, null, null, null, '0');
+INSERT INTO `t_general_detail` VALUES ('2', '2', 'Container', 'Convemsion Projects', null, null, null, null, '0');
+INSERT INTO `t_general_detail` VALUES ('3', '2', 'Tanker', 'Convemsion Projects', null, null, null, null, '0');
+INSERT INTO `t_general_detail` VALUES ('4', '2', 'Gas Carrier', 'Repairing Projects', null, null, null, null, '0');
+INSERT INTO `t_general_detail` VALUES ('5', '2', 'Offshore', 'Repairing Projects', null, null, null, null, '0');
+INSERT INTO `t_general_detail` VALUES ('6', '2', 'Cruise', 'Repairing Projects', null, null, null, null, '0');
+INSERT INTO `t_general_detail` VALUES ('7', '2', 'Other', 'Major Clients', null, null, null, null, '0');
+INSERT INTO `t_general_detail` VALUES ('8', '2', 'Offshore', 'Major Clients', null, null, null, null, '0');
+INSERT INTO `t_general_detail` VALUES ('9', '2', 'BW Offshore', 'Major Clients', null, null, null, null, '0');
+
+-- ----------------------------
+-- Table structure for t_private_shipyard
+-- ----------------------------
+DROP TABLE IF EXISTS `t_private_shipyard`;
+CREATE TABLE `t_private_shipyard` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '船东关联的船厂的id',
+  `name` varchar(45) DEFAULT NULL,
+  `group_company` varchar(45) DEFAULT NULL COMMENT '集团公司',
+  `country` varchar(45) DEFAULT NULL COMMENT '国家',
+  `city` varchar(45) DEFAULT NULL COMMENT '城市',
+  `location` varchar(45) DEFAULT NULL COMMENT '位置',
+  `tel` varchar(45) DEFAULT NULL COMMENT '电话',
+  `email` varchar(45) DEFAULT NULL COMMENT '邮箱',
+  `create_date` date DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+  `update_date` date DEFAULT NULL COMMENT '修改时间',
+  `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+  `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+  `company_id` int(11) DEFAULT NULL COMMENT '公司id',
+  `shipyard_id` int(11) DEFAULT NULL COMMENT '船厂的id',
+  `contact_name` varchar(45) DEFAULT NULL,
+  `logo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_private_shipyard
+-- ----------------------------
+INSERT INTO `t_private_shipyard` VALUES ('1', '	COSCO DaLian', 'COSCO', '中国', '辽宁沈阳', null, null, null, null, null, null, null, '0', '1', '1', '张三', null);
+INSERT INTO `t_private_shipyard` VALUES ('2', 'COSCO(Nantong) Shipyard Co.,Ltd', 'COSCO	', 'China', 'Central China', 'Nantong,Jiangsu Province', '(86)-21-58600111', '601590910@qq.com', null, null, null, null, '0', '1', '2', 'zhenLu', null);
+INSERT INTO `t_private_shipyard` VALUES ('3', '上海 船务', null, null, null, null, null, null, null, null, null, null, '1', '1', null, '李四', null);
+INSERT INTO `t_private_shipyard` VALUES ('4', '岙洋船务', '中远', 'China', '上海', '上海', '131313131', 'luzhen', null, null, null, null, '1', '1', null, 'luzhen', null);
+INSERT INTO `t_private_shipyard` VALUES ('5', 'xxx', '中远', 'China', '', '', '17317309132', 'luzhen', null, null, null, null, '1', '1', null, 'luzhen', null);
+INSERT INTO `t_private_shipyard` VALUES ('6', 'xxx', '中远', 'China', '', '', '17317309132', 'luzhen', null, null, null, null, '1', '1', null, 'luzhen', null);
+INSERT INTO `t_private_shipyard` VALUES ('7', '岙洋船务', '中远', 'China', '', '', '17317309132', 'luzhen', null, null, null, null, '1', '1', null, 'luzhen', null);
+INSERT INTO `t_private_shipyard` VALUES ('8', '岙洋船务', '中远', 'China', '上海', '上海', '17317309132', '601590910@qq.com', null, null, null, null, '0', '1', null, 'luzhen', null);
+INSERT INTO `t_private_shipyard` VALUES ('9', '岙洋船务', '中远', 'China', '上海', '上海', '17317309132', '601590910@qq.com', null, null, null, null, null, null, null, 'luzhen', 'go/upload-images/pwXxns2yeS.png');
+INSERT INTO `t_private_shipyard` VALUES ('10', '岙洋船务', '中远', 'China', '上海', '上海', '17317309132', '601590910@qq.com', null, null, null, null, '0', '1', null, 'luzhen', '');
+INSERT INTO `t_private_shipyard` VALUES ('11', '岙洋船务', '中远', 'China', '上海', '上海', '17317309132', '601590910@qq.com', null, null, null, null, null, null, null, 'luzhen', '');
+INSERT INTO `t_private_shipyard` VALUES ('12', '岙洋船务', '中远', 'China', '上海', '上海', '17317309132', '601590910@qq.com', null, null, null, null, '0', '1', null, 'luzhen', '');
+INSERT INTO `t_private_shipyard` VALUES ('13', '岙洋船务', '中远', 'China', '上海', '上海', '17317309132', '601590910@qq.com', null, null, null, null, '1', '1', null, 'luzhen', 'go/upload-images/sm7GSEZ3wQ.png');
 
 -- ----------------------------
 -- Table structure for t_repair_model
@@ -486,6 +556,8 @@ CREATE TABLE `t_repair_prog` (
   `update_date` date DEFAULT NULL COMMENT '修改时间',
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+  `company_name` varchar(45) DEFAULT NULL COMMENT '公司名称',
+  `ship_name` varchar(45) DEFAULT NULL COMMENT '船舶名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -747,15 +819,17 @@ CREATE TABLE `t_ship` (
   `update_date` date DEFAULT NULL COMMENT '修改时间',
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+  `dd` varchar(45) DEFAULT NULL,
+  `ss` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_ship
 -- ----------------------------
-INSERT INTO `t_ship` VALUES ('1', '1', '1111', '222', '222', '22', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0');
-INSERT INTO `t_ship` VALUES ('2', '2', '333', '333', '33', '3333', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0');
-INSERT INTO `t_ship` VALUES ('3', '1', '33322', '222', '111', '1111', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0');
+INSERT INTO `t_ship` VALUES ('1', '1', '1111', '222', '222', '22', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', null, null);
+INSERT INTO `t_ship` VALUES ('2', '2', '333', '333', '33', '3333', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, null);
+INSERT INTO `t_ship` VALUES ('3', '1', '33322', '222', '111', '1111', '', null, '', '', '1212', null, null, '121', '121', '121', '', '', '', null, null, '', '', '', null, null, 'dssd', '', '', null, null, null, null, '', null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_shipyard
@@ -765,7 +839,7 @@ CREATE TABLE `t_shipyard` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '船厂id',
   `company_id` int(11) DEFAULT NULL COMMENT '公司id',
   `name` varchar(45) DEFAULT NULL COMMENT '船厂名称',
-  `des` varchar(45) DEFAULT NULL COMMENT '船厂简介',
+  `des` text COMMENT '船厂简介',
   `short_name` varchar(45) DEFAULT NULL COMMENT '短名称',
   `group_company` varchar(45) DEFAULT NULL COMMENT '集团公司',
   `country` varchar(45) DEFAULT NULL COMMENT '国家',
@@ -784,11 +858,13 @@ CREATE TABLE `t_shipyard` (
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_shipyard
 -- ----------------------------
+INSERT INTO `t_shipyard` VALUES ('1', '1', 'COSCO DaLian', null, null, 'COSCO', '中国', '辽宁沈阳', null, null, null, null, null, null, null, null, null, null, null, null, '0');
+INSERT INTO `t_shipyard` VALUES ('2', '1', 'COSCO(Nantong) Shipyard Co.,Ltd', null, 'COSCO', 'COSCO', 'China', 'Central China', 'Nantong,Jiangsu Province', 'No.1 Zhongyuan Road,Nantong,Jiangsu province', '120°52′59″E', '31°58′59″N', '(86)-21-58600111', 'biz@cosco-shipyard.com', 'http://en.cosco-shipyard.com/', null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_style
@@ -827,9 +903,9 @@ CREATE TABLE `t_wharf_detail` (
   `name` varchar(45) DEFAULT NULL COMMENT '姓名',
   `capacity` int(11) DEFAULT NULL COMMENT '能力',
   `lift_capacity` int(11) DEFAULT NULL COMMENT '提升能力',
-  `lengh` int(11) DEFAULT NULL COMMENT '维：长度',
+  `length` int(11) DEFAULT NULL,
   `width` int(11) DEFAULT NULL COMMENT '维：宽度',
-  `protocol` int(11) DEFAULT NULL COMMENT '''维：草案''',
+  `draft` int(11) DEFAULT NULL,
   `cranes` varchar(45) DEFAULT NULL COMMENT '起重机',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   `create_date` date DEFAULT NULL COMMENT '创建时间',
@@ -838,8 +914,10 @@ CREATE TABLE `t_wharf_detail` (
   `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
   `del_flag` int(11) DEFAULT '0' COMMENT '状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_wharf_detail
 -- ----------------------------
+INSERT INTO `t_wharf_detail` VALUES ('1', '2', 'Floating', 'Nantong', '150000', null, '270', '48', '9', '24TX1,22TX1,15TX1,5TX1', null, null, null, null, null, '0');
+INSERT INTO `t_wharf_detail` VALUES ('2', '2', 'Floating', 'Yuantong', '80000', null, '230', '42', '8', '22TX1,5TX1', null, null, null, null, null, '0');

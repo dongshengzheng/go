@@ -76,4 +76,123 @@
             alter table t_berth_detail CHANGE protocol draft int(11);
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-005">
+        <sql>
+            alter table t_private_shipyard add contact_name varchar(10)
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-006">
+        <sql>
+            alter table t_ship add dd varchar(45);
+            alter table t_ship add ss varchar(45);
+            alter table t_private_shipyard modify column contact_name varchar(45);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-007">
+        <sql>
+            alter table t_private_shipyard add logo varchar(100);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-008">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `go`.`t_param_value_variable` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '参数可变值id',
+            `param_code` INT NULL COMMENT '参数id',
+            `param_val_variable` VARCHAR(45) NULL COMMENT '参数可选值',
+            `create_by` VARCHAR(45) NULL COMMENT '建立者',
+            `create_date` DATE NULL COMMENT '建立时间',
+            `update_by` VARCHAR(45) NULL COMMENT '修改者',
+            `update_date` DATE NULL COMMENT '修改时间',
+            `del_flag` INT NULL DEFAULT 0 COMMENT '状态',
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+            CREATE TABLE IF NOT EXISTS `go`.`t_param` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '参数id',
+            `item_code` VARCHAR(45) NULL COMMENT '项目编号',
+            `param_code` VARCHAR(45) NULL COMMENT '参数编号',
+            `name` VARCHAR(45) NULL COMMENT '参数名称',
+            `unit` VARCHAR(45) NULL COMMENT '参数单位',
+            `type` VARCHAR(45) NULL COMMENT '参数的类型',
+            `create_by` VARCHAR(45) NULL COMMENT '创建者',
+            `create_date` DATE NULL COMMENT '创建时间',
+            `update_by` VARCHAR(45) NULL COMMENT '修改者',
+            `update_date` DATE NULL COMMENT '修改者',
+            `del_flag` INT NULL DEFAULT 0 COMMENT '状态',
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+            CREATE TABLE IF NOT EXISTS `go`.`t_price` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '价格表id',
+            `param1` VARCHAR(45) NULL COMMENT '参数1',
+            `param2` VARCHAR(45) NULL COMMENT '参数2',
+            `param3` VARCHAR(45) NULL COMMENT '参数3',
+            `param4` VARCHAR(45) NULL COMMENT '参数4',
+            `param5` VARCHAR(45) NULL COMMENT '参数5',
+            `param6` VARCHAR(45) NULL COMMENT '参数6',
+            `param7` VARCHAR(45) NULL COMMENT '参数7',
+            `param8` VARCHAR(45) NULL COMMENT '参数8',
+            `create_by` VARCHAR(45) NULL COMMENT '创建者',
+            `create_date` DATE NULL COMMENT '创建时间',
+            `update_by` VARCHAR(45) NULL COMMENT '修改者',
+            `update_date` DATE NULL COMMENT '修改时间',
+            `del_flag` INT NULL DEFAULT 0 COMMENT '状态',
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+            CREATE TABLE IF NOT EXISTS `go`.`t_repair_spec_item` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '维修工程详情的id',
+            `repair_spec_detail_id` INT NULL COMMENT '维修工程的id',
+            `catagory` VARCHAR(45) NULL COMMENT '维修项目类型',
+            `code` VARCHAR(45) NULL COMMENT '项目号',
+            `content` VARCHAR(100) NULL COMMENT '维修类容',
+            `unit` VARCHAR(45) NULL COMMENT '单位',
+            `count` INT NULL COMMENT '数量',
+            `remark` VARCHAR(500) NULL COMMENT '备注',
+            `info` TEXT(1000) NULL COMMENT '维修信息',
+            `parentid` INT NULL COMMENT '父id',
+            `param1_val` VARCHAR(45) NULL COMMENT '参数1的值',
+            `param1_des` VARCHAR(45) NULL COMMENT '参数1的描述',
+            `param2_val` VARCHAR(45) NULL COMMENT '参数2的值',
+            `param2_des` VARCHAR(45) NULL COMMENT '参数2的描述',
+            `param3_val` VARCHAR(45) NULL COMMENT '参数3的值',
+            `param3_des` VARCHAR(45) NULL COMMENT '参数3的描述',
+            `param4_val` VARCHAR(45) NULL COMMENT '参数4的值',
+            `param4_des` VARCHAR(45) NULL COMMENT '参数4的描述',
+            `param5_val` VARCHAR(45) NULL COMMENT '参数5的值',
+            `param5_des` VARCHAR(45) NULL COMMENT '参数5的描述',
+            `param6_val` VARCHAR(45) NULL COMMENT '参数6的值',
+            `param6_des` VARCHAR(45) NULL COMMENT '参数6的描述',
+            `param7_val` VARCHAR(45) NULL,
+            `param7_des` VARCHAR(45) NULL,
+            `param8_val` VARCHAR(45) NULL,
+            `param8_des` VARCHAR(45) NULL,
+            `repair_spec_id` INT NULL COMMENT '维修工程的id',
+            `create_by` VARCHAR(45) NULL COMMENT '穿件者',
+            `create_date` DATE NULL COMMENT '创建时间',
+            `update_by` VARCHAR(45) NULL COMMENT '修改者',
+            `update_date` DATE NULL COMMENT '修改时间',
+            `del_flag` INT NULL DEFAULT 0 COMMENT '状态',
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-009">
+        <sql>
+            alter table t_repair_spec_item add param1_val VARCHAR(45) NULL COMMENT '参数1的值';
+            alter table t_repair_spec_item add param1_des VARCHAR(45) NULL COMMENT '参数1的描述';
+            alter table t_repair_spec_item add param2_val VARCHAR(45) NULL COMMENT '参数2的值';
+            alter table t_repair_spec_item add param2_des VARCHAR(45) NULL COMMENT '参数2的描述';
+            alter table t_repair_spec_item add param3_val VARCHAR(45) NULL COMMENT '参数3的值';
+            alter table t_repair_spec_item add param3_des VARCHAR(45) NULL COMMENT '参数3的描述';
+            alter table t_repair_spec_item add param4_val VARCHAR(45) NULL COMMENT '参数4的值';
+            alter table t_repair_spec_item add param4_des VARCHAR(45) NULL COMMENT '参数4的描述';
+            alter table t_repair_spec_item add param5_val VARCHAR(45) NULL COMMENT '参数5的值';
+            alter table t_repair_spec_item add param5_des VARCHAR(45) NULL COMMENT '参数5的描述';
+            alter table t_repair_spec_item add param6_val VARCHAR(45) NULL COMMENT '参数6的值';
+            alter table t_repair_spec_item add param6_des VARCHAR(45) NULL COMMENT '参数6的描述';
+            alter table t_repair_spec_item add param7_val VARCHAR(45) NULL COMMENT '参数7的值';
+            alter table t_repair_spec_item add param7_des VARCHAR(45) NULL COMMENT '参数7的描述';
+            alter table t_repair_spec_item add param8_val VARCHAR(45) NULL COMMENT '参数8的值';
+            alter table t_repair_spec_item add param8_des VARCHAR(45) NULL COMMENT '参数8的描述';
+
+        </sql>
+    </changeSet>
 </databaseChangeLog>

@@ -126,6 +126,9 @@
 <script src="${ctx}/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
 <script src="${ctx}/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="${ctx}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script src="${ctx}/assets/global/plugins/gmaps/gmaps.min.js" type="text/javascript"></script>
+
 <!-- END THEME LAYOUT SCRIPTS -->
 
 <%-- 自定义js文件--%>

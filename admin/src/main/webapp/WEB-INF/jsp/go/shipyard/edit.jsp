@@ -23,7 +23,17 @@
 
 </style>
 <go:navigater path="shipyard"></go:navigater>
-<form action="shipyard/add" id="defForm" class="form-horizontal" method="post">
+<form action="shipyard/edit" id="form_sample_1" class="form-horizontal" method="post">
+    <c:if test="${!empty privateShipyard}">
+        <input id="edit" name="edit" type="hidden" value="yes">
+        <input id="id" name="id" type="hidden" value="${privateShipyard.id}"/>
+        <input id="companyId" name="companyId" type="hidden" value="${privateShipyard.companyId}"/>
+        <input id="shipyardId" name="shipyardId" type="hidden" value="${privateShipyard.shipyardId}"/>
+        <input id="createDate" name="createDate" type="hidden" value="<fmt:formatDate value='${privateShipyard.createDate}'
+                        pattern="yyyy-MM-dd"/>"/>
+        <input id="createBy" name="createBy" type="hidden" value="${privateShipyard.createBy}"/>
+        <input id="delFlag" name="delFlag" type="hidden" value="${privateShipyard.delFlag}"/>
+    </c:if>
     <div class="form-body">
         <div class="col-sm-6">
             <div class="form-group">
@@ -31,21 +41,21 @@
                     <span class="red"> * </span>
                 </label>
                 <div class="col-md-4">
-                    <input id="name" type="text" name="name" data-required="1" class="form-control" /> </div>
+                    <input id="name" type="text" name="name" data-required="1" class="form-control" value="${privateShipyard.name}"/> </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">集团公司
                     <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
-                    <input name="groupCompany" type="text" class="form-control" /> </div>
+                    <input name="groupCompany" type="text" class="form-control" value="${privateShipyard.groupCompany}"/> </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">国家
                     <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
-                    <input name="country" type="text" class="form-control" />
+                    <input name="country" type="text" class="form-control" value="${privateShipyard.country}"/>
                 </div>
             </div>
             <div class="form-group">
@@ -53,14 +63,14 @@
                     <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
-                    <input name="city" type="text" class="form-control" /> </div>
+                    <input name="city" type="text" class="form-control" value="${privateShipyard.city}"/> </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">位置
                     <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
-                    <input name="location" type="text" class="form-control" /> </div>
+                    <input name="location" type="text" class="form-control" value="${privateShipyard.location}"/> </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">联系电话
@@ -71,7 +81,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-phone"></i>
                         </span>
-                        <input id="tel" name="tel" type="text" class="form-control" />
+                        <input id="tel" name="tel" type="text" class="form-control" value="${privateShipyard.tel}" />
                     </div>
                 </div>
             </div>
@@ -84,7 +94,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </span>
-                        <input id="contactName" name="contactName" type="text" class="form-control" />
+                        <input id="contactName" name="contactName" type="text" class="form-control" value="${privateShipyard.contactName}"/>
                     </div>
                 </div>
             </div>
@@ -97,7 +107,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-envelope"></i>
                         </span>
-                        <input id="email" type="text" class="form-control" name="email" placeholder="Email Address"/> </div>
+                        <input id="email" type="text" class="form-control" name="email" placeholder="Email Address" value="${privateShipyard.email}"/> </div>
                 </div>
             </div>
         </div>
@@ -105,7 +115,7 @@
     <div class="col-sm-2" >
         <p>公司logo</p>
         <img id="logo-img"
-             src="http://windyeel.img-cn-shanghai.aliyuncs.com/${company.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
+             src="http://windyeel.img-cn-shanghai.aliyuncs.com/${privateShipyard.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
              style="display: block;width: 50%;height: 50%"
              onerror="nofind(1)"/>
         <input type="hidden" id="logo" name="logo" >
@@ -121,7 +131,8 @@
         </div>
     </div>
 </form>
-<a id="shipyard" href="shipyard" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>
+<a id="shipyard" href="shipyard" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>'
+
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
@@ -130,7 +141,7 @@
     //服务器校验
     function severCheck() {
         if (check()) {
-            $("#defForm").ajaxSubmit({
+            $("#form_sample_1").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
                         alert("success");

@@ -169,6 +169,32 @@
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨)</label>
                                         </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="dd" class="col-sm-3 control-label">坞检</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <input disabled id="dd" name="dd" type="text"
+                                                           class="form-control date-picker"
+                                                           value="${ship.dd}"
+                                                           placeholder="暂无坞检日期">
+                                                    <span class="input-group-addon">
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </span></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="ss" class="col-sm-3 control-label">特检</label>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <input disabled id="ss" name="ss" type="text"
+                                                           class="form-control date-picker"
+                                                           value="${ship.ss}"
+                                                           placeholder="暂无特检日期">
+                                                    <span class="input-group-addon">
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </span></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

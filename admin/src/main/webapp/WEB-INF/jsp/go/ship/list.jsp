@@ -36,7 +36,8 @@
                         <th>船舶类型</th>
                         <th>载重吨</th>
                         <th>船级社</th>
-                        <th>公司名称</th>
+                        <th>坞检</th>
+                        <th>特检</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -86,7 +87,10 @@
                     "data": "shipClass",
                 },
                 {
-                    "data": "companyName",
+                    "data": "dd",
+                },
+                {
+                    "data": "ss",
                 },
 //                {
 //                    "data": "createDate", "type": "date",
@@ -98,7 +102,7 @@
             ],
 
             "columnDefs": [{
-                "targets": 6,
+                "targets": 7,
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="ship/info">

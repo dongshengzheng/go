@@ -68,8 +68,18 @@ public class ShipyardController extends BaseController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public JSONObject addComplete(Shipyard shipyard) {
+    @ResponseBody
+    public JSONObject addComplete(PrivateShipyard privateShipyard) {
         JSONObject jsonObject = new JSONObject();
+        int companyId=getCurrentUser().getCompanyId();
+        privateShipyard.setCompanyId(companyId);
+        privateShipyard.setDelFlag(Const.DEL_FLAG_NORMAL);
+       if( privateShipyardService.insert(privateShipyard)){
+            jsonObject.put("success",true);
+        }else{
+            jsonObject.put("success",false);
+            jsonObject.put("msg", "添加时出错,请稍后再试");
+        }
         return jsonObject;
     }
 
@@ -82,6 +92,13 @@ public class ShipyardController extends BaseController {
         EntityWrapper<Shipyard> ew3 = getEntityWrapper();
         ew3.addFilter("name={0}", privateShipyard.getName());
         Shipyard shipyard = shipyardService.selectOne(ew3);
+
+        //判断数据库里面是否有船东写的船厂
+        if(shipyard==null){
+            map.put("mes",true);
+            return "go/shipyard/list";
+        }
+
         map.put("shipyard", shipyard);
 
         //查看一般信息中的Convemsion 项目
@@ -122,6 +139,9 @@ public class ShipyardController extends BaseController {
         return "go/shipyard/info";
     }
 
+
+
+
     //ajax查看码头信息
     @RequestMapping(value = "/wharf")
     @ResponseBody
@@ -149,16 +169,16 @@ public class ShipyardController extends BaseController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(@RequestParam(required = false) Integer id, ModelMap map) {
-        Shipyard shipyard = shipyardService.selectById(id);
-        map.put("shipyard", shipyard);
+        PrivateShipyard privateShipyard = privateShipyardService.selectById(id);
+        map.put("privateShipyard", privateShipyard);
         return "go/shipyard/edit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject editComplete(Shipyard shipyard) {
+    public JSONObject editComplete(PrivateShipyard privateShipyard) {
         JSONObject jsonObject = new JSONObject();
-        if (shipyardService.updateById(shipyard)) {
+        if (privateShipyardService.updateById(privateShipyard)) {
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);
@@ -171,9 +191,9 @@ public class ShipyardController extends BaseController {
     @ResponseBody
     public JSONObject delete(@RequestParam(required = false) Integer id) {
         JSONObject jsonObject = new JSONObject();
-        Shipyard shipyard = shipyardService.selectById(id);
-        shipyard.setDelFlag(Const.DEL_FLAG_DELETE);
-        if (shipyardService.updateById(shipyard)) {
+        PrivateShipyard privateShipyard = privateShipyardService.selectById(id);
+        privateShipyard.setDelFlag(Const.DEL_FLAG_DELETE);
+        if (privateShipyardService.updateById(privateShipyard)) {
             jsonObject.put("status", 1);
         } else {
             jsonObject.put("status", 0);
