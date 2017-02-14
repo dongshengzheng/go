@@ -58,7 +58,7 @@
 
 </style>
 <go:navigater path="account"></go:navigater>
-<form class="form-horizontal" action="ship/add" method="post"
+<form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
     <div class="profile-content">
         <div class="row">
@@ -170,7 +170,7 @@
                                 <div class="portlet box blue-dark">
                                     <div class="portlet-title" style="background-color: #00aaaa">
                                         <div class="caption">
-                                            <i class="fa fa-cog"></i>坞修服务
+                                            <i class="fa fa-cog"></i>通用服务
                                         </div>
                                         <div class="tools">
                                             <a href="javascript:;" class="collapse"> </a>
@@ -181,9 +181,9 @@
                                                id="table1">
                                             <thead>
                                             <tr>
-                                                <th style="width:10%">&nbsp;</th>
-                                                <th style="width:15%">项目号</th>
-                                                <th style="width:35%">维修内容</th>
+                                                <th style="width:5%">&nbsp;</th>
+                                                <th style="width:10%">项目号</th>
+                                                <th style="width:45%">维修内容</th>
                                                 <th style="width:10%">单位</th>
                                                 <th style="width:10%">数量</th>
                                                 <th style="width:10%">备注</th>
@@ -197,7 +197,23 @@
                                                 </c:if>
                                                 <td><c:if test="${item.status==0}"><input type="checkbox"> </c:if></td>
                                                 <td>${item.code}</td>
-                                                <td>${item.content}</td>
+                                                <td>${item.content}
+                                                    <c:forEach items="${item.paramList}" var="p">
+                                                        ${p.name}
+                                                        <c:if test="${p.type=='text'}">
+                                                            <input>
+                                                        </c:if>
+                                                        <c:if test="${p.type=='select'}">
+                                                            <select>
+                                                                <c:forEach items="${p.paramValueVariableList}"
+                                                                           var="value">
+                                                                    <option value="">${value.paramValVariable}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </c:if>
+                                                        ${p.unit}
+                                                    </c:forEach>
+                                                </td>
                                                 <td>${item.unit}</td>
                                                 <td><c:if test="${item.status==0}"><input class="col-md-12"></c:if></td>
                                                 <td><c:if test="${item.parentid==0}"><a data-id="${item.id}"

@@ -184,7 +184,9 @@ public class BaseController {
 
             message.setText(text); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
 
-            message.setContent(multipart);
+            if (multipart != null) {
+                message.setContent(multipart);
+            }
 
             message.setSubject(subject); //设置标题
 

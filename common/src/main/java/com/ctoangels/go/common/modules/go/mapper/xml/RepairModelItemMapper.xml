@@ -2,9 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.go.common.modules.go.mapper.RepairModelItemMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
 		id, catagory, code, content, unit, `count`, remark, info, parentid, `status`, repair_model_id AS repairModelId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
+
+    <select id="byModelIdAndCatagoryContainParams" resultMap="ModelMap">
+		SELECT model.* from t_repair_model_item model
+		WHERE model.repair_model_id=#{0} and model.catagory=#{1} and del_flag=0
+	</select>
+
+    <resultMap id="ModelMap" type="RepairModelItem">
+        <result property="id" column="id"></result>
+        <result property="code" column="code"></result>
+        <collection property="paramList" column="code" ofType="Param"
+                    select="com.ctoangels.go.common.modules.go.mapper.ParamMapper.byItemCodeContainParamValue"/>
+    </resultMap>
 
 </mapper>
