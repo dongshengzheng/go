@@ -11,6 +11,7 @@ import com.ctoangels.go.common.modules.go.service.IRepairModelItemService;
 import com.ctoangels.go.common.modules.go.service.IRepairProgService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,8 +20,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * RepairProg 控制层
@@ -56,14 +73,20 @@ public class RepairProgController extends BaseController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(ModelMap map) {
+        EntityWrapper ew = getEntityWrapper();
+        ew.orderBy("code");
         RepairModelItem repairModelItem = new RepairModelItem();
         repairModelItem.setRepairModelId(1);
         repairModelItem.setCatagory("通用服务");
-        List<RepairModelItem> type1List = repairModelItemService.selectList(new EntityWrapper<>(repairModelItem));
+        ew.setEntity(repairModelItem);
+        List<RepairModelItem> type1List = repairModelItemService.selectList(ew);
         repairModelItem.setCatagory("坞修服务");
-        List<RepairModelItem> type1List2 = repairModelItemService.selectList(new EntityWrapper<>(repairModelItem));
+        ew.setEntity(repairModelItem);
+        List<RepairModelItem> type1List2 = repairModelItemService.selectList(ew);
         map.put("type1", type1List);
         map.put("type2", type1List2);
+
+
         return "go/repairProg/add";
     }
 
@@ -84,11 +107,29 @@ public class RepairProgController extends BaseController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public String info(@RequestParam(required = false) Integer id, ModelMap map) {
+    @RequestMapping(value = "/enquiry", method = RequestMethod.GET)
+    public String enquiry(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairProg repairProg = repairProgService.selectById(id);
         map.put("repairProg", repairProg);
-        return "go/repairProg/info";
+        return "go/repairProg/enquiry";
+    }
+
+    @RequestMapping(value = "/enquiry", method = RequestMethod.POST)
+    public JSONObject enquiryComplete(@RequestParam(required = false) MultipartFile[] files) {
+        JSONObject jsonObject = new JSONObject();
+        List<File> fileList = new ArrayList<>();
+        File filefile;
+        for (MultipartFile file : files) {
+            try {
+                filefile = new File(file.getOriginalFilename());
+                file.transferTo(filefile);
+                fileList.add(filefile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        sendEnquiryEmail("1061147291@qq.com", "试发带附件的邮件", fileList);
+        return jsonObject;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -125,4 +166,40 @@ public class RepairProgController extends BaseController {
         }
         return jsonObject;
     }
+
+    //发送询价邮件
+    public void sendEnquiryEmail(String toAddress, String text, List<File> files) {
+        Multipart multipart = new MimeMultipart();
+        //实例化一个bodypart用于封装内容
+        BodyPart bodyPart = new MimeBodyPart();
+        try {
+            bodyPart.setContent("<font color='red'>这个是带有附件的HTML内容</font>", "text/html;charset=utf8");
+            multipart.addBodyPart(bodyPart);
+            //每一个部分实例化一个bodypart，故每个附件也需要实例化一个bodypart
+            for (File file : files) {
+                bodyPart = new MimeBodyPart();
+                //实例化DataSource(来自jaf)，参数为文件的地址
+                DataSource dataSource = new FileDataSource(file.getAbsolutePath());
+                //使用datasource实例化datahandler
+                DataHandler dataHandler = new DataHandler(dataSource);
+                bodyPart.setDataHandler(dataHandler);
+                //设置附件标题，使用MimeUtility进行名字转码，否则接收到的是乱码
+                try {
+                    bodyPart.setFileName(javax.mail.internet.MimeUtility.encodeText(file.getName()));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                //添加bodypart到multipart
+                multipart.addBodyPart(bodyPart);
+            }
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        sendEmail(toAddress, text, "附件", multipart);
+        for (File file : files) {
+            file.delete();
+        }
+    }
+
 }

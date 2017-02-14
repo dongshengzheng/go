@@ -414,7 +414,7 @@ public class LoginController extends BaseController {
         sb.append(toAddress);
         sb.append("&validateCode=");
         sb.append(validateCode);
-        sendEmail(toAddress, sb.toString(), "欢迎注册");
+        sendEmail(toAddress, sb.toString(), "欢迎注册", null);
     }
 
 

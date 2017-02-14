@@ -114,8 +114,8 @@
                             <shiro:hasPermission name="repairProg/edit">
                             + '<a href="repairProg/edit?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="repairProg/info">
-                            + '<a href="repairProg/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>询价</a>'
+                            <shiro:hasPermission name="repairProg/enquiry">
+                            + '<a href="repairProg/enquiry?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>询价</a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairProg/delete">
                             + '<a href="repairProg/delete?id=' + row.id +
