@@ -225,7 +225,7 @@ public class AccountController extends BaseController {
         session.setAttribute("sessionChangeEmailCode", code.toString());
         sb.append("请尽快使用下面的验证码进行验证");
         sb.append(code.toString());
-        sendEmail(toAddress, sb.toString(), "更换邮箱");
+        sendEmail(toAddress, sb.toString(), "更换邮箱", null);
     }
 
 }

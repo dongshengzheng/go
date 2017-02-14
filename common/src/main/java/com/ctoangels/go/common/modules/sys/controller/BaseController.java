@@ -20,6 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -162,7 +163,7 @@ public class BaseController {
 
 
     //发送邮件 1.收件人 2.信息 3.标题
-    public void sendEmail(String toAddress, String text, String subject) {
+    public void sendEmail(String toAddress, String text, String subject, Multipart multipart) {
         Properties props = new Properties();
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -182,6 +183,10 @@ public class BaseController {
             message.setFrom(new InternetAddress(fromAddress)); //设置发出方,使用setXXX设置单用户，使用addXXX添加InternetAddress[]
 
             message.setText(text); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
+
+            if (multipart != null) {
+                message.setContent(multipart);
+            }
 
             message.setSubject(subject); //设置标题
 

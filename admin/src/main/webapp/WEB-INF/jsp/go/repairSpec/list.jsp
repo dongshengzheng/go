@@ -6,7 +6,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="repairProg"></go:navigater>
+<go:navigater path="repairSpec"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -18,8 +18,8 @@
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
-                                <shiro:hasPermission name="repairProg/add">
-                                    <a href="repairProg/add" data-target="navTab"
+                                <shiro:hasPermission name="repairSpec/add">
+                                    <a href="repairSpec/add" data-target="navTab"
                                        class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增维修工程单
                                     </a>
                                 </shiro:hasPermission>
@@ -58,7 +58,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "repairProg/list",
+                "url": "repairSpec/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
@@ -111,14 +111,14 @@
                 "targets": 9,
                 "render": function (data, type, row) {
                     return ""
-                            <shiro:hasPermission name="repairProg/edit">
-                            + '<a href="repairProg/edit?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>编辑</a>'
+                            <shiro:hasPermission name="repairSpec/edit">
+                            + '<a href="repairSpec/edit?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="repairProg/info">
-                            + '<a href="repairProg/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>询价</a>'
+                            <shiro:hasPermission name="repairSpec/enquiry">
+                            + '<a href="repairSpec/enquiry?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>询价</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="repairProg/delete">
-                            + '<a href="repairProg/delete?id=' + row.id +
+                            <shiro:hasPermission name="repairSpec/delete">
+                            + '<a href="repairSpec/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
                             </shiro:hasPermission>
                             ;
