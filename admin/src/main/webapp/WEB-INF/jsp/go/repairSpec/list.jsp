@@ -111,6 +111,9 @@
                 "targets": 9,
                 "render": function (data, type, row) {
                     return ""
+                            <shiro:hasPermission name="repairSpec/info">
+                            + '<a href="repairSpec/info?id=' + row.id + '" class="btn btn-sm default" data-target="navTab"></i>查看</a>'
+                            </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/edit">
                             + '<a href="repairSpec/edit?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>

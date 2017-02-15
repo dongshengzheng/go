@@ -7,6 +7,11 @@
 		id, item_code AS itemCode, param_code AS paramCode, `name`, unit, `type`, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
 	</sql>
 
+    <select id="byItemCodeWithOutParamValue" resultType="Param">
+        SELECT p.* from t_param p
+        WHERE p.item_code=#{0} and del_flag=0
+    </select>
+
     <select id="byItemCodeContainParamValue" resultMap="ParamMap">
 		SELECT p.* from t_param p
 		WHERE p.item_code=#{0} and del_flag=0
