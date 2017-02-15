@@ -195,10 +195,12 @@
                                                 <c:if test="${item.parentid!=0}">
                                                     <tr class="details-control-child" data-parent="${item.parentid}" style="display: none">
                                                 </c:if>
-                                                <td><c:if test="${item.status==0}"><input type="checkbox"> </c:if></td>
+                                                <td><c:if test="${item.children==0}"><input type="checkbox"> </c:if>
+                                                </td>
                                                 <td>${item.code}</td>
                                                 <td>${item.content}
                                                     <c:forEach items="${item.paramList}" var="p">
+                                                        <br>
                                                         ${p.name}
                                                         <c:if test="${p.type=='text'}">
                                                             <input>
@@ -215,7 +217,8 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>${item.unit}</td>
-                                                <td><c:if test="${item.status==0}"><input class="col-md-12"></c:if></td>
+                                                <td><c:if test="${item.children==0}"><input class="col-md-12"></c:if>
+                                                </td>
                                                 <td><c:if test="${item.parentid==0}"><a data-id="${item.id}"
                                                                                         class="add-remark"
                                                                                         data-toggle="modal"
@@ -225,7 +228,7 @@
                                                               wrap="hard" placeholder="暂未添加备注"
                                                               style="display: none"></textarea>
                                                 </td>
-                                                <c:if test="${item.status==1}">
+                                                <c:if test="${item.children==1}">
                                                     <td class="details-control" data-id="${item.id}">
                                                         <img src="<%=basePath%>static/img/details_open.png"
                                                              class="open-png">
@@ -234,7 +237,7 @@
                                                              style="display: none">
                                                     </td>
                                                 </c:if>
-                                                <c:if test="${item.status==0}">
+                                                <c:if test="${item.children==0}">
                                                     <td>
                                                         <button type="button" class="copyRow">+</button>
                                                     </td>
@@ -260,80 +263,6 @@
                                 <%--通用服务结束--%>
 
                                 <%--坞修服务开始--%>
-                                <div class="portlet box blue-dark">
-                                    <div class="portlet-title" style="background-color: #00aaaa">
-                                        <div class="caption">
-                                            <i class="fa fa-cog"></i>坞修服务
-                                        </div>
-                                        <div class="tools">
-                                            <a href="javascript:;" class="collapse"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                               id="table2">
-                                            <thead>
-                                            <tr>
-                                                <th style="width:10%">&nbsp;</th>
-                                                <th style="width:15%">项目号</th>
-                                                <th style="width:35%">维修内容</th>
-                                                <th style="width:10%">单位</th>
-                                                <th style="width:10%">数量</th>
-                                                <th style="width:10%">备注</th>
-                                                <th style="width:10%">操作</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <c:forEach items="${type2}" var="item">
-                                                <c:if test="${item.parentid!=0}">
-                                                    <tr class="details-control-child" data-parent="${item.parentid}" style="display: none">
-                                                </c:if>
-                                                <td><c:if test="${item.status==0}"><input type="checkbox"> </c:if></td>
-                                                <td>${item.code}</td>
-                                                <td>${item.content}</td>
-                                                <td>${item.unit}</td>
-                                                <td><c:if test="${item.status==0}"><input class="col-md-12"></c:if></td>
-                                                <td><c:if test="${item.parentid==0}"><a data-id="${item.id}"
-                                                                                        class="add-remark"
-                                                                                        data-toggle="modal"
-                                                                                        href="#responsive">
-                                                    添加备注 </a></c:if>
-                                                    <textarea class="remark-text" name="remark" cols="60" rows="10"
-                                                              wrap="hard" placeholder="暂未添加备注"
-                                                              style="display: none"></textarea>
-                                                </td>
-                                                <c:if test="${item.status==1}">
-                                                    <td class="details-control" data-id="${item.id}">
-                                                        <img src="<%=basePath%>static/img/details_open.png"
-                                                             class="open-png">
-                                                        <img src="<%=basePath%>static/img/details_close.png"
-                                                             class="close-png"
-                                                             style="display: none">
-                                                    </td>
-                                                </c:if>
-                                                <c:if test="${item.status==0}">
-                                                    <td>
-                                                        <button type="button" class="copyRow">+</button>
-                                                    </td>
-                                                </c:if>
-                                                </tr>
-                                            </c:forEach>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm blue addRow">新增
-                                                    </button>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
                                 <%--坞修服务结束--%>
                             </div>
                         </div>
