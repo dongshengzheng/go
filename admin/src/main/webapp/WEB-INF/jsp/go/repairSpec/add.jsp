@@ -195,7 +195,8 @@
                                                 <c:if test="${item.parentid!=0}">
                                                     <tr class="details-control-child" data-parent="${item.parentid}" style="display: none">
                                                 </c:if>
-                                                <td><c:if test="${item.status==0}"><input type="checkbox"> </c:if></td>
+                                                <td><c:if test="${item.children==0}"><input type="checkbox"> </c:if>
+                                                </td>
                                                 <td>${item.code}</td>
                                                 <td>${item.content}
                                                     <c:forEach items="${item.paramList}" var="p">
@@ -216,7 +217,8 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>${item.unit}</td>
-                                                <td><c:if test="${item.status==0}"><input class="col-md-12"></c:if></td>
+                                                <td><c:if test="${item.children==0}"><input class="col-md-12"></c:if>
+                                                </td>
                                                 <td><c:if test="${item.parentid==0}"><a data-id="${item.id}"
                                                                                         class="add-remark"
                                                                                         data-toggle="modal"
@@ -226,7 +228,7 @@
                                                               wrap="hard" placeholder="暂未添加备注"
                                                               style="display: none"></textarea>
                                                 </td>
-                                                <c:if test="${item.status==1}">
+                                                <c:if test="${item.children==1}">
                                                     <td class="details-control" data-id="${item.id}">
                                                         <img src="<%=basePath%>static/img/details_open.png"
                                                              class="open-png">
@@ -235,7 +237,7 @@
                                                              style="display: none">
                                                     </td>
                                                 </c:if>
-                                                <c:if test="${item.status==0}">
+                                                <c:if test="${item.children==0}">
                                                     <td>
                                                         <button type="button" class="copyRow">+</button>
                                                     </td>
