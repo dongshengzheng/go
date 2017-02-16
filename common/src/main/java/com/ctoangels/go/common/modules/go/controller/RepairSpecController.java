@@ -73,7 +73,7 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(ModelMap map) {
         List<RepairModelItem> type1 = repairModelItemService.byModelIdAndCatagoryContainParams(1, "船体工程");
-       map.put("type1", type1);
+        map.put("type1", type1);
         return "go/repairSpec/add";
     }
 
@@ -99,7 +99,7 @@ public class RepairSpecController extends BaseController {
         RepairSpec repairSpec = repairSpecService.selectById(id);
         List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryContainParams(id, "通用服务");
         map.put("repairSpec", repairSpec);
-//        map.put("type1", type1);
+        map.put("type1", type1);
         return "go/repairSpec/info";
     }
 
@@ -197,7 +197,6 @@ public class RepairSpecController extends BaseController {
             file.delete();
         }
     }
-
 
 
 }
