@@ -29,6 +29,7 @@
         <div class="col-md-12">
             <div class="portlet light portlet-fit bordered">
                 <div class="portlet-title tabbable-line">
+                    <div id="bootstrap_alerts_demo"></div>
                     <div class="caption caption-md">
                         <i class="icon-microphone font-green"></i>
                         <span class="caption-subject bold font-green uppercase"> 新增船舶信息</span>
@@ -394,6 +395,7 @@
                                                     提交
                                                 </button>
                                             </shiro:hasPermission>
+                                            <button id="reset-btn" type="reset" class="btn blue">清空</button>
                                             <a href="ship" type="button" class="btn btn-default" data-target="navTab">取消
                                             </a>
                                         </div>
@@ -422,15 +424,44 @@
             $("#defForm").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
-                        alert("success");
-                        $('#ship').click()
+                        $('#reset-btn').click();
+                        App.alert({
+                            container: "#bootstrap_alerts_demo",
+                            close: true,
+                            icon: 'fa fa-check',
+                            place: "append",
+                            message: "success",
+                            type: 'success',
+                            reset: true,
+                            focus: true,
+                            closeInSeconds: 10,
+                        })
                     } else {
-                        alert("false");
-                        alert(data.msg);
+                        App.alert({
+                            container: "#bootstrap_alerts_demo",
+                            close: true,
+                            icon: 'fa fa-warning',
+                            place: "append",
+                            message: "failure",
+                            type: 'danger',
+                            reset: true,
+                            focus: true,
+                            closeInSeconds: 10,
+                        })
                     }
                 },
                 error: function () {
-                    alert("error");
+                    App.alert({
+                        container: "#bootstrap_alerts_demo",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "error",
+                        type: 'warning',
+                        reset: true,
+                        focus: true,
+                        closeInSeconds: 10,
+                    })
                     return;
                 }
             });

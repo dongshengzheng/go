@@ -98,6 +98,8 @@ public class RepairSpecController extends BaseController {
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
         List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryContainParams(id, "通用服务");
+        map.put("repairSpec", repairSpec);
+//        map.put("type1", type1);
         return "go/repairSpec/info";
     }
 

@@ -45,7 +45,7 @@
     <link href="${global}/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css"/>
-
+    <link href="${global}/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
 
@@ -115,6 +115,8 @@
 
 <script src="${global}/plugins/plupload-2.1.2/js/moxie.min.js"></script>
 <script src="${global}/plugins/plupload-2.1.2/js/plupload.dev.js"></script>
+
+<script src="${global}/plugins/bootstrap-sweetalert/sweetalert.min.js"
 
 <script src="${global}/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->

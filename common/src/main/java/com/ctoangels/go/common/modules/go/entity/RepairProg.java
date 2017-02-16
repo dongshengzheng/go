@@ -60,20 +60,20 @@ public class RepairProg implements Serializable {
     /**
      * 计划进厂日期
      */
-    @TableField(value = "s_start_date")
-    private Date sStartDate;
+    @TableField(value = "plan_start_date")
+    private Date planStartDate;
 
     /**
      * 计划天数
      */
-    @TableField(value = "s_days")
-    private Integer sDays;
+    @TableField(value = "plan_days")
+    private Integer planDays;
 
     /**
      * 计划金额
      */
-    @TableField(value = "s_cost")
-    private Integer sCost;
+    @TableField(value = "plan_cost")
+    private Integer planCost;
 
     /**
      * 维修类型
@@ -149,30 +149,6 @@ public class RepairProg implements Serializable {
         this.companyId = companyId;
     }
 
-    public Date getSStartDate() {
-        return this.sStartDate;
-    }
-
-    public void setSStartDate(Date sStartDate) {
-        this.sStartDate = sStartDate;
-    }
-
-    public Integer getSDays() {
-        return this.sDays;
-    }
-
-    public void setSDays(Integer sDays) {
-        this.sDays = sDays;
-    }
-
-    public Integer getSCost() {
-        return this.sCost;
-    }
-
-    public void setSCost(Integer sCost) {
-        this.sCost = sCost;
-    }
-
     public String getType() {
         return this.type;
     }
@@ -243,5 +219,29 @@ public class RepairProg implements Serializable {
 
     public void setShipName(String shipName) {
         this.shipName = shipName;
+    }
+
+    public Date getPlanStartDate() {
+        return planStartDate;
+    }
+
+    public void setPlanStartDate(Date planStartDate) {
+        this.planStartDate = planStartDate;
+    }
+
+    public Integer getPlanDays() {
+        return planDays;
+    }
+
+    public void setPlanDays(Integer planDays) {
+        this.planDays = planDays;
+    }
+
+    public Integer getPlanCost() {
+        return planCost;
+    }
+
+    public void setPlanCost(Integer planCost) {
+        this.planCost = planCost;
     }
 }

@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, order_no AS orderNo, ship_id AS shipId, ship_name AS shipName, company_id AS companyId, company_name AS companyName, s_start_date AS sStartDate, s_days AS sDays, s_cost AS sCost, `type`, enquiry_id AS enquiryId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, order_no AS orderNo, ship_id AS shipId, ship_name AS shipName, company_id AS companyId, company_name AS companyName, plan_start_date AS planStartDate, plan_days AS planDays, plan_cost AS planCost, `type`, enquiry_id AS enquiryId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
 </mapper>
