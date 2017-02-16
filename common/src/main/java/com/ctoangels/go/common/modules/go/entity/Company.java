@@ -47,6 +47,9 @@ public class Company implements Serializable {
 	@TableField(value = "postal_code")
 	private String postalCode;
 
+	/** 公司邮箱 */
+	private String email;
+
 	/** 联系姓名 */
 	@TableField(value = "contact_name")
 	private String contactName;
@@ -77,6 +80,7 @@ public class Company implements Serializable {
 	/** 状态 */
 	@TableField(value = "del_flag")
 	private Integer delFlag;
+
 
 
 	public Integer getId() {
@@ -207,4 +211,11 @@ public class Company implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

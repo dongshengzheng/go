@@ -105,6 +105,16 @@
                             <label class="col-sm-3 control-label">请填写邮政编码</label>
                         </div>
                         <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label"><i class="fa fa-envelope"></i>
+                                公司邮箱</label>
+                            <div class="col-sm-7">
+                                <input id="email" name="email" type="text" maxlength="32"
+                                       value="${company.email}"
+                                       minlength="2" class="form-control required" placeholder="请填写公司邮箱">
+                            </div>
+                            <label class="col-sm-3 control-label">请填写公司邮箱</label>
+                        </div>
+                        <div class="form-group">
                             <label for="contactName" class="col-sm-2 control-label"><i class="fa fa-user"></i>
                                 联系姓名</label>
                             <div class="col-sm-7">
@@ -206,7 +216,7 @@
         if ($("#name").val() == "") {
             $("#name").tips({
                 side: 2,
-                msg: '<fmt:message key="register_username_empty"/>',
+                msg: '公司名称不能为空',
                 bg: '#AE81FF',
                 time: 3
             });
@@ -215,10 +225,10 @@
         } else {
             $("#name").val(jQuery.trim($('#name').val()));
         }
-        if ($("#tel").val() == "") {
+        /*if ($("#tel").val() == "") {
             $("#tel").tips({
                 side: 2,
-                msg: 'imo号不能为空',
+                msg: '公司电话不能为空',
                 bg: '#AE81FF',
                 time: 3
             });
@@ -262,7 +272,7 @@
             return false;
         } else {
             $("#contactTel").val(jQuery.trim($('#contactTel').val()));
-        }
+        }*/
         return true;
     }
 

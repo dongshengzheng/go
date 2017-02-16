@@ -200,4 +200,18 @@
             alter table t_repair_model_item add children INT NULL COMMENT '判断改项是否有孩子';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-011">
+        <sql>
+            alter table t_company add email varchar(45) NULL COMMENT '公司邮箱';
+        </sql>
+    </changeSet>
+
+    <changeSet author="LuZhen" id="17317309132-014">
+        <sql>
+            alter table t_param add model_id INT NULL COMMENT '红本id';
+            alter table t_param_value_variable add model_id INT NULL COMMENT '红本id';
+            alter table t_repair_spec_item add children INT NULL COMMENT '判断改项是否有孩子';
+
+        </sql>
+    </changeSet>
 </databaseChangeLog>

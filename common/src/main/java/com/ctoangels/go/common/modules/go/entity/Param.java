@@ -54,6 +54,12 @@ public class Param implements Serializable {
      */
     private String type;
 
+    /**
+     * 创建者
+     */
+    @TableField(value = "model_id")
+    private Integer modelId;
+
     private List<ParamValueVariable> paramValueVariableList;
 
     /**
@@ -181,5 +187,13 @@ public class Param implements Serializable {
 
     public void setParamValueVariableList(List<ParamValueVariable> paramValueVariableList) {
         this.paramValueVariableList = paramValueVariableList;
+    }
+
+    public Integer getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
     }
 }

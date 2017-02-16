@@ -32,6 +32,10 @@ public class ParamValueVariable implements Serializable {
 	@TableField(value = "param_val_variable")
 	private String paramValVariable;
 
+	/** 红本id */
+	@TableField(value = "modle_id")
+	private Integer modelId;
+
 	/** 建立者 */
 	@TableField(value = "create_by")
 	private String createBy;
@@ -117,4 +121,11 @@ public class ParamValueVariable implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public Integer getModelId() {
+		return modelId;
+	}
+
+	public void setModelId(Integer modelId) {
+		this.modelId = modelId;
+	}
 }
