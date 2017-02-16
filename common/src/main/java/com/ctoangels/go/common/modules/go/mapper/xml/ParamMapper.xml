@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, item_code AS itemCode, param_code AS paramCode, `name`, unit, `type`, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
+		id, item_code AS itemCode, param_code AS paramCode, `name`, unit, `type`,model_id AS modelId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
 	</sql>
 
     <select id="byItemCodeWithOutParamValue" resultType="Param">
