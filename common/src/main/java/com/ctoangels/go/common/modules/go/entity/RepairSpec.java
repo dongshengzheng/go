@@ -47,7 +47,7 @@ public class RepairSpec implements Serializable {
      * 船名
      */
     @TableField(value = "ship_name")
-    private Integer shipName;
+    private String shipName;
 
     /**
      * 公司id
@@ -78,6 +78,12 @@ public class RepairSpec implements Serializable {
      * 维修类型
      */
     private String type;
+
+    /**
+     * 此工程单依据的红本
+     */
+    @TableField(value = "model_id")
+    private Integer modelId;
 
     /**
      * 创建时间
@@ -223,11 +229,20 @@ public class RepairSpec implements Serializable {
         this.planCost = planCost;
     }
 
-    public Integer getShipName() {
+
+    public Integer getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
+    }
+
+    public String getShipName() {
         return shipName;
     }
 
-    public void setShipName(Integer shipName) {
+    public void setShipName(String shipName) {
         this.shipName = shipName;
     }
 }

@@ -205,7 +205,8 @@
                                                         <c:forEach items="${item.paramList}" var="p" varStatus="vs">
                                                             <br>
                                                             ${p.name}
-                                                            ${item['param1Val']}
+                                                            <c:set var="paramVal" value="param${vs.count}Val"></c:set>
+                                                            ${item[paramVal]}
                                                             ${p.unit}
                                                         </c:forEach>
                                                     </td>
@@ -232,6 +233,10 @@
                                                             <img src="<%=basePath%>static/img/details_close.png"
                                                                  class="close-png"
                                                                  style="display: none">
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${item.children==0}">
+                                                        <td>
                                                         </td>
                                                     </c:if>
                                                     </tr>

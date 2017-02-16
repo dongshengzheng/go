@@ -19,7 +19,7 @@ public class RepairSpecItemServiceImpl extends SuperServiceImpl<RepairSpecItemMa
     RepairSpecItemMapper repairSpecItemMapper;
 
     @Override
-    public List<RepairSpecItem> bySpecIdAndCatagoryContainParams(Integer repairSpecId, String catagory) {
-        return repairSpecItemMapper.bySpecIdAndCatagoryContainParams(repairSpecId, catagory);
+    public List<RepairSpecItem> bySpecIdAndCatagoryContainParams(Integer repairSpecId, String catagory, Integer modelId) {
+        return repairSpecItemMapper.bySpecIdAndCatagoryContainParams(repairSpecId, catagory, modelId);
     }
 }
