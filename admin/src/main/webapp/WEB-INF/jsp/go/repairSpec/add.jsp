@@ -65,6 +65,7 @@
             <div class="col-md-12">
                 <div class="portlet light bordered">
                     <div class="portlet-title tabbable-line">
+                        <div id="bootstrap_alerts_demo"></div>
                         <div class="caption caption-md">
                             <i class="fa fa-user"></i>
                             <span class="caption-subject font-blue-madison bold uppercase"> 新增维修工程单</span>
@@ -294,10 +295,11 @@
 
                         </div>
                         <div class="modal-footer" style="text-align: center">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             <shiro:hasPermission name="repairSpec/add">
-                                <button type="button" onclick="severCheck()" class="btn btn-primary">保存</button>
+                                <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
                             </shiro:hasPermission>
+                            <button id="reset-btn" type="reset" class="btn blue">清空</button>
+                            <a href="repairSpec" class="btn default" data-target="navTab">取消</a>
                         </div>
                     </div>
                 </div>
@@ -330,6 +332,7 @@
     </div>
 </div>
 
+
 <table style="display: none">
     <tr id="row-temp1">
         <td></td>
@@ -355,18 +358,48 @@
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
-
+                    $('#reset-btn').click();
+                    App.alert({
+                        container: "#bootstrap_alerts_demo",
+                        close: true,
+                        icon: 'fa fa-check',
+                        place: "append",
+                        message: "success",
+                        type: 'success',
+                        reset: true,
+                        focus: true,
+                        closeInSeconds: 10,
+                    })
                 } else {
-
+                    App.alert({
+                        container: "#bootstrap_alerts_demo",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "failure",
+                        type: 'danger',
+                        reset: true,
+                        focus: true,
+                        closeInSeconds: 10,
+                    })
                 }
             },
             error: function () {
-
+                App.alert({
+                    container: "#bootstrap_alerts_demo",
+                    close: true,
+                    icon: 'fa fa-warning',
+                    place: "append",
+                    message: "error",
+                    type: 'warning',
+                    reset: true,
+                    focus: true,
+                    closeInSeconds: 10,
+                })
                 return;
             }
         });
     }
-
 
     $responsive = $('#responsive');
 
@@ -437,12 +470,9 @@
         $('#dialog-text').val(text);
         $responsive.attr('data-id', $(this).attr('data-id'));
     })
-
     $('.save-remark').on('click', function () {
         var text = $('#dialog-text').val();
         var dataId = $responsive.attr('data-id')
         $('.add-remark[data-id=' + dataId + ']').siblings('.remark-text').text(text);
     })
-
-
 </script>

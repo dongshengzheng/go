@@ -83,17 +83,17 @@
                     "data": "companyName",
                 },
                 {
-                    "data": "sStartDate", "type": "date",
+                    "data": "ssStartDate", "type": "date",
                     "render": function (data) {
                         var date = new Date(data);
                         return date.Format("yyyy-MM-dd");
                     }
                 },
                 {
-                    "data": "sDays",
+                    "data": "ssDays",
                 },
                 {
-                    "data": "sCost",
+                    "data": "ssCost",
                 },
                 {
                     "data": "createDate", "type": "date",

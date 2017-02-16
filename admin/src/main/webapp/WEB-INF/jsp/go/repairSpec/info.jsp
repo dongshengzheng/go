@@ -54,10 +54,8 @@
         top: 40%;
         z-index: 100;
     }
-
-
 </style>
-<go:navigater path="account"></go:navigater>
+<go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
     <div class="profile-content">
@@ -86,7 +84,7 @@
                                         <label for="shipName" class="col-sm-3 control-label">
                                             船舶名称</label>
                                         <div class="col-sm-7">
-                                            <input id="shipName" name="shipName" type="text" maxlength="32"
+                                            <input disabled id="shipName" name="shipName" type="text" maxlength="32"
                                                    value=""
                                                    minlength="2" class="form-control required" placeholder="请选择船舶">
                                         </div>
@@ -96,9 +94,9 @@
                                         <label for="sStartDate" class="col-sm-3 control-label">计划进场日期</label>
                                         <div class="col-sm-7">
                                             <div class="input-group">
-                                                <input id="sStartDate" name="sStartDate" type="text"
+                                                <input disabled id="sStartDate" name="sStartDate" type="text"
                                                        class="form-control date-picker"
-                                                       placeholder="请选择进厂日期">
+                                                       placeholder="暂无进厂日期">
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
@@ -110,16 +108,18 @@
                                         <label for="sDays" class="col-sm-3 control-label">
                                             预估天数</label>
                                         <div class="col-sm-7">
-                                            <input id="sDays" name="sDays" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required" placeholder="请输入预估维修天数">
+                                            <input disabled id="sDays" name="sDays" type="text"
+                                                   value="${repairSpec.planDays}" class="form-control required"
+                                                   placeholder="暂无预估维修天数">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="sCost" class="col-sm-3 control-label">
                                             预估金额</label>
                                         <div class="col-sm-7">
-                                            <input id="sCost" name="sCost" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required" placeholder="请输入预估维修金额">
+                                            <input disabled id="sCost" name="sCost" type="text"
+                                                   class="form-control required"
+                                                   placeholder="暂无预估维修金额">
                                         </div>
                                         <label class="col-sm-2 control-label"
                                                style="padding-left: 5px;padding-right: 5px">
@@ -132,22 +132,22 @@
                                             维修类型</label>
                                         <div class="col-sm-9 icheck-inline">
                                             <label>
-                                                <input type="radio" name="type"
+                                                <input disabled type="radio" name="type"
                                                        value="临时维修" checked> 临时维修
                                                 <span></span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="type"
+                                                <input disabled type="radio" name="type"
                                                        value="坞检"> 坞检
                                                 <span></span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="type"
+                                                <input disabled type="radio" name="type"
                                                        value="特检"> 特检
                                                 <span></span>
                                             </label>
                                             <label>
-                                                <input type="radio" name="type"
+                                                <input disabled type="radio" name="type"
                                                        value="改造"> 改造
                                                 <span></span>
                                             </label>
@@ -198,22 +198,22 @@
                                                 <c:if test="${item.parentid==0}">
                                                     <tr>
                                                 </c:if>
-                                                <input type="hidden" value="${item.catagory}"
+                                                <input disabled type="hidden" value="${item.catagory}"
                                                        name="type1List[${itemVs.index}].catagory">
-                                                <input type="hidden" value="${item.code}"
+                                                <input disabled type="hidden" value="${item.code}"
                                                        name="type1List[${itemVs.index}].code">
-                                                <input type="hidden" value="${item.content}"
+                                                <input disabled type="hidden" value="${item.content}"
                                                        name="type1List[${itemVs.index}].content">
-                                                <input type="hidden" value="${item.unit}"
+                                                <input disabled type="hidden" value="${item.unit}"
                                                        name="type1List[${itemVs.index}].unit">
-                                                <input type="hidden" value="${item.parentid}"
+                                                <input disabled type="hidden" value="${item.parentid}"
                                                        name="type1List[${itemVs.index}].parentid">
-                                                <input type="hidden" value="${item.children}"
+                                                <input disabled type="hidden" value="${item.children}"
                                                        name="type1List[${itemVs.index}].children">
                                                 <td>
-                                                        <%--<c:if test="${item.children==0}"><input type="checkbox"></c:if>--%>
-                                                    <input type="checkbox" class="status-checkBox">
-                                                    <input type="hidden" value="1"
+                                                        <%--<c:if test="${item.children==0}"><input disabled  type="checkbox"></c:if>--%>
+                                                    <input disabled type="checkbox" class="status-checkBox">
+                                                    <input disabled type="hidden" value="1"
                                                            name="type1List[${itemVs.index}].status">
                                                 </td>
                                                 <td>${item.code}</td>
@@ -222,7 +222,8 @@
                                                         <br>
                                                         ${p.name}
                                                         <c:if test="${p.type=='text'}">
-                                                            <input name="type1List[${itemVs.index}].param${vs.count}Val"
+                                                            <input disabled
+                                                                   name="type1List[${itemVs.index}].param${vs.count}Val"
                                                                    value="">
                                                         </c:if>
                                                         <c:if test="${p.type=='select'}">
@@ -237,7 +238,7 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>${item.unit}</td>
-                                                <td><c:if test="${item.children==0}"><input class="col-md-12"
+                                                <td><c:if test="${item.children==0}"><input disabled class="col-md-12"
                                                                                             name="type1List[${itemVs.index}].count"></c:if>
                                                 </td>
                                                 <td><c:if test="${item.parentid==0}"><a data-id="${item.id}"
@@ -334,16 +335,16 @@
     <tr id="row-temp1">
         <td></td>
         <td></td>
-        <td><input class="form-control col-md-12"></td>
-        <td><input class="form-control col-md-12"></td>
-        <td><input class="form-control col-md-12"></td>
+        <td><input disabled class="form-control col-md-12"></td>
+        <td><input disabled class="form-control col-md-12"></td>
+        <td><input disabled class="form-control col-md-12"></td>
         <td></td>
         <td></td>
     </tr>
     <tr id="row-temp2">
         <td></td>
         <td></td>
-        <td>维修详单<input value="请选择需要的范本"></td>
+        <td>维修详单<input disabled value="请选择需要的范本"></td>
         <td></td>
         <td></td>
         <td></td>

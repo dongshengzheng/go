@@ -211,7 +211,19 @@
             alter table t_param add model_id INT NULL COMMENT '红本id';
             alter table t_param_value_variable add model_id INT NULL COMMENT '红本id';
             alter table t_repair_spec_item add children INT NULL COMMENT '判断改项是否有孩子';
-
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-007">
+        <sql>
+            ALTER TABLE `t_repair_prog` CHANGE COLUMN `s_cost` `plan_cost` int(11) DEFAULT NULL COMMENT '计划金额';
+            ALTER TABLE `t_repair_prog` CHANGE COLUMN `s_start_date` `plan_start_date` date DEFAULT NULL COMMENT
+            '计划进厂日期';
+            ALTER TABLE `t_repair_prog` CHANGE COLUMN `s_days` `plan_days` int(11) DEFAULT NULL COMMENT '计划天数';
+            ALTER TABLE `t_repair_spec` CHANGE COLUMN `s_cost` `plan_cost` int(11) DEFAULT NULL COMMENT '计划金额';
+            ALTER TABLE `t_repair_spec` CHANGE COLUMN `s_start_date` `plan_start_date` date DEFAULT NULL COMMENT
+            '计划进厂日期';
+            ALTER TABLE `t_repair_spec` CHANGE COLUMN `s_days` `plan_days` int(11) DEFAULT NULL COMMENT '计划天数';
+            ALTER TABLE `t_repair_spec` ADD COLUMN `ship_name` varchar(45) DEFAULT NULL COMMENT '船舶名称';
         </sql>
     </changeSet>
 </databaseChangeLog>
