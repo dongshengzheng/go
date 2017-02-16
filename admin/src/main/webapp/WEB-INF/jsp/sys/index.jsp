@@ -128,9 +128,6 @@
 <script src="${ctx}/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
 <script src="${ctx}/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="${ctx}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
-<script src="${ctx}/assets/global/plugins/gmaps/gmaps.js" type="text/javascript"></script>
-<script src="${ctx}/assets/pages/scripts/prettify.js" type="text/javascript"></script>
 
 <!-- END THEME LAYOUT SCRIPTS -->
 
