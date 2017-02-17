@@ -7,9 +7,9 @@
 		id, param_code AS paramCode, param_val_variable AS paramValVariable,model_id AS modelId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
 	</sql>
 
-    <select id="ByParamCode" resultType="ParamValueVariable">
+    <select id="ByParamCode" resultType="ParamValueVariable" parameterType="java.util.Map">
 		SELECT v.* from t_param_value_variable v
-		WHERE v.param_code=#{0} and del_flag=0
+		WHERE v.param_code=#{param_code} and v.model_id=#{model_id} and del_flag=0
 	</select>
 
 </mapper>

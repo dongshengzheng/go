@@ -226,4 +226,9 @@
             ALTER TABLE `t_repair_spec` ADD COLUMN `ship_name` varchar(45) DEFAULT NULL COMMENT '船舶名称';
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-009">
+        <sql>
+            ALTER TABLE `t_repair_spec` ADD COLUMN `model_id` int(11) DEFAULT NULL COMMENT '此维修工程单依据的红本';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

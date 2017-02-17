@@ -8,15 +8,15 @@
 	</sql>
 
     <!--根据红本id以及维修项目类型获取items-->
-    <select id="byModelIdAndCatagoryContainParams" resultMap="ModelMap">
-		SELECT model.* from t_repair_model_item model
-		WHERE model.repair_model_id=#{0} and model.catagory=#{1} and del_flag=0
+    <select id="byModelIdAndCatagoryContainParams" resultMap="ItemMap">
+		SELECT item.* from t_repair_model_item item
+		WHERE item.repair_model_id=#{0} and item.catagory=#{1} and del_flag=0
 	</select>
 
-    <resultMap id="ModelMap" type="RepairModelItem">
+    <resultMap id="ItemMap" type="RepairModelItem">
         <result property="id" column="id"></result>
         <result property="code" column="code"></result>
-        <collection property="paramList" column="code" ofType="Param"
+        <collection property="paramList" column="{model_id=repair_model_id,code=code}" ofType="Param"
                     select="com.ctoangels.go.common.modules.go.mapper.ParamMapper.byItemCodeContainParamValue"/>
     </resultMap>
 

@@ -60,8 +60,6 @@
 <go:navigater path="account"></go:navigater>
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
-    <input type="hidden" name="modelId" value="${modelId}">
-    <input type="hidden" name="shipId" value="">
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">

@@ -7,20 +7,21 @@
 		id, item_code AS itemCode, param_code AS paramCode, `name`, unit, `type`,model_id AS modelId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
 	</sql>
 
-    <select id="byItemCodeWithOutParamValue" resultType="Param">
+    <select id="byItemCodeWithOutParamValue" resultType="Param" parameterType="java.util.Map">
         SELECT p.* from t_param p
-        WHERE p.item_code=#{0} and del_flag=0
+        WHERE p.item_code=#{code} and p.model_id=#{model_id} and del_flag=0
     </select>
 
-    <select id="byItemCodeContainParamValue" resultMap="ParamMap">
+    <select id="byItemCodeContainParamValue" resultMap="ParamMap" parameterType="java.util.Map">
 		SELECT p.* from t_param p
-		WHERE p.item_code=#{0} and del_flag=0
+		 WHERE p.item_code=#{code} and p.model_id=#{model_id} and del_flag=0
 	</select>
 
     <resultMap id="ParamMap" type="Param">
         <result property="id" column="id"></result>
         <result property="paramCode" column="param_code"></result>
-        <collection property="paramValueVariableList" column="param_code" ofType="ParamValueVariable"
+        <collection property="paramValueVariableList" column="{param_code=param_code,model_id=model_id}"
+                    ofType="ParamValueVariable"
                     select="com.ctoangels.go.common.modules.go.mapper.ParamValueVariableMapper.ByParamCode"/>
     </resultMap>
 

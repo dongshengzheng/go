@@ -74,6 +74,11 @@ public class RepairSpecItem implements Serializable {
     private Integer parentid;
 
     /**
+     * 判断是否有儿子
+     */
+    private Integer children;
+
+    /**
      * 维修工程的id
      */
     @TableField(value = "repair_spec_id")
@@ -484,5 +489,13 @@ public class RepairSpecItem implements Serializable {
 
     public void setParamList(List<Param> paramList) {
         this.paramList = paramList;
+    }
+
+    public Integer getChildren() {
+        return children;
+    }
+
+    public void setChildren(Integer children) {
+        this.children = children;
     }
 }
