@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface RepairSpecItemMapper extends AutoMapper<RepairSpecItem> {
 
-    List<RepairSpecItem> bySpecIdAndCatagoryContainParams(Integer repairSpecId, String catagory, Integer modelId);
+    List<RepairSpecItem> bySpecIdAndCatagoryWithParamsNoValue(Integer repairSpecId, String catagory, Integer modelId);
+
+    List<RepairSpecItem> bySpecIdAndCatagoryWithParamsAndValue(Integer repairSpecId, String catagory, Integer modelId);
 }

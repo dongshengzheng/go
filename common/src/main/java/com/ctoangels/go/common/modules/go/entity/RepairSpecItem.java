@@ -69,9 +69,10 @@ public class RepairSpecItem implements Serializable {
     private String info;
 
     /**
-     * 父id
+     * 父项目号
      */
-    private Integer parentid;
+    @TableField(value = "parent_code")
+    private String parentCode;
 
     /**
      * 判断是否有儿子
@@ -291,14 +292,6 @@ public class RepairSpecItem implements Serializable {
         this.info = info;
     }
 
-    public Integer getParentid() {
-        return this.parentid;
-    }
-
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
-    }
-
     public Integer getRepairSpecId() {
         return this.repairSpecId;
     }
@@ -497,5 +490,13 @@ public class RepairSpecItem implements Serializable {
 
     public void setChildren(Integer children) {
         this.children = children;
+    }
+
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
     }
 }

@@ -4,13 +4,14 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, repair_spec_detail_id AS repairSpecDetailId,children, catagory, code, content, unit, `count`, remark, info, parentid, repair_spec_id AS repairSpecId, `status`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, param1_val AS param1Val, param1_des AS param1Des, param2_val AS param2Val, param2_des AS param2Des, param3_val AS param3Val, param3_des AS param3Des, param4_val AS param4Val, param4_des AS param4Des, param5_val AS param5Val, param5_des AS param5Des, param6_val AS param6Val, param6_des AS param6Des, param7_val AS param7Val, param7_des AS param7Des, param8_val AS param8Val, param8_des AS param8Des
+		id, repair_spec_detail_id AS repairSpecDetailId,children, catagory, code, content, unit, `count`, remark, info,parent_code AS parentCode, repair_spec_id AS repairSpecId, `status`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, param1_val AS param1Val, param1_des AS param1Des, param2_val AS param2Val, param2_des AS param2Des, param3_val AS param3Val, param3_des AS param3Des, param4_val AS param4Val, param4_des AS param4Des, param5_val AS param5Val, param5_des AS param5Des, param6_val AS param6Val, param6_des AS param6Des, param7_val AS param7Val, param7_des AS param7Des, param8_val AS param8Val, param8_des AS param8Des
 	</sql>
 
-    <!--根据红本id以及维修项目类型获取维修单items的详细信息-->
-    <select id="bySpecIdAndCatagoryContainParams" resultMap="SpecItemMap">
+    <!--根据红本id以及维修项目类型获取维修单items的详细信息(无参数可选值)-->
+    <select id="bySpecIdAndCatagoryWithParamsNoValue" resultMap="SpecItemMap">
 		SELECT item.* ,#{2} as model_id  from t_repair_spec_item item
 		WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and del_flag=0
+		Order by item.code
 	</select>
 
     <resultMap id="SpecItemMap" type="RepairSpecItem">
@@ -18,5 +19,19 @@
         <result property="code" column="code"></result>
         <collection property="paramList" column="{model_id=model_id,code=code}" ofType="Param"
                     select="com.ctoangels.go.common.modules.go.mapper.ParamMapper.byItemCodeWithOutParamValue"/>
+    </resultMap>
+
+    <!--根据红本id以及维修项目类型获取维修单items的详细信息(无参数可选值)-->
+    <select id="bySpecIdAndCatagoryWithParamsAndValue" resultMap="SpecItemMap2">
+        SELECT item.* ,#{2} as model_id  from t_repair_spec_item item
+        WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and del_flag=0
+        Order by item.code
+    </select>
+
+    <resultMap id="SpecItemMap2" type="RepairSpecItem">
+        <result property="id" column="id"></result>
+        <result property="code" column="code"></result>
+        <collection property="paramList" column="{model_id=model_id,code=code}" ofType="Param"
+                    select="com.ctoangels.go.common.modules.go.mapper.ParamMapper.byItemCodeContainParamValue"/>
     </resultMap>
 </mapper>

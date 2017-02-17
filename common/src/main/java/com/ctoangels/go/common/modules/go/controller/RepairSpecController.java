@@ -99,7 +99,7 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
-        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryContainParams(id, "通用服务", repairSpec.getModelId());
+        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsNoValue(id, "通用服务", repairSpec.getModelId());
         map.put("repairSpec", repairSpec);
         map.put("type1", type1);
         return "go/repairSpec/info";
@@ -133,15 +133,18 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
+        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "通用服务", repairSpec.getModelId());
         map.put("repairSpec", repairSpec);
+        map.put("type1", type1);
         return "go/repairSpec/edit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject editComplete(RepairSpec repairSpec) {
+    public JSONObject edit(RepairSpec repairSpec,
+                           RepairSpecItemList specItems) {
         JSONObject jsonObject = new JSONObject();
-        if (repairSpecService.updateById(repairSpec)) {
+        if (repairSpecService.updateRepairSpec(repairSpec, specItems)) {
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);

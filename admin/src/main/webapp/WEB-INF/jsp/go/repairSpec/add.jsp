@@ -195,10 +195,10 @@
                                             </thead>
                                             <tbody>
                                             <c:forEach items="${type1}" var="item" varStatus="itemVs">
-                                                <c:if test="${item.parentid!=0}">
-                                                    <tr class="details-control-child" data-parent="${item.parentid}" style="display: none">
+                                                <c:if test="${item.parentCode!='0'}">
+                                                    <tr class="details-control-child" data-parent="${item.parentCode}" style="display: none">
                                                 </c:if>
-                                                <c:if test="${item.parentid==0}">
+                                                <c:if test="${item.parentCode=='0'}">
                                                     <tr>
                                                 </c:if>
                                                 <input type="hidden" value="${item.catagory}"
@@ -209,12 +209,11 @@
                                                        name="type1List[${itemVs.index}].content">
                                                 <input type="hidden" value="${item.unit}"
                                                        name="type1List[${itemVs.index}].unit">
-                                                <input type="hidden" value="${item.parentid}"
-                                                       name="type1List[${itemVs.index}].parentid">
+                                                <input type="hidden" value="${item.parentCode}"
+                                                       name="type1List[${itemVs.index}].parentCode">
                                                 <input type="hidden" value="${item.children}"
                                                        name="type1List[${itemVs.index}].children">
                                                 <td>
-                                                        <%--<c:if test="${item.children==0}"><input type="checkbox"></c:if>--%>
                                                     <input type="checkbox" class="status-checkBox">
                                                     <input type="hidden" value="1"
                                                            name="type1List[${itemVs.index}].status">
@@ -243,10 +242,10 @@
                                                 <td><c:if test="${item.children==0}"><input class="col-md-12"
                                                                                             name="type1List[${itemVs.index}].count"></c:if>
                                                 </td>
-                                                <td><c:if test="${item.parentid==0}"><a data-id="${item.id}"
-                                                                                        class="add-remark"
-                                                                                        data-toggle="modal"
-                                                                                        href="#responsive">
+                                                <td><c:if test="${item.parentCode=='0'}"><a data-id="${item.id}"
+                                                                                            class="add-remark"
+                                                                                            data-toggle="modal"
+                                                                                            href="#responsive">
                                                     添加备注 </a></c:if>
                                                     <textarea class="remark-text"
                                                               name="type1List[${itemVs.index}].remark" cols="60"
@@ -255,7 +254,7 @@
                                                               style="display: none"></textarea>
                                                 </td>
                                                 <c:if test="${item.children==1}">
-                                                    <td class="details-control" data-id="${item.id}">
+                                                    <td class="details-control" data-code="${item.code}">
                                                         <img src="<%=basePath%>static/img/details_open.png"
                                                              class="open-png">
                                                         <img src="<%=basePath%>static/img/details_close.png"
@@ -409,8 +408,8 @@
 
     <%--行的展开与折叠--%>
     $('td.details-control').on('click', function () {
-        var parentId = $(this).attr('data-id');
-        var ele = $("tr.details-control-child[data-parent=" + parentId + "]");
+        var parentCode = $(this).attr('data-code');
+        var ele = $("tr.details-control-child[data-parent='" + parentCode + "']");
         ele.toggle();
         $(this).find('img').toggle();
         if ($(this).find('.close-png').css('display') == 'none') {
@@ -441,20 +440,17 @@
         var clone = row.clone();
         clone.find('textarea').each(function () {
             var name = $(this).attr('name');
-//            alert(current + "这是改变前的" + name);
             name = name.replace("[" + current + "]", "[" + index + "]");
-//            alert("这是改变后的" + name);
             $(this).attr('name', name);
         });
         clone.find('input').each(function () {
             var name = $(this).attr('name');
             if (name != null) {
-//                alert(current + "这是改变前的" + name);
                 name = name.replace("[" + current + "]", "[" + index + "]");
-//                alert("这是改变后的" + name);
                 $(this).attr('name', name);
             }
         });
+        clone.find('.copyRow').remove();
         row.after(clone);
     })
 

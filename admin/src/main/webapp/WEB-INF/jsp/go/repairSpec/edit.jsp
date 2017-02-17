@@ -58,8 +58,13 @@
 
 </style>
 <go:navigater path="account"></go:navigater>
-<form class="form-horizontal" action="repairSpec/add" method="post"
+<form class="form-horizontal" action="repairSpec/edit" method="post"
       id="defForm" callfn="refreshTable">
+    <input type="hidden" name="modelId" value="${modelId}">
+    <input type="hidden" name="id" value="${repairSpec.id}">
+    <input type="hidden" name="delFlag" value="${repairSpec.delFlag}">
+    <input type="hidden" name="companyId" value="${repairSpec.companyId}">
+    <input type="hidden" name="shipId" value="">
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
@@ -68,7 +73,7 @@
                         <div id="bootstrap_alerts_demo"></div>
                         <div class="caption caption-md">
                             <i class="fa fa-user"></i>
-                            <span class="caption-subject font-blue-madison bold uppercase"> 新增维修工程单</span>
+                            <span class="caption-subject font-blue-madison bold uppercase"> 编辑维修工程单</span>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -88,7 +93,7 @@
                                             船舶名称</label>
                                         <div class="col-sm-7">
                                             <input id="shipName" name="shipName" type="text" maxlength="32"
-                                                   value=""
+                                                   value="${repairSpec.shipName}"
                                                    minlength="2" class="form-control required" placeholder="请选择船舶">
                                         </div>
                                         <label class="col-sm-1 control-label"><span class="red">* </span></label>
@@ -99,6 +104,7 @@
                                             <div class="input-group">
                                                 <input id="planStartDate" name="planStartDate" type="text"
                                                        class="form-control date-picker" readonly
+                                                       value="<fmt:formatDate value='${repairSpec.planStartDate}' pattern="yyyy-MM-dd"/>"
                                                        placeholder="请选择进厂日期">
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
@@ -112,7 +118,8 @@
                                             预估天数</label>
                                         <div class="col-sm-7">
                                             <input id="planDays" name="planDays" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required" placeholder="请输入预估维修天数">
+                                                   value="${repairSpec.planDays}"
+                                                   class="form-control required" placeholder="请输入预估维修天数">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -120,7 +127,8 @@
                                             预估金额</label>
                                         <div class="col-sm-7">
                                             <input id="planCost" name="planCost" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required" placeholder="请输入预估维修金额">
+                                                   value="${repairSpec.planCost}" class="form-control required"
+                                                   placeholder="请输入预估维修金额">
                                         </div>
                                         <label class="col-sm-2 control-label"
                                                style="padding-left: 5px;padding-right: 5px">
@@ -134,22 +142,30 @@
                                         <div class="col-sm-9 icheck-inline">
                                             <label>
                                                 <input type="radio" name="type"
-                                                       value="临时维修" checked> 临时维修
+                                                       value="临时维修"
+                                                       <c:if test="${repairSpec.type=='临时维修'}">checked</c:if>
+                                                > 临时维修
                                                 <span></span>
                                             </label>
                                             <label>
                                                 <input type="radio" name="type"
-                                                       value="坞检"> 坞检
+                                                       value="坞检"
+                                                       <c:if test="${repairSpec.type=='坞检'}">checked</c:if>
+                                                > 坞检
                                                 <span></span>
                                             </label>
                                             <label>
                                                 <input type="radio" name="type"
-                                                       value="特检"> 特检
+                                                       value="特检"
+                                                       <c:if test="${repairSpec.type=='特检'}">checked</c:if>
+                                                > 特检
                                                 <span></span>
                                             </label>
                                             <label>
                                                 <input type="radio" name="type"
-                                                       value="改造"> 改造
+                                                       value="改造"
+                                                       <c:if test="${repairSpec.type=='改造'}">checked</c:if>
+                                                > 改造
                                                 <span></span>
                                             </label>
                                         </div>
@@ -193,44 +209,54 @@
                                             </thead>
                                             <tbody>
                                             <c:forEach items="${type1}" var="item" varStatus="itemVs">
-                                                <c:if test="${item.parentid!=0}">
-                                                    <tr class="details-control-child" data-parent="${item.parentid}" style="display: none">
+                                                <c:if test="${item.parentCode!='0'}">
+                                                    <tr class="details-control-child" data-parent="${item.parentCode}" style="display: none">
                                                 </c:if>
-                                                <c:if test="${item.parentid==0}">
+                                                <c:if test="${item.parentCode=='0'}">
                                                     <tr>
                                                 </c:if>
+                                                <input type="hidden" value="${item.id}" class="item-id"
+                                                       name="type1List[${itemVs.index}].id">
                                                 <input type="hidden" value="${item.catagory}"
                                                        name="type1List[${itemVs.index}].catagory">
+                                                <input type="hidden" value="${item.repairSpecId}"
+                                                       name="type1List[${itemVs.index}].repairSpecId">
                                                 <input type="hidden" value="${item.code}"
                                                        name="type1List[${itemVs.index}].code">
                                                 <input type="hidden" value="${item.content}"
                                                        name="type1List[${itemVs.index}].content">
                                                 <input type="hidden" value="${item.unit}"
                                                        name="type1List[${itemVs.index}].unit">
-                                                <input type="hidden" value="${item.parentid}"
-                                                       name="type1List[${itemVs.index}].parentid">
+                                                <input type="hidden" value="${item.parentCode}"
+                                                       name="type1List[${itemVs.index}].parentCode">
                                                 <input type="hidden" value="${item.children}"
                                                        name="type1List[${itemVs.index}].children">
+                                                <input type="hidden" value="${item.delFlag}"
+                                                       name="type1List[${itemVs.index}].delFlag">
                                                 <td>
-                                                        <%--<c:if test="${item.children==0}"><input type="checkbox"></c:if>--%>
-                                                    <input type="checkbox" class="status-checkBox">
-                                                    <input type="hidden" value="1"
+                                                    <input type="checkbox" class="status-checkBox"
+                                                           <c:if test="${item.status==0}">checked</c:if>
+                                                    >
+                                                    <input type="hidden" value="${item.status}"
                                                            name="type1List[${itemVs.index}].status">
                                                 </td>
                                                 <td>${item.code}</td>
                                                 <td>${item.content}
                                                     <c:forEach items="${item.paramList}" var="p" varStatus="vs">
+                                                        <c:set var="paramVal" value="param${vs.count}Val"></c:set>
                                                         <br>
                                                         ${p.name}
                                                         <c:if test="${p.type=='text'}">
                                                             <input name="type1List[${itemVs.index}].param${vs.count}Val"
-                                                                   value="">
+                                                                   value="${item[paramVal]}">
                                                         </c:if>
                                                         <c:if test="${p.type=='select'}">
                                                             <select name="type1List[${itemVs.index}].param${vs.count}Val">
                                                                 <c:forEach items="${p.paramValueVariableList}"
                                                                            var="val">
-                                                                    <option value="${val.paramValVariable}">${val.paramValVariable}</option>
+                                                                    <option value="${val.paramValVariable}"
+                                                                            <c:if test="${item[paramVal]==val.paramValVariable}">selected</c:if>
+                                                                    >${val.paramValVariable}</option>
                                                                 </c:forEach>
                                                             </select>
                                                         </c:if>
@@ -241,19 +267,19 @@
                                                 <td><c:if test="${item.children==0}"><input class="col-md-12"
                                                                                             name="type1List[${itemVs.index}].count"></c:if>
                                                 </td>
-                                                <td><c:if test="${item.parentid==0}"><a data-id="${item.id}"
-                                                                                        class="add-remark"
-                                                                                        data-toggle="modal"
-                                                                                        href="#responsive">
-                                                    添加备注 </a></c:if>
+                                                <td><c:if test="${item.parentCode=='0'}"><a data-id="${item.id}"
+                                                                                            class="add-remark"
+                                                                                            data-toggle="modal"
+                                                                                            href="#responsive">
+                                                    添加备注</a></c:if>
                                                     <textarea class="remark-text"
                                                               name="type1List[${itemVs.index}].remark" cols="60"
                                                               rows="10"
                                                               wrap="hard" placeholder="暂未添加备注"
-                                                              style="display: none"></textarea>
+                                                              style="display: none">${item.remark}</textarea>
                                                 </td>
                                                 <c:if test="${item.children==1}">
-                                                    <td class="details-control" data-id="${item.id}">
+                                                    <td class="details-control" data-code="${item.code}">
                                                         <img src="<%=basePath%>static/img/details_open.png"
                                                              class="open-png">
                                                         <img src="<%=basePath%>static/img/details_close.png"
@@ -295,7 +321,7 @@
 
                         </div>
                         <div class="modal-footer" style="text-align: center">
-                            <shiro:hasPermission name="repairSpec/add">
+                            <shiro:hasPermission name="repairSpec/edit">
                                 <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
                             </shiro:hasPermission>
                             <button id="reset-btn" type="reset" class="btn blue">清空</button>
@@ -407,8 +433,8 @@
 
     <%--行的展开与折叠--%>
     $('td.details-control').on('click', function () {
-        var parentId = $(this).attr('data-id');
-        var ele = $("tr.details-control-child[data-parent=" + parentId + "]");
+        var parentCode = $(this).attr('data-code');
+        var ele = $("tr.details-control-child[data-parent='" + parentCode + "']");
         ele.toggle();
         $(this).find('img').toggle();
         if ($(this).find('.close-png').css('display') == 'none') {
@@ -439,20 +465,18 @@
         var clone = row.clone();
         clone.find('textarea').each(function () {
             var name = $(this).attr('name');
-//            alert(current + "这是改变前的" + name);
             name = name.replace("[" + current + "]", "[" + index + "]");
-//            alert("这是改变后的" + name);
             $(this).attr('name', name);
         });
         clone.find('input').each(function () {
             var name = $(this).attr('name');
             if (name != null) {
-//                alert(current + "这是改变前的" + name);
                 name = name.replace("[" + current + "]", "[" + index + "]");
-//                alert("这是改变后的" + name);
                 $(this).attr('name', name);
             }
         });
+        clone.find('.item-id').val("");
+        clone.find('.copyRow').remove();
         row.after(clone);
     })
 

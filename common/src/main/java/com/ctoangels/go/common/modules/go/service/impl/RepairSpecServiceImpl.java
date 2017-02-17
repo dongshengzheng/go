@@ -3,6 +3,7 @@ package com.ctoangels.go.common.modules.go.service.impl;
 import com.ctoangels.go.common.modules.go.entity.RepairSpecItem;
 import com.ctoangels.go.common.modules.go.entity.RepairSpecItemList;
 import com.ctoangels.go.common.modules.go.mapper.RepairSpecItemMapper;
+import com.ctoangels.go.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,6 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         if (repairSpecMapper.insert(repairSpec) < 0) {
             return false;
         }
-
         List<RepairSpecItem> list = new ArrayList<>();
         list.addAll(specItemList.getType1List());
         list.addAll(specItemList.getType2List());
@@ -45,7 +45,39 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         if (repairSpecItemMapper.insertBatch(list) < 0) {
             return false;
         }
-        ;
         return true;
     }
+
+    @Override
+    public boolean updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList) {
+        if (repairSpecMapper.updateById(repairSpec) < 0) {
+            return false;
+        }
+        List<RepairSpecItem> list = new ArrayList<>();
+        list.addAll(specItemList.getType1List());
+        list.addAll(specItemList.getType2List());
+        list.addAll(specItemList.getType3List());
+        list.addAll(specItemList.getType4List());
+        list.addAll(specItemList.getType5List());
+        list.addAll(specItemList.getType6List());
+        list.addAll(specItemList.getType7List());
+        List<RepairSpecItem> updateList = new ArrayList<>();
+        List<RepairSpecItem> insertList = new ArrayList<>();
+        for (RepairSpecItem item : list) {
+            if (item.getId() != null) {
+                updateList.add(item);
+            } else {
+                insertList.add(item);
+            }
+        }
+        if (repairSpecItemMapper.insertBatch(insertList) < 0) {
+            return false;
+        }
+        if (repairSpecItemMapper.updateBatchById(updateList) < 0) {
+            return false;
+        }
+        return true;
+    }
+
+
 }

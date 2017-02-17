@@ -231,4 +231,14 @@
             ALTER TABLE `t_repair_spec` ADD COLUMN `model_id` int(11) DEFAULT NULL COMMENT '此维修工程单依据的红本';
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-010">
+        <sql>
+            ALTER TABLE `t_repair_model_item` CHANGE COLUMN `parentid` `parent_code` varchar(45) DEFAULT NULL COMMENT
+            '父项目号';
+            ALTER TABLE `t_repair_spec_item` CHANGE COLUMN `parentid` `parent_code` varchar(45) DEFAULT NULL COMMENT
+            '父项目号';
+            ALTER TABLE `t_repair_prog_item` CHANGE COLUMN `parentid` `parent_code` varchar(45) DEFAULT NULL COMMENT
+            '父项目号';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

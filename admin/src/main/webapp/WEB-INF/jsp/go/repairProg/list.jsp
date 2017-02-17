@@ -6,7 +6,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="repairSpec"></go:navigater>
+<go:navigater path="ship"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -14,13 +14,13 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            维修工程单
+                            船舶信息
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
-                                <shiro:hasPermission name="repairSpec/add">
-                                    <a href="repairSpec/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增维修工程单
+                                <shiro:hasPermission name="ship/add">
+                                    <a href="ship/add" data-target="navTab"
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
                                     </a>
                                 </shiro:hasPermission>
                             </div>
@@ -32,14 +32,12 @@
                     <thead>
                     <tr>
                         <th>船舶名称</th>
-                        <th>维修单号</th>
-                        <th>维修类别</th>
-                        <th>公司名称</th>
-                        <th>计划进场日期</th>
-                        <th>计划天数</th>
-                        <th>计划金额</th>
-                        <th>创建日期</th>
-                        <th>创建人</th>
+                        <th>IMO</th>
+                        <th>船舶类型</th>
+                        <th>载重吨</th>
+                        <th>船级社</th>
+                        <th>坞检</th>
+                        <th>特检</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -58,7 +56,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "repairSpec/list",
+                "url": "ship/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
@@ -71,57 +69,50 @@
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
                 {
-                    "data": "shipName",
+                    "data": "name",
+                    "render": function (data, type, row) {
+                        return row.name;
+                    }
                 },
                 {
-                    "data": "orderNo",
+                    "data": "imo",
                 },
                 {
                     "data": "type",
                 },
                 {
-                    "data": "companyName",
+                    "data": "dwt",
                 },
                 {
-                    "data": "planStartDate", "type": "date",
-                    "render": function (data) {
-                        var date = new Date(data);
-                        return date.Format("yyyy-MM-dd");
-                    }
+                    "data": "shipClass",
                 },
                 {
-                    "data": "planDays",
+                    "data": "dd",
                 },
                 {
-                    "data": "planCost",
+                    "data": "ss",
                 },
-                {
-                    "data": "createDate", "type": "date",
-                    "render": function (data) {
-                        var date = new Date(data);
-                        return date.Format("yyyy-MM-dd");
-                    }
-                },
-                {
-                    "data": "createBy",
-                },
+//                {
+//                    "data": "createDate", "type": "date",
+//                    "render": function (data) {
+//                        var date = new Date(data);
+//                        return date.Format("yyyy-MM-dd");
+//                    }
+//                },
             ],
 
             "columnDefs": [{
-                "targets": 9,
+                "targets": 7,
                 "render": function (data, type, row) {
                     return ""
-                            <shiro:hasPermission name="repairSpec/info">
-                            + '<a href="repairSpec/info?id=' + row.id + '" class="btn btn-sm default" data-target="navTab"></i>查看</a>'
+                            <shiro:hasPermission name="ship/info">
+                            + '<a href="ship/info?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="repairSpec/edit">
-                            + '<a href="repairSpec/edit?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>编辑</a>'
+                            <shiro:hasPermission name="ship/edit">
+                            + '<a href="ship/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="repairSpec/enquiry">
-                            + '<a href="repairSpec/enquiry?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>询价</a>'
-                            </shiro:hasPermission>
-                            <shiro:hasPermission name="repairSpec/delete">
-                            + '<a href="repairSpec/delete?id=' + row.id +
+                            <shiro:hasPermission name="ship/delete">
+                            + '<a href="ship/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
                             </shiro:hasPermission>
                             ;
@@ -132,7 +123,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船舶名称");
+                initSearchForm(null, "请输入船厂名称");
             }
         });
 
