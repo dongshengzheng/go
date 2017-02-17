@@ -83,17 +83,17 @@
                     "data": "companyName",
                 },
                 {
-                    "data": "ssStartDate", "type": "date",
+                    "data": "planStartDate", "type": "date",
                     "render": function (data) {
                         var date = new Date(data);
                         return date.Format("yyyy-MM-dd");
                     }
                 },
                 {
-                    "data": "ssDays",
+                    "data": "planDays",
                 },
                 {
-                    "data": "ssCost",
+                    "data": "planCost",
                 },
                 {
                     "data": "createDate", "type": "date",

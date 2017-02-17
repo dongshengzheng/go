@@ -10,5 +10,9 @@ import java.util.List;
  */
 public interface IRepairSpecItemService extends ISuperService<RepairSpecItem> {
 
-    List<RepairSpecItem> bySpecIdAndCatagoryContainParams(Integer repairSpecId, String catagory, Integer modelId);
+    //    查询用  无可选值列表
+    List<RepairSpecItem> bySpecIdAndCatagoryWithParamsNoValue(Integer repairSpecId, String catagory, Integer modelId);
+
+    //    编辑用  含选值列表
+    List<RepairSpecItem> bySpecIdAndCatagoryWithParamsAndValue(Integer repairSpecId, String catagory, Integer modelId);
 }

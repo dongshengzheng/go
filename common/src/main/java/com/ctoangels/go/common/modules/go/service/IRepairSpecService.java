@@ -14,4 +14,6 @@ public interface IRepairSpecService extends ISuperService<RepairSpec> {
 
     boolean saveRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList);
 
+    boolean updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList);
+
 }

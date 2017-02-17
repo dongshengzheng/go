@@ -90,7 +90,7 @@
                                             <div class="input-group">
                                                 <input disabled id="planStartDate" name="planStartDate" type="text"
                                                        class="form-control date-picker"
-                                                       value="${repairSpec.planStartDate}"
+                                                       value="<fmt:formatDate value='${repairSpec.planStartDate}' pattern="yyyy-MM-dd"/>"
                                                        placeholder="暂无进厂日期">
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
@@ -188,10 +188,10 @@
                                             <tbody>
                                             <c:forEach items="${type1}" var="item" varStatus="itemVs">
                                                 <c:if test="${item.status==0}">
-                                                    <c:if test="${item.parentid!=0}">
-                                                        <tr class="details-control-child" data-parent="${item.parentid}" style="display: none">
+                                                    <c:if test="${item.parentCode!='0'}">
+                                                        <tr class="details-control-child" data-parent="${item.parentCode}" style="display: none">
                                                     </c:if>
-                                                    <c:if test="${item.parentid==0}">
+                                                    <c:if test="${item.parentCode=='0'}">
                                                         <tr>
                                                     </c:if>
                                                     <td>
@@ -215,10 +215,10 @@
                                                                                                 class="col-md-12"
                                                                                                 name="type1List[${itemVs.index}].count"></c:if>
                                                     </td>
-                                                    <td><c:if test="${item.parentid==0}"><a data-id="${item.id}"
-                                                                                            class="add-remark"
-                                                                                            data-toggle="modal"
-                                                                                            href="#responsive">
+                                                    <td><c:if test="${item.parentCode=='0'}"><a data-id="${item.id}"
+                                                                                                class="add-remark"
+                                                                                                data-toggle="modal"
+                                                                                                href="#responsive">
                                                         显示备注 </a></c:if>
                                                         <textarea disabled class="remark-text"
                                                                   name="type1List[${itemVs.index}].remark" cols="60"
@@ -227,7 +227,7 @@
                                                                   style="display: none"></textarea>
                                                     </td>
                                                     <c:if test="${item.children==1}">
-                                                        <td class="details-control" data-id="${item.id}">
+                                                        <td class="details-control" data-code="${item.code}">
                                                             <img src="<%=basePath%>static/img/details_open.png"
                                                                  class="open-png">
                                                             <img src="<%=basePath%>static/img/details_close.png"
@@ -288,8 +288,8 @@
 <script>
     <%--行的展开与折叠--%>
     $('td.details-control').on('click', function () {
-        var parentId = $(this).attr('data-id');
-        var ele = $("tr.details-control-child[data-parent=" + parentId + "]");
+        var parentCode = $(this).attr('data-code');
+        var ele = $("tr.details-control-child[data-parent='" + parentCode + "']");
         ele.toggle();
         $(this).find('img').toggle();
         if ($(this).find('.close-png').css('display') == 'none') {
