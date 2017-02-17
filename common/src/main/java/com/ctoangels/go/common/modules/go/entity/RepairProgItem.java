@@ -11,210 +11,244 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  *
- * 
+ *
  *
  */
 @TableName("t_repair_prog_item")
 public class RepairProgItem implements Serializable {
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
-	/** 维修进度项目id */
-	@TableId(type = IdType.AUTO)
-	private Integer id;
+    /**
+     * 维修进度项目id
+     */
+    @TableId(type = IdType.AUTO)
+    private Integer id;
 
-	/** 维修进度详细信息id */
-	@TableField(value = "repair_prog_detail_id")
-	private Integer repairProgDetailId;
+    /**
+     * 维修进度详细信息id
+     */
+    @TableField(value = "repair_prog_detail_id")
+    private Integer repairProgDetailId;
 
-	/** 维修项目类型 */
-	private String catagory;
+    /**
+     * 维修项目类型
+     */
+    private String catagory;
 
-	/** 项目号 */
-	private String code;
+    /**
+     * 项目号
+     */
+    private String code;
 
-	/** 维修类容 */
-	private String content;
+    /**
+     * 维修类容
+     */
+    private String content;
 
-	/** 单位 */
-	private String unit;
+    /**
+     * 单位
+     */
+    private String unit;
 
-	/** 数量 */
-	private String count;
+    /**
+     * 数量
+     */
+    private String count;
 
-	/** 备注 */
-	private String remark;
+    /**
+     * 备注
+     */
+    private String remark;
 
-	/** 父id */
-	private Integer parentid;
+    /**
+     * 父项目号
+     */
+    @TableField(value = "parent_code")
+    private Integer parent_code;
 
-	/** 维修信息 */
-	private String info;
+    /**
+     * 维修信息
+     */
+    private String info;
 
-	/** 任务状态 */
-	@TableField(value = "task_status")
-	private String taskStatus;
+    /**
+     * 任务状态
+     */
+    @TableField(value = "task_status")
+    private String taskStatus;
 
-	/** 维修进度id */
-	@TableField(value = "repair_prog_id")
-	private Integer repairProgId;
+    /**
+     * 维修进度id
+     */
+    @TableField(value = "repair_prog_id")
+    private Integer repairProgId;
 
-	/** 创建时间 */
-	@TableField(value = "create_date")
-	private Date createDate;
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_date")
+    private Date createDate;
 
-	/** 创建用户 */
-	@TableField(value = "create_by")
-	private String createBy;
+    /**
+     * 创建用户
+     */
+    @TableField(value = "create_by")
+    private String createBy;
 
-	/** 修改时间 */
-	@TableField(value = "update_date")
-	private Date updateDate;
+    /**
+     * 修改时间
+     */
+    @TableField(value = "update_date")
+    private Date updateDate;
 
-	/** 修改用户 */
-	@TableField(value = "update_by")
-	private String updateBy;
+    /**
+     * 修改用户
+     */
+    @TableField(value = "update_by")
+    private String updateBy;
 
-	/** 状态 */
-	@TableField(value = "del_flag")
-	private Integer delFlag;
+    /**
+     * 状态
+     */
+    @TableField(value = "del_flag")
+    private Integer delFlag;
 
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getRepairProgDetailId() {
-		return this.repairProgDetailId;
-	}
+    public Integer getRepairProgDetailId() {
+        return this.repairProgDetailId;
+    }
 
-	public void setRepairProgDetailId(Integer repairProgDetailId) {
-		this.repairProgDetailId = repairProgDetailId;
-	}
+    public void setRepairProgDetailId(Integer repairProgDetailId) {
+        this.repairProgDetailId = repairProgDetailId;
+    }
 
-	public String getCatagory() {
-		return this.catagory;
-	}
+    public String getCatagory() {
+        return this.catagory;
+    }
 
-	public void setCatagory(String catagory) {
-		this.catagory = catagory;
-	}
+    public void setCatagory(String catagory) {
+        this.catagory = catagory;
+    }
 
-	public String getCode() {
-		return this.code;
-	}
+    public String getCode() {
+        return this.code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getContent() {
-		return this.content;
-	}
+    public String getContent() {
+        return this.content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public String getUnit() {
-		return this.unit;
-	}
+    public String getUnit() {
+        return this.unit;
+    }
 
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
-	public String getCount() {
-		return this.count;
-	}
+    public String getCount() {
+        return this.count;
+    }
 
-	public void setCount(String count) {
-		this.count = count;
-	}
+    public void setCount(String count) {
+        this.count = count;
+    }
 
-	public String getRemark() {
-		return this.remark;
-	}
+    public String getRemark() {
+        return this.remark;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public Integer getParentid() {
-		return this.parentid;
-	}
+    public String getInfo() {
+        return this.info;
+    }
 
-	public void setParentid(Integer parentid) {
-		this.parentid = parentid;
-	}
+    public void setInfo(String info) {
+        this.info = info;
+    }
 
-	public String getInfo() {
-		return this.info;
-	}
+    public String getTaskStatus() {
+        return this.taskStatus;
+    }
 
-	public void setInfo(String info) {
-		this.info = info;
-	}
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
+    }
 
-	public String getTaskStatus() {
-		return this.taskStatus;
-	}
+    public Integer getRepairProgId() {
+        return this.repairProgId;
+    }
 
-	public void setTaskStatus(String taskStatus) {
-		this.taskStatus = taskStatus;
-	}
+    public void setRepairProgId(Integer repairProgId) {
+        this.repairProgId = repairProgId;
+    }
 
-	public Integer getRepairProgId() {
-		return this.repairProgId;
-	}
+    public Date getCreateDate() {
+        return this.createDate;
+    }
 
-	public void setRepairProgId(Integer repairProgId) {
-		this.repairProgId = repairProgId;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public Date getCreateDate() {
-		return this.createDate;
-	}
+    public String getCreateBy() {
+        return this.createBy;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
-	public String getCreateBy() {
-		return this.createBy;
-	}
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
+    public String getUpdateBy() {
+        return this.updateBy;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
+    public Integer getDelFlag() {
+        return this.delFlag;
+    }
 
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
 
-	public Integer getDelFlag() {
-		return this.delFlag;
-	}
+    public Integer getParent_code() {
+        return parent_code;
+    }
 
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-	}
-
+    public void setParent_code(Integer parent_code) {
+        this.parent_code = parent_code;
+    }
 }
