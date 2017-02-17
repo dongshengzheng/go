@@ -63,6 +63,12 @@ public class RepairModelItem implements Serializable {
     private String info;
 
     /**
+     * 是否需要复制
+     */
+    private Integer copy;
+
+
+    /**
      * 父项目号
      */
     @TableField(value = "parent_code")
@@ -258,5 +264,13 @@ public class RepairModelItem implements Serializable {
 
     public void setParentCode(String parentCode) {
         this.parentCode = parentCode;
+    }
+
+    public Integer getCopy() {
+        return copy;
+    }
+
+    public void setCopy(Integer copy) {
+        this.copy = copy;
     }
 }

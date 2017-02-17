@@ -90,6 +90,11 @@ public class RepairSpecItem implements Serializable {
      */
     private Integer status;
 
+    /**
+     * 是否需要复制
+     */
+    private Integer copy;
+
     @TableField(exist = false)
     private List<Param> paramList;
 
@@ -498,5 +503,13 @@ public class RepairSpecItem implements Serializable {
 
     public void setParentCode(String parentCode) {
         this.parentCode = parentCode;
+    }
+
+    public Integer getCopy() {
+        return copy;
+    }
+
+    public void setCopy(Integer copy) {
+        this.copy = copy;
     }
 }
