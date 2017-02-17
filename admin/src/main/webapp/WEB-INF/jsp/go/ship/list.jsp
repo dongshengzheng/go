@@ -34,7 +34,7 @@
                         <th>船舶名称</th>
                         <th>IMO</th>
                         <th>船舶类型</th>
-                        <th>载重吨</th>
+                        <th>注册总吨</th>
                         <th>船级社</th>
                         <th>坞检</th>
                         <th>特检</th>
@@ -81,7 +81,7 @@
                     "data": "type",
                 },
                 {
-                    "data": "dwt",
+                    "data": "gt",
                 },
                 {
                     "data": "shipClass",
