@@ -34,6 +34,10 @@
     .div-left{
         margin-left: 20px
     }
+    .mt-checkbox, .mt-radio{
+        margin-left: 3px;
+    }
+    .form-horizontal .form-group{}
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
@@ -76,13 +80,13 @@
             <div style="margin-top: 5px;border-right: dashed 1px #337ab7;" class="col-md-8">
                 <div style="width: 100%;">
                     <div ><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
-                    <div class="div-left">工程名称：<input type="text" name=""/></div>
-                    <div class="div-left">工程描述： </div>
-                    <div class="form-group" style="margin-left: 20px">
-                        <textarea style="width: 90%"></textarea>
+                    <div class="col-md-12 div-left">工程名称：<input type="text" name=""/></div>
+                    <div class="col-md-12 div-left">工程描述： </div>
+                    <div class="col-md-12" style="margin-left: 20px">
+                        <textarea class="form-control" rows="4"></textarea>
                     </div>
                 </div>
-                <div class="line1"></div>
+                <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
                     <div ><span class="head">设备信息</span></div>
                     <div class="col-md-6">
@@ -117,15 +121,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group" style="margin-left: 20px">
-                            <label>相关参数</label>
-                            <textarea class="form-control" rows="7"></textarea>
+                            <textarea class="form-control" rows="7" placeholder="请输入相关参数"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
                     <div  class="form-group col-md-12"><span class="head">维修部位</span></div>
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-12" style="margin-left: 3px">
                         <div class="col-md-3">
                             <label class="mt-checkbox">
                                 <input type="checkbox" value="option1"> 甲板
@@ -218,16 +221,16 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <div style="margin-left: 20px">
-                            <textarea class="form-control" rows="4" placeholder="请输入详细位置"></textarea>
-                        </div>
+                    <div class="col-md-12" style="margin-left: 20px">
+                        <textarea class="form-control" rows="4" placeholder="请输入详细位置"></textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
                     <div class="form-group col-md-12"><span class="head">损坏程度</span></div>
-                    <textarea class="form-control" rows="4"></textarea>
+                    <div class="col-md-12" style="margin-left: 20px">
+                        <textarea class="form-control" rows="4"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
@@ -245,14 +248,15 @@
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
             <div ><span class="head">请求材料规格</span></div>
-            <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                   id="default_table" width="90%" >
+            <div class="col-md-12 div-left">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                   id="default_table" style="width: 98%" >
                 <thead>
                 <tr style="background-color: #8CD2E5">
                     <th style="width: 70%">要求和描述/材料规格</th>
-                    <th style="width: 10%">单位</th>
-                    <th style="width: 10%">数量</th>
-                    <th><button type="button" onclick="addTr()" class="btn green">添加一行</button></th>
+                    <th style="width: 6%">单位</th>
+                    <th style="width: 6%">数量</th>
+                    <th style="width: 5%"><button  type="button" onclick="addTr()" class="btn green">添加一行</button></th>
                 </tr>
                 </thead>
                 <tbody id="table-tbody">
@@ -265,10 +269,12 @@
 
                 </tbody>
             </table>
+            </div>
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
             <div ><span class="head">修理工艺</span></div>
+            <div class="col-md-12 div-left">
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
                         <input type="checkbox"  value="option1"> 动火
@@ -378,13 +384,14 @@
                         <span></span>
                     </label>
                 </div>
-                <div class="form-group" style="margin-left: 20px">
-                    <textarea class="form-control" rows="6" placeholder="请填写修理工艺"></textarea>
-                </div>
+            </div>
+            <div class="col-md-12 div-left"">
+                <textarea class="form-control" rows="4" placeholder="请填写修理工艺"></textarea>
+            </div>
         </div>
     </div>
 
-    <div class="form-actions">
+    <div class="form-actions" >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
                 <button type="button" class="btn green">保存</button>
