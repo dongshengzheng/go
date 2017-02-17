@@ -65,7 +65,7 @@
                                 <input id="tel" name="tel" type="text" maxlength="32" value="${company.tel}"
                                        minlength="2" class="form-control required" placeholder="请填写公司电话">
                             </div>
-                            <label class="col-sm-3 control-label"><span class="red">* </span>请填写公司电话</label>
+                            <label class="col-sm-3 control-label">请填写公司电话</label>
                         </div>
                         <div class="form-group">
                             <label for="fax" class="col-sm-2 control-label"><i class="fa fa-fax"></i>
@@ -92,7 +92,7 @@
                                 <input id="address" name="address" type="text" maxlength="32" value="${company.address}"
                                        minlength="2" class="form-control required" placeholder="请填写公司地址">
                             </div>
-                            <label class="col-sm-3 control-label"><span class="red">* </span>请填写公司地址</label>
+                            <label class="col-sm-3 control-label">请填写公司地址</label>
                         </div>
                         <div class="form-group">
                             <label for="postalCode" class="col-sm-2 control-label"><i class="fa fa-envelope"></i>
@@ -122,7 +122,7 @@
                                        value="${company.contactName}"
                                        minlength="2" class="form-control required" placeholder="请填写联系人姓名">
                             </div>
-                            <label class="col-sm-3 control-label"><span class="red">* </span>请填写联系人姓名</label>
+                            <label class="col-sm-3 control-label">请填写联系人姓名</label>
                         </div>
                         <div class="form-group">
                             <label for="contactTel" class="col-sm-2 control-label"><i class="fa fa-weixin"></i>
@@ -132,7 +132,7 @@
                                        value="${company.contactTel}"
                                        minlength="2" class="form-control required" placeholder="请填写联系方式">
                             </div>
-                            <label class="col-sm-3 control-label"><span class="red">* </span>请填写联系人联系方式</label>
+                            <label class="col-sm-3 control-label">请填写联系人联系方式</label>
                         </div>
                     </div>
                     <div class="col-md-4" style="border-left: 1px dotted lightgrey;">

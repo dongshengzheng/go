@@ -128,92 +128,92 @@
                     <div class="form-group col-md-12">
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 甲板
+                                <input type="checkbox" value="option1"> 甲板
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 机舱
+                                <input type="checkbox"  value="option1"> 机舱
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 货舱
+                                <input type="checkbox"  value="option1"> 货舱
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 泵舱
+                                <input type="checkbox"  value="option1"> 泵舱
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 机舱棚
+                                <input type="checkbox"  value="option1"> 机舱棚
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 压载舱
+                                <input type="checkbox"  value="option1"> 压载舱
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 驾驶室
+                                <input type="checkbox"  value="option1"> 驾驶室
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 舵机舱
+                                <input type="checkbox"  value="option1"> 舵机舱
                                 <span></span>
                             </label>
                         </div>
 
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 集控室
+                                <input type="checkbox"  value="option1"> 集控室
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 货控室
+                                <input type="checkbox"  value="option1"> 货控室
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 艏楼区域
+                                <input type="checkbox"  value="option1"> 艏楼区域
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 罗经甲板
+                                <input type="checkbox"  value="option1"> 罗经甲板
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 上建
+                                <input type="checkbox"  value="option1"> 上建
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 船艉
+                                <input type="checkbox"  value="option1"> 船艉
                                 <span></span>
                             </label>
                         </div>
                         <div class="col-md-3">
                             <label class="mt-checkbox">
-                                <input type="checkbox" id="" value="option1"> 其他请填
+                                <input type="checkbox"  value="option1"> 其他请填
                                 <span></span>
                             </label>
                         </div>
@@ -271,110 +271,110 @@
             <div ><span class="head">修理工艺</span></div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 动火
+                        <input type="checkbox"  value="option1"> 动火
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 脚手架
+                        <input type="checkbox"  value="option1"> 脚手架
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 吊车运输
+                        <input type="checkbox"  value="option1"> 吊车运输
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 功能测试
+                        <input type="checkbox"  value="option1"> 功能测试
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 化学清洗
+                        <input type="checkbox"  value="option1"> 化学清洗
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 船厂提供螺栓螺母及垫片等材料
+                        <input type="checkbox"  value="option1"> 船厂提供螺栓螺母及垫片等材料
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 补漆
+                        <input type="checkbox"  value="option1"> 补漆
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 提供照明
+                        <input type="checkbox"  value="option1"> 提供照明
                         <span></span>
                     </label>
                 </div>
 
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 清舱除气
+                        <input type="checkbox"  value="option1"> 清舱除气
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 拆装花钢板地格栅
+                        <input type="checkbox"  value="option1"> 拆装花钢板地格栅
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 布置安全通道
+                        <input type="checkbox"  value="option1"> 布置安全通道
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 需船厂提供维修场地
+                        <input type="checkbox"  value="option1"> 需船厂提供维修场地
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 清洁
+                        <input type="checkbox"  value="option1"> 清洁
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 提供通风
+                        <input type="checkbox"  value="option1"> 提供通风
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 压力测试
+                        <input type="checkbox"  value="option1"> 压力测试
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 拆装栏杆等铁舾件
+                        <input type="checkbox"  value="option1"> 拆装栏杆等铁舾件
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 船东提供材料
+                        <input type="checkbox"  value="option1"> 船东提供材料
                         <span></span>
                     </label>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mt-checkbox">
-                        <input type="checkbox" id="" value="option1"> 其它请填
+                        <input type="checkbox"  value="option1"> 其它请填
                         <span></span>
                     </label>
                 </div>
