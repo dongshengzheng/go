@@ -385,7 +385,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col-md-12 div-left"">
+            <div class="col-md-12 div-left">
                 <textarea class="form-control" rows="4" placeholder="请填写修理工艺"></textarea>
             </div>
         </div>
@@ -394,10 +394,8 @@
     <div class="form-actions" >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <button type="button" class="btn green">保存</button>
-                <button type="button" class="btn blue">提交</button>
-                <button type="button" class="btn red">删除</button>
-                <button type="button" class="btn default">重置</button>
+                <button type="button" class="btn green">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn default">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn green">保存为工程单范本</button>
             </div>
         </div>

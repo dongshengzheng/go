@@ -95,6 +95,9 @@ public class RepairSpecItem implements Serializable {
      */
     private Integer copy;
 
+    /*排序*/
+    private Integer sort;
+
     @TableField(exist = false)
     private List<Param> paramList;
 
@@ -511,5 +514,13 @@ public class RepairSpecItem implements Serializable {
 
     public void setCopy(Integer copy) {
         this.copy = copy;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

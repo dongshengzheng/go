@@ -118,7 +118,12 @@ public class RepairModelItem implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    /*判断是否有孩子*/
     private Integer children;
+
+
+    /*排序*/
+    private Integer sort;
 
 
     public Integer getId() {
@@ -272,5 +277,13 @@ public class RepairModelItem implements Serializable {
 
     public void setCopy(Integer copy) {
         this.copy = copy;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

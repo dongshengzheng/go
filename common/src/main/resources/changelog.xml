@@ -247,4 +247,11 @@
             alter table t_repair_spec_item add copy INT NULL COMMENT '判断是否需要复制';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-016">
+        <sql>
+            alter table t_repair_model_item add sort INT NULL COMMENT '工程单排序';
+            alter table t_repair_spec_item add sort INT NULL COMMENT '工程单排序';
+            alter table t_repair_prog_item add sort INT NULL COMMENT '工程单排序';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
