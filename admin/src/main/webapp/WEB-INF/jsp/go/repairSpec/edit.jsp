@@ -57,7 +57,7 @@
 
 
 </style>
-<go:navigater path="account"></go:navigater>
+<go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/edit" method="post"
       id="defForm" callfn="refreshTable">
     <input type="hidden" name="modelId" value="${modelId}">
@@ -264,7 +264,8 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>${item.unit}</td>
-                                                <td><c:if test="${item.children==0}"><input class="col-md-12"
+                                                <td><c:if test="${!empty item.unit}"><input class="col-md-12"
+                                                                                            value="${item.count}"
                                                                                             name="type1List[${itemVs.index}].count"></c:if>
                                                 </td>
                                                 <td><c:if test="${item.parentCode=='0'}"><a data-id="${item.id}"

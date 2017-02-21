@@ -59,7 +59,7 @@
                     <div class="portlet-title tabbable-line">
                         <div class="caption caption-md">
                             <i class="fa fa-user"></i>
-                            <span class="caption-subject font-blue-madison bold uppercase"> 新增维修工程单</span>
+                            <span class="caption-subject font-blue-madison bold uppercase"> 查看维修工程单</span>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -127,23 +127,31 @@
                                             维修类型</label>
                                         <div class="col-sm-9 icheck-inline">
                                             <label>
-                                                <input disabled type="radio" name="type"
-                                                       value="临时维修" checked> 临时维修
+                                                <input type="radio" name="type"
+                                                       value="临时维修"
+                                                       <c:if test="${repairSpec.type=='临时维修'}">checked</c:if>
+                                                > 临时维修
                                                 <span></span>
                                             </label>
                                             <label>
-                                                <input disabled type="radio" name="type"
-                                                       value="坞检"> 坞检
+                                                <input type="radio" name="type"
+                                                       value="坞检"
+                                                       <c:if test="${repairSpec.type=='坞检'}">checked</c:if>
+                                                > 坞检
                                                 <span></span>
                                             </label>
                                             <label>
-                                                <input disabled type="radio" name="type"
-                                                       value="特检"> 特检
+                                                <input type="radio" name="type"
+                                                       value="特检"
+                                                       <c:if test="${repairSpec.type=='特检'}">checked</c:if>
+                                                > 特检
                                                 <span></span>
                                             </label>
                                             <label>
-                                                <input disabled type="radio" name="type"
-                                                       value="改造"> 改造
+                                                <input type="radio" name="type"
+                                                       value="改造"
+                                                       <c:if test="${repairSpec.type=='改造'}">checked</c:if>
+                                                > 改造
                                                 <span></span>
                                             </label>
                                         </div>
@@ -211,8 +219,9 @@
                                                         </c:forEach>
                                                     </td>
                                                     <td>${item.unit}</td>
-                                                    <td><c:if test="${item.children==0}"><input disabled
+                                                    <td><c:if test="${!empty item.unit}"><input disabled
                                                                                                 class="col-md-12"
+                                                                                                value="${item.count}"
                                                                                                 name="type1List[${itemVs.index}].count"></c:if>
                                                     </td>
                                                     <td><c:if test="${item.parentCode=='0'}"><a data-id="${item.id}"

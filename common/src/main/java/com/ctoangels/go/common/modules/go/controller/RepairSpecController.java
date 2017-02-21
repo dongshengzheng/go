@@ -64,7 +64,7 @@ public class RepairSpecController extends BaseController {
         int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<RepairSpec> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
-            ew.like("shipName", keyword);
+            ew.like("ship_name", keyword);
         ew.addFilter("company_id={0}", companyId);
         Page<RepairSpec> page = repairSpecService.selectPage(getPage(), ew);
         return jsonPage(page);
@@ -74,8 +74,22 @@ public class RepairSpecController extends BaseController {
     public String add(ModelMap map) {
         Integer modelId = 1;
         List<RepairModelItem> type1 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "通用服务");
+        List<RepairModelItem> type2 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "坞修工程");
+        List<RepairModelItem> type3 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "船体工程");
+        List<RepairModelItem> type4 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "机械工程");
+        List<RepairModelItem> type5 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "电气工程");
+        List<RepairModelItem> type6 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "冷藏工程");
+        List<RepairModelItem> type7 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "特种设备");
+        List<RepairModelItem> type8 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "其他");
         map.put("modelId", modelId);
         map.put("type1", type1);
+        map.put("type2", type2);
+        map.put("type3", type3);
+        map.put("type4", type4);
+        map.put("type5", type5);
+        map.put("type6", type6);
+        map.put("type7", type7);
+        map.put("type8", type8);
         return "go/repairSpec/add";
     }
 
