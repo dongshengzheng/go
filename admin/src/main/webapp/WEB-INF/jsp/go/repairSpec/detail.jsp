@@ -195,17 +195,7 @@
                             <input type="text" value="1" class="asd"  style="width: 20%">
                         </td>
                     </tr>
-                    <tr id="td-twoline" style="display: none">
-                        <td> <input type="checkbox" /></td>
-                        <td><input type="text" class="td-text"></td>
-                        <td><input type="text" class="td-text"></td>
-                        <td><input type="text" class="td-text"></td>
-                        <td>
-                            <button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
-                            <button  type="button"  class="btn green insert" >插入</button>
-                            <input type="text" value="1" class="asd"  style="width: 20%">
-                        </td>
-                    </tr>
+
 
                 </tbody>
             </table>
@@ -244,7 +234,7 @@
 <script>
     function delTr(obj) { //删除行  
         if(confirm('确定要删除？')) {
-            s = $("#td-twoline").clone();
+            s = $("#default_table tbody tr").clone();
             $(obj).parent().parent().remove();
         }
     }

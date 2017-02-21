@@ -82,7 +82,7 @@ public class RepairProgItem implements Serializable {
      * 任务状态
      */
     @TableField(value = "task_status")
-    private String taskStatus;
+    private Integer taskStatus;
 
     /**
      * 维修进度id
@@ -193,11 +193,11 @@ public class RepairProgItem implements Serializable {
         this.info = info;
     }
 
-    public String getTaskStatus() {
-        return this.taskStatus;
+    public Integer getTaskStatus() {
+        return taskStatus;
     }
 
-    public void setTaskStatus(String taskStatus) {
+    public void setTaskStatus(Integer taskStatus) {
         this.taskStatus = taskStatus;
     }
 

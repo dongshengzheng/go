@@ -319,5 +319,9 @@
 
         </sql>
     </changeSet>
-
+    <changeSet author="LuZhen" id="17317309132-022">
+        <sql>
+            alter table t_repair_prog_item modify column task_status INT;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
