@@ -36,7 +36,6 @@
           type="text/css"/>
     <%--<link href="${global}/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />--%>
     <link href="${global}/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
-
     <link href="${global}/plugins/icheck/skins/flat/blue.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/icheck/skins/minimal/blue.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
@@ -46,6 +45,8 @@
     <link href="${global}/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${global}/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css"/>
     <link href="${global}/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
+    <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css"/>
+    <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
 
@@ -119,6 +120,8 @@
 <script src="${global}/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
 
 <script src="${global}/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
+
+<script src="${global}/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="${global}/scripts/app.min.js" type="text/javascript"></script>

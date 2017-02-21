@@ -70,11 +70,15 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
                 insertList.add(item);
             }
         }
-        if (repairSpecItemMapper.insertBatch(insertList) < 0) {
-            return false;
+        if (insertList.size() > 0) {
+            if (repairSpecItemMapper.insertBatch(insertList) < 0) {
+                return false;
+            }
         }
-        if (repairSpecItemMapper.updateBatchById(updateList) < 0) {
-            return false;
+        if (updateList.size() > 0) {
+            if (repairSpecItemMapper.updateBatchById(updateList) < 0) {
+                return false;
+            }
         }
         return true;
     }

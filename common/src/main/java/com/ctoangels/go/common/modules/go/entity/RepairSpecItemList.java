@@ -22,6 +22,8 @@ public class RepairSpecItemList {
 
     private List<RepairSpecItem> type7List = new ArrayList<>();
 
+    private List<RepairSpecItem> type8List = new ArrayList<>();
+
 
     public RepairSpecItemList() {
     }
@@ -82,4 +84,11 @@ public class RepairSpecItemList {
         this.type7List = type7List;
     }
 
+    public List<RepairSpecItem> getType8List() {
+        return type8List;
+    }
+
+    public void setType8List(List<RepairSpecItem> type8List) {
+        this.type8List = type8List;
+    }
 }
