@@ -269,4 +269,11 @@
             alter table t_repair_spec_detail add img varchar(80) NULL COMMENT '图片或是图纸';
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-011">
+        <sql>
+            alter table t_repair_prog_detail add ship_name varchar(45) NULL COMMENT '船名';
+            alter table t_repair_prog_detail add pro_order_no varchar(45) NULL COMMENT '项目单号';
+            alter table t_repair_prog_detail add img varchar(80) NULL COMMENT '图片或是图纸';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

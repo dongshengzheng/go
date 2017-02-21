@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.Company;
 import com.ctoangels.go.common.modules.go.entity.RepairProg;
+import com.ctoangels.go.common.modules.go.entity.RepairProgItem;
 import com.ctoangels.go.common.modules.go.service.ICompanyService;
+import com.ctoangels.go.common.modules.go.service.IRepairProgItemService;
 import com.ctoangels.go.common.modules.go.service.IRepairProgService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
@@ -30,6 +32,9 @@ public class RepairProgController extends BaseController {
 
     @Autowired
     private ICompanyService companyService;
+
+    @Autowired
+    private IRepairProgItemService repairProgItemService;
 
     @RequestMapping
     public String page() {
@@ -108,6 +113,21 @@ public class RepairProgController extends BaseController {
         } else {
             jsonObject.put("status", 0);
             jsonObject.put("msg", "删除错误,请稍后再试");
+        }
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/item/changeStatus", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject itemChangeStatus(@RequestParam(required = false) Integer id, @RequestParam(required = false) Integer status) {
+        JSONObject jsonObject = new JSONObject();
+        RepairProgItem repairProgItem = repairProgItemService.selectById(id);
+        repairProgItem.setTaskStatus("1");
+        if (repairProgItemService.updateById(repairProgItem)) {
+            jsonObject.put("suc", true);
+        } else {
+            jsonObject.put("suc", false);
+            jsonObject.put("msg", "更改状态错误,请稍后再试");
         }
         return jsonObject;
     }

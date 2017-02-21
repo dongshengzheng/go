@@ -127,15 +127,18 @@
                                                             <li class="divider"></li>
                                                             <li>
                                                                 <a href="javascript:;" data-color="green-jungle"
-                                                                   class="btn change-status green-jungle ">
+                                                                   data-status=0
+                                                                   class="btn change-status green-jungle">
                                                                     已完成 </a>
                                                             </li>
                                                             <li>
                                                                 <a href="javascript:;" data-color="default"
+                                                                   data-status=1
                                                                    class="btn change-status default"> 未完成 </a>
                                                             </li>
                                                             <li>
                                                                 <a href="javascript:;" data-color="yellow"
+                                                                   data-status=2
                                                                    class="btn change-status yellow ">
                                                                     已取消 </a>
                                                             </li>
@@ -181,17 +184,7 @@
         </div>
     </div>
 </div>
-<div class="hahaha">
-    <button type="button">haha</button>
-    <input value="1">
-
-</div>
-
 <script>
-    $('.hahaha button').on('click', function () {
-        var aa = $(this).siblings('input').val();
-        alert(aa);
-    })
     $(".prog").each(function () {
         var percent = $(this).val();
         $(this).ionRangeSlider({
@@ -206,6 +199,53 @@
     })
 
     $('.change-status').on("click", function () {
-        $(this).parent().parent().siblings('button').removeClass().addClass("btn dropdown-toggle " + $(this).attr("data-color"));
+        var id = $(this).attr("data-id");
+        var status = $(this).attr("data-status");
+        $.ajax({
+            url: "repairProg/item/changeStatus",
+            data: {id: id, status: status},
+            success: function (data) {
+                if (data.success) {
+                    App.alert({
+                        container: "#bootstrap_alerts_demo",
+                        close: true,
+                        icon: 'fa fa-check',
+                        place: "append",
+                        message: "success",
+                        type: 'success',
+                        reset: true,
+                        focus: true,
+                        closeInSeconds: 10,
+                    })
+                    $(this).parent().parent().siblings('button').removeClass().addClass("btn dropdown-toggle " + $(this).attr("data-color"));
+                } else {
+                    App.alert({
+                        container: "#bootstrap_alerts_demo",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "failure",
+                        type: 'danger',
+                        reset: true,
+                        focus: true,
+                        closeInSeconds: 10,
+                    })
+                }
+            },
+            error: function () {
+                App.alert({
+                    container: "#bootstrap_alerts_demo",
+                    close: true,
+                    icon: 'fa fa-warning',
+                    place: "append",
+                    message: "error",
+                    type: 'warning',
+                    reset: true,
+                    focus: true,
+                    closeInSeconds: 10,
+                })
+                return;
+            }
+        });
     })
 </script>
