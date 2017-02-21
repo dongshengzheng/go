@@ -74,6 +74,11 @@ public class RepairProgItem implements Serializable {
     private String info;
 
     /**
+     * 排序
+     */
+    private Integer sort;
+
+    /**
      * 任务状态
      */
     @TableField(value = "task_status")
@@ -250,5 +255,13 @@ public class RepairProgItem implements Serializable {
 
     public void setParent_code(Integer parent_code) {
         this.parent_code = parent_code;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

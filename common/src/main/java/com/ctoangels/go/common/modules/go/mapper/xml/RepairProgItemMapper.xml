@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, repair_prog_detail_id AS repairProgDetailId, catagory, code, content, unit, `count`, remark,parent_code AS parentCode, info, task_status AS taskStatus, repair_prog_id AS repairProgId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, repair_prog_detail_id AS repairProgDetailId, catagory, code, content, unit, `count`, remark,parent_code AS parentCode, info, sort, task_status AS taskStatus, repair_prog_id AS repairProgId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
 </mapper>

@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html >
+    <head>
+   <meta name="spreadjs culture" content="zh-cn" />
+	<!-- jQuery（2） -->
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+
+    <!-- Wijmo CSS（3）-->
+    <link href="http://cdn.wijmo.com/themes/aristo/jquery-wijmo.css" rel="stylesheet" type="text/css" />
+
+    <!-- SpreadJS（4） -->
+    <script src="http://cdn.wijmo.com/spreadjs/jquery.wijmo.wijspread.all.3.20142.11.min.js" type="text/javascript"></script>
+
+    <!-- SpreadJS CSS（5）-->
+    <link href="http://cdn.wijmo.com/spreadjs/jquery.wijmo.wijspread.3.20142.11.css" rel="stylesheet" type="text/css" />
+    <body>
+			<div id="wijspread1" style="width: 480px; height: 320px; border: 1px solid gray"/>
+
+    </body>
+	<script id="scriptInit" type="text/javascript">
+		$(document).ready( $(function () {
+			// SpreadJS 初始化
+			$("#wijspread1").wijspread();
+		})
+		);
+    </script>
+</html>
