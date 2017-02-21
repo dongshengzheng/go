@@ -72,4 +72,12 @@ public class Const {
 
     public static final Integer EMAIL_ACTIVATE_STATUS_NOT = 0;//未进行邮箱验证
     public static final Integer EMAIL_ACTIVATE_STATUS_HAVE = 1;//已经行邮箱验证
+
+    //维修进度子项完成进度
+    public static final Integer TASK_COMPLETE = 0;//该项已完成
+    public static final Integer TASK_NOT_COMPLETE = 1;//该项未完成
+    public static final Integer TASK_CANCEL = 2;//该项已取消
+
+
+
 }
