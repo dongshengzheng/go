@@ -276,4 +276,55 @@
             alter table t_repair_prog_detail add img varchar(80) NULL COMMENT '图片或是图纸';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-020">
+        <sql>
+            CREATE TABLE `t_repair_model_detail` (
+            `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '维修工程范本的id',
+            `ship_name` varchar(45) DEFAULT NULL COMMENT '船名',
+            `code` varchar(45) DEFAULT NULL COMMENT '项目号',
+            `catagory` varchar(45) DEFAULT NULL COMMENT '项目分类',
+            `pro_order_no` varchar(45) DEFAULT NULL COMMENT '项目单号',
+            `pro_name` varchar(45) DEFAULT NULL COMMENT '项目名称',
+            `pro_desc` text COMMENT '项目描述',
+            `faci_name` varchar(45) DEFAULT NULL COMMENT '设备名称',
+            `faci_type` varchar(45) DEFAULT NULL COMMENT '设备类型',
+            `faci_src` varchar(45) DEFAULT NULL COMMENT '厂家/国家',
+            `faci_no` varchar(45) DEFAULT NULL COMMENT '设备信息：序列号',
+            `faci_param` varchar(200) DEFAULT NULL COMMENT '设备信息：相关参数',
+            `repair_position` varchar(45) DEFAULT NULL COMMENT '维修部位',
+            `repair_position_desc` text COMMENT '维修详细位置',
+            `damage` varchar(500) DEFAULT NULL COMMENT '损坏程度',
+            `repair_tech` varchar(300) DEFAULT NULL COMMENT '修理工艺',
+            `repair_tech_desc` varchar(500) DEFAULT NULL COMMENT '详细修理工艺',
+            `create_date` date DEFAULT NULL COMMENT '创建时间',
+            `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+            `update_date` date DEFAULT NULL COMMENT '修改时间',
+            `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+            `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+            `img` varchar(80) DEFAULT NULL COMMENT '图片或是图纸',
+            `company_id` varchar(80) DEFAULT NULL COMMENT '公司id',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+
+    <changeSet author="LuZhen" id="17317309132-021">
+        <sql>
+            CREATE TABLE `t_repair_model_detail_req` (
+            `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '修理要求/和材料规格的id',
+            `des` varchar(500) DEFAULT NULL COMMENT '要求描述/和材料规格',
+            `unit` varchar(45) DEFAULT NULL COMMENT '单位',
+            `count` varchar(45) DEFAULT NULL COMMENT '数量',
+            `repair_spec_detail_id` int(11) DEFAULT NULL COMMENT '维修工程单范本的id',
+            `create_date` date DEFAULT NULL COMMENT '创建时间',
+            `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+            `update_date` date DEFAULT NULL COMMENT '修改时间',
+            `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+            `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

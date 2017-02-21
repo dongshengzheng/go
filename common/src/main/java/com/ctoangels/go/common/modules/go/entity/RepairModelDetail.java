@@ -14,33 +14,29 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * 
  *
  */
-@TableName("t_repair_spec_detail")
-public class RepairSpecDetail implements Serializable {
+@TableName("t_repair_model_detail")
+public class RepairModelDetail implements Serializable {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
 
-	/** 维修详单的id */
+	/** 维修工程范本的id */
 	@TableId(type = IdType.AUTO)
 	private Integer id;
 
-	/** 维修工程单的id */
-	@TableField(value = "repair_spec_id")
-	private Integer repairSpecId;
+	/** 船名 */
+	@TableField(value = "ship_name")
+	private String shipName;
 
 	/** 项目号 */
 	private String code;
 
-	/*船舶名称*/
-	@TableField(value = "ship_name")
-	private String shipName;
-
-	/*项目单号*/
-	@TableField(value = "pro_order_no")
-	private String proOrderNo;
-
 	/** 项目分类 */
 	private String catagory;
+
+	/** 项目单号 */
+	@TableField(value = "pro_order_no")
+	private String proOrderNo;
 
 	/** 项目名称 */
 	@TableField(value = "pro_name")
@@ -89,9 +85,6 @@ public class RepairSpecDetail implements Serializable {
 	@TableField(value = "repair_tech_desc")
 	private String repairTechDesc;
 
-	/** 图纸 */
-	private String img;
-
 	/** 创建时间 */
 	@TableField(value = "create_date")
 	private Date createDate;
@@ -112,6 +105,13 @@ public class RepairSpecDetail implements Serializable {
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
+	/** 图片或是图纸 */
+	private String img;
+
+	/** 公司id */
+	@TableField(value = "company_id")
+	private String companyId;
+
 
 	public Integer getId() {
 		return this.id;
@@ -121,12 +121,12 @@ public class RepairSpecDetail implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getRepairSpecId() {
-		return this.repairSpecId;
+	public String getShipName() {
+		return this.shipName;
 	}
 
-	public void setRepairSpecId(Integer repairSpecId) {
-		this.repairSpecId = repairSpecId;
+	public void setShipName(String shipName) {
+		this.shipName = shipName;
 	}
 
 	public String getCode() {
@@ -143,6 +143,14 @@ public class RepairSpecDetail implements Serializable {
 
 	public void setCatagory(String catagory) {
 		this.catagory = catagory;
+	}
+
+	public String getProOrderNo() {
+		return this.proOrderNo;
+	}
+
+	public void setProOrderNo(String proOrderNo) {
+		this.proOrderNo = proOrderNo;
 	}
 
 	public String getProName() {
@@ -281,27 +289,20 @@ public class RepairSpecDetail implements Serializable {
 		this.delFlag = delFlag;
 	}
 
-	public String getShipName() {
-		return shipName;
-	}
-
-	public void setShipName(String shipName) {
-		this.shipName = shipName;
-	}
-
-	public String getProOrderNo() {
-		return proOrderNo;
-	}
-
-	public void setProOrderNo(String proOrderNo) {
-		this.proOrderNo = proOrderNo;
-	}
-
 	public String getImg() {
-		return img;
+		return this.img;
 	}
 
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+	public String getCompanyId() {
+		return this.companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 }
