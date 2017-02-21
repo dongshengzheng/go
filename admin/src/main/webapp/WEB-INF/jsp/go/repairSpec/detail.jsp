@@ -177,8 +177,8 @@
                     <th style="width: 6%">单位</th>
                     <th style="width: 6%">数量</th>
                     <th style="width: 20%">
-                        <button type="button" onclick="" class="btn red">删除</button>&nbsp;&nbsp;
-                        <button  type="button" onclick="addTr()" class="btn green">添加</button>&nbsp;
+                        <button type="button" onclick="" class="btn red">删除</button>&nbsp;
+                        <button  type="button" onclick="addTr(this)" class="btn green">添加</button>
                         <input type="text" value="1" id="assPages" style="width: 20%">
                     </th>
                 </tr>
@@ -190,9 +190,20 @@
                         <td><input type="text" class="td-text"></td>
                         <td><input type="text" class="td-text"></td>
                         <td>
-                            <button type="button" onclick="" class="btn red">删除</button>&nbsp;&nbsp;
-                            <button  type="button" onclick="addTr()" class="btn green">插入</button>&nbsp;
-                            <input type="text" value="1"  style="width: 20%">
+                            <button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
+                            <button  type="button"  class="btn green insert" >插入</button>
+                            <input type="text" value="1" class="asd"  style="width: 20%">
+                        </td>
+                    </tr>
+                    <tr id="td-twoline" style="display: none">
+                        <td> <input type="checkbox" /></td>
+                        <td><input type="text" class="td-text"></td>
+                        <td><input type="text" class="td-text"></td>
+                        <td><input type="text" class="td-text"></td>
+                        <td>
+                            <button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
+                            <button  type="button"  class="btn green insert" >插入</button>
+                            <input type="text" value="1" class="asd"  style="width: 20%">
                         </td>
                     </tr>
 
@@ -232,28 +243,43 @@
 
 <script>
     function delTr(obj) { //删除行  
-        $(obj).parent().parent().remove();
+        if(confirm('确定要删除？')) {
+            s = $("#td-twoline").clone();
+            $(obj).parent().parent().remove();
+        }
     }
 
     function addTr() {  //增加行
-        if($("table tbody tr:visible").length==0){
-            $("#default_table tbody").append('<tr>' +
-                    '<td><input type="checkbox"/></td>'+
-                    '<td><input type="text" class="td-text"></td>' +
-                    '<td><input type="text" class="td-text"></td>' +
-                    '<td><input type="text" class="td-text"></td>' +
-                    '<td><button type="button" onclick="delTr(this)" class="btn red">删除</button></td>' +
-                    '</tr>');
-        }else {
-            $("#default_table tbody tr:last").after('<tr>' +
-                    '<td><input type="checkbox"/></td>'+
-                    '<td><input type="text" class="td-text"></td>' +
-                    '<td><input type="text" class="td-text"></td>' +
-                    '<td><input type="text" class="td-text"></td>' +
-                    '<td><button type="button" onclick="delTr(this)" class="btn red">删除</button></td>' +
-                    '</tr>');
+        var rows=$("#assPages").val();
+        for(i=0;i<rows;i++){
+            if($("table tbody tr:visible").length==0){
+                $("#default_table tbody").append(s);
+            }else {
+                s=$("#default_table tbody tr:last").clone()
+                $("#default_table tbody tr:last").after(s);
+            }
         }
+
+        $(".insert").unbind('click');
+
+        $(".insert").on("click",function () {
+            var rows=$(this).parent().find('input').val();
+            for(i=0;i<rows;i++){
+                var s=$("#default_table tbody tr:last").clone()
+                $(this).parent().parent().after(s);
+            }
+            $(this).parent().find('input').val(1);
+        })
     }
+
+    $(".insert").on("click",function () {
+        var rows=$(this).parent().find('input').val();
+        for(i=0;i<rows;i++){
+            var s=$("#default_table tbody tr:last").clone()
+            $(this).parent().parent().after(s);
+        }
+        $(this).parent().find('input').val(1);
+    })
 
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 

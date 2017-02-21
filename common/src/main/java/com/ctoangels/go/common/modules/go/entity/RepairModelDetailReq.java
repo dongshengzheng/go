@@ -14,8 +14,8 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * 
  *
  */
-@TableName("t_repair_spec_detail_req")
-public class RepairSpecDetailReq implements Serializable {
+@TableName("t_repair_model_detail_req")
+public class RepairModelDetailReq implements Serializable {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
@@ -33,7 +33,7 @@ public class RepairSpecDetailReq implements Serializable {
 	/** 数量 */
 	private String count;
 
-	/** 维修详单的id */
+	/** 维修工程单范本的id */
 	@TableField(value = "repair_spec_detail_id")
 	private Integer repairSpecDetailId;
 
