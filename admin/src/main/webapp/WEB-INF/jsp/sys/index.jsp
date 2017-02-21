@@ -116,7 +116,7 @@
 <script src="${global}/plugins/plupload-2.1.2/js/moxie.min.js"></script>
 <script src="${global}/plugins/plupload-2.1.2/js/plupload.dev.js"></script>
 
-<script src="${global}/plugins/bootstrap-sweetalert/sweetalert.min.js"
+<script src="${global}/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
 
 <script src="${global}/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->

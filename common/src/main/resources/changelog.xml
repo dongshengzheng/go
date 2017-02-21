@@ -254,4 +254,19 @@
             alter table t_repair_prog_item add sort INT NULL COMMENT '工程单排序';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-017">
+        <sql>
+            alter table t_repair_spec_detail add ship_name varchar(45) NULL COMMENT '船名';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-018">
+        <sql>
+            alter table t_repair_spec_detail add pro_order_no varchar(45) NULL COMMENT '项目单号';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-019">
+        <sql>
+            alter table t_repair_spec_detail add img varchar(80) NULL COMMENT '图片或是图纸';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
