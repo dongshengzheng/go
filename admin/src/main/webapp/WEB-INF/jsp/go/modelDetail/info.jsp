@@ -47,43 +47,6 @@
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
-<script type="text/javascript">
-    $(function () {
-        $("#selectAll").change(function(){
-
-            $("#selectAll").prop("checked",this.checked);
-            if($("#selectAll").prop("checked")){
-                $(".td-checkbox").each(function () {
-                    $(this).prop("checked","checked");
-                });
-            }else{
-                $(".td-checkbox").each(function () {
-                    $(this).attr("checked",false);
-                });
-            }
-        });
-
-        $("#deletes").click(function(e){
-            //e.preventDefault();
-            var t=confirm("确定要删除吗？");
-            if(t) {
-                var count = 0;
-                $(".td-checkbox").each(function () {
-                    if ($(this).prop("checked")) {
-                        count++
-                        $(this).parent().parent().remove();
-                    }
-                });
-
-                if (count == 0) {
-                    alert("至少选择一个!");
-                    return;
-                }
-            }
-        });
-    });
-</script>
-
 <form action="" method="post" class="form-horizontal" id="defForm">
     <div>
         <div class="line1"></div>
@@ -265,119 +228,10 @@
     <div class="form-actions" >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <button type="button" class="btn green" onclick="saveInfo(1)">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn green" onclick="saveInfo()">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn default">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn green" onclick="saveInfo(2)">保存为工程单范本</button>
             </div>
         </div>
     </div>
 </form>
 
-
-<script type="text/javascript">
-
-    var rowTr='<tr>' +
-            '<td><input type="checkbox" class="td-checkbox"/></td>'+
-            '<td><input type="text" class="td-text" name="des"></td>' +
-            '<td><input type="text" class="td-text" name="unit"></td>' +
-            '<td><input type="text" class="td-text" name="count"></td>' +
-            '<td><button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;&nbsp;' +
-            '<button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button></td>' +
-            '</tr>'
-    function delTr(obj) { //删除行  
-        if(confirm('确定要删除？')) {
-            $(obj).parent().parent().remove();
-        }
-    }
-
-    function addTr() {  //增加行
-        var rows=$("#assPages").val();
-        for(i=0;i<rows;i++){
-            if($("table tbody tr:visible").length==0){
-                $("#default_table tbody").append(rowTr);
-            }else {
-                $("#default_table tbody tr:last").after(rowTr);
-            }
-        }
-        $("#assPages").val(1);
-    }
-    function insTr(obj) {
-        $(obj).parent().parent().after(rowTr);
-    }
-
-
-
-    $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
-
-    initUploaders_img("upload_img", "windyeel", "${staticPath}/", "imges", "img");
-
-    //服务器校验
-    function saveInfo(a) {
-        var dataJson="";
-        var des = "";
-        var unit="";
-        var count=0;
-        $("#default_table tr").each(function (index, domEle){// mainTable 下的tr  
-            userId = "";
-            if(index != 0){//遍历除去第一行的之外的所有input作为json数据传入后台  
-                $(domEle).find("input").each(function(index,data){
-                    if(index == 1){
-                        des = $(data).val();
-                    }if(index == 2){
-                        unit = $(data).val();
-                    }if(index == 3){
-                        if($(data).val() != "" && $(data).val() != null){//如果没有输入的情况下传的值是0  
-                            count = $(data).val();
-                        }
-                    }
-                });
-                /*
-                 dataJson += "{"+"\"des\":\""+des+"\","+"\"unit\":\""+unit+"\","+"\"count\":\""+count+"\"},";
-                 */
-                dataJson += des+","+unit+","+count+",";
-
-            }
-        });
-        if (dataJson.lastIndexOf(",")) {
-            dataJson = dataJson.substring(0,dataJson.length -1);
-        }
-        alert(dataJson);
-        if(a==1){
-            $("#defForm").attr("action","enquiry/add?dataJson="+dataJson);
-        }else if (a==2){
-            $("#defForm").attr("action","enquiry/addModel?dataJson="+dataJson);
-        }
-        if(check()) {
-            $("#defForm").ajaxSubmit({
-                success: function (data) {
-                    if (data.success) {
-                        alert("success");
-                    } else {
-                        alert("false");
-                        alert(data.msg);
-                    }
-                },
-                error: function () {
-                    alert("error");
-                    return;
-                }
-            });
-        }
-    }
-    //客户端校验
-    function check() {
-        if ($("#proName").val() == "") {
-            $("#proName").tips({
-                side: 2,
-                msg: '工程名称不能为空',
-                bg: '#AE81FF',
-                time: 3
-            });
-            $("#proName").focus();
-            return false;
-        } else {
-            $("#proName").val(jQuery.trim($('#proName').val()));
-        }
-        return true
-    }
-</script>

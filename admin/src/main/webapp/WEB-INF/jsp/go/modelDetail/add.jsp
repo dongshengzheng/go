@@ -175,7 +175,7 @@
                         <c:forEach items="${repDicts}" var="r">
                             <div class="col-md-3">
                                 <label class="mt-checkbox">
-                                    <input type="checkbox" value="${r.id}" name="repairPosition"> ${r.value}
+                                    <input type="checkbox" value="${r.value}" name="repairPosition"> ${r.des}
                                     <span></span>
                                 </label>
                             </div>
@@ -249,7 +249,7 @@
                 <c:forEach items="${reqDicts}" var="req">
                     <div class="col-md-3">
                         <label class="mt-checkbox">
-                            <input type="checkbox"  value="${req.id}" name="repairTech"> ${req.value}
+                            <input type="checkbox"  value="${req.value}" name="repairTech"> ${req.des}
                             <span></span>
                         </label>
                     </div>

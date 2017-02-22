@@ -372,4 +372,9 @@
             INSERT INTO `t_dict` VALUES ('32', '修理工艺', '其它请填', null, null, null, null, null, '0');
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-025">
+        <sql>
+            alter table t_repair_model_detail_req change column repair_spec_detail_id repair_model_detail_id INT  COMMENT '维修范本id';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

@@ -12,6 +12,7 @@ import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -67,7 +70,7 @@ public class RepairModelDetailController extends BaseController{
 
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String add(ModelMap modelMap) {
+    public String add(HttpSession session) {
         EntityWrapper<Dict> ew = new EntityWrapper<>();
         ew.addFilter("type={0}", "维修部位");
         List<Dict> repDicts=dictService.selectList(ew);
@@ -76,8 +79,8 @@ public class RepairModelDetailController extends BaseController{
         ew1.addFilter("type={0}", "修理工艺");
         List<Dict> reqDicts=dictService.selectList(ew1);
 
-        modelMap.put("repDicts",repDicts);
-        modelMap.put("reqDicts",reqDicts);
+        session.setAttribute("repDicts",repDicts);
+        session.setAttribute("reqDicts",reqDicts);
         return "go/modelDetail/add";
     }
 
@@ -104,7 +107,7 @@ public class RepairModelDetailController extends BaseController{
                     modelReq.setUnit(array[i]);
                 }else if(i%3==2){
                     modelReq.setCount(array[i]);
-                    modelReq.setRepairSpecDetailId(id);
+                    modelReq.setRepairModelDetailId(id);
                     modelReqs.add(modelReq);
                     modelReq=new RepairModelDetailReq();
                 }
@@ -119,6 +122,16 @@ public class RepairModelDetailController extends BaseController{
         return jsonObject;
     }
 
+    @RequestMapping(value = "info" ,method =RequestMethod.GET)
+    public String info(@RequestParam Integer id, Model model){
 
+        RepairModelDetail repairModelDetail=repairModelDetailService.selectById(id);
+        model.addAttribute("modelDetails",repairModelDetail);
+
+        EntityWrapper<RepairModelDetailReq> ew = new EntityWrapper<>();
+        ew.addFilter("repair_model_id", repairModelDetail.getId());
+        List<RepairModelDetailReq> repairModelDetailReqs=repairModelDetailReqService.selectList(ew);
+        return "go/modelDetail/info";
+    }
 
 }
