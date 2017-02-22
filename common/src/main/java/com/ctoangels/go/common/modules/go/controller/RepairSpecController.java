@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.*;
-import com.ctoangels.go.common.modules.go.service.ICompanyService;
-import com.ctoangels.go.common.modules.go.service.IRepairModelItemService;
-import com.ctoangels.go.common.modules.go.service.IRepairSpecItemService;
-import com.ctoangels.go.common.modules.go.service.IRepairSpecService;
+import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -53,6 +50,9 @@ public class RepairSpecController extends BaseController {
     @Autowired
     private ICompanyService companyService;
 
+    @Autowired
+    private IDictService dictService;
+
     @RequestMapping
     public String page() {
         return "go/repairSpec/list";
@@ -81,6 +81,7 @@ public class RepairSpecController extends BaseController {
         List<RepairModelItem> type6 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "冷藏工程");
         List<RepairModelItem> type7 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "特种设备");
         List<RepairModelItem> type8 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "其他");
+        map.put("typeList", dictService.getListByType("维修类型"));
         map.put("modelId", modelId);
         map.put("type1", type1);
         map.put("type2", type2);
@@ -114,7 +115,9 @@ public class RepairSpecController extends BaseController {
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
         List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsNoValue(id, "通用服务", repairSpec.getModelId());
+        List<RepairSpecItem> type2 = repairSpecItemService.bySpecIdAndCatagoryWithParamsNoValue(id, "通用服务", repairSpec.getModelId());
         map.put("repairSpec", repairSpec);
+        map.put("typeList", dictService.getListByType("维修类型"));
         map.put("type1", type1);
         return "go/repairSpec/info";
     }
@@ -149,6 +152,7 @@ public class RepairSpecController extends BaseController {
         RepairSpec repairSpec = repairSpecService.selectById(id);
         List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "通用服务", repairSpec.getModelId());
         map.put("repairSpec", repairSpec);
+        map.put("typeList", dictService.getListByType("维修类型"));
         map.put("type1", type1);
         return "go/repairSpec/edit";
     }

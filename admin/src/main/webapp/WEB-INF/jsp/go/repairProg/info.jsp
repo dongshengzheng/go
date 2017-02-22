@@ -30,6 +30,7 @@
     }
 </style>
 <go:navigater path="repairProg"></go:navigater>
+<input id="repairProgId" value="${repairProg.id}" type="hidden">
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
     <div class="profile-content">
@@ -97,81 +98,94 @@
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"> </a>
                                 </div>
+                                <div class="caption" style="float: right">
+                                    说明:
+                                    <a class="btn btn-sm green-jungle disabled" style="padding: 2px 5px;opacity: 1">
+                                        已完成
+                                    </a>
+                                    <a class="btn btn-sm default disabled" style="padding: 2px 5px;opacity: 1">
+                                        未完成
+                                    </a>
+                                    <a class="btn btn-sm  yellow disabled" style="padding: 2px 5px;opacity: 1">
+                                        已取消
+                                    </a>
+
+                                </div>
                             </div>
 
                             <c:forEach begin="1" end="8" varStatus="outerVs">
-
-                                <%--通用服务开始--%>
-                                <div class="portlet-body">
-                                    <div class="portlet box blue-dark">
-                                        <div class="portlet-title" style="background-color: #00aaaa">
-                                            <div class="caption">
-                                                <i class="fa fa-cog"></i>
-                                                <c:if test="${outerVs.count==1}">通用服务</c:if>
-                                                <c:if test="${outerVs.count==2}">坞修工程</c:if>
-                                                <c:if test="${outerVs.count==3}">船体工程</c:if>
-                                                <c:if test="${outerVs.count==4}">机械工程</c:if>
-                                                <c:if test="${outerVs.count==5}">电气工程</c:if>
-                                                <c:if test="${outerVs.count==6}">冷藏工程</c:if>
-                                                <c:if test="${outerVs.count==7}">特种设备</c:if>
-                                                <c:if test="${outerVs.count==8}">其他</c:if>
+                                <c:set var="type" value="type${outerVs.count}"></c:set>
+                                <c:if test="${!empty requestScope[type]}">
+                                    <div class="portlet-body">
+                                        <div class="portlet box blue-dark">
+                                            <div class="portlet-title" style="background-color: #00aaaa">
+                                                <div class="caption">
+                                                    <i class="fa fa-cog"></i>
+                                                    <c:if test="${outerVs.count==1}">通用服务</c:if>
+                                                    <c:if test="${outerVs.count==2}">坞修工程</c:if>
+                                                    <c:if test="${outerVs.count==3}">船体工程</c:if>
+                                                    <c:if test="${outerVs.count==4}">机械工程</c:if>
+                                                    <c:if test="${outerVs.count==5}">电气工程</c:if>
+                                                    <c:if test="${outerVs.count==6}">冷藏工程</c:if>
+                                                    <c:if test="${outerVs.count==7}">特种设备</c:if>
+                                                    <c:if test="${outerVs.count==8}">其他</c:if>
+                                                </div>
+                                                <div class="tools">
+                                                    <a href="javascript:;" class="collapse"> </a>
+                                                </div>
                                             </div>
-                                            <div class="tools">
-                                                <a href="javascript:;" class="collapse"> </a>
-                                            </div>
-                                        </div>
-                                        <div class="portlet-body">
-                                            <div class="row">
-                                                <div class="col-md-12 clearfix">
-                                                    <c:set var="type" value="type${outerVs.count}"></c:set>
-                                                    <c:forEach items="${requestScope[type]}" var="item">
-                                                        <div class="btn-group margin-bottom-5">
-                                                            <button class="btn dropdown-toggle
+                                            <div class="portlet-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 clearfix">
+                                                        <c:forEach items="${requestScope[type]}" var="item">
+                                                            <c:if test="${!empty item}"></c:if>
+                                                            <div class="btn-group margin-bottom-5">
+                                                                <button class="btn dropdown-toggle
                                                          <c:if test="${item.taskStatus==0}">green-jungle</c:if>
                                                          <c:if test="${item.taskStatus==1}">default</c:if>
                                                          <c:if test="${item.taskStatus==2}">yellow</c:if>"
-                                                                    type="button"
-                                                                    data-toggle="dropdown"> ${item.proOrderNo}
-                                                                <i class="fa fa-angle-down"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                <li>
-                                                                    <a href="javascript:;"
-                                                                       class="btn change-status blue"> 查看详单 </a>
-                                                                </li>
-                                                                <li class="divider"></li>
-                                                                <li>
-                                                                    <a href="javascript:;" data-color="green-jungle"
-                                                                       data-status="0" data-id="${item.id}"
-                                                                       class="btn change-status green-jungle">
-                                                                        已完成 </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;" data-color="default"
-                                                                       data-status="1" data-id="${item.id}"
-                                                                       class="btn change-status default"> 未完成 </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;" data-color="yellow"
-                                                                       data-status="2" data-id="${item.id}"
-                                                                       class="btn change-status yellow ">
-                                                                        已取消 </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </c:forEach>
+                                                                        type="button"
+                                                                        data-toggle="dropdown"> ${item.proOrderNo}
+                                                                    <i class="fa fa-angle-down"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu" role="menu">
+                                                                    <li>
+                                                                        <a href="javascript:;"
+                                                                           class="btn change-status blue"> 查看详单 </a>
+                                                                    </li>
+                                                                    <li class="divider"></li>
+                                                                    <li>
+                                                                        <a href="javascript:;" data-color="green-jungle"
+                                                                           data-status="0" data-id="${item.id}"
+                                                                           class="btn change-status green-jungle">
+                                                                            已完成 </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="javascript:;" data-color="default"
+                                                                           data-status="1" data-id="${item.id}"
+                                                                           class="btn change-status default"> 未完成 </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="javascript:;" data-color="yellow"
+                                                                           data-status="2" data-id="${item.id}"
+                                                                           class="btn change-status yellow ">
+                                                                            已取消 </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <%--通用服务结束--%>
+                                </c:if>
                             </c:forEach>
                         </div>
                         <%--维修工程进度看板结束--%>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <a href="repairSpec" class="btn default" data-target="navTab">返回</a>
+                        <a href="repairProg" class="btn default" data-target="navTab">返回</a>
                     </div>
                 </div>
             </div>
@@ -179,7 +193,6 @@
     </div>
     </div>
 </form>
-<input id="repairProgId" value="${repairProg.id}">
 <script>
     var repairProgId = $("#repairProgId").val();
     var count_table;
@@ -238,17 +251,6 @@
         });
     });
 
-
-    function refreshTable(toFirst) {
-        //defaultTable.ajax.reload();
-        if (toFirst) {//表格重绘，并跳转到第一页
-            count_table.draw();
-        } else {//表格重绘，保持在当前页
-            count_table.draw(false);
-        }
-    }
-
-
     $(".prog").each(function () {
         var percent = $(this).val();
         $(this).ionRangeSlider({
@@ -266,34 +268,34 @@
         var thisone = $(this);
         var id = thisone.attr("data-id");
         var status = thisone.attr("data-status");
+        var btn = thisone.parent().parent().siblings('button');
         $.ajax({
             url: "repairProg/item/changeStatus",
             data: {id: id, status: status},
             success: function (data) {
                 if (data.success) {
-                    var btn = thisone.parent().parent().siblings('button');
                     btn.removeClass().addClass("btn dropdown-toggle " + thisone.attr("data-color"));
                     btn.tips({
                         side: 1,
                         msg: '修改成功',
-                        bg: 'blue',
+                        bg: '#6AC1F1',
                         time: 3
                     });
-                    refreshTable();
+                    count_table.draw();
                 } else {
-                    thisone.tips({
+                    btn.tips({
                         side: 1,
                         msg: data.msg,
-                        bg: '#AE81FF',
+                        bg: '#6AC1F1',
                         time: 3
                     });
                 }
             },
             error: function () {
-                thisone.tips({
+                btn.tips({
                     side: 1,
                     msg: "发生异常,请稍后再试",
-                    bg: '#AE81FF',
+                    bg: '#6AC1F1',
                     time: 3
                 });
                 return;

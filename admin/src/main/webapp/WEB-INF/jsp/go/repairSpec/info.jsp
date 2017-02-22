@@ -126,34 +126,14 @@
                                         <label class="col-sm-3 control-label">
                                             维修类型</label>
                                         <div class="col-sm-9 icheck-inline">
-                                            <label>
-                                                <input type="radio" name="type"
-                                                       value="临时维修"
-                                                       <c:if test="${repairSpec.type=='临时维修'}">checked</c:if>
-                                                > 临时维修
-                                                <span></span>
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="type"
-                                                       value="坞检"
-                                                       <c:if test="${repairSpec.type=='坞检'}">checked</c:if>
-                                                > 坞检
-                                                <span></span>
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="type"
-                                                       value="特检"
-                                                       <c:if test="${repairSpec.type=='特检'}">checked</c:if>
-                                                > 特检
-                                                <span></span>
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="type"
-                                                       value="改造"
-                                                       <c:if test="${repairSpec.type=='改造'}">checked</c:if>
-                                                > 改造
-                                                <span></span>
-                                            </label>
+                                            <c:forEach items="${typeList}" var="type" varStatus="vs">
+                                                <label>
+                                                    <input type="radio" name="type"
+                                                           value="${type.value}"
+                                                           <c:if test="${type.value==repairSpec.type}">checked</c:if>> ${type.des}
+                                                    <span></span>
+                                                </label>
+                                            </c:forEach>
                                         </div>
                                     </div>
                                 </div>

@@ -46,7 +46,7 @@
     <link href="${global}/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css"/>
     <link href="${global}/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
     <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css"/>
-    <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css"/>
+    <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat2.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
 

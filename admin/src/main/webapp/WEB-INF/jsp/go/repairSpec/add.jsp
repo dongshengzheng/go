@@ -166,26 +166,14 @@
                                         <label class="col-sm-3 control-label">
                                             维修类型</label>
                                         <div class="col-sm-9 icheck-inline">
-                                            <label>
-                                                <input type="radio" name="type"
-                                                       value="临时维修" checked> 临时维修
-                                                <span></span>
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="type"
-                                                       value="坞检"> 坞检
-                                                <span></span>
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="type"
-                                                       value="特检"> 特检
-                                                <span></span>
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="type"
-                                                       value="改造"> 改造
-                                                <span></span>
-                                            </label>
+                                            <c:forEach items="${typeList}" var="type" varStatus="vs">
+                                                <label>
+                                                    <input type="radio" name="type"
+                                                           value="${type.value}"
+                                                           <c:if test="${vs.count==1}">checked</c:if>> ${type.des}
+                                                    <span></span>
+                                                </label>
+                                            </c:forEach>
                                         </div>
                                     </div>
                                 </div>
