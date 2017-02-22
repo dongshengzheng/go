@@ -1,5 +1,6 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ctoangels.go.common.modules.go.mapper.RepairSpecDetailMapper;
@@ -14,6 +15,4 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
  */
 @Service
 public class RepairSpecDetailServiceImpl extends SuperServiceImpl<RepairSpecDetailMapper, RepairSpecDetail> implements IRepairSpecDetailService {
-
-
 }

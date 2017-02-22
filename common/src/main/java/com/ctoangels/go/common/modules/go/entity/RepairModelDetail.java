@@ -110,7 +110,7 @@ public class RepairModelDetail implements Serializable {
 
 	/** 公司id */
 	@TableField(value = "company_id")
-	private String companyId;
+	private Integer companyId;
 
 
 	public Integer getId() {
@@ -297,12 +297,11 @@ public class RepairModelDetail implements Serializable {
 		this.img = img;
 	}
 
-	public String getCompanyId() {
-		return this.companyId;
+	public Integer getCompanyId() {
+		return companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(Integer companyId) {
 		this.companyId = companyId;
 	}
-
 }

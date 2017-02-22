@@ -9,6 +9,4 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  *
  */
 public interface RepairSpecDetailMapper extends AutoMapper<RepairSpecDetail> {
-
-
 }
