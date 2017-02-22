@@ -265,15 +265,13 @@
     <div class="form-actions" >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <button type="button" class="btn green" onclick="saveInfo(1)">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn green" onclick="saveInfo()">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn default">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn green" onclick="saveInfo(2)">保存为工程单范本</button>
             </div>
         </div>
     </div>
 </form>
-
-
+<a id="modelDetail" href="modelDetail" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>'
 <script type="text/javascript">
 
     var rowTr='<tr>' +
@@ -341,17 +339,14 @@
         if (dataJson.lastIndexOf(",")) {
             dataJson = dataJson.substring(0,dataJson.length -1);
         }
-        alert(dataJson);
-        if(a==1){
-            $("#defForm").attr("action","enquiry/add?dataJson="+dataJson);
-        }else if (a==2){
-            $("#defForm").attr("action","enquiry/addModel?dataJson="+dataJson);
-        }
+
+        $("#defForm").attr("action","enquiry/addModel?dataJson="+dataJson);
         if(check()) {
             $("#defForm").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
                         alert("success");
+                        $("#modelDetail").click();
                     } else {
                         alert("false");
                         alert(data.msg);

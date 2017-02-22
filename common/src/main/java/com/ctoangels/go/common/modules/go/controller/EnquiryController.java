@@ -30,7 +30,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("enquiry")
 public class EnquiryController extends BaseController {
-    private String[] name=new String[10000];
 
     @Autowired
     private IRepairSpecDetailReqService repairSpecDetailReqService;
