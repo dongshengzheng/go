@@ -123,7 +123,7 @@
             <div style="margin-top: 5px;border-right: dashed 1px #337ab7;" class="col-md-8">
                 <div style="width: 100%;">
                     <div ><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
-                    <div class="col-md-12 div-left">工程名称：<input type="text" name="proName"/></div>
+                    <div class="col-md-12 div-left">工程名称：<input id="proName" type="text" name="proName"/></div>
                     <div class="col-md-12 div-left">工程描述： </div>
                     <div class="col-md-12" style="margin-left: 20px">
                         <textarea class="form-control" rows="4" name="proDesc"></textarea>
@@ -346,19 +346,37 @@
         }else if (a==2){
             $("#defForm").attr("action","enquiry/addModel?dataJson="+dataJson);
         }
-        $("#defForm").ajaxSubmit({
-            success: function (data) {
-                if (data.success) {
-                    alert("success");
-                } else {
-                    alert("false");
-                    alert(data.msg);
+        if(check()) {
+            $("#defForm").ajaxSubmit({
+                success: function (data) {
+                    if (data.success) {
+                        alert("success");
+                    } else {
+                        alert("false");
+                        alert(data.msg);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                    return;
                 }
-            },
-            error: function () {
-                alert("error");
-                return;
-            }
-        });
+            });
+        }
+    }
+    //客户端校验
+    function check() {
+        if ($("#proName").val() == "") {
+            $("#proName").tips({
+                side: 2,
+                msg: '工程名称不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#proName").focus();
+            return false;
+        } else {
+            $("#proName").val(jQuery.trim($('#proName').val()));
+        }
+        return true
     }
 </script>
