@@ -10,5 +10,7 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface RepairProgMapper extends AutoMapper<RepairProg> {
 
+    //根据id获取该工程总完成百分比
+    Double getPerById(Integer repairProgId);
 
 }

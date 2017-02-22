@@ -33,6 +33,12 @@ public class RepairProgItem implements Serializable {
     private Integer repairProgDetailId;
 
     /**
+     * 维修进度详细信息id
+     */
+    @TableField(exist = false)
+    private String proOrderNo;
+
+    /**
      * 维修项目类型
      */
     private String catagory;
@@ -118,7 +124,7 @@ public class RepairProgItem implements Serializable {
      * 状态
      */
     @TableField(value = "del_flag")
-    private Integer delFlag;
+    private Integer delFlag = 0;
 
 
     public Integer getId() {
@@ -263,5 +269,13 @@ public class RepairProgItem implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getProOrderNo() {
+        return proOrderNo;
+    }
+
+    public void setProOrderNo(String proOrderNo) {
+        this.proOrderNo = proOrderNo;
     }
 }

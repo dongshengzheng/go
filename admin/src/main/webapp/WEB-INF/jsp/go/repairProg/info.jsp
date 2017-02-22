@@ -55,7 +55,7 @@
                             </div>
                             <div class="portlet-body">
                                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                       id="table1">
+                                       id="count_table">
                                     <thead>
                                     <tr>
                                         <th style="width:14%">分类</th>
@@ -63,30 +63,27 @@
                                         <th style="width:14%">已完成</th>
                                         <th style="width:14%">未完成</th>
                                         <th style="width:14%">已取消</th>
-                                        <th style="width:14%">待完成</th>
                                         <th style="width:16%">完成百分比</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>通用服务</td>
-                                        <td>416</td>
-                                        <td>258</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>158</td>
-                                        <td><input class="prog" value="35"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>船体工程</td>
-                                        <td>183</td>
-                                        <td>137</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>46</td>
-                                        <td><input class="prog" value="30"></td>
-                                    </tr>
-                                    </tbody>
+                                    <%--<tbody>--%>
+                                    <%--<tr>--%>
+                                    <%--<td>通用服务</td>--%>
+                                    <%--<td>416</td>--%>
+                                    <%--<td>258</td>--%>
+                                    <%--<td>0</td>--%>
+                                    <%--<td>0</td>--%>
+                                    <%--<td><input class="prog" value="35"></td>--%>
+                                    <%--</tr>--%>
+                                    <%--<tr>--%>
+                                    <%--<td>船体工程</td>--%>
+                                    <%--<td>183</td>--%>
+                                    <%--<td>137</td>--%>
+                                    <%--<td>0</td>--%>
+                                    <%--<td>0</td>--%>
+                                    <%--<td><input class="prog" value="30"></td>--%>
+                                    <%--</tr>--%>
+                                    <%--</tbody>--%>
                                 </table>
                             </div>
                         </div>
@@ -101,55 +98,75 @@
                                     <a href="javascript:;" class="collapse"> </a>
                                 </div>
                             </div>
-                            <div class="portlet-body item">
-                                <div class="portlet box blue-dark">
-                                    <div class="portlet-title" style="background-color: #00aaaa">
-                                        <div class="caption">
-                                            <i class="fa fa-cog"></i>通用服务
+
+                            <c:forEach begin="1" end="8" varStatus="outerVs">
+
+                                <%--通用服务开始--%>
+                                <div class="portlet-body">
+                                    <div class="portlet box blue-dark">
+                                        <div class="portlet-title" style="background-color: #00aaaa">
+                                            <div class="caption">
+                                                <i class="fa fa-cog"></i>
+                                                <c:if test="${outerVs.count==1}">通用服务</c:if>
+                                                <c:if test="${outerVs.count==2}">坞修工程</c:if>
+                                                <c:if test="${outerVs.count==3}">船体工程</c:if>
+                                                <c:if test="${outerVs.count==4}">机械工程</c:if>
+                                                <c:if test="${outerVs.count==5}">电气工程</c:if>
+                                                <c:if test="${outerVs.count==6}">冷藏工程</c:if>
+                                                <c:if test="${outerVs.count==7}">特种设备</c:if>
+                                                <c:if test="${outerVs.count==8}">其他</c:if>
+                                            </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse"> </a>
+                                            </div>
                                         </div>
-                                        <div class="tools">
-                                            <a href="javascript:;" class="collapse"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div class="row">
-                                            <div class="col-md-12 clearfix">
-                                                <c:forEach begin="1" end="20">
-                                                    <div class="btn-group margin-bottom-5">
-                                                        <button class="btn dropdown-toggle green-jungle " type="button"
-                                                                data-toggle="dropdown"> D001
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="javascript:;"> 查看详单 </a>
-                                                            </li>
-                                                            <li class="divider"></li>
-                                                            <li>
-                                                                <a href="javascript:;" data-color="green-jungle"
-                                                                   data-status=0
-                                                                   class="btn change-status green-jungle">
-                                                                    已完成 </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:;" data-color="default"
-                                                                   data-status=1
-                                                                   class="btn change-status default"> 未完成 </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:;" data-color="yellow"
-                                                                   data-status=2
-                                                                   class="btn change-status yellow ">
-                                                                    已取消 </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </c:forEach>
+                                        <div class="portlet-body">
+                                            <div class="row">
+                                                <div class="col-md-12 clearfix">
+                                                    <c:set var="type" value="type${outerVs.count}"></c:set>
+                                                    <c:forEach items="${requestScope[type]}" var="item">
+                                                        <div class="btn-group margin-bottom-5">
+                                                            <button class="btn dropdown-toggle
+                                                         <c:if test="${item.taskStatus==0}">green-jungle</c:if>
+                                                         <c:if test="${item.taskStatus==1}">default</c:if>
+                                                         <c:if test="${item.taskStatus==2}">yellow</c:if>"
+                                                                    type="button"
+                                                                    data-toggle="dropdown"> ${item.proOrderNo}
+                                                                <i class="fa fa-angle-down"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li>
+                                                                    <a href="javascript:;"
+                                                                       class="btn change-status blue"> 查看详单 </a>
+                                                                </li>
+                                                                <li class="divider"></li>
+                                                                <li>
+                                                                    <a href="javascript:;" data-color="green-jungle"
+                                                                       data-status="0" data-id="${item.id}"
+                                                                       class="btn change-status green-jungle">
+                                                                        已完成 </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="javascript:;" data-color="default"
+                                                                       data-status="1" data-id="${item.id}"
+                                                                       class="btn change-status default"> 未完成 </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="javascript:;" data-color="yellow"
+                                                                       data-status="2" data-id="${item.id}"
+                                                                       class="btn change-status yellow ">
+                                                                        已取消 </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <%--通用服务结束--%>
+                            </c:forEach>
                         </div>
                         <%--维修工程进度看板结束--%>
                     </div>
@@ -162,29 +179,76 @@
     </div>
     </div>
 </form>
-
-<div id="responsive" class="modal fade" tabindex="-1" aria-hidden="true" data-id="">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">备注</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                            <textarea id="dialog-text" class="form-control" rows="10"
-                                      style="resize: none;" placeholder="暂无备注信息"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn green \">确认</button>
-            </div>
-        </div>
-    </div>
-</div>
+<input id="repairProgId" value="${repairProg.id}">
 <script>
+    var repairProgId = $("#repairProgId").val();
+    var count_table;
+    $(document).ready(function () {
+        count_table = $('#count_table').DataTable({
+            "ordering": false,
+            "pagingType": "simple_numbers",
+            "processing": true,
+            "autoWidth": false,
+            "serverSide": true,
+            "paging": false,
+            "ajax": {
+                "url": "repairProg/getCount",
+                "type": "post",
+                "data": {id: repairProgId}
+            },
+            "language": {
+                "url": "<%=basePath%>assets/global/plugins/datatables/cn.txt"
+            },
+
+            "columns": [
+                {
+                    "data": "catagory",
+                },
+                {
+                    "data": "allCount",
+                },
+                {
+                    "data": "complete",
+                },
+                {
+                    "data": "notComplete",
+                },
+                {
+                    "data": "cancel",
+                },
+                {
+                    "data": "per",
+                    "render": function (data) {
+                        return '<input type="text" value="' + data + '" class="prog"/>';
+                    }
+                },
+            ],
+            "drawCallback": function (settings) {
+                drawICheck('defaultCheck', 'chx_default');
+                $(".prog").each(function () {
+                    var percent = $(this).val();
+                    $(this).ionRangeSlider({
+                        min: 0,
+                        max: 100,
+                        from: percent,
+                        from_fixed: true,
+                    });
+                })
+            },
+        });
+    });
+
+
+    function refreshTable(toFirst) {
+        //defaultTable.ajax.reload();
+        if (toFirst) {//表格重绘，并跳转到第一页
+            count_table.draw();
+        } else {//表格重绘，保持在当前页
+            count_table.draw(false);
+        }
+    }
+
+
     $(".prog").each(function () {
         var percent = $(this).val();
         $(this).ionRangeSlider({
@@ -199,51 +263,39 @@
     })
 
     $('.change-status').on("click", function () {
-        var id = $(this).attr("data-id");
-        var status = $(this).attr("data-status");
+        var thisone = $(this);
+        var id = thisone.attr("data-id");
+        var status = thisone.attr("data-status");
         $.ajax({
             url: "repairProg/item/changeStatus",
             data: {id: id, status: status},
             success: function (data) {
                 if (data.success) {
-                    App.alert({
-                        container: "#bootstrap_alerts_demo",
-                        close: true,
-                        icon: 'fa fa-check',
-                        place: "append",
-                        message: "success",
-                        type: 'success',
-                        reset: true,
-                        focus: true,
-                        closeInSeconds: 10,
-                    })
-                    $(this).parent().parent().siblings('button').removeClass().addClass("btn dropdown-toggle " + $(this).attr("data-color"));
+                    var btn = thisone.parent().parent().siblings('button');
+                    btn.removeClass().addClass("btn dropdown-toggle " + thisone.attr("data-color"));
+                    btn.tips({
+                        side: 1,
+                        msg: '修改成功',
+                        bg: 'blue',
+                        time: 3
+                    });
+                    refreshTable();
                 } else {
-                    App.alert({
-                        container: "#bootstrap_alerts_demo",
-                        close: true,
-                        icon: 'fa fa-warning',
-                        place: "append",
-                        message: "failure",
-                        type: 'danger',
-                        reset: true,
-                        focus: true,
-                        closeInSeconds: 10,
-                    })
+                    thisone.tips({
+                        side: 1,
+                        msg: data.msg,
+                        bg: '#AE81FF',
+                        time: 3
+                    });
                 }
             },
             error: function () {
-                App.alert({
-                    container: "#bootstrap_alerts_demo",
-                    close: true,
-                    icon: 'fa fa-warning',
-                    place: "append",
-                    message: "error",
-                    type: 'warning',
-                    reset: true,
-                    focus: true,
-                    closeInSeconds: 10,
-                })
+                thisone.tips({
+                    side: 1,
+                    msg: "发生异常,请稍后再试",
+                    bg: '#AE81FF',
+                    time: 3
+                });
                 return;
             }
         });

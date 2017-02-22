@@ -109,9 +109,12 @@
                     "data": "createBy",
                 },
                 {
-                    "data": 1,
+                    "data": "per",
                     "render": function (data) {
-                        return '<input type="text" value="55" class="prog"/>';
+                        if (data == null) {
+                            data = 100;
+                        }
+                        return '<input type="text" value="' + data + '" class="prog"/>';
                     }
                 },
             ],
@@ -132,13 +135,10 @@
                 $(".prog").each(function () {
                     var percent = $(this).val();
                     $(this).ionRangeSlider({
-                        type: "double",
                         min: 0,
                         max: 100,
-                        from: 0,
-                        to: percent,
+                        from: percent,
                         from_fixed: true,
-                        to_fixed: true,
                     });
                 })
             },

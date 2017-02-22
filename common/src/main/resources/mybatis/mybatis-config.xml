@@ -16,6 +16,8 @@
         <typeAlias type="com.ctoangels.go.common.modules.sys.entity.User" alias="User"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.RepairModelItem" alias="RepairModelItem"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.RepairSpecItem" alias="RepairSpecItem"/>
+        <typeAlias type="com.ctoangels.go.common.modules.go.entity.RepairProgItem" alias="RepairProgItem"/>
+        <typeAlias type="com.ctoangels.go.common.modules.go.entity.ItemCount" alias="ItemCount"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.Param" alias="Param"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.ParamValueVariable" alias="ParamValueVariable"/>
     </typeAliases>

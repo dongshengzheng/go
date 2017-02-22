@@ -87,6 +87,12 @@ public class RepairProg implements Serializable {
     private Integer enquiryId;
 
     /**
+     * 询价id
+     */
+    @TableField(exist = false)
+    private Double per;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_date")
@@ -243,5 +249,13 @@ public class RepairProg implements Serializable {
 
     public void setPlanCost(Integer planCost) {
         this.planCost = planCost;
+    }
+
+    public Double getPer() {
+        return per;
+    }
+
+    public void setPer(Double per) {
+        this.per = per;
     }
 }
