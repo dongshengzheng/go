@@ -122,7 +122,7 @@ public class RepairProgController extends BaseController {
     public JSONObject itemChangeStatus(@RequestParam(required = false) Integer id, @RequestParam(required = false) Integer status) {
         JSONObject jsonObject = new JSONObject();
         RepairProgItem repairProgItem = repairProgItemService.selectById(id);
-        repairProgItem.setTaskStatus("1");
+        repairProgItem.setTaskStatus(1);
         if (repairProgItemService.updateById(repairProgItem)) {
             jsonObject.put("suc", true);
         } else {

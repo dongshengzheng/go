@@ -25,6 +25,7 @@ public class RepairSpecItemList {
     private List<RepairSpecItem> type8List = new ArrayList<>();
 
 
+
     public RepairSpecItemList() {
     }
 

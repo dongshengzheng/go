@@ -38,38 +38,80 @@
     .mt-checkbox, .mt-radio{
         margin-left: 3px;
     }
-    .form-horizontal .form-group{}
+    .form-horizontal .form-group{
+        margin-left: 5px;
+    }
+    .label-top{
+        margin-top: 10px
+    }
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
-<form action="enquiry/add" method="post" class="form-horizontal" id="defForm">
+<script type="text/javascript">
+    $(function () {
+        $("#selectAll").change(function(){
+
+            $("#selectAll").prop("checked",this.checked);
+            if($("#selectAll").prop("checked")){
+                $(".td-checkbox").each(function () {
+                    $(this).prop("checked","checked");
+                });
+            }else{
+                $(".td-checkbox").each(function () {
+                    $(this).attr("checked",false);
+                });
+            }
+        });
+
+        $("#deletes").click(function(e){
+            //e.preventDefault();
+            var t=confirm("确定要删除吗？");
+            if(t) {
+                var count = 0;
+                $(".td-checkbox").each(function () {
+                    if ($(this).prop("checked")) {
+                        count++
+                        $(this).parent().parent().remove();
+                    }
+                });
+
+                if (count == 0) {
+                    alert("至少选择一个!");
+                    return;
+                }
+            }
+        });
+    });
+</script>
+
+<form action="" method="post" class="form-horizontal" id="defForm">
     <div>
         <div class="line1"></div>
         <div style="height:40px;width: 100%;background-color: #C0C9CC" >
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
-                    <label for="shipName" class="col-sm-4 control-label">船名：</label>
+                    <label for="shipName" class="col-sm-4 control-label label-top" >船名：</label>
                     <div class="col-sm-7">
                         <input id="shipName" name="shipName" type="text" maxlength="32"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="catagory" class="col-sm-6 control-label">项目分类：</label>
+                    <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
                     <div class="col-sm-6">
                         <input id="catagory" name="catagory" type="text" maxlength="32"
                                class="form-control ">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="code" class="col-sm-6 control-label">项目号：</label>
+                    <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
                     <div class="col-sm-6">
                         <input id="code" name="code" type="text" maxlength="32"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="proOrderNo" class="col-sm-6 control-label">项目单号：</label>
+                    <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
                     <div class="col-sm-6">
                         <input id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
                                class="form-control required">
@@ -154,13 +196,13 @@
             </div>
             <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
                 <p>插入图片或图纸</p>
-                <img id="logo-img"
-                     src="http://windyeel.img-cn-shanghai.aliyuncs.com/${company.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
+                <img id="imges"
+                     src=""
                      style="display: block;width: 50%;height: 50%"
                      onerror="nofind(1)"/>
-                <input type="hidden" id="logo" name="logo" value="${company.logo}">
+                <input type="hidden" id="img" name="img" value="">
                 <br>
-                <button id="upload_logo" class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
+                <button id="upload_img" class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
             </div>
 
         </div>
@@ -169,51 +211,51 @@
             <div ><span class="head">请求材料规格</span></div>
             <div class="col-md-12 div-left">
                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                   id="default_table" style="width: 98%" >
-                <thead>
-                <tr style="background-color: #8CD2E5">
-                    <td style="width:2%"> <input type="checkbox"/></td>
-                    <th style="width: 68%">要求和描述/材料规格</th>
-                    <th style="width: 6%">单位</th>
-                    <th style="width: 6%">数量</th>
-                    <th style="width: 20%">
-                        <button type="button" onclick="" class="btn red">删除</button>&nbsp;
-                        <button  type="button" onclick="addTr(this)" class="btn green">添加</button>
-                        <input type="text" value="1" id="assPages" style="width: 20%">
-                    </th>
-                </tr>
-                </thead>
-                <tbody id="table-tbody">
+                       id="default_table" style="width: 98%" >
+                    <thead>
+                    <tr style="background-color: #8CD2E5">
+                        <td style="width:2%"> <input type="checkbox" id="selectAll" /></td>
+                        <th style="width: 68%">要求和描述/材料规格</th>
+                        <th style="width: 6%">单位</th>
+                        <th style="width: 6%">数量</th>
+                        <th style="width: 20%">
+                            <button type="button" onclick="" class="btn red" id="deletes">删除</button>&nbsp;
+                            <button  type="button" onclick="addTr(this)" class="btn green">添加</button>
+                            <input type="text" value="1" id="assPages" style="width: 20%">
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-tbody">
                     <tr id="td-oneline">
-                        <td> <input type="checkbox" /></td>
-                        <td><input type="text" class="td-text"></td>
-                        <td><input type="text" class="td-text"></td>
-                        <td><input type="text" class="td-text"></td>
+                        <td> <input type="checkbox" class="td-checkbox" /></td>
+                        <td><input type="text" class="td-text" name="des"></td>
+                        <td><input type="text" class="td-text" name="unit"></td>
+                        <td><input type="text" class="td-text" name="count"></td>
                         <td>
                             <button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
-                            <button  type="button"  class="btn green insert" >插入</button>
-                            <input type="text" value="1" class="asd"  style="width: 20%">
+                            <button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button>
                         </td>
                     </tr>
 
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
             <div ><span class="head">修理工艺</span></div>
-            <div class="col-md-12 div-left">
+            <div class="form-group col-md-12 div-left">
                 <c:forEach items="${reqDicts}" var="req">
-                    <div class="form-group col-md-3">
-                    <label class="mt-checkbox">
-                        <input type="checkbox"  value="${req.id}"> ${req.value}
-                        <span></span>
-                    </label>
-                </div>
+                    <div class="col-md-3">
+                        <label class="mt-checkbox">
+                            <input type="checkbox"  value="${req.id}" name="repairTech"> ${req.value}
+                            <span></span>
+                        </label>
+                    </div>
                 </c:forEach>
             </div>
+
             <div class="col-md-12 div-left">
                 <textarea class="form-control" rows="4" placeholder="请填写修理工艺" name="repairTechDesc"></textarea>
             </div>
@@ -223,18 +265,26 @@
     <div class="form-actions" >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <button type="button" class="btn green" onclick="saveInfo()">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn green" onclick="saveInfo(1)">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn default">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn green">保存为工程单范本</button>
+                <button type="button" class="btn green" onclick="saveInfo(2)">保存为工程单范本</button>
             </div>
         </div>
     </div>
 </form>
 
-<script>
+<script type="text/javascript">
+
+    var rowTr='<tr>' +
+            '<td><input type="checkbox" class="td-checkbox"/></td>'+
+            '<td><input type="text" class="td-text" name="des"></td>' +
+            '<td><input type="text" class="td-text" name="unit"></td>' +
+            '<td><input type="text" class="td-text" name="count"></td>' +
+            '<td><button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;&nbsp;' +
+            '<button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button></td>' +
+            '</tr>'
     function delTr(obj) { //删除行  
         if(confirm('确定要删除？')) {
-            s = $("#default_table tbody tr").clone();
             $(obj).parent().parent().remove();
         }
     }
@@ -243,45 +293,63 @@
         var rows=$("#assPages").val();
         for(i=0;i<rows;i++){
             if($("table tbody tr:visible").length==0){
-                $("#default_table tbody").append(s);
+                $("#default_table tbody").append(rowTr);
             }else {
-                s=$("#default_table tbody tr:last").clone()
-                $("#default_table tbody tr:last").after(s);
+                $("#default_table tbody tr:last").after(rowTr);
             }
         }
-
-        $(".insert").unbind('click');
-
-        $(".insert").on("click",function () {
-            var rows=$(this).parent().find('input').val();
-            for(i=0;i<rows;i++){
-                var s=$("#default_table tbody tr:last").clone()
-                $(this).parent().parent().after(s);
-            }
-            $(this).parent().find('input').val(1);
-        })
+        $("#assPages").val(1);
+    }
+    function insTr(obj) {
+        $(obj).parent().parent().after(rowTr);
     }
 
-    $(".insert").on("click",function () {
-        var rows=$(this).parent().find('input').val();
-        for(i=0;i<rows;i++){
-            var s=$("#default_table tbody tr:last").clone()
-            $(this).parent().parent().after(s);
-        }
-        $(this).parent().find('input').val(1);
-    })
+
 
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_logo("upload_logo", "windyeel", "${staticPath}/", "logo-img", "logo");
+    initUploaders_img("upload_img", "windyeel", "${staticPath}/", "imges", "img");
 
     //服务器校验
-    function saveInfo() {
+    function saveInfo(a) {
+        var dataJson="";
+        var des = "";
+        var unit="";
+        var count=0;
+        $("#default_table tr").each(function (index, domEle){// mainTable 下的tr  
+            userId = "";
+            if(index != 0){//遍历除去第一行的之外的所有input作为json数据传入后台  
+                $(domEle).find("input").each(function(index,data){
+                    if(index == 1){
+                        des = $(data).val();
+                    }if(index == 2){
+                        unit = $(data).val();
+                    }if(index == 3){
+                        if($(data).val() != "" && $(data).val() != null){//如果没有输入的情况下传的值是0  
+                            count = $(data).val();
+                        }
+                    }
+                });
+                /*
+                 dataJson += "{"+"\"des\":\""+des+"\","+"\"unit\":\""+unit+"\","+"\"count\":\""+count+"\"},";
+                 */
+                dataJson += des+","+unit+","+count+",";
+
+            }
+        });
+        if (dataJson.lastIndexOf(",")) {
+            dataJson = dataJson.substring(0,dataJson.length -1);
+        }
+        alert(dataJson);
+        if(a==1){
+            $("#defForm").attr("action","enquiry/add?dataJson="+dataJson);
+        }else if (a==2){
+            $("#defForm").attr("action","enquiry/addModel?dataJson="+dataJson);
+        }
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
                     alert("success");
-                    $("#shipyard").click();
                 } else {
                     alert("false");
                     alert(data.msg);

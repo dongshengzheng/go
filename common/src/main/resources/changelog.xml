@@ -331,4 +331,9 @@
             alter table t_repair_prog_item modify column task_status INT;
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-023">
+        <sql>
+            alter table t_repair_model_detail modify column company_id INT;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
