@@ -8,40 +8,61 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <style>
-    .col-md-3{
+    .col-md-3 {
         margin-bottom: 5px;
     }
-    .col-md-6{
+
+    .col-md-6 {
         padding-left: 0px;
     }
-    .form-control{
+
+    .form-control {
         height: 28px;
         margin-top: 5px;
-        width:100%;
+        width: 100%;
     }
-    .control-label{
-        margin-top:0px;
+
+    .control-label {
+        margin-top: 0px;
     }
-    .form-horizontal .control-label{
+
+    .form-horizontal .control-label {
         padding-top: 0px;
     }
-    .line1{  border-bottom:solid 2px #337ab7; height:1px;margin-top: 10px  }
-    .head{background-color: #C0C9CC;font-size: 20px  }
-    textarea{ resize:none;
+
+    .line1 {
+        border-bottom: solid 2px #337ab7;
+        height: 1px;
+        margin-top: 10px
     }
-    .td-text{
-        height: 100%;width: 100%;
+
+    .head {
+        background-color: #C0C9CC;
+        font-size: 20px
     }
-    .div-left{
+
+    textarea {
+        resize: none;
+    }
+
+    .td-text {
+        height: 100%;
+        width: 100%;
+    }
+
+    .div-left {
         margin-left: 20px
     }
-    .mt-checkbox, .mt-radio{
+
+    .mt-checkbox, .mt-radio {
         margin-left: 3px;
     }
-    .form-horizontal .form-group{
+
+    .form-horizontal .form-group {
         margin-left: 5px;
     }
-    .label-top{
+
+    .label-top {
         margin-top: 10px
     }
 
@@ -49,24 +70,24 @@
 <go:navigater path="repairSpec"></go:navigater>
 <script type="text/javascript">
     $(function () {
-        $("#selectAll").change(function(){
+        $("#selectAll").change(function () {
 
-            $("#selectAll").prop("checked",this.checked);
-            if($("#selectAll").prop("checked")){
+            $("#selectAll").prop("checked", this.checked);
+            if ($("#selectAll").prop("checked")) {
                 $(".td-checkbox").each(function () {
-                    $(this).prop("checked","checked");
+                    $(this).prop("checked", "checked");
                 });
-            }else{
+            } else {
                 $(".td-checkbox").each(function () {
-                    $(this).attr("checked",false);
+                    $(this).attr("checked", false);
                 });
             }
         });
 
-        $("#deletes").click(function(e){
+        $("#deletes").click(function (e) {
             //e.preventDefault();
-            var t=confirm("确定要删除吗？");
-            if(t) {
+            var t = confirm("确定要删除吗？");
+            if (t) {
                 var count = 0;
                 $(".td-checkbox").each(function () {
                     if ($(this).prop("checked")) {
@@ -87,10 +108,10 @@
 <form action="" method="post" class="form-horizontal" id="defForm">
     <div>
         <div class="line1"></div>
-        <div style="height:40px;width: 100%;background-color: #C0C9CC" >
+        <div style="height:40px;width: 100%;background-color: #C0C9CC">
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
-                    <label for="shipName" class="col-sm-4 control-label label-top" >船名：</label>
+                    <label for="shipName" class="col-sm-4 control-label label-top">船名：</label>
                     <div class="col-sm-7">
                         <input id="shipName" name="shipName" type="text" maxlength="32"
                                class="form-control required">
@@ -122,16 +143,17 @@
         <div class="row">
             <div style="margin-top: 5px;border-right: dashed 1px #337ab7;" class="col-md-8">
                 <div style="width: 100%;">
-                    <div ><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
-                    <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：<input id="proName" type="text" name="proName"/></div>
-                    <div class="col-md-12 div-left">工程描述： </div>
+                    <div><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
+                    <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：<input id="proName" type="text"
+                                                                                         name="proName"/></div>
+                    <div class="col-md-12 div-left">工程描述：</div>
                     <div class="col-md-12" style="margin-left: 20px">
                         <textarea class="form-control" rows="4" name="proDesc"></textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div ><span class="head">设备信息</span></div>
+                    <div><span class="head">设备信息</span></div>
                     <div class="col-md-6">
                         <div class="form-group col-md-12">
                             <label for="faciName" class="col-sm-6 control-label">设备名称:</label>
@@ -170,7 +192,7 @@
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div><span class="head" >维修部位</span></div>
+                    <div><span class="head">维修部位</span></div>
                     <div class="form-group col-md-12" style="margin-left: 3px;margin-top: 20px">
                         <c:forEach items="${repDicts}" var="r">
                             <div class="col-md-3">
@@ -183,12 +205,13 @@
 
                     </div>
                     <div class="col-md-12" style="margin-left: 20px">
-                        <textarea class="form-control" rows="4" placeholder="请输入详细位置" name="repairPositionDesc"></textarea>
+                        <textarea class="form-control" rows="4" placeholder="请输入详细位置"
+                                  name="repairPositionDesc"></textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div ><span class="head">损坏程度</span></div>
+                    <div><span class="head">损坏程度</span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">
                         <textarea class="form-control" rows="4" name="damage"></textarea>
                     </div>
@@ -208,32 +231,34 @@
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div ><span class="head">请求材料规格</span></div>
+            <div><span class="head">请求材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                       id="default_table" style="width: 98%" >
+                       id="default_table" style="width: 98%">
                     <thead>
                     <tr style="background-color: #8CD2E5">
-                        <td style="width:2%"> <input type="checkbox" id="selectAll" /></td>
+                        <td style="width:2%"><input type="checkbox" id="selectAll"/></td>
                         <th style="width: 68%">要求和描述/材料规格</th>
                         <th style="width: 6%">单位</th>
                         <th style="width: 6%">数量</th>
                         <th style="width: 20%">
-                            <button type="button" onclick="" class="btn red" id="deletes">删除</button>&nbsp;
-                            <button  type="button" onclick="addTr(this)" class="btn green">添加</button>
+                            <button type="button" onclick="" class="btn red" id="deletes">删除</button>
+                            &nbsp;
+                            <button type="button" onclick="addTr(this)" class="btn green">添加</button>
                             <input type="text" value="1" id="assPages" style="width: 20%">
                         </th>
                     </tr>
                     </thead>
                     <tbody id="table-tbody">
                     <tr id="td-oneline">
-                        <td> <input type="checkbox" class="td-checkbox" /></td>
+                        <td><input type="checkbox" class="td-checkbox"/></td>
                         <td><input type="text" class="td-text" name="des"></td>
                         <td><input type="text" class="td-text" name="unit"></td>
                         <td><input type="text" class="td-text" name="count"></td>
                         <td>
-                            <button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
-                            <button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button>
+                            <button type="button" onclick="delTr(this)" class="btn red">删除</button>
+                            &nbsp;
+                            <button type="button" onclick="insTr(this)" class="btn green">插入一行</button>
                         </td>
                     </tr>
 
@@ -244,12 +269,12 @@
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div ><span class="head">修理工艺</span></div>
+            <div><span class="head">修理工艺</span></div>
             <div class="form-group col-md-12 div-left" style="margin-top: 20px">
                 <c:forEach items="${reqDicts}" var="req">
                     <div class="col-md-3">
                         <label class="mt-checkbox">
-                            <input type="checkbox"  value="${req.id}" name="repairTech"> ${req.value}
+                            <input type="checkbox" value="${req.id}" name="repairTech"> ${req.value}
                             <span></span>
                         </label>
                     </div>
@@ -262,11 +287,13 @@
         </div>
     </div>
 
-    <div class="form-actions" >
+    <div class="form-actions">
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <button type="button" class="btn green" onclick="saveInfo(1)">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn default">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn green" onclick="saveInfo(1)">保存</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn default">重置</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn green" onclick="saveInfo(2)">保存为工程单范本</button>
             </div>
         </div>
@@ -276,8 +303,8 @@
 
 <script type="text/javascript">
 
-    var rowTr='<tr>' +
-            '<td><input type="checkbox" class="td-checkbox"/></td>'+
+    var rowTr = '<tr>' +
+            '<td><input type="checkbox" class="td-checkbox"/></td>' +
             '<td><input type="text" class="td-text" name="des"></td>' +
             '<td><input type="text" class="td-text" name="unit"></td>' +
             '<td><input type="text" class="td-text" name="count"></td>' +
@@ -285,17 +312,17 @@
             '<button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button></td>' +
             '</tr>'
     function delTr(obj) { //删除行  
-        if(confirm('确定要删除？')) {
+        if (confirm('确定要删除？')) {
             $(obj).parent().parent().remove();
         }
     }
 
     function addTr() {  //增加行
-        var rows=$("#assPages").val();
-        for(i=0;i<rows;i++){
-            if($("table tbody tr:visible").length==0){
+        var rows = $("#assPages").val();
+        for (i = 0; i < rows; i++) {
+            if ($("table tbody tr:visible").length == 0) {
                 $("#default_table tbody").append(rowTr);
-            }else {
+            } else {
                 $("#default_table tbody tr:last").after(rowTr);
             }
         }
@@ -306,27 +333,28 @@
     }
 
 
-
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
     initUploaders_img("upload_img", "windyeel", "${staticPath}/", "imges", "img");
 
     //服务器校验
     function saveInfo(a) {
-        var dataJson="";
-        var des = "";
-        var unit="";
-        var count=0;
-        $("#default_table tr").each(function (index, domEle){// mainTable 下的tr  
-            userId = "";
-            if(index != 0){//遍历除去第一行的之外的所有input作为json数据传入后台  
-                $(domEle).find("input").each(function(index,data){
-                    if(index == 1){
-                        des = $(data).val();
-                    }if(index == 2){
-                        unit = $(data).val();
-                    }if(index == 3){
-                        if($(data).val() != "" && $(data).val() != null){//如果没有输入的情况下传的值是0  
+        var dataJson = "";
+        var des = "";
+        var unit = "";
+        var count = 0;
+        $("#default_table tr").each(function (index, domEle) {// mainTable 下的tr  
+            userId = "";
+            if (index != 0) {//遍历除去第一行的之外的所有input作为json数据传入后台  
+                $(domEle).find("input").each(function (index, data) {
+                    if (index == 1) {
+                        des = $(data).val();
+                    }
+                    if (index == 2) {
+                        unit = $(data).val();
+                    }
+                    if (index == 3) {
+                        if ($(data).val() != "" && $(data).val() != null) {//如果没有输入的情况下传的值是0  
                             count = $(data).val();
                         }
                     }
@@ -334,20 +362,20 @@
                 /*
                  dataJson += "{"+"\"des\":\""+des+"\","+"\"unit\":\""+unit+"\","+"\"count\":\""+count+"\"},";
                  */
-                dataJson += des+","+unit+","+count+",";
+                dataJson += des + "," + unit + "," + count + ",";
 
             }
         });
-        if (dataJson.lastIndexOf(",")) {
-            dataJson = dataJson.substring(0,dataJson.length -1);
+        if (dataJson.lastIndexOf(",")) {
+            dataJson = dataJson.substring(0, dataJson.length - 1);
         }
         alert(dataJson);
-        if(a==1){
-            $("#defForm").attr("action","enquiry/add?dataJson="+dataJson);
-        }else if (a==2){
-            $("#defForm").attr("action","enquiry/addModel?dataJson="+dataJson);
+        if (a == 1) {
+            $("#defForm").attr("action", "enquiry/add?dataJson=" + dataJson);
+        } else if (a == 2) {
+            $("#defForm").attr("action", "enquiry/addModel?dataJson=" + dataJson);
         }
-        if(check()) {
+        if (check()) {
             $("#defForm").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {

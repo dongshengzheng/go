@@ -11,7 +11,7 @@
     <select id="bySpecIdAndCatagoryWithParamsNoValue" resultMap="SpecItemMap">
 		SELECT item.* ,#{2} as model_id  from t_repair_spec_item item
 		WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and del_flag=0
-		Order by item.code
+		Order by item.sort
 	</select>
 
     <resultMap id="SpecItemMap" type="RepairSpecItem">
@@ -25,7 +25,7 @@
     <select id="bySpecIdAndCatagoryWithParamsAndValue" resultMap="SpecItemMap2">
         SELECT item.* ,#{2} as model_id  from t_repair_spec_item item
         WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and del_flag=0
-        Order by item.code
+        Order by item.sort
     </select>
 
     <resultMap id="SpecItemMap2" type="RepairSpecItem">

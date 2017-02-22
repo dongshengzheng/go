@@ -11,7 +11,7 @@
     <select id="byModelIdAndCatagoryContainParams" resultMap="ItemMap">
 		SELECT item.* from t_repair_model_item item
 		WHERE item.repair_model_id=#{0} and item.catagory=#{1} and del_flag=0
-		Order by item.code
+		Order by item.sort
 	</select>
 
     <resultMap id="ItemMap" type="RepairModelItem">
