@@ -76,7 +76,7 @@
         padding: 15px 0;
         line-height: 15px;
         text-align: center;
-        background-color: #fff;
+        background-color: #fbfcfd;
         color: #32c96a;
         display: block;
         font-size: 10px;
@@ -84,7 +84,7 @@
 
     #menu ul li a:hover, #menu ul li a.cur {
         background-color: #32c92a;
-        color: #fff;
+        color: #fbfcfd;
     }
 
     .modal-dialog {
@@ -98,7 +98,50 @@
     }
 </style>
 <go:navigater path="repairSpec"></go:navigater>
-<a href="repairSpecDetail/addModelDetail" data-model="dialog">新增详单</a>
+
+<a href="repairSpecDetail/addModelDetail?shipName=好船&catagory=机械工程&code=2.2.2" id="add-detail"
+   data-model="dialog">新增详单</a>
+<div>
+    <select class="model-detail-select"></select>
+    <input class="repairSpecDetailId" name="repairSpecDetailId" value="">
+</div>
+<div>
+    <select class="model-detail-select"></select>
+    <input class="repairSpecDetailId" name="repairSpecDetailId" value="">
+</div>
+<div>
+    <select class="model-detail-select"></select>
+    <input class="repairSpecDetailId" name="repairSpecDetailId" value="">
+</div>
+<script>
+    $(document).ready(initRepairModelDetailList())
+    function initRepairModelDetailList() {
+        $.ajax({
+            "url": 'repairSpec/getModelDetailList',
+            "type": 'get',
+            "success": function (data) {
+                var html = "";
+                html += "<option>--请选择维修详单范本--</option>"
+                html += "<option data-id=0>--新增详单--</option>";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<option value=" + data[i].id + ">" + data[i].proName + "</option>"
+                }
+                $(".model-detail-select").html(html);
+            }
+        })
+        $('.model-detail-select').on("change", function () {
+            alert(1);
+            var thisone = $(this);
+            $('.marked-spec-detail').removeClass("marked-spec-detail");
+            thisone.siblings('.repairSpecDetailId').addClass("marked-spec-detail");
+            $('#add-detail').attr("href", "repairSpecDetail/addModelDetail?shipName=好船&catagory=机械工程&code=2.2.2&id=" + thisone.val());
+            $('#add-detail').click();
+        })
+    }
+
+
+</script>
+
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
     <input type="hidden" name="modelId" value="${modelId}">
@@ -362,7 +405,6 @@
         </div>
     </div>
 </form>
-
 
 <div id="responsive" class="modal fade" tabindex="-1" aria-hidden="true" data-id="">
     <div class="modal-dialog">

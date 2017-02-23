@@ -1,5 +1,6 @@
 package com.ctoangels.go.common.modules.go.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -48,6 +49,9 @@ public class RepairSpecController extends BaseController {
     private IRepairModelItemService repairModelItemService;
 
     @Autowired
+    private IRepairModelDetailService repairModelDetailService;
+
+    @Autowired
     private ICompanyService companyService;
 
     @Autowired
@@ -93,6 +97,14 @@ public class RepairSpecController extends BaseController {
         map.put("type8", type8);
         return "go/repairSpec/add";
     }
+
+    @RequestMapping(value = "/getModelDetailList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<RepairModelDetail> getModelDetailList() {
+        List<RepairModelDetail> repairModelDetailList = repairModelDetailService.getListByCompanyId(getCurrentUser().getCompanyId());
+        return repairModelDetailList;
+    }
+
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody

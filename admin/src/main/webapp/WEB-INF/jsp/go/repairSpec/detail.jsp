@@ -67,7 +67,7 @@
     }
 
 </style>
-<form action="" method="post" class="form-horizontal" id="defForm">
+<form action="" method="post" class="form-horizontal" id="detail_form">
     <div>
         <div class="line1"></div>
         <div style="height:40px;width: 100%;background-color: #C0C9CC">
@@ -75,21 +75,21 @@
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
                     <div class="col-sm-7">
-                        <input id="shipName" name="shipName" type="text" maxlength="32"
+                        <input id="shipName" name="shipName" type="text" maxlength="32" value="${param.shipName}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
                     <div class="col-sm-6">
-                        <input id="catagory" name="catagory" type="text" maxlength="32"
+                        <input id="catagory" name="catagory" type="text" maxlength="32" value="${param.catagory}"
                                class="form-control ">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
                     <div class="col-sm-6">
-                        <input id="code" name="code" type="text" maxlength="32"
+                        <input id="code" name="code" type="text" maxlength="32" value="${param.code}"
                                class="form-control required">
                     </div>
                 </div>
@@ -248,14 +248,16 @@
 
     <div class="form-actions">
         <div class="row">
-            <div class="col-md-offset-3 col-md-9">
+            <div class="col-md-12" style="text-align: center">
                 <br>
+                <div id="detail_alert"></div>
                 <button type="button" class="btn green" onclick="saveInfo(1)">确定</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="reset" class="btn default"/>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn green" onclick="saveInfo(2)">保存为范本</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="close" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 <br><br>
             </div>
         </div>
@@ -331,24 +333,59 @@
         if (dataJson.lastIndexOf(",")) {
             dataJson = dataJson.substring(0, dataJson.length - 1);
         }
-        alert(dataJson);
         if (a == 1) {
-            $("#defForm").attr("action", "enquiry/add?dataJson=" + dataJson);
+            $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail?dataJson=" + dataJson);
         } else if (a == 2) {
-            $("#defForm").attr("action", "enquiry/addModel?dataJson=" + dataJson);
+            $("#detail_form").attr("action", "repairSpecDetail/addModelDetail?dataJson=" + dataJson);
         }
         if (check()) {
-            $("#defForm").ajaxSubmit({
+            $("#detail_form").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
-                        alert("success");
+                        //  保存为工程单详单
+                        if (data.specDetail) {
+                            $('.marked-spec-detail').val(data.repairSpecDetailId).removeClass('marked-spec-detail');
+                            $('#close').click();
+                        } else {
+                            App.alert({
+                                container: "#detail_alert",
+                                close: true,
+                                icon: 'fa fa-warning',
+                                place: "append",
+                                message: "成功保存为范本",
+                                type: 'success',
+                                reset: true,
+                                focus: false,
+                                closeInSeconds: 5,
+                            })
+                            initRepairModelDetailList();
+                        }
                     } else {
-                        alert("false");
-                        alert(data.msg);
+                        App.alert({
+                            container: "#detail_alert",
+                            close: true,
+                            icon: 'fa fa-warning',
+                            place: "append",
+                            message: "提交失败,请稍后再试",
+                            type: 'danger',
+                            reset: true,
+                            focus: false,
+                            closeInSeconds: 5,
+                        })
                     }
                 },
                 error: function () {
-                    alert("error");
+                    App.alert({
+                        container: "#detail_alert",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "系统繁忙,请稍后再试",
+                        type: 'warning',
+                        reset: true,
+                        focus: false,
+                        closeInSeconds: 5,
+                    })
                     return;
                 }
             });
@@ -373,7 +410,6 @@
 
     $(function () {
         $("#selectAll").change(function () {
-
             $("#selectAll").prop("checked", this.checked);
             if ($("#selectAll").prop("checked")) {
                 $(".td-checkbox").each(function () {
@@ -397,7 +433,6 @@
                         $(this).parent().parent().remove();
                     }
                 });
-
                 if (count == 0) {
                     alert("至少选择一个!");
                     return;
