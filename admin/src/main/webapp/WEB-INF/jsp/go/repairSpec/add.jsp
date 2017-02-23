@@ -268,7 +268,7 @@
                                                             <input class="repairSpecDetailId" name="repairSpecDetailId"
                                                                    type="hidden"
                                                                    value="">
-                                                            <a class="repairSpecDetailName"
+                                                            <a class="repairSpecDetailName" data-model="dialog"
                                                                href="javascript:;">暂未选择详单</a>
                                                         </c:if>
                                                         <c:forEach items="${item.paramList}" var="p" varStatus="vs">

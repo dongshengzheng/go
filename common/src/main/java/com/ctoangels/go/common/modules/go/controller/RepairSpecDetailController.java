@@ -145,4 +145,67 @@ public class RepairSpecDetailController extends BaseController {
         return jsonObject;
     }
 
+    //查看和编辑维修详单
+    @RequestMapping(value = "editSpecDetail", method = RequestMethod.GET)
+    public String editSpecDetail(@RequestParam(required = false) Integer id, ModelMap map) {
+        RepairSpecDetail detail = repairSpecDetailService.selectById(id);
+        String repairPosition = detail.getRepairPosition();
+        if (!StringUtils.isEmpty(repairPosition)) {
+            String[] positionsList = repairPosition.split(",");
+            map.put("positionList", positionsList);
+        }
+        String repairTech = detail.getRepairTech();
+        if (!StringUtils.isEmpty(repairTech)) {
+            String[] techList = repairTech.split(",");
+            map.put("techList", techList);
+        }
+        map.put("detail", detail);
+        EntityWrapper<RepairSpecDetailReq> ew = new EntityWrapper<>();
+        ew.addFilter("repair_spec_detail_id={0}", detail.getId());
+        List<RepairSpecDetailReq> repairSpecDetailReqs = repairSpecDetailReqService.selectList(ew);
+        map.put("reqList", repairSpecDetailReqs);
+        EntityWrapper<Dict> ew1 = new EntityWrapper<>();
+        ew1.addFilter("type={0}", "维修部位");
+        List<Dict> repDicts = dictService.selectList(ew1);
+        EntityWrapper<Dict> ew2 = new EntityWrapper<>();
+        ew2.addFilter("type={0}", "修理工艺");
+        List<Dict> reqDicts = dictService.selectList(ew2);
+        map.put("repDicts", repDicts);
+        map.put("reqDicts", reqDicts);
+        return "go/repairSpec/detail-edit";
+    }
+
+    /*更新维修详单*/
+    @RequestMapping(value = "/editSpecDetail", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editSpecDetailComplete(RepairSpecDetail repairSpecDetail, @RequestParam(required = false) String dataJson) {
+        JSONObject jsonObject = new JSONObject();
+        List<RepairSpecDetailReq> specReqs = new ArrayList<>();
+        RepairSpecDetailReq specReq = new RepairSpecDetailReq();
+        String[] array = dataJson.split(",");
+        repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
+        if (repairSpecDetailService.updateById(repairSpecDetail)) {
+            int id = repairSpecDetail.getId();
+            for (int i = 0; i < array.length; i++) {
+                if (i % 3 == 0) {
+                    specReq.setDes(array[i]);
+                } else if (i % 3 == 1) {
+                    specReq.setUnit(array[i]);
+                } else if (i % 3 == 2) {
+                    specReq.setCount(array[i]);
+                    specReq.setRepairSpecDetailId(id);
+                    specReqs.add(specReq);
+                    specReq = new RepairSpecDetailReq();
+                }
+            }
+            repairSpecDetailReqService.deleteRepairSpecDetailReqById(id);
+            repairSpecDetailReqService.insertBatch(specReqs);
+            jsonObject.put("success", true);
+        } else {
+            jsonObject.put("success", false);
+            jsonObject.put("msg", "添加时出错,请稍后再试");
+        }
+        return jsonObject;
+    }
+
 }
