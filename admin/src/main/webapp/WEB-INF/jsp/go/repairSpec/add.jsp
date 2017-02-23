@@ -59,7 +59,7 @@
         width: 30px;
         height: auto;
         position: fixed;
-        top: 50%;
+        top: 40%;
         right: 10px;
         margin-top: -135px;
     }
@@ -87,9 +87,18 @@
         color: #fff;
     }
 
+    .modal-dialog {
+        position: relative;
+        width: 75%;
+        margin: auto;
+    }
 
+    .modal-content {
+        padding: 10px;
+    }
 </style>
 <go:navigater path="repairSpec"></go:navigater>
+<a href="repairSpecDetail/addModelDetail" data-model="dialog">新增详单</a>
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
     <input type="hidden" name="modelId" value="${modelId}">
@@ -249,8 +258,17 @@
                                                     </td>
                                                     <td>${item.code}</td>
                                                     <td>${item.content}
+                                                        <c:if test="${item.content=='维修详单'}">
+                                                            <select>
+                                                                <option>
+                                                                    选择详单
+                                                                </option>
+                                                            </select>
+                                                        </c:if>
                                                         <c:forEach items="${item.paramList}" var="p" varStatus="vs">
-                                                            <br>
+                                                            <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
+                                                                <br>
+                                                            </c:if>
                                                             ${p.name}
                                                             <c:if test="${p.type=='text'}">
                                                                 <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
@@ -303,9 +321,11 @@
                                                     </c:if>
                                                     <c:if test="${item.children==0}">
                                                         <td>
-                                                            <button type="button" class="copyRow"
-                                                                    data-row="${itemVs.index}">+
-                                                            </button>
+                                                            <c:if test="${item.copy==1}">
+                                                                <button type="button" class="copyRow"
+                                                                        data-row="${itemVs.index}">+
+                                                                </button>
+                                                            </c:if>
                                                         </td>
                                                     </c:if>
                                                     </tr>
@@ -327,130 +347,7 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-
-
-                                <%--通用服务开始--%>
-                                <%--<div class="portlet box blue-dark item" id="item1">--%>
-                                <%--<div class="portlet-title" style="background-color: #00aaaa">--%>
-                                <%--<div class="caption">--%>
-                                <%--<i class="fa fa-cog"></i>通用服务--%>
-                                <%--</div>--%>
-                                <%--<div class="tools">--%>
-                                <%--<a href="javascript:;" class="collapse"> </a>--%>
-                                <%--</div>--%>
-                                <%--</div>--%>
-                                <%--<div class="portlet-body">--%>
-                                <%--<table class="table table-striped table-bordered table-hover table-checkable order-column"--%>
-                                <%--id="table1">--%>
-                                <%--<thead>--%>
-                                <%--<tr>--%>
-                                <%--<th style="width:5%">&nbsp;</th>--%>
-                                <%--<th style="width:10%">项目号</th>--%>
-                                <%--<th style="width:45%">维修内容</th>--%>
-                                <%--<th style="width:10%">单位</th>--%>
-                                <%--<th style="width:10%">数量</th>--%>
-                                <%--<th style="width:10%">备注</th>--%>
-                                <%--<th style="width:10%">操作</th>--%>
-                                <%--</tr>--%>
-                                <%--</thead>--%>
-                                <%--<tbody>--%>
-                                <%--<c:forEach items="${type1}" var="item" varStatus="itemVs">--%>
-                                <%--<c:if test="${item.parentCode!='0'}">--%>
-                                <%--<tr class="details-control-child" data-parent="${item.parentCode}" style="display: none">--%>
-                                <%--</c:if>--%>
-                                <%--<c:if test="${item.parentCode=='0'}">--%>
-                                <%--<tr>--%>
-                                <%--</c:if>--%>
-                                <%--<input type="hidden" value="${item.catagory}"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].catagory">--%>
-                                <%--<input type="hidden" value="${item.code}"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].code">--%>
-                                <%--<input type="hidden" value="${item.content}"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].content">--%>
-                                <%--<input type="hidden" value="${item.unit}"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].unit">--%>
-                                <%--<input type="hidden" value="${item.parentCode}"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].parentCode">--%>
-                                <%--<input type="hidden" value="${item.children}"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].children">--%>
-                                <%--<td>--%>
-                                <%--<input type="checkbox" class="status-checkBox">--%>
-                                <%--<input type="hidden" value="1"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].status">--%>
-                                <%--</td>--%>
-                                <%--<td>${item.code}</td>--%>
-                                <%--<td>${item.content}--%>
-                                <%--<c:forEach items="${item.paramList}" var="p" varStatus="vs">--%>
-                                <%--<br>--%>
-                                <%--${p.name}--%>
-                                <%--<c:if test="${p.type=='text'}">--%>
-                                <%--<input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"--%>
-                                <%--value="">--%>
-                                <%--</c:if>--%>
-                                <%--<c:if test="${p.type=='select'}">--%>
-                                <%--<select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">--%>
-                                <%--<c:forEach items="${p.paramValueVariableList}"--%>
-                                <%--var="val">--%>
-                                <%--<option value="${val.paramValVariable}">${val.paramValVariable}</option>--%>
-                                <%--</c:forEach>--%>
-                                <%--</select>--%>
-                                <%--</c:if>--%>
-                                <%--${p.unit}--%>
-                                <%--</c:forEach>--%>
-                                <%--</td>--%>
-                                <%--<td>${item.unit}</td>--%>
-                                <%--<td><c:if test="${!empty item.unit}"><input class="col-md-12"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].count"></c:if>--%>
-                                <%--</td>--%>
-                                <%--<td><c:if test="${item.parentCode=='0'}"><a data-id="${item.id}"--%>
-                                <%--class="add-remark"--%>
-                                <%--data-toggle="modal"--%>
-                                <%--href="#responsive">--%>
-                                <%--添加备注 </a></c:if>--%>
-                                <%--<textarea class="remark-text"--%>
-                                <%--name="type${outerVs.count}List[${itemVs.index}].remark"--%>
-                                <%--cols="60"--%>
-                                <%--rows="10"--%>
-                                <%--wrap="hard" placeholder="暂未添加备注"--%>
-                                <%--style="display: none"></textarea>--%>
-                                <%--</td>--%>
-                                <%--<c:if test="${item.children==1}">--%>
-                                <%--<td class="details-control" data-code="${item.code}">--%>
-                                <%--<img src="<%=basePath%>static/img/details_open.png"--%>
-                                <%--class="open-png">--%>
-                                <%--<img src="<%=basePath%>static/img/details_close.png"--%>
-                                <%--class="close-png"--%>
-                                <%--style="display: none">--%>
-                                <%--</td>--%>
-                                <%--</c:if>--%>
-                                <%--<c:if test="${item.children==0}">--%>
-                                <%--<td>--%>
-                                <%--<button type="button" class="copyRow"--%>
-                                <%--data-row="${itemVs.index}">+--%>
-                                <%--</button>--%>
-                                <%--</td>--%>
-                                <%--</c:if>--%>
-                                <%--</tr>--%>
-                                <%--</c:forEach>--%>
-                                <%--<tr>--%>
-                                <%--<td></td>--%>
-                                <%--<td></td>--%>
-                                <%--<td>--%>
-                                <%--<button type="button" class="btn btn-sm blue addRow">新增--%>
-                                <%--</button>--%>
-                                <%--</td>--%>
-                                <%--<td></td>--%>
-                                <%--<td></td>--%>
-                                <%--<td></td>--%>
-                                <%--<td></td>--%>
-                                <%--</tr>--%>
-                                <%--</tbody>--%>
-                                <%--</table>--%>
-                                <%--</div>--%>
-                                <%--</div>--%>
-                                <%--通用服务结束--%>
                             </div>
-
                         </div>
                         <div class="modal-footer" style="text-align: center">
                             <shiro:hasPermission name="repairSpec/add">
@@ -582,8 +479,6 @@
         });
     }
 
-    $responsive = $('#responsive');
-
     <%--行的展开与折叠--%>
     $('td.details-control').on('click', function () {
         var parentCode = $(this).attr('data-code');
@@ -642,6 +537,7 @@
         $(this).siblings('.remark-text').toggle();
     })
 
+    $responsive = $('#responsive');
     <%--添加备注--%>
     $('.add-remark').on('click', function () {
         var text = $(this).siblings('.remark-text').text()
