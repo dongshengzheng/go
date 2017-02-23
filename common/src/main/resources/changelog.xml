@@ -372,6 +372,12 @@
             INSERT INTO `t_dict` VALUES ('32', '修理工艺', '其它请填', null, null, null, null, null, '0');
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-025">
+        <sql>
+            alter table t_repair_model_detail_req change column repair_spec_detail_id repair_model_detail_id INT COMMENT
+            '维修范本id';
+        </sql>
+    </changeSet>
     <changeSet author="WangShun" id="15950097942-012">
         <sql>
             INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修类型","1","临时维修",0);
@@ -380,10 +386,10 @@
             INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修类型","4","改造",0);
         </sql>
     </changeSet>
-    <changeSet author="LuZhen" id="17317309132-025">
+    <changeSet author="LuZhen" id="17317309132-026">
         <sql>
-            alter table t_repair_model_detail_req change column repair_spec_detail_id repair_model_detail_id INT COMMENT
-            '维修范本id';
+            alter table t_repair_model_detail_req modify column count float COMMENT '数量';
+            alter table t_repair_spec_detail_req modify column count float COMMENT '数量';
         </sql>
     </changeSet>
 </databaseChangeLog>

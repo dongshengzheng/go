@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface IRepairModelDetailReqService extends ISuperService<RepairModelDetailReq> {
 
+    void deleteRepairModelDetailById(int repair_model_detail_id);
     List<RepairModelDetailReq> getListByDetailId(Integer repairModelDetailId);
 }

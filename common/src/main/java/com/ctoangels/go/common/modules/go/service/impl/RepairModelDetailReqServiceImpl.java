@@ -18,7 +18,12 @@ import java.util.List;
 public class RepairModelDetailReqServiceImpl extends SuperServiceImpl<RepairModelDetailReqMapper, RepairModelDetailReq> implements IRepairModelDetailReqService {
 
     @Autowired
-    RepairModelDetailReqMapper repairModelDetailReqMapper;
+    private RepairModelDetailReqMapper repairModelDetailReqMapper;
+
+    public void deleteRepairModelDetailById(int repair_model_detail_id) {
+        repairModelDetailReqMapper.deleteRepairModelDetailById(repair_model_detail_id);
+        RepairModelDetailReqMapper repairModelDetailReqMapper;
+    }
 
     @Override
     public List<RepairModelDetailReq> getListByDetailId(Integer repairModelDetailId) {

@@ -44,6 +44,10 @@
     .label-top{
         margin-top: 10px
     }
+    .col-md-offset-3 {
+        margin-left: 40%;
+        margin-top: 20px;
+    }
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
@@ -55,28 +59,28 @@
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-4 control-label label-top" >船名：</label>
                     <div class="col-sm-7">
-                        <input id="shipName" name="shipName" type="text" maxlength="32"
+                        <input disabled id="shipName" name="shipName" type="text" maxlength="32" value="${modelDetails.shipName}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
                     <div class="col-sm-6">
-                        <input id="catagory" name="catagory" type="text" maxlength="32"
+                        <input disabled id="catagory" name="catagory" type="text" maxlength="32" value="${modelDetails.catagory}"
                                class="form-control ">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
                     <div class="col-sm-6">
-                        <input id="code" name="code" type="text" maxlength="32"
+                        <input disabled id="code" name="code" type="text" maxlength="32" value="${modelDetails.code}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
                     <div class="col-sm-6">
-                        <input id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
+                        <input disabled id="proOrderNo" name="proOrderNo" type="text" maxlength="32" value="${modelDetails.proOrderNo}"
                                class="form-control required">
                     </div>
                 </div>
@@ -86,10 +90,10 @@
             <div style="margin-top: 5px;border-right: dashed 1px #337ab7;" class="col-md-8">
                 <div style="width: 100%;">
                     <div ><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
-                    <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：<input id="proName" type="text" name="proName"/></div>
+                    <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：<input disabled id="proName" type="text" name="proName" value="${modelDetails.proName}"/></div>
                     <div class="col-md-12 div-left">工程描述： </div>
                     <div class="col-md-12" style="margin-left: 20px">
-                        <textarea class="form-control" rows="4" name="proDesc"></textarea>
+                        <textarea disabled class="form-control" rows="4" name="proDesc">${modelDetails.proDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
@@ -99,35 +103,35 @@
                         <div class="form-group col-md-12">
                             <label for="faciName" class="col-sm-6 control-label">设备名称:</label>
                             <div class="col-sm-6">
-                                <input id="faciName" name="faciName" type="text"
+                                <input id="faciName" disabled name="faciName" type="text" value="${modelDetails.faciName}"
                                        class="">
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="faciType" class="col-sm-6 control-label">设备型号:</label>
                             <div class="col-sm-6">
-                                <input id="faciType" name="faciType" type="text"
+                                <input disabled id="faciType" name="faciType" type="text" value="${modelDetails.faciType}"
                                        class="">
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="faciSrc" class="col-sm-6 control-label">厂家/国家:</label>
                             <div class="col-sm-6">
-                                <input id="faciSrc" name="faciSrc" type="text"
+                                <input disabled id="faciSrc" name="faciSrc" type="text" value="${modelDetails.faciSrc}"
                                        class="">
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="faciNo" class="col-sm-6 control-label">序列号:</label>
                             <div class="col-sm-6">
-                                <input id="faciNo" name="faciNo" type="text"
+                                <input  disabled id="faciNo" name="faciNo" type="text" value="${modelDetails.faciNo}"
                                        class="">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group" style="margin-left: 20px">
-                            <textarea class="form-control" rows="7" placeholder="请输入相关参数" name="faciParam"></textarea>
+                            <textarea disabled class="form-control" rows="7" placeholder="请输入相关参数" name="faciParam">${modelDetails.faciParam}</textarea>
                         </div>
                     </div>
                 </div>
@@ -138,7 +142,13 @@
                         <c:forEach items="${repDicts}" var="r">
                             <div class="col-md-3">
                                 <label class="mt-checkbox">
-                                    <input type="checkbox" value="${r.value}" name="repairPosition"> ${r.des}
+                                    <input disabled type="checkbox" value="${r.value}"
+                                           <c:forEach var="p" items="${positions}">
+                                                <c:if test="${r.value==p}" >
+                                                    checked
+                                                </c:if>
+                                            </c:forEach>
+                                           name="repairPosition"> ${r.des}
                                     <span></span>
                                 </label>
                             </div>
@@ -146,26 +156,26 @@
 
                     </div>
                     <div class="col-md-12" style="margin-left: 20px">
-                        <textarea class="form-control" rows="4" placeholder="请输入详细位置" name="repairPositionDesc"></textarea>
+                        <textarea disabled class="form-control" rows="4" placeholder="请输入详细位置" name="repairPositionDesc">${modelDetails.repairPositionDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
                     <div ><span class="head">损坏程度</span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">
-                        <textarea class="form-control" rows="4" name="damage"></textarea>
+                        <textarea class="form-control" rows="4" name="damage">${modelDetails.damage}</textarea>
                     </div>
                 </div>
             </div>
             <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
                 <p>插入图片或图纸</p>
                 <img id="imges"
-                     src=""
+                     src="http://windyeel.img-cn-shanghai.aliyuncs.com/${modelDetails.img}?x-oss-process=image/resize,m_fill,h_100,w_100"
                      style="display: block;width: 50%;height: 50%"
                      onerror="nofind(1)"/>
                 <input type="hidden" id="img" name="img" value="">
                 <br>
-                <button id="upload_img" class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
+                <button disabled <%--id="upload_img"--%> class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
             </div>
 
         </div>
@@ -177,30 +187,30 @@
                        id="default_table" style="width: 98%" >
                     <thead>
                     <tr style="background-color: #8CD2E5">
-                        <td style="width:2%"> <input type="checkbox" id="selectAll" /></td>
+                        <td style="width:2%"> <input type="checkbox" disabled id="selectAll" /></td>
                         <th style="width: 68%">要求和描述/材料规格</th>
                         <th style="width: 6%">单位</th>
                         <th style="width: 6%">数量</th>
                         <th style="width: 20%">
-                            <button type="button" onclick="" class="btn red" id="deletes">删除</button>&nbsp;
-                            <button  type="button" onclick="addTr(this)" class="btn green">添加</button>
-                            <input type="text" value="1" id="assPages" style="width: 20%">
+                            <button disabled type="button" onclick="" class="btn red" id="deletes">删除</button>&nbsp;
+                            <button  disabled type="button" onclick="addTr(this)" class="btn green">添加</button>
+                            <input  disabled type="text" value="1" id="assPages" style="width: 20%">
                         </th>
                     </tr>
                     </thead>
                     <tbody id="table-tbody">
-                    <tr id="td-oneline">
-                        <td> <input type="checkbox" class="td-checkbox" /></td>
-                        <td><input type="text" class="td-text" name="des"></td>
-                        <td><input type="text" class="td-text" name="unit"></td>
-                        <td><input type="text" class="td-text" name="count"></td>
-                        <td>
-                            <button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
-                            <button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button>
-                        </td>
-                    </tr>
-
-
+                    <c:forEach items="${detailReqs}" var="r">
+                        <tr id="td-oneline">
+                            <td> <input disabled type="checkbox" class="td-checkbox" /></td>
+                            <td><input disabled type="text" class="td-text" name="des" value="${r.des}"></td>
+                            <td><input disabled type="text" class="td-text" name="unit" value="${r.unit}"></td>
+                            <td><input disabled type="text" class="td-text" name="count" value="${r.count}"></td>
+                            <td>
+                                <button disabled type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
+                                <button disabled  type="button" onclick="insTr(this)" class="btn green" >插入一行</button>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -212,7 +222,13 @@
                 <c:forEach items="${reqDicts}" var="req">
                     <div class="col-md-3">
                         <label class="mt-checkbox">
-                            <input type="checkbox"  value="${req.value}" name="repairTech"> ${req.des}
+                            <input disabled type="checkbox"  value="${req.value}"
+                                        <c:forEach var="t" items="${techs}">
+                                                <c:if test="${req.value==t}" >
+                                                       checked
+                                                </c:if>
+                                        </c:forEach>
+                                   name="repairTech"> ${req.des}
                             <span></span>
                         </label>
                     </div>
@@ -220,7 +236,7 @@
             </div>
 
             <div class="col-md-12 div-left">
-                <textarea class="form-control" rows="4" placeholder="请填写修理工艺" name="repairTechDesc"></textarea>
+                <textarea disabled class="form-control" rows="4" placeholder="请填写修理工艺" name="repairTechDesc">${modelDetails.repairTechDesc}</textarea>
             </div>
         </div>
     </div>
@@ -228,8 +244,9 @@
     <div class="form-actions" >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <button type="button" class="btn green" onclick="saveInfo()">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn default">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button disabled type="button" class="btn green" onclick="saveInfo()">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button disabled type="button" class="btn default">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="modelDetail" type="button" class="btn btn-default" data-target="navTab">取消</a>
             </div>
         </div>
     </div>
