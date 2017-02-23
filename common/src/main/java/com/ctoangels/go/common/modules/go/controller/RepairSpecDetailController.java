@@ -2,12 +2,9 @@ package com.ctoangels.go.common.modules.go.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.ctoangels.go.common.modules.go.entity.Dict;
-import com.ctoangels.go.common.modules.go.entity.RepairSpecDetail;
-import com.ctoangels.go.common.modules.go.entity.RepairSpecDetailReq;
-import com.ctoangels.go.common.modules.go.service.IDictService;
-import com.ctoangels.go.common.modules.go.service.IRepairSpecDetailReqService;
-import com.ctoangels.go.common.modules.go.service.IRepairSpecDetailService;
+import com.ctoangels.go.common.modules.go.entity.*;
+import com.ctoangels.go.common.modules.go.service.*;
+import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "repairSpecDetail")
-public class RepairSpecDetailController {
+public class RepairSpecDetailController extends BaseController {
     @Autowired
     IRepairSpecDetailService repairSpecDetailService;
 
@@ -35,23 +32,72 @@ public class RepairSpecDetailController {
     @Autowired
     IDictService dictService;
 
-    /*在新增工程单模式下 新增维修范本*/
+    @Autowired
+    IRepairModelDetailService repairModelDetailService;
+
+    @Autowired
+    IRepairModelDetailReqService repairModelDetailReqService;
+
+    /*在新增工程单模式下 新增维修范本或维修详单*/
     @RequestMapping(value = "/addModelDetail", method = RequestMethod.GET)
-    public String add(ModelMap modelMap) {
+    public String add(ModelMap map, @RequestParam(required = false) Integer id) {
+        if (id != null && id != 0) {
+            RepairModelDetail detail = repairModelDetailService.selectById(id);
+            List<RepairModelDetailReq> reqList = repairModelDetailReqService.getListByDetailId(id);
+
+        }
         EntityWrapper<Dict> ew = new EntityWrapper<>();
         ew.addFilter("type={0}", "维修部位");
         List<Dict> repDicts = dictService.selectList(ew);
         EntityWrapper<Dict> ew1 = new EntityWrapper<>();
         ew1.addFilter("type={0}", "修理工艺");
         List<Dict> reqDicts = dictService.selectList(ew1);
-
-        modelMap.put("repDicts", repDicts);
-        modelMap.put("reqDicts", reqDicts);
+        map.put("repDicts", repDicts);
+        map.put("reqDicts", reqDicts);
         return "go/repairSpec/detail";
     }
 
+    /*保存为维修工程单范本*/
+    @RequestMapping(value = "/addModelDetail", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject addModel(RepairModelDetail repairModelDetail, @RequestParam(required = false) String dataJson) {
+        int companyId = getCurrentUser().getCompanyId();
+        repairModelDetail.setCompanyId(companyId);
+        JSONObject jsonObject = new JSONObject();
+        List<RepairModelDetailReq> modelReqs = new ArrayList<>();
+        RepairModelDetailReq modelReq = new RepairModelDetailReq();
+        String[] array = dataJson.split(",");
+
+        repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
+
+        if (repairModelDetailService.insert(repairModelDetail)) {
+            int id = repairModelDetail.getId();
+            for (int i = 0; i < array.length; i++) {
+                if (i % 3 == 0) {
+                    modelReq.setDes(array[i]);
+                } else if (i % 3 == 1) {
+                    modelReq.setUnit(array[i]);
+                } else if (i % 3 == 2) {
+                    modelReq.setCount(array[i]);
+                    modelReq.setRepairSpecDetailId(id);
+                    modelReqs.add(modelReq);
+                    modelReq = new RepairModelDetailReq();
+                }
+            }
+            repairModelDetailReqService.insertBatch(modelReqs);
+
+            jsonObject.put("success", true);
+            jsonObject.put("specDetail", false);
+        } else {
+            jsonObject.put("success", false);
+            jsonObject.put("msg", "添加时出错,请稍后再试");
+        }
+        return jsonObject;
+    }
+
+
     /*保存为工程单的维修详单*/
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/addSpecDetail", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(RepairSpecDetail repairSpecDetail, @RequestParam(required = false) String dataJson) {
         JSONObject jsonObject = new JSONObject();
@@ -78,6 +124,8 @@ public class RepairSpecDetailController {
             repairSpecDetailReqService.insertBatch(reqs);
 
             jsonObject.put("success", true);
+            jsonObject.put("specDetail", true);
+            jsonObject.put("repairSpecDetailId", id);
         } else {
             jsonObject.put("success", false);
             jsonObject.put("msg", "添加时出错,请稍后再试");
