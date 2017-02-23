@@ -233,7 +233,15 @@
                 <c:forEach items="${reqDicts}" var="req">
                     <div class="col-md-3">
                         <label class="mt-checkbox">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                            <input type="checkbox"  value="${req.value}" name="repairTech"> ${req.des}
+=======
+                            <input type="checkbox" value="${req.id}" name="repairTech"> ${req.value}
+>>>>>>> 9cb5dc2479c3fa079e790c2b5035be191f905e55
+=======
                             <input type="checkbox" value="${req.value}" name="repairTech"> ${req.des}
+>>>>>>> 4b43474cb33e582e1337d9b5a1c0e0609c40aed2
                             <span></span>
                         </label>
                     </div>

@@ -34,8 +34,8 @@ public class RepairModelDetailReq implements Serializable {
 	private String count;
 
 	/** 维修工程单范本的id */
-	@TableField(value = "repair_spec_detail_id")
-	private Integer repairSpecDetailId;
+	@TableField(value = "repair_model_detail_id")
+	private Integer repairModelDetailId;
 
 	/** 创建时间 */
 	@TableField(value = "create_date")
@@ -90,12 +90,12 @@ public class RepairModelDetailReq implements Serializable {
 		this.count = count;
 	}
 
-	public Integer getRepairSpecDetailId() {
-		return this.repairSpecDetailId;
+	public Integer getRepairModelDetailId() {
+		return repairModelDetailId;
 	}
 
-	public void setRepairSpecDetailId(Integer repairSpecDetailId) {
-		this.repairSpecDetailId = repairSpecDetailId;
+	public void setRepairModelDetailId(Integer repairModelDetailId) {
+		this.repairModelDetailId = repairModelDetailId;
 	}
 
 	public Date getCreateDate() {
