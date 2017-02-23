@@ -79,7 +79,7 @@ public class RepairSpecDetailController extends BaseController {
                     modelReq.setUnit(array[i]);
                 } else if (i % 3 == 2) {
                     modelReq.setCount(array[i]);
-                    modelReq.setRepairSpecDetailId(id);
+                    modelReq.setRepairModelDetailId(id);
                     modelReqs.add(modelReq);
                     modelReq = new RepairModelDetailReq();
                 }
