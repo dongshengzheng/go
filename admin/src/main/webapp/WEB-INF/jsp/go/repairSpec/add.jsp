@@ -77,13 +77,13 @@
         line-height: 15px;
         text-align: center;
         background-color: #fbfcfd;
-        color: #32c96a;
+        color: lightseagreen;
         display: block;
         font-size: 10px;
     }
 
     #menu ul li a:hover, #menu ul li a.cur {
-        background-color: #32c92a;
+        background-color: lightseagreen;
         color: #fbfcfd;
     }
 
@@ -98,50 +98,6 @@
     }
 </style>
 <go:navigater path="repairSpec"></go:navigater>
-
-<a href="repairSpecDetail/addModelDetail?shipName=好船&catagory=机械工程&code=2.2.2" id="add-detail"
-   data-model="dialog">新增详单</a>
-<div>
-    <select class="model-detail-select"></select>
-    <input class="repairSpecDetailId" name="repairSpecDetailId" value="">
-</div>
-<div>
-    <select class="model-detail-select"></select>
-    <input class="repairSpecDetailId" name="repairSpecDetailId" value="">
-</div>
-<div>
-    <select class="model-detail-select"></select>
-    <input class="repairSpecDetailId" name="repairSpecDetailId" value="">
-</div>
-<script>
-    $(document).ready(initRepairModelDetailList())
-    function initRepairModelDetailList() {
-        $.ajax({
-            "url": 'repairSpec/getModelDetailList',
-            "type": 'get',
-            "success": function (data) {
-                var html = "";
-                html += "<option>--请选择维修详单范本--</option>"
-                html += "<option data-id=0>--新增详单--</option>";
-                for (var i = 0; i < data.length; i++) {
-                    html += "<option value=" + data[i].id + ">" + data[i].proName + "</option>"
-                }
-                $(".model-detail-select").html(html);
-            }
-        })
-        $('.model-detail-select').on("change", function () {
-            alert(1);
-            var thisone = $(this);
-            $('.marked-spec-detail').removeClass("marked-spec-detail");
-            thisone.siblings('.repairSpecDetailId').addClass("marked-spec-detail");
-            $('#add-detail').attr("href", "repairSpecDetail/addModelDetail?shipName=好船&catagory=机械工程&code=2.2.2&id=" + thisone.val());
-            $('#add-detail').click();
-        })
-    }
-
-
-</script>
-
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
     <input type="hidden" name="modelId" value="${modelId}">
@@ -174,7 +130,7 @@
                                             船舶名称</label>
                                         <div class="col-sm-7">
                                             <input id="shipName" name="shipName" type="text" maxlength="32"
-                                                   value=""
+                                                   value="我是假的 放着看看"
                                                    minlength="2" class="form-control required" placeholder="请选择船舶">
                                         </div>
                                         <label class="col-sm-1 control-label"><span class="red">* </span></label>
@@ -299,14 +255,21 @@
                                                         <input type="hidden" value="1"
                                                                name="type${outerVs.count}List[${itemVs.index}].status">
                                                     </td>
-                                                    <td>${item.code}</td>
+                                                    <td>
+                                                        <c:if test="${!(item.content=='维修详单')}">
+                                                            ${item.code}
+                                                        </c:if>
+                                                    </td>
                                                     <td>${item.content}
                                                         <c:if test="${item.content=='维修详单'}">
-                                                            <select>
-                                                                <option>
-                                                                    选择详单
-                                                                </option>
-                                                            </select>
+                                                            <select class="model-detail-select"
+                                                                    data-code="${item.parentCode}"
+                                                                    data-catagory="${item.catagory}"></select>
+                                                            <input class="repairSpecDetailId" name="repairSpecDetailId"
+                                                                   type="hidden"
+                                                                   value="">
+                                                            <a class="repairSpecDetailName"
+                                                               href="javascript:;">暂未选择详单</a>
                                                         </c:if>
                                                         <c:forEach items="${item.paramList}" var="p" varStatus="vs">
                                                             <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
@@ -471,6 +434,42 @@
         >其他</a></li>
     </ul>
 </div>
+<%--触发详单弹窗--%>
+<a style="display:none" href="repairSpecDetail/addModelDetail?shipName=&catagory=&code=" id="add-detail"
+   data-model="dialog">新增详单</a>
+<script>
+    var shipName = $("#shipName").val();
+    $(document).ready(initRepairModelDetailList())
+    function initRepairModelDetailList() {
+        $.ajax({
+            "url": 'repairSpec/getModelDetailList',
+            "type": 'get',
+            "success": function (data) {
+                var html = "";
+                html += "<option>--请选择维修详单范本--</option>"
+                html += "<option value=0>--新增详单--</option>";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<option value=" + data[i].id + ">" + data[i].proName + "</option>"
+                }
+                $(".model-detail-select").html(html);
+            }
+        })
+        $('.model-detail-select').unbind("change");
+        $('.model-detail-select').on("change", function () {
+            var thisone = $(this);
+            var id = thisone.val();
+            var catagory = thisone.attr("data-catagory");
+            var code = thisone.attr("data-code");
+            if (id == null) {
+                return;
+            }
+            $('.marked-spec-detail').removeClass("marked-spec-detail");
+            thisone.siblings('.repairSpecDetailId').addClass("marked-spec-detail");
+            $('#add-detail').attr("href", "repairSpecDetail/addModelDetail?shipName=" + shipName + "&catagory=" + catagory + "&code=" + code + "&id=" + id);
+            $('#add-detail').click();
+        })
+    }
+</script>
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 

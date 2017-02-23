@@ -6,6 +6,7 @@ import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,7 +45,18 @@ public class RepairSpecDetailController extends BaseController {
         if (id != null && id != 0) {
             RepairModelDetail detail = repairModelDetailService.selectById(id);
             List<RepairModelDetailReq> reqList = repairModelDetailReqService.getListByDetailId(id);
-
+            map.put("detail", detail);
+            String repairPosition = detail.getRepairPosition();
+            if (!StringUtils.isEmpty(repairPosition)) {
+                String[] positionList = repairPosition.split(",");
+                map.put("positionList", positionList);
+            }
+            String repairTech = detail.getRepairTech();
+            if (!StringUtils.isEmpty(repairTech)) {
+                String[] techList = repairTech.split(",");
+                map.put("techList", techList);
+            }
+            map.put("reqList", reqList);
         }
         EntityWrapper<Dict> ew = new EntityWrapper<>();
         ew.addFilter("type={0}", "维修部位");

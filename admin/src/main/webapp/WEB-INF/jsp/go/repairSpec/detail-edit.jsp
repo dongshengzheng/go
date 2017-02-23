@@ -284,7 +284,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn green" onclick="saveInfo(2)">保存为范本</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="reset" class="btn default">重置</button>
+                <button type="button" class="btn default">重置</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button id="close" type="button" class="btn default" data-dismiss="modal">取消</button>
                 <br><br>
