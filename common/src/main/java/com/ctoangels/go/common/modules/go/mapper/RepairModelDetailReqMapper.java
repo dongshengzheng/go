@@ -10,5 +10,6 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface RepairModelDetailReqMapper extends AutoMapper<RepairModelDetailReq> {
 
+    void deleteRepairModelDetailById(int id);
 
 }

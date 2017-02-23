@@ -51,24 +51,6 @@ public class RepairModelDetailController extends BaseController {
 
     @RequestMapping
     public String page() {
-        return "go/modelDetail/list";
-    }
-
-    @RequestMapping(value = "/list")
-    @ResponseBody
-    public JSONObject list(RepairModelDetail repairModelDetail, @RequestParam(required = false) String keyword) {
-        int companyId = getCurrentUser().getCompanyId();
-        EntityWrapper<RepairModelDetail> ew = getEntityWrapper();
-        if (!StringUtils.isEmpty(keyword))
-            ew.like("proName", keyword);
-        ew.addFilter("company_id={0}", companyId);
-        Page<RepairModelDetail> page = repairModelDetailService.selectPage(getPage(), ew);
-        return jsonPage(page);
-    }
-
-
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String add(HttpSession session) {
         EntityWrapper<Dict> ew = new EntityWrapper<>();
         ew.addFilter("type={0}", "维修部位");
         List<Dict> repDicts = dictService.selectList(ew);
@@ -79,6 +61,26 @@ public class RepairModelDetailController extends BaseController {
 
         session.setAttribute("repDicts",repDicts);
         session.setAttribute("reqDicts",reqDicts);
+
+        return "go/modelDetail/list";
+    }
+
+    @RequestMapping(value = "/list")
+    @ResponseBody
+    public JSONObject list(RepairModelDetail repairModelDetail, @RequestParam(required = false) String keyword) {
+        int companyId = getCurrentUser().getCompanyId();
+        EntityWrapper<RepairModelDetail> ew = getEntityWrapper();
+        if (!StringUtils.isEmpty(keyword))
+            ew.like("pro_name", keyword);
+        ew.addFilter("company_id={0}", companyId);
+        Page<RepairModelDetail> page = repairModelDetailService.selectPage(getPage(), ew);
+        return jsonPage(page);
+    }
+
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add(HttpSession session) {
+
         return "go/modelDetail/add";
     }
 
@@ -120,16 +122,87 @@ public class RepairModelDetailController extends BaseController {
         return jsonObject;
     }
 
+    //查看和编辑
     @RequestMapping(value = "info" ,method =RequestMethod.GET)
-    public String info(@RequestParam Integer id, Model model){
+    public String info(@RequestParam Integer id,@RequestParam String operate , ModelMap modelMap){
 
         RepairModelDetail repairModelDetail=repairModelDetailService.selectById(id);
-        model.addAttribute("modelDetails",repairModelDetail);
+        String repairPosition=repairModelDetail.getRepairPosition();
+        if(repairPosition!=null){
+            String[] positions=repairPosition.split(",");
+            modelMap.put("positions",positions);
+        }
+        String repairTech=repairModelDetail.getRepairTech();
+        if(repairTech!=null){
+            String[] techs=repairTech.split(",");
+            modelMap.put("techs",techs);
+        }
+        modelMap.put("modelDetails",repairModelDetail);
 
         EntityWrapper<RepairModelDetailReq> ew = new EntityWrapper<>();
-        ew.addFilter("repair_model_id", repairModelDetail.getId());
+        ew.addFilter("repair_model_detail_id={0}", repairModelDetail.getId());
         List<RepairModelDetailReq> repairModelDetailReqs=repairModelDetailReqService.selectList(ew);
-        return "go/modelDetail/info";
+        modelMap.put("detailReqs",repairModelDetailReqs);
+
+        if(operate.equals("look")){
+            return "go/modelDetail/info";
+        }else{
+            return "go/modelDetail/edit";
+        }
+
     }
 
+
+    /*更新为维修工程单范本*/
+    @RequestMapping(value = "/editModel", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editModel(RepairModelDetail repairModelDetail, @RequestParam(required = false) String dataJson) {
+        JSONObject jsonObject = new JSONObject();
+        List<RepairModelDetailReq> modelReqs = new ArrayList<>();
+        RepairModelDetailReq modelReq = new RepairModelDetailReq();
+        String[] array = dataJson.split(",");
+
+        repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
+
+        if (repairModelDetailService.insertOrUpdate(repairModelDetail)) {
+            int id = repairModelDetail.getId();
+            for (int i = 0; i < array.length; i++) {
+                if (i % 3 == 0) {
+                    modelReq.setDes(array[i]);
+                } else if (i % 3 == 1) {
+                    modelReq.setUnit(array[i]);
+                } else if (i % 3 == 2) {
+                    modelReq.setCount(array[i]);
+                    modelReq.setRepairModelDetailId(id);
+                    modelReqs.add(modelReq);
+                    modelReq = new RepairModelDetailReq();
+                }
+            }
+            repairModelDetailReqService.deleteRepairModelDetailById(id);
+            repairModelDetailReqService.insertBatch(modelReqs);
+
+            jsonObject.put("success", true);
+        } else {
+            jsonObject.put("success", false);
+            jsonObject.put("msg", "添加时出错,请稍后再试");
+        }
+        return jsonObject;
+    }
+
+    /*删除维修范本单*/
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject delete(@RequestParam Integer id){
+        JSONObject jsonObject = new JSONObject();
+
+        RepairModelDetail repairModelDetail= repairModelDetailService.selectById(id);
+        repairModelDetail.setDelFlag(Const.DEL_FLAG_DELETE);
+        if(repairModelDetailService.updateById(repairModelDetail)){
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+            jsonObject.put("msg", "删除错误,请稍后再试");
+        }
+        return jsonObject;
+    }
 }

@@ -82,8 +82,8 @@
                 "targets": 4,
                 "render": function (data, type, row) {
                     return ""
-                            + '<a href="modelDetail/info?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
-                            + '<a href="modelDetail/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
+                            + '<a href="modelDetail/info?id=' + row.id + '&operate=look" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
+                            + '<a href="modelDetail/info?id=' + row.id + '&operate=edit" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
                             + '<a href="modelDetail/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
                             ;

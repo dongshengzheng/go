@@ -1,5 +1,6 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ctoangels.go.common.modules.go.mapper.RepairModelDetailReqMapper;
@@ -15,5 +16,11 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
 @Service
 public class RepairModelDetailReqServiceImpl extends SuperServiceImpl<RepairModelDetailReqMapper, RepairModelDetailReq> implements IRepairModelDetailReqService {
 
+    @Autowired
+    private RepairModelDetailReqMapper repairModelDetailReqMapper;
 
+    @Override
+    public void deleteRepairModelDetailById(int repair_model_detail_id) {
+        repairModelDetailReqMapper.deleteRepairModelDetailById(repair_model_detail_id);
+    }
 }

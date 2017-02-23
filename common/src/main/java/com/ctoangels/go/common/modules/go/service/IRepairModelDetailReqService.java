@@ -10,5 +10,5 @@ import com.baomidou.framework.service.ISuperService;
  */
 public interface IRepairModelDetailReqService extends ISuperService<RepairModelDetailReq> {
 
-
+    void deleteRepairModelDetailById(int repair_model_detail_id);
 }
