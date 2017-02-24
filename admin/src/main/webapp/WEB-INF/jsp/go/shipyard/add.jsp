@@ -116,7 +116,8 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
                 <button type="button" class="btn green" onclick="severCheck()">Submit</button>
-                <button type="button" class="btn grey-salsa btn-outline">Cancel</button>
+                <a href="shipyard" type="button" class="btn btn-default" data-target="navTab">取消
+                </a>
             </div>
         </div>
     </div>
