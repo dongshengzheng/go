@@ -373,8 +373,10 @@
                     if (data.success) {
                         //  保存为工程单详单
                         if (data.specDetail) {
-                            $(".marked-spec-detail").val(data.repairSpecDetailId).removeClass("marked-spec-detail")
-                                    .siblings(".repairSpecDetailName").html($("#proName").val());
+                            var repairSpecDetailId = data.repairSpecDetailId;
+                            $(".marked-spec-detail").val(repairSpecDetailId).removeClass("marked-spec-detail")
+                                    .siblings(".repairSpecDetailName").html($("#proName").val())
+                                    .attr("href", "repairSpecDetail/editSpecDetail?id=" + repairSpecDetailId);
                             $('#close').click();
                         } else {
                             App.alert({

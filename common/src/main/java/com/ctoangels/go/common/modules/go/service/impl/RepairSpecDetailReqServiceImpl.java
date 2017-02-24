@@ -19,4 +19,11 @@ import java.util.List;
 @Service
 public class RepairSpecDetailReqServiceImpl extends SuperServiceImpl<RepairSpecDetailReqMapper, RepairSpecDetailReq> implements IRepairSpecDetailReqService {
 
+    @Autowired
+    RepairSpecDetailReqMapper repairSpecDetailReqMapper;
+
+    @Override
+    public void deleteRepairSpecDetailReqById(Integer repairSpecDetailId) {
+        repairSpecDetailReqMapper.deleteRepairSpecDetailReqById(repairSpecDetailId);
+    }
 }

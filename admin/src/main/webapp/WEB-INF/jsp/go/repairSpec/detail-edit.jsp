@@ -75,21 +75,21 @@
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
                     <div class="col-sm-7">
-                        <input id="shipName" name="shipName" type="text" maxlength="32" value="${param.shipName}"
+                        <input id="shipName" name="shipName" type="text" maxlength="32" value="${detail.shipName}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
                     <div class="col-sm-6">
-                        <input id="catagory" name="catagory" type="text" maxlength="32" value="${param.catagory}"
+                        <input id="catagory" name="catagory" type="text" maxlength="32" value="${detail.catagory}"
                                class="form-control ">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
                     <div class="col-sm-6">
-                        <input id="code" name="code" type="text" maxlength="32" value="${param.code}"
+                        <input id="code" name="code" type="text" maxlength="32" value="${detail.code}"
                                class="form-control required">
                     </div>
                 </div>
@@ -363,7 +363,7 @@
             dataJson = dataJson.substring(0, dataJson.length - 1);
         }
         if (a == 1) {
-            $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail?dataJson=" + dataJson);
+            $("#detail_form").attr("action", "repairSpecDetail/editSpecDetail?dataJson=" + dataJson);
         } else if (a == 2) {
             $("#detail_form").attr("action", "repairSpecDetail/addModelDetail?dataJson=" + dataJson);
         }

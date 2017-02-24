@@ -22,7 +22,6 @@ public class RepairModelDetailReqServiceImpl extends SuperServiceImpl<RepairMode
 
     public void deleteRepairModelDetailById(int repair_model_detail_id) {
         repairModelDetailReqMapper.deleteRepairModelDetailById(repair_model_detail_id);
-        RepairModelDetailReqMapper repairModelDetailReqMapper;
     }
 
     @Override
