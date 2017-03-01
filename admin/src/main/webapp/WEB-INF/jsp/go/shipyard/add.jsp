@@ -64,7 +64,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">联系电话
-                    <span class="red"> * </span>
+                    <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
                     <div class="input-group">
@@ -77,7 +77,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">联系人
-                    <span class="red"> * </span>
+                    <span class="red">   </span>
                 </label>
                 <div class="col-md-4">
                     <div class="input-group">
@@ -90,7 +90,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">邮箱
-                    <span class="red"> * </span>
+                    <span class="red">   </span>
                 </label>
                 <div class="col-md-4">
                     <div class="input-group">
@@ -116,7 +116,8 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
                 <button type="button" class="btn green" onclick="severCheck()">Submit</button>
-                <button type="button" class="btn grey-salsa btn-outline">Cancel</button>
+                <a href="shipyard" type="button" class="btn btn-default" data-target="navTab">取消
+                </a>
             </div>
         </div>
     </div>

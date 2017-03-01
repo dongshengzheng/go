@@ -300,8 +300,8 @@
             '<td><input type="text" class="td-text" name="des"></td>' +
             '<td><input type="text" class="td-text" name="unit"></td>' +
             '<td><input type="text" class="td-text" name="count"></td>' +
-            '<td><button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;&nbsp;' +
-            '<button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button></td>' +
+            '<td><button type="button" onclick="delTr(this)" class="btn btn-sm red">删除</button>&nbsp;&nbsp;' +
+            '<button  type="button" onclick="insTr(this)" class="btn btn-sm green" >插入一行</button></td>' +
             '</tr>'
     function delTr(obj) { //删除行  
         if (confirm('确定要删除？')) {

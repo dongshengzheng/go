@@ -392,4 +392,11 @@
             alter table t_repair_spec_detail_req modify column count float COMMENT '数量';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-027">
+        <sql>
+            alter table t_repair_model_item add src INT NULL COMMENT '判断是自定义还是红本中的数据';
+            alter table t_repair_spec_item add src INT NULL COMMENT '判断是自定义还是红本中的数据';
+            alter table t_repair_prog_item add src INT NULL COMMENT '判断是自定义还是红本中的数据';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

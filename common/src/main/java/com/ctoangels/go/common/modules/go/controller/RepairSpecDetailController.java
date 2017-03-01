@@ -83,20 +83,22 @@ public class RepairSpecDetailController extends BaseController {
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insert(repairModelDetail)) {
-            int id = repairModelDetail.getId();
-            for (int i = 0; i < array.length; i++) {
-                if (i % 3 == 0) {
-                    modelReq.setDes(array[i]);
-                } else if (i % 3 == 1) {
-                    modelReq.setUnit(array[i]);
-                } else if (i % 3 == 2) {
-                    modelReq.setCount(array[i]);
-                    modelReq.setRepairModelDetailId(id);
-                    modelReqs.add(modelReq);
-                    modelReq = new RepairModelDetailReq();
+            if (!dataJson.equals("")){
+                int id = repairModelDetail.getId();
+                for (int i = 0; i < array.length; i++) {
+                    if (i % 3 == 0) {
+                        modelReq.setDes(array[i]);
+                    } else if (i % 3 == 1) {
+                        modelReq.setUnit(array[i]);
+                    } else if (i % 3 == 2) {
+                        modelReq.setCount(array[i]);
+                        modelReq.setRepairModelDetailId(id);
+                        modelReqs.add(modelReq);
+                        modelReq = new RepairModelDetailReq();
+                    }
                 }
+                repairModelDetailReqService.insertBatch(modelReqs);
             }
-            repairModelDetailReqService.insertBatch(modelReqs);
 
             jsonObject.put("success", true);
             jsonObject.put("specDetail", false);
@@ -121,19 +123,21 @@ public class RepairSpecDetailController extends BaseController {
 
         if (repairSpecDetailService.insert(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            for (int i = 0; i < array.length; i++) {
-                if (i % 3 == 0) {
-                    req.setDes(array[i]);
-                } else if (i % 3 == 1) {
-                    req.setUnit(array[i]);
-                } else if (i % 3 == 2) {
-                    req.setCount(array[i]);
-                    req.setRepairSpecDetailId(id);
-                    reqs.add(req);
-                    req = new RepairSpecDetailReq();
+            if(!dataJson.equals("")){
+                for (int i = 0; i < array.length; i++) {
+                    if (i % 3 == 0) {
+                        req.setDes(array[i]);
+                    } else if (i % 3 == 1) {
+                        req.setUnit(array[i]);
+                    } else if (i % 3 == 2) {
+                        req.setCount(array[i]);
+                        req.setRepairSpecDetailId(id);
+                        reqs.add(req);
+                        req = new RepairSpecDetailReq();
+                    }
                 }
+                repairSpecDetailReqService.insertBatch(reqs);
             }
-            repairSpecDetailReqService.insertBatch(reqs);
 
             jsonObject.put("success", true);
             jsonObject.put("specDetail", true);
@@ -186,20 +190,22 @@ public class RepairSpecDetailController extends BaseController {
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
         if (repairSpecDetailService.updateById(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            for (int i = 0; i < array.length; i++) {
-                if (i % 3 == 0) {
-                    specReq.setDes(array[i]);
-                } else if (i % 3 == 1) {
-                    specReq.setUnit(array[i]);
-                } else if (i % 3 == 2) {
-                    specReq.setCount(array[i]);
-                    specReq.setRepairSpecDetailId(id);
-                    specReqs.add(specReq);
-                    specReq = new RepairSpecDetailReq();
+            if (!dataJson.equals("")){
+                for (int i = 0; i < array.length; i++) {
+                    if (i % 3 == 0) {
+                        specReq.setDes(array[i]);
+                    } else if (i % 3 == 1) {
+                        specReq.setUnit(array[i]);
+                    } else if (i % 3 == 2) {
+                        specReq.setCount(array[i]);
+                        specReq.setRepairSpecDetailId(id);
+                        specReqs.add(specReq);
+                        specReq = new RepairSpecDetailReq();
+                    }
                 }
+                repairSpecDetailReqService.deleteRepairSpecDetailReqById(id);
+                repairSpecDetailReqService.insertBatch(specReqs);
             }
-            repairSpecDetailReqService.deleteRepairSpecDetailReqById(id);
-            repairSpecDetailReqService.insertBatch(specReqs);
             jsonObject.put("success", true);
             jsonObject.put("specDetail", true);
         } else {

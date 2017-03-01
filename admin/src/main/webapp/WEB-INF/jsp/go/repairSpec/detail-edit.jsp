@@ -69,6 +69,13 @@
 </style>
 <form action="" method="post" class="form-horizontal" id="detail_form">
     <input name="id" value="${detail.id}" type="hidden">
+    <c:if test="${!empty detail}">
+        <input id="id" name="id" type="hidden" value="${detail.id}"/>
+        <input id="createDate" name="createDate" type="hidden" value="<fmt:formatDate value='${detail.createDate}'
+                        pattern="yyyy-MM-dd"/>"/>
+        <input id="createBy" name="createBy" type="hidden" value="${detail.createBy}"/>
+        <input id="delFlag" name="delFlag" type="hidden" value="${detail.delFlag}"/>
+    </c:if>
     <div>
         <div class="line1"></div>
         <div style="height:40px;width: 100%;background-color: #C0C9CC">
@@ -302,8 +309,8 @@
             '<td><input type="text" class="td-text" name="des"></td>' +
             '<td><input type="text" class="td-text" name="unit"></td>' +
             '<td><input type="text" class="td-text" name="count"></td>' +
-            '<td><button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;&nbsp;' +
-            '<button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button></td>' +
+            '<td><button type="button" onclick="delTr(this)" class="btn btn-sm red">删除</button>&nbsp;&nbsp;' +
+            '<button  type="button" onclick="insTr(this)" class="btn btn-sm green" >插入一行</button></td>' +
             '</tr>'
     function delTr(obj) { //删除行  
         if (confirm('确定要删除？')) {
