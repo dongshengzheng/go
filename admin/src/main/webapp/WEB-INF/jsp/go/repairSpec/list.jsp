@@ -112,13 +112,17 @@
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="repairSpec/info">
-                            + '<a href="repairSpec/info?id=' + row.id + '" class="btn btn-sm default" data-target="navTab"></i>查看</a>'
+                            + '<a href="repairSpec/info?id=' + row.id + '" class="btn btn-sm margin-bottom-5 default" data-target="navTab"></i>查看</a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/edit">
                             + '<a href="repairSpec/edit?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/enquiry">
                             + '<a href="repairSpec/enquiry?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>询价</a>'
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="repairSpec/delete">
+                            + '<br><a href="repairProg/makeProgress?id=' + row.id +
+                            '" data-msg="确定生成吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm green">生成维修进度</a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/delete">
                             + '<a href="repairSpec/delete?id=' + row.id +

@@ -39,6 +39,7 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         list.addAll(specItemList.getType5List());
         list.addAll(specItemList.getType6List());
         list.addAll(specItemList.getType7List());
+        list.addAll(specItemList.getType8List());
         for (RepairSpecItem item : list) {
             item.setRepairSpecId(repairSpec.getId());
         }

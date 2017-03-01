@@ -68,6 +68,7 @@
 
 </style>
 <form action="" method="post" class="form-horizontal" id="detail_form">
+    <input name="id" value="${detail.id}" type="hidden">
     <div>
         <div class="line1"></div>
         <div style="height:40px;width: 100%;background-color: #C0C9CC">
@@ -96,7 +97,7 @@
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
                     <div class="col-sm-6">
-                        <input id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
+                        <input id="proOrderNo" name="proOrderNo" type="text" maxlength="32" value="${detail.proOrderNo}"
                                class="form-control required">
                     </div>
                 </div>
@@ -371,10 +372,9 @@
             $("#detail_form").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
-                        //  保存为工程单详单
+                        //  更新工程单详单
                         if (data.specDetail) {
-                            $(".marked-spec-detail").val(data.repairSpecDetailId).removeClass("marked-spec-detail")
-                                    .siblings(".repairSpecDetailName").html($("#proName").val());
+                            $(".marked-detail-name").html($("#proName").val()).removeClass("marked-detail-name");
                             $('#close').click();
                         } else {
                             App.alert({

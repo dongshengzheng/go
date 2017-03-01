@@ -2,6 +2,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -15,15 +16,15 @@
                 <div class="portlet-title tabbable-line">
                     <div class="caption caption-md">
                         <i class="fa fa-user"></i>
-                        <span class="caption-subject font-blue-madison bold uppercase">账号管理</span>
+                        <span class="caption-subject font-blue-madison bold uppercase"><fmt:message
+                                key="account_management"></fmt:message></span>
                     </div>
                 </div>
                 <div class="portlet-body">
-
                     <div class="portlet box blue-dark">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-info"></i>账号信息
+                                <i class="fa fa-info"></i><fmt:message key="account_info"></fmt:message>
                             </div>
                             <div class="tools">
                                 <a href="javascript:;" class="collapse"> </a>
@@ -31,37 +32,67 @@
                         </div>
                         <div class="portlet-body">
                             <div class="modal-body" style="padding: 5px;">
-                                <label style="margin-right: 2%">个人姓名</label>
-                                <button class="btn blue-dark" style="margin-right: 2%"> 已设置
-                                </button>
-                                <label class="">您当前姓名为:${sessionScope.sessionUser.name}</label>
+                                <label style="margin-right: 2%"><fmt:message key="account_name"></fmt:message></label>
+                                <c:if test="${!empty sessionScope.sessionUser.name}">
+                                    <button class="btn blue-dark" style="margin-right: 2%"><fmt:message
+                                            key="account_have_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <c:if test="${empty sessionScope.sessionUser.name}">
+                                    <button class="btn default" style="margin-right: 2%"><fmt:message
+                                            key="account_not_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <label class=""><fmt:message
+                                        key="account_current_name"></fmt:message>:${sessionScope.sessionUser.name}</label>
                                 <shiro:hasPermission name="account/editName">
                                     <button style="float:right" data-url="account/editName" data-model="dialog"
-                                            class="btn green-haze"> 修改
+                                            class="btn green-haze"><fmt:message
+                                            key="modify"></fmt:message>
                                     </button>
                                 </shiro:hasPermission>
                             </div>
                             <hr style="border-top: 1px dotted lightgrey;margin-top: 5px;margin-bottom: 5px">
                             <div class="modal-body" style="padding: 5px;">
-                                <label style="margin-right: 2%">手机号码</label>
-                                <button class="btn blue-dark" style="margin-right: 2%"> 已设置
-                                </button>
-                                <label class="">您当前的手机号码为:${sessionScope.sessionUser.phone}</label>
+                                <label style="margin-right: 2%"><fmt:message key="account_tel"></fmt:message></label>
+                                <c:if test="${!empty sessionScope.sessionUser.phone}">
+                                    <button class="btn blue-dark" style="margin-right: 2%"><fmt:message
+                                            key="account_have_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <c:if test="${empty sessionScope.sessionUser.phone}">
+                                    <button class="btn default" style="margin-right: 2%"><fmt:message
+                                            key="account_not_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <label class=""><fmt:message
+                                        key="account_current_tel"></fmt:message>:${sessionScope.sessionUser.phone}</label>
                                 <shiro:hasPermission name="account/editPhone">
                                     <button style="float:right" data-url="account/editPhone" data-model="dialog"
-                                            class="btn green-haze"> 修改
+                                            class="btn green-haze"><fmt:message
+                                            key="modify"></fmt:message>
                                     </button>
                                 </shiro:hasPermission>
                             </div>
                             <hr style="border-top: 1px dotted lightgrey;margin-top: 5px;margin-bottom: 5px">
                             <div class="modal-body" style="padding: 5px;">
-                                <label style="margin-right: 2%">电子邮箱</label>
-                                <button class="btn blue-dark" style="margin-right: 2%"> 已设置
-                                </button>
-                                <label class="">您绑定的邮箱是:${sessionScope.sessionUser.email}</label>
+                                <label style="margin-right: 2%"><fmt:message key="account_email"></fmt:message></label>
+                                <c:if test="${!empty sessionScope.sessionUser.email}">
+                                    <button class="btn blue-dark" style="margin-right: 2%"><fmt:message
+                                            key="account_have_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <c:if test="${empty sessionScope.sessionUser.email}">
+                                    <button class="btn default" style="margin-right: 2%"><fmt:message
+                                            key="account_not_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <label class=""><fmt:message
+                                        key="account_binding_email"></fmt:message>:${sessionScope.sessionUser.email}</label>
                                 <shiro:hasPermission name="account/editEmail">
                                     <button style="float:right" data-url="account/editEmail" data-model="dialog"
-                                            class="btn green-haze"> 修改
+                                            class="btn green-haze"><fmt:message
+                                            key="modify"></fmt:message>
                                     </button>
                                 </shiro:hasPermission>
                             </div>
@@ -71,7 +102,7 @@
                     <div class="portlet box blue-dark">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-lock"></i>修改密码
+                                <i class="fa fa-lock"></i><fmt:message key="account_modify_password"></fmt:message>
                             </div>
                             <div class="tools">
                                 <a href="javascript:;" class="collapse"> </a>
@@ -79,13 +110,23 @@
                         </div>
                         <div class="portlet-body">
                             <div class="modal-body" style="padding: 5px;">
-                                <label style="margin-right: 2%">账号密码</label>
-                                <button class="btn blue-dark" style="margin-right: 2%"> 已设置
-                                </button>
-                                <label class="">安全性高的密码可以使账号更安全</label>
+                                <label style="margin-right: 2%"><fmt:message
+                                        key="account_password"></fmt:message></label>
+                                <c:if test="${!empty sessionScope.sessionUser.password}">
+                                    <button class="btn blue-dark" style="margin-right: 2%"><fmt:message
+                                            key="account_have_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <c:if test="${empty sessionScope.sessionUser.password}">
+                                    <button class="btn default" style="margin-right: 2%"><fmt:message
+                                            key="account_not_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <label class=""><fmt:message key="account_password_security"></fmt:message></label>
                                 <shiro:hasPermission name="account/editPassword">
                                     <button style="float:right" data-url="account/editPassword" data-model="dialog"
-                                            class="btn green-haze"> 修改
+                                            class="btn green-haze"><fmt:message
+                                            key="modify"></fmt:message>
                                     </button>
                                 </shiro:hasPermission>
                             </div>
@@ -94,7 +135,7 @@
                     <div class="portlet box blue-dark">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-cog"></i>其他设置
+                                <i class="fa fa-cog"></i><fmt:message key="account_other"></fmt:message>
                             </div>
                             <div class="tools">
                                 <a href="javascript:;" class="collapse"> </a>
@@ -102,13 +143,22 @@
                         </div>
                         <div class="portlet-body">
                             <div class="modal-body" style="padding: 5px;">
-                                <label style="margin-right: 2%">系统样式</label>
-                                <button class="btn blue-dark" style="margin-right: 2%"> 已设置
-                                </button>
-                                <label class="">可以选择您喜爱的样式</label>
+                                <label style="margin-right: 2%"><fmt:message key="account_style"></fmt:message></label>
+                                <c:if test="${!empty sessionScope.sessionUser.styleId}">
+                                    <button class="btn blue-dark" style="margin-right: 2%"><fmt:message
+                                            key="account_have_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <c:if test="${empty sessionScope.sessionUser.styleId}">
+                                    <button class="btn default" style="margin-right: 2%"><fmt:message
+                                            key="account_not_set"></fmt:message>
+                                    </button>
+                                </c:if>
+                                <label class=""><fmt:message key="account_style_select"></fmt:message></label>
                                 <shiro:hasPermission name="account/editStyle">
                                     <button style="float:right" data-url="account/editStyle" data-model="dialog"
-                                            class="btn green-haze"> 修改
+                                            class="btn green-haze"><fmt:message
+                                            key="modify"></fmt:message>
                                     </button>
                                 </shiro:hasPermission>
                             </div>

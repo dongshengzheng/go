@@ -1,6 +1,5 @@
 package com.ctoangels.go.common.modules.go.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -8,14 +7,12 @@ import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
-import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -25,13 +22,12 @@ import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 /**
  * RepairSpec 控制层
@@ -57,6 +53,9 @@ public class RepairSpecController extends BaseController {
     @Autowired
     private IDictService dictService;
 
+    @Autowired
+    private IShipService shipService;
+
     @RequestMapping
     public String page() {
         return "go/repairSpec/list";
@@ -77,6 +76,7 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(ModelMap map) {
         Integer modelId = 1;
+        List<Ship> shipList = shipService.getListByCompanyId(getCurrentUser().getCompanyId());
         List<RepairModelItem> type1 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "通用服务");
         List<RepairModelItem> type2 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "坞修工程");
         List<RepairModelItem> type3 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "船体工程");
@@ -87,6 +87,7 @@ public class RepairSpecController extends BaseController {
         List<RepairModelItem> type8 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "其他");
         map.put("typeList", dictService.getListByType("维修类型"));
         map.put("modelId", modelId);
+        map.put("shipList", shipList);
         map.put("type1", type1);
         map.put("type2", type2);
         map.put("type3", type3);
@@ -113,6 +114,8 @@ public class RepairSpecController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         Company company = companyService.selectById(getCurrentUser().getCompanyId());
         repairSpec.setCompanyId(company.getId());
+        repairSpec.setCreateDate(new Date());
+        repairSpec.setCreateBy(getCurrentUser().getName());
         repairSpec.setDelFlag(Const.DEL_FLAG_NORMAL);
         if (repairSpecService.saveRepairSpec(repairSpec, specItems)) {
             jsonObject.put("success", true);
@@ -126,11 +129,24 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
-        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsNoValue(id, "通用服务", repairSpec.getModelId());
-        List<RepairSpecItem> type2 = repairSpecItemService.bySpecIdAndCatagoryWithParamsNoValue(id, "通用服务", repairSpec.getModelId());
+        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "通用服务", repairSpec.getModelId());
+        List<RepairSpecItem> type2 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "坞修工程", repairSpec.getModelId());
+        List<RepairSpecItem> type3 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "船体工程", repairSpec.getModelId());
+        List<RepairSpecItem> type4 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "机械工程", repairSpec.getModelId());
+        List<RepairSpecItem> type5 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "电气工程", repairSpec.getModelId());
+        List<RepairSpecItem> type6 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "冷藏工程", repairSpec.getModelId());
+        List<RepairSpecItem> type7 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "特种设备", repairSpec.getModelId());
+        List<RepairSpecItem> type8 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "其他", repairSpec.getModelId());
         map.put("repairSpec", repairSpec);
         map.put("typeList", dictService.getListByType("维修类型"));
         map.put("type1", type1);
+        map.put("type2", type2);
+        map.put("type3", type3);
+        map.put("type4", type4);
+        map.put("type5", type5);
+        map.put("type6", type6);
+        map.put("type7", type7);
+        map.put("type8", type8);
         return "go/repairSpec/info";
     }
 
@@ -163,9 +179,23 @@ public class RepairSpecController extends BaseController {
     public String edit(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
         List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "通用服务", repairSpec.getModelId());
+        List<RepairSpecItem> type2 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "坞修工程", repairSpec.getModelId());
+        List<RepairSpecItem> type3 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "船体工程", repairSpec.getModelId());
+        List<RepairSpecItem> type4 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "机械工程", repairSpec.getModelId());
+        List<RepairSpecItem> type5 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "电气工程", repairSpec.getModelId());
+        List<RepairSpecItem> type6 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "冷藏工程", repairSpec.getModelId());
+        List<RepairSpecItem> type7 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "特种设备", repairSpec.getModelId());
+        List<RepairSpecItem> type8 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "其他", repairSpec.getModelId());
         map.put("repairSpec", repairSpec);
         map.put("typeList", dictService.getListByType("维修类型"));
         map.put("type1", type1);
+        map.put("type2", type2);
+        map.put("type3", type3);
+        map.put("type4", type4);
+        map.put("type5", type5);
+        map.put("type6", type6);
+        map.put("type7", type7);
+        map.put("type8", type8);
         return "go/repairSpec/edit";
     }
 

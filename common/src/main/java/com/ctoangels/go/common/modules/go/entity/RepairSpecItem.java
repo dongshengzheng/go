@@ -28,10 +28,16 @@ public class RepairSpecItem implements Serializable {
     private Integer id;
 
     /**
-     * 维修工程的id
+     * 维修详单的id
      */
     @TableField(value = "repair_spec_detail_id")
     private Integer repairSpecDetailId;
+
+    /**
+     * 维修详单的name
+     */
+    @TableField(exist = false)
+    private String proName;
 
     /**
      * 维修项目类型
@@ -522,5 +528,13 @@ public class RepairSpecItem implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getProName() {
+        return proName;
+    }
+
+    public void setProName(String proName) {
+        this.proName = proName;
     }
 }
