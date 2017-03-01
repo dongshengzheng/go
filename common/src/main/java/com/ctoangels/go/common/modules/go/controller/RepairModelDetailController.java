@@ -100,19 +100,21 @@ public class RepairModelDetailController extends BaseController {
 
         if (repairModelDetailService.insert(repairModelDetail)) {
             int id = repairModelDetail.getId();
-            for (int i = 0; i < array.length; i++) {
-                if (i % 3 == 0) {
-                    modelReq.setDes(array[i]);
-                } else if (i % 3 == 1) {
-                    modelReq.setUnit(array[i]);
-                } else if (i % 3 == 2) {
-                    modelReq.setCount(array[i]);
-                    modelReq.setRepairModelDetailId(id);
-                    modelReqs.add(modelReq);
-                    modelReq = new RepairModelDetailReq();
+            if(!dataJson.equals("")){
+                for (int i = 0; i < array.length; i++) {
+                    if (i % 3 == 0) {
+                        modelReq.setDes(array[i]);
+                    } else if (i % 3 == 1) {
+                        modelReq.setUnit(array[i]);
+                    } else if (i % 3 == 2) {
+                        modelReq.setCount(array[i]);
+                        modelReq.setRepairModelDetailId(id);
+                        modelReqs.add(modelReq);
+                        modelReq = new RepairModelDetailReq();
+                    }
                 }
+                repairModelDetailReqService.insertBatch(modelReqs);
             }
-            repairModelDetailReqService.insertBatch(modelReqs);
 
             jsonObject.put("success", true);
         } else {
@@ -166,20 +168,22 @@ public class RepairModelDetailController extends BaseController {
 
         if (repairModelDetailService.insertOrUpdate(repairModelDetail)) {
             int id = repairModelDetail.getId();
-            for (int i = 0; i < array.length; i++) {
-                if (i % 3 == 0) {
-                    modelReq.setDes(array[i]);
-                } else if (i % 3 == 1) {
-                    modelReq.setUnit(array[i]);
-                } else if (i % 3 == 2) {
-                    modelReq.setCount(array[i]);
-                    modelReq.setRepairModelDetailId(id);
-                    modelReqs.add(modelReq);
-                    modelReq = new RepairModelDetailReq();
+            if(!dataJson.equals("")){
+                for (int i = 0; i < array.length; i++) {
+                    if (i % 3 == 0) {
+                        modelReq.setDes(array[i]);
+                    } else if (i % 3 == 1) {
+                        modelReq.setUnit(array[i]);
+                    } else if (i % 3 == 2) {
+                        modelReq.setCount(array[i]);
+                        modelReq.setRepairModelDetailId(id);
+                        modelReqs.add(modelReq);
+                        modelReq = new RepairModelDetailReq();
+                    }
                 }
+                repairModelDetailReqService.deleteRepairModelDetailById(id);
+                repairModelDetailReqService.insertBatch(modelReqs);
             }
-            repairModelDetailReqService.deleteRepairModelDetailById(id);
-            repairModelDetailReqService.insertBatch(modelReqs);
 
             jsonObject.put("success", true);
         } else {

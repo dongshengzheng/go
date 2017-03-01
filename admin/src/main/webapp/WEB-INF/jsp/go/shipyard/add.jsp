@@ -64,7 +64,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">联系电话
-                    <span class="red"> * </span>
+                    <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
                     <div class="input-group">
@@ -77,7 +77,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">联系人
-                    <span class="red"> * </span>
+                    <span class="red">   </span>
                 </label>
                 <div class="col-md-4">
                     <div class="input-group">
@@ -90,7 +90,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">邮箱
-                    <span class="red"> * </span>
+                    <span class="red">   </span>
                 </label>
                 <div class="col-md-4">
                     <div class="input-group">
