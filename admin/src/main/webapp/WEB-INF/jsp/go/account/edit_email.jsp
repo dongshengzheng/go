@@ -5,6 +5,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<style>
+    p {
+        margin: 0 0;
+    }
+</style>
 <form class="form-horizontal" action="account/editEmail" method="post"
       id="defForm">
     <div class="modal-header">
@@ -13,34 +18,37 @@
                  style='display: block;'>
                 <button class='close' data-dismiss='modal' aria-label='Close'>×</button>
             </div>
-            <div class='bootstrap-dialog-title'>修改电子邮箱</div>
+            <div class='bootstrap-dialog-title'><fmt:message key="account_modify_email"></fmt:message></div>
         </div>
     </div>
     <div class="modal-body">
         <div class="container-fluid">
             <div class="form-group">
-                <label for="email" class="col-sm-3 control-label">新电子邮箱</label>
+                <label for="email" class="col-sm-3 control-label"><fmt:message
+                        key="account_new_email"></fmt:message></label>
                 <div class="col-sm-6">
                     <input id="email" name="email" type="email" maxlength="32" class="form-control required"
-                           placeholder="请输入邮箱地址">
+                           placeholder="<fmt:message key="register_email_input"></fmt:message>">
                 </div>
             </div>
             <div class="form-group">
-                <label for="code" class="col-sm-3 control-label">验证码</label>
+                <label for="code" class="col-sm-3 control-label"><fmt:message key="verify_code"></fmt:message></label>
                 <div class="col-sm-6">
                     <input class="form-control required" placeholder="<fmt:message key="login_verify_code"/>"
                            type="text"
                            id="code" name="code" style="width: 30%; float: left;margin-right: 2%">
-                    <button type="button" onclick="sendCode()" class="btn blue-dark"> 发送验证码
+                    <button type="button" onclick="sendCode()" class="btn blue-dark" id="send-code"><fmt:message
+                            key="account_send_verification_code"></fmt:message>
                     </button>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message
+                key="cancel"></fmt:message></button>
         <shiro:hasPermission name="account/editEmail">
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary"><fmt:message key="save"></fmt:message></button>
         </shiro:hasPermission>
     </div>
 </form>
@@ -63,13 +71,13 @@
         },
         messages: {
             email: {
-                required: "请输入邮箱",
-                remote: "该邮箱已被使用",
-                email: "邮箱格式错误"
+                required: "<fmt:message key="register_email_input"></fmt:message>",
+                remote: "<fmt:message key="register_incorrect_email2"></fmt:message>",
+                email: "<fmt:message key="register_incorrect_email2"></fmt:message>"
             },
             code: {
-                required: "请输入验证码",
-                remote: "验证码错误"
+                required: "<fmt:message key="account_enter_verification_code"></fmt:message>",
+                remote: "<fmt:message key="login_incorrect_verifycode"></fmt:message>"
             }
         }
     });
@@ -78,12 +86,17 @@
     function sendCode() {
         $.post("account/editEmail/sendCode", {email: $('#email').val()}, function (data) {
             if (data.suc) {
-                alert("验证码已发送,请前往邮箱接受");
+                $("#send-code").tips({
+                    side: 1,
+                    msg: "<fmt:message key="account_have_send_code"/>",
+                    bg: '#FF5080',
+                    time: 15
+                })
             } else {
                 if (data.errInfo == "email used") {
-                    alert("邮箱已被使用");
+                    alert("<fmt:message key="register_incorrect_email"></fmt:message>");
                 } else if (data.errInfo == "email empty") {
-                    alert("邮箱不能为空");
+                    alert("<fmt:message key="register_email_empty"></fmt:message>");
                 }
             }
         });

@@ -9,7 +9,9 @@
 
     <!--根据红本id以及维修项目类型获取维修单items的详细信息(无参数可选值)-->
     <select id="bySpecIdAndCatagoryWithParamsNoValue" resultMap="SpecItemMap">
-		SELECT item.* ,#{2} as model_id  from t_repair_spec_item item
+		SELECT item.* ,#{2} as model_id,
+		(SELECT d.pro_name from t_repair_spec_detail d WHERE d.id=item.repair_spec_detail_id) as proName
+		from t_repair_spec_item item
 		WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and del_flag=0
 		Order by item.sort
 	</select>
@@ -21,9 +23,11 @@
                     select="com.ctoangels.go.common.modules.go.mapper.ParamMapper.byItemCodeWithOutParamValue"/>
     </resultMap>
 
-    <!--根据红本id以及维修项目类型获取维修单items的详细信息(无参数可选值)-->
+    <!--根据红本id以及维修项目类型获取维修单items的详细信息(含参数可选值)-->
     <select id="bySpecIdAndCatagoryWithParamsAndValue" resultMap="SpecItemMap2">
-        SELECT item.* ,#{2} as model_id  from t_repair_spec_item item
+        SELECT item.* ,#{2} as model_id,
+        (SELECT d.pro_name from t_repair_spec_detail d WHERE d.id=item.repair_spec_detail_id) as proName
+        from t_repair_spec_item item
         WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and del_flag=0
         Order by item.sort
     </select>

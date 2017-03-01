@@ -13,38 +13,45 @@
                  style='display: block;'>
                 <button class='close' data-dismiss='modal' aria-label='Close'>×</button>
             </div>
-            <div class='bootstrap-dialog-title'>修改密码</div>
+            <div class='bootstrap-dialog-title'><fmt:message key="account_modify_password"></fmt:message></div>
         </div>
     </div>
     <div class="modal-body">
         <div class="container-fluid">
             <div class="form-group">
-                <label for="oldPwd" class="col-sm-2 control-label">原密码</label>
+                <label for="oldPwd" class="col-sm-2 control-label"><fmt:message
+                        key="account_original_password"></fmt:message></label>
                 <div class="col-sm-7">
                     <input id="oldPwd" name="oldPwd" type="password" maxlength="32"
-                           minlength="2" class="form-control required" placeholder="请输原密码">
+                           minlength="2" class="form-control required"
+                           placeholder="<fmt:message key="account_original_password"></fmt:message>">
                 </div>
             </div>
             <div class="form-group">
-                <label for="newPwd" class="col-sm-2 control-label">新密码</label>
+                <label for="newPwd" class="col-sm-2 control-label"><fmt:message
+                        key="account_new_password"></fmt:message></label>
                 <div class="col-sm-7">
                     <input id="newPwd" name="newPwd" type="password" maxlength="32"
-                           minlength="5" class="form-control required" placeholder="请输入新密码">
+                           minlength="5" class="form-control required"
+                           placeholder="<fmt:message key="account_new_password"></fmt:message>">
                 </div>
             </div>
             <div class="form-group">
-                <label for="newPwdCon" class="col-sm-2 control-label">确认密码</label>
+                <label for="newPwdCon" class="col-sm-2 control-label"><fmt:message
+                        key="account_confirm_password"></fmt:message></label>
                 <div class="col-sm-7">
                     <input id="newPwdCon" name="newPwdCon" type="password" maxlength="32"
-                           minlength="5" class="form-control required" placeholder="请确认新密码">
+                           minlength="5" class="form-control required"
+                           placeholder="<fmt:message key="account_confirm_password"></fmt:message>">
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message
+                key="cancel"></fmt:message></button>
         <shiro:hasPermission name="account/editPassword">
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary"><fmt:message key="save"></fmt:message></button>
         </shiro:hasPermission>
     </div>
 </form>
@@ -69,16 +76,16 @@
         },
         messages: {
             oldPwd: {
-                required: "请输入原密码",
-                remote: "原密码错误!"
+                required: "<fmt:message key="account_fill_in_original_password"></fmt:message> ",
+                remote: "<fmt:message key="account_original_password_false"></fmt:message> "
             },
             newPwd: {
-                required: "请输入新密码",
-                remote: "长度不得小于6位!"
+                required: "<fmt:message key="account_fill_in_new_password"></fmt:message> ",
+                remote: "<fmt:message key="account_new_password_false"></fmt:message> "
             },
             newPwdCon: {
-                required: "请确认密码",
-                remote: "与新密码不一致!!"
+                required: "<fmt:message key="account_confirm_password"></fmt:message> ",
+                remote: "<fmt:message key="account_new_password_confirm_false"></fmt:message> "
             }
         }
 

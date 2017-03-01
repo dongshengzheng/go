@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -39,10 +40,10 @@
                         <th width="10px" >
                            <input type='checkbox' id="defaultCheck"/>
                         </th>
-                        <th>名称</th>
-                        <th>路径</th>
-                        <th>排序</th>
-                        <th>描述</th>
+                        <th><fmt:message key="right_table_head_title"></fmt:message></th>
+                        <th><fmt:message key="right_table_head_path"></fmt:message></th>
+                        <th><fmt:message key="right_table_head_sort"></fmt:message></th>
+                        <th><fmt:message key="right_table_head_des"></fmt:message></th>
                         <th></th>
                     </tr>
                     </thead>
@@ -86,10 +87,10 @@
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="right/editMenu">
-                            + '<a href="right/editMenu?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i>编辑</a>'
+                            + '<a href="right/editMenu?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i><fmt:message key="edit"></fmt:message></a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="right/deleteMenu">
-                            + '<a href="right/deleteMenu?id=' + row.id + '" data-msg="将删除该菜单下的所有子菜单和权限，确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-trash-o"></i>删除</a>'
+                            + '<a href="right/deleteMenu?id=' + row.id + '" data-msg="将删除该菜单下的所有子菜单和权限，确定删除吗？" data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-trash-o"></i><fmt:message key="delete"></fmt:message></a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="right/subMenu">
                             + '<a href="right/subMenu?parentId=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-target="navTab"><i class="fa fa-search"></i>查看子菜单</a>'

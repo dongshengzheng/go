@@ -96,7 +96,7 @@
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
                     <div class="col-sm-6">
-                        <input id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
+                        <input id="proOrderNo" name="proOrderNo" type="text" maxlength="32" value="${param.proOrderNo}"
                                class="form-control required">
                     </div>
                 </div>
@@ -295,7 +295,6 @@
 
 
 <script type="text/javascript">
-
     var rowTr = '<tr>' +
             '<td><input type="checkbox" class="td-checkbox"/></td>' +
             '<td><input type="text" class="td-text" name="des"></td>' +

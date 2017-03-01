@@ -13,20 +13,21 @@
                  style='display: block;'>
                 <button class='close' data-dismiss='modal' aria-label='Close'>×</button>
             </div>
-            <div class='bootstrap-dialog-title'>修改个人姓名</div>
+            <div class='bootstrap-dialog-title'><fmt:message key="account_modify_name"></fmt:message></div>
         </div>
     </div>
     <div class="modal-body">
         <div class="container-fluid">
             <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">个人姓名</label>
+                <label for="name" class="col-sm-2 control-label"><fmt:message key="account_name"></fmt:message></label>
                 <div class="col-sm-7">
                     <input id="name" name="name" type="text" maxlength="32"
-                           minlength="2" class="form-control required" placeholder="请输入个人姓名">
+                           minlength="2" class="form-control required"
+                           placeholder="<fmt:message key="account_enter_name"></fmt:message>">
                 </div>
             </div>
             <div class="form-group">
-                <label for="code" class="col-sm-2 control-label">验证码</label>
+                <label for="code" class="col-sm-2 control-label"><fmt:message key="verify_code"></fmt:message></label>
                 <div class="col-sm-7">
                     <input class="form-control required" placeholder="<fmt:message key="login_verify_code"/>"
                            type="text"
@@ -39,9 +40,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message
+                key="cancel"></fmt:message></button>
         <shiro:hasPermission name="account/editName">
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary"><fmt:message key="save"></fmt:message></button>
         </shiro:hasPermission>
     </div>
 </form>
@@ -64,8 +66,8 @@
         },
         messages: {
             name: {
-                required: "请输入个人姓名",
-                remote: "用户名重复"
+                required: "<fmt:message key="account_enter_name"></fmt:message>",
+                remote: "<fmt:message key="register_username_false"></fmt:message>"
             }
         }
     });

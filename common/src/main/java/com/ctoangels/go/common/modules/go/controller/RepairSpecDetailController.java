@@ -207,9 +207,10 @@ public class RepairSpecDetailController extends BaseController {
                 repairSpecDetailReqService.insertBatch(specReqs);
             }
             jsonObject.put("success", true);
+            jsonObject.put("specDetail", true);
         } else {
             jsonObject.put("success", false);
-            jsonObject.put("msg", "添加时出错,请稍后再试");
+            jsonObject.put("msg", "更新时出错,请稍后再试");
         }
         return jsonObject;
     }

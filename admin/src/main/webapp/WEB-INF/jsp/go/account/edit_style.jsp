@@ -21,7 +21,7 @@
                  style='display: block;'>
                 <button class='close' data-dismiss='modal' aria-label='Close'>×</button>
             </div>
-            <div class='bootstrap-dialog-title'>修改系统样式</div>
+            <div class='bootstrap-dialog-title'><fmt:message key="account_modify_style"></fmt:message></div>
         </div>
     </div>
     <div class="modal-body">
@@ -32,11 +32,12 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message
+                key="cancel"></fmt:message></button>
         <input type="hidden" value="" id="oldStyle">
         <shiro:hasPermission name="account/editStyle">
             <input type="hidden" value="0" name="styleId" id="styleId">
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary"><fmt:message key="save"></fmt:message></button>
         </shiro:hasPermission>
     </div>
 </form>

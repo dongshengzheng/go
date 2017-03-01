@@ -13,34 +13,34 @@
                  style='display: block;'>
                 <button class='close' data-dismiss='modal' aria-label='Close'>×</button>
             </div>
-            <div class='bootstrap-dialog-title'>修改手机号码</div>
+            <div class='bootstrap-dialog-title'><fmt:message key="account_modify_tel"></fmt:message> </div>
         </div>
     </div>
     <div class="modal-body">
         <div class="container-fluid">
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">新手机号码</label>
+                <label for="name" class="col-sm-3 control-label"><fmt:message key="account_new_tel"></fmt:message> </label>
                 <div class="col-sm-7">
                     <input id="name" name="name" type="text" maxlength="32"
-                           minlength="2" class="form-control required" placeholder="请输入手机号码">
+                           minlength="2" class="form-control required" placeholder="<fmt:message key="account_enter_new_tel"></fmt:message> ">
                 </div>
             </div>
             <div class="form-group">
-                <label for="code" class="col-sm-3 control-label">验证码</label>
+                <label for="code" class="col-sm-3 control-label"><fmt:message key="verify_code"></fmt:message> </label>
                 <div class="col-sm-7">
                     <input class="form-control required" placeholder="<fmt:message key="login_verify_code"/>"
                            type="text"
                            id="code" name="code" style="width: 30%; float: left;margin-right: 2%">
-                    <button class="btn blue-dark"> 发送验证码
+                    <button class="btn blue-dark"> <fmt:message key="account_send_verification_code"></fmt:message>
                     </button>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="cancel"></fmt:message> </button>
         <shiro:hasPermission name="account/editPhone">
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary"><fmt:message key="save"></fmt:message> </button>
         </shiro:hasPermission>
     </div>
 </form>
@@ -63,12 +63,6 @@
                 }
             }
         },
-        messages: {
-            loginName: {
-                required: "请输入用户名",
-                remote: "用户名重复"
-            }
-        }
     });
 
 
