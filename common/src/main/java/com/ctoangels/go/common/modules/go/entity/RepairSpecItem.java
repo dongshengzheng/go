@@ -533,20 +533,18 @@ public class RepairSpecItem implements Serializable {
         this.sort = sort;
     }
 
-<<<<<<< HEAD
     public Integer getSrc() {
         return src;
     }
 
     public void setSrc(Integer src) {
         this.src = src;
-=======
+    }
     public String getProName() {
         return proName;
     }
 
     public void setProName(String proName) {
         this.proName = proName;
->>>>>>> 35ad2f50109154258969fbd7ed06209d2c16edaf
     }
 }
