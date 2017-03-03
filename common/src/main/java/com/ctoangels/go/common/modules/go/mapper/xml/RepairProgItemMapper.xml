@@ -19,8 +19,9 @@
                                                     when  "电气工程" then 5 when  "冷藏工程" then 6
                                                     when  "特种设备" then 7 when  "其他" then 8 end ) as sort,
         SUM(case when item.task_status=0 then 1 else 0 end) as complete,
-        SUM(case when item.task_status=1 then 1 else 0 end) as notComplete,
-        SUM(case when item.task_status=2 then 1 else 0 end) as cancel,
+        SUM(case when item.task_status=1 then 1 else 0 end) as now,
+        SUM(case when item.task_status=2 then 1 else 0 end) as notStart,
+         SUM(case when item.task_status=3 then 1 else 0 end) as cancel,
         cast(SUM(case when item.task_status=0 then 1 else 0 end)/nullif(count(*),0)*100 as decimal(10,2)) as per
         from t_repair_prog_item item where item.repair_prog_id=#{0} AND item.content="维修详单" GROUP BY catagory ORDER BY sort
     </select>

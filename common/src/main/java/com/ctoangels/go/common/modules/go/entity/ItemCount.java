@@ -11,7 +11,9 @@ public class ItemCount {
 
     private Integer complete;
 
-    private Integer notComplete;
+    private Integer now;
+
+    private Integer notStart;
 
     private Integer cancel;
 
@@ -37,14 +39,6 @@ public class ItemCount {
         this.complete = complete;
     }
 
-    public Integer getNotComplete() {
-        return notComplete;
-    }
-
-    public void setNotComplete(Integer notComplete) {
-        this.notComplete = notComplete;
-    }
-
     public Integer getCancel() {
         return cancel;
     }
@@ -68,5 +62,21 @@ public class ItemCount {
 
     public void setPer(String per) {
         this.per = per;
+    }
+
+    public Integer getNow() {
+        return now;
+    }
+
+    public void setNow(Integer now) {
+        this.now = now;
+    }
+
+    public Integer getNotStart() {
+        return notStart;
+    }
+
+    public void setNotStart(Integer notStart) {
+        this.notStart = notStart;
     }
 }

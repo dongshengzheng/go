@@ -68,7 +68,6 @@
 
 </style>
 <form action="" method="post" class="form-horizontal" id="detail_form">
-    <input name="id" value="${detail.id}" type="hidden">
     <c:if test="${!empty detail}">
         <input id="id" name="id" type="hidden" value="${detail.id}"/>
         <input id="createDate" name="createDate" type="hidden" value="<fmt:formatDate value='${detail.createDate}'

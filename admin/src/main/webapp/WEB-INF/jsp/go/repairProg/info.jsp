@@ -62,29 +62,12 @@
                                         <th style="width:14%">分类</th>
                                         <th style="width:14%">项目总数</th>
                                         <th style="width:14%">已完成</th>
-                                        <th style="width:14%">未完成</th>
+                                        <th style="width:14%">进行中</th>
+                                        <th style="width:14%">未开始</th>
                                         <th style="width:14%">已取消</th>
                                         <th style="width:16%">完成百分比</th>
                                     </tr>
                                     </thead>
-                                    <%--<tbody>--%>
-                                    <%--<tr>--%>
-                                    <%--<td>通用服务</td>--%>
-                                    <%--<td>416</td>--%>
-                                    <%--<td>258</td>--%>
-                                    <%--<td>0</td>--%>
-                                    <%--<td>0</td>--%>
-                                    <%--<td><input class="prog" value="35"></td>--%>
-                                    <%--</tr>--%>
-                                    <%--<tr>--%>
-                                    <%--<td>船体工程</td>--%>
-                                    <%--<td>183</td>--%>
-                                    <%--<td>137</td>--%>
-                                    <%--<td>0</td>--%>
-                                    <%--<td>0</td>--%>
-                                    <%--<td><input class="prog" value="30"></td>--%>
-                                    <%--</tr>--%>
-                                    <%--</tbody>--%>
                                 </table>
                             </div>
                         </div>
@@ -104,7 +87,10 @@
                                         已完成
                                     </a>
                                     <a class="btn btn-sm default disabled" style="padding: 2px 5px;opacity: 1">
-                                        未完成
+                                        进行中
+                                    </a>
+                                    <a class="btn btn-sm default disabled" style="padding: 2px 5px;opacity: 1">
+                                        未开始
                                     </a>
                                     <a class="btn btn-sm  yellow disabled" style="padding: 2px 5px;opacity: 1">
                                         已取消
@@ -163,11 +149,16 @@
                                                                     <li>
                                                                         <a href="javascript:;" data-color="default"
                                                                            data-status="1" data-id="${item.id}"
-                                                                           class="btn change-status default"> 未完成 </a>
+                                                                           class="btn change-status default"> 进行中 </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="javascript:;" data-color="default"
+                                                                           data-status="2" data-id="${item.id}"
+                                                                           class="btn change-status default"> 未开始 </a>
                                                                     </li>
                                                                     <li>
                                                                         <a href="javascript:;" data-color="yellow"
-                                                                           data-status="2" data-id="${item.id}"
+                                                                           data-status="3" data-id="${item.id}"
                                                                            class="btn change-status yellow ">
                                                                             已取消 </a>
                                                                     </li>

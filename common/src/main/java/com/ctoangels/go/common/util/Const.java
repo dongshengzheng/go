@@ -75,9 +75,9 @@ public class Const {
 
     //维修进度子项完成进度
     public static final Integer TASK_COMPLETE = 0;//该项已完成
-    public static final Integer TASK_NOT_COMPLETE = 1;//该项未完成
-    public static final Integer TASK_CANCEL = 2;//该项已取消
-
+    public static final Integer TASK_NOW = 1;//该项进行中
+    public static final Integer TASK_NOT_START = 2;//该项未开始
+    public static final Integer TASK_CANCEL = 3;//该项已取消
 
 
 }
