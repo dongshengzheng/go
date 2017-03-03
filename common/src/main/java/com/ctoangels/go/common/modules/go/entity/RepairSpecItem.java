@@ -233,6 +233,9 @@ public class RepairSpecItem implements Serializable {
     @TableField(value = "param8_des")
     private String param8Des;
 
+    /*判断是红本的数据，还是自定义的数据1：红本数据；0自定义数据*/
+    private Integer src;
+
 
     public Integer getId() {
         return this.id;
@@ -530,6 +533,13 @@ public class RepairSpecItem implements Serializable {
         this.sort = sort;
     }
 
+    public Integer getSrc() {
+        return src;
+    }
+
+    public void setSrc(Integer src) {
+        this.src = src;
+    }
     public String getProName() {
         return proName;
     }

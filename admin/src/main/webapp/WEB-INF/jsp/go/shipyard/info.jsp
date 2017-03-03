@@ -28,18 +28,15 @@
     #line1{  border-bottom:solid 2px #337ab7; height:1px;margin-top: 10px  }
     #line2{ border-bottom:solid 2px #337ab7; height:1px;}
 </style>
-<div><img src="/img/top.png"/><span>查看船厂信息</span></div>
+<div><a href="shipyard" data-target="navTab"><img src="/img/top.png" /></a><span>查看船厂信息</span></div>
 <div id="line1"></div>
-<div style="margin-bottom: 30px;margin-top: 3px">
-    <div style="display:inline-block;width: 35%;margin-right: 10px">
-        <img style="width:100%; height: 200px" src="/img/ship.jpg">
+<div style="margin-top: 20px;height: 50%">
+    <div class="col-sm-5">
+        <img style="width:100%; height: 250px" src="/img/ship.jpg">
     </div>
-    <div style="display:inline-block;width: 55%;margin-top: -1px">
+    <div class="col-sm-7">
         <p style="margin: 0px">${shipyard.name}</p>
-        <p style="font-size: 12px">“中远（大连）造船厂是中远船务集团的核心子企业。它的主要业务是船舶与海洋工程修
-            理、转换和和新的建筑。船厂有一个面积120000平方米，总用地3200米以上的深水泊位3个码头、8
-            码头修船，2门式起重机（200吨），1门式起重机（400吨）和各种设施，期间近年来，中远（
-            大连）造船厂做了一个修船到船舶和海上修理、转换
+        <p style="font-size: 12px" id="des">${shipyard.des}
         </p>
         <div class="timeline-body-content">
             <div class="row">
@@ -91,7 +88,7 @@
         </div>
     </div>
 </div>
-<div style="margin: 0 auto;width:250px;">
+<div class="col-sm-12" style="margin-left: 40%;margin-top: 40px">
     <ul class="nav nav-pills" style="margin-bottom: 0px">
         <li class="active">
             <a href="#tab11" data-toggle="tab">一般信息</a>
@@ -102,14 +99,14 @@
     </ul>
 </div>
 
-<div id="line2"></div>
+<div id="line2" class="col-sm-12"></div>
 <div class="portlet light bordered" style="padding: 0px;">
     <div class="portlet-body">
         <div class="tabbable tabbable-tabdrop">
             <div class="tab-content">
                 <div class="tab-pane active" id="tab11">
                     <div style="text-align:center">装换项目</div>
-                    <div style="float: left;width: 33%">
+                    <div class="col-sm-4">
                         <div class="portlet-body">
                             <center class="dock">convemsion项目</center>
                             <table class="table table-hover">
@@ -135,9 +132,9 @@
                                 </c:if>
                                 </tbody>
                             </table>
+                        </div>
                     </div>
-                    </div>
-                    <div style="float: left;width:33%">
+                    <div class="col-sm-4">
                         <div class="portlet-body">
                                 <center class="dock">修复工程</center>
                                 <table class="table table-hover">
@@ -165,7 +162,7 @@
                                 </table>
                         </div>
                     </div>
-                    <div style="float: left;width:33%">
+                    <div class="col-sm-4">
                         <div class="portlet-body">
                                 <center class="dock">大客户</center>
                                 <table class="table table-hover">
@@ -451,4 +448,27 @@
 
     });
 
+</script>
+
+<%--船厂信息的介绍的文字的展开和合并--%>
+<script type="text/javascript">
+    Subt();
+    function Subt(){
+        var s = $("#des").html();
+        $("#des").html("");
+        $("#des").append("<span id='part'></span>");
+        $("#part").after("<a id='info'></a>");
+        $("#part").html(s.substring(0,200));
+        $("#info").attr("href","##");
+        $("#info").html(s.length > 200 ? "...[详细]" : "");
+        $("#info").click(function () {
+            if ($("#info").html() == "...[详细]"){
+                $("#info").html("收起");
+                $("#part").html(s);
+            }else{
+                $("#info").html("...[详细]");
+                $("#part").html(s.substring(0,200));
+            }
+        });
+    }
 </script>

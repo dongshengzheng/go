@@ -126,6 +126,9 @@ public class RepairProgItem implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag = 0;
 
+    /*判断是红本的数据，还是自定义的数据1：红本数据；0自定义数据*/
+    private Integer src;
+
 
     public Integer getId() {
         return this.id;
@@ -277,5 +280,13 @@ public class RepairProgItem implements Serializable {
 
     public void setProOrderNo(String proOrderNo) {
         this.proOrderNo = proOrderNo;
+    }
+
+    public Integer getSrc() {
+        return src;
+    }
+
+    public void setSrc(Integer src) {
+        this.src = src;
     }
 }

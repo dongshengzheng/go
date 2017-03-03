@@ -160,6 +160,12 @@ public class RepairProgDetail implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    /**
+     * 任务状态
+     */
+    @TableField(value = "task_status")
+    private Integer taskStatus;
+
 
     public Integer getId() {
         return this.id;
@@ -351,5 +357,13 @@ public class RepairProgDetail implements Serializable {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public Integer getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(Integer taskStatus) {
+        this.taskStatus = taskStatus;
     }
 }

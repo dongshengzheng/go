@@ -125,6 +125,9 @@ public class RepairModelItem implements Serializable {
     /*排序*/
     private Integer sort;
 
+    /*判断是红本的数据，还是自定义的数据1：红本数据；0自定义数据*/
+    private Integer src;
+
 
     public Integer getId() {
         return this.id;
@@ -285,5 +288,13 @@ public class RepairModelItem implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Integer getSrc() {
+        return src;
+    }
+
+    public void setSrc(Integer src) {
+        this.src = src;
     }
 }
