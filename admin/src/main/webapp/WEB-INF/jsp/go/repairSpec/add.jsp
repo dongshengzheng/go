@@ -279,12 +279,12 @@
                                                         <c:if test="${item.children==1}">
                                                             <td class="details-control" data-code="${item.code}">
                                                                 <a href="javascript:;"
-                                                                   onclick="controlHidden(false,${item.code},this)"
+                                                                   onclick="controlHidden(false,'${item.code}',this)"
                                                                    class="btn btn-circle blue m-icon m-icon-only open-png">
                                                                     <i class="m-icon-swapdown m-icon-white"></i>
                                                                 </a>
                                                                 <a href="javascript:;"
-                                                                   onclick="controlHidden(true,${item.code},this)"
+                                                                   onclick="controlHidden(true,'${item.code}',this)"
                                                                    class="btn btn-circle blue m-icon m-icon-only close-png"
                                                                    style="display: none">
                                                                     <i class="m-icon-swapup m-icon-white"></i>
@@ -412,12 +412,12 @@
                                                         <c:if test="${item.children==1}">
                                                             <td class="details-control" data-code="${item.code}">
                                                                 <a href="javascript:;"
-                                                                   onclick="controlHidden(false,${item.code},this)"
+                                                                   onclick="controlHidden(false,'${item.code}',this)"
                                                                    class="btn btn-circle blue m-icon m-icon-only open-png">
                                                                     <i class="m-icon-swapdown m-icon-white"></i>
                                                                 </a>
                                                                 <a href="javascript:;"
-                                                                   onclick="controlHidden(true,${item.code},this)"
+                                                                   onclick="controlHidden(true,'${item.code}',this)"
                                                                    class="btn btn-circle blue m-icon m-icon-only close-png"
                                                                    style="display: none">
                                                                     <i class="m-icon-swapup m-icon-white"></i>
