@@ -399,4 +399,9 @@
             alter table t_repair_prog_item add src INT NULL COMMENT '判断是自定义还是红本中的数据';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-028">
+        <sql>
+            alter table t_repair_prog_detail add task_status INT NULL COMMENT '任务状态';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
