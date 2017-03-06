@@ -47,6 +47,7 @@
     <link href="${global}/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
     <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css"/>
     <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat2.css" rel="stylesheet" type="text/css"/>
+    <link href="${global}/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
 
@@ -111,6 +112,7 @@
 <script src="${global}/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="${global}/plugins/Editor-1.5.4/js/dataTables.editor.min.js"></script>
 
+
 <script src="${global}/plugins/bootstrap-dialog/bootstrap-dialog.min.js"></script>
 <script src="${global}/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 
@@ -122,6 +124,10 @@
 <script src="${global}/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
 
 <script src="${global}/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
+
+<script src="${global}/plugins/ladda/spin.min.js" type="text/javascript"></script>
+<script src="${global}/plugins/ladda/ladda.min.js" type="text/javascript"></script>
+
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="${global}/scripts/app.min.js" type="text/javascript"></script>

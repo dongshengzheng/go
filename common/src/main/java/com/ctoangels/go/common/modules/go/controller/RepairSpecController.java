@@ -7,6 +7,7 @@ import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,8 +24,10 @@ import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -228,6 +231,17 @@ public class RepairSpecController extends BaseController {
         return jsonObject;
     }
 
+    //导出工程单excel
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject exportRepairSpecExcel(Integer specId, String path) {
+        JSONObject jsonObject = new JSONObject();
+        sendSpecExcelEmail("1061147291@qq.com", "111", exportSpecExcel(1, "1"));
+        jsonObject.put("status", 1);
+        return jsonObject;
+    }
+
+
     //发送询价邮件
     public void sendEnquiryEmail(String toAddress, String text, List<File> files) {
         Multipart multipart = new MimeMultipart();
@@ -261,6 +275,83 @@ public class RepairSpecController extends BaseController {
         for (File file : files) {
             file.delete();
         }
+    }
+
+
+    //发送SpecExcel
+    public void sendSpecExcelEmail(String toAddress, String text, File excel) {
+        Multipart multipart = new MimeMultipart();
+        //实例化一个bodypart用于封装内容
+        BodyPart bodyPart = new MimeBodyPart();
+        try {
+            bodyPart.setContent("<font color='red'>这个是带有附件的HTML内容</font>", "text/html;charset=utf8");
+            multipart.addBodyPart(bodyPart);
+            //每一个部分实例化一个bodypart，故每个附件也需要实例化一个bodypart
+            bodyPart = new MimeBodyPart();
+            //实例化DataSource(来自jaf)，参数为文件的地址
+            DataSource dataSource = new FileDataSource(excel.getAbsolutePath());
+            //使用datasource实例化datahandler
+            DataHandler dataHandler = new DataHandler(dataSource);
+            bodyPart.setDataHandler(dataHandler);
+            //设置附件标题，使用MimeUtility进行名字转码，否则接收到的是乱码
+            try {
+                bodyPart.setFileName(javax.mail.internet.MimeUtility.encodeText(excel.getName()));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            //添加bodypart到multipart
+            multipart.addBodyPart(bodyPart);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        sendEmail(toAddress, text, "附件", multipart);
+        excel.delete();
+    }
+
+
+    //导出工程单excel
+    public File exportSpecExcel(Integer specId, String toAddress) {
+        HSSFWorkbook wb = new HSSFWorkbook();
+        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+        HSSFSheet sheet = wb.createSheet("学生表一");
+        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+        HSSFRow row = sheet.createRow((int) 0);
+        // 第四步，创建单元格，并设置值表头 设置表头居中
+        HSSFCellStyle style = wb.createCellStyle();
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+        HSSFCell cell = row.createCell((short) 0);
+        cell.setCellValue("学号");
+        cell.setCellStyle(style);
+        cell = row.createCell((short) 1);
+        cell.setCellValue("姓名");
+        cell.setCellStyle(style);
+        cell = row.createCell((short) 2);
+        cell.setCellValue("年龄");
+        cell.setCellStyle(style);
+        cell = row.createCell((short) 3);
+        cell.setCellValue("生日");
+        cell.setCellStyle(style);
+
+        for (int i = 0; i < 20; i++) {
+            row = sheet.createRow((int) i + 1);
+            // 第四步，创建单元格，并设置值
+            row.createCell((short) 0).setCellValue(i);
+            row.createCell((short) 1).setCellValue("学生" + i);
+            row.createCell((short) 2).setCellValue(10 + i);
+            cell = row.createCell((short) 3);
+            cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(new Date()));
+        }
+        // 第六步，将文件存到指定位置
+        try {
+            FileOutputStream fout = new FileOutputStream("F:/students.xls");
+            wb.write(fout);
+            fout.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        File excel = new File("F:/students.xls");
+        return excel;
     }
 
 

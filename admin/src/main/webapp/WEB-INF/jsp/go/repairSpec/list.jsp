@@ -20,7 +20,8 @@
                             <div class="btn-group">
                                 <shiro:hasPermission name="repairSpec/add">
                                     <a href="repairSpec/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增维修工程单
+                                       class="btn btn-sm blue mt-ladda-btn ladda-button" data-style="slide-down">
+                                        <span class="ladda-label"> <i class="fa fa-plus"></i> 新增维修工程单</span>
                                     </a>
                                 </shiro:hasPermission>
                             </div>
@@ -115,18 +116,22 @@
                             + '<a href="repairSpec/info?id=' + row.id + '" class="btn btn-sm margin-bottom-5 default" data-target="navTab"></i>查看</a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/edit">
-                            + '<a href="repairSpec/edit?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>编辑</a>'
+                            + '<a href="repairSpec/edit?id=' + row.id + '" class="btn btn-sm margin-bottom-5 grey-mint" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/enquiry">
-                            + '<a href="repairSpec/enquiry?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>询价</a>'
+                            + '<a href="repairSpec/enquiry?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab"></i>询价</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="repairSpec/delete">
+                            <shiro:hasPermission name="repairSpec/makeProgress">
                             + '<br><a href="repairProg/makeProgress?id=' + row.id +
-                            '" data-msg="确定生成吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm green">生成维修进度</a>'
+                            '" data-msg="确定生成吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 green">生成维修进度</a>'
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="repairSpec/exportExcel">
+                            + '<br><a href="repairSpec/exportExcel?id=' + row.id +
+                            '" data-msg="确定发送吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 green">发送excel</a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/delete">
                             + '<a href="repairSpec/delete?id=' + row.id +
-                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
+                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 red">删除</a>'
                             </shiro:hasPermission>
                             ;
                 }
@@ -156,15 +161,6 @@
         }
 
     }
-    //
-    //    function      slide(id, slide) {
-    //        if (confirm("确定提交？")) {
-    //            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
-    //                refreshTable();
-    //            });
-    //        }
-    //    }
-
 
     function refreshTable(toFirst) {
         //defaultTable.ajax.reload();
@@ -174,5 +170,21 @@
             defTable.draw(false);
         }
     }
+
+
+    var UIButtons = function () {
+        var handleButtons = function () {
+            Ladda.bind('.mt-ladda-btn', {timeout: 60000});
+        }
+        return {
+            init: function () {
+                handleButtons();
+            }
+        };
+    }();
+
+    jQuery(document).ready(function () {
+        UIButtons.init();
+    });
 
 </script>

@@ -7,4 +7,25 @@
 		id, repair_prog_id AS repairProgId, code, catagory, pro_name AS proName,ship_name AS shipName,img,pro_order_no AS proOrderNo, pro_desc AS proDesc, faci_name AS faciName, faci_type AS faciType, faci_no AS faciNo, faci_param AS faciParam, faci_src AS faciSrc, repair_position AS repairPosition, repair_position_desc AS repairPositionDesc, damage, repair_tech AS repairTech, repair_tech_desc AS repairTechDesc, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, task_status AS taskStatus
 	</sql>
 
+    <select id="getCount" resultType="ItemCount">
+        SELECT detail.catagory catagory,count(*) as allCount,
+        (case detail.catagory when  "通用服务" then 1 when  "坞修工程" then 2
+        when  "船体工程" then 3 when  "机械工程" then 4
+        when  "电气工程" then 5 when  "冷藏工程" then 6
+        when  "特种设备" then 7 when  "其他" then 8 end ) as sort,
+        SUM(case when detail.task_status=0 then 1 else 0 end) as complete,
+        SUM(case when detail.task_status=1 then 1 else 0 end) as now,
+        SUM(case when detail.task_status=2 then 1 else 0 end) as notStart,
+        SUM(case when detail.task_status=3 then 1 else 0 end) as cancel,
+        cast(SUM(case when detail.task_status=0 then 1 else 0 end)/nullif(count(*),0)*100 as decimal(10,2)) as per
+        from t_repair_prog_detail detail where detail.repair_prog_id=#{0} GROUP BY catagory ORDER BY sort
+    </select>
+
+    <select id="getDetailByCatagory" resultType="RepairProgDetail">
+         SELECT detail.id,detail.pro_order_no as proOrderNo,detail.task_status as taskStatus
+         FROM t_repair_prog_detail detail
+         where detail.repair_prog_id=#{0} and catagory=#{1}
+         ORDER BY detail.pro_order_no
+    </select>
+
 </mapper>

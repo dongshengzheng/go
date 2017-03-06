@@ -157,7 +157,7 @@
             "type": 'get',
             "success": function (data) {
                 var html = "";
-                html += "<option>--请选择维修详单范本--</option>"
+                html += "<option value=-1>--请选择维修详单范本--</option>"
                 html += "<option value=0>--新增详单--</option>";
                 for (var i = 0; i < data.length; i++) {
                     html += "<option value=" + data[i].id + ">" + data[i].proName + "</option>"
@@ -173,7 +173,7 @@
         var id = thisOne.val();
         var catagory = thisOne.attr("data-catagory");
         var code = thisOne.attr("data-code");
-        if (id == null) {
+        if (id == -1) {
             return;
         }
         //自增详单号
