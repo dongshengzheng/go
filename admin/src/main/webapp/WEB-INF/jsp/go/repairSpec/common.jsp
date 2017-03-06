@@ -177,42 +177,38 @@
             return;
         }
         //自增详单号
-        var proOrderNo = thisOne.attr("data-proOrderNo");
-        if (proOrderNo == "0") {
-            if (catagory == "通用服务") {
-                var no = $("#type1proOrderNo").val();
-                proOrderNo = "G-" + foo(no);
-                $("#type1proOrderNo").val(no * 1 + 1);
-            } else if (catagory == "坞修工程") {
-                var no = $("#type2proOrderNo").val();
-                proOrderNo = "D-" + foo(no);
-                $("#type2proOrderNo").val(no * 1 + 1);
-            } else if (catagory == "船体工程") {
-                var no = $("#type3proOrderNo").val();
-                proOrderNo = "H-" + foo(no);
-                $("#type3proOrderNo").val(no * 1 + 1);
-            } else if (catagory == "机械工程") {
-                var no = $("#type4proOrderNo").val();
-                proOrderNo = "M-" + foo(no);
-                $("#type4proOrderNo").val(no * 1 + 1);
-            } else if (catagory == "电气工程") {
-                var no = $("#type5proOrderNo").val();
-                proOrderNo = "E-" + foo(no);
-                $("#type5proOrderNo").val(no * 1 + 1);
-            } else if (catagory == "冷藏工程") {
-                var no = $("#type6proOrderNo").val();
-                proOrderNo = "R-" + foo(no);
-                $("#type6proOrderNo").val(no * 1 + 1);
-            } else if (catagory == "特种设备") {
-                var no = $("#type7proOrderNo").val();
-                proOrderNo = "S-" + foo(no);
-                $("#type7proOrderNo").val(no * 1 + 1);
-            } else if (catagory == "坞修工程") {
-                var no = $("#type8proOrderNo").val();
-                proOrderNo = "O-" + foo(no);
-                $("#type7proOrderNo").val(no * 1 + 1);
-            }
-            thisOne.attr("data-proOrderNo", proOrderNo);
+        if (catagory == "通用服务") {
+            var no = $("#type1proOrderNo").val();
+            proOrderNo = "G-" + foo(no);
+            $("#type1proOrderNo").val(no * 1 + 1);
+        } else if (catagory == "坞修工程") {
+            var no = $("#type2proOrderNo").val();
+            proOrderNo = "D-" + foo(no);
+            $("#type2proOrderNo").val(no * 1 + 1);
+        } else if (catagory == "船体工程") {
+            var no = $("#type3proOrderNo").val();
+            proOrderNo = "H-" + foo(no);
+            $("#type3proOrderNo").val(no * 1 + 1);
+        } else if (catagory == "机械工程") {
+            var no = $("#type4proOrderNo").val();
+            proOrderNo = "M-" + foo(no);
+            $("#type4proOrderNo").val(no * 1 + 1);
+        } else if (catagory == "电气工程") {
+            var no = $("#type5proOrderNo").val();
+            proOrderNo = "E-" + foo(no);
+            $("#type5proOrderNo").val(no * 1 + 1);
+        } else if (catagory == "冷藏工程") {
+            var no = $("#type6proOrderNo").val();
+            proOrderNo = "R-" + foo(no);
+            $("#type6proOrderNo").val(no * 1 + 1);
+        } else if (catagory == "特种设备") {
+            var no = $("#type7proOrderNo").val();
+            proOrderNo = "S-" + foo(no);
+            $("#type7proOrderNo").val(no * 1 + 1);
+        } else if (catagory == "坞修工程") {
+            var no = $("#type8proOrderNo").val();
+            proOrderNo = "O-" + foo(no);
+            $("#type7proOrderNo").val(no * 1 + 1);
         }
         $(".marked-select").removeClass("marked-select");
         thisOne.addClass("marked-select");

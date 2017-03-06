@@ -71,7 +71,6 @@
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
     <input type="hidden" name="modelId" value="${modelId}">
-    <input type="hidden" name="shipId" value="">
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
@@ -393,7 +392,6 @@
                                                             <c:if test="${item.parentCode!='0'}">
                                                                 <select class="model-detail-select"
                                                                         data-code="${item.parentCode}"
-                                                                        data-proOrderNo="0"
                                                                         data-catagory="${item.catagory}"></select>
                                                             </c:if>
                                                         </td>
@@ -480,6 +478,18 @@
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
     function severCheck() {
+        var shipId = $("#shipId").val();
+        if (shipId == "0") {
+            $("#shipId").tips({
+                side: 1,
+                msg: "船舶不能为空",
+                bg: '#FF5080',
+                time: 15
+            });
+            $("#shipId").focus();
+            return;
+        }
+
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {

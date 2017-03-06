@@ -8,6 +8,7 @@ import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -51,6 +52,9 @@ public class RepairSpecController extends BaseController {
     private IRepairModelDetailService repairModelDetailService;
 
     @Autowired
+    private IRepairSpecDetailService repairSpecDetailService;
+
+    @Autowired
     private ICompanyService companyService;
 
     @Autowired
@@ -73,6 +77,9 @@ public class RepairSpecController extends BaseController {
             ew.like("ship_name", keyword);
         ew.addFilter("company_id={0}", companyId);
         Page<RepairSpec> page = repairSpecService.selectPage(getPage(), ew);
+        for (RepairSpec spec : page.getRecords()) {
+            spec.setType(dictService.getDesByTypeAndValue("维修类型", spec.getType()));
+        }
         return jsonPage(page);
     }
 
@@ -113,7 +120,7 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(RepairSpec repairSpec,
-                          RepairSpecItemList specItems) {
+                          RepairSpecItemList specItems, Integer[] repairDetailId) {
         JSONObject jsonObject = new JSONObject();
         Company company = companyService.selectById(getCurrentUser().getCompanyId());
         repairSpec.setCompanyId(company.getId());
@@ -126,20 +133,30 @@ public class RepairSpecController extends BaseController {
             jsonObject.put("success", false);
             jsonObject.put("msg", "添加时出错,请稍后再试");
         }
+        List<RepairSpecDetail> detailList = new ArrayList<>();
+        RepairSpecDetail detail;
+        Integer specId = repairSpec.getId();
+        for (Integer detailId : repairDetailId) {
+            detail = repairSpecDetailService.selectById(detailId);
+            detail.setRepairSpecId(specId);
+            detailList.add(detail);
+        }
+        repairSpecDetailService.updateBatchById(detailList);
         return jsonObject;
     }
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
-        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "通用服务", repairSpec.getModelId());
-        List<RepairSpecItem> type2 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "坞修工程", repairSpec.getModelId());
-        List<RepairSpecItem> type3 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "船体工程", repairSpec.getModelId());
-        List<RepairSpecItem> type4 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "机械工程", repairSpec.getModelId());
-        List<RepairSpecItem> type5 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "电气工程", repairSpec.getModelId());
-        List<RepairSpecItem> type6 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "冷藏工程", repairSpec.getModelId());
-        List<RepairSpecItem> type7 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "特种设备", repairSpec.getModelId());
-        List<RepairSpecItem> type8 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "其他", repairSpec.getModelId());
+        Integer modelId = repairSpec.getModelId();
+        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "通用服务", modelId);
+        List<RepairSpecItem> type2 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "坞修工程", modelId);
+        List<RepairSpecItem> type3 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "船体工程", modelId);
+        List<RepairSpecItem> type4 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "机械工程", modelId);
+        List<RepairSpecItem> type5 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "电气工程", modelId);
+        List<RepairSpecItem> type6 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "冷藏工程", modelId);
+        List<RepairSpecItem> type7 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "特种设备", modelId);
+        List<RepairSpecItem> type8 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "其他", modelId);
         map.put("repairSpec", repairSpec);
         map.put("typeList", dictService.getListByType("维修类型"));
         map.put("type1", type1);
@@ -234,9 +251,9 @@ public class RepairSpecController extends BaseController {
     //导出工程单excel
     @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject exportRepairSpecExcel(Integer specId, String path) {
+    public JSONObject exportRepairSpecExcel(Integer id) {
         JSONObject jsonObject = new JSONObject();
-        sendSpecExcelEmail("1061147291@qq.com", "111", exportSpecExcel(1, "1"));
+        sendSpecExcelEmail("1061147291@qq.com", "111", exportSpecExcel(id));
         jsonObject.put("status", 1);
         return jsonObject;
     }
@@ -311,48 +328,53 @@ public class RepairSpecController extends BaseController {
 
 
     //导出工程单excel
-    public File exportSpecExcel(Integer specId, String toAddress) {
+    public File exportSpecExcel(Integer specId) {
+        RepairSpec spec = repairSpecService.selectById(specId);
+        String excelName = spec.getName() != null ? spec.getName() : "工程单概述";
+
+
         HSSFWorkbook wb = new HSSFWorkbook();
         // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
-        HSSFSheet sheet = wb.createSheet("学生表一");
+        HSSFSheet sheet = wb.createSheet(excelName);
         // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
         HSSFRow row = sheet.createRow((int) 0);
         // 第四步，创建单元格，并设置值表头 设置表头居中
-        HSSFCellStyle style = wb.createCellStyle();
-        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
         HSSFCell cell = row.createCell((short) 0);
-        cell.setCellValue("学号");
-        cell.setCellStyle(style);
-        cell = row.createCell((short) 1);
-        cell.setCellValue("姓名");
-        cell.setCellStyle(style);
-        cell = row.createCell((short) 2);
-        cell.setCellValue("年龄");
-        cell.setCellStyle(style);
-        cell = row.createCell((short) 3);
-        cell.setCellValue("生日");
-        cell.setCellStyle(style);
 
-        for (int i = 0; i < 20; i++) {
+        row.createCell((short) 0).setCellValue("详单号");
+        row.createCell((short) 1).setCellValue("详单名称");
+
+        RepairSpecDetail detail = new RepairSpecDetail();
+        detail.setRepairSpecId(specId);
+        List<RepairSpecDetail> repairSpecDetailList = repairSpecDetailService.selectList(new EntityWrapper<>(detail));
+
+        HSSFCellStyle linkStyle = wb.createCellStyle();
+        HSSFFont cellFont = wb.createFont();
+        cellFont.setUnderline((byte) 1);
+        cellFont.setColor(HSSFColor.BLUE.index);
+        linkStyle.setFont(cellFont);
+
+        for (int i = 0; i < repairSpecDetailList.size(); i++) {
             row = sheet.createRow((int) i + 1);
             // 第四步，创建单元格，并设置值
-            row.createCell((short) 0).setCellValue(i);
-            row.createCell((short) 1).setCellValue("学生" + i);
-            row.createCell((short) 2).setCellValue(10 + i);
-            cell = row.createCell((short) 3);
-            cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(new Date()));
+            String proOrderNo = repairSpecDetailList.get(i).getProOrderNo();
+            cell = row.createCell((short) 0);
+            cell.setCellFormula("HYPERLINK(\"" + "#'" + proOrderNo + "'!A1" + "\",\"" + proOrderNo + "\")");
+            cell.setCellStyle(linkStyle);
+            row.createCell((short) 1).setCellValue(repairSpecDetailList.get(i).getProName());
+            HSSFSheet detailSheet = wb.createSheet(proOrderNo);
         }
+
+
         // 第六步，将文件存到指定位置
         try {
-            FileOutputStream fout = new FileOutputStream("F:/students.xls");
+            FileOutputStream fout = new FileOutputStream(excelName + ".xls");
             wb.write(fout);
             fout.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        File excel = new File("F:/students.xls");
+        File excel = new File(excelName + ".xls");
         return excel;
     }
-
-
 }
