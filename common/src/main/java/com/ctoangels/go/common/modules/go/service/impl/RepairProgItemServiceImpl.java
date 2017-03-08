@@ -21,13 +21,5 @@ public class RepairProgItemServiceImpl extends SuperServiceImpl<RepairProgItemMa
     @Autowired
     RepairProgItemMapper repairProgItemMapper;
 
-    @Override
-    public List<RepairProgItem> getItemsContainDetailName(Integer repairProgId, String catagory) {
-        return repairProgItemMapper.getItemsContainDetailName(repairProgId, catagory);
-    }
 
-    @Override
-    public List<ItemCount> getCount(Integer repairProgId) {
-        return repairProgItemMapper.getCount(repairProgId);
-    }
 }

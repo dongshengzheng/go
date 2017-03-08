@@ -86,7 +86,7 @@
                                     <a class="btn btn-sm green-jungle disabled" style="padding: 2px 5px;opacity: 1">
                                         已完成
                                     </a>
-                                    <a class="btn btn-sm default disabled" style="padding: 2px 5px;opacity: 1">
+                                    <a class="btn btn-sm blue disabled" style="padding: 2px 5px;opacity: 1">
                                         进行中
                                     </a>
                                     <a class="btn btn-sm default disabled" style="padding: 2px 5px;opacity: 1">
@@ -123,15 +123,16 @@
                                             <div class="portlet-body">
                                                 <div class="row">
                                                     <div class="col-md-12 clearfix">
-                                                        <c:forEach items="${requestScope[type]}" var="item">
-                                                            <c:if test="${!empty item}"></c:if>
+                                                        <c:forEach items="${requestScope[type]}" var="detail">
+                                                            <c:if test="${!empty detail}"></c:if>
                                                             <div class="btn-group margin-bottom-5">
                                                                 <button class="btn dropdown-toggle
-                                                         <c:if test="${item.taskStatus==0}">green-jungle</c:if>
-                                                         <c:if test="${item.taskStatus==1}">default</c:if>
-                                                         <c:if test="${item.taskStatus==2}">yellow</c:if>"
+                                                         <c:if test="${detail.taskStatus==0}">green-jungle</c:if>
+                                                         <c:if test="${detail.taskStatus==1}">blue</c:if>
+                                                         <c:if test="${detail.taskStatus==2}">default</c:if>
+                                                         <c:if test="${detail.taskStatus==3}">yellow</c:if>"
                                                                         type="button"
-                                                                        data-toggle="dropdown"> ${item.proOrderNo}
+                                                                        data-toggle="dropdown"> ${detail.proOrderNo}
                                                                     <i class="fa fa-angle-down"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu" role="menu">
@@ -142,23 +143,23 @@
                                                                     <li class="divider"></li>
                                                                     <li>
                                                                         <a href="javascript:;" data-color="green-jungle"
-                                                                           data-status="0" data-id="${item.id}"
+                                                                           data-status="0" data-id="${detail.id}"
                                                                            class="btn change-status green-jungle">
                                                                             已完成 </a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="javascript:;" data-color="default"
-                                                                           data-status="1" data-id="${item.id}"
-                                                                           class="btn change-status default"> 进行中 </a>
+                                                                        <a href="javascript:;" data-color="blue"
+                                                                           data-status="1" data-id="${detail.id}"
+                                                                           class="btn change-status blue"> 进行中 </a>
                                                                     </li>
                                                                     <li>
                                                                         <a href="javascript:;" data-color="default"
-                                                                           data-status="2" data-id="${item.id}"
+                                                                           data-status="2" data-id="${detail.id}"
                                                                            class="btn change-status default"> 未开始 </a>
                                                                     </li>
                                                                     <li>
                                                                         <a href="javascript:;" data-color="yellow"
-                                                                           data-status="3" data-id="${item.id}"
+                                                                           data-status="3" data-id="${detail.id}"
                                                                            class="btn change-status yellow ">
                                                                             已取消 </a>
                                                                     </li>
@@ -215,7 +216,10 @@
                     "data": "complete",
                 },
                 {
-                    "data": "notComplete",
+                    "data": "now",
+                },
+                {
+                    "data": "notStart",
                 },
                 {
                     "data": "cancel",

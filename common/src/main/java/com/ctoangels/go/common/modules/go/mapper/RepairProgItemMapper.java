@@ -11,9 +11,4 @@ import java.util.List;
  */
 public interface RepairProgItemMapper extends AutoMapper<RepairProgItem> {
 
-    //根据维修进度id和item类型获取具有详单的itemList,包含详单项目单号
-    List<RepairProgItem> getItemsContainDetailName(Integer repairProgId, String catagory);
-
-    //获取进度完成数量及比例
-    List<ItemCount> getCount(Integer repairProgId);
 }

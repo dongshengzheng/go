@@ -182,7 +182,9 @@ public class BaseController {
         try {
             message.setFrom(new InternetAddress(fromAddress)); //设置发出方,使用setXXX设置单用户，使用addXXX添加InternetAddress[]
 
-            message.setText(text); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
+            if (text != null) {
+                message.setText(text); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
+            }
 
             if (multipart != null) {
                 message.setContent(multipart);

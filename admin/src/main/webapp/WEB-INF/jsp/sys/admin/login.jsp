@@ -43,7 +43,7 @@
     <link rel="shortcut icon" href="${ctx}/favicon.ico"/>
     <style>
         .login .content {
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -54,7 +54,7 @@
 <div class="content">
     <form role="form" method="post" action="" name="loginForm"
           id="loginForm">
-        <h3 class="form-title"><fmt:message key="sys.user.plogin" /></h3>
+        <h3 class="form-title"><fmt:message key="sys.user.plogin"/></h3>
         <p><fmt:message key="login_no_account"/><a class="color-green" href="register"><fmt:message
                 key="sys.user.register"/></a>!</p>
         <div class="form-group">

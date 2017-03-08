@@ -26,4 +26,12 @@ public class DictServiceImpl extends SuperServiceImpl<DictMapper, Dict> implemen
         ew.addFilter("type={0} and del_flag=0", type);
         return dictMapper.selectList(ew);
     }
+
+    @Override
+    public String getDesByTypeAndValue(String type, String value) {
+        EntityWrapper<Dict> ew = new EntityWrapper();
+        ew.setSqlSelect("des");
+        ew.addFilter("type={0} and value={1}", type, value);
+        return selectOne(ew).getDes();
+    }
 }

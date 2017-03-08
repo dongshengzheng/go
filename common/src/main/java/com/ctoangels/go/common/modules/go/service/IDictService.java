@@ -11,4 +11,6 @@ import java.util.List;
 public interface IDictService extends ISuperService<Dict> {
 
     List<Dict> getListByType(String type);
+
+    String getDesByTypeAndValue(String type, String value);
 }

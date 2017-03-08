@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.ctoangels.go.common.modules.go.entity.Company;
-import com.ctoangels.go.common.modules.go.entity.ItemCount;
-import com.ctoangels.go.common.modules.go.entity.RepairProg;
-import com.ctoangels.go.common.modules.go.entity.RepairProgItem;
+import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.ICompanyService;
+import com.ctoangels.go.common.modules.go.service.IRepairProgDetailService;
 import com.ctoangels.go.common.modules.go.service.IRepairProgItemService;
 import com.ctoangels.go.common.modules.go.service.IRepairProgService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
@@ -39,6 +37,9 @@ public class RepairProgController extends BaseController {
 
     @Autowired
     private IRepairProgItemService repairProgItemService;
+
+    @Autowired
+    private IRepairProgDetailService repairProgDetailService;
 
     @RequestMapping
     public String page() {
@@ -85,14 +86,14 @@ public class RepairProgController extends BaseController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairProg repairProg = repairProgService.selectById(id);
-        List<RepairProgItem> type1 = repairProgItemService.getItemsContainDetailName(id, "通用服务");
-        List<RepairProgItem> type2 = repairProgItemService.getItemsContainDetailName(id, "坞修工程");
-        List<RepairProgItem> type3 = repairProgItemService.getItemsContainDetailName(id, "船体工程");
-        List<RepairProgItem> type4 = repairProgItemService.getItemsContainDetailName(id, "机械工程");
-        List<RepairProgItem> type5 = repairProgItemService.getItemsContainDetailName(id, "电气工程");
-        List<RepairProgItem> type6 = repairProgItemService.getItemsContainDetailName(id, "冷藏工程");
-        List<RepairProgItem> type7 = repairProgItemService.getItemsContainDetailName(id, "特种设备");
-        List<RepairProgItem> type8 = repairProgItemService.getItemsContainDetailName(id, "其他");
+        List<RepairProgDetail> type1 = repairProgDetailService.getDetailByCatagory(id, "通用服务");
+        List<RepairProgDetail> type2 = repairProgDetailService.getDetailByCatagory(id, "坞修工程");
+        List<RepairProgDetail> type3 = repairProgDetailService.getDetailByCatagory(id, "船体工程");
+        List<RepairProgDetail> type4 = repairProgDetailService.getDetailByCatagory(id, "机械工程");
+        List<RepairProgDetail> type5 = repairProgDetailService.getDetailByCatagory(id, "电气工程");
+        List<RepairProgDetail> type6 = repairProgDetailService.getDetailByCatagory(id, "冷藏工程");
+        List<RepairProgDetail> type7 = repairProgDetailService.getDetailByCatagory(id, "特种设备");
+        List<RepairProgDetail> type8 = repairProgDetailService.getDetailByCatagory(id, "其他");
         map.put("repairProg", repairProg);
         map.put("type1", type1);
         map.put("type2", type2);
@@ -109,7 +110,7 @@ public class RepairProgController extends BaseController {
     @ResponseBody
     public JSONObject getCount(@RequestParam(required = false) Integer id) {
         JSONObject jo = new JSONObject();
-        List<ItemCount> countList = repairProgItemService.getCount(id);
+        List<ItemCount> countList = repairProgDetailService.getCount(id);
         jo.put(Const.DRAW, request.getParameter(Const.DRAW));
         jo.put(Const.RECORDSTOTAL, countList.size());
         jo.put(Const.RECORDSFILTERED, countList.size());
