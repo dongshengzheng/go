@@ -107,6 +107,8 @@ public class RepairModelDetailController extends BaseController {
             for (RepairModelDetailReq r:reqs) {
                 r.setRepairModelDetailId(repairModelDetail.getId());
             }
+            repairModelDetailService.insert
+
             repairModelDetailReqService.insertBatch(reqs);
             jsonObject.put("success", true);
         } else {
