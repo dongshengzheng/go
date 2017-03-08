@@ -3,10 +3,7 @@ package com.ctoangels.go.common.modules.go.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.ctoangels.go.common.modules.go.entity.Dict;
-import com.ctoangels.go.common.modules.go.entity.RepairModelDetail;
-import com.ctoangels.go.common.modules.go.entity.RepairModelDetailReq;
-import com.ctoangels.go.common.modules.go.entity.Ship;
+import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
@@ -84,38 +81,33 @@ public class RepairModelDetailController extends BaseController {
         return "go/modelDetail/add";
     }
 
+    //获取repairModelDetailReq信息
+    @RequestMapping(value = "/reqs", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject demo(@RequestParam(required =false) Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        EntityWrapper<RepairModelDetailReq> ew = new EntityWrapper<>();
+        ew.addFilter("repair_model_detail_id={0}", id);
+        List<RepairModelDetailReq> repairModelDetailReqs=repairModelDetailReqService.selectList(ew);
+        jsonObject.put("reqs",repairModelDetailReqs);
+        return jsonObject;
+    }
+
     /*保存为维修工程单范本*/
-    @RequestMapping(value = "/addModel", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject addModel(RepairModelDetail repairModelDetail, @RequestParam(required = false) String dataJson) {
-        int companyId = getCurrentUser().getCompanyId();
-        repairModelDetail.setCompanyId(companyId);
+        repairModelDetail.setCompanyId(getCurrentUser().getCompanyId());
 
+        List<RepairModelDetailReq>reqs=JSONObject.parseArray(dataJson,RepairModelDetailReq.class);
         JSONObject jsonObject = new JSONObject();
-        List<RepairModelDetailReq> modelReqs = new ArrayList<>();
-        RepairModelDetailReq modelReq = new RepairModelDetailReq();
-        String[] array = dataJson.split(",");
-
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insert(repairModelDetail)) {
-            int id = repairModelDetail.getId();
-            if(!dataJson.equals("")){
-                for (int i = 0; i < array.length; i++) {
-                    if (i % 3 == 0) {
-                        modelReq.setDes(array[i]);
-                    } else if (i % 3 == 1) {
-                        modelReq.setUnit(array[i]);
-                    } else if (i % 3 == 2) {
-                        modelReq.setCount(array[i]);
-                        modelReq.setRepairModelDetailId(id);
-                        modelReqs.add(modelReq);
-                        modelReq = new RepairModelDetailReq();
-                    }
-                }
-                repairModelDetailReqService.insertBatch(modelReqs);
+            for (RepairModelDetailReq r:reqs) {
+                r.setRepairModelDetailId(repairModelDetail.getId());
             }
-
+            repairModelDetailReqService.insertBatch(reqs);
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);
@@ -156,34 +148,19 @@ public class RepairModelDetailController extends BaseController {
 
 
     /*更新为维修工程单范本*/
-    @RequestMapping(value = "/editModel", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject editModel(RepairModelDetail repairModelDetail, @RequestParam(required = false) String dataJson) {
         JSONObject jsonObject = new JSONObject();
-        List<RepairModelDetailReq> modelReqs = new ArrayList<>();
-        RepairModelDetailReq modelReq = new RepairModelDetailReq();
-        String[] array = dataJson.split(",");
-
+        List<RepairModelDetailReq> reqs=JSONObject.parseArray(dataJson,RepairModelDetailReq.class);
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insertOrUpdate(repairModelDetail)) {
-            int id = repairModelDetail.getId();
-            if(!dataJson.equals("")){
-                for (int i = 0; i < array.length; i++) {
-                    if (i % 3 == 0) {
-                        modelReq.setDes(array[i]);
-                    } else if (i % 3 == 1) {
-                        modelReq.setUnit(array[i]);
-                    } else if (i % 3 == 2) {
-                        modelReq.setCount(array[i]);
-                        modelReq.setRepairModelDetailId(id);
-                        modelReqs.add(modelReq);
-                        modelReq = new RepairModelDetailReq();
-                    }
-                }
-                repairModelDetailReqService.deleteRepairModelDetailById(id);
-                repairModelDetailReqService.insertBatch(modelReqs);
+            for (RepairModelDetailReq r:reqs) {
+                r.setRepairModelDetailId(repairModelDetail.getId());
             }
+                repairModelDetailReqService.deleteRepairModelDetailById(repairModelDetail.getId());
+                repairModelDetailReqService.insertBatch(reqs);
 
             jsonObject.put("success", true);
         } else {

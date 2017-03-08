@@ -214,36 +214,7 @@
         <div style="width: 100%;margin-top: 10px">
             <div ><span class="head">请求材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
-                <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                       id="default_table" style="width: 98%" >
-                    <thead>
-                    <tr style="background-color: #8CD2E5">
-                        <td style="width:2%"> <input type="checkbox" id="selectAll" /></td>
-                        <th style="width: 68%">要求和描述/材料规格</th>
-                        <th style="width: 6%">单位</th>
-                        <th style="width: 6%">数量</th>
-                        <th style="width: 20%">
-                            <button type="button" onclick="" class="btn red" id="deletes">删除</button>&nbsp;
-                            <button  type="button" onclick="addTr(this)" class="btn green">添加</button>
-                            <input type="text" value="1" id="assPages" style="width: 20%" >
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="table-tbody">
-                    <tr id="td-oneline">
-                        <td> <input type="checkbox" class="td-checkbox" /></td>
-                        <td><input type="text" class="td-text" name="des"></td>
-                        <td><input type="text" class="td-text" name="unit" /></td>
-                        <td><input type="text" class="td-text" name="count" onblur="check2(this)"  ></td>
-                        <td>
-                            <button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
-                            <button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button>
-                        </td>
-                    </tr>
-
-
-                    </tbody>
-                </table>
+                <div id="example1"  style=" height: 300px; overflow: hidden;"></div>
             </div>
         </div>
         <div class="col-md-12 line1"></div>
@@ -269,8 +240,8 @@
     <div class="form-actions"  >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <button type="button" class="btn green" onclick="saveInfo()">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="reset" class="btn default" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="dump" type="button" class="btn green" onclick="saveInfo()" data-dump="#example1" data-instance="hot">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="reset" class="btn default"/>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="modelDetail" type="button" class="btn btn-default" data-target="navTab">取消
                 </a>
             </div>
@@ -279,76 +250,32 @@
 </form>
 <a id="modelDetail" href="modelDetail" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>'
 <script type="text/javascript">
-
-    var rowTr='<tr>' +
-            '<td><input type="checkbox" class="td-checkbox"/></td>'+
-            '<td><input type="text" class="td-text" name="des"></td>' +
-            '<td><input type="text" class="td-text" name="unit"></td>' +
-            '<td><input type="text" class="td-text" name="count" onblur="check2(this)"></td>' +
-            '<td><button type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;&nbsp;' +
-            '<button  type="button" onclick="insTr(this)" class="btn green" >插入一行</button></td>' +
-            '</tr>'
-    function delTr(obj) { //删除行  
-        if(confirm('确定要删除？')) {
-            $(obj).parent().parent().remove();
-        }
-    }
-
-    function addTr() {  //增加行
-        var rows=$("#assPages").val();
-        for(i=0;i<rows;i++){
-            if($("table tbody tr:visible").length==0){
-                $("#default_table tbody").append(rowTr);
-            }else {
-                $("#default_table tbody tr:last").after(rowTr);
-            }
-        }
-        $("#assPages").val(1);
-    }
-    function insTr(obj) {
-        $(obj).parent().parent().after(rowTr);
-    }
-
-
-
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
     initUploaders_img("upload_img", "windyeel", "${staticPath}/", "imges", "img");
 
     //服务器校验
     function saveInfo(a) {
-        var dataJson="";
-        var des = "";
-        var unit="";
-        var count=0;
-        $("#default_table tr").each(function (index, domEle){// mainTable 下的tr  
-            userId = "";
-            if(index != 0){//遍历除去第一行的之外的所有input作为json数据传入后台  
-                $(domEle).find("input").each(function(index,data){
-                    if(index == 1){
-                        des = $(data).val();
-                    }if(index == 2){
-                        unit = $(data).val();
-                    }if(index == 3){
-                        if($(data).val() != "" && $(data).val() != null){//如果没有输入的情况下传的值是0  
-                            count = $(data).val();
-                        }
-                    }
-                });
-                /*
-                 dataJson += "{"+"\"des\":\""+des+"\","+"\"unit\":\""+unit+"\","+"\"count\":\""+count+"\"},";
-                 */
-                dataJson += des+","+unit+","+count+",";
-
+        var arr1=new Array();
+        var datas=handsontableData();
+        for(var i=0;i<datas.length;i++){
+            if(datas[i][0]==null){
+                continue;
             }
-        });
-        if (dataJson.lastIndexOf(",")) {
-            dataJson = dataJson.substring(0,dataJson.length -1);
+            var obj=new Object();
+            obj.des=datas[i][0];
+            obj.unit=datas[i][1];
+            obj.count =datas[i][2];
+            arr1[i]=obj;
         }
 
-        $("#defForm").attr("action","modelDetail/addModel?dataJson="+dataJson);
+        var dataJson=JSON.stringify(arr1);
+        $("#defForm").attr("action","modelDetail/add");
         if(check()) {
             $("#defForm").ajaxSubmit({
+                data:{
+                    dataJson:dataJson
+                },
                 success: function (data) {
                     if (data.success) {
                         alert("success");
@@ -396,6 +323,49 @@
                 $(e).focus();
             }
         }
+    }
+
+</script>
+
+<script>
+    var width=$(window).width();
+    var divWidth=$("#example1").width(width*0.75);
+    var container = document.getElementById('example1'),
+            storedData = {},
+            savedKeys,
+            resetState,
+            stateLoaded,
+            hot;
+
+    hot = new Handsontable(container, {
+        rowHeaders: true,
+        colHeaders: true,
+        colWidths: [800,100,100],
+        minRows:15,
+        minCols:3,
+        colHeaders: ["要求和描述/材料规格","单位","数量"],
+        columnSorting: true,
+        columns: [
+            {data: "des"},
+            {data: "unit"},
+            {data: "count",}
+        ],
+        columns:[
+            {type:"text"},
+            {type:"text"},
+            {type:"numeric"}
+        ],
+        manualColumnMove: true,
+        manualColumnResize: true,
+        manualRowMove: true,
+        manualRowResize: true,
+        minSpareRows: 1,
+        contextMenu: true,
+        persistentState: true
+    });
+
+    function handsontableData() {
+        return hot.getData();
     }
 
 </script>

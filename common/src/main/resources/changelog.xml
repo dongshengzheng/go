@@ -416,4 +416,10 @@
             INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","8","其他",0);
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-029">
+        <sql>
+            alter table t_repair_model_detail_req modify column count varchar(45) COMMENT '数量';
+            alter table t_repair_spec_detail_req modify column count varchar(45) COMMENT '数量';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

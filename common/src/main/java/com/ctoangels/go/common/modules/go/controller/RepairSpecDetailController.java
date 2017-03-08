@@ -73,32 +73,17 @@ public class RepairSpecDetailController extends BaseController {
     @RequestMapping(value = "/addModelDetail", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject addModel(RepairModelDetail repairModelDetail, @RequestParam(required = false) String dataJson) {
-        int companyId = getCurrentUser().getCompanyId();
-        repairModelDetail.setCompanyId(companyId);
+        repairModelDetail.setCompanyId(getCurrentUser().getCompanyId());
         JSONObject jsonObject = new JSONObject();
-        List<RepairModelDetailReq> modelReqs = new ArrayList<>();
-        RepairModelDetailReq modelReq = new RepairModelDetailReq();
-        String[] array = dataJson.split(",");
+        List<RepairModelDetailReq>reqs=JSONObject.parseArray(dataJson,RepairModelDetailReq.class);
 
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insert(repairModelDetail)) {
-            if (!dataJson.equals("")) {
-                int id = repairModelDetail.getId();
-                for (int i = 0; i < array.length; i++) {
-                    if (i % 3 == 0) {
-                        modelReq.setDes(array[i]);
-                    } else if (i % 3 == 1) {
-                        modelReq.setUnit(array[i]);
-                    } else if (i % 3 == 2) {
-                        modelReq.setCount(array[i]);
-                        modelReq.setRepairModelDetailId(id);
-                        modelReqs.add(modelReq);
-                        modelReq = new RepairModelDetailReq();
-                    }
-                }
-                repairModelDetailReqService.insertBatch(modelReqs);
+            for (RepairModelDetailReq r:reqs) {
+                r.setRepairModelDetailId(repairModelDetail.getId());
             }
+            repairModelDetailReqService.insertBatch(reqs);
 
             jsonObject.put("success", true);
             jsonObject.put("specDetail", false);
@@ -115,30 +100,14 @@ public class RepairSpecDetailController extends BaseController {
     @ResponseBody
     public JSONObject add(RepairSpecDetail repairSpecDetail, @RequestParam(required = false) String dataJson) {
         JSONObject jsonObject = new JSONObject();
-        List<RepairSpecDetailReq> reqs = new ArrayList<>();
-        RepairSpecDetailReq req = new RepairSpecDetailReq();
-        String[] array = dataJson.split(",");
-
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
-
+        List<RepairSpecDetailReq>reqs=JSONObject.parseArray(dataJson,RepairSpecDetailReq.class);
         if (repairSpecDetailService.insert(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            if (!dataJson.equals("")) {
-                for (int i = 0; i < array.length; i++) {
-                    if (i % 3 == 0) {
-                        req.setDes(array[i]);
-                    } else if (i % 3 == 1) {
-                        req.setUnit(array[i]);
-                    } else if (i % 3 == 2) {
-                        req.setCount(array[i]);
-                        req.setRepairSpecDetailId(id);
-                        reqs.add(req);
-                        req = new RepairSpecDetailReq();
-                    }
-                }
-                repairSpecDetailReqService.insertBatch(reqs);
+            for (RepairSpecDetailReq r:reqs) {
+                r.setRepairSpecDetailId(id);
             }
-
+                repairSpecDetailReqService.insertBatch(reqs);
             jsonObject.put("success", true);
             jsonObject.put("specDetail", true);
             jsonObject.put("repairSpecDetailId", id);
@@ -184,28 +153,15 @@ public class RepairSpecDetailController extends BaseController {
     @ResponseBody
     public JSONObject editSpecDetailComplete(RepairSpecDetail repairSpecDetail, @RequestParam(required = false) String dataJson) {
         JSONObject jsonObject = new JSONObject();
-        List<RepairSpecDetailReq> specReqs = new ArrayList<>();
-        RepairSpecDetailReq specReq = new RepairSpecDetailReq();
-        String[] array = dataJson.split(",");
+        List<RepairSpecDetailReq> reqs=JSONObject.parseArray(dataJson,RepairSpecDetailReq.class);
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
         if (repairSpecDetailService.updateById(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            if (!dataJson.equals("")) {
-                for (int i = 0; i < array.length; i++) {
-                    if (i % 3 == 0) {
-                        specReq.setDes(array[i]);
-                    } else if (i % 3 == 1) {
-                        specReq.setUnit(array[i]);
-                    } else if (i % 3 == 2) {
-                        specReq.setCount(array[i]);
-                        specReq.setRepairSpecDetailId(id);
-                        specReqs.add(specReq);
-                        specReq = new RepairSpecDetailReq();
-                    }
-                }
-                repairSpecDetailReqService.deleteRepairSpecDetailReqById(id);
-                repairSpecDetailReqService.insertBatch(specReqs);
+            for (RepairSpecDetailReq r:reqs) {
+                r.setRepairSpecDetailId(id);
             }
+                repairSpecDetailReqService.deleteRepairSpecDetailReqById(id);
+                repairSpecDetailReqService.insertBatch(reqs);
             jsonObject.put("success", true);
             jsonObject.put("specDetail", true);
         } else {
@@ -227,6 +183,17 @@ public class RepairSpecDetailController extends BaseController {
         } else {
             jsonObject.put("suc", false);
         }
+        return jsonObject;
+    }
+    //获取DetailReq信息
+    @RequestMapping(value = "/reqs", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject demo(@RequestParam(required =false) Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        EntityWrapper<RepairSpecDetailReq> ew = new EntityWrapper<>();
+        ew.addFilter("repair_spec_detail_id={0}", id);
+        List<RepairSpecDetailReq> repairSpecDetailReqs=repairSpecDetailReqService.selectList(ew);
+        jsonObject.put("reqs",repairSpecDetailReqs);
         return jsonObject;
     }
 

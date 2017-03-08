@@ -65,6 +65,10 @@
     <!-- END THEME LAYOUT STYLES -->
     <link type="image/png" href="${ctx}/static/img/great_vision.png" rel="shortcut icon">
     <link rel="shortcut icon" href="${ctx}/favicon.ico"/>
+
+    <%--handsontable的CSS--%>
+    <link  rel="stylesheet" media="screen" href="${ctx}/static/css/handsontable/handsontable.css">
+
 </head>
 <body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
@@ -97,7 +101,10 @@
 <script src="${global}/plugins/ie8.fix.min.js"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
+<%--
 <script src="${global}/plugins/jquery.min.js" type="text/javascript"></script>
+--%>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/js.cookie.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
@@ -149,6 +156,14 @@
 <script src="${ctx}/static/js/go.common.js"></script>
 <script src="${ctx}/static/js/api.js"></script>
 <script src="${ctx}/static/js/jquery.tips.js"></script>
+
+<%--handsontable的js--%>
+<script src="${ctx}/static/js/handsontable/pikaday.js"></script>
+<script src="${ctx}/static/js/handsontable/moment.js"></script>
+<script src="${ctx}/static/js/handsontable/ZeroClipboard.js"></script>
+<script src="${ctx}/static/js/handsontable/numbro.js"></script>
+<script src="${ctx}/static/js/handsontable/languages.js"></script>
+<script src="${ctx}/static/js/handsontable/handsontable.js"></script>
 
 </body>
 <script>
