@@ -107,6 +107,9 @@ public class RepairSpecItem implements Serializable {
     @TableField(exist = false)
     private List<Param> paramList;
 
+    @TableField(exist = false)
+    private List<RepairSpecDetail> detailList;
+
     /**
      * 创建时间
      */
@@ -540,11 +543,20 @@ public class RepairSpecItem implements Serializable {
     public void setSrc(Integer src) {
         this.src = src;
     }
+
     public String getProName() {
         return proName;
     }
 
     public void setProName(String proName) {
         this.proName = proName;
+    }
+
+    public List<RepairSpecDetail> getDetailList() {
+        return detailList;
+    }
+
+    public void setDetailList(List<RepairSpecDetail> detailList) {
+        this.detailList = detailList;
     }
 }

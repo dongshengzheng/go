@@ -9,6 +9,7 @@ import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +29,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,6 +53,9 @@ public class RepairSpecController extends BaseController {
 
     @Autowired
     private IRepairSpecDetailService repairSpecDetailService;
+
+    @Autowired
+    private IRepairSpecDetailReqService repairSpecDetailReqService;
 
     @Autowired
     private ICompanyService companyService;
@@ -127,36 +130,28 @@ public class RepairSpecController extends BaseController {
         repairSpec.setCreateDate(new Date());
         repairSpec.setCreateBy(getCurrentUser().getName());
         repairSpec.setDelFlag(Const.DEL_FLAG_NORMAL);
-        if (repairSpecService.saveRepairSpec(repairSpec, specItems)) {
+        if (repairSpecService.saveRepairSpec(repairSpec, specItems, repairDetailId)) {
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);
             jsonObject.put("msg", "添加时出错,请稍后再试");
         }
-        List<RepairSpecDetail> detailList = new ArrayList<>();
-        RepairSpecDetail detail;
-        Integer specId = repairSpec.getId();
-        for (Integer detailId : repairDetailId) {
-            detail = repairSpecDetailService.selectById(detailId);
-            detail.setRepairSpecId(specId);
-            detailList.add(detail);
-        }
-        repairSpecDetailService.updateBatchById(detailList);
         return jsonObject;
     }
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
+        repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType()));
         Integer modelId = repairSpec.getModelId();
-        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "通用服务", modelId);
-        List<RepairSpecItem> type2 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "坞修工程", modelId);
-        List<RepairSpecItem> type3 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "船体工程", modelId);
-        List<RepairSpecItem> type4 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "机械工程", modelId);
-        List<RepairSpecItem> type5 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "电气工程", modelId);
-        List<RepairSpecItem> type6 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "冷藏工程", modelId);
-        List<RepairSpecItem> type7 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "特种设备", modelId);
-        List<RepairSpecItem> type8 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "其他", modelId);
+        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryForInfo(id, "通用服务", modelId);
+        List<RepairSpecDetail> type2 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "坞修工程");
+        List<RepairSpecDetail> type3 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "船体工程");
+        List<RepairSpecDetail> type4 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "机械工程");
+        List<RepairSpecDetail> type5 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "电气工程");
+        List<RepairSpecDetail> type6 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "冷藏工程");
+        List<RepairSpecDetail> type7 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "特种设备");
+        List<RepairSpecDetail> type8 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "其他");
         map.put("repairSpec", repairSpec);
         map.put("typeList", dictService.getListByType("维修类型"));
         map.put("type1", type1);
@@ -216,15 +211,16 @@ public class RepairSpecController extends BaseController {
         map.put("type6", type6);
         map.put("type7", type7);
         map.put("type8", type8);
+        map.put("nextProNoList", repairSpecDetailService.getNextProNo(id));
         return "go/repairSpec/edit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject edit(RepairSpec repairSpec,
-                           RepairSpecItemList specItems) {
+                           RepairSpecItemList specItems, Integer[] repairDetailId) {
         JSONObject jsonObject = new JSONObject();
-        if (repairSpecService.updateRepairSpec(repairSpec, specItems)) {
+        if (repairSpecService.updateRepairSpec(repairSpec, specItems, repairDetailId)) {
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);
@@ -330,41 +326,59 @@ public class RepairSpecController extends BaseController {
     //导出工程单excel
     public File exportSpecExcel(Integer specId) {
         RepairSpec spec = repairSpecService.selectById(specId);
-        String excelName = spec.getName() != null ? spec.getName() : "工程单概述";
-
+        String excelName = spec.getName() != null ? spec.getName() : spec.getShipName() + "工程单概述";
 
         HSSFWorkbook wb = new HSSFWorkbook();
-        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
-        HSSFSheet sheet = wb.createSheet(excelName);
-        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
-        HSSFRow row = sheet.createRow((int) 0);
-        // 第四步，创建单元格，并设置值表头 设置表头居中
-        HSSFCell cell = row.createCell((short) 0);
 
-        row.createCell((short) 0).setCellValue("详单号");
-        row.createCell((short) 1).setCellValue("详单名称");
+        List<Dict> dictList = dictService.getListByType("维修工程大类");
+        for (Dict dict : dictList) {
+            int catagoryRowNum = 0;
+            String catagory = dict.getDes();
+            HSSFSheet sheet = wb.createSheet(catagory);
+            sheet.setColumnWidth(1, 50 * 256);
 
-        RepairSpecDetail detail = new RepairSpecDetail();
-        detail.setRepairSpecId(specId);
-        List<RepairSpecDetail> repairSpecDetailList = repairSpecDetailService.selectList(new EntityWrapper<>(detail));
+            List<RepairSpecDetail> detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
 
-        HSSFCellStyle linkStyle = wb.createCellStyle();
-        HSSFFont cellFont = wb.createFont();
-        cellFont.setUnderline((byte) 1);
-        cellFont.setColor(HSSFColor.BLUE.index);
-        linkStyle.setFont(cellFont);
+            HSSFRow row = sheet.createRow((int) catagoryRowNum++);
+            HSSFCell cell = row.createCell((short) 0);
 
-        for (int i = 0; i < repairSpecDetailList.size(); i++) {
-            row = sheet.createRow((int) i + 1);
-            // 第四步，创建单元格，并设置值
-            String proOrderNo = repairSpecDetailList.get(i).getProOrderNo();
-            cell = row.createCell((short) 0);
-            cell.setCellFormula("HYPERLINK(\"" + "#'" + proOrderNo + "'!A1" + "\",\"" + proOrderNo + "\")");
-            cell.setCellStyle(linkStyle);
-            row.createCell((short) 1).setCellValue(repairSpecDetailList.get(i).getProName());
-            HSSFSheet detailSheet = wb.createSheet(proOrderNo);
+            row.createCell((short) 0).setCellValue("详单号");
+            row.createCell((short) 1).setCellValue("详单内容");
+            row.createCell((short) 2).setCellValue("单位");
+            row.createCell((short) 3).setCellValue("数量");
+
+            HSSFCellStyle linkStyle = wb.createCellStyle();
+            CellStyle cellStyle = wb.createCellStyle();
+            HSSFFont cellFont = wb.createFont();
+            cellFont.setUnderline((byte) 1);
+            cellFont.setColor(HSSFColor.BLUE.index);
+            linkStyle.setFont(cellFont);
+
+            for (RepairSpecDetail detail : detailList) {
+                row = sheet.createRow((int) catagoryRowNum++);
+                // 第四步，创建单元格，并设置值
+                String proOrderNo = detail.getProOrderNo();
+                cell = row.createCell((short) 0);
+                cell.setCellFormula("HYPERLINK(\"" + "#'" + proOrderNo + "'!A1" + "\",\"" + proOrderNo + "\")");
+                cell.setCellStyle(linkStyle);
+                row.createCell((short) 1).setCellValue("工程名称:" + detail.getProName());
+
+                RepairSpecDetailReq req = new RepairSpecDetailReq();
+                req.setRepairSpecDetailId(detail.getId());
+                List<RepairSpecDetailReq> reqList = repairSpecDetailReqService.selectList(new EntityWrapper<>(req));
+                for (RepairSpecDetailReq r : reqList) {
+                    row = sheet.createRow((int) catagoryRowNum++);
+                    row.createCell((short) 1).setCellValue(r.getDes());
+                    row.createCell((short) 2).setCellValue(r.getUnit());
+                    row.createCell((short) 3).setCellValue(r.getCount());
+                }
+                row = sheet.createRow((int) catagoryRowNum++);
+
+
+                HSSFSheet detailSheet = wb.createSheet(proOrderNo);
+                //待完善单独的详单表
+            }
         }
-
 
         // 第六步，将文件存到指定位置
         try {

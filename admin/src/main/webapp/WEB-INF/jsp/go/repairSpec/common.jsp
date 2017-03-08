@@ -137,18 +137,9 @@
 <%--触发详单弹窗--%>
 <a style="display:none" href="repairSpecDetail/addModelDetail?shipName=&catagory=&code=" id="add-detail"
    data-model="dialog">新增详单</a>
-<%--用于工程单号--%>
-<input type="hidden" id="type1proOrderNo" value=1>
-<input type="hidden" id="type2proOrderNo" value=1>
-<input type="hidden" id="type3proOrderNo" value=1>
-<input type="hidden" id="type4proOrderNo" value=1>
-<input type="hidden" id="type5proOrderNo" value=1>
-<input type="hidden" id="type6proOrderNo" value=1>
-<input type="hidden" id="type7proOrderNo" value=1>
-<input type="hidden" id="type8proOrderNo" value=1>
-
 
 <script>
+    $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
     <%--范本选择下拉列表的初始化及更新--%>
     $(document).ready(initRepairModelDetailList())
     function initRepairModelDetailList() {
@@ -271,4 +262,137 @@
         var text = $('#dialog-text').val();
         $('.marked-add-remark').removeClass("marked-add-remark").siblings('.remark-text').text(text);
     })
+
+
+    <%--行的展开与折叠--%>
+    function controlHidden(hidden, code, obj) {
+        $(obj).toggle().siblings().toggle();
+        if (hidden) {
+            hiddenRow(code);
+        } else {
+            showRow(code);
+        }
+    }
+    function showRow(parentCode) {
+        if (parentCode != null) {
+            var ele = $("tr.details-control-child[data-parent='" + parentCode + "']");
+            ele.each(function () {
+                $(this).css("display", "table-row");
+                showRow($(this).attr("data-code"));
+            })
+        }
+    }
+    function hiddenRow(parentCode) {
+        if (parentCode != null) {
+            var ele = $("tr.details-control-child[data-parent='" + parentCode + "']");
+            ele.each(function () {
+                $(this).css("display", "none");
+                hiddenRow($(this).attr("data-code"));
+            })
+        }
+    }
+
+
+    <%--新增一行--%>
+    $(".addRow").on("click", function () {
+        var oldRow = $(this).parents("tr");
+        var newRow = oldRow.clone();
+        newRow.find(".model-detail-select").toggle();
+        var contentTd = newRow.find(".content-td");
+        contentTd.find("button").remove();
+        contentTd.find("input").val("");
+        contentTd.find("input").toggle();
+        //改code
+        var oldCode = oldRow.find(".item-code").val();
+        var numbers = oldCode.split(".");
+        var newCode = "";
+        for (var i = 0; i < numbers.length - 1; i++) {
+            newCode += numbers[i] + ".";
+        }
+        newCode += numbers[numbers.length - 1] * 1 + 1;
+        oldRow.find(".item-code").val(newCode);
+        oldRow.find(".code-td").html(newCode);
+        //改input和textarea的name
+        var current = $(this).attr('data-current');
+        console.log(current);
+        var table = oldRow.parents("table");
+        var index = table.attr("data-totalRow");
+        console.log(index);
+        table.attr("data-totalRow", index * 1 + 1);
+        newRow.find('textarea').each(function () {
+            var name = $(this).attr('name');
+            name = name.replace("[" + current + "]", "[" + index + "]");
+            $(this).attr('name', name);
+        });
+        newRow.find('input').each(function () {
+            var name = $(this).attr('name');
+            if (name != null) {
+                name = name.replace("[" + current + "]", "[" + index + "]");
+                $(this).attr('name', name);
+            }
+        });
+
+        oldRow.before(newRow);
+    })
+</script>
+
+<script>
+    <%--左侧checkBox状态控制--%>
+    $(".input-control").on("change", function () {
+        var tr = $(this).parents("tr");
+        var code = tr.attr("data-code");
+        changeStatus(code);
+    })
+
+    function addDetail(repairSpecDetailId, proName) {
+        var tr = $(".marked-select").removeClass("marked-select").parents("tr");
+        var code = tr.attr("data-code");
+        var newRow = $("#detail-row-temp").clone().attr("data-parent", code).removeAttr("id").toggle();
+        newRow.find(".repairDetailId").val(repairSpecDetailId);
+        var a = newRow.find(".editDetail");
+        a.html(proName).attr("href", "repairSpecDetail/editSpecDetail?id=" + repairSpecDetailId);
+        tr.after(newRow);
+        changeStatus(code);
+    }
+
+    function deleteDetail(obj) {
+        var tr = $(obj).parents("tr");
+        var id = tr.find(".repairDetailId").val();
+        var code = tr.attr("data-parent");
+        tr.remove();
+        changeStatus(code);
+    }
+
+    function changeStatus(code) {
+        if (code != null) {
+            var tr = $("tr[data-code='" + code + "']")
+            var flag = false;
+            var children = $("tr[data-parent='" + code + "']");
+            children.each(function () {
+                var status = $(this).find(".status-control").prop("checked");
+                if (status) {
+                    flag = true;
+                    return false;
+                }
+            })
+            if (!flag) {
+                var inputs = tr.find(".input-control");
+                inputs.each(function () {
+                    var status = !($(this).val() == null || $(this).val().trim() == "");
+                    if (status) {
+                        flag = true;
+                        return false;
+                    }
+                })
+            }
+            if (flag) {
+                tr.find(".status-control").prop("checked", true);
+                tr.find(".true-status").val(0);
+            } else {
+                tr.find(".status-control").prop("checked", false);
+                tr.find(".true-status").val(1);
+            }
+            changeStatus(tr.attr("data-parent"));
+        }
+    }
 </script>

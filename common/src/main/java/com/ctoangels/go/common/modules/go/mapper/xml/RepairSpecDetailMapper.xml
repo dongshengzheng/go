@@ -2,9 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.go.common.modules.go.mapper.RepairSpecDetailMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
 		id, repair_spec_id AS repairSpecId, ship_name AS shipName, pro_order_no AS proOrderNo, code, catagory, pro_name AS proName, pro_desc AS proDesc, faci_name AS faciName, faci_type AS faciType, faci_src AS faciSrc, faci_no AS faciNo, faci_param AS faciParam, repair_position AS repairPosition, repair_position_desc AS repairPositionDesc, damage, repair_tech AS repairTech, repair_tech_desc AS repairTechDesc, img, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
+    <select id="byItemCodeAndSpecId" resultType="RepairSpecDetail" parameterType="java.util.Map">
+		SELECT detail.* from t_repair_spec_detail detail
+		WHERE detail.repair_spec_id=#{repair_spec_id} and detail.code=#{code} and del_flag=0
+		Order By detail.pro_order_no
+	</select>
+
+    <select id="getNextProNo" resultType="DetailNextProNo">
+		select
+		(select RIGHT(IFNULL(max(detail.pro_order_no),"000"),3)+1 from t_repair_spec_detail detail where detail.catagory="通用服务" and detail.repair_spec_id=#{0} and detail.del_flag=0 ) as nextNo1,
+		(select RIGHT(IFNULL(max(detail.pro_order_no),"000"),3)+1 from t_repair_spec_detail detail where detail.catagory="坞修工程" and detail.repair_spec_id=#{0} and detail.del_flag=0 ) as nextNo2,
+		(select RIGHT(IFNULL(max(detail.pro_order_no),"000"),3)+1 from t_repair_spec_detail detail where detail.catagory="船体工程" and detail.repair_spec_id=#{0} and detail.del_flag=0 ) as nextNo3,
+		(select RIGHT(IFNULL(max(detail.pro_order_no),"000"),3)+1 from t_repair_spec_detail detail where detail.catagory="机械工程" and detail.repair_spec_id=#{0} and detail.del_flag=0 ) as nextNo4,
+		(select RIGHT(IFNULL(max(detail.pro_order_no),"000"),3)+1 from t_repair_spec_detail detail where detail.catagory="电气工程" and detail.repair_spec_id=#{0} and detail.del_flag=0 ) as nextNo5,
+		(select RIGHT(IFNULL(max(detail.pro_order_no),"000"),3)+1 from t_repair_spec_detail detail where detail.catagory="冷藏工程" and detail.repair_spec_id=#{0} and detail.del_flag=0 ) as nextNo6,
+		(select RIGHT(IFNULL(max(detail.pro_order_no),"000"),3)+1 from t_repair_spec_detail detail where detail.catagory="特种设备" and detail.repair_spec_id=#{0} and detail.del_flag=0 ) as nextNo7,
+		(select RIGHT(IFNULL(max(detail.pro_order_no),"000"),3)+1 from t_repair_spec_detail detail where detail.catagory="其他" and detail.repair_spec_id=#{0} and detail.del_flag=0 ) as nextNo8
+	</select>
 </mapper>

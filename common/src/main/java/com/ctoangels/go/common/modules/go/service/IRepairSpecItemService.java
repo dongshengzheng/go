@@ -15,4 +15,8 @@ public interface IRepairSpecItemService extends ISuperService<RepairSpecItem> {
 
     //    编辑用  含选值列表
     List<RepairSpecItem> bySpecIdAndCatagoryWithParamsAndValue(Integer repairSpecId, String catagory, Integer modelId);
+
+    //    查询用  仅查询被勾选的项目
+    List<RepairSpecItem> bySpecIdAndCatagoryForInfo(Integer repairSpecId, String catagory, Integer modelId);
+
 }

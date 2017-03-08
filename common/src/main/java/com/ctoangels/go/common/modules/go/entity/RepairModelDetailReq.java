@@ -90,13 +90,7 @@ public class RepairModelDetailReq implements Serializable {
 		this.count = count;
 	}
 
-	public Integer getRepairModelDetailId() {
-		return repairModelDetailId;
-	}
 
-	public void setRepairModelDetailId(Integer repairModelDetailId) {
-		this.repairModelDetailId = repairModelDetailId;
-	}
 
 	public Date getCreateDate() {
 		return this.createDate;
@@ -138,4 +132,11 @@ public class RepairModelDetailReq implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public Integer getRepairModelDetailId() {
+		return repairModelDetailId;
+	}
+
+	public void setRepairModelDetailId(Integer repairModelDetailId) {
+		this.repairModelDetailId = repairModelDetailId;
+	}
 }

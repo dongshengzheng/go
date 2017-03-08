@@ -83,7 +83,7 @@ public class RepairSpecDetailController extends BaseController {
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insert(repairModelDetail)) {
-            if (!dataJson.equals("")){
+            if (!dataJson.equals("")) {
                 int id = repairModelDetail.getId();
                 for (int i = 0; i < array.length; i++) {
                     if (i % 3 == 0) {
@@ -123,7 +123,7 @@ public class RepairSpecDetailController extends BaseController {
 
         if (repairSpecDetailService.insert(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            if(!dataJson.equals("")){
+            if (!dataJson.equals("")) {
                 for (int i = 0; i < array.length; i++) {
                     if (i % 3 == 0) {
                         req.setDes(array[i]);
@@ -190,7 +190,7 @@ public class RepairSpecDetailController extends BaseController {
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
         if (repairSpecDetailService.updateById(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            if (!dataJson.equals("")){
+            if (!dataJson.equals("")) {
                 for (int i = 0; i < array.length; i++) {
                     if (i % 3 == 0) {
                         specReq.setDes(array[i]);
@@ -211,6 +211,21 @@ public class RepairSpecDetailController extends BaseController {
         } else {
             jsonObject.put("success", false);
             jsonObject.put("msg", "更新时出错,请稍后再试");
+        }
+        return jsonObject;
+    }
+
+    /*更新维修详单*/
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject editSpecDetailComplete(Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        RepairSpecDetail detail = repairSpecDetailService.selectById(id);
+        detail.setDelFlag(Const.DEL_FLAG_DELETE);
+        if (repairSpecDetailService.updateById(detail)) {
+            jsonObject.put("suc", true);
+        } else {
+            jsonObject.put("suc", false);
         }
         return jsonObject;
     }

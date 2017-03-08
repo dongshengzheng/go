@@ -404,4 +404,16 @@
             alter table t_repair_prog_detail add task_status INT NULL COMMENT '任务状态';
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-013">
+        <sql>
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","1","通用服务",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","2","坞修工程",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","3","船体工程",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","4","机械工程",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","5","电气工程",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","6","冷藏设备",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","7","特种设备",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","8","其他",0);
+        </sql>
+    </changeSet>
 </databaseChangeLog>

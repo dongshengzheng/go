@@ -126,16 +126,16 @@
                                         <label for="planDays" class="col-sm-3 control-label">
                                             预估天数</label>
                                         <div class="col-sm-7">
-                                            <input id="planDays" name="planDays" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required" placeholder="请输入预估维修天数">
+                                            <input id="planDays" name="planDays" type="text"
+                                                   class="form-control required" placeholder="请输入预估维修天数">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="planCost" class="col-sm-3 control-label">
                                             预估金额</label>
                                         <div class="col-sm-7">
-                                            <input id="planCost" name="planCost" type="text" maxlength="32"
-                                                   minlength="2" class="form-control required" placeholder="请输入预估维修金额">
+                                            <input id="planCost" name="planCost" type="text"
+                                                   class="form-control required" placeholder="请输入预估维修金额">
                                         </div>
                                         <label class="col-sm-2 control-label"
                                                style="padding-left: 5px;padding-right: 5px">
@@ -189,8 +189,10 @@
                                             </div>
                                         </div>
                                         <div class="portlet-body">
+                                            <c:set var="type" value="type${outerVs.count}"></c:set>
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="table${outerVs.count}">
+                                                   id="table${outerVs.count}"
+                                                   data-totalRow="${fn:length(requestScope[type])}">
                                                     <%--通用服务开始--%>
                                                 <c:if test="${outerVs.count==1}">
                                                     <thead>
@@ -205,21 +207,18 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <c:set var="type" value="type${outerVs.count}"></c:set>
                                                     <c:forEach items="${requestScope[type]}" var="item"
                                                                varStatus="itemVs">
                                                         <c:if test="${item.parentCode!='0'}">
-                                                            <tr class="details-control-child" data-parent="${item.parentCode}" data-code="${item.code}" style="display: none">
+                                                            <tr class="details-control-child" data-parent="${item.parentCode}" data-code="${item.code}">
                                                         </c:if>
                                                         <c:if test="${item.parentCode=='0'}">
                                                             <tr class="top-row" data-parent="${item.parentCode}" data-code="${item.code}">
                                                         </c:if>
                                                         <input type="hidden" value="${item.catagory}"
                                                                name="type${outerVs.count}List[${itemVs.index}].catagory">
-                                                        <input type="hidden" value="${item.code}" class=""
+                                                        <input type="hidden" value="${item.code}" class="item-code"
                                                                name="type${outerVs.count}List[${itemVs.index}].code">
-                                                        <input type="hidden" value="${item.content}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].content">
                                                         <input type="hidden" value="${item.unit}"
                                                                name="type${outerVs.count}List[${itemVs.index}].unit">
                                                         <input type="hidden" value="${item.parentCode}"
@@ -228,35 +227,51 @@
                                                                name="type${outerVs.count}List[${itemVs.index}].children">
                                                         <input type="hidden" value="${item.sort}"
                                                                name="type${outerVs.count}List[${itemVs.index}].sort">
+                                                        <input type="hidden" value="${item.src}"
+                                                               name="type${outerVs.count}List[${itemVs.index}].src">
                                                         <td>
                                                             <input type="checkbox" disabled
                                                                    class="status-checkBox status-control">
                                                             <input type="hidden" value="1" class="true-status"
                                                                    name="type${outerVs.count}List[${itemVs.index}].status">
                                                         </td>
-                                                        <td>
+                                                        <td class="code-td">
                                                                 ${item.code}
                                                         </td>
-                                                        <td>${item.content}
-                                                            <c:forEach items="${item.paramList}" var="p" varStatus="vs">
-                                                                <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
-                                                                    <br>
-                                                                </c:if>
-                                                                ${p.name}
-                                                                <c:if test="${p.type=='text'}">
-                                                                    <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
-                                                                           class="input-control">
-                                                                </c:if>
-                                                                <c:if test="${p.type=='select'}">
-                                                                    <select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">
-                                                                        <c:forEach items="${p.paramValueVariableList}"
-                                                                                   var="val">
-                                                                            <option value="${val.paramValVariable}">${val.paramValVariable}</option>
-                                                                        </c:forEach>
-                                                                    </select>
-                                                                </c:if>
-                                                                ${p.unit}
-                                                            </c:forEach>
+                                                        <td class="content-td">
+                                                            <c:if test="${!(item.content=='addrow')}">
+                                                                ${item.content}
+                                                                <input value="${item.content}" type="hidden"
+                                                                       name="type${outerVs.count}List[${itemVs.index}].content">
+                                                                <c:forEach items="${item.paramList}" var="p"
+                                                                           varStatus="vs">
+                                                                    <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
+                                                                        <br>
+                                                                    </c:if>
+                                                                    ${p.name}
+                                                                    <c:if test="${p.type=='text'}">
+                                                                        <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
+                                                                               class="input-control">
+                                                                    </c:if>
+                                                                    <c:if test="${p.type=='select'}">
+                                                                        <select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">
+                                                                            <c:forEach
+                                                                                    items="${p.paramValueVariableList}"
+                                                                                    var="val">
+                                                                                <option value="${val.paramValVariable}">${val.paramValVariable}</option>
+                                                                            </c:forEach>
+                                                                        </select>
+                                                                    </c:if>
+                                                                    ${p.unit}
+                                                                </c:forEach>
+                                                            </c:if>
+                                                            <c:if test="${(item.content=='addrow')}">
+                                                                <button type="button" data-current="${itemVs.index}"
+                                                                        class="btn btn-sm blue addRow">新增
+                                                                </button>
+                                                                <input value="${item.content}" style="display: none"
+                                                                       name="type${outerVs.count}List[${itemVs.index}].content">
+                                                            </c:if>
                                                         </td>
                                                         <td>${item.unit}</td>
                                                         <td><c:if test="${!empty item.unit}"><input
@@ -279,13 +294,14 @@
                                                             <td class="details-control" data-code="${item.code}">
                                                                 <a href="javascript:;"
                                                                    onclick="controlHidden(false,'${item.code}',this)"
-                                                                   class="btn btn-circle blue m-icon m-icon-only open-png">
+                                                                   class="btn btn-circle blue m-icon m-icon-only open-png"
+                                                                   style="display: none">
                                                                     <i class="m-icon-swapdown m-icon-white"></i>
                                                                 </a>
                                                                 <a href="javascript:;"
                                                                    onclick="controlHidden(true,'${item.code}',this)"
                                                                    class="btn btn-circle blue m-icon m-icon-only close-png"
-                                                                   style="display: none">
+                                                                >
                                                                     <i class="m-icon-swapup m-icon-white"></i>
                                                                 </a>
                                                             </td>
@@ -296,29 +312,6 @@
                                                         </c:if>
                                                         </tr>
                                                     </c:forEach>
-                                                    <tr>
-                                                        <td>
-                                                        </td>
-                                                        <td></td>
-                                                        <td>
-                                                            <c:set var="lastCode"
-                                                                   value="${requestScope[type][fn:length(requestScope[type])-1].code}"></c:set>
-                                                            <input class="last-code"
-                                                            <c:if test="${empty lastCode}">
-                                                                   value="${outerVs.count}.0"
-                                                            </c:if>
-                                                            <c:if test="${!empty lastCode}">
-                                                                   value="${outerVs.count}"
-                                                            </c:if>
-                                                            >
-                                                            <button type="button" class="btn btn-sm blue addRow1">新增
-                                                            </button>
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
                                                     </tbody>
                                                 </c:if>
                                                     <%--通用服务结束--%>
@@ -335,7 +328,6 @@
                                                         <th style="width:10%">操作</th>
                                                     </tr>
                                                     </thead>
-                                                    <c:set var="type" value="type${outerVs.count}"></c:set>
                                                     <c:forEach items="${requestScope[type]}" var="item"
                                                                varStatus="itemVs">
                                                         <c:if test="${item.parentCode!='0'}">
@@ -346,10 +338,8 @@
                                                         </c:if>
                                                         <input type="hidden" value="${item.catagory}"
                                                                name="type${outerVs.count}List[${itemVs.index}].catagory">
-                                                        <input type="hidden" value="${item.code}" class=""
+                                                        <input type="hidden" value="${item.code}" class="item-code"
                                                                name="type${outerVs.count}List[${itemVs.index}].code">
-                                                        <input type="hidden" value="${item.content}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].content">
                                                         <input type="hidden" value="${item.unit}"
                                                                name="type${outerVs.count}List[${itemVs.index}].unit">
                                                         <input type="hidden" value="${item.parentCode}"
@@ -364,35 +354,50 @@
                                                             <input type="hidden" value="1" class="true-status"
                                                                    name="type${outerVs.count}List[${itemVs.index}].status">
                                                         </td>
-                                                        <td>
+                                                        <td class="code-td">
                                                                 ${item.code}
                                                         </td>
-                                                        <td>${item.content}
-                                                            <c:forEach items="${item.paramList}" var="p" varStatus="vs">
-                                                                <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
-                                                                    <br>
-                                                                </c:if>
-                                                                ${p.name}
-                                                                <c:if test="${p.type=='text'}">
-                                                                    <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
-                                                                           value="" class="input-control">
-                                                                </c:if>
-                                                                <c:if test="${p.type=='select'}">
-                                                                    <select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">
-                                                                        <c:forEach items="${p.paramValueVariableList}"
-                                                                                   var="val">
-                                                                            <option value="${val.paramValVariable}">${val.paramValVariable}</option>
-                                                                        </c:forEach>
-                                                                    </select>
-                                                                </c:if>
-                                                                ${p.unit}
-                                                            </c:forEach>
+                                                        <td class="content-td">
+                                                            <c:if test="${!(item.content=='addrow')}">${item.content}
+                                                                <input type="hidden" value="${item.content}"
+                                                                       name="type${outerVs.count}List[${itemVs.index}].content">
+                                                                <c:forEach items="${item.paramList}" var="p"
+                                                                           varStatus="vs">
+                                                                    <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
+                                                                        <br>
+                                                                    </c:if>
+                                                                    ${p.name}
+                                                                    <c:if test="${p.type=='text'}">
+                                                                        <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
+                                                                               value="" class="input-control">
+                                                                    </c:if>
+                                                                    <c:if test="${p.type=='select'}">
+                                                                        <select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">
+                                                                            <c:forEach
+                                                                                    items="${p.paramValueVariableList}"
+                                                                                    var="val">
+                                                                                <option value="${val.paramValVariable}">${val.paramValVariable}</option>
+                                                                            </c:forEach>
+                                                                        </select>
+                                                                    </c:if>
+                                                                    ${p.unit}
+                                                                </c:forEach>
+                                                            </c:if>
+                                                            <c:if test="${(item.content=='addrow')}">
+                                                                <button type="button" data-current="${itemVs.index}"
+                                                                        class="btn btn-sm blue addRow">新增
+                                                                </button>
+                                                                <input value="${item.content}" style="display: none"
+                                                                       name="type${outerVs.count}List[${itemVs.index}].content">
+                                                            </c:if>
                                                         </td>
                                                         <td>
                                                             <c:if test="${item.parentCode!='0'}">
                                                                 <select class="model-detail-select"
-                                                                        data-code="${item.parentCode}"
-                                                                        data-catagory="${item.catagory}"></select>
+                                                                        <c:if test="${(item.content=='addrow')}">style="display: none"</c:if>
+                                                                        data-code="${item.code}"
+                                                                        data-catagory="${item.catagory}">
+                                                                </select>
                                                             </c:if>
                                                         </td>
                                                         <td><c:if test="${item.parentCode=='0'}">
@@ -428,28 +433,6 @@
                                                         </c:if>
                                                         </tr>
                                                     </c:forEach>
-                                                    <tr>
-                                                        <td>
-                                                        </td>
-                                                        <td></td>
-                                                        <td>
-                                                            <c:set var="lastCode"
-                                                                   value="${requestScope[type][fn:length(requestScope[type])-1].code}"></c:set>
-                                                            <input class="last-code"
-                                                            <c:if test="${empty lastCode}">
-                                                                   value="${outerVs.count}.0"
-                                                            </c:if>
-                                                            <c:if test="${!empty lastCode}">
-                                                                   value="${outerVs.count}"
-                                                            </c:if>
-                                                            >
-                                                            <button type="button" class="btn btn-sm blue addRow2">新增
-                                                            </button>
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
                                                     </tbody>
                                                 </c:if>
                                                     <%--除通用服务外结束--%>
@@ -473,10 +456,18 @@
     </div>
 </form>
 
+<%--用于工程单号--%>
+<input type="hidden" id="type1proOrderNo" value=1>
+<input type="hidden" id="type2proOrderNo" value=1>
+<input type="hidden" id="type3proOrderNo" value=1>
+<input type="hidden" id="type4proOrderNo" value=1>
+<input type="hidden" id="type5proOrderNo" value=1>
+<input type="hidden" id="type6proOrderNo" value=1>
+<input type="hidden" id="type7proOrderNo" value=1>
+<input type="hidden" id="type8proOrderNo" value=1>
+
 <jsp:include page="common.jsp"></jsp:include>
 <script>
-    $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
-
     function severCheck() {
         var shipId = $("#shipId").val();
         if (shipId == "0") {
@@ -541,99 +532,4 @@
         $("#shipName").val($(this).find("option:selected").text());
     })
 
-    <%--行的展开与折叠--%>
-    function controlHidden(hidden, code, obj) {
-        $(obj).toggle().siblings().toggle();
-        if (hidden) {
-            hiddenRow(code);
-        } else {
-            showRow(code);
-        }
-    }
-    function showRow(parentCode) {
-        if (parentCode != null) {
-            var ele = $("tr.details-control-child[data-parent='" + parentCode + "']");
-            ele.each(function () {
-                $(this).css("display", "table-row");
-                showRow($(this).attr("data-code"));
-            })
-        }
-    }
-    function hiddenRow(parentCode) {
-        if (parentCode != null) {
-            var ele = $("tr.details-control-child[data-parent='" + parentCode + "']");
-            ele.each(function () {
-                $(this).css("display", "none");
-                hiddenRow($(this).attr("data-code"));
-            })
-        }
-    }
-
-
-    <%--新增一行--%>
-    $('.addRow1').on('click', function () {
-        $(this).parent().parent().before($("#item-row-temp1").clone().removeAttr("id").toggle());
-    })
-    $('.addRow2').on('click', function () {
-        $(this).parent().parent().before($("#item-row-temp2").clone().removeAttr("id").toggle());
-    })
-
-</script>
-<script>
-    $(".input-control").on("change", function () {
-        var tr = $(this).parents("tr");
-        var code = tr.attr("data-code");
-        changeStatus(code);
-    })
-
-    function addDetail(repairSpecDetailId, proName) {
-        var tr = $(".marked-select").removeClass("marked-select").parents("tr");
-        var code = tr.attr("data-code");
-        var newRow = $("#detail-row-temp").clone().attr("data-parent", code).removeAttr("id").toggle();
-        newRow.find(".repairDetailId").val(repairSpecDetailId);
-        var a = newRow.find(".editDetail");
-        a.html(proName).attr("href", "repairSpecDetail/editSpecDetail?id=" + repairSpecDetailId);
-        tr.after(newRow);
-        changeStatus(code);
-    }
-
-    function deleteDetail(obj) {
-        var tr = $(obj).parents("tr");
-        var code = tr.attr("data-parent");
-        tr.remove();
-        changeStatus(code);
-    }
-
-    function changeStatus(code) {
-        if (code != null) {
-            var tr = $("tr[data-code='" + code + "']")
-            var flag = false;
-            var children = $("tr[data-parent='" + code + "']");
-            children.each(function () {
-                var status = $(this).find(".status-control").prop("checked");
-                if (status) {
-                    flag = true;
-                    return false;
-                }
-            })
-            if (!flag) {
-                var inputs = tr.find(".input-control");
-                inputs.each(function () {
-                    var status = !($(this).val() == null || $(this).val().trim() == "");
-                    if (status) {
-                        flag = true;
-                        return false;
-                    }
-                })
-            }
-            if (flag) {
-                tr.find(".status-control").prop("checked", true);
-                tr.find(".true-status").val(0);
-            } else {
-                tr.find(".status-control").prop("checked", false);
-                tr.find(".true-status").val(1);
-            }
-            changeStatus(tr.attr("data-parent"));
-        }
-    }
 </script>

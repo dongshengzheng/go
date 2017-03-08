@@ -61,7 +61,7 @@
 <go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/edit" method="post"
       id="defForm" callfn="refreshTable">
-    <input type="hidden" name="modelId" value="${modelId}">
+    <input type="hidden" name="modelId" value="${repairSpec.modelId}">
     <input type="hidden" name="id" value="${repairSpec.id}">
     <input type="hidden" name="delFlag" value="${repairSpec.delFlag}">
     <input type="hidden" name="companyId" value="${repairSpec.companyId}">
