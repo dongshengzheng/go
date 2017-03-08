@@ -13,4 +13,6 @@ public interface RepairSpecItemMapper extends AutoMapper<RepairSpecItem> {
     List<RepairSpecItem> bySpecIdAndCatagoryWithParamsNoValue(Integer repairSpecId, String catagory, Integer modelId);
 
     List<RepairSpecItem> bySpecIdAndCatagoryWithParamsAndValue(Integer repairSpecId, String catagory, Integer modelId);
+
+    List<RepairSpecItem> bySpecIdAndCatagoryForInfo(Integer repairSpecId, String catagory, Integer modelId);
 }

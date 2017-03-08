@@ -27,4 +27,9 @@ public class RepairSpecItemServiceImpl extends SuperServiceImpl<RepairSpecItemMa
     public List<RepairSpecItem> bySpecIdAndCatagoryWithParamsAndValue(Integer repairSpecId, String catagory, Integer modelId) {
         return repairSpecItemMapper.bySpecIdAndCatagoryWithParamsAndValue(repairSpecId, catagory, modelId);
     }
+
+    @Override
+    public List<RepairSpecItem> bySpecIdAndCatagoryForInfo(Integer repairSpecId, String catagory, Integer modelId) {
+        return repairSpecItemMapper.bySpecIdAndCatagoryForInfo(repairSpecId, catagory, modelId);
+    }
 }

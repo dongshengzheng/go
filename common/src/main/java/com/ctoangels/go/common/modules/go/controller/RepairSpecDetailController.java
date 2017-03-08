@@ -103,7 +103,7 @@ public class RepairSpecDetailController extends BaseController {
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
         List<RepairSpecDetailReq>reqs=JSONObject.parseArray(dataJson,RepairSpecDetailReq.class);
         if (repairSpecDetailService.insert(repairSpecDetail)) {
-            int id=repairSpecDetail.getId();
+            int id = repairSpecDetail.getId();
             for (RepairSpecDetailReq r:reqs) {
                 r.setRepairSpecDetailId(id);
             }
@@ -171,6 +171,20 @@ public class RepairSpecDetailController extends BaseController {
         return jsonObject;
     }
 
+    /*更新维修详单*/
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject editSpecDetailComplete(Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        RepairSpecDetail detail = repairSpecDetailService.selectById(id);
+        detail.setDelFlag(Const.DEL_FLAG_DELETE);
+        if (repairSpecDetailService.updateById(detail)) {
+            jsonObject.put("suc", true);
+        } else {
+            jsonObject.put("suc", false);
+        }
+        return jsonObject;
+    }
     //获取DetailReq信息
     @RequestMapping(value = "/reqs", method = RequestMethod.POST)
     @ResponseBody
