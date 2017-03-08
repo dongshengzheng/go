@@ -82,14 +82,6 @@ public class RepairSpecDetailReq implements Serializable {
 		this.unit = unit;
 	}
 
-	public String getCount() {
-		return this.count;
-	}
-
-	public void setCount(String count) {
-		this.count = count;
-	}
-
 	public Integer getRepairSpecDetailId() {
 		return this.repairSpecDetailId;
 	}
@@ -138,4 +130,11 @@ public class RepairSpecDetailReq implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public String getCount() {
+		return count;
+	}
+
+	public void setCount(String count) {
+		this.count = count;
+	}
 }

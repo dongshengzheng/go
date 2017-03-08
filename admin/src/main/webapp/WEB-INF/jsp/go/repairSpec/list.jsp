@@ -128,6 +128,10 @@
                             + '<a href="repairSpec/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
                             </shiro:hasPermission>
+                            <shiro:hasPermission name="repairSpec/delete">
+                            + '<a href="repairSpec/delete?id=' + row.id +
+                            '" data-msg="确定删除吗？"  data-model="dialog" data-callback="refreshTable" class="btn btn-sm red">确定</a>'
+                            </shiro:hasPermission>
                             ;
                 }
             }],

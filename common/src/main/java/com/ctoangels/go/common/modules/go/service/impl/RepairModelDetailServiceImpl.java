@@ -26,4 +26,5 @@ public class RepairModelDetailServiceImpl extends SuperServiceImpl<RepairModelDe
         ew.addFilter("company_id={0} and del_flag=0", companyId);
         return repairModelDetailMapper.selectList(ew);
     }
+
 }

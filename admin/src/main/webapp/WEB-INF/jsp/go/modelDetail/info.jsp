@@ -52,6 +52,7 @@
 </style>
 <go:navigater path="repairSpec"></go:navigater>
 <form action="" method="post" class="form-horizontal" id="defForm">
+    <input type="hidden" value="${modelDetails.id}" id="modelDetailId"/>
     <div>
         <div class="line1"></div>
         <div style="height:40px;width: 100%;background-color: #C0C9CC" >
@@ -183,36 +184,7 @@
         <div style="width: 100%;margin-top: 10px">
             <div ><span class="head">请求材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
-                <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                       id="default_table" style="width: 98%" >
-                    <thead>
-                    <tr style="background-color: #8CD2E5">
-                        <td style="width:2%"> <input type="checkbox" disabled id="selectAll" /></td>
-                        <th style="width: 68%">要求和描述/材料规格</th>
-                        <th style="width: 6%">单位</th>
-                        <th style="width: 6%">数量</th>
-                        <th style="width: 20%">
-                            <button disabled type="button" onclick="" class="btn red" id="deletes">删除</button>&nbsp;
-                            <button  disabled type="button" onclick="addTr(this)" class="btn green">添加</button>
-                            <input  disabled type="text" value="1" id="assPages" style="width: 20%">
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="table-tbody">
-                    <c:forEach items="${detailReqs}" var="r">
-                        <tr id="td-oneline">
-                            <td> <input disabled type="checkbox" class="td-checkbox" /></td>
-                            <td><input disabled type="text" class="td-text" name="des" value="${r.des}"></td>
-                            <td><input disabled type="text" class="td-text" name="unit" value="${r.unit}"></td>
-                            <td><input disabled type="text" class="td-text" name="count" value="${r.count}"></td>
-                            <td>
-                                <button disabled type="button" onclick="delTr(this)" class="btn red">删除</button>&nbsp;
-                                <button disabled  type="button" onclick="insTr(this)" class="btn green" >插入一行</button>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                <div id="example1"  style=" height: 300px; overflow: hidden;"></div>
             </div>
         </div>
         <div class="col-md-12 line1"></div>
@@ -251,4 +223,64 @@
         </div>
     </div>
 </form>
+<script>
+    $(document).ready(function () {
+        var id=$("#modelDetailId").val();
+        var width=$(window).width();
+        var divWidth=$("#example1").width(width*0.75);
+        function json() {
+            $.ajax({
+                url:'modelDetail/reqs',
+                type:'POST', //GET
+                async:true,    //或false,是否异步
+                data:{
+                    id:id
+                },
+                success:function(data){
+                    dataJson=data.reqs;
+                    console.log(dataJson);
+                    var datas = eval(dataJson);
+                    var container = document.getElementById('example1'),
+                            storedData = {},
+                            savedKeys,
+                            resetState,
+                            stateLoaded,
+                            hot;
 
+                    hot = new Handsontable(container, {
+                        data: datas,
+                        rowHeaders: true,
+                        colHeaders: true,
+                        colWidths: [800,100,100],
+                        minRows:15,
+                        colHeaders: ["要求和描述/材料规格","单位","数量"],
+                        columnSorting: true,
+                        columns: [
+                            {data: "des"},
+                            {data: "unit"},
+                            {data: "count"}
+                        ],
+                        manualColumnMove: false,
+                        manualColumnResize: false,
+                        manualRowMove: false,
+                        manualRowResize: false,
+                        minSpareRows: 1,
+                        contextMenu: false,
+                        persistentState: false,
+                        readOnly:true
+                    });
+
+                    resetState = document.querySelector('.reset-state');
+                    stateLoaded = document.querySelector('.state-loaded');
+
+                },
+                error:function(xhr,textStatus){
+                    console.log('错误');
+                }
+            });
+        }
+        json();
+
+
+    });
+</script>

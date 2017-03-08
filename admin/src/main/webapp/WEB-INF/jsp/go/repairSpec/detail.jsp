@@ -202,51 +202,7 @@
         <div style="width: 100%;margin-top: 10px">
             <div><span class="head">请求材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
-                <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                       id="default_table" style="width: 98%">
-                    <thead>
-                    <tr style="background-color: #8CD2E5">
-                        <td style="width:2%"><input type="checkbox" id="selectAll"/></td>
-                        <th style="width: 64%">要求和描述/材料规格</th>
-                        <th style="width: 6%">单位</th>
-                        <th style="width: 6%">数量</th>
-                        <th style="width: 24%">
-                            <button type="button" onclick="" class="btn btn-sm red" id="deletes">删除</button>
-                            &nbsp;
-                            <button type="button" onclick="addTr(this)" class="btn btn-sm green">添加</button>
-                            <input type="text" value="1" id="assPages" style="width: 20%">
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody id="table-tbody">
-                    <c:forEach items="${reqList}" var="req">
-                        <tr id="td-oneline">
-                            <td><input type="checkbox" class="td-checkbox"/></td>
-                            <td><input type="text" class="td-text" name="des" value="${req.des}"></td>
-                            <td><input type="text" class="td-text" name="unit" value="${req.unit}"></td>
-                            <td><input type="text" class="td-text" name="count" value="${req.count}"></td>
-                            <td>
-                                <button type="button" onclick="delTr(this)" class="btn btn-sm red">删除</button>
-                                &nbsp;
-                                <button type="button" onclick="insTr(this)" class="btn btn-sm green">插入一行</button>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    <c:if test="${empty reqList}">
-                        <tr id="td-oneline">
-                            <td><input type="checkbox" class="td-checkbox"/></td>
-                            <td><input type="text" class="td-text" name="des"></td>
-                            <td><input type="text" class="td-text" name="unit"></td>
-                            <td><input type="text" class="td-text" name="count"></td>
-                            <td>
-                                <button type="button" onclick="delTr(this)" class="btn btn-sm red">删除</button>
-                                &nbsp;
-                                <button type="button" onclick="insTr(this)" class="btn btn-sm green">插入一行</button>
-                            </td>
-                        </tr>
-                    </c:if>
-                    </tbody>
-                </table>
+                <div id="example1"  style=" height: 300px; overflow: hidden;"></div>
             </div>
         </div>
         <div class="col-md-12 line1"></div>
@@ -280,7 +236,7 @@
             <div class="col-md-12" style="text-align: center">
                 <br>
                 <div id="detail_alert"></div>
-                <button type="button" class="btn green" onclick="saveInfo(1)">确定</button>
+                <button id="id" type="button" class="btn green" onclick="saveInfo(1)" data-id="${detail.id}">确定</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" class="btn green" onclick="saveInfo(2)">保存为范本</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -295,79 +251,35 @@
 
 
 <script type="text/javascript">
-    var rowTr = '<tr>' +
-            '<td><input type="checkbox" class="td-checkbox"/></td>' +
-            '<td><input type="text" class="td-text" name="des"></td>' +
-            '<td><input type="text" class="td-text" name="unit"></td>' +
-            '<td><input type="text" class="td-text" name="count"></td>' +
-            '<td><button type="button" onclick="delTr(this)" class="btn btn-sm red">删除</button>&nbsp;&nbsp;' +
-            '<button  type="button" onclick="insTr(this)" class="btn btn-sm green" >插入一行</button></td>' +
-            '</tr>'
-    function delTr(obj) { //删除行  
-        if (confirm('确定要删除？')) {
-            $(obj).parent().parent().remove();
-        }
-    }
-
-    function addTr() {  //增加行
-        var rows = $("#assPages").val();
-        for (i = 0; i < rows; i++) {
-            if ($("table tbody tr:visible").length == 0) {
-                $("#default_table tbody").append(rowTr);
-            } else {
-                $("#default_table tbody tr:last").after(rowTr);
-            }
-        }
-        $("#assPages").val(1);
-    }
-    function insTr(obj) {
-        $(obj).parent().parent().after(rowTr);
-    }
-
-
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
     initUploaders_img("upload_img", "windyeel", "${staticPath}/", "imges", "img");
 
     //服务器校验
     function saveInfo(a) {
-        var dataJson = "";
-        var des = "";
-        var unit = "";
-        var count = 0;
-        $("#default_table tr").each(function (index, domEle) {// mainTable 下的tr  
-            userId = "";
-            if (index != 0) {//遍历除去第一行的之外的所有input作为json数据传入后台  
-                $(domEle).find("input").each(function (index, data) {
-                    if (index == 1) {
-                        des = $(data).val();
-                    }
-                    if (index == 2) {
-                        unit = $(data).val();
-                    }
-                    if (index == 3) {
-                        if ($(data).val() != "" && $(data).val() != null) {//如果没有输入的情况下传的值是0  
-                            count = $(data).val();
-                        }
-                    }
-                });
-                /*
-                 dataJson += "{"+"\"des\":\""+des+"\","+"\"unit\":\""+unit+"\","+"\"count\":\""+count+"\"},";
-                 */
-                dataJson += des + "," + unit + "," + count + ",";
-
+        var arr1=new Array();
+        var datas=handsontableData();
+        for(var i=0;i<datas.length;i++){
+            if(datas[i][0]==null){
+                continue;
             }
-        });
-        if (dataJson.lastIndexOf(",")) {
-            dataJson = dataJson.substring(0, dataJson.length - 1);
+            var obj=new Object();
+            obj.des=datas[i][0];
+            obj.unit=datas[i][1];
+            obj.count =datas[i][2];
+            arr1[i]=obj;
         }
+        var dataJson=JSON.stringify(arr1);
         if (a == 1) {
-            $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail?dataJson=" + dataJson);
+            $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail");
         } else if (a == 2) {
-            $("#detail_form").attr("action", "repairSpecDetail/addModelDetail?dataJson=" + dataJson);
+            $("#detail_form").attr("action", "repairSpecDetail/addModelDetail");
         }
         if (check()) {
             $("#detail_form").ajaxSubmit({
+                data:{
+                    dataJson:dataJson
+                },
                 success: function (data) {
                     if (data.success) {
                         //  保存为工程单详单
@@ -435,37 +347,65 @@
         }
         return true
     }
+</script>
+<script>
+    var id=$("#id").attr("data-id");
+    var width=$(window).width();
+    $("#example1").width(width*0.65);
+    var dataJson;
+    var h;
+    $.ajax({
+        url:'modelDetail/reqs',
+        type:'POST', //GET
+        async:true,    //或false,是否异步
+        data:{
+            id:id
+        },
+        success:function(data){
+            dataJson=data.reqs;
+            console.log(dataJson);
+            var datas = eval(dataJson);
+            var container = document.getElementById('example1'),
+                    storedData = {},
+                    savedKeys,
+                    resetState,
+                    stateLoaded,
+                    hot;
 
-    $(function () {
-        $("#selectAll").change(function () {
-            $("#selectAll").prop("checked", this.checked);
-            if ($("#selectAll").prop("checked")) {
-                $(".td-checkbox").each(function () {
-                    $(this).prop("checked", "checked");
-                });
-            } else {
-                $(".td-checkbox").each(function () {
-                    $(this).attr("checked", false);
-                });
-            }
-        });
+            hot = new Handsontable(container, {
+                data: datas,
+                rowHeaders: true,
+                colHeaders: true,
+                colWidths: [800,100,100],
+                minRows:15,
+                colHeaders: ["要求和描述/材料规格","单位","数量"],
+                columnSorting: true,
+                columns: [
+                    {data: "des"},
+                    {data: "unit"},
+                    {data: "count"}
+                ],
+                manualColumnMove: true,
+                manualColumnResize: true,
+                manualRowMove: true,
+                manualRowResize: true,
+                minSpareRows: 1,
+                contextMenu: true,
+                persistentState: true
+            });
+            h=hot;
 
-        $("#deletes").click(function (e) {
-            //e.preventDefault();
-            var t = confirm("确定要删除吗？");
-            if (t) {
-                var count = 0;
-                $(".td-checkbox").each(function () {
-                    if ($(this).prop("checked")) {
-                        count++
-                        $(this).parent().parent().remove();
-                    }
-                });
-                if (count == 0) {
-                    alert("至少选择一个!");
-                    return;
-                }
-            }
-        });
+            resetState = document.querySelector('.reset-state');
+            stateLoaded = document.querySelector('.state-loaded');
+
+        },
+        error:function(xhr,textStatus){
+            console.log('错误');
+        }
     });
+    function handsontableData() {
+        return h.getData();
+    }
+
+
 </script>

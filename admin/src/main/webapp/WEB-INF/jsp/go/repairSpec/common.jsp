@@ -45,24 +45,15 @@
 <%--右侧悬浮滚动条--%>
 <div id="menu">
     <ul>
-        <li><a data-item="#item1" class="cur"
-        >通用服务</a></li>
-        <li><a data-item="#item2"
-        >坞修工程</a></li>
-        <li><a data-item="#item3"
-        >船体工程</a></li>
-        <li><a data-item="#item4"
-        >机械工程</a></li>
-        <li><a data-item="#item5"
-        >电气工程</a></li>
-        <li><a data-item="#item6"
-        >冷藏工程</a></li>
-        <li><a data-item="#item7"
-        >特种设备</a></li>
-        <li><a data-item="#item8"
-        >其他</a></li>
-        <li><a data-item="#item9"
-        >完成</a></li>
+        <li><a data-item="#item1" class="cur">通用服务</a></li>
+        <li><a data-item="#item2">坞修工程</a></li>
+        <li><a data-item="#item3">船体工程</a></li>
+        <li><a data-item="#item4">机械工程</a></li>
+        <li><a data-item="#item5">电气工程</a></li>
+        <li><a data-item="#item6">冷藏工程</a></li>
+        <li><a data-item="#item7">特种设备</a></li>
+        <li><a data-item="#item8">其他</a></li>
+        <li><a data-item="#item9">完成</a></li>
     </ul>
 </div>
 
