@@ -278,6 +278,7 @@
     function saveInfo() {
         var arr1=new Array();
         var datas=handsontableData();
+        var j=0;
         for(var i=0;i<datas.length;i++){
             if(datas[i][0]==null){
                 continue;
@@ -286,7 +287,7 @@
             obj.des=datas[i][0];
             obj.unit=datas[i][1];
             obj.count =datas[i][2];
-            arr1[i]=obj;
+            arr1[j++]=obj;
         }
         /*
          dataJson=dataJson.substring(0,dataJson.length-1);

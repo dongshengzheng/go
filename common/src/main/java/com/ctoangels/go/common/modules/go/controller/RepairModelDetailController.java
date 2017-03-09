@@ -103,14 +103,14 @@ public class RepairModelDetailController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
-        if (repairModelDetailService.insert(repairModelDetail)) {
-            if(reqs.size()>0) {
+        if (repairModelDetailService.insertDetailAndDetailReq(repairModelDetail,reqs)) {
+           /* if(reqs.size()>0) {
 
                 for (RepairModelDetailReq r : reqs) {
                     r.setRepairModelDetailId(repairModelDetail.getId());
                 }
                 repairModelDetailReqService.insertBatch(reqs);
-            }
+            }*/
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);

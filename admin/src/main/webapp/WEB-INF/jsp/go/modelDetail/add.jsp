@@ -258,15 +258,17 @@
     function saveInfo(a) {
         var arr1=new Array();
         var datas=handsontableData();
+        var j=0;
+        console.log(datas)
         for(var i=0;i<datas.length;i++){
-            if(datas[i][0]==null){
+            if(datas[i][0]==null||datas[i][0]==""){
                 continue;
             }
             var obj=new Object();
             obj.des=datas[i][0];
             obj.unit=datas[i][1];
             obj.count =datas[i][2];
-            arr1[i]=obj;
+            arr1[j++]=obj;
         }
 
         var dataJson=JSON.stringify(arr1);

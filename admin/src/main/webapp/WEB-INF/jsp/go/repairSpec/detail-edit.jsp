@@ -275,17 +275,18 @@
 
     //服务器校验
     function saveInfo(a) {
-        var arr1 = new Array();
-        var datas = handsontableData();
-        for (var i = 0; i < datas.length; i++) {
-            if (datas[i][0] == null) {
+        var arr1=new Array();
+        var datas=handsontableData();
+        var j=0;
+        for(var i=0;i<datas.length;i++){
+            if(datas[i][0]==null){
                 continue;
             }
-            var obj = new Object();
-            obj.des = datas[i][0];
-            obj.unit = datas[i][1];
-            obj.count = datas[i][2];
-            arr1[i] = obj;
+            var obj=new Object();
+            obj.des=datas[i][0];
+            obj.unit=datas[i][1];
+            obj.count =datas[i][2];
+            arr1[j++]=obj;
         }
         var dataJson = JSON.stringify(arr1);
         if (a == 1) {
