@@ -7,11 +7,9 @@ import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +28,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -346,44 +346,94 @@ public class RepairSpecController extends BaseController {
         for (Dict dict : dictList) {
             int catagoryRowNum = 0;
             String catagory = dict.getDes();
-            HSSFSheet sheet = wb.createSheet(catagory);
-            sheet.setColumnWidth(1, 50 * 256);
-            detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
+            if (!"通用服务".equals(catagory)) {
+                HSSFSheet sheet = wb.createSheet(catagory);
+                sheet.setColumnWidth(1, 50 * 256);
+                detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
 
-            HSSFRow row = sheet.createRow((int) catagoryRowNum++);
-            HSSFCell cell = row.createCell((short) 0);
+                HSSFRow row = sheet.createRow((int) catagoryRowNum++);
+                HSSFCell cell = row.createCell((short) 0);
 
-            row.createCell((short) 0).setCellValue("详单号");
-            row.createCell((short) 1).setCellValue("详单内容");
-            row.createCell((short) 2).setCellValue("单位");
-            row.createCell((short) 3).setCellValue("数量");
+                row.createCell((short) 0).setCellValue("详单号");
+                row.createCell((short) 1).setCellValue("详单内容");
+                row.createCell((short) 2).setCellValue("单位");
+                row.createCell((short) 3).setCellValue("数量");
 
-            HSSFCellStyle linkStyle = wb.createCellStyle();
-            CellStyle cellStyle = wb.createCellStyle();
-            HSSFFont cellFont = wb.createFont();
-            cellFont.setUnderline((byte) 1);
-            cellFont.setColor(HSSFColor.BLUE.index);
-            linkStyle.setFont(cellFont);
+                HSSFCellStyle linkStyle = wb.createCellStyle();
+                CellStyle cellStyle = wb.createCellStyle();
+                HSSFFont cellFont = wb.createFont();
+                cellFont.setUnderline((byte) 1);
+                cellFont.setColor(HSSFColor.BLUE.index);
+                linkStyle.setFont(cellFont);
 
-            for (RepairSpecDetail detail : detailList) {
-                row = sheet.createRow((int) catagoryRowNum++);
-                // 第四步，创建单元格，并设置值
-                String proOrderNo = detail.getProOrderNo();
-                cell = row.createCell((short) 0);
-                cell.setCellFormula("HYPERLINK(\"" + "#'" + proOrderNo + "'!A1" + "\",\"" + proOrderNo + "\")");
-                cell.setCellStyle(linkStyle);
-                row.createCell((short) 1).setCellValue("工程名称:" + detail.getProName());
-
-                RepairSpecDetailReq req = new RepairSpecDetailReq();
-                req.setRepairSpecDetailId(detail.getId());
-                List<RepairSpecDetailReq> reqList = repairSpecDetailReqService.selectList(new EntityWrapper<>(req));
-                for (RepairSpecDetailReq r : reqList) {
+                for (RepairSpecDetail detail : detailList) {
                     row = sheet.createRow((int) catagoryRowNum++);
-                    row.createCell((short) 1).setCellValue(r.getDes());
-                    row.createCell((short) 2).setCellValue(r.getUnit());
-                    row.createCell((short) 3).setCellValue(r.getCount());
+                    // 第四步，创建单元格，并设置值
+                    String proOrderNo = detail.getProOrderNo();
+                    cell = row.createCell((short) 0);
+                    cell.setCellFormula("HYPERLINK(\"" + "#'" + proOrderNo + "'!A1" + "\",\"" + proOrderNo + "\")");
+                    cell.setCellStyle(linkStyle);
+                    row.createCell((short) 1).setCellValue("工程名称:" + detail.getProName());
+
+                    RepairSpecDetailReq req = new RepairSpecDetailReq();
+                    req.setRepairSpecDetailId(detail.getId());
+                    List<RepairSpecDetailReq> reqList = repairSpecDetailReqService.selectList(new EntityWrapper<>(req));
+                    for (RepairSpecDetailReq r : reqList) {
+                        row = sheet.createRow((int) catagoryRowNum++);
+                        row.createCell((short) 1).setCellValue(r.getDes());
+                        row.createCell((short) 2).setCellValue(r.getUnit());
+                        row.createCell((short) 3).setCellValue(r.getCount());
+                    }
+                    row = sheet.createRow((int) catagoryRowNum++);
                 }
-                row = sheet.createRow((int) catagoryRowNum++);
+            } else {
+                HSSFSheet sheet = wb.createSheet(catagory);
+                sheet.setColumnWidth(1, 50 * 256);
+                sheet.setColumnWidth(4, 100 * 256);
+                List<RepairSpecItem> itemList = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId());
+                HSSFRow row = sheet.createRow((int) 0);
+                row.createCell((short) 0).setCellValue("项目号");
+                row.createCell((short) 1).setCellValue("维修内容");
+                row.createCell((short) 2).setCellValue("单位");
+                row.createCell((short) 3).setCellValue("数量");
+                row.createCell((short) 4).setCellValue("备注");
+
+                for (RepairSpecItem item : itemList) {
+                    row = sheet.createRow(sheet.getLastRowNum() + 1);
+                    row.createCell((short) 0).setCellValue(item.getCode());
+                    row.createCell((short) 1).setCellValue(item.getContent());
+                    row.createCell((short) 2).setCellValue(item.getUnit());
+                    if (item.getCount() != null) {
+                        row.createCell((short) 3).setCellValue(item.getCount());
+                    }
+                    row.createCell((short) 4).setCellValue(item.getRemark());
+                    List<Param> paramList = item.getParamList();
+                    if (paramList != null) {
+                        Class clazz = item.getClass();
+                        Method m = null;
+                        Param param = null;
+                        for (int n = 0; n < paramList.size(); n++) {
+                            param = paramList.get(n);
+                            row = sheet.createRow(sheet.getLastRowNum() + 1);
+                            try {
+                                m = clazz.getDeclaredMethod("getParam" + (n + 1) + "Val");
+                                String name = param.getName();
+                                name = name == null ? "" : name;
+                                String str = (String) m.invoke(item);
+                                str = str == null ? "" : str;
+                                String unit = param.getUnit();
+                                unit = unit == null ? "" : unit;
+                                row.createCell((short) 1).setCellValue(name + str + unit);
+                            } catch (NoSuchMethodException e) {
+                                e.printStackTrace();
+                            } catch (InvocationTargetException e) {
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -439,7 +489,6 @@ public class RepairSpecController extends BaseController {
                     }
                     if (r == posList.length) {
                         detailSheet.getRow(posRow).getCell(posCol).setCellValue(iDes);
-//                        detailSheet.getRow(posRow).getCell(posCol + 1).setCellValue("×");
                     }
                     posCol += 2;
                     if ((i + 1) % 4 == 0) {
@@ -472,7 +521,6 @@ public class RepairSpecController extends BaseController {
                     }
                     if (r == techList.length) {
                         detailSheet.getRow(techRow).getCell(techCol).setCellValue(iDes);
-//                        detailSheet.getRow(techRow).getCell(techCol + 1).setCellValue("×");
                     }
                     techCol += 2;
                     if ((i + 1) % 4 == 0) {
@@ -480,7 +528,6 @@ public class RepairSpecController extends BaseController {
                         techCol = 0;
                     }
                 }
-
 
                 RepairSpecDetailReq req = new RepairSpecDetailReq();
                 req.setRepairSpecDetailId(detail.getId());
