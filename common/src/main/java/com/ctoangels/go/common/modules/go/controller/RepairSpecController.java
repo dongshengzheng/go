@@ -20,15 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.imageio.ImageIO;
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -326,59 +327,222 @@ public class RepairSpecController extends BaseController {
     //导出工程单excel
     public File exportSpecExcel(Integer specId) {
         RepairSpec spec = repairSpecService.selectById(specId);
+        List<RepairSpecDetail> detailList = null;
         String excelName = spec.getName() != null ? spec.getName() : spec.getShipName() + "工程单概述";
 
-        HSSFWorkbook wb = new HSSFWorkbook();
+        File modelExcel = new File("detailModel.xls");
+        FileInputStream is = null; //文件流
+        HSSFWorkbook wb = null;
+        try {
+            is = new FileInputStream(modelExcel);
+            wb = new HSSFWorkbook(is);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         List<Dict> dictList = dictService.getListByType("维修工程大类");
         for (Dict dict : dictList) {
             int catagoryRowNum = 0;
             String catagory = dict.getDes();
-            HSSFSheet sheet = wb.createSheet(catagory);
-            sheet.setColumnWidth(1, 50 * 256);
+            if (!"通用服务".equals(catagory)) {
+                HSSFSheet sheet = wb.createSheet(catagory);
+                sheet.setColumnWidth(1, 50 * 256);
+                detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
 
-            List<RepairSpecDetail> detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
+                HSSFRow row = sheet.createRow((int) catagoryRowNum++);
+                HSSFCell cell = row.createCell((short) 0);
 
-            HSSFRow row = sheet.createRow((int) catagoryRowNum++);
-            HSSFCell cell = row.createCell((short) 0);
+                row.createCell((short) 0).setCellValue("详单号");
+                row.createCell((short) 1).setCellValue("详单内容");
+                row.createCell((short) 2).setCellValue("单位");
+                row.createCell((short) 3).setCellValue("数量");
 
-            row.createCell((short) 0).setCellValue("详单号");
-            row.createCell((short) 1).setCellValue("详单内容");
-            row.createCell((short) 2).setCellValue("单位");
-            row.createCell((short) 3).setCellValue("数量");
+                HSSFCellStyle linkStyle = wb.createCellStyle();
+                CellStyle cellStyle = wb.createCellStyle();
+                HSSFFont cellFont = wb.createFont();
+                cellFont.setUnderline((byte) 1);
+                cellFont.setColor(HSSFColor.BLUE.index);
+                linkStyle.setFont(cellFont);
 
-            HSSFCellStyle linkStyle = wb.createCellStyle();
-            CellStyle cellStyle = wb.createCellStyle();
-            HSSFFont cellFont = wb.createFont();
-            cellFont.setUnderline((byte) 1);
-            cellFont.setColor(HSSFColor.BLUE.index);
-            linkStyle.setFont(cellFont);
+                for (RepairSpecDetail detail : detailList) {
+                    row = sheet.createRow((int) catagoryRowNum++);
+                    // 第四步，创建单元格，并设置值
+                    String proOrderNo = detail.getProOrderNo();
+                    cell = row.createCell((short) 0);
+                    cell.setCellFormula("HYPERLINK(\"" + "#'" + proOrderNo + "'!A1" + "\",\"" + proOrderNo + "\")");
+                    cell.setCellStyle(linkStyle);
+                    row.createCell((short) 1).setCellValue("工程名称:" + detail.getProName());
 
+                    RepairSpecDetailReq req = new RepairSpecDetailReq();
+                    req.setRepairSpecDetailId(detail.getId());
+                    List<RepairSpecDetailReq> reqList = repairSpecDetailReqService.selectList(new EntityWrapper<>(req));
+                    for (RepairSpecDetailReq r : reqList) {
+                        row = sheet.createRow((int) catagoryRowNum++);
+                        row.createCell((short) 1).setCellValue(r.getDes());
+                        row.createCell((short) 2).setCellValue(r.getUnit());
+                        row.createCell((short) 3).setCellValue(r.getCount());
+                    }
+                    row = sheet.createRow((int) catagoryRowNum++);
+                }
+            } else {
+                HSSFSheet sheet = wb.createSheet(catagory);
+                sheet.setColumnWidth(1, 50 * 256);
+                sheet.setColumnWidth(4, 100 * 256);
+                List<RepairSpecItem> itemList = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId());
+                HSSFRow row = sheet.createRow((int) 0);
+                row.createCell((short) 0).setCellValue("项目号");
+                row.createCell((short) 1).setCellValue("维修内容");
+                row.createCell((short) 2).setCellValue("单位");
+                row.createCell((short) 3).setCellValue("数量");
+                row.createCell((short) 4).setCellValue("备注");
+
+                for (RepairSpecItem item : itemList) {
+                    row = sheet.createRow(sheet.getLastRowNum() + 1);
+                    row.createCell((short) 0).setCellValue(item.getCode());
+                    row.createCell((short) 1).setCellValue(item.getContent());
+                    row.createCell((short) 2).setCellValue(item.getUnit());
+                    if (item.getCount() != null) {
+                        row.createCell((short) 3).setCellValue(item.getCount());
+                    }
+                    row.createCell((short) 4).setCellValue(item.getRemark());
+                    List<Param> paramList = item.getParamList();
+                    if (paramList != null) {
+                        Class clazz = item.getClass();
+                        Method m = null;
+                        Param param = null;
+                        for (int n = 0; n < paramList.size(); n++) {
+                            param = paramList.get(n);
+                            row = sheet.createRow(sheet.getLastRowNum() + 1);
+                            try {
+                                m = clazz.getDeclaredMethod("getParam" + (n + 1) + "Val");
+                                String name = param.getName();
+                                name = name == null ? "" : name;
+                                String str = (String) m.invoke(item);
+                                str = str == null ? "" : str;
+                                String unit = param.getUnit();
+                                unit = unit == null ? "" : unit;
+                                row.createCell((short) 1).setCellValue(name + str + unit);
+                            } catch (NoSuchMethodException e) {
+                                e.printStackTrace();
+                            } catch (InvocationTargetException e) {
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //待完善单独的详单表
+        for (Dict dict : dictList) {
+            String catagory = dict.getDes();
+            detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
             for (RepairSpecDetail detail : detailList) {
-                row = sheet.createRow((int) catagoryRowNum++);
-                // 第四步，创建单元格，并设置值
+                HSSFSheet detailSheet = wb.cloneSheet(0);
                 String proOrderNo = detail.getProOrderNo();
-                cell = row.createCell((short) 0);
-                cell.setCellFormula("HYPERLINK(\"" + "#'" + proOrderNo + "'!A1" + "\",\"" + proOrderNo + "\")");
-                cell.setCellStyle(linkStyle);
-                row.createCell((short) 1).setCellValue("工程名称:" + detail.getProName());
+                int sheetIndex = wb.getSheetIndex(detailSheet);
+                wb.setSheetName(sheetIndex, proOrderNo);
+                detailSheet.getRow(0).getCell(2).setCellValue(detail.getShipName());//船名
+                detailSheet.getRow(0).getCell(6).setCellValue(detail.getCatagory());//维修大类
+                detailSheet.getRow(0).getCell(10).setCellValue(detail.getCode());//item code
+                detailSheet.getRow(0).getCell(14).setCellValue(detail.getProOrderNo());//维修单号
+                detailSheet.getRow(4).getCell(1).setCellValue(detail.getProName());//工程名称
+                detailSheet.getRow(5).getCell(1).setCellValue(detail.getProDesc());//工程描述
+                detailSheet.getRow(13).getCell(1).setCellValue(detail.getFaciName());//设备名称
+                detailSheet.getRow(14).getCell(1).setCellValue(detail.getFaciType());//设备型号
+                detailSheet.getRow(15).getCell(1).setCellValue(detail.getFaciSrc());//设备来源 厂家/国家
+                detailSheet.getRow(16).getCell(1).setCellValue(detail.getFaciNo());//设备序列号
+                detailSheet.getRow(11).getCell(3).setCellValue(detail.getFaciParam());//设备相关参数
+                detailSheet.getRow(23).getCell(1).setCellValue(detail.getRepairPositionDesc());//维修详细位置
+                detailSheet.getRow(27).getCell(2).setCellValue(detail.getDamage());//损坏程度
+                detailSheet.getRow(40).getCell(1).setCellValue(detail.getRepairTechDesc());//修理工艺描述
+
+                //维修部位
+                Dict dict2 = new Dict();
+                dict2.setType("维修部位");
+                List<Dict> dictList1 = dictService.selectList(new EntityWrapper<>(dict2));
+                String[] posList = new String[0];
+                if (detail.getRepairPosition() != null) {
+                    posList = detail.getRepairPosition().split(",");
+                }
+
+                int posRow = 19;
+                int posCol = 0;
+                String iValue;
+                String rValue;
+                String iDes;
+                for (int i = 0; i < dictList1.size(); i++) {
+                    iValue = dictList1.get(i).getValue();
+                    iDes = dictList1.get(i).getDes();
+                    int r;
+                    for (r = 0; r < posList.length; r++) {
+                        rValue = posList[r];
+                        if (iValue.equals(rValue)) {
+                            detailSheet.getRow(posRow).getCell(posCol).setCellValue(iDes);
+                            detailSheet.getRow(posRow).getCell(posCol + 1).setCellValue("√");
+                            break;
+                        }
+                    }
+                    if (r == posList.length) {
+                        detailSheet.getRow(posRow).getCell(posCol).setCellValue(iDes);
+                    }
+                    posCol += 2;
+                    if ((i + 1) % 4 == 0) {
+                        posRow++;
+                        posCol = 0;
+                    }
+                }
+
+                //修理工艺
+                Dict dict3 = new Dict();
+                dict3.setType("修理工艺");
+                List<Dict> dictList2 = dictService.selectList(new EntityWrapper<>(dict3));
+                String[] techList = new String[0];
+                if (detail.getRepairTech() != null) {
+                    techList = detail.getRepairTech().split(",");
+                }
+                int techRow = 35;
+                int techCol = 0;
+                for (int i = 0; i < dictList2.size(); i++) {
+                    iValue = dictList2.get(i).getValue();
+                    iDes = dictList2.get(i).getDes();
+                    int r;
+                    for (r = 0; r < techList.length; r++) {
+                        rValue = techList[r];
+                        if (iValue.equals(rValue)) {
+                            detailSheet.getRow(techRow).getCell(techCol).setCellValue(iDes);
+                            detailSheet.getRow(techRow).getCell(techCol + 1).setCellValue("√");
+                            break;
+                        }
+                    }
+                    if (r == techList.length) {
+                        detailSheet.getRow(techRow).getCell(techCol).setCellValue(iDes);
+                    }
+                    techCol += 2;
+                    if ((i + 1) % 4 == 0) {
+                        techRow++;
+                        techCol = 0;
+                    }
+                }
 
                 RepairSpecDetailReq req = new RepairSpecDetailReq();
                 req.setRepairSpecDetailId(detail.getId());
                 List<RepairSpecDetailReq> reqList = repairSpecDetailReqService.selectList(new EntityWrapper<>(req));
+                int startRow = 5;
                 for (RepairSpecDetailReq r : reqList) {
-                    row = sheet.createRow((int) catagoryRowNum++);
-                    row.createCell((short) 1).setCellValue(r.getDes());
-                    row.createCell((short) 2).setCellValue(r.getUnit());
-                    row.createCell((short) 3).setCellValue(r.getCount());
+                    HSSFRow reqRow = detailSheet.getRow(startRow++);
+                    reqRow.getCell(9).setCellValue(r.getDes());//要求和描述/材料
+                    reqRow.getCell(14).setCellValue(r.getUnit());//单位
+                    reqRow.getCell(15).setCellValue(r.getCount());//数量
                 }
-                row = sheet.createRow((int) catagoryRowNum++);
-
-
-                HSSFSheet detailSheet = wb.createSheet(proOrderNo);
-                //待完善单独的详单表
             }
         }
+
+        wb.removeSheetAt(0);
 
         // 第六步，将文件存到指定位置
         try {
@@ -392,3 +556,22 @@ public class RepairSpecController extends BaseController {
         return excel;
     }
 }
+
+
+//插入图片
+//            BufferedImage bufferImg = null;
+//            ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+//            try {
+//                bufferImg = ImageIO.read(new File("F:/15.jpg"));
+//                ImageIO.write(bufferImg, "jpg", byteArrayOut);
+//                //画图的顶级管理器，一个sheet只能获取一个（一定要注意这点）
+//                HSSFPatriarch patriarch = sheet.createDrawingPatriarch();
+//                //anchor主要用于设置图片的属性
+//                HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 255, 255, (short) 1, 1, (short) 5, 8);
+//                anchor.setAnchorType(3);
+//                //插入图片
+//                patriarch.createPicture(anchor, wb.addPicture(byteArrayOut.toByteArray(), HSSFWorkbook.PICTURE_TYPE_JPEG));
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }

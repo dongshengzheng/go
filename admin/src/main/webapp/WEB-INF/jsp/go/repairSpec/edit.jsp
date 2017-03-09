@@ -66,6 +66,10 @@
         z-index: 100;
     }
 
+    .table > tbody > tr > td.for-right {
+        padding-left: 15px;
+    }
+
 </style>
 <go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/edit" method="post"
@@ -240,7 +244,7 @@
                                                                    class="true-status"
                                                                    name="type${outerVs.count}List[${itemVs.index}].status">
                                                         </td>
-                                                        <td class="code-td">
+                                                        <td class="code-td <c:if test="${!(item.parentCode=='0')}">for-right</c:if>">
                                                                 ${item.code}
                                                         </td>
                                                         <td class="content-td">
@@ -370,7 +374,7 @@
                                                                    class="true-status"
                                                                    name="type${outerVs.count}List[${itemVs.index}].status">
                                                         </td>
-                                                        <td class="code-td">
+                                                        <td class="code-td <c:if test="${!(item.parentCode=='0')}">for-right</c:if>">
                                                                 ${item.code}
                                                         </td>
                                                         <td class="content-td">

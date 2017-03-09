@@ -29,9 +29,8 @@
         background-color: #fbfcfd;
     }
 
-    .table-checkable tr.details-control-child > td:first-child {
-        text-align: right;
-        padding-right: 15px;
+    .table > tbody > tr > td.for-right {
+        padding-left: 15px;
     }
 
     .table-striped > tbody > tr.details-control-child.detail-row:nth-of-type(odd) {
@@ -235,7 +234,7 @@
                                                             <input type="hidden" value="1" class="true-status"
                                                                    name="type${outerVs.count}List[${itemVs.index}].status">
                                                         </td>
-                                                        <td class="code-td">
+                                                        <td class="code-td <c:if test="${!(item.parentCode=='0')}">for-right</c:if>">
                                                                 ${item.code}
                                                         </td>
                                                         <td class="content-td">
@@ -354,7 +353,7 @@
                                                             <input type="hidden" value="1" class="true-status"
                                                                    name="type${outerVs.count}List[${itemVs.index}].status">
                                                         </td>
-                                                        <td class="code-td">
+                                                        <td class="code-td <c:if test="${!(item.parentCode=='0')}">for-right</c:if>">
                                                                 ${item.code}
                                                         </td>
                                                         <td class="content-td">

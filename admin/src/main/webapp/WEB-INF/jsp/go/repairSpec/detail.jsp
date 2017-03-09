@@ -65,13 +65,19 @@
     .label-top {
         margin-top: 10px
     }
+
     .htContextMenu {
         display: none;
         position: absolute;
         z-index: 106000;
     }
-    #remind{
+
+    #remind {
         color: red;
+    }
+
+    .htContextMenu {
+        z-index: 1060000;
     }
 
 </style>
@@ -115,7 +121,8 @@
                 <div style="width: 100%;">
                     <div><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：
-                        <input id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span id="remind"></span>
+                        <input id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span
+                                id="remind"></span>
                     </div>
                     <div class="col-md-12 div-left">工程描述：</div>
                     <div class="col-md-12" style="margin-left: 20px">
@@ -210,7 +217,7 @@
         <div style="width: 100%;margin-top: 10px">
             <div><span class="head">请求材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
-                <div id="example1"  style=" height: 300px; overflow: hidden;"></div>
+                <div id="example1" style=" height: 300px; overflow: hidden;"></div>
             </div>
         </div>
         <div class="col-md-12 line1"></div>
@@ -265,109 +272,108 @@
 
     //服务器校验
     function saveInfo(a) {
-        var arr1=new Array();
-        var datas=handsontableData();
+        var arr1 = new Array();
+        var datas = handsontableData();
         var j=0;
-        for(var i=0;i<datas.length;i++){
-            if(datas[i][0]==null&& datas[i][0]!=""){
-                continue;
+        for (var i = 0; i < datas.length; i++) {
+            if (datas[i][0] == null) {
+                var obj = new Object();
+                obj.des = datas[i][0];
+                obj.unit = datas[i][1];
+                obj.count = datas[i][2];
+                arr1[j++] = obj;
             }
-            var obj=new Object();
-            obj.des=datas[i][0];
-            obj.unit=datas[i][1];
-            obj.count =datas[i][2];
-            arr1[j++]=obj;
-        }
-        var dataJson=JSON.stringify(arr1);
-        if (a == 1) {
-            $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail");
-        } else if (a == 2) {
-            $("#detail_form").attr("action", "repairSpecDetail/addModelDetail");
-        }
-        if (check()) {
-            $("#detail_form").ajaxSubmit({
-                data:{
-                    dataJson:dataJson
-                },
-                success: function (data) {
-                    if (data.success) {
-                        //  保存为工程单详单
-                        if (data.specDetail) {
-                            addDetail(data.repairSpecDetailId,$("#proName").val());
-                            $('#close').click();
+            var dataJson = JSON.stringify(arr1);
+            if (a == 1) {
+                $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail");
+            } else if (a == 2) {
+                $("#detail_form").attr("action", "repairSpecDetail/addModelDetail");
+            }
+            if (check()) {
+                $("#detail_form").ajaxSubmit({
+                    data: {
+                        dataJson: dataJson
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            //  保存为工程单详单
+                            if (data.specDetail) {
+                                addDetail(data.repairSpecDetailId, $("#proName").val());
+                                $('#close').click();
+                            } else {
+                                App.alert({
+                                    container: "#detail_alert",
+                                    close: true,
+                                    icon: 'fa fa-warning',
+                                    place: "append",
+                                    message: "成功保存为范本",
+                                    type: 'success',
+                                    reset: true,
+                                    focus: false,
+                                    closeInSeconds: 5,
+                                })
+                                initRepairModelDetailList();
+                            }
                         } else {
                             App.alert({
                                 container: "#detail_alert",
                                 close: true,
                                 icon: 'fa fa-warning',
                                 place: "append",
-                                message: "成功保存为范本",
-                                type: 'success',
+                                message: "提交失败,请稍后再试",
+                                type: 'danger',
                                 reset: true,
                                 focus: false,
                                 closeInSeconds: 5,
                             })
-                            initRepairModelDetailList();
                         }
-                    } else {
+                    },
+                    error: function () {
                         App.alert({
                             container: "#detail_alert",
                             close: true,
                             icon: 'fa fa-warning',
                             place: "append",
-                            message: "提交失败,请稍后再试",
-                            type: 'danger',
+                            message: "系统繁忙,请稍后再试",
+                            type: 'warning',
                             reset: true,
                             focus: false,
                             closeInSeconds: 5,
                         })
+                        return;
                     }
-                },
-                error: function () {
-                    App.alert({
-                        container: "#detail_alert",
-                        close: true,
-                        icon: 'fa fa-warning',
-                        place: "append",
-                        message: "系统繁忙,请稍后再试",
-                        type: 'warning',
-                        reset: true,
-                        focus: false,
-                        closeInSeconds: 5,
-                    })
-                    return;
-                }
-            });
+                });
+            }
         }
-    }
-    //客户端校验
-    function check() {
-        if ($("#proName").val() == "") {
-            $("#remind").html("*工程名称不能为空");
-            $("#proName").focus();
-            setTimeout("$('#remind').html('')",3000);//延时3秒
-            return false;
+        //客户端校验
+        function check() {
+            if ($("#proName").val() == "") {
+                $("#remind").html("*工程名称不能为空");
+                $("#proName").focus();
+                setTimeout("$('#remind').html('')", 3000);//延时3秒
+                return false;
+            }
+            return true
         }
-        return true
     }
 </script>
 <script>
-    var id=$("#id").attr("data-id");
-    var width=$(window).width();
-    $("#example1").width(width*0.65);
+    var id = $("#id").attr("data-id");
+    var width = $(window).width();
+    $("#example1").width(width * 0.65);
     var dataJson;
     var h;
     $.ajax({
-        url:'modelDetail/reqs',
-        type:'POST', //GET
-        async:true,    //或false,是否异步
-        data:{
-            id:id
+        url: 'modelDetail/reqs',
+        type: 'POST', //GET
+        async: true,    //或false,是否异步
+        data: {
+            id: id
         },
-        success:function(data){
-            dataJson=data.reqs;
+        success: function (data) {
+            dataJson = data.reqs;
             console.log(dataJson);
-            var datas = eval(dataJson);
+            var datas = eval(dataJson);
             var container = document.getElementById('example1'),
                     storedData = {},
                     savedKeys,
@@ -379,14 +385,14 @@
                 data: datas,
                 rowHeaders: true,
                 colHeaders: true,
-                colWidths: [600,100,100],
-                minRows:15,
-                colHeaders: ["要求和描述/材料规格","单位","数量"],
+                colWidths: [600, 100, 100],
+                minRows: 15,
+                colHeaders: ["要求和描述/材料规格", "单位", "数量"],
                 columnSorting: true,
-                columns: [
-                    {data: "des"},
-                    {data: "unit"},
-                    {data: "count"}
+                columns: [
+                    {data: "des"},
+                    {data: "unit"},
+                    {data: "count"}
                 ],
                 manualColumnMove: false,
                 manualColumnResize: true,
@@ -396,13 +402,13 @@
                 contextMenu: true,
                 persistentState: true
             });
-            h=hot;
+            h = hot;
 
             resetState = document.querySelector('.reset-state');
             stateLoaded = document.querySelector('.state-loaded');
 
         },
-        error:function(xhr,textStatus){
+        error: function (xhr, textStatus) {
             console.log('错误');
         }
     });
