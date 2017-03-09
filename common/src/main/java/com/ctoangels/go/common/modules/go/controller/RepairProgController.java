@@ -4,12 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.*;
-import com.ctoangels.go.common.modules.go.service.ICompanyService;
-import com.ctoangels.go.common.modules.go.service.IRepairProgDetailService;
-import com.ctoangels.go.common.modules.go.service.IRepairProgItemService;
-import com.ctoangels.go.common.modules.go.service.IRepairProgService;
+import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,6 +28,18 @@ import java.util.List;
 @Controller
 @RequestMapping("repairProg")
 public class RepairProgController extends BaseController {
+    @Autowired
+    private IRepairSpecService repairSpecService;
+
+    @Autowired
+    private IRepairSpecItemService repairSpecItemService;
+
+    @Autowired
+    private IRepairSpecDetailService repairSpecDetailService;
+
+    @Autowired
+    private IRepairSpecDetailReqService repairSpecDetailReqService;
+
     @Autowired
     private IRepairProgService repairProgService;
 
@@ -39,6 +51,9 @@ public class RepairProgController extends BaseController {
 
     @Autowired
     private IRepairProgDetailService repairProgDetailService;
+
+    @Autowired
+    private IRepairProgDetailReqService repairProgDetailReqService;
 
     @RequestMapping
     public String page() {
@@ -164,6 +179,75 @@ public class RepairProgController extends BaseController {
             jsonObject.put("success", false);
             jsonObject.put("msg", "更改状态错误,请稍后再试");
         }
+        return jsonObject;
+    }
+
+    @RequestMapping(value="makeProgress",method = RequestMethod.GET)
+    @ResponseBody
+    private JSONObject makeProg(@RequestParam(required = false) Integer id) throws InvocationTargetException, IllegalAccessException {
+        //查找维修工程单基本信息
+        RepairSpec repairSpec= repairSpecService.selectById(id);
+        RepairProg repairProg=new RepairProg();
+        BeanUtils.copyProperties(repairProg,repairSpec);
+        repairProg.setId(null);
+        repairProgService.insert(repairProg);
+
+        //查找维修详单的item信息
+        /*EntityWrapper<RepairSpecItem> ew=new EntityWrapper<>();
+        ew.addFilter("repair_spec_id={0}",id);
+        List<RepairSpecItem> repairSpecItems=repairSpecItemService.selectList(ew);
+        List<RepairProgItem> repairProgItems=new ArrayList<>();
+
+        for(RepairSpecItem r:repairSpecItems){
+            RepairProgItem repairProgItem=new RepairProgItem();
+            BeanUtils.copyProperties(repairProgItem,r);
+            repairProgItem.setId(null);
+            repairProgItem.setRepairProgId(repairProg.getId());
+            repairProgItems.add(repairProgItem);
+        }
+        repairProgItemService.insertBatch(repairProgItems);*/
+
+
+        //查找维修详单的detail信息
+        EntityWrapper<RepairSpecDetail> ew2=new EntityWrapper<>();
+        ew2.addFilter("repair_spec_id={0}",id);
+        List<RepairSpecDetail>repairSpecDetails= repairSpecDetailService.selectList(ew2);
+        if(repairSpecDetails.size()>0) {
+            List<RepairProgDetail> repairProgDetails = new ArrayList<>();
+            for (RepairSpecDetail r : repairSpecDetails) {
+                RepairProgDetail repairProgDetail = new RepairProgDetail();
+                BeanUtils.copyProperties(repairProgDetail, r);
+                repairProgDetail.setId(null);
+                repairProgDetail.setRepairProgId(repairProg.getId());
+                repairProgDetails.add(repairProgDetail);
+            }
+            repairProgDetailService.insertBatch(repairProgDetails);
+
+
+            for (RepairSpecDetail detail : repairSpecDetails) {
+
+                //查找每个详单的req信息
+                EntityWrapper<RepairSpecDetailReq> ew3 = new EntityWrapper<>();
+                ew3.addFilter("repair_spec_detail_id={0}", detail.getId());
+                List<RepairSpecDetailReq> specReqs = repairSpecDetailReqService.selectList(ew3);
+                if(specReqs.size()>0) {
+                    List<RepairProgDetailReq> progReqs = new ArrayList<>();
+                    for (RepairSpecDetailReq r : specReqs) {
+                        RepairProgDetailReq repairProgDetailReq = new RepairProgDetailReq();
+                        BeanUtils.copyProperties(repairProgDetailReq, r);
+                        repairProgDetailReq.setId(null);
+                        repairProgDetailReq.setRepairProgDetailId(r.getId());
+                        progReqs.add(repairProgDetailReq);
+                    }
+                    repairProgDetailReqService.insertBatch(progReqs);
+                }
+
+            }
+        }
+
+        JSONObject jsonObject=new JSONObject();
+
+        jsonObject.put("status",1);
         return jsonObject;
     }
 

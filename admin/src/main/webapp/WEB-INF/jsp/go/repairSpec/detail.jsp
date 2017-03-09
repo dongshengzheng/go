@@ -67,10 +67,16 @@
     }
 
     .htContextMenu {
-        z-index: 1060000;
+        display: none;
+        position: absolute;
+        z-index: 106000;
     }
 
-    .jq_tips_box {
+    #remind {
+        color: red;
+    }
+
+    .htContextMenu {
         z-index: 1060000;
     }
 
@@ -115,7 +121,8 @@
                 <div style="width: 100%;">
                     <div><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：
-                        <input id="proName" type="text" name="proName" value="${detail.proName}"/>
+                        <input id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span
+                                id="remind"></span>
                     </div>
                     <div class="col-md-12 div-left">工程描述：</div>
                     <div class="col-md-12" style="margin-left: 20px">
@@ -269,91 +276,84 @@
         var datas = handsontableData();
         for (var i = 0; i < datas.length; i++) {
             if (datas[i][0] == null) {
-                continue;
+                var obj = new Object();
+                obj.des = datas[i][0];
+                obj.unit = datas[i][1];
+                obj.count = datas[i][2];
+                arr1[i] = obj;
             }
-            var obj = new Object();
-            obj.des = datas[i][0];
-            obj.unit = datas[i][1];
-            obj.count = datas[i][2];
-            arr1[i] = obj;
-        }
-        var dataJson = JSON.stringify(arr1);
-        if (a == 1) {
-            $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail");
-        } else if (a == 2) {
-            $("#detail_form").attr("action", "repairSpecDetail/addModelDetail");
-        }
-        if (check()) {
-            $("#detail_form").ajaxSubmit({
-                data: {
-                    dataJson: dataJson
-                },
-                success: function (data) {
-                    if (data.success) {
-                        //  保存为工程单详单
-                        if (data.specDetail) {
-                            addDetail(data.repairSpecDetailId, $("#proName").val());
-                            $('#close').click();
+            var dataJson = JSON.stringify(arr1);
+            if (a == 1) {
+                $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail");
+            } else if (a == 2) {
+                $("#detail_form").attr("action", "repairSpecDetail/addModelDetail");
+            }
+            if (check()) {
+                $("#detail_form").ajaxSubmit({
+                    data: {
+                        dataJson: dataJson
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            //  保存为工程单详单
+                            if (data.specDetail) {
+                                addDetail(data.repairSpecDetailId, $("#proName").val());
+                                $('#close').click();
+                            } else {
+                                App.alert({
+                                    container: "#detail_alert",
+                                    close: true,
+                                    icon: 'fa fa-warning',
+                                    place: "append",
+                                    message: "成功保存为范本",
+                                    type: 'success',
+                                    reset: true,
+                                    focus: false,
+                                    closeInSeconds: 5,
+                                })
+                                initRepairModelDetailList();
+                            }
                         } else {
                             App.alert({
                                 container: "#detail_alert",
                                 close: true,
                                 icon: 'fa fa-warning',
                                 place: "append",
-                                message: "成功保存为范本",
-                                type: 'success',
+                                message: "提交失败,请稍后再试",
+                                type: 'danger',
                                 reset: true,
                                 focus: false,
                                 closeInSeconds: 5,
                             })
-                            initRepairModelDetailList();
                         }
-                    } else {
+                    },
+                    error: function () {
                         App.alert({
                             container: "#detail_alert",
                             close: true,
                             icon: 'fa fa-warning',
                             place: "append",
-                            message: "提交失败,请稍后再试",
-                            type: 'danger',
+                            message: "系统繁忙,请稍后再试",
+                            type: 'warning',
                             reset: true,
                             focus: false,
                             closeInSeconds: 5,
                         })
+                        return;
                     }
-                },
-                error: function () {
-                    App.alert({
-                        container: "#detail_alert",
-                        close: true,
-                        icon: 'fa fa-warning',
-                        place: "append",
-                        message: "系统繁忙,请稍后再试",
-                        type: 'warning',
-                        reset: true,
-                        focus: false,
-                        closeInSeconds: 5,
-                    })
-                    return;
-                }
-            });
+                });
+            }
         }
-    }
-    //客户端校验
-    function check() {
-        if ($("#proName").val() == "") {
-            $("#proName").tips({
-                side: 2,
-                msg: '工程名称不能为空',
-                bg: '#AE81FF',
-                time: 15
-            });
-            $("#proName").focus();
-            return false;
-        } else {
-            $("#proName").val(jQuery.trim($('#proName').val()));
+        //客户端校验
+        function check() {
+            if ($("#proName").val() == "") {
+                $("#remind").html("*工程名称不能为空");
+                $("#proName").focus();
+                setTimeout("$('#remind').html('')", 3000);//延时3秒
+                return false;
+            }
+            return true
         }
-        return true
     }
 </script>
 <script>
@@ -393,7 +393,7 @@
                     {data: "unit"},
                     {data: "count"}
                 ],
-                manualColumnMove: true,
+                manualColumnMove: false,
                 manualColumnResize: true,
                 manualRowMove: true,
                 manualRowResize: true,

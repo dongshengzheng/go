@@ -422,4 +422,9 @@
             alter table t_repair_spec_detail_req modify column count varchar(45) COMMENT '数量';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-030">
+        <sql>
+            alter table t_repair_prog_detail_req modify column count varchar(45) COMMENT '数量';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

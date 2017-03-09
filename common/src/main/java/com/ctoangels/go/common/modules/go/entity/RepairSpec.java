@@ -115,6 +115,12 @@ public class RepairSpec implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    /**
+     * 公司名称
+     */
+    @TableField(value = "company_name")
+    private String companyName;
+
 
     public Integer getId() {
         return this.id;
@@ -244,5 +250,13 @@ public class RepairSpec implements Serializable {
 
     public void setShipName(String shipName) {
         this.shipName = shipName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

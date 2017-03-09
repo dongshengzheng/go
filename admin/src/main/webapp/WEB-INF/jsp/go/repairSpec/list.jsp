@@ -81,7 +81,7 @@
                     "data": "type",
                 },
                 {
-                    "data": "companyName",
+                    "data": "name",
                 },
                 {
                     "data": "planStartDate", "type": "date",

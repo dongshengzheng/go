@@ -70,8 +70,8 @@
         z-index: 1060000;
     }
 
-    .jq_tips_box {
-        z-index: 1060000;
+    #remind {
+        color: red;
     }
 
 </style>
@@ -122,7 +122,8 @@
                 <div style="width: 100%;">
                     <div><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：
-                        <input id="proName" type="text" name="proName" value="${detail.proName}"/>
+                        <input id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span
+                                id="remind"></span>
                     </div>
                     <div class="col-md-12 div-left">工程描述：</div>
                     <div class="col-md-12" style="margin-left: 20px">
@@ -351,16 +352,10 @@
     //客户端校验
     function check() {
         if ($("#proName").val() == "") {
-            $("#proName").tips({
-                side: 2,
-                msg: '工程名称不能为空',
-                bg: '#AE81FF',
-                time: 3
-            });
+            $("#remind").html("*工程名称不能为空");
             $("#proName").focus();
+            setTimeout("$('#remind').html('')", 3000);//延时3秒
             return false;
-        } else {
-            $("#proName").val(jQuery.trim($('#proName').val()));
         }
         return true
     }
@@ -402,7 +397,7 @@
                     {data: "unit"},
                     {data: "count"}
                 ],
-                manualColumnMove: true,
+                manualColumnMove: false,
                 manualColumnResize: true,
                 manualRowMove: true,
                 manualRowResize: true,

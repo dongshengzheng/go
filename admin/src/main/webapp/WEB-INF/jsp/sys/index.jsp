@@ -101,10 +101,10 @@
 <script src="${global}/plugins/ie8.fix.min.js"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<%--
 <script src="${global}/plugins/jquery.min.js" type="text/javascript"></script>
---%>
+<%--
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+--%>
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/js.cookie.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
