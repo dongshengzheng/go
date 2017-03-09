@@ -13,6 +13,6 @@ public interface IRepairModelDetailService extends ISuperService<RepairModelDeta
 
     List<RepairModelDetail> getListByCompanyId(Integer companyId);
 
-
+    Boolean insertDetailAndDetailReq(RepairModelDetail repairModelDetail,List<RepairModelDetailReq> reqs);
 
 }
