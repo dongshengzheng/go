@@ -66,6 +66,14 @@
         margin-top: 10px
     }
 
+    .htContextMenu {
+        z-index: 1060000;
+    }
+
+    .jq_tips_box {
+        z-index: 1060000;
+    }
+
 </style>
 <form action="" method="post" class="form-horizontal" id="detail_form">
     <div>
@@ -202,7 +210,7 @@
         <div style="width: 100%;margin-top: 10px">
             <div><span class="head">请求材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
-                <div id="example1"  style=" height: 300px; overflow: hidden;"></div>
+                <div id="example1" style=" height: 300px; overflow: hidden;"></div>
             </div>
         </div>
         <div class="col-md-12 line1"></div>
@@ -257,19 +265,19 @@
 
     //服务器校验
     function saveInfo(a) {
-        var arr1=new Array();
-        var datas=handsontableData();
-        for(var i=0;i<datas.length;i++){
-            if(datas[i][0]==null){
+        var arr1 = new Array();
+        var datas = handsontableData();
+        for (var i = 0; i < datas.length; i++) {
+            if (datas[i][0] == null) {
                 continue;
             }
-            var obj=new Object();
-            obj.des=datas[i][0];
-            obj.unit=datas[i][1];
-            obj.count =datas[i][2];
-            arr1[i]=obj;
+            var obj = new Object();
+            obj.des = datas[i][0];
+            obj.unit = datas[i][1];
+            obj.count = datas[i][2];
+            arr1[i] = obj;
         }
-        var dataJson=JSON.stringify(arr1);
+        var dataJson = JSON.stringify(arr1);
         if (a == 1) {
             $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail");
         } else if (a == 2) {
@@ -277,14 +285,14 @@
         }
         if (check()) {
             $("#detail_form").ajaxSubmit({
-                data:{
-                    dataJson:dataJson
+                data: {
+                    dataJson: dataJson
                 },
                 success: function (data) {
                     if (data.success) {
                         //  保存为工程单详单
                         if (data.specDetail) {
-                            addDetail(data.repairSpecDetailId,$("#proName").val());
+                            addDetail(data.repairSpecDetailId, $("#proName").val());
                             $('#close').click();
                         } else {
                             App.alert({
@@ -338,7 +346,7 @@
                 side: 2,
                 msg: '工程名称不能为空',
                 bg: '#AE81FF',
-                time: 3
+                time: 15
             });
             $("#proName").focus();
             return false;
@@ -349,22 +357,22 @@
     }
 </script>
 <script>
-    var id=$("#id").attr("data-id");
-    var width=$(window).width();
-    $("#example1").width(width*0.65);
+    var id = $("#id").attr("data-id");
+    var width = $(window).width();
+    $("#example1").width(width * 0.65);
     var dataJson;
     var h;
     $.ajax({
-        url:'modelDetail/reqs',
-        type:'POST', //GET
-        async:true,    //或false,是否异步
-        data:{
-            id:id
+        url: 'modelDetail/reqs',
+        type: 'POST', //GET
+        async: true,    //或false,是否异步
+        data: {
+            id: id
         },
-        success:function(data){
-            dataJson=data.reqs;
+        success: function (data) {
+            dataJson = data.reqs;
             console.log(dataJson);
-            var datas = eval(dataJson);
+            var datas = eval(dataJson);
             var container = document.getElementById('example1'),
                     storedData = {},
                     savedKeys,
@@ -376,14 +384,14 @@
                 data: datas,
                 rowHeaders: true,
                 colHeaders: true,
-                colWidths: [800,100,100],
-                minRows:15,
-                colHeaders: ["要求和描述/材料规格","单位","数量"],
+                colWidths: [800, 100, 100],
+                minRows: 15,
+                colHeaders: ["要求和描述/材料规格", "单位", "数量"],
                 columnSorting: true,
-                columns: [
-                    {data: "des"},
-                    {data: "unit"},
-                    {data: "count"}
+                columns: [
+                    {data: "des"},
+                    {data: "unit"},
+                    {data: "count"}
                 ],
                 manualColumnMove: true,
                 manualColumnResize: true,
@@ -393,13 +401,13 @@
                 contextMenu: true,
                 persistentState: true
             });
-            h=hot;
+            h = hot;
 
             resetState = document.querySelector('.reset-state');
             stateLoaded = document.querySelector('.state-loaded');
 
         },
-        error:function(xhr,textStatus){
+        error: function (xhr, textStatus) {
             console.log('错误');
         }
     });
