@@ -55,6 +55,9 @@ public class RepairProgController extends BaseController {
     @Autowired
     private IRepairProgDetailReqService repairProgDetailReqService;
 
+    @Autowired
+    private IDictService dictService;
+
     @RequestMapping
     public String page() {
         return "go/repairProg/list";
@@ -71,6 +74,7 @@ public class RepairProgController extends BaseController {
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         for (RepairProg prog : page.getRecords()) {
             prog.setPer(repairProgService.getPerById(prog.getId()));
+            prog.setType(dictService.getDesByTypeAndValue("维修类型", prog.getType()));
         }
         return jsonPage(page);
     }
@@ -182,13 +186,13 @@ public class RepairProgController extends BaseController {
         return jsonObject;
     }
 
-    @RequestMapping(value="makeProgress",method = RequestMethod.GET)
+    @RequestMapping(value = "makeProgress", method = RequestMethod.GET)
     @ResponseBody
     private JSONObject makeProg(@RequestParam(required = false) Integer id) throws InvocationTargetException, IllegalAccessException {
         //查找维修工程单基本信息
-        RepairSpec repairSpec= repairSpecService.selectById(id);
-        RepairProg repairProg=new RepairProg();
-        BeanUtils.copyProperties(repairProg,repairSpec);
+        RepairSpec repairSpec = repairSpecService.selectById(id);
+        RepairProg repairProg = new RepairProg();
+        BeanUtils.copyProperties(repairProg, repairSpec);
         repairProg.setId(null);
         repairProgService.insert(repairProg);
 
@@ -209,10 +213,10 @@ public class RepairProgController extends BaseController {
 
 
         //查找维修详单的detail信息
-        EntityWrapper<RepairSpecDetail> ew2=new EntityWrapper<>();
-        ew2.addFilter("repair_spec_id={0}",id);
-        List<RepairSpecDetail>repairSpecDetails= repairSpecDetailService.selectList(ew2);
-        if(repairSpecDetails.size()>0) {
+        EntityWrapper<RepairSpecDetail> ew2 = new EntityWrapper<>();
+        ew2.addFilter("repair_spec_id={0}", id);
+        List<RepairSpecDetail> repairSpecDetails = repairSpecDetailService.selectList(ew2);
+        if (repairSpecDetails.size() > 0) {
             List<RepairProgDetail> repairProgDetails = new ArrayList<>();
             for (RepairSpecDetail r : repairSpecDetails) {
                 RepairProgDetail repairProgDetail = new RepairProgDetail();
@@ -230,7 +234,7 @@ public class RepairProgController extends BaseController {
                 EntityWrapper<RepairSpecDetailReq> ew3 = new EntityWrapper<>();
                 ew3.addFilter("repair_spec_detail_id={0}", detail.getId());
                 List<RepairSpecDetailReq> specReqs = repairSpecDetailReqService.selectList(ew3);
-                if(specReqs.size()>0) {
+                if (specReqs.size() > 0) {
                     List<RepairProgDetailReq> progReqs = new ArrayList<>();
                     for (RepairSpecDetailReq r : specReqs) {
                         RepairProgDetailReq repairProgDetailReq = new RepairProgDetailReq();
@@ -245,9 +249,9 @@ public class RepairProgController extends BaseController {
             }
         }
 
-        JSONObject jsonObject=new JSONObject();
+        JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put("status",1);
+        jsonObject.put("status", 1);
         return jsonObject;
     }
 

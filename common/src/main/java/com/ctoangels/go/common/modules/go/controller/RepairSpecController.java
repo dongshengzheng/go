@@ -360,10 +360,9 @@ public class RepairSpecController extends BaseController {
                 row.createCell((short) 3).setCellValue("数量");
 
                 HSSFCellStyle linkStyle = wb.createCellStyle();
-                CellStyle cellStyle = wb.createCellStyle();
                 HSSFFont cellFont = wb.createFont();
                 cellFont.setUnderline((byte) 1);
-                cellFont.setColor(HSSFColor.BLUE.index);
+                cellFont.setColor(HSSFColor.HSSFColorPredefined.BLUE.getIndex());
                 linkStyle.setFont(cellFont);
 
                 for (RepairSpecDetail detail : detailList) {
