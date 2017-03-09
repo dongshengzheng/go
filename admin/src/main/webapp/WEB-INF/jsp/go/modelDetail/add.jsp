@@ -202,7 +202,7 @@
                 <p>插入图片或图纸</p>
                 <img id="imges"
                      src=""
-                     style="display: block;width: 50%;height: 50%"
+                     style="display: block;width: 80%;height: 50%"
                      onerror="nofind(1)"/>
                 <input type="hidden" id="img" name="img" value="">
                 <br>
@@ -355,7 +355,7 @@
             {type:"text"},
             {type:"numeric"}
         ],
-        manualColumnMove: true,
+        manualColumnMove: false,
         manualColumnResize: true,
         manualRowMove: true,
         manualRowResize: true,

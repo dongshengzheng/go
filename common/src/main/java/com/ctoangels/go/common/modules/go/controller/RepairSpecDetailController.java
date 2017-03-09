@@ -104,10 +104,12 @@ public class RepairSpecDetailController extends BaseController {
         List<RepairSpecDetailReq>reqs=JSONObject.parseArray(dataJson,RepairSpecDetailReq.class);
         if (repairSpecDetailService.insert(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            for (RepairSpecDetailReq r:reqs) {
-                r.setRepairSpecDetailId(id);
-            }
+            if(reqs.size()>0) {
+                for (RepairSpecDetailReq r : reqs) {
+                    r.setRepairSpecDetailId(id);
+                }
                 repairSpecDetailReqService.insertBatch(reqs);
+            }
             jsonObject.put("success", true);
             jsonObject.put("specDetail", true);
             jsonObject.put("repairSpecDetailId", id);
@@ -157,11 +159,14 @@ public class RepairSpecDetailController extends BaseController {
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
         if (repairSpecDetailService.updateById(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            for (RepairSpecDetailReq r:reqs) {
-                r.setRepairSpecDetailId(id);
-            }
+            if(reqs.size()>0) {
+
+                for (RepairSpecDetailReq r : reqs) {
+                    r.setRepairSpecDetailId(id);
+                }
                 repairSpecDetailReqService.deleteRepairSpecDetailReqById(id);
                 repairSpecDetailReqService.insertBatch(reqs);
+            }
             jsonObject.put("success", true);
             jsonObject.put("specDetail", true);
         } else {
@@ -171,7 +176,7 @@ public class RepairSpecDetailController extends BaseController {
         return jsonObject;
     }
 
-    /*更新维修详单*/
+    /*删除维修详单*/
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject editSpecDetailComplete(Integer id) {

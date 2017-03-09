@@ -81,7 +81,7 @@
                     "data": "type",
                 },
                 {
-                    "data": "companyName",
+                    "data": "name",
                 },
                 {
                     "data": "planStartDate", "type": "date",
@@ -132,11 +132,6 @@
                             <shiro:hasPermission name="repairSpec/enquiry">
                             + '<li><a href="repairSpec/enquiry?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab"></i>询价</a></li>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="repairSpec/delete">
-                            + '<a href="repairSpec/delete?id=' + row.id +
-                            '" data-msg="确定删除吗？"  data-model="dialog" data-callback="refreshTable" class="btn btn-sm red">确定</a>'
-                            </shiro:hasPermission>
-                            ;
                             <shiro:hasPermission name="repairSpec/exportExcel">
                             + '<li><a href="repairSpec/exportExcel?id=' + row.id +
                             '" data-msg="确定发送吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 yellow">发送excel</a></li>'

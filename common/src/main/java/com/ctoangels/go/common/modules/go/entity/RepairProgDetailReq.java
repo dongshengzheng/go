@@ -31,7 +31,7 @@ public class RepairProgDetailReq implements Serializable {
 	private String unit;
 
 	/** 数量 */
-	private Integer count;
+	private String count;
 
 	/** 维修进度详细的信息id */
 	@TableField(value = "repair_prog_detail_id")
@@ -82,11 +82,11 @@ public class RepairProgDetailReq implements Serializable {
 		this.unit = unit;
 	}
 
-	public Integer getCount() {
-		return this.count;
+	public String getCount() {
+		return count;
 	}
 
-	public void setCount(Integer count) {
+	public void setCount(String count) {
 		this.count = count;
 	}
 

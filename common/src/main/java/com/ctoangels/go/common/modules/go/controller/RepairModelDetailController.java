@@ -104,10 +104,13 @@ public class RepairModelDetailController extends BaseController {
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insert(repairModelDetail)) {
-            for (RepairModelDetailReq r:reqs) {
-                r.setRepairModelDetailId(repairModelDetail.getId());
+            if(reqs.size()>0) {
+
+                for (RepairModelDetailReq r : reqs) {
+                    r.setRepairModelDetailId(repairModelDetail.getId());
+                }
+                repairModelDetailReqService.insertBatch(reqs);
             }
-            repairModelDetailReqService.insertBatch(reqs);
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);
@@ -156,11 +159,13 @@ public class RepairModelDetailController extends BaseController {
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insertOrUpdate(repairModelDetail)) {
-            for (RepairModelDetailReq r:reqs) {
-                r.setRepairModelDetailId(repairModelDetail.getId());
-            }
+            if(reqs.size()>0) {
+                for (RepairModelDetailReq r : reqs) {
+                    r.setRepairModelDetailId(repairModelDetail.getId());
+                }
                 repairModelDetailReqService.deleteRepairModelDetailById(repairModelDetail.getId());
                 repairModelDetailReqService.insertBatch(reqs);
+            }
 
             jsonObject.put("success", true);
         } else {
