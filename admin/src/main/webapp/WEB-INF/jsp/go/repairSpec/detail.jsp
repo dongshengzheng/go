@@ -384,7 +384,7 @@
                 data: datas,
                 rowHeaders: true,
                 colHeaders: true,
-                colWidths: [800, 100, 100],
+                colWidths: [600, 100, 100],
                 minRows: 15,
                 colHeaders: ["要求和描述/材料规格", "单位", "数量"],
                 columnSorting: true,
