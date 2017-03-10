@@ -51,45 +51,10 @@
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
-<script type="text/javascript">
-    $(function () {
-        $("#selectAll").change(function(){
-
-            $("#selectAll").prop("checked",this.checked);
-            if($("#selectAll").prop("checked")){
-                $(".td-checkbox").each(function () {
-                    $(this).prop("checked","checked");
-                });
-            }else{
-                $(".td-checkbox").each(function () {
-                    $(this).attr("checked",false);
-                });
-            }
-        });
-
-        $("#deletes").click(function(e){
-            //e.preventDefault();
-            var t=confirm("确定要删除吗？");
-            if(t) {
-                var count = 0;
-                $(".td-checkbox").each(function () {
-                    if ($(this).prop("checked")) {
-                        count++
-                        $(this).parent().parent().remove();
-                    }
-                });
-
-                if (count == 0) {
-                    alert("至少选择一个!");
-                    return;
-                }
-            }
-        });
-    });
-</script>
 
 <form action="" method="post" class="form-horizontal" id="defForm">
     <div>
+        <div id="bootstrap_alerts_demo"></div>
         <div class="line1"></div>
         <div style="height:40px;width: 100%;background-color: #C0C9CC" >
             <div class="timeline-body-content">
@@ -240,6 +205,7 @@
     <div class="form-actions"  >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
+                <div id="detail_alert"></div>
                 <button id="dump" type="button" class="btn green" onclick="saveInfo()" data-dump="#example1" data-instance="hot">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="reset" class="btn default"/>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="modelDetail" type="button" class="btn btn-default" data-target="navTab">取消
@@ -280,15 +246,44 @@
                 },
                 success: function (data) {
                     if (data.success) {
-                        alert("success");
-                        $("#modelDetail").click();
+                        App.alert({
+                            container: "#bootstrap_alerts_demo",
+                            close: true,
+                            icon: 'fa fa-check',
+                            place: "append",
+                            message: "success",
+                            type: 'success',
+                            reset: true,
+                            focus: true,
+                            closeInSeconds: 10,
+                        })
+
                     } else {
-                        alert("false");
-                        alert(data.msg);
+                        App.alert({
+                            container: "#detail_alert",
+                            close: true,
+                            icon: 'fa fa-warning',
+                            place: "append",
+                            message: "提交失败,请稍后再试",
+                            type: 'danger',
+                            reset: true,
+                            focus: false,
+                            closeInSeconds: 5,
+                        })
                     }
                 },
                 error: function () {
-                    alert("error");
+                    App.alert({
+                        container: "#detail_alert",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "系统繁忙,请稍后再试",
+                        type: 'warning',
+                        reset: true,
+                        focus: false,
+                        closeInSeconds: 5,
+                    })
                     return;
                 }
             });

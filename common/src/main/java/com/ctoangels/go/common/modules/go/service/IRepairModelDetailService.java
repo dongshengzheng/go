@@ -3,6 +3,7 @@ package com.ctoangels.go.common.modules.go.service;
 import com.ctoangels.go.common.modules.go.entity.RepairModelDetail;
 import com.baomidou.framework.service.ISuperService;
 import com.ctoangels.go.common.modules.go.entity.RepairModelDetailReq;
+import org.springframework.transaction.TransactionException;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ public interface IRepairModelDetailService extends ISuperService<RepairModelDeta
 
     List<RepairModelDetail> getListByCompanyId(Integer companyId);
 
-    Boolean insertDetailAndDetailReq(RepairModelDetail repairModelDetail,List<RepairModelDetailReq> reqs);
+    void insertDetailAndDetailReq(RepairModelDetail repairModelDetail,List<RepairModelDetailReq> reqs)throws TransactionException;
 
 }

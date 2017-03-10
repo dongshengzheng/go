@@ -86,6 +86,7 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 
+
     <bean class="com.baomidou.mybatisplus.spring.MybatisMapperRefresh">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
         <constructor-arg name="mapperLocations" value="classpath:com/ctoangels/go/common/modules/**/*.xml"/>

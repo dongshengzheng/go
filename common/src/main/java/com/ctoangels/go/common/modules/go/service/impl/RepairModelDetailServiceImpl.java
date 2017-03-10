@@ -10,6 +10,8 @@ import com.ctoangels.go.common.modules.go.mapper.RepairModelDetailMapper;
 import com.ctoangels.go.common.modules.go.entity.RepairModelDetail;
 import com.ctoangels.go.common.modules.go.service.IRepairModelDetailService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import org.springframework.transaction.TransactionException;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -33,10 +35,10 @@ public class RepairModelDetailServiceImpl extends SuperServiceImpl<RepairModelDe
         return repairModelDetailMapper.selectList(ew);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     @Override
-    public Boolean insertDetailAndDetailReq(RepairModelDetail repairModelDetail, List<RepairModelDetailReq> reqs) {
-        if(repairModelDetailMapper.insert(repairModelDetail)<0){
+    public void insertDetailAndDetailReq(RepairModelDetail repairModelDetail, List<RepairModelDetailReq> reqs) throws TransactionException {
+        /*if(repairModelDetailMapper.insert(repairModelDetail)<0){
             return false;
         }
 
@@ -49,8 +51,12 @@ public class RepairModelDetailServiceImpl extends SuperServiceImpl<RepairModelDe
                 return false;
             }
 
+        }*/
+        repairModelDetailMapper.insert(repairModelDetail);
+        for (RepairModelDetailReq r : reqs) {
+            r.setRepairModelDetailId(repairModelDetail.getId());
         }
-        return true;
+        repairModelDetailReqMapper.insertBatch(reqs);
     }
 
 }

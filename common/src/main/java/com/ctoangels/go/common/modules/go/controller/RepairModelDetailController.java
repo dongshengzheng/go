@@ -102,20 +102,26 @@ public class RepairModelDetailController extends BaseController {
         List<RepairModelDetailReq>reqs=JSONObject.parseArray(dataJson,RepairModelDetailReq.class);
         JSONObject jsonObject = new JSONObject();
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
+        try{
+            repairModelDetailService.insertDetailAndDetailReq(repairModelDetail,reqs);
+            jsonObject.put("success", true);
+        }catch (Exception e){
+            jsonObject.put("success", false);
+        }
 
-        if (repairModelDetailService.insertDetailAndDetailReq(repairModelDetail,reqs)) {
-           /* if(reqs.size()>0) {
+        /*if () {
+            if(reqs.size()>0) {
 
                 for (RepairModelDetailReq r : reqs) {
                     r.setRepairModelDetailId(repairModelDetail.getId());
                 }
                 repairModelDetailReqService.insertBatch(reqs);
-            }*/
+            }
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);
             jsonObject.put("msg", "添加时出错,请稍后再试");
-        }
+        }*/
         return jsonObject;
     }
 
