@@ -89,28 +89,31 @@
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
                     <div class="col-sm-7">
-                        <input id="shipName" name="shipName" type="text" maxlength="32" value="${param.shipName}"
+                        <input readonly id="shipName" name="shipName" type="text" maxlength="32"
+                               value="${param.shipName}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
                     <div class="col-sm-6">
-                        <input id="catagory" name="catagory" type="text" maxlength="32" value="${param.catagory}"
+                        <input readonly id="catagory" name="catagory" type="text" maxlength="32"
+                               value="${param.catagory}"
                                class="form-control ">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
                     <div class="col-sm-6">
-                        <input id="code" name="code" type="text" maxlength="32" value="${param.code}"
+                        <input readonly id="code" name="code" type="text" maxlength="32" value="${param.code}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
                     <div class="col-sm-6">
-                        <input id="proOrderNo" name="proOrderNo" type="text" maxlength="32" value="${param.proOrderNo}"
+                        <input readonly id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
+                               value="${param.proOrderNo}"
                                class="form-control required">
                     </div>
                 </div>
@@ -274,7 +277,7 @@
     function saveInfo(a) {
         var arr1 = new Array();
         var datas = handsontableData();
-        var j=0;
+        var j = 0;
         for (var i = 0; i < datas.length; i++) {
             if (datas[i][0] == null) {
                 var obj = new Object();

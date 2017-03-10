@@ -49,6 +49,26 @@
         </div>
     </div>
 </div>
+
+<div id="static" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">请输入邮箱</h4>
+            </div>
+            <div class="modal-body">
+                <input id="email" class="form-control" placeholder="请输入正确的邮箱" name="toAddress">
+                <input id="id" type="hidden" name="id">
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
+                <button type="button" onclick="severCheck(this)" class="btn dark btn-outline">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     var defTable;
     $(document).ready(function () {
@@ -117,7 +137,7 @@
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/makeProgress">
                             + '<a href="repairProg/makeProgress?id=' + row.id +
-                            '" data-msg="确定生成吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 green">生成维修进度</a>'
+                            '" data-msg="确定生成吗？"  data-model="ajaxToDo"  class="btn btn-sm margin-bottom-5 green">生成维修进度</a>'
                             </shiro:hasPermission>
                             + '<div class="btn-group margin-top-5">'
                             + '<button class="btn btn-sm margin-bottom-5 dropdown-toggle blue" type="button" data-toggle="dropdown"> 更多 <i class="fa fa-angle-down"></i> </button> '
@@ -133,8 +153,7 @@
                             + '<li><a href="repairSpec/enquiry?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab">询价</a></li>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/exportExcel">
-                            + '<li><a href="repairSpec/exportExcel?id=' + row.id +
-                            '" data-msg="确定发送吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 yellow">发送excel</a></li>'
+                            + '<li><a onclick="addId(' + row.id + ')" href="#static" data-toggle="modal" class="btn btn-sm margin-bottom-5 yellow">发送excel</a></li>'
                             </shiro:hasPermission>
                             + '</ul></div>';
 
@@ -153,12 +172,77 @@
         });
     });
 
-    function check(id, status) {
-        if (confirm("确定审核？")) {
-            $.post("/shipinfo/check", {id: id, status: status}, function () {
-                refreshTable();
-            });
+    function severCheck(obj) {
+        if (check()) {
+            var email = $("#email").val();
+            var id = $("#id").val();
+            $(obj).prop("disabled", true);
+            $.ajax({
+                type: "POST",
+                url: 'repairSpec/exportExcel',
+                data: {
+                    id: id,
+                    toAddress: email
+                },
+                success: function (data) {
+                    if ("success" == data.result) {
+                        alert("成功");
+                        $(".close").click();
+                    } else if ("email error" == data.result) {
+                        $("#email").tips({
+                            side: 1,
+                            msg: "<fmt:message key="register_incorrect_email2"/>",
+                            bg: '#FF5080',
+                            time: 15
+                        });
+                        $("#email").focus();
+                        $(obj).prop("disabled", false);
+                    }
+                },
+                error: function () {
+                    alert("发生错误,请稍后再试");
+                    $(obj).prop("disabled", false);
+                }
+            })
         }
+    }
+
+    function check() {
+        var email = $("#email").val();
+        if (email == "") {
+            $("#email").tips({
+                side: 1,
+                msg: '<fmt:message key="register_email_empty"/>',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#email").focus();
+            return false;
+        } else if (!checkMail(email)) {
+            $("#email").tips({
+                side: 1,
+                msg: '<fmt:message key="register_incorrect_email2"/>',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#email").focus();
+            return false;
+        }
+        return true;
+    }
+
+    function checkMail(mail) {
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (filter.test(mail)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function addId(id) {
+        console.log(id);
+        $("#id").val(id);
     }
 
     function refreshTable(toFirst) {

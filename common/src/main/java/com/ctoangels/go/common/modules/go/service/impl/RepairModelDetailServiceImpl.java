@@ -36,16 +36,16 @@ public class RepairModelDetailServiceImpl extends SuperServiceImpl<RepairModelDe
     @Transactional(readOnly = true)
     @Override
     public Boolean insertDetailAndDetailReq(RepairModelDetail repairModelDetail, List<RepairModelDetailReq> reqs) {
-        if(repairModelDetailMapper.insert(repairModelDetail)<0){
+        if (repairModelDetailMapper.insert(repairModelDetail) < 0) {
             return false;
         }
 
-        if(reqs.size()>0) {
+        if (reqs.size() > 0) {
 
             for (RepairModelDetailReq r : reqs) {
                 r.setRepairModelDetailId(repairModelDetail.getId());
             }
-            if(repairModelDetailReqMapper.insertBatch(reqs)<0){
+            if (repairModelDetailReqMapper.insertBatch(reqs) < 0) {
                 return false;
             }
 
