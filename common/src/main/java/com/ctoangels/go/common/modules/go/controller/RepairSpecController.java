@@ -33,6 +33,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * RepairSpec 控制层
@@ -246,12 +248,22 @@ public class RepairSpecController extends BaseController {
     }
 
     //导出工程单excel
-    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject exportRepairSpecExcel(Integer id) {
+    public JSONObject exportRepairSpecExcel(Integer id, String toAddress) {
         JSONObject jsonObject = new JSONObject();
-        sendSpecExcelEmail("1061147291@qq.com", "111", exportSpecExcel(id));
-        jsonObject.put("status", 1);
+        String errInfo = "";
+        String regex = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(toAddress);
+        Boolean flag = m.matches();
+        if (flag) {
+            sendSpecExcelEmail(toAddress, "111", exportSpecExcel(id));
+            errInfo = "success";
+        } else {
+            errInfo = "email error";
+        }
+        jsonObject.put("result", errInfo);
         return jsonObject;
     }
 
@@ -360,7 +372,6 @@ public class RepairSpecController extends BaseController {
                 row.createCell((short) 3).setCellValue("数量");
 
                 HSSFCellStyle linkStyle = wb.createCellStyle();
-                CellStyle cellStyle = wb.createCellStyle();
                 HSSFFont cellFont = wb.createFont();
                 cellFont.setUnderline((byte) 1);
                 cellFont.setColor(HSSFColor.BLUE.index);

@@ -300,11 +300,11 @@
                                                     <c:forEach items="${requestScope[type]}" var="detail">
                                                         <tr>
                                                             <td>${detail.proOrderNo}</td>
-                                                            <td>${detail.proName}</td>
-                                                            <td>${detail.proDesc}</td>
+                                                            <td class="proName">${detail.proName}</td>
+                                                            <td class="proDesc">${detail.proDesc}</td>
                                                             <td>
                                                                 <a href="repairSpecDetail/editSpecDetail?id=${detail.id}"
-                                                                   data-model="dialog">查看详细</a>
+                                                                   data-model="dialog" class="look-info">查看详细</a>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -335,5 +335,12 @@
 <jsp:include page="common.jsp"></jsp:include>
 <script>
     $("input").prop("readonly", true);
+    $(".look-info").on("click", function () {
+        $(".marked-detail-name").removeClass("marked-detail-name");
+        $(".marked-detail-desc").removeClass("marked-detail-desc");
+        var tr = $(this).parents("tr");
+        tr.find(".proName").addClass("marked-detail-name");
+        tr.find(".proDesc").addClass("marked-detail-desc");
+    })
 </script>
 

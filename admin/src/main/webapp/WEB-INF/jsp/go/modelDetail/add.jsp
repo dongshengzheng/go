@@ -225,7 +225,6 @@
         var arr1=new Array();
         var datas=handsontableData();
         var j=0;
-        console.log(datas)
         for(var i=0;i<datas.length;i++){
             if(datas[i][0]==null||datas[i][0]==""){
                 continue;

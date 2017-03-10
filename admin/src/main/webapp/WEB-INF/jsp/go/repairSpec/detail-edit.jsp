@@ -78,6 +78,7 @@
 <form action="" method="post" class="form-horizontal" id="detail_form">
     <c:if test="${!empty detail}">
         <input id="id" name="id" type="hidden" value="${detail.id}"/>
+        <input id="id" name="repairSpecId" type="hidden" value="${detail.repairSpecId}"/>
         <input id="createDate" name="createDate" type="hidden" value="<fmt:formatDate value='${detail.createDate}'
                         pattern="yyyy-MM-dd"/>"/>
         <input id="createBy" name="createBy" type="hidden" value="${detail.createBy}"/>
@@ -90,28 +91,31 @@
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
                     <div class="col-sm-7">
-                        <input id="shipName" name="shipName" type="text" maxlength="32" value="${detail.shipName}"
+                        <input readonly id="shipName" name="shipName" type="text" maxlength="32"
+                               value="${detail.shipName}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
                     <div class="col-sm-6">
-                        <input id="catagory" name="catagory" type="text" maxlength="32" value="${detail.catagory}"
+                        <input readonly id="catagory" name="catagory" type="text" maxlength="32"
+                               value="${detail.catagory}"
                                class="form-control ">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
                     <div class="col-sm-6">
-                        <input id="code" name="code" type="text" maxlength="32" value="${detail.code}"
+                        <input readonly id="code" name="code" type="text" maxlength="32" value="${detail.code}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
                     <div class="col-sm-6">
-                        <input id="proOrderNo" name="proOrderNo" type="text" maxlength="32" value="${detail.proOrderNo}"
+                        <input readonly id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
+                               value="${detail.proOrderNo}"
                                class="form-control required">
                     </div>
                 </div>
@@ -127,7 +131,7 @@
                     </div>
                     <div class="col-md-12 div-left">工程描述：</div>
                     <div class="col-md-12" style="margin-left: 20px">
-                        <textarea class="form-control" rows="4" name="proDesc">${detail.proDesc}</textarea>
+                        <textarea id="proDesc" class="form-control" rows="4" name="proDesc">${detail.proDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
@@ -275,18 +279,18 @@
 
     //服务器校验
     function saveInfo(a) {
-        var arr1=new Array();
-        var datas=handsontableData();
-        var j=0;
-        for(var i=0;i<datas.length;i++){
-            if(datas[i][0]==null){
+        var arr1 = new Array();
+        var datas = handsontableData();
+        var j = 0;
+        for (var i = 0; i < datas.length; i++) {
+            if (datas[i][0] == null) {
                 continue;
             }
-            var obj=new Object();
-            obj.des=datas[i][0];
-            obj.unit=datas[i][1];
-            obj.count =datas[i][2];
-            arr1[j++]=obj;
+            var obj = new Object();
+            obj.des = datas[i][0];
+            obj.unit = datas[i][1];
+            obj.count = datas[i][2];
+            arr1[j++] = obj;
         }
         var dataJson = JSON.stringify(arr1);
         if (a == 1) {
@@ -304,6 +308,7 @@
                         //  更新工程单详单
                         if (data.specDetail) {
                             $(".marked-detail-name").html($("#proName").val()).removeClass("marked-detail-name");
+                            $(".marked-detail-desc").html($("#proDesc").val()).removeClass("marked-detail-desc");
                             $('#close').click();
                         } else {
                             App.alert({
