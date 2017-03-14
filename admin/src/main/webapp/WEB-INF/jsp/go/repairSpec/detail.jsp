@@ -289,78 +289,77 @@
             obj.count = datas[i][2];
             arr1[j++] = obj;
         }
-            var dataJson = JSON.stringify(arr1);
-            if (a == 1) {
-                $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail");
-            } else if (a == 2) {
-                $("#detail_form").attr("action", "repairSpecDetail/addModelDetail");
-            }
-            if (check()) {
-                $("#detail_form").ajaxSubmit({
-                    data: {
-                        dataJson: dataJson
-                    },
-                    success: function (data) {
-                        if (data.success) {
-                            //  保存为工程单详单
-                            if (data.specDetail) {
-                                addDetail(data.repairSpecDetailId, $("#proName").val());
-                                $('#close').click();
-                            } else {
-                                App.alert({
-                                    container: "#detail_alert",
-                                    close: true,
-                                    icon: 'fa fa-warning',
-                                    place: "append",
-                                    message: "成功保存为范本",
-                                    type: 'success',
-                                    reset: true,
-                                    focus: false,
-                                    closeInSeconds: 5,
-                                })
-                                initRepairModelDetailList();
-                            }
+        var dataJson = JSON.stringify(arr1);
+        if (a == 1) {
+            $("#detail_form").attr("action", "repairSpecDetail/addSpecDetail");
+        } else if (a == 2) {
+            $("#detail_form").attr("action", "repairSpecDetail/addModelDetail");
+        }
+        if (check()) {
+            $("#detail_form").ajaxSubmit({
+                data: {
+                    dataJson: dataJson
+                },
+                success: function (data) {
+                    if (data.success) {
+                        //  保存为工程单详单
+                        if (data.specDetail) {
+                            addDetail(data.repairSpecDetailId, $("#proName").val());
+                            $('#close').click();
                         } else {
                             App.alert({
                                 container: "#detail_alert",
                                 close: true,
                                 icon: 'fa fa-warning',
                                 place: "append",
-                                message: "提交失败,请稍后再试",
-                                type: 'danger',
+                                message: "成功保存为范本",
+                                type: 'success',
                                 reset: true,
                                 focus: false,
                                 closeInSeconds: 5,
                             })
+                            initRepairModelDetailList();
                         }
-                    },
-                    error: function () {
+                    } else {
                         App.alert({
                             container: "#detail_alert",
                             close: true,
                             icon: 'fa fa-warning',
                             place: "append",
-                            message: "系统繁忙,请稍后再试",
-                            type: 'warning',
+                            message: "提交失败,请稍后再试",
+                            type: 'danger',
                             reset: true,
                             focus: false,
                             closeInSeconds: 5,
                         })
-                        return;
                     }
-                });
-            }
+                },
+                error: function () {
+                    App.alert({
+                        container: "#detail_alert",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "系统繁忙,请稍后再试",
+                        type: 'warning',
+                        reset: true,
+                        focus: false,
+                        closeInSeconds: 5,
+                    })
+                    return;
+                }
+            });
         }
-        //客户端校验
-        function check() {
-            if ($("#proName").val() == "") {
-                $("#remind").html("*工程名称不能为空");
-                $("#proName").focus();
-                setTimeout("$('#remind').html('')", 3000);//延时3秒
-                return false;
-            }
-            return true
+    }
+    //客户端校验
+    function check() {
+        if ($("#proName").val() == "") {
+            $("#remind").html("*工程名称不能为空");
+            $("#proName").focus();
+            setTimeout("$('#remind').html('')", 3000);//延时3秒
+            return false;
         }
+        return true
     }
 </script>
 <script>

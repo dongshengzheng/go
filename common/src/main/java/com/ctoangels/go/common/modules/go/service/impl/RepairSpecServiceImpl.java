@@ -108,10 +108,13 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         for (RepairSpecDetail oldDetail : oldList) {
             oldDetail.setRepairSpecId(0);
         }
-        int a = repairSpecDetailMapper.updateBatchById(oldList);
-        if (a < 0) {
-            return false;
+        if (oldList != null && oldList.size() > 0) {
+            int a = repairSpecDetailMapper.updateBatchById(oldList);
+            if (a < 0) {
+                return false;
+            }
         }
+
 
         if (repairDetailId != null && repairDetailId.length > 0) {
             List<RepairSpecDetail> detailList = new ArrayList<>();

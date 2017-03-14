@@ -1,6 +1,9 @@
 package com.ctoangels.go.common.modules.go.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.*;
@@ -82,6 +85,7 @@ public class RepairSpecController extends BaseController {
         if (!StringUtils.isEmpty(keyword))
             ew.like("ship_name", keyword);
         ew.addFilter("company_id={0}", companyId);
+        ew.orderBy("updateDate", false);
         Page<RepairSpec> page = repairSpecService.selectPage(getPage(), ew);
         for (RepairSpec spec : page.getRecords()) {
             spec.setType(dictService.getDesByTypeAndValue("维修类型", spec.getType()));
@@ -92,27 +96,28 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(ModelMap map) {
         Integer modelId = 1;
-        List<Ship> shipList = shipService.getListByCompanyId(getCurrentUser().getCompanyId());
-        List<RepairModelItem> type1 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "通用服务");
-        List<RepairModelItem> type2 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "坞修工程");
-        List<RepairModelItem> type3 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "船体工程");
-        List<RepairModelItem> type4 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "机械工程");
-        List<RepairModelItem> type5 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "电气工程");
-        List<RepairModelItem> type6 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "冷藏工程");
-        List<RepairModelItem> type7 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "特种设备");
-        List<RepairModelItem> type8 = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, "其他");
+        Integer companyId = getCurrentUser().getCompanyId();
+        String companyName = companyService.selectById(companyId).getName();
+        List<Dict> cataList = dictService.getListByType("维修工程大类");
+        List<Ship> shipList = shipService.getListByCompanyId(companyId);
         map.put("typeList", dictService.getListByType("维修类型"));
         map.put("modelId", modelId);
+        map.put("companyId", companyId);
+        map.put("companyName", companyName);
         map.put("shipList", shipList);
-        map.put("type1", type1);
-        map.put("type2", type2);
-        map.put("type3", type3);
-        map.put("type4", type4);
-        map.put("type5", type5);
-        map.put("type6", type6);
-        map.put("type7", type7);
-        map.put("type8", type8);
+        map.put("catagory", cataList);
         return "go/repairSpec/add";
+    }
+
+    @RequestMapping(value = "/getModelItem", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONArray getModelItemList(String catagory) {
+        Integer modelId = 1;
+        List<RepairModelItem> list = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, catagory);
+        SerializerFeature feature = SerializerFeature.DisableCircularReferenceDetect;
+        String a = JSON.toJSONString(list, feature);
+        JSONArray jsonArray = JSONArray.parseArray(a);
+        return jsonArray;
     }
 
     @RequestMapping(value = "/getModelDetailList", method = RequestMethod.GET)
@@ -128,10 +133,10 @@ public class RepairSpecController extends BaseController {
     public JSONObject add(RepairSpec repairSpec,
                           RepairSpecItemList specItems, Integer[] repairDetailId) {
         JSONObject jsonObject = new JSONObject();
-        Company company = companyService.selectById(getCurrentUser().getCompanyId());
-        repairSpec.setCompanyId(company.getId());
         repairSpec.setCreateDate(new Date());
         repairSpec.setCreateBy(getCurrentUser().getName());
+        repairSpec.setUpdateDate(new Date());
+        repairSpec.setUpdateBy(getCurrentUser().getName());
         repairSpec.setDelFlag(Const.DEL_FLAG_NORMAL);
         if (repairSpecService.saveRepairSpec(repairSpec, specItems, repairDetailId)) {
             jsonObject.put("success", true);
@@ -196,26 +201,22 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
-        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "通用服务", repairSpec.getModelId());
-        List<RepairSpecItem> type2 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "坞修工程", repairSpec.getModelId());
-        List<RepairSpecItem> type3 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "船体工程", repairSpec.getModelId());
-        List<RepairSpecItem> type4 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "机械工程", repairSpec.getModelId());
-        List<RepairSpecItem> type5 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "电气工程", repairSpec.getModelId());
-        List<RepairSpecItem> type6 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "冷藏工程", repairSpec.getModelId());
-        List<RepairSpecItem> type7 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "特种设备", repairSpec.getModelId());
-        List<RepairSpecItem> type8 = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(id, "其他", repairSpec.getModelId());
         map.put("repairSpec", repairSpec);
+        List<Dict> cataList = dictService.getListByType("维修工程大类");
         map.put("typeList", dictService.getListByType("维修类型"));
-        map.put("type1", type1);
-        map.put("type2", type2);
-        map.put("type3", type3);
-        map.put("type4", type4);
-        map.put("type5", type5);
-        map.put("type6", type6);
-        map.put("type7", type7);
-        map.put("type8", type8);
+        map.put("catagory", cataList);
         map.put("nextProNoList", repairSpecDetailService.getNextProNo(id));
         return "go/repairSpec/edit";
+    }
+
+    @RequestMapping(value = "/getSpecItem", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONArray getSpecItemList(String catagory, Integer specId, Integer modelId) {
+        List<RepairSpecItem> list = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(specId, catagory, modelId);
+        SerializerFeature feature = SerializerFeature.DisableCircularReferenceDetect;
+        String a = JSON.toJSONString(list, feature);
+        JSONArray jsonArray = JSONArray.parseArray(a);
+        return jsonArray;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -223,6 +224,8 @@ public class RepairSpecController extends BaseController {
     public JSONObject edit(RepairSpec repairSpec,
                            RepairSpecItemList specItems, Integer[] repairDetailId) {
         JSONObject jsonObject = new JSONObject();
+        repairSpec.setUpdateDate(new Date());
+        repairSpec.setUpdateBy(getCurrentUser().getName());
         if (repairSpecService.updateRepairSpec(repairSpec, specItems, repairDetailId)) {
             jsonObject.put("success", true);
         } else {

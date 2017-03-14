@@ -16,13 +16,15 @@
                         <div class="col-md-6">
                             <div class="btn-group">
                                 <shiro:hasPermission name="user/add">
-                                    <button data-url="user/add" data-model="dialog" class="btn btn-outline btn-circle btn-sm green"> 新增
+                                    <button data-url="user/add" data-model="dialog"
+                                            class="btn btn-outline btn-circle btn-sm green"> 新增
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </shiro:hasPermission>
                                 <shiro:hasPermission name="user/batchDelete">
 
-                                    <button data-url="user/batchDelete" data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-outline btn-circle btn-sm green"
+                                    <button data-url="user/batchDelete" data-msg="确定批量删除吗？" data-model="ajaxToDo"
+                                            class="btn btn-outline btn-circle btn-sm green"
                                             data-checkbox-name="chx_default" data-callback="refreshTable">批量删除
                                         <i class="fa fa-times"></i>
                                     </button>
@@ -37,8 +39,8 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th width="10px" >
-                            <input type='checkbox' id ="defaultCheck"/>
+                        <th width="10px">
+                            <input type='checkbox' id="defaultCheck"/>
                         </th>
                         <th>用户名</th>
                         <th>姓名</th>
@@ -82,22 +84,28 @@
                 {"data": "name"},
                 {"data": "email"},
                 {"data": "phone"},
-                {"data": "lastLogin"}
+                {
+                    "data": "lastLogin", "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        return date.Format("yyyy-MM-dd");
+                    }
+                },
             ],
             "columnDefs": [{
                 "targets": 6,
                 "render": function (data, type, row) {
                     return ""
-                    <shiro:hasPermission name="right/editBtn">
-                    +'<a href="user/edit?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i>编辑</a>'
-                    </shiro:hasPermission>
-                    <shiro:hasPermission name="right/deleteBtn">
-                    +'<a href="user/delete?id=' + row.id +
-                           '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-times"></i>删除</a>'
-                    </shiro:hasPermission>
-                    <shiro:hasPermission name="right/editRole">
-                            +'<a href="user/editRole?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-user"></i>分配角色</a>'
-                    </shiro:hasPermission>;
+                            <shiro:hasPermission name="right/editBtn">
+                            + '<a href="user/edit?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-edit"></i>编辑</a>'
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="right/deleteBtn">
+                            + '<a href="user/delete?id=' + row.id +
+                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-outline btn-circle btn-sm green"><i class="fa fa-times"></i>删除</a>'
+                            </shiro:hasPermission>
+                            <shiro:hasPermission name="right/editRole">
+                            + '<a href="user/editRole?id=' + row.id + '" class="btn btn-outline btn-circle btn-sm green" data-model="dialog"><i class="fa fa-user"></i>分配角色</a>'
+                            </shiro:hasPermission>;
                 }
             }],
             "drawCallback": function (settings) {

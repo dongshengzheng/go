@@ -75,12 +75,12 @@ public class RepairSpecDetailController extends BaseController {
     public JSONObject addModel(RepairModelDetail repairModelDetail, @RequestParam(required = false) String dataJson) {
         repairModelDetail.setCompanyId(getCurrentUser().getCompanyId());
         JSONObject jsonObject = new JSONObject();
-        List<RepairModelDetailReq>reqs=JSONObject.parseArray(dataJson,RepairModelDetailReq.class);
+        List<RepairModelDetailReq> reqs = JSONObject.parseArray(dataJson, RepairModelDetailReq.class);
 
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insert(repairModelDetail)) {
-            for (RepairModelDetailReq r:reqs) {
+            for (RepairModelDetailReq r : reqs) {
                 r.setRepairModelDetailId(repairModelDetail.getId());
             }
             repairModelDetailReqService.insertBatch(reqs);
@@ -101,10 +101,10 @@ public class RepairSpecDetailController extends BaseController {
     public JSONObject add(RepairSpecDetail repairSpecDetail, @RequestParam(required = false) String dataJson) {
         JSONObject jsonObject = new JSONObject();
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
-        List<RepairSpecDetailReq>reqs=JSONObject.parseArray(dataJson,RepairSpecDetailReq.class);
+        List<RepairSpecDetailReq> reqs = JSONObject.parseArray(dataJson, RepairSpecDetailReq.class);
         if (repairSpecDetailService.insert(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            if(reqs.size()>0) {
+            if (reqs.size() > 0) {
                 for (RepairSpecDetailReq r : reqs) {
                     r.setRepairSpecDetailId(id);
                 }
@@ -155,11 +155,11 @@ public class RepairSpecDetailController extends BaseController {
     @ResponseBody
     public JSONObject editSpecDetailComplete(RepairSpecDetail repairSpecDetail, @RequestParam(required = false) String dataJson) {
         JSONObject jsonObject = new JSONObject();
-        List<RepairSpecDetailReq> reqs=JSONObject.parseArray(dataJson,RepairSpecDetailReq.class);
+        List<RepairSpecDetailReq> reqs = JSONObject.parseArray(dataJson, RepairSpecDetailReq.class);
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
         if (repairSpecDetailService.updateById(repairSpecDetail)) {
             int id = repairSpecDetail.getId();
-            if(reqs.size()>0) {
+            if (reqs.size() > 0) {
 
                 for (RepairSpecDetailReq r : reqs) {
                     r.setRepairSpecDetailId(id);
@@ -190,15 +190,16 @@ public class RepairSpecDetailController extends BaseController {
         }
         return jsonObject;
     }
+
     //获取DetailReq信息
     @RequestMapping(value = "/reqs", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject demo(@RequestParam(required =false) Integer id) {
+    public JSONObject demo(@RequestParam(required = false) Integer id) {
         JSONObject jsonObject = new JSONObject();
         EntityWrapper<RepairSpecDetailReq> ew = new EntityWrapper<>();
         ew.addFilter("repair_spec_detail_id={0}", id);
-        List<RepairSpecDetailReq> repairSpecDetailReqs=repairSpecDetailReqService.selectList(ew);
-        jsonObject.put("reqs",repairSpecDetailReqs);
+        List<RepairSpecDetailReq> repairSpecDetailReqs = repairSpecDetailReqService.selectList(ew);
+        jsonObject.put("reqs", repairSpecDetailReqs);
         return jsonObject;
     }
 

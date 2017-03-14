@@ -23,7 +23,7 @@ public class ShipServiceImpl extends SuperServiceImpl<ShipMapper, Ship> implemen
     @Override
     public List<Ship> getListByCompanyId(Integer companyId) {
         EntityWrapper<Ship> ew = new EntityWrapper<>();
-        ew.setSqlSelect("id,name");
+        ew.setSqlSelect("id,name,imo");
         ew.addFilter("del_flag=0 and company_id={0}", companyId);
         return shipMapper.selectList(ew);
     }

@@ -70,6 +70,8 @@
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
     <input type="hidden" name="modelId" value="${modelId}">
+    <input type="hidden" name="companyId" value="${companyId}">
+    <input type="hidden" name="companyName" value="${companyName}">
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
@@ -82,7 +84,7 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="portlet box blue-dark">
+                        <div class="portlet box blue-dark" id="item0">
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="fa fa-info"></i>工程单概要
@@ -97,10 +99,11 @@
                                         <label for="shipId" class="col-sm-3 control-label">
                                             船舶名称</label>
                                         <div class="col-sm-7">
-                                            <select id="shipId" name="shipId" class="form-control">
+                                            <select id="shipId" name="shipId" class="form-control select2">
                                                 <option value="0">请选择船舶</option>
                                                 <c:forEach items="${shipList}" var="ship">
-                                                    <option value="${ship.id}">${ship.name}</option>
+                                                    <option value="${ship.id}" data-name="${ship.name}">${ship.name}
+                                                        imo:${ship.imo}</option>
                                                 </c:forEach>
                                             </select>
                                             <input type="hidden" name="shipName" id="shipName" value="">
@@ -174,14 +177,7 @@
                                         <div class="portlet-title" style="background-color: #00aaaa">
                                             <div class="caption">
                                                 <i class="fa fa-cog"></i>
-                                                <c:if test="${outerVs.count==1}">通用服务</c:if>
-                                                <c:if test="${outerVs.count==2}">坞修工程</c:if>
-                                                <c:if test="${outerVs.count==3}">船体工程</c:if>
-                                                <c:if test="${outerVs.count==4}">机械工程</c:if>
-                                                <c:if test="${outerVs.count==5}">电气工程</c:if>
-                                                <c:if test="${outerVs.count==6}">冷藏工程</c:if>
-                                                <c:if test="${outerVs.count==7}">特种设备</c:if>
-                                                <c:if test="${outerVs.count==8}">其他</c:if>
+                                                    ${catagory[outerVs.count-1].des}
                                             </div>
                                             <div class="tools">
                                                 <a href="javascript:;" class="collapse"> </a>
@@ -206,117 +202,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <c:forEach items="${requestScope[type]}" var="item"
-                                                               varStatus="itemVs">
-                                                        <c:if test="${item.parentCode!='0'}">
-                                                            <tr class="details-control-child" data-parent="${item.parentCode}" data-code="${item.code}">
-                                                        </c:if>
-                                                        <c:if test="${item.parentCode=='0'}">
-                                                            <tr class="top-row" data-parent="${item.parentCode}" data-code="${item.code}">
-                                                        </c:if>
-                                                        <input type="hidden" value="${item.catagory}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].catagory">
-                                                        <input type="hidden" value="${item.code}" class="item-code"
-                                                               name="type${outerVs.count}List[${itemVs.index}].code">
-                                                        <input type="hidden" value="${item.unit}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].unit">
-                                                        <input type="hidden" value="${item.parentCode}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].parentCode">
-                                                        <input type="hidden" value="${item.children}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].children">
-                                                        <input type="hidden" value="${item.sort}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].sort">
-                                                        <input type="hidden" value="${item.src}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].src">
-                                                        <td>
-                                                            <input type="checkbox" disabled
-                                                                   class="status-checkBox status-control">
-                                                            <input type="hidden" value="1" class="true-status"
-                                                                   name="type${outerVs.count}List[${itemVs.index}].status">
-                                                        </td>
-                                                        <td class="code-td <c:if test="${!(item.parentCode=='0')}">for-right</c:if>">
-                                                                ${item.code}
-                                                        </td>
-                                                        <td class="content-td">
-                                                            <c:if test="${!(item.content=='addrow')}">
-                                                                ${item.content}
-                                                                <input value="${item.content}" type="hidden"
-                                                                       name="type${outerVs.count}List[${itemVs.index}].content">
-                                                                <c:forEach items="${item.paramList}" var="p"
-                                                                           varStatus="vs">
-                                                                    <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
-                                                                        <br>
-                                                                    </c:if>
-                                                                    ${p.name}
-                                                                    <c:if test="${p.type=='text'}">
-                                                                        <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
-                                                                               class="input-control">
-                                                                    </c:if>
-                                                                    <c:if test="${p.type=='select'}">
-                                                                        <select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">
-                                                                            <c:forEach
-                                                                                    items="${p.paramValueVariableList}"
-                                                                                    var="val">
-                                                                                <option value="${val.paramValVariable}">${val.paramValVariable}</option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </c:if>
-                                                                    ${p.unit}
-                                                                </c:forEach>
-                                                            </c:if>
-                                                            <c:if test="${(item.content=='addrow')}">
-                                                                <button type="button" data-current="${itemVs.index}"
-                                                                        class="btn btn-sm blue addRow">新增
-                                                                </button>
-                                                                <input value="${item.content}" style="display: none"
-                                                                       name="type${outerVs.count}List[${itemVs.index}].content">
-                                                            </c:if>
-                                                        </td>
-                                                        <td>${item.unit}</td>
-                                                        <td><c:if test="${!empty item.unit}"><input
-                                                                class="col-md-12 input-control"
-                                                                name="type${outerVs.count}List[${itemVs.index}].count"></c:if>
-                                                        </td>
-                                                        <td><c:if test="${item.parentCode=='0'}">
-                                                            <a class="add-remark" data-toggle="modal"
-                                                               onclick="addRemark(this)" onmouseover="showRemark(this)"
-                                                               onmouseout="showRemark(this)"
-                                                               href="#responsive">添加备注 </a>
-                                                            <textarea class="remark-text"
-                                                                      name="type${outerVs.count}List[${itemVs.index}].remark"
-                                                                      cols="60"
-                                                                      rows="10"
-                                                                      wrap="hard" placeholder="暂未添加备注"
-                                                                      style="display: none"></textarea></c:if>
-                                                        </td>
-                                                        <c:if test="${item.children==1}">
-                                                            <td class="details-control" data-code="${item.code}">
-                                                                <a href="javascript:;"
-                                                                   onclick="controlHidden(false,'${item.code}',this)"
-                                                                   class="btn btn-circle blue m-icon m-icon-only open-png"
-                                                                   style="display: none">
-                                                                    <i class="m-icon-swapdown m-icon-white"></i>
-                                                                </a>
-                                                                <a href="javascript:;"
-                                                                   onclick="controlHidden(true,'${item.code}',this)"
-                                                                   class="btn btn-circle blue m-icon m-icon-only close-png"
-                                                                >
-                                                                    <i class="m-icon-swapup m-icon-white"></i>
-                                                                </a>
-                                                            </td>
-                                                        </c:if>
-                                                        <c:if test="${item.children==0}">
-                                                            <td>
-                                                            </td>
-                                                        </c:if>
-                                                        </tr>
-                                                    </c:forEach>
                                                     </tbody>
                                                 </c:if>
                                                     <%--通用服务结束--%>
                                                     <%--除通用服务外开始--%>
                                                 <c:if test="${outerVs.count!=1}">
-                                                    <tbody>
                                                     <thead>
                                                     <tr>
                                                         <th style="width:5%">&nbsp;</th>
@@ -327,111 +217,7 @@
                                                         <th style="width:10%">操作</th>
                                                     </tr>
                                                     </thead>
-                                                    <c:forEach items="${requestScope[type]}" var="item"
-                                                               varStatus="itemVs">
-                                                        <c:if test="${item.parentCode!='0'}">
-                                                            <tr class="details-control-child" data-parent="${item.parentCode}" data-code="${item.code}" style="display: none">
-                                                        </c:if>
-                                                        <c:if test="${item.parentCode=='0'}">
-                                                            <tr class="top-row" data-parent="${item.parentCode}" data-code="${item.code}">
-                                                        </c:if>
-                                                        <input type="hidden" value="${item.catagory}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].catagory">
-                                                        <input type="hidden" value="${item.code}" class="item-code"
-                                                               name="type${outerVs.count}List[${itemVs.index}].code">
-                                                        <input type="hidden" value="${item.unit}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].unit">
-                                                        <input type="hidden" value="${item.parentCode}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].parentCode">
-                                                        <input type="hidden" value="${item.children}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].children">
-                                                        <input type="hidden" value="${item.sort}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].sort">
-                                                        <td>
-                                                            <input type="checkbox" disabled
-                                                                   class="status-checkBox status-control">
-                                                            <input type="hidden" value="1" class="true-status"
-                                                                   name="type${outerVs.count}List[${itemVs.index}].status">
-                                                        </td>
-                                                        <td class="code-td <c:if test="${!(item.parentCode=='0')}">for-right</c:if>">
-                                                                ${item.code}
-                                                        </td>
-                                                        <td class="content-td">
-                                                            <c:if test="${!(item.content=='addrow')}">${item.content}
-                                                                <input type="hidden" value="${item.content}"
-                                                                       name="type${outerVs.count}List[${itemVs.index}].content">
-                                                                <c:forEach items="${item.paramList}" var="p"
-                                                                           varStatus="vs">
-                                                                    <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
-                                                                        <br>
-                                                                    </c:if>
-                                                                    ${p.name}
-                                                                    <c:if test="${p.type=='text'}">
-                                                                        <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
-                                                                               value="" class="input-control">
-                                                                    </c:if>
-                                                                    <c:if test="${p.type=='select'}">
-                                                                        <select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">
-                                                                            <c:forEach
-                                                                                    items="${p.paramValueVariableList}"
-                                                                                    var="val">
-                                                                                <option value="${val.paramValVariable}">${val.paramValVariable}</option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </c:if>
-                                                                    ${p.unit}
-                                                                </c:forEach>
-                                                            </c:if>
-                                                            <c:if test="${(item.content=='addrow')}">
-                                                                <button type="button" data-current="${itemVs.index}"
-                                                                        class="btn btn-sm blue addRow">新增
-                                                                </button>
-                                                                <input value="${item.content}" style="display: none"
-                                                                       name="type${outerVs.count}List[${itemVs.index}].content">
-                                                            </c:if>
-                                                        </td>
-                                                        <td>
-                                                            <c:if test="${item.parentCode!='0'}">
-                                                                <select class="model-detail-select"
-                                                                        <c:if test="${(item.content=='addrow')}">style="display: none"</c:if>
-                                                                        data-code="${item.code}"
-                                                                        data-catagory="${item.catagory}">
-                                                                </select>
-                                                            </c:if>
-                                                        </td>
-                                                        <td><c:if test="${item.parentCode=='0'}">
-                                                            <a class="add-remark" data-toggle="modal"
-                                                               onclick="addRemark(this)" onmouseover="showRemark(this)"
-                                                               onmouseout="showRemark(this)"
-                                                               href="#responsive">添加备注</a>
-                                                            <textarea class="remark-text"
-                                                                      name="type${outerVs.count}List[${itemVs.index}].remark"
-                                                                      cols="60"
-                                                                      rows="10"
-                                                                      wrap="hard" placeholder="暂未添加备注"
-                                                                      style="display: none"></textarea></c:if>
-                                                        </td>
-                                                        <c:if test="${item.children==1}">
-                                                            <td class="details-control" data-code="${item.code}">
-                                                                <a href="javascript:;"
-                                                                   onclick="controlHidden(false,'${item.code}',this)"
-                                                                   class="btn btn-circle blue m-icon m-icon-only open-png">
-                                                                    <i class="m-icon-swapdown m-icon-white"></i>
-                                                                </a>
-                                                                <a href="javascript:;"
-                                                                   onclick="controlHidden(true,'${item.code}',this)"
-                                                                   class="btn btn-circle blue m-icon m-icon-only close-png"
-                                                                   style="display: none">
-                                                                    <i class="m-icon-swapup m-icon-white"></i>
-                                                                </a>
-                                                            </td>
-                                                        </c:if>
-                                                        <c:if test="${item.children==0}">
-                                                            <td>
-                                                            </td>
-                                                        </c:if>
-                                                        </tr>
-                                                    </c:forEach>
+                                                    <tbody>
                                                     </tbody>
                                                 </c:if>
                                                     <%--除通用服务外结束--%>
@@ -466,7 +252,186 @@
 <input type="hidden" id="type8proOrderNo" value=1>
 
 <jsp:include page="common.jsp"></jsp:include>
+
+
 <script>
+    <%--初始化通用服务item--%>
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: 'repairSpec/getModelItem',
+            data: {
+                catagory: "通用服务",
+            },
+            success: function (data) {
+                var tbody = $("#item1").find("tbody");
+                var table = tbody.parents("table");
+                table.attr("data-totalRow", data.length);
+                var count = 0;
+                $(data).each(function () {
+                    var a = eval(this);
+                    var namePre = "type1List[" + count + "].";
+                    var tr = $("#genTmp").clone().removeAttr("id");
+                    tr.attr("data-parent", a.parentCode).attr("data-code", a.code);
+                    if (a.parentCode == 0) {
+                        tr.addClass("top-row");
+                    } else {
+                        tr.addClass("details-control-child");
+                    }
+                    tr.find(".code-td").html(a.code);
+                    var contentHtml = "<input value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
+                    if (a.content != "addrow") {
+                        contentHtml += a.content;
+                        var pCount = 1;
+                        var paramList = a.paramList;
+                        if (paramList != null && paramList.length > 0) {
+                            for (var m = 0; m < paramList.length; m++) {
+                                if ((m == 0 && a.content != "") || m != 0) {
+                                    contentHtml += "<br>";
+                                }
+                                var p = eval(paramList[m]);
+                                contentHtml += p.name;
+                                if (p.type == "text") {
+                                    contentHtml += "<input onchange='inputControl(this)' name='" + namePre + "param" + pCount + "Val' class='input-control'>";
+                                } else if (p.type == "select") {
+                                    contentHtml += "<select name='" + namePre + "param" + pCount + "Val'>";
+                                    $(p.paramValueVariableList).each(function () {
+                                        var val = eval(this);
+                                        contentHtml += "<option value = '" + val.paramValVariable + "'>" + val.paramValVariable + "</option>";
+                                    })
+                                    contentHtml += "</select>";
+                                }
+                                pCount++;
+                            }
+                        }
+                        tr.find(".content-td").html(contentHtml);
+                    } else {
+                        contentHtml += "<button onclick='addRow(this)' type='button' data-current='" + count + "' class='btn btn-sm blue'>新增 </button> ";
+                        tr.find(".content-td").html(contentHtml);
+                    }
+
+                    tr.find(".unit-td").html(a.unit);
+                    if (a.unit != "") {
+                        tr.find(".count-td").html("<input class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "count'>");
+                    }
+                    if (a.parentCode == 0) {
+                        tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>添加备注</a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
+                    }
+                    if (a.children != 0) {
+                        var td = tr.find(".show-td");
+                        td.addClass("details-control").attr("data-code", a.code);
+                        td.html(" <a href='javascript:;' onclick='controlHidden(false,'xx" + a.code + "',this)' class='btn btn-circle blue m-icon m-icon-only open-png' style='display: none'><i class='m-icon-swapdown m-icon-white'></i></a>" +
+                                "<a href='javascript:;' onclick='controlHidden(true,'xx" + a.code + "',this)' class='btn btn-circle blue m-icon m-icon-only close-png' > <i class='m-icon-swapup m-icon-white'></i></a>");
+                    }
+                    tr.find(".true-status").val(1).prop("name", namePre + "status");
+                    tr.find(".item-cata").val(a.catagory).prop("name", namePre + "catagory");
+                    tr.find(".item-code").val(a.code).prop("name", namePre + "code");
+                    tr.find(".item-unit").val(a.unit).prop("name", namePre + "unit");
+                    tr.find(".item-parent").val(a.parentCode).prop("name", namePre + "parentCode");
+                    tr.find(".item-children").val(a.children).prop("name", namePre + "children");
+                    tr.find(".item-sort").val(a.sort).prop("name", namePre + "sort");
+                    tr.find(".item-src").val(a.src).prop("name", namePre + "src");
+                    tbody.append(tr);
+                    count++;
+                })
+            },
+        })
+    })
+
+    <%--初始化除通用服务外其他item--%>
+    $(function () {
+        var catagory = ["", "坞修工程", "船体工程", "机械工程", "电气工程", "冷藏工程", "特种设备", "其他"];
+        for (var n = 1; n < catagory.length; n++) {
+            getItem(catagory[n], n)
+        }
+    })
+
+    function getItem(catagory, num) {
+        $.ajax({
+            type: "GET",
+            url: 'repairSpec/getModelItem',
+            data: {
+                catagory: catagory,
+            },
+            success: function (data) {
+                var tbody = $("#item" + (num * 1 + 1)).find("tbody");
+                var table = tbody.parents("table");
+                table.attr("data-totalRow", data.length);
+                var count = 0;
+                $(data).each(function () {
+                    var a = eval(this);
+                    var namePre = "type" + (num * 1 + 1) + "List[" + count + "].";
+                    var tr = $("#otherTmp").clone().removeAttr("id");
+                    tr.attr("data-parent", a.parentCode).attr("data-code", a.code);
+                    if (a.parentCode == 0) {
+                        tr.addClass("top-row");
+                    } else {
+                        tr.addClass("details-control-child").css("display", "none");
+                    }
+                    tr.find(".code-td").html(a.code);
+                    var contentHtml = "<input value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
+                    if (a.content != "addrow") {
+                        contentHtml += a.content;
+                        var pCount = 1;
+                        var paramList = a.paramList;
+                        if (paramList != null && paramList.length > 0) {
+                            for (var m = 0; m < paramList.length; m++) {
+                                if ((m == 0 && a.content != "") || m != 0) {
+                                    contentHtml += "<br>";
+                                }
+                                var p = eval(paramList[m]);
+                                contentHtml += p.name;
+                                if (p.type == "text") {
+                                    contentHtml += "<input onchange='inputControl(this)' name='" + namePre + "param" + pCount + "Val' class='input-control'>";
+                                } else if (p.type == "select") {
+                                    contentHtml += "<select name='" + namePre + "param" + pCount + "Val'>";
+                                    $(p.paramValueVariableList).each(function () {
+                                        var val = eval(this);
+                                        contentHtml += "<option value = '" + val.paramValVariable + "'>" + val.paramValVariable + "</option>";
+                                    })
+                                    contentHtml += "</select>";
+                                }
+                                pCount++;
+                            }
+                        }
+                        tr.find(".content-td").html(contentHtml);
+                    } else {
+                        contentHtml += "<button onclick='addRow(this)' type='button' data-current='" + count + "' class='btn btn-sm blue'>新增 </button>"
+                        tr.find(".content-td").html(contentHtml);
+                    }
+
+                    tr.find(".unit-td").html(a.unit);
+                    if (a.unit != "") {
+                        tr.find(".count-td").html("<input class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "count'>");
+                    }
+                    if (a.parentCode == 0) {
+                        tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>添加备注</a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
+                    } else {
+                        tr.find(".model-detail-select").attr("data-code", a.code).attr("data-catagory", a.catagory).toggle();
+                    }
+                    if (a.children != 0) {
+                        var td = tr.find(".show-td");
+                        td.addClass("details-control").attr("data-code", a.code);
+                        td.html("<a href='javascript:;' onclick='controlHidden(false,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only open-png'><i class='m-icon-swapdown m-icon-white'></i></a>" +
+                                "<a href='javascript:;' onclick='controlHidden(true,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only close-png' style='display: none'> <i class='m-icon-swapup m-icon-white'></i></a>");
+                    }
+                    tr.find(".true-status").val(1).prop("name", namePre + "status");
+                    tr.find(".item-cata").val(a.catagory).prop("name", namePre + "catagory");
+                    tr.find(".item-code").val(a.code).prop("name", namePre + "code");
+                    tr.find(".item-unit").val(a.unit).prop("name", namePre + "unit");
+                    tr.find(".item-parent").val(a.parentCode).prop("name", namePre + "parentCode");
+                    tr.find(".item-children").val(a.children).prop("name", namePre + "children");
+                    tr.find(".item-sort").val(a.sort).prop("name", namePre + "sort");
+                    tr.find(".item-src").val(a.src).prop("name", namePre + "src");
+                    tbody.append(tr);
+                    count++;
+                })
+            },
+        })
+    }
+
+
+    <%--保存为工程单--%>
     function severCheck() {
         var shipId = $("#shipId").val();
         if (shipId == "0") {
@@ -525,10 +490,21 @@
             }
         });
     }
-
     <%--选择船舶后  修改隐藏的 shipName的值--%>
     $("#shipId").on("change", function () {
-        $("#shipName").val($(this).find("option:selected").text());
+        $("#shipName").val($(this).find("option:selected").attr("data-name"));
     })
-
+</script>
+<script>
+    <%--船只列表的初始化下拉框--%>
+    if (App.isAngularJsApp() === false) {
+        jQuery(document).ready(function () {
+            $.fn.select2.defaults.set("theme", "bootstrap");
+            var placeholder = "Select a State";
+            $(".select2, .select2-multiple").select2({
+                placeholder: placeholder,
+                width: null
+            });
+        });
+    }
 </script>

@@ -67,7 +67,7 @@
     <link rel="shortcut icon" href="${ctx}/favicon.ico"/>
 
     <%--handsontable的CSS--%>
-    <link  rel="stylesheet" media="screen" href="${ctx}/static/css/handsontable/handsontable.css">
+    <link rel="stylesheet" media="screen" href="${ctx}/static/css/handsontable/handsontable.css">
 
 </head>
 <body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
