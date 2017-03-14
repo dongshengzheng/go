@@ -17,8 +17,8 @@
 
     #menu ul li a {
         width: 30px;
-        height: 60px;
-        padding: 15px 0;
+        height: 45px;
+        padding: 8px 0;
         line-height: 15px;
         text-align: center;
         background-color: #fbfcfd;
@@ -45,7 +45,8 @@
 <%--右侧悬浮滚动条--%>
 <div id="menu">
     <ul>
-        <li><a data-item="#item1" class="cur">通用服务</a></li>
+        <li><a data-item="#item0" class="cur">概要</a></li>
+        <li><a data-item="#item1">通用服务</a></li>
         <li><a data-item="#item2">坞修工程</a></li>
         <li><a data-item="#item3">船体工程</a></li>
         <li><a data-item="#item4">机械工程</a></li>
@@ -64,10 +65,10 @@
         <td><input type="checkbox" disabled class="status-control"
                    style="display:none"
                    checked="checked"></td>
-        <td>维修详单</td>
+        <td class="proOrderNo">维修详单</td>
         <td><a class="editDetail" data-model="dialog"
                onclick="markDetailName(this)"></a></td>
-        <td><input name="repairDetailId" class="repairDetailId"></td>
+        <td><input name="repairDetailId" class="repairDetailId" type="hidden"></td>
         <td></td>
         <td>
             <button type="button" onclick="deleteDetail(this)">删除
@@ -100,6 +101,82 @@
                       style="display: none"></textarea></td>
         <td></td>
     </tr>
+
+
+    <%--通用服务item模板--%>
+    <tr id="genTmp">
+        <input type="hidden" class="item-id"
+               name="type${outerVs.count}List[${itemVs.index}].id">
+        <input type="hidden" value="${item.catagory}" class="item-cata"
+               name="type${outerVs.count}List[${itemVs.index}].catagory">
+        <input type="hidden" value="${item.code}" class="item-code"
+               name="type${outerVs.count}List[${itemVs.index}].code">
+        <input type="hidden" value="${item.unit}" class="item-unit"
+               name="type${outerVs.count}List[${itemVs.index}].unit">
+        <input type="hidden" value="${item.parentCode}" class="item-parent"
+               name="type${outerVs.count}List[${itemVs.index}].parentCode">
+        <input type="hidden" value="${item.children}" class="item-children"
+               name="type${outerVs.count}List[${itemVs.index}].children">
+        <input type="hidden" value="${item.sort}" class="item-sort"
+               name="type${outerVs.count}List[${itemVs.index}].sort">
+        <input type="hidden" value="${item.src}" class="item-src"
+               name="type${outerVs.count}List[${itemVs.index}].src">
+        <td>
+            <input type="checkbox" disabled
+                   class="status-checkBox status-control">
+            <input type="hidden" value="1" class="true-status"
+                   name="type${outerVs.count}List[${itemVs.index}].status">
+        </td>
+        <td class="code-td">
+        </td>
+        <td class="content-td">
+        </td>
+        <td class="unit-td"></td>
+        <td class="count-td">
+        </td>
+        <td class="remark-td">
+        </td>
+        <td class="show-td"></td>
+    </tr>
+
+
+    <%--除通用服务外item模板--%>
+    <tr id="otherTmp">
+        <input type="hidden" class="item-id"
+               name="type${outerVs.count}List[${itemVs.index}].id">
+        <input type="hidden" value="${item.catagory}" class="item-cata"
+               name="type${outerVs.count}List[${itemVs.index}].catagory">
+        <input type="hidden" value="${item.code}" class="item-code"
+               name="type${outerVs.count}List[${itemVs.index}].code">
+        <input type="hidden" value="${item.unit}" class="item-unit"
+               name="type${outerVs.count}List[${itemVs.index}].unit">
+        <input type="hidden" value="${item.parentCode}" class="item-parent"
+               name="type${outerVs.count}List[${itemVs.index}].parentCode">
+        <input type="hidden" value="${item.children}" class="item-children"
+               name="type${outerVs.count}List[${itemVs.index}].children">
+        <input type="hidden" value="${item.sort}" class="item-sort"
+               name="type${outerVs.count}List[${itemVs.index}].sort">
+        <input type="hidden" value="${item.src}" class="item-src"
+               name="type${outerVs.count}List[${itemVs.index}].src">
+        <td>
+            <input type="checkbox" disabled
+                   class="status-checkBox status-control">
+            <input type="hidden" value="1" class="true-status"
+                   name="type${outerVs.count}List[${itemVs.index}].status">
+        </td>
+        <td class="code-td">
+        </td>
+        <td class="content-td">
+        </td>
+        <td class="detail-td">
+            <select class="model-detail-select" style="display: none" data-code="" data-catagory=""
+                    onchange="getDetail(this)">
+            </select>
+        </td>
+        <td class="remark-td">
+        </td>
+        <td class="show-td"></td>
+    </tr>
 </table>
 
 <div id="responsive" class="modal fade" tabindex="-1" aria-hidden="true" data-id="">
@@ -125,6 +202,7 @@
     </div>
 </div>
 
+
 <%--触发详单弹窗--%>
 <a style="display:none" href="repairSpecDetail/addModelDetail?shipName=&catagory=&code=" id="add-detail"
    data-model="dialog">新增详单</a>
@@ -149,8 +227,9 @@
         })
     }
 
-    $(".model-detail-select").on("change", function () {
-        var thisOne = $(this);
+
+    function getDetail(obj) {
+        var thisOne = $(obj);
         var shipName = $("#shipName").val();
         var id = thisOne.val();
         var catagory = thisOne.attr("data-catagory");
@@ -196,7 +275,7 @@
         thisOne.addClass("marked-select");
         $('#add-detail').attr("href", "repairSpecDetail/addModelDetail?shipName=" + shipName + "&catagory=" + catagory + "&code=" + code + "&proOrderNo=" + proOrderNo + "&id=" + id);
         $('#add-detail').click();
-    })
+    }
 
     function markDetailName(obj) {
         $(".marked-detail-name").removeClass("marked-detail-name");
@@ -213,13 +292,13 @@
     //右侧悬浮滚动条
     $(document).ready(function () {
         $(window).scroll(function () {
-            var top = $(document).scrollTop();          //定义变量，获取滚动条的高度
-            var menu = $("#menu");                      //定义变量，抓取#menu
-            var items = $("#content").find(".item");    //定义变量，查找.item
-            var curId = "";                             //定义变量，当前所在的楼层item #id
+            var top = $(document).scrollTop(); //定义变量，获取滚动条的高度
+            var menu = $("#menu"); //定义变量，抓取#menu
+            var items = $("#content").find(".item"); //定义变量，查找.item
+            var curId = ""; //定义变量，当前所在的楼层item #id
             items.each(function () {
-                var m = $(this);                        //定义变量，获取当前类
-                var itemsTop = m.offset().top;        //定义变量，获取当前类的top偏移量
+                var m = $(this); //定义变量，获取当前类
+                var itemsTop = m.offset().top; //定义变量，获取当前类的top偏移量
                 if (top >= itemsTop - 300) {
                     curId = "#" + m.attr("id");
                 } else {
@@ -283,10 +362,10 @@
         }
     }
 
-
     <%--新增一行--%>
-    $(".addRow").on("click", function () {
-        var oldRow = $(this).parents("tr");
+    function addRow(obj) {
+        var a = $(obj);
+        var oldRow = a.parents("tr");
         var newRow = oldRow.clone();
         newRow.find(".model-detail-select").toggle();
         var contentTd = newRow.find(".content-td");
@@ -304,42 +383,44 @@
         oldRow.find(".item-code").val(newCode);
         oldRow.find(".code-td").html(newCode);
         //改input和textarea的name
-        var current = $(this).attr('data-current');
+        var current = a.attr('data-current');
         console.log(current);
         var table = oldRow.parents("table");
         var index = table.attr("data-totalRow");
         console.log(index);
         table.attr("data-totalRow", index * 1 + 1);
         newRow.find('textarea').each(function () {
-            var name = $(this).attr('name');
-            name = name.replace("[" + current + "]", "[" + index + "]");
-            $(this).attr('name', name);
-        });
-        newRow.find('input').each(function () {
-            var name = $(this).attr('name');
+            var name = a.attr('name');
             if (name != null) {
                 name = name.replace("[" + current + "]", "[" + index + "]");
-                $(this).attr('name', name);
+                a.attr('name', name);
             }
         });
-
+        newRow.find('input').each(function () {
+            var name = a.attr('name');
+            if (name != null) {
+                name = name.replace("[" + current + "]", "[" + index + "]");
+                a.attr('name', name);
+            }
+        });
         oldRow.before(newRow);
-    })
+    }
 </script>
 
 <script>
     <%--左侧checkBox状态控制--%>
-    $(".input-control").on("change", function () {
-        var tr = $(this).parents("tr");
+    function inputControl(obj) {
+        var tr = $(obj).parents("tr");
         var code = tr.attr("data-code");
         changeStatus(code);
-    })
+    }
 
-    function addDetail(repairSpecDetailId, proName) {
+    function addDetail(repairSpecDetailId, proName, proOrderNo) {
         var tr = $(".marked-select").removeClass("marked-select").parents("tr");
         var code = tr.attr("data-code");
         var newRow = $("#detail-row-temp").clone().attr("data-parent", code).removeAttr("id").toggle();
         newRow.find(".repairDetailId").val(repairSpecDetailId);
+        newRow.find(".proNo").html(proOrderNo);
         var a = newRow.find(".editDetail");
         a.html(proName).attr("href", "repairSpecDetail/editSpecDetail?id=" + repairSpecDetailId);
         tr.after(newRow);

@@ -127,6 +127,7 @@
                                                        class="form-control required"
                                                        placeholder="请填写船长">
                                             </div>
+                                            <label class="col-sm-3 control-label">(单位:米)</label>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="draft" class="col-sm-3 control-label">吃水<span

@@ -3,6 +3,7 @@
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -33,8 +34,24 @@
         padding-right: 15px;
     }
 
-    .table-striped > tbody > tr:nth-of-type(odd) {
+    .table-striped > tbody > tr.details-control-child.detail-row:nth-of-type(odd) {
+        background-color: white;
+    }
+
+    .table-striped > tbody > tr.details-control-child.detail-row:nth-of-type(even) {
+        background-color: white;
+    }
+
+    .table-striped > tbody > tr.details-control-child:nth-of-type(odd) {
         background-color: #d2f7ff;
+    }
+
+    .table-striped > tbody > tr.details-control-child:nth-of-type(even) {
+        background-color: #d2f7ff;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #bfe3ff;
     }
 
     .table-striped > tbody > tr:nth-of-type(even) {
@@ -48,22 +65,28 @@
         top: 40%;
         z-index: 100;
     }
+
 </style>
 <go:navigater path="repairSpec"></go:navigater>
-<form class="form-horizontal" action="repairSpec/add" method="post"
+<form class="form-horizontal" action="repairSpec/edit" method="post"
       id="defForm" callfn="refreshTable">
+    <input type="hidden" name="modelId" value="${repairSpec.modelId}">
+    <input type="hidden" name="id" value="${repairSpec.id}">
+    <input type="hidden" name="delFlag" value="${repairSpec.delFlag}">
+    <input type="hidden" name="companyId" value="${repairSpec.companyId}">
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
                     <div class="portlet-title tabbable-line">
+                        <div id="bootstrap_alerts_demo"></div>
                         <div class="caption caption-md">
                             <i class="fa fa-user"></i>
-                            <span class="caption-subject font-blue-madison bold uppercase"> 查看维修工程单</span>
+                            <span class="caption-subject font-blue-madison bold uppercase"> 编辑维修工程单</span>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="portlet box blue-dark">
+                        <div class="portlet box blue-dark" id="item0">
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="fa fa-info"></i>工程单概要
@@ -75,23 +98,22 @@
                             <div class="portlet-body">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label for="shipName" class="col-sm-3 control-label">
+                                        <label class="col-sm-3 control-label">
                                             船舶名称</label>
                                         <div class="col-sm-7">
-                                            <input disabled id="shipName" name="shipName" type="text" maxlength="32"
-                                                   value="${repairSpec.shipName}"
-                                                   minlength="2" class="form-control required" placeholder="暂无船舶名称">
+                                            <input type="hidden" name="shipId" value="${repairSpec.shipId}">
+                                            <input name="shipName" id="shipName" class="form-control" readonly
+                                                   value="${repairSpec.shipName}" placeholder="无船舶名称信息">
                                         </div>
-                                        <label class="col-sm-1 control-label"><span class="red">* </span></label>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="planStartDate" class="col-sm-3 control-label">计划进场日期</label>
                                         <div class="col-sm-7">
                                             <div class="input-group">
-                                                <input disabled id="planStartDate" name="planStartDate" type="text"
-                                                       class="form-control date-picker"
+                                                <input id="planStartDate" name="planStartDate" type="text"
+                                                       class="form-control" readonly
                                                        value="<fmt:formatDate value='${repairSpec.planStartDate}' pattern="yyyy-MM-dd"/>"
-                                                       placeholder="暂无进厂日期">
+                                                       placeholder="无进厂日期信息">
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
@@ -103,18 +125,16 @@
                                         <label for="planDays" class="col-sm-3 control-label">
                                             预估天数</label>
                                         <div class="col-sm-7">
-                                            <input disabled id="planDays" name="planDays" type="text"
-                                                   class="form-control required" value="${repairSpec.planDays}"
-                                                   placeholder="暂无预估维修天数">
+                                            <input id="planDays" name="planDays" type="text" ${repairSpec.planDays}
+                                                   class="form-control required" placeholder="无预估维修天数信息">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="planCost" class="col-sm-3 control-label">
                                             预估金额</label>
                                         <div class="col-sm-7">
-                                            <input disabled id="planCost" name="planCost" type="text"
-                                                   class="form-control required" value="${repairSpec.planCost}"
-                                                   placeholder="暂无预估维修金额">
+                                            <input id="planCost" name="planCost" type="text" ${repairSpec.planCost}
+                                                   class="form-control required" placeholder="无预估维修金额信息">
                                         </div>
                                         <label class="col-sm-2 control-label"
                                                style="padding-left: 5px;padding-right: 5px">
@@ -125,15 +145,9 @@
                                     <div class="form-group col-md-6">
                                         <label class="col-sm-3 control-label">
                                             维修类型</label>
-                                        <div class="col-sm-9 icheck-inline">
-                                            <c:forEach items="${typeList}" var="type" varStatus="vs">
-                                                <label>
-                                                    <input type="radio" name="type"
-                                                           value="${type.value}"
-                                                           <c:if test="${type.value==repairSpec.type}">checked</c:if>> ${type.des}
-                                                    <span></span>
-                                                </label>
-                                            </c:forEach>
+                                        <div class="col-sm-7">
+                                            <input value="${repairSpec.type}" class="form-control"
+                                                   placeholder="无预估维修类型信息">
                                         </div>
                                     </div>
                                 </div>
@@ -168,82 +182,55 @@
                                             </div>
                                         </div>
                                         <div class="portlet-body">
+                                            <c:set var="type" value="type${outerVs.count}"></c:set>
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="table${outerVs.count}">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width:5%">&nbsp;</th>
-                                                    <th style="width:10%">项目号</th>
-                                                    <th style="width:45%">维修内容</th>
-                                                    <th style="width:10%">单位</th>
-                                                    <th style="width:10%">数量</th>
-                                                    <th style="width:10%">备注</th>
-                                                    <th style="width:10%">操作</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <c:set var="type" value="type${outerVs.count}"></c:set>
-                                                <c:forEach items="${requestScope[type]}" var="item" varStatus="itemVs">
-                                                    <c:if test="${item.status==0}">
+                                                   id="table${outerVs.count}"
+                                                   data-totalRow="${fn:length(requestScope[type])}">
+                                                    <%--通用服务开始--%>
+                                                <c:if test="${outerVs.count==1}">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:10%">项目号</th>
+                                                        <th style="width:45%">维修内容</th>
+                                                        <th style="width:10%">单位</th>
+                                                        <th style="width:10%">数量</th>
+                                                        <th style="width:10%">备注</th>
+                                                        <th style="width:10%">操作</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <c:forEach items="${requestScope[type]}" var="item"
+                                                               varStatus="itemVs">
                                                         <c:if test="${item.parentCode!='0'}">
-                                                            <tr class="details-control-child" data-parent="${item.parentCode}" style="display: none">
+                                                            <tr class="details-control-child" data-parent="${item.parentCode}" data-code="${item.code}">
                                                         </c:if>
                                                         <c:if test="${item.parentCode=='0'}">
-                                                            <tr>
+                                                            <tr class="top-row" data-parent="${item.parentCode}" data-code="${item.code}">
                                                         </c:if>
-                                                        <input type="hidden" value="${item.id}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].id">
-                                                        <input type="hidden" value="${item.catagory}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].catagory">
-                                                        <input type="hidden" value="${item.code}" class=""
-                                                               name="type${outerVs.count}List[${itemVs.index}].code">
-                                                        <input type="hidden" value="${item.content}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].content">
-                                                        <input type="hidden" value="${item.unit}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].unit">
-                                                        <input type="hidden" value="${item.parentCode}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].parentCode">
-                                                        <input type="hidden" value="${item.children}"
-                                                               name="type${outerVs.count}List[${itemVs.index}].children">
                                                         <td>
-                                                            <input type="checkbox" class="status-checkBox"
-                                                                   <c:if test="${item.status==0}">checked</c:if>>
-                                                            <input type="hidden" value="${item.status}"
-                                                                   name="type${outerVs.count}List[${itemVs.index}].status">
-                                                        </td>
-                                                        <td>
-                                                            <c:if test="${!(item.content=='维修详单')}">
                                                                 ${item.code}
-                                                            </c:if>
                                                         </td>
-                                                        <td>${item.content}
-                                                            <c:if test="${item.content=='维修详单'}">
-                                                                <select class="model-detail-select"
-                                                                        data-code="${item.parentCode}"
-                                                                        data-proOrderNo="0"
-                                                                        data-catagory="${item.catagory}"></select>
-                                                                <input class="repairSpecDetailId"
-                                                                       name="type${outerVs.count}List[${itemVs.index}].repairSpecDetailId"
-                                                                       type="hidden"
-                                                                       value="${item.repairSpecDetailId}">
-                                                                <a class="repairSpecDetailName" data-model="dialog"
-                                                                   href="javascript:;"><c:if
-                                                                        test="${empty item.repairSpecDetailId}">暂未选择详单</c:if>
-                                                                        ${item.proName}</a>
-                                                            </c:if>
-                                                            <c:forEach items="${item.paramList}" var="p" varStatus="vs">
+                                                        <td>
+                                                                ${item.content}
+                                                            <input type="hidden" value="${item.content}"
+                                                                   name="type${outerVs.count}List[${itemVs.index}].content">
+                                                            <c:forEach items="${item.paramList}" var="p"
+                                                                       varStatus="vs">
                                                                 <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
                                                                     <br>
                                                                 </c:if>
                                                                 ${p.name}
                                                                 <c:if test="${p.type=='text'}">
+                                                                    <c:set var="value"
+                                                                           value="param${vs.count}Val"></c:set>
                                                                     <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
-                                                                           value="">
+                                                                           class="input-control" value="${item[value]}">
                                                                 </c:if>
                                                                 <c:if test="${p.type=='select'}">
                                                                     <select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">
-                                                                        <c:forEach items="${p.paramValueVariableList}"
-                                                                                   var="val">
+                                                                        <c:forEach
+                                                                                items="${p.paramValueVariableList}"
+                                                                                var="val">
                                                                             <option value="${val.paramValVariable}">${val.paramValVariable}</option>
                                                                         </c:forEach>
                                                                     </select>
@@ -252,27 +239,37 @@
                                                             </c:forEach>
                                                         </td>
                                                         <td>${item.unit}</td>
-                                                        <td><c:if test="${!empty item.unit}"><input class="col-md-12"
-                                                                                                    value="${item.count}"
-                                                                                                    name="type${outerVs.count}List[${itemVs.index}].count"></c:if>
+                                                        <td><c:if test="${!empty item.unit}"><input
+                                                                class="col-md-12 input-control" value="${item.count}"
+                                                                name="type${outerVs.count}List[${itemVs.index}].count"></c:if>
                                                         </td>
                                                         <td><c:if test="${item.parentCode=='0'}">
                                                             <a class="add-remark" data-toggle="modal"
-                                                               href="#responsive">添加备注 </a>
+                                                               onclick="addRemark(this)" onmouseover="showRemark(this)"
+                                                               onmouseout="showRemark(this)"
+                                                               href="#responsive">显示备注 </a>
                                                             <textarea class="remark-text"
                                                                       name="type${outerVs.count}List[${itemVs.index}].remark"
                                                                       cols="60"
                                                                       rows="10"
                                                                       wrap="hard" placeholder="暂未添加备注"
-                                                                      style="display: none">${item.remark}</textarea></c:if>
+                                                                      value="${item.remark}"
+                                                                      style="display: none"></textarea></c:if>
                                                         </td>
                                                         <c:if test="${item.children==1}">
                                                             <td class="details-control" data-code="${item.code}">
-                                                                <img src="<%=basePath%>static/img/details_open.png"
-                                                                     class="open-png">
-                                                                <img src="<%=basePath%>static/img/details_close.png"
-                                                                     class="close-png"
-                                                                     style="display: none">
+                                                                <a href="javascript:;"
+                                                                   onclick="controlHidden(false,'${item.code}',this)"
+                                                                   class="btn btn-circle blue m-icon m-icon-only open-png"
+                                                                   style="display: none">
+                                                                    <i class="m-icon-swapdown m-icon-white"></i>
+                                                                </a>
+                                                                <a href="javascript:;"
+                                                                   onclick="controlHidden(true,'${item.code}',this)"
+                                                                   class="btn btn-circle blue m-icon m-icon-only close-png"
+                                                                >
+                                                                    <i class="m-icon-swapup m-icon-white"></i>
+                                                                </a>
                                                             </td>
                                                         </c:if>
                                                         <c:if test="${item.children==0}">
@@ -280,17 +277,52 @@
                                                             </td>
                                                         </c:if>
                                                         </tr>
+                                                    </c:forEach>
+                                                    <c:if test="${(fn:length(requestScope[type]))==0}">
+                                                        <tr>
+                                                            <td colspan="7" style="text-align: center">无维修项目</td>
+                                                        </tr>
                                                     </c:if>
-                                                </c:forEach>
-                                                </tbody>
-
+                                                    </tbody>
+                                                </c:if>
+                                                    <%--通用服务结束--%>
+                                                    <%--除通用服务外开始--%>
+                                                <c:if test="${outerVs.count!=1}">
+                                                    <tbody>
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:10%">工程单号</th>
+                                                        <th style="width:15%">工程单名</th>
+                                                        <th style="width:65%">工程描述</th>
+                                                        <th style="width:10%">操作</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <c:forEach items="${requestScope[type]}" var="detail">
+                                                        <tr>
+                                                            <td>${detail.proOrderNo}</td>
+                                                            <td class="proName">${detail.proName}</td>
+                                                            <td class="proDesc">${detail.proDesc}</td>
+                                                            <td>
+                                                                <a href="repairSpecDetail/editSpecDetail?id=${detail.id}"
+                                                                   data-model="dialog" class="look-info">查看详细</a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <c:if test="${(fn:length(requestScope[type]))==0}">
+                                                        <tr>
+                                                            <td colspan="6" style="text-align: center">无维修详单</td>
+                                                        </tr>
+                                                    </c:if>
+                                                    </tbody>
+                                                </c:if>
+                                                    <%--除通用服务外结束--%>
                                             </table>
                                         </div>
                                     </div>
                                 </c:forEach>
                             </div>
                         </div>
-                        <div class="modal-footer" style="text-align: center">
+                        <div class="modal-footer" style="text-align: center" id="item9">
                             <a href="repairSpec" class="btn default" data-target="navTab">返回</a>
                         </div>
                     </div>
@@ -300,56 +332,15 @@
     </div>
 </form>
 
-<div id="responsive" class="modal fade" tabindex="-1" aria-hidden="true" data-id="">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">备注</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                            <textarea id="dialog-text" class="form-control" rows="10"
-                                      style="resize: none;" placeholder="暂无备注信息"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn green \">确认</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<jsp:include page="common.jsp"></jsp:include>
 <script>
-    <%--行的展开与折叠--%>
-    $('td.details-control').on('click', function () {
-        var parentCode = $(this).attr('data-code');
-        var ele = $("tr.details-control-child[data-parent='" + parentCode + "']");
-        ele.toggle();
-        $(this).find('img').toggle();
-        if ($(this).find('.close-png').css('display') == 'none') {
-            ele.each(function () {
-                $(this).find('.close-png').each(function () {
-                    if ($(this).css('display') == 'inline') {
-                        $(this).parent().click();
-                    }
-                })
-            })
-        }
+    $("input").prop("readonly", true);
+    $(".look-info").on("click", function () {
+        $(".marked-detail-name").removeClass("marked-detail-name");
+        $(".marked-detail-desc").removeClass("marked-detail-desc");
+        var tr = $(this).parents("tr");
+        tr.find(".proName").addClass("marked-detail-name");
+        tr.find(".proDesc").addClass("marked-detail-desc");
     })
-
-    <%--显示备注--%>
-    $('.add-remark').on('mouseover mouseout', function () {
-        $(this).siblings('.remark-text').toggle();
-    })
-
-    <%--添加备注--%>
-    $('.add-remark').on('click', function () {
-        var text = $(this).siblings('.remark-text').text()
-        $('#dialog-text').val(text);
-        $responsive.attr('data-id', $(this).attr('data-id'));
-    })
-
 </script>
+

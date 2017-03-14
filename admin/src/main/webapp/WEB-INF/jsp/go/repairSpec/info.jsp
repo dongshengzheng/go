@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="portlet box blue-dark">
+                        <div class="portlet box blue-dark" id="item0">
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="fa fa-info"></i>工程单概要

@@ -47,6 +47,7 @@
                 <property name="supportedMediaTypes" value="application/json"/>
                 <property name="features">
                     <list>
+                        <value>DisableCircularReferenceDetect</value>
                         <value>WriteMapNullValue</value>
                         <value>QuoteFieldNames</value>
                     </list>
