@@ -40,7 +40,7 @@ public class PolicyController {
     @ResponseBody
     public Map<String, Object> get() {
         Map<String, Object> map = new HashMap<String, Object>();
-        String dir = "go/upload-images/";
+        String dir = "goshipyard/";
         String host = "http://" + bucket + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
         try {

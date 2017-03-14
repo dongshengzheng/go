@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
+import com.ctoangels.go.common.modules.go.service.impl.RepairProgDetailServiceImpl;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.apache.commons.beanutils.BeanUtils;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -186,9 +188,10 @@ public class RepairProgController extends BaseController {
         return jsonObject;
     }
 
+    //生成维修进度
     @RequestMapping(value = "makeProgress", method = RequestMethod.GET)
     @ResponseBody
-    private JSONObject makeProg(@RequestParam(required = false) Integer id) throws InvocationTargetException, IllegalAccessException {
+    public JSONObject makeProg(@RequestParam(required = false) Integer id) throws InvocationTargetException, IllegalAccessException {
         //查找维修工程单基本信息
         RepairSpec repairSpec = repairSpecService.selectById(id);
         RepairProg repairProg = new RepairProg();
@@ -252,6 +255,51 @@ public class RepairProgController extends BaseController {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("status", 1);
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "progDetail",method =RequestMethod.GET )
+    public String progDetail(@RequestParam(required = false) Integer id, @RequestParam(required = false) String orderNo, Map map){
+        EntityWrapper<RepairProgDetail> ew=getEntityWrapper();
+        ew.addFilter("repair_prog_id={0}",id);
+        ew.addFilter("pro_order_no={0}",orderNo);
+        RepairProgDetail progDetail= repairProgDetailService.selectOne(ew);
+        String repairPosition=progDetail.getRepairPosition();
+        if(repairPosition!=null){
+            String[] positions=repairPosition.split(",");
+            map.put("positions",positions);
+        }
+        String repairTech=progDetail.getRepairTech();
+        if(repairTech!=null){
+            String[] techs=repairTech.split(",");
+            map.put("techs",techs);
+        }
+
+        EntityWrapper<Dict> ew1 = new EntityWrapper<>();
+        ew1.addFilter("type={0}", "维修部位");
+        List<Dict> repDicts = dictService.selectList(ew1);
+
+        EntityWrapper<Dict> ew2 = new EntityWrapper<>();
+        ew2.addFilter("type={0}", "修理工艺");
+        List<Dict> reqDicts = dictService.selectList(ew2);
+
+        map.put("repDicts",repDicts);
+        map.put("reqDicts",reqDicts);
+
+        map.put("proDetail",progDetail);
+        return "go/repairProg/detail";
+
+    }
+
+    //获取repairModelDetailReq信息
+    @RequestMapping(value = "/reqs", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject demo(@RequestParam(required =false) Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        EntityWrapper<RepairProgDetailReq> ew = new EntityWrapper<>();
+        ew.addFilter("repair_prog_detail_id={0}", id);
+        List<RepairProgDetailReq> repairProgDetailReqs=repairProgDetailReqService.selectList(ew);
+        jsonObject.put("reqs",repairProgDetailReqs);
         return jsonObject;
     }
 

@@ -28,11 +28,20 @@
     ul.dropdown-menu {
         z-index: 100;
     }
+    .modal-dialog {
+        position: relative;
+        width: 75%;
+        margin: auto;
+    }
+    .modal-content {
+        padding: 10px;
+    }
 </style>
 <go:navigater path="repairProg"></go:navigater>
 <input id="repairProgId" value="${repairProg.id}" type="hidden">
 <form class="form-horizontal" action="repairSpec/add" method="post"
       id="defForm" callfn="refreshTable">
+    <input type="hidden" value="${repairProg.id}" id="prog_id">
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
@@ -127,17 +136,17 @@
                                                             <c:if test="${!empty detail}"></c:if>
                                                             <div class="btn-group margin-bottom-5">
                                                                 <button class="btn dropdown-toggle
-                                                         <c:if test="${detail.taskStatus==0}">green-jungle</c:if>
-                                                         <c:if test="${detail.taskStatus==1}">blue</c:if>
-                                                         <c:if test="${detail.taskStatus==2}">default</c:if>
-                                                         <c:if test="${detail.taskStatus==3}">yellow</c:if>"
+                                                             <c:if test="${detail.taskStatus==0}">green-jungle</c:if>
+                                                             <c:if test="${detail.taskStatus==1}">blue</c:if>
+                                                             <c:if test="${detail.taskStatus==2}">default</c:if>
+                                                             <c:if test="${detail.taskStatus==3}">yellow</c:if>"
                                                                         type="button"
                                                                         data-toggle="dropdown"> ${detail.proOrderNo}
                                                                     <i class="fa fa-angle-down"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu" role="menu">
                                                                     <li>
-                                                                        <a href="javascript:;"
+                                                                        <a data-no="${detail.proOrderNo}" id="look_detail" href="javascript:;"
                                                                            class="btn change-status blue"> 查看详单 </a>
                                                                     </li>
                                                                     <li class="divider"></li>
@@ -185,6 +194,9 @@
     </div>
     </div>
 </form>
+<%--触发详单弹窗--%>
+<a style="display:none" href="" id="select-detail"
+   data-model="dialog">新增详单</a>
 <script>
     var repairProgId = $("#repairProgId").val();
     var count_table;
@@ -296,5 +308,13 @@
                 return;
             }
         });
+    })
+
+    $("#look_detail").on("click",function () {
+        var orderNo=$("#look_detail").attr("data-no");
+        var prog_id=$("#prog_id").val();
+
+        $("#select-detail").attr("href","repairProg/progDetail?id="+prog_id+"&orderNo="+orderNo);
+        $("#select-detail").click();
     })
 </script>

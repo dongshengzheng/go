@@ -370,7 +370,7 @@
     var id = $("#id").val();
     var width = $(window).width();
     $("#example1").width(width * 0.65);
-    var dataJson;
+    var d;
     var h;
     $.ajax({
         url: 'repairSpecDetail/reqs',
@@ -380,9 +380,9 @@
             id: id
         },
         success: function (data) {
-            dataJson = data.reqs;
-            console.log(dataJson);
+            d = data.reqs;
             var datas = eval(dataJson);
+            console.log(d);
             var container = document.getElementById('example1'),
                     storedData = {},
                     savedKeys,
@@ -394,7 +394,7 @@
                 data: datas,
                 rowHeaders: true,
                 colHeaders: true,
-                colWidths: [800, 100, 100],
+                colWidths: [600, 100, 100],
                 minRows: 15,
                 colHeaders: ["要求和描述/材料规格", "单位", "数量"],
                 columnSorting: true,

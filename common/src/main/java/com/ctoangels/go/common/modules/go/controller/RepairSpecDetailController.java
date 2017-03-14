@@ -201,5 +201,4 @@ public class RepairSpecDetailController extends BaseController {
         jsonObject.put("reqs",repairSpecDetailReqs);
         return jsonObject;
     }
-
 }

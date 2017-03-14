@@ -182,7 +182,7 @@
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_logo("upload_logo", "windyeel", "${staticPath}/", "logo-img", "logo");
+    initUploaders_logo("upload_logo", "shipinfo", "${staticPath}/", "logo-img", "logo");
 
     //服务器校验
     function severCheck() {
