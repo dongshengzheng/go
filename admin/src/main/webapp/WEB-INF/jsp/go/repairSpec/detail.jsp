@@ -88,34 +88,32 @@
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
-                    <div class="col-sm-7">
-                        <input readonly id="shipName" name="shipName" type="text" maxlength="32"
-                               value="${param.shipName}"
-                               class="form-control required">
-                    </div>
+                    <label class="col-sm-7 control-label label-top">${param.shipName}</label>
+                    <input style="display: none" readonly id="shipName" name="shipName" type="text" maxlength="32"
+                           value="${param.shipName}"
+                           class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
-                    <div class="col-sm-6">
-                        <input readonly id="catagory" name="catagory" type="text" maxlength="32"
-                               value="${param.catagory}"
-                               class="form-control ">
-                    </div>
+                    <label class="col-sm-6 control-label label-top">${param.catagory}</label>
+                    <input style="display: none" readonly id="catagory" name="catagory" type="text" maxlength="32"
+                           value="${param.catagory}"
+                           class="form-control ">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
-                    <div class="col-sm-6">
-                        <input readonly id="code" name="code" type="text" maxlength="32" value="${param.code}"
-                               class="form-control required">
-                    </div>
+                    <label class="col-sm-6 control-label label-top">${param.code}</label>
+                    <input style="display: none" readonly id="code" name="code" type="text" maxlength="32"
+                           value="${param.code}"
+                           class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
-                    <div class="col-sm-6">
-                        <input readonly id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
-                               value="${param.proOrderNo}"
-                               class="form-control required">
-                    </div>
+                    <label class="col-sm-6 control-label label-top">${param.proOrderNo}</label>
+                    <input style="display: none" readonly id="proOrderNo" name="proOrderNo" type="text"
+                           maxlength="32"
+                           value="${param.proOrderNo}"
+                           class="form-control required">
                 </div>
             </div>
         </div>
@@ -304,7 +302,7 @@
                     if (data.success) {
                         //  保存为工程单详单
                         if (data.specDetail) {
-                            addDetail(data.repairSpecDetailId, $("#proName").val());
+                            addDetail(data.repairSpecDetailId, $("#proName").val(), $("#proOrderNo").val());
                             $('#close').click();
                         } else {
                             App.alert({

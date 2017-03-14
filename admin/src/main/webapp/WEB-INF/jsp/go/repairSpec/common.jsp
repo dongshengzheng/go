@@ -65,7 +65,7 @@
         <td><input type="checkbox" disabled class="status-control"
                    style="display:none"
                    checked="checked"></td>
-        <td>维修详单</td>
+        <td class="proOrderNo">维修详单</td>
         <td><a class="editDetail" data-model="dialog"
                onclick="markDetailName(this)"></a></td>
         <td><input name="repairDetailId" class="repairDetailId" type="hidden"></td>
@@ -170,7 +170,7 @@
         </td>
         <td class="detail-td">
             <select class="model-detail-select" style="display: none" data-code="" data-catagory=""
-                    onclick="getDetail(this)">
+                    onchange="getDetail(this)">
             </select>
         </td>
         <td class="remark-td">
@@ -415,11 +415,12 @@
         changeStatus(code);
     }
 
-    function addDetail(repairSpecDetailId, proName) {
+    function addDetail(repairSpecDetailId, proName, proOrderNo) {
         var tr = $(".marked-select").removeClass("marked-select").parents("tr");
         var code = tr.attr("data-code");
         var newRow = $("#detail-row-temp").clone().attr("data-parent", code).removeAttr("id").toggle();
         newRow.find(".repairDetailId").val(repairSpecDetailId);
+        newRow.find(".proNo").html(proOrderNo);
         var a = newRow.find(".editDetail");
         a.html(proName).attr("href", "repairSpecDetail/editSpecDetail?id=" + repairSpecDetailId);
         tr.after(newRow);

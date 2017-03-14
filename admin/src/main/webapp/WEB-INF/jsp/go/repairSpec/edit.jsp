@@ -459,6 +459,7 @@
                         var detail = detailList[d];
                         var detailRow = $("#detail-row-temp").clone().removeAttr("id").attr("data-parent", detail.code);
                         var detailId = detail.id;
+                        detailRow.find(".proOrderNo").html(detail.proOrderNo);
                         detailRow.find(".repairDetailId").val(detailId);
                         detailRow.find(".editDetail").attr("href", "repairSpecDetail/editSpecDetail?id=" + detailId).html(detail.proName);
                         tr.after(detailRow);
