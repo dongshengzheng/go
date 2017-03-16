@@ -177,7 +177,7 @@
                                         <div class="portlet-title" style="background-color: #00aaaa">
                                             <div class="caption">
                                                 <i class="fa fa-cog"></i>
-                                                    ${catagory[outerVs.count-1].des}
+                                                    ${cataList[outerVs.count-1].des}
                                             </div>
                                             <div class="tools">
                                                 <a href="javascript:;" class="collapse"> </a>
@@ -282,7 +282,6 @@
                     var contentHtml = "<input value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
                     if (a.content != "addrow") {
                         contentHtml += a.content;
-                        var pCount = 1;
                         var paramList = a.paramList;
                         if (paramList != null && paramList.length > 0) {
                             for (var m = 0; m < paramList.length; m++) {
@@ -290,18 +289,20 @@
                                     contentHtml += "<br>";
                                 }
                                 var p = eval(paramList[m]);
+                                var pCount = m + 1;
+                                var str = "param" + pCount + "Val";
                                 contentHtml += p.name;
                                 if (p.type == "text") {
-                                    contentHtml += "<input onchange='inputControl(this)' name='" + namePre + "param" + pCount + "Val' class='input-control'>";
+                                    contentHtml += "<input onchange='inputControl(this)' name='" + namePre + str + "' class='input-control'>";
                                 } else if (p.type == "select") {
-                                    contentHtml += "<select name='" + namePre + "param" + pCount + "Val'>";
+                                    contentHtml += "<select name='" + namePre + str + "'>";
                                     $(p.paramValueVariableList).each(function () {
                                         var val = eval(this);
                                         contentHtml += "<option value = '" + val.paramValVariable + "'>" + val.paramValVariable + "</option>";
                                     })
                                     contentHtml += "</select>";
                                 }
-                                pCount++;
+                                contentHtml += p.unit;
                             }
                         }
                         tr.find(".content-td").html(contentHtml);
@@ -320,8 +321,8 @@
                     if (a.children != 0) {
                         var td = tr.find(".show-td");
                         td.addClass("details-control").attr("data-code", a.code);
-                        td.html(" <a href='javascript:;' onclick='controlHidden(false,'xx" + a.code + "',this)' class='btn btn-circle blue m-icon m-icon-only open-png' style='display: none'><i class='m-icon-swapdown m-icon-white'></i></a>" +
-                                "<a href='javascript:;' onclick='controlHidden(true,'xx" + a.code + "',this)' class='btn btn-circle blue m-icon m-icon-only close-png' > <i class='m-icon-swapup m-icon-white'></i></a>");
+                        td.html("<a href='javascript:;' onclick='controlHidden(false,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only open-png' style='display: none'><i class='m-icon-swapdown m-icon-white'></i></a>" +
+                                "<a href='javascript:;' onclick='controlHidden(true,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only close-png' > <i class='m-icon-swapup m-icon-white'></i></a>");
                     }
                     tr.find(".true-status").val(1).prop("name", namePre + "status");
                     tr.find(".item-cata").val(a.catagory).prop("name", namePre + "catagory");
@@ -334,6 +335,7 @@
                     tbody.append(tr);
                     count++;
                 })
+
             },
         })
     })
@@ -372,7 +374,6 @@
                     var contentHtml = "<input value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
                     if (a.content != "addrow") {
                         contentHtml += a.content;
-                        var pCount = 1;
                         var paramList = a.paramList;
                         if (paramList != null && paramList.length > 0) {
                             for (var m = 0; m < paramList.length; m++) {
@@ -380,18 +381,20 @@
                                     contentHtml += "<br>";
                                 }
                                 var p = eval(paramList[m]);
+                                var pCount = m + 1;
+                                var str = "param" + pCount + "Val";
                                 contentHtml += p.name;
                                 if (p.type == "text") {
-                                    contentHtml += "<input onchange='inputControl(this)' name='" + namePre + "param" + pCount + "Val' class='input-control'>";
+                                    contentHtml += "<input onchange='inputControl(this)' name='" + namePre + str + "' class='input-control'>";
                                 } else if (p.type == "select") {
-                                    contentHtml += "<select name='" + namePre + "param" + pCount + "Val'>";
+                                    contentHtml += "<select name='" + namePre + str + "'>";
                                     $(p.paramValueVariableList).each(function () {
                                         var val = eval(this);
                                         contentHtml += "<option value = '" + val.paramValVariable + "'>" + val.paramValVariable + "</option>";
                                     })
                                     contentHtml += "</select>";
                                 }
-                                pCount++;
+                                contentHtml += p.unit;
                             }
                         }
                         tr.find(".content-td").html(contentHtml);

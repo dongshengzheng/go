@@ -58,7 +58,7 @@
     </ul>
 </div>
 
-<table>
+<table style="display: none">
     <%--维修详单行模板--%>
     <tr class="details-control-child  detail-row" data-parent=""
         style="display: none;" id="detail-row-temp">
@@ -103,7 +103,7 @@
     </tr>
 
 
-    <%--通用服务item模板--%>
+    <%--通用服务item模板(编辑/新增)--%>
     <tr id="genTmp">
         <input type="hidden" class="item-id"
                name="type${outerVs.count}List[${itemVs.index}].id">
@@ -139,8 +139,22 @@
         <td class="show-td"></td>
     </tr>
 
+    <%--通用服务item模板(查看)--%>
+    <tr id="genInfoTmp">
+        <td class="code-td">
+        </td>
+        <td class="content-td">
+        </td>
+        <td class="unit-td"></td>
+        <td class="count-td">
+        </td>
+        <td class="remark-td">
+        </td>
+        <td class="show-td"></td>
+    </tr>
 
-    <%--除通用服务外item模板--%>
+
+    <%--除通用服务外item模板(编辑/新增用)--%>
     <tr id="otherTmp">
         <input type="hidden" class="item-id"
                name="type${outerVs.count}List[${itemVs.index}].id">
@@ -176,6 +190,14 @@
         <td class="remark-td">
         </td>
         <td class="show-td"></td>
+    </tr>
+
+    <%--除通用服务外item模板(查看)--%>
+    <tr id="otherInfoTmp">
+        <td class="proOrderNo-td"></td>
+        <td class="proName-td"></td>
+        <td class="proDesc-td"></td>
+        <td class="look-td"><a href="" data-model="dialog" onclick="lookDetail(this)">查看详细</a></td>
     </tr>
 </table>
 
@@ -371,7 +393,7 @@
         var contentTd = newRow.find(".content-td");
         contentTd.find("button").remove();
         contentTd.find("input").val("");
-        contentTd.find("input").toggle();
+        contentTd.find("input").prop("type", "text");
         //改code
         var oldCode = oldRow.find(".item-code").val();
         var numbers = oldCode.split(".");

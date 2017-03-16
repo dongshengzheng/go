@@ -72,6 +72,7 @@ public class RepairProgController extends BaseController {
         EntityWrapper<RepairProg> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.like("ship_name", keyword);
+        ew.setSqlSelect("id,ship_name,order_no,type,plan_start_date,plan_days,plan_cost,create_date,create_by");
         ew.addFilter("company_id={0}", companyId);
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         for (RepairProg prog : page.getRecords()) {
@@ -114,7 +115,9 @@ public class RepairProgController extends BaseController {
         List<RepairProgDetail> type6 = repairProgDetailService.getDetailByCatagory(id, "冷藏工程");
         List<RepairProgDetail> type7 = repairProgDetailService.getDetailByCatagory(id, "特种设备");
         List<RepairProgDetail> type8 = repairProgDetailService.getDetailByCatagory(id, "其他");
+        List<Dict> cataList = dictService.getListByType("维修工程大类");
         map.put("repairProg", repairProg);
+        map.put("cataList", cataList);
         map.put("type1", type1);
         map.put("type2", type2);
         map.put("type3", type3);
@@ -177,9 +180,9 @@ public class RepairProgController extends BaseController {
     @ResponseBody
     public JSONObject itemChangeStatus(@RequestParam(required = false) Integer id, @RequestParam(required = false) Integer status) {
         JSONObject jsonObject = new JSONObject();
-        RepairProgItem repairProgItem = repairProgItemService.selectById(id);
-        repairProgItem.setTaskStatus(status);
-        if (repairProgItemService.updateById(repairProgItem)) {
+        RepairProgDetail repairProgDetail = repairProgDetailService.selectById(id);
+        repairProgDetail.setTaskStatus(status);
+        if (repairProgDetailService.updateById(repairProgDetail)) {
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);
@@ -258,21 +261,18 @@ public class RepairProgController extends BaseController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "progDetail",method =RequestMethod.GET )
-    public String progDetail(@RequestParam(required = false) Integer id, @RequestParam(required = false) String orderNo, Map map){
-        EntityWrapper<RepairProgDetail> ew=getEntityWrapper();
-        ew.addFilter("repair_prog_id={0}",id);
-        ew.addFilter("pro_order_no={0}",orderNo);
-        RepairProgDetail progDetail= repairProgDetailService.selectOne(ew);
-        String repairPosition=progDetail.getRepairPosition();
-        if(repairPosition!=null){
-            String[] positions=repairPosition.split(",");
-            map.put("positions",positions);
+    @RequestMapping(value = "progDetail", method = RequestMethod.GET)
+    public String progDetail(@RequestParam(required = false) Integer id, Map map) {
+        RepairProgDetail progDetail = repairProgDetailService.selectById(id);
+        String repairPosition = progDetail.getRepairPosition();
+        if (repairPosition != null) {
+            String[] positions = repairPosition.split(",");
+            map.put("positions", positions);
         }
-        String repairTech=progDetail.getRepairTech();
-        if(repairTech!=null){
-            String[] techs=repairTech.split(",");
-            map.put("techs",techs);
+        String repairTech = progDetail.getRepairTech();
+        if (repairTech != null) {
+            String[] techs = repairTech.split(",");
+            map.put("techs", techs);
         }
 
         EntityWrapper<Dict> ew1 = new EntityWrapper<>();
@@ -283,10 +283,10 @@ public class RepairProgController extends BaseController {
         ew2.addFilter("type={0}", "修理工艺");
         List<Dict> reqDicts = dictService.selectList(ew2);
 
-        map.put("repDicts",repDicts);
-        map.put("reqDicts",reqDicts);
+        map.put("repDicts", repDicts);
+        map.put("reqDicts", reqDicts);
 
-        map.put("proDetail",progDetail);
+        map.put("proDetail", progDetail);
         return "go/repairProg/detail";
 
     }
@@ -294,12 +294,12 @@ public class RepairProgController extends BaseController {
     //获取repairModelDetailReq信息
     @RequestMapping(value = "/reqs", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject demo(@RequestParam(required =false) Integer id) {
+    public JSONObject demo(@RequestParam(required = false) Integer id) {
         JSONObject jsonObject = new JSONObject();
         EntityWrapper<RepairProgDetailReq> ew = new EntityWrapper<>();
         ew.addFilter("repair_prog_detail_id={0}", id);
-        List<RepairProgDetailReq> repairProgDetailReqs=repairProgDetailReqService.selectList(ew);
-        jsonObject.put("reqs",repairProgDetailReqs);
+        List<RepairProgDetailReq> repairProgDetailReqs = repairProgDetailReqService.selectList(ew);
+        jsonObject.put("reqs", repairProgDetailReqs);
         return jsonObject;
     }
 

@@ -44,7 +44,7 @@ public class PolicyController {
         String host = "http://" + bucket + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
         try {
-            long expireTime = 30;
+            long expireTime = 3000;
             long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
             Date expiration = new Date(expireEndTime);
             PolicyConditions policyConds = new PolicyConditions();
@@ -61,9 +61,10 @@ public class PolicyController {
             map.put("signature", postSignature);
             map.put("dir", dir);
             map.put("host", host);
-            map.put("expire", String.valueOf(expireEndTime / 1000));
+//            map.put("expire", String.valueOf(expireEndTime / 1000));
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return map;
     }

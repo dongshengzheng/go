@@ -9,16 +9,8 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <style>
-    .red {
-        color: red;
-    }
-
     .portlet.box > .portlet-title > .tools > a.collapse {
         background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);
-    }
-
-    .details-control {
-        cursor: pointer;
     }
 
     .table-striped > tbody > tr.details-control-child:nth-of-type(odd) {
@@ -70,10 +62,8 @@
 <go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/edit" method="post"
       id="defForm" callfn="refreshTable">
-    <input type="hidden" name="modelId" value="${repairSpec.modelId}">
-    <input type="hidden" name="id" value="${repairSpec.id}">
-    <input type="hidden" name="delFlag" value="${repairSpec.delFlag}">
-    <input type="hidden" name="companyId" value="${repairSpec.companyId}">
+    <input id="modelId" type="hidden" name="modelId" value="${repairSpec.modelId}">
+    <input id="specId" type="hidden" name="id" value="${repairSpec.id}">
     <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
@@ -168,14 +158,7 @@
                                         <div class="portlet-title" style="background-color: #00aaaa">
                                             <div class="caption">
                                                 <i class="fa fa-cog"></i>
-                                                <c:if test="${outerVs.count==1}">通用服务</c:if>
-                                                <c:if test="${outerVs.count==2}">坞修工程</c:if>
-                                                <c:if test="${outerVs.count==3}">船体工程</c:if>
-                                                <c:if test="${outerVs.count==4}">机械工程</c:if>
-                                                <c:if test="${outerVs.count==5}">电气工程</c:if>
-                                                <c:if test="${outerVs.count==6}">冷藏工程</c:if>
-                                                <c:if test="${outerVs.count==7}">特种设备</c:if>
-                                                <c:if test="${outerVs.count==8}">其他</c:if>
+                                                    ${cataList[outerVs.count-1].des}
                                             </div>
                                             <div class="tools">
                                                 <a href="javascript:;" class="collapse"> </a>
@@ -199,96 +182,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <c:forEach items="${requestScope[type]}" var="item"
-                                                               varStatus="itemVs">
-                                                        <c:if test="${item.parentCode!='0'}">
-                                                            <tr class="details-control-child" data-parent="${item.parentCode}" data-code="${item.code}">
-                                                        </c:if>
-                                                        <c:if test="${item.parentCode=='0'}">
-                                                            <tr class="top-row" data-parent="${item.parentCode}" data-code="${item.code}">
-                                                        </c:if>
-                                                        <td>
-                                                                ${item.code}
-                                                        </td>
-                                                        <td>
-                                                                ${item.content}
-                                                            <input type="hidden" value="${item.content}"
-                                                                   name="type${outerVs.count}List[${itemVs.index}].content">
-                                                            <c:forEach items="${item.paramList}" var="p"
-                                                                       varStatus="vs">
-                                                                <c:if test="${(!(vs.count==1))||((vs.count==1)&&(!empty item.content))}">
-                                                                    <br>
-                                                                </c:if>
-                                                                ${p.name}
-                                                                <c:if test="${p.type=='text'}">
-                                                                    <c:set var="value"
-                                                                           value="param${vs.count}Val"></c:set>
-                                                                    <input name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val"
-                                                                           class="input-control" value="${item[value]}">
-                                                                </c:if>
-                                                                <c:if test="${p.type=='select'}">
-                                                                    <select name="type${outerVs.count}List[${itemVs.index}].param${vs.count}Val">
-                                                                        <c:forEach
-                                                                                items="${p.paramValueVariableList}"
-                                                                                var="val">
-                                                                            <option value="${val.paramValVariable}">${val.paramValVariable}</option>
-                                                                        </c:forEach>
-                                                                    </select>
-                                                                </c:if>
-                                                                ${p.unit}
-                                                            </c:forEach>
-                                                        </td>
-                                                        <td>${item.unit}</td>
-                                                        <td><c:if test="${!empty item.unit}"><input
-                                                                class="col-md-12 input-control" value="${item.count}"
-                                                                name="type${outerVs.count}List[${itemVs.index}].count"></c:if>
-                                                        </td>
-                                                        <td><c:if test="${item.parentCode=='0'}">
-                                                            <a class="add-remark" data-toggle="modal"
-                                                               onclick="addRemark(this)" onmouseover="showRemark(this)"
-                                                               onmouseout="showRemark(this)"
-                                                               href="#responsive">显示备注 </a>
-                                                            <textarea class="remark-text"
-                                                                      name="type${outerVs.count}List[${itemVs.index}].remark"
-                                                                      cols="60"
-                                                                      rows="10"
-                                                                      wrap="hard" placeholder="暂未添加备注"
-                                                                      value="${item.remark}"
-                                                                      style="display: none"></textarea></c:if>
-                                                        </td>
-                                                        <c:if test="${item.children==1}">
-                                                            <td class="details-control" data-code="${item.code}">
-                                                                <a href="javascript:;"
-                                                                   onclick="controlHidden(false,'${item.code}',this)"
-                                                                   class="btn btn-circle blue m-icon m-icon-only open-png"
-                                                                   style="display: none">
-                                                                    <i class="m-icon-swapdown m-icon-white"></i>
-                                                                </a>
-                                                                <a href="javascript:;"
-                                                                   onclick="controlHidden(true,'${item.code}',this)"
-                                                                   class="btn btn-circle blue m-icon m-icon-only close-png"
-                                                                >
-                                                                    <i class="m-icon-swapup m-icon-white"></i>
-                                                                </a>
-                                                            </td>
-                                                        </c:if>
-                                                        <c:if test="${item.children==0}">
-                                                            <td>
-                                                            </td>
-                                                        </c:if>
-                                                        </tr>
-                                                    </c:forEach>
-                                                    <c:if test="${(fn:length(requestScope[type]))==0}">
-                                                        <tr>
-                                                            <td colspan="7" style="text-align: center">无维修项目</td>
-                                                        </tr>
-                                                    </c:if>
                                                     </tbody>
                                                 </c:if>
                                                     <%--通用服务结束--%>
                                                     <%--除通用服务外开始--%>
                                                 <c:if test="${outerVs.count!=1}">
-                                                    <tbody>
                                                     <thead>
                                                     <tr>
                                                         <th style="width:10%">工程单号</th>
@@ -297,22 +195,7 @@
                                                         <th style="width:10%">操作</th>
                                                     </tr>
                                                     </thead>
-                                                    <c:forEach items="${requestScope[type]}" var="detail">
-                                                        <tr>
-                                                            <td>${detail.proOrderNo}</td>
-                                                            <td class="proName">${detail.proName}</td>
-                                                            <td class="proDesc">${detail.proDesc}</td>
-                                                            <td>
-                                                                <a href="repairSpecDetail/editSpecDetail?id=${detail.id}"
-                                                                   data-model="dialog" class="look-info">查看详细</a>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                    <c:if test="${(fn:length(requestScope[type]))==0}">
-                                                        <tr>
-                                                            <td colspan="6" style="text-align: center">无维修详单</td>
-                                                        </tr>
-                                                    </c:if>
+                                                    <tbody>
                                                     </tbody>
                                                 </c:if>
                                                     <%--除通用服务外结束--%>
@@ -334,13 +217,117 @@
 
 <jsp:include page="common.jsp"></jsp:include>
 <script>
+    var specId = $("#specId").val();
+    var modelId = $("#modelId").val();
+
+
+    <%--初始化通用服务item--%>
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: 'repairSpec/getSpecInfoItem',
+            data: {
+                specId: specId,
+                catagory: "通用服务",
+                modelId: modelId
+            },
+            success: function (data) {
+                var tbody = $("#item1").find("tbody");
+                if (data != null && data.length > 0) {
+
+                    $(data).each(function () {
+                        var a = eval(this);
+                        var tr = $("#genInfoTmp").clone().removeAttr("id");
+                        tr.attr("data-parent", a.parentCode).attr("data-code", a.code);
+                        if (a.parentCode == 0) {
+                            tr.addClass("top-row");
+                        } else {
+                            tr.addClass("details-control-child");
+                        }
+                        tr.find(".code-td").html(a.code);
+                        var contentHtml = "";
+                        contentHtml += a.content;
+                        var paramList = a.paramList;
+                        if (paramList != null && paramList.length > 0) {
+                            for (var m = 0; m < paramList.length; m++) {
+                                if ((m == 0 && a.content != "") || m != 0) {
+                                    contentHtml += "<br>";
+                                }
+                                var p = eval(paramList[m]);
+                                var pCount = m + 1;
+                                contentHtml += p.name;
+                                var str = "param" + pCount + "Val";
+                                var pValue = a[str];
+                                contentHtml += pValue + p.unit;
+                            }
+                        }
+                        tr.find(".content-td").html(contentHtml);
+                        tr.find(".unit-td").html(a.unit);
+                        tr.find(".count-td").html(a.count);
+                        if (a.parentCode == 0) {
+                            tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>查看备注</a> <textarea class='remark-text' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
+                        }
+                        if (a.children != 0) {
+                            var td = tr.find(".show-td");
+                            td.addClass("details-control").attr("data-code", a.code);
+                            td.html("<a href='javascript:;' onclick='controlHidden(false,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only open-png' style='display: none'><i class='m-icon-swapdown m-icon-white'></i></a>" +
+                                    "<a href='javascript:;' onclick='controlHidden(true,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only close-png' > <i class='m-icon-swapup m-icon-white'></i></a>");
+                        }
+                        tbody.append(tr);
+                    })
+                    tbody.find("input").prop("readonly", true);
+                } else {
+                    tbody.html("<tr><td colspan='6'>无项目信息</td></tr>")
+                }
+            },
+        })
+    })
+
+    <%--初始化除通用服务外其他item--%>
+    $(function () {
+        var catagory = ["", "坞修工程", "船体工程", "机械工程", "电气工程", "冷藏工程", "特种设备", "其他"];
+        for (var n = 1; n < catagory.length; n++) {
+            getItem(catagory[n], n)
+        }
+    })
+
+    function getItem(catagory, num) {
+        $.ajax({
+            type: "GET",
+            url: 'repairSpec/getSpecInfoItem',
+            data: {
+                specId: specId,
+                catagory: catagory,
+                modelId: modelId
+            },
+            success: function (data) {
+                var tbody = $("#item" + (num * 1 + 1)).find("tbody");
+                var count = 0;
+                if (data != null && data.length > 0) {
+                    $(data).each(function () {
+                        var a = eval(this);
+                        var tr = $("#otherInfoTmp").clone().removeAttr("id");
+                        tr.find(".proOrderNo-td").html(a.proOrderNo);
+                        tr.find(".proName-td").html(a.proName);
+                        tr.find(".proDesc-td").html(a.proDesc);
+                        tr.find("a").attr("href", "repairSpecDetail/editSpecDetail?id=" + a.id);
+                        tbody.append(tr);
+                    })
+                } else {
+                    tbody.html("<tr><td colspan='4'>无详单信息</td></tr>")
+                }
+            },
+        })
+    }
+
     $("input").prop("readonly", true);
-    $(".look-info").on("click", function () {
+    $("textarea").prop("readonly", true);
+    function lookDetail(obj) {
         $(".marked-detail-name").removeClass("marked-detail-name");
         $(".marked-detail-desc").removeClass("marked-detail-desc");
-        var tr = $(this).parents("tr");
+        var tr = $(obj).parents("tr");
         tr.find(".proName").addClass("marked-detail-name");
         tr.find(".proDesc").addClass("marked-detail-desc");
-    })
+    }
 </script>
 

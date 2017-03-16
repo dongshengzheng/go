@@ -159,7 +159,7 @@
                     <div class="col-md-4" style="border-left: 1px dotted lightgrey;">
                         <p><fmt:message key="company_logo"></fmt:message></p>
                         <img id="logo-img"
-                             src="http://windyeel.img-cn-shanghai.aliyuncs.com/${company.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
+                             src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${company.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
                              style="display: block;width: 50%;height: 50%"
                              onerror="nofind(1)"/>
                         <input type="hidden" id="logo" name="logo" value="${company.logo}">

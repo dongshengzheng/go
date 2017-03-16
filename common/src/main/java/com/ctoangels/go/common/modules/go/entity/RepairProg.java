@@ -39,7 +39,7 @@ public class RepairProg implements Serializable {
     private Integer shipId;
 
     /**
-     * 船的id
+     * 船名
      */
     @TableField(value = "ship_name")
     private String shipName;

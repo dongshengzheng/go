@@ -84,8 +84,9 @@ public class RepairSpecController extends BaseController {
         EntityWrapper<RepairSpec> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.like("ship_name", keyword);
+        ew.setSqlSelect("id,ship_name,order_no,type,company_name,create_date,create_by,plan_start_date,plan_days,plan_cost");
         ew.addFilter("company_id={0}", companyId);
-        ew.orderBy("updateDate", false);
+        ew.orderBy("update_date", false);
         Page<RepairSpec> page = repairSpecService.selectPage(getPage(), ew);
         for (RepairSpec spec : page.getRecords()) {
             spec.setType(dictService.getDesByTypeAndValue("维修类型", spec.getType()));
@@ -105,7 +106,7 @@ public class RepairSpecController extends BaseController {
         map.put("companyId", companyId);
         map.put("companyName", companyName);
         map.put("shipList", shipList);
-        map.put("catagory", cataList);
+        map.put("cataList", cataList);
         return "go/repairSpec/add";
     }
 
@@ -151,26 +152,28 @@ public class RepairSpecController extends BaseController {
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
         repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType()));
-        Integer modelId = repairSpec.getModelId();
-        List<RepairSpecItem> type1 = repairSpecItemService.bySpecIdAndCatagoryForInfo(id, "通用服务", modelId);
-        List<RepairSpecDetail> type2 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "坞修工程");
-        List<RepairSpecDetail> type3 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "船体工程");
-        List<RepairSpecDetail> type4 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "机械工程");
-        List<RepairSpecDetail> type5 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "电气工程");
-        List<RepairSpecDetail> type6 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "冷藏工程");
-        List<RepairSpecDetail> type7 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "特种设备");
-        List<RepairSpecDetail> type8 = repairSpecDetailService.getListBySpecIdAndCatagory(id, "其他");
+        List<Dict> cataList = dictService.getListByType("维修工程大类");
         map.put("repairSpec", repairSpec);
         map.put("typeList", dictService.getListByType("维修类型"));
-        map.put("type1", type1);
-        map.put("type2", type2);
-        map.put("type3", type3);
-        map.put("type4", type4);
-        map.put("type5", type5);
-        map.put("type6", type6);
-        map.put("type7", type7);
-        map.put("type8", type8);
+        map.put("cataList", cataList);
         return "go/repairSpec/info";
+    }
+
+    @RequestMapping(value = "/getSpecInfoItem", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONArray getSpecInfoItem(String catagory, Integer specId, Integer modelId) {
+        JSONArray jsonArray = null;
+        SerializerFeature feature = SerializerFeature.DisableCircularReferenceDetect;
+        if (!"通用服务".equals(catagory)) {
+            List<RepairSpecDetail> list = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
+            String a = JSON.toJSONString(list, feature);
+            jsonArray = JSONArray.parseArray(a);
+        } else {
+            List<RepairSpecItem> list = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, "通用服务", modelId);
+            String a = JSON.toJSONString(list, feature);
+            jsonArray = JSONArray.parseArray(a);
+        }
+        return jsonArray;
     }
 
     @RequestMapping(value = "/enquiry", method = RequestMethod.GET)

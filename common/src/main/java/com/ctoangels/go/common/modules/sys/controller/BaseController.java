@@ -164,14 +164,14 @@ public class BaseController {
     }
 
 
-    //发送邮件 1.收件人 2.信息 3.标题
+    //发送邮件 1.收件人 2.信息 3.标题 4.附件
     public void sendEmail(String toAddress, String text, String subject, Multipart multipart) {
         Properties props = new Properties();
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         props.put("mail.smtp.host", mailSmtpHost); //smtp服务器地址
-        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
-        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.port", mailSmtpPort);
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.auth", true);  //是否需要认证
@@ -185,7 +185,7 @@ public class BaseController {
             message.setFrom(new InternetAddress(fromAddress)); //设置发出方,使用setXXX设置单用户，使用addXXX添加InternetAddress[]
 
             if (text != null) {
-                message.setText(text); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
+                message.setContent(text, "text/html;charset=utf-8"); //设置文本内容 单一文本使用setText,Multipart复杂对象使用setContent
             }
 
             if (multipart != null) {

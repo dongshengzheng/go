@@ -285,7 +285,6 @@
                     var contentHtml = "<input value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
                     if (a.content != "addrow") {
                         contentHtml += a.content;
-                        var pCount = 1;
                         var paramList = a.paramList;
                         if (paramList != null && paramList.length > 0) {
                             for (var m = 0; m < paramList.length; m++) {
@@ -293,13 +292,14 @@
                                     contentHtml += "<br>";
                                 }
                                 var p = eval(paramList[m]);
+                                var pCount = m + 1;
                                 contentHtml += p.name;
                                 var str = "param" + pCount + "Val";
                                 var pValue = a[str];
                                 if (p.type == "text") {
-                                    contentHtml += "<input value='" + pValue + "' onchange='inputControl(this)' name='" + namePre + "param" + pCount + "Val' class='input-control'>";
+                                    contentHtml += "<input value='" + pValue + "' onchange='inputControl(this)' name='" + namePre + str + "' class='input-control'>";
                                 } else if (p.type == "select") {
-                                    contentHtml += "<select name='" + namePre + "param" + pCount + "Val'>";
+                                    contentHtml += "<select name='" + str + "'>";
                                     $(p.paramValueVariableList).each(function () {
                                         var val = eval(this);
                                         contentHtml += "<option value = '" + val.paramValVariable + "'";
@@ -310,7 +310,7 @@
                                     })
                                     contentHtml += "</select>";
                                 }
-                                pCount++;
+                                contentHtml += p.unit;
                             }
                         }
                         tr.find(".content-td").html(contentHtml);
@@ -333,8 +333,8 @@
                     if (a.children != 0) {
                         var td = tr.find(".show-td");
                         td.addClass("details-control").attr("data-code", a.code);
-                        td.html("<a href='javascript:;' onclick='controlHidden(false,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only open-png'><i class='m-icon-swapdown m-icon-white'></i></a>" +
-                                "<a href='javascript:;' onclick='controlHidden(true,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only close-png' style='display: none'> <i class='m-icon-swapup m-icon-white'></i></a>");
+                        td.html("<a href='javascript:;' onclick='controlHidden(false,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only open-png' style='display: none'><i class='m-icon-swapdown m-icon-white'></i></a>" +
+                                "<a href='javascript:;' onclick='controlHidden(true,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only close-png' > <i class='m-icon-swapup m-icon-white'></i></a>");
                     }
                     if (a.status == "0") {
                         tr.find(".status-control").prop("checked", true);
@@ -391,10 +391,11 @@
                     var contentHtml = "<input value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
                     if (a.content != "addrow") {
                         contentHtml += a.content;
-                        var pCount = 1;
+
                         var paramList = a.paramList;
                         if (paramList != null && paramList.length > 0) {
                             for (var m = 0; m < paramList.length; m++) {
+                                var pCount = m + 1;
                                 if ((m == 0 && a.content != "") || m != 0) {
                                     contentHtml += "<br>";
                                 }
@@ -403,9 +404,9 @@
                                 var str = "param" + pCount + "Val";
                                 var pValue = a[str];
                                 if (p.type == "text") {
-                                    contentHtml += "<input value='" + pValue + "' onchange='inputControl(this)' name='" + namePre + "param" + pCount + "Val' class='input-control'>";
+                                    contentHtml += "<input value='" + pValue + "' onchange='inputControl(this)' name='" + namePre + str + "' class='input-control'>";
                                 } else if (p.type == "select") {
-                                    contentHtml += "<select name='" + namePre + "param" + pCount + "Val'>";
+                                    contentHtml += "<select name='" + namePre + str + "'>";
                                     $(p.paramValueVariableList).each(function () {
                                         var val = eval(this);
                                         contentHtml += "<option value = '" + val.paramValVariable + "'";
@@ -416,7 +417,7 @@
                                     })
                                     contentHtml += "</select>";
                                 }
-                                pCount++;
+                                contentHtml += p.unit;
                             }
                         }
                         tr.find(".content-td").html(contentHtml);

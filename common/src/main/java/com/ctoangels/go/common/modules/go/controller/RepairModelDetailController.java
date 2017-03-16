@@ -56,8 +56,8 @@ public class RepairModelDetailController extends BaseController {
         ew1.addFilter("type={0}", "修理工艺");
         List<Dict> reqDicts = dictService.selectList(ew1);
 
-        session.setAttribute("repDicts",repDicts);
-        session.setAttribute("reqDicts",reqDicts);
+        session.setAttribute("repDicts", repDicts);
+        session.setAttribute("reqDicts", reqDicts);
 
         return "go/modelDetail/list";
     }
@@ -69,6 +69,7 @@ public class RepairModelDetailController extends BaseController {
         EntityWrapper<RepairModelDetail> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.like("pro_name", keyword);
+        ew.setSqlSelect("id,pro_name,ship_name,catagory,code");
         ew.addFilter("company_id={0}", companyId);
         Page<RepairModelDetail> page = repairModelDetailService.selectPage(getPage(), ew);
         return jsonPage(page);
@@ -84,12 +85,12 @@ public class RepairModelDetailController extends BaseController {
     //获取repairModelDetailReq信息
     @RequestMapping(value = "/reqs", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject demo(@RequestParam(required =false) Integer id) {
+    public JSONObject demo(@RequestParam(required = false) Integer id) {
         JSONObject jsonObject = new JSONObject();
         EntityWrapper<RepairModelDetailReq> ew = new EntityWrapper<>();
         ew.addFilter("repair_model_detail_id={0}", id);
-        List<RepairModelDetailReq> repairModelDetailReqs=repairModelDetailReqService.selectList(ew);
-        jsonObject.put("reqs",repairModelDetailReqs);
+        List<RepairModelDetailReq> repairModelDetailReqs = repairModelDetailReqService.selectList(ew);
+        jsonObject.put("reqs", repairModelDetailReqs);
         return jsonObject;
     }
 
@@ -99,13 +100,13 @@ public class RepairModelDetailController extends BaseController {
     public JSONObject addModel(RepairModelDetail repairModelDetail, @RequestParam(required = false) String dataJson) {
         repairModelDetail.setCompanyId(getCurrentUser().getCompanyId());
 
-        List<RepairModelDetailReq>reqs=JSONObject.parseArray(dataJson,RepairModelDetailReq.class);
+        List<RepairModelDetailReq> reqs = JSONObject.parseArray(dataJson, RepairModelDetailReq.class);
         JSONObject jsonObject = new JSONObject();
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
-        try{
-            repairModelDetailService.insertDetailAndDetailReq(repairModelDetail,reqs);
+        try {
+            repairModelDetailService.insertDetailAndDetailReq(repairModelDetail, reqs);
             jsonObject.put("success", true);
-        }catch (Exception e){
+        } catch (Exception e) {
             jsonObject.put("success", false);
         }
 
@@ -126,30 +127,30 @@ public class RepairModelDetailController extends BaseController {
     }
 
     //查看和编辑
-    @RequestMapping(value = "info" ,method =RequestMethod.GET)
-    public String info(@RequestParam Integer id,@RequestParam String operate , ModelMap modelMap){
+    @RequestMapping(value = "info", method = RequestMethod.GET)
+    public String info(@RequestParam Integer id, @RequestParam String operate, ModelMap modelMap) {
 
-        RepairModelDetail repairModelDetail=repairModelDetailService.selectById(id);
-        String repairPosition=repairModelDetail.getRepairPosition();
-        if(repairPosition!=null){
-            String[] positions=repairPosition.split(",");
-            modelMap.put("positions",positions);
+        RepairModelDetail repairModelDetail = repairModelDetailService.selectById(id);
+        String repairPosition = repairModelDetail.getRepairPosition();
+        if (repairPosition != null) {
+            String[] positions = repairPosition.split(",");
+            modelMap.put("positions", positions);
         }
-        String repairTech=repairModelDetail.getRepairTech();
-        if(repairTech!=null){
-            String[] techs=repairTech.split(",");
-            modelMap.put("techs",techs);
+        String repairTech = repairModelDetail.getRepairTech();
+        if (repairTech != null) {
+            String[] techs = repairTech.split(",");
+            modelMap.put("techs", techs);
         }
-        modelMap.put("modelDetails",repairModelDetail);
+        modelMap.put("modelDetails", repairModelDetail);
 
         EntityWrapper<RepairModelDetailReq> ew = new EntityWrapper<>();
         ew.addFilter("repair_model_detail_id={0}", repairModelDetail.getId());
-        List<RepairModelDetailReq> repairModelDetailReqs=repairModelDetailReqService.selectList(ew);
-        modelMap.put("detailReqs",repairModelDetailReqs);
+        List<RepairModelDetailReq> repairModelDetailReqs = repairModelDetailReqService.selectList(ew);
+        modelMap.put("detailReqs", repairModelDetailReqs);
 
-        if(operate.equals("look")){
+        if (operate.equals("look")) {
             return "go/modelDetail/info";
-        }else{
+        } else {
             return "go/modelDetail/edit";
         }
 
@@ -161,11 +162,11 @@ public class RepairModelDetailController extends BaseController {
     @ResponseBody
     public JSONObject editModel(RepairModelDetail repairModelDetail, @RequestParam(required = false) String dataJson) {
         JSONObject jsonObject = new JSONObject();
-        List<RepairModelDetailReq> reqs=JSONObject.parseArray(dataJson,RepairModelDetailReq.class);
+        List<RepairModelDetailReq> reqs = JSONObject.parseArray(dataJson, RepairModelDetailReq.class);
         repairModelDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
 
         if (repairModelDetailService.insertOrUpdate(repairModelDetail)) {
-            if(reqs.size()>0) {
+            if (reqs.size() > 0) {
                 for (RepairModelDetailReq r : reqs) {
                     r.setRepairModelDetailId(repairModelDetail.getId());
                 }
@@ -184,12 +185,12 @@ public class RepairModelDetailController extends BaseController {
     /*删除维修范本单*/
     @RequestMapping(value = "delete", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject delete(@RequestParam Integer id){
+    public JSONObject delete(@RequestParam Integer id) {
         JSONObject jsonObject = new JSONObject();
 
-        RepairModelDetail repairModelDetail= repairModelDetailService.selectById(id);
+        RepairModelDetail repairModelDetail = repairModelDetailService.selectById(id);
         repairModelDetail.setDelFlag(Const.DEL_FLAG_DELETE);
-        if(repairModelDetailService.updateById(repairModelDetail)){
+        if (repairModelDetailService.updateById(repairModelDetail)) {
             jsonObject.put("status", 1);
         } else {
             jsonObject.put("status", 0);
