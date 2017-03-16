@@ -437,7 +437,6 @@ public class LoginController extends BaseController {
         sb.append("<img id='img1' src='" + imgPath + "' />");
         sb.append("</a>");
 
-
         sb.append("</body>");
         sb.append("</html>");
 
