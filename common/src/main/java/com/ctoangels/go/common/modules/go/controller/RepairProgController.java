@@ -60,6 +60,9 @@ public class RepairProgController extends BaseController {
     @Autowired
     private IDictService dictService;
 
+    @Autowired
+    private ITaskService taskService;
+
     @RequestMapping
     public String page() {
         return "go/repairProg/list";
@@ -254,7 +257,13 @@ public class RepairProgController extends BaseController {
 
             }
         }
-
+        Task task=new Task();
+        task.setRepairProgId(repairProg.getId());
+        task.setCompanyId(getCurrentUser().getCompanyId());
+        task.setShipName(repairProg.getShipName());
+        task.setShipyard("");
+        task.setStatus(2);
+        taskService.insert(task);
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("status", 1);

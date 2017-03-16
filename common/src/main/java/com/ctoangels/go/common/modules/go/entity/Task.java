@@ -43,8 +43,8 @@ public class Task implements Serializable {
 	@TableField(value = "company_id")
 	private Integer companyId;
 
-	/** 任务状态 */
-	private String status;
+	/** 任务状态：1进行中，0已结束,2未开始 */
+	private Integer status;
 
 	/**  */
 	@TableField(value = "create_by")
@@ -119,11 +119,11 @@ public class Task implements Serializable {
 		this.companyId = companyId;
 	}
 
-	public String getStatus() {
-		return this.status;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
