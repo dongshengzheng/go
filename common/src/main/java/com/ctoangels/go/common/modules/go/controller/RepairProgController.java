@@ -8,6 +8,7 @@ import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.go.service.impl.RepairProgDetailServiceImpl;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.MailUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 
 /**
@@ -257,7 +260,7 @@ public class RepairProgController extends BaseController {
 
             }
         }
-        Task task=new Task();
+        Task task = new Task();
         task.setRepairProgId(repairProg.getId());
         task.setCompanyId(getCurrentUser().getCompanyId());
         task.setShipName(repairProg.getShipName());

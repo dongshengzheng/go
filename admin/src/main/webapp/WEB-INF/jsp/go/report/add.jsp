@@ -224,7 +224,6 @@
             },
         })
 
-
         $(".proImg-td div img").each(function () {
             if (this.width > this.height) {
                 $(this).addClass("width-max")
@@ -245,6 +244,17 @@
                 a.find(".proOrderNo-td").html(progDetail.proOrderNo);
                 a.find(".proName-td").html(progDetail.proName);
                 a.find(".proDesc-td").html(progDetail.proDesc);
+                var taskStatus = progDetail.taskStatus;
+                console.log(taskStatus);
+                if (taskStatus == 0) {
+                    a.find(".taskStatus-td").html("已完成");
+                } else if (taskStatus == 1) {
+                    a.find(".taskStatus-td").html("进行中");
+                } else if (taskStatus == 3) {
+                    a.find(".taskStatus-td").html("已取消");
+                } else {
+                    a.find(".taskStatus-td").html("未开始");
+                }
                 a.find(".description-td").html();
                 a.find(".proImg-td").html();
                 a.find(".proFile-td").html();

@@ -8,6 +8,7 @@ import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.modules.sys.entity.User;
 import com.ctoangels.go.common.modules.sys.service.UserService;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.MailUtil;
 import com.ctoangels.go.common.util.Tools;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Account 控制层
  */
@@ -33,7 +35,6 @@ public class AccountController extends BaseController {
 
     @Autowired
     private IStyleService styleService;
-
 
     @RequestMapping
     public String page() {
@@ -119,7 +120,7 @@ public class AccountController extends BaseController {
             user.setEmail(email);
             user = userService.selectOne(user);
             if (user == null) {
-                sendChangeEmailCode(email, session);
+                MailUtil.sendChangeEmailCode(email, session);
                 jsonObject.put("suc", true);
             } else {
                 jsonObject.put("errInfo", "email used");//邮箱已被使用
@@ -210,22 +211,5 @@ public class AccountController extends BaseController {
         return jsonObject;
     }
 
-
-    //发送更改邮箱时的验证邮件
-    public void sendChangeEmailCode(String toAddress, HttpSession session) {
-        StringBuffer sb = new StringBuffer();
-        String base = "0123456789";
-        Random random = new Random();
-        StringBuilder code = new StringBuilder();
-        for (int i = 0; i < 6; ++i) {
-            int number = random.nextInt(base.length());
-            code.append(base.charAt(number));
-        }
-        session.setAttribute("sessionChangeEmail", toAddress);
-        session.setAttribute("sessionChangeEmailCode", code.toString());
-        sb.append("请尽快使用下面的验证码进行验证");
-        sb.append(code.toString());
-        sendEmail(toAddress, sb.toString(), "更换邮箱", null);
-    }
 
 }

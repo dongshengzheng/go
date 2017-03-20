@@ -8,6 +8,7 @@ import com.ctoangels.go.common.modules.go.entity.Report;
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
 import com.ctoangels.go.common.modules.go.entity.Task;
 import com.ctoangels.go.common.modules.go.service.*;
+import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "report")
-public class ReportController {
+public class ReportController extends BaseController {
     @Autowired
     ITaskService taskService;
 
@@ -51,7 +52,7 @@ public class ReportController {
     @ResponseBody
     public JSONObject list(@RequestParam Integer taskId) {
         JSONObject jsonObject = new JSONObject();
-        //TODO:根据taskId拿到所有未提交的reportDetail
+        //根据taskId拿到所有未提交的reportDetail
         List<ReportDetail> list = reportDetailService.getListByTaskId(taskId);
         jsonObject.put("list", list);
         return jsonObject;
@@ -62,6 +63,8 @@ public class ReportController {
     public JSONObject addComplete(Report report, Integer[] reportDetailId) {
         JSONObject jsonObject = new JSONObject();
         //TODO:1.保存report,2.更新reportDetail状态,3.发送每日报告邮件
+        reportService.saveReportAndUpdateReportDetail(report, reportDetailId);//(TODO:impl还未实现
+
         Boolean flag = true;
         if (flag) {
             jsonObject.put("success", true);

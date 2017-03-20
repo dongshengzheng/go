@@ -12,6 +12,7 @@ import com.ctoangels.go.common.modules.sys.service.LoginService;
 import com.ctoangels.go.common.modules.sys.service.UserService;
 import com.ctoangels.go.common.util.Const;
 import com.ctoangels.go.common.util.MD5;
+import com.ctoangels.go.common.util.MailUtil;
 import com.ctoangels.go.common.util.Tools;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -237,7 +238,7 @@ public class LoginController extends BaseController {
                     newUser.setEmailTime(new Date());
                     newUser.setEmailCode(validateCode);
                     userService.insertOrUpdate(newUser);
-                    sendActivateEmail(email, validateCode);
+                    MailUtil.sendActivateEmail(email, validateCode);
                 }
             }
         } else {
@@ -404,44 +405,5 @@ public class LoginController extends BaseController {
         map.put("sysname", sysName);
         return "sys/admin/login";
     }
-
-
-    //发送注册时的验证邮件
-    public void sendActivateEmail(String toAddress, String validateCode) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("<html>");
-        sb.append("<head>");
-        sb.append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
-        sb.append("<title>Daily Report</title>");
-
-
-        sb.append("<style>");
-        sb.append(" a:hover img {  -webkit-transform: scale(1.5, 1.5);  -moz-transform: scale(1.5, 1.5);  -transform: scale(1.5, 1.5);  }");
-        sb.append("</style>");
-
-        sb.append("</head>");
-        sb.append("<body>");
-        sb.append("点击下面链接激活账号，" + effectiveTime + "分钟生效，否则重新注册账号，链接只能使用一次，请尽快激活!");
-        sb.append("<br>");
-        String href = sitePath + "/register/activate?action=activate&email=" + toAddress + "&validateCode=" + validateCode;
-//        sb.append(sitePath + "/register/activate?action=activate&email=");
-//        sb.append(toAddress);
-//        sb.append("&validateCode=");
-//        sb.append(validateCode);
-        sb.append("<a href='" + href + "'>" + "点击进行激活" + "</a>");
-
-        sb.append("<br>=================================<br>");
-        String imgPath = "https://zhstatic.zhihu.com/eDM/roundtable/chunjiyundong.jpg";
-
-        sb.append("<a href='" + imgPath + "'>");
-        sb.append("<img id='img1' src='" + imgPath + "' />");
-        sb.append("</a>");
-
-        sb.append("</body>");
-        sb.append("</html>");
-
-        sendEmail(toAddress, sb.toString(), "欢迎注册", null);
-    }
-
 
 }

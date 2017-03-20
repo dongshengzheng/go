@@ -10,6 +10,7 @@ import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.MailUtil;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -71,6 +72,7 @@ public class RepairSpecController extends BaseController {
 
     @Autowired
     private IShipService shipService;
+
 
     @RequestMapping
     public String page() {
@@ -197,7 +199,7 @@ public class RepairSpecController extends BaseController {
                 e.printStackTrace();
             }
         }
-        sendEnquiryEmail("1061147291@qq.com", "试发带附件的邮件", fileList);
+        MailUtil.sendEnquiryEmail("1061147291@qq.com", "试发带附件的邮件", fileList);
         return jsonObject;
     }
 
@@ -264,7 +266,7 @@ public class RepairSpecController extends BaseController {
         Matcher m = p.matcher(toAddress);
         Boolean flag = m.matches();
         if (flag) {
-            sendSpecExcelEmail(toAddress, "111", exportSpecExcel(id));
+            MailUtil.sendSpecExcelEmail(toAddress, "111", exportSpecExcel(id));
             errInfo = "success";
         } else {
             errInfo = "email error";
@@ -272,75 +274,6 @@ public class RepairSpecController extends BaseController {
         jsonObject.put("result", errInfo);
         return jsonObject;
     }
-
-
-    //发送询价邮件
-    public void sendEnquiryEmail(String toAddress, String text, List<File> files) {
-        Multipart multipart = new MimeMultipart();
-        //实例化一个bodypart用于封装内容
-        BodyPart bodyPart = new MimeBodyPart();
-        try {
-            bodyPart.setContent("<font color='red'>这个是带有附件的HTML内容</font>", "text/html;charset=utf8");
-            multipart.addBodyPart(bodyPart);
-            //每一个部分实例化一个bodypart，故每个附件也需要实例化一个bodypart
-            for (File file : files) {
-                bodyPart = new MimeBodyPart();
-                //实例化DataSource(来自jaf)，参数为文件的地址
-                DataSource dataSource = new FileDataSource(file.getAbsolutePath());
-                //使用datasource实例化datahandler
-                DataHandler dataHandler = new DataHandler(dataSource);
-                bodyPart.setDataHandler(dataHandler);
-                //设置附件标题，使用MimeUtility进行名字转码，否则接收到的是乱码
-                try {
-                    bodyPart.setFileName(javax.mail.internet.MimeUtility.encodeText(file.getName()));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                //添加bodypart到multipart
-                multipart.addBodyPart(bodyPart);
-            }
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        sendEmail(toAddress, text, "附件", multipart);
-        for (File file : files) {
-            file.delete();
-        }
-    }
-
-
-    //发送SpecExcel
-    public void sendSpecExcelEmail(String toAddress, String text, File excel) {
-        Multipart multipart = new MimeMultipart();
-        //实例化一个bodypart用于封装内容
-        BodyPart bodyPart = new MimeBodyPart();
-        try {
-            bodyPart.setContent("<font color='red'>这个是带有附件的HTML内容</font>", "text/html;charset=utf8");
-            multipart.addBodyPart(bodyPart);
-            //每一个部分实例化一个bodypart，故每个附件也需要实例化一个bodypart
-            bodyPart = new MimeBodyPart();
-            //实例化DataSource(来自jaf)，参数为文件的地址
-            DataSource dataSource = new FileDataSource(excel.getAbsolutePath());
-            //使用datasource实例化datahandler
-            DataHandler dataHandler = new DataHandler(dataSource);
-            bodyPart.setDataHandler(dataHandler);
-            //设置附件标题，使用MimeUtility进行名字转码，否则接收到的是乱码
-            try {
-                bodyPart.setFileName(javax.mail.internet.MimeUtility.encodeText(excel.getName()));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            //添加bodypart到multipart
-            multipart.addBodyPart(bodyPart);
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        sendEmail(toAddress, text, "附件", multipart);
-        excel.delete();
-    }
-
 
     //导出工程单excel
     public File exportSpecExcel(Integer specId) {
@@ -454,7 +387,6 @@ public class RepairSpecController extends BaseController {
             }
         }
 
-        //待完善单独的详单表
         for (Dict dict : dictList) {
             String catagory = dict.getDes();
             detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
