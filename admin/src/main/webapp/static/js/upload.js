@@ -236,7 +236,7 @@ function initUploaders_attachment(buttonId, bucket, domain,tableId, trId ) {
     uploader.init();
 }
 
-function initUploaders_report_img(buttonId, bucket, domain, imgId, inputId) {
+function initUploaders_report_img(buttonId, bucket, domain, imgId, divId) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: buttonId,
@@ -259,7 +259,7 @@ function initUploaders_report_img(buttonId, bucket, domain, imgId, inputId) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
-                $("#" + buttonId).before('<div class="col-md-4" style="padding: 5px;">' +
+                $("#" + divId).before('<div style="float:left;position:relative;margin: 10px">' +
                     '<input name="fileDiskName" type="hidden" value="' + g_object_name + '" >' +//文件存储磁盘的名称
                     '<input name="fileName" type="hidden" value="'+nativeName+'"/> '+//文件原名称
                     '<input name="oss" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '"/> '+

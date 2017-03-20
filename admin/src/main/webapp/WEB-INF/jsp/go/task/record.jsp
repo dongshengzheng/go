@@ -51,9 +51,9 @@
             </div>
             <div class="col-md-12 " ><h4>上传照片</h4></div>
             <div class="col-md-12 borders" >
-                <div class="col-md-4" style="padding: 5px;">
+                <div id="divId" style="margin: 10px">
                     <button id="upload_img" >
-                        <img id="img" src="" style="display: block;width: 100px;height: 100px"
+                        <img id="img" src="" style="width: 100px;height: 100px"
                          onerror="nofind(1)"/>
                     </button>
                 </div>
@@ -132,7 +132,7 @@
     }
 </script>
 <script>
-    initUploaders_report_img("upload_img", "shipinfo", "${staticPath}/", "img", "logo");
+    initUploaders_report_img("upload_img", "shipinfo", "${staticPath}/", "img", "divId");
     initUploaders_attachment("attachment", "shipinfo", "${staticPath}/", "table_attachment","one");
 
     var id=$("#progDetailId").val();
