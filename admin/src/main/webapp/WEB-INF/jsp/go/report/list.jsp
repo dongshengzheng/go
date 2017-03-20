@@ -6,7 +6,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="task"></go:navigater>
+<go:navigater path="ship"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -14,13 +14,13 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            维修工程单汇报
+                            每日报告
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
                                 <shiro:hasPermission name="ship/add">
                                     <a href="ship/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增汇报信息
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
                                     </a>
                                 </shiro:hasPermission>
                             </div>
@@ -31,14 +31,12 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>船舶名称</th>
-                        <th>维修单号</th>
-                        <th>维修状态</th>
-                        <th>维修船厂</th>
-                        <th>最后报告日期</th>
-                        <th>汇报邮箱</th>
-                        <th>查看每日汇报</th>
-                        <th>工程汇报</th>
+                        <th>序号</th>
+                        <th>日期</th>
+                        <th>天气</th>
+                        <th>温度</th>
+                        <th>湿度</th>
+                        <th>所涉及单号</th>
                     </tr>
                     </thead>
                 </table>
@@ -56,9 +54,10 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "task/list",
+                "url": "report/list",
                 "type": "post",
                 "data": function (data) {
+                    data.taskId =${task.id};
                     data.keyword = $("#keyword").val();
                 }
             },
@@ -69,44 +68,25 @@
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
                 {
-                    "data": "shipName",
+                    "data": "id"
                 },
                 {
-                    "data": "shipName",
-                },
-                {
-                    "data": "status",
+                    "data": "publishTime",
                     "render": function (data) {
-                        if (data == 0) {
-                            return "已完成";
-                        } else if (data == 1) {
-                            return "进行中";
-                        } else {
-                            return "未开始";
-                        }
+                        var date = new Date(data);
+                        return date.Format("yyyy-MM-dd");
                     }
                 },
                 {
-                    "data": "shipyard",
+                    "data": "weather"
                 },
                 {
-                    "data": "shipyard",
+                    "data": "temperature"
                 },
                 {
-                    "data": "shipyard",
-                },
-                {
-                    "data": "id",
-                    "render": function (data) {
-                        return "<a href='report?taskId=" + data + "' class='btn btn-sm blue' data-target='navTab'>查看</a>";
-                    }
-                },
-                {
-                    "data": "id",
-                    "render": function (data) {
-                        return "<a href='task/info?id=" + data + "' data-target='navTab'>进入汇报</a>";
-                    }
-                },
+                    "data": "hnmiaity"
+                }
+
 //                {
 //                    "data": "createDate", "type": "date",
 //                    "render": function (data) {
@@ -120,14 +100,34 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船舶名称");
+//                initSearchForm(null, "请输入船厂名称");
             }
         });
+
         $('#myInput').on('keyup', function () {
             defTable.search(this.value).draw();
         });
 
+
     });
+
+    function check(id, status) {
+        if (confirm("确定审核？")) {
+            $.post("/shipinfo/check", {id: id, status: status}, function () {
+                refreshTable();
+            });
+
+        }
+
+    }
+    //
+    //    function      slide(id, slide) {
+    //        if (confirm("确定提交？")) {
+    //            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
+    //                refreshTable();
+    //            });
+    //        }
+    //    }
 
 
     function refreshTable(toFirst) {

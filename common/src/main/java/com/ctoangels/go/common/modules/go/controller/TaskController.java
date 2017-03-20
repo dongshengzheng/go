@@ -38,16 +38,16 @@ public class TaskController extends BaseController {
     @Autowired
     IRepairProgDetailService repairProgDetailService;
 
-    @RequestMapping
-    public String page() {
-        return "go/task/record";
-    }
+//    @RequestMapping
+//    public String page() {
+//        return "go/task/record";
+//    }
 
-  /*  @RequestMapping
+    @RequestMapping
     public String page() {
         return "go/task/list";
     }
-    */
+
     @RequestMapping(value = "/list")
     @ResponseBody
     public JSONObject list(@RequestParam(required = false) String keyword) {

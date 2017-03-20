@@ -28,8 +28,9 @@
         text-align: center;
     }
 </style>
-<input type="hidden" value="${task.id}">
 <form class="form-horizontal" action="report/add" method="post" id="defForm">
+    <input type="hidden" value="${task.id}" name="taskId">
+    <input type="hidden" value="${task.shipName}" name="shipName">
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -54,7 +55,6 @@
                         </div>
                     </div>
 
-
                     <table class="table table-striped table-bordered table-hover table-checkable order-column">
                         <tr>
                             <td style="width: 33%">天气</td>
@@ -62,9 +62,9 @@
                             <td style="width: 33%">湿度</td>
                         </tr>
                         <tr>
-                            <td><input class="form-control"></td>
-                            <td><input class="form-control"></td>
-                            <td><input class="form-control"></td>
+                            <td><input class="form-control" name="weather"></td>
+                            <td><input class="form-control" name="temperature"></td>
+                            <td><input class="form-control" name="hnmiaity"></td>
                         </tr>
                     </table>
 
@@ -78,21 +78,21 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <h4>船员主要工作</h4>
-                            <textarea rows="6" class="form-control" style="resize: none"></textarea>
+                            <textarea rows="6" class="form-control" style="resize: none" name=""></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
                             <h4>船检反馈情况</h4>
-                            <textarea rows="6" class="form-control" style="resize: none"></textarea>
+                            <textarea rows="6" class="form-control" style="resize: none" name=""></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
                             <h4>明日工作计划</h4>
-                            <textarea rows="6" class="form-control" style="resize: none"></textarea>
+                            <textarea rows="6" class="form-control" style="resize: none" name="tomorrowPlan"></textarea>
                         </div>
                     </div>
 
@@ -102,9 +102,8 @@
                         </div>
                     </div>
 
-                    <div id="marked"></div>
-
                     <div id="bootstrap_alerts_demo"></div>
+
                     <div class="modal-footer" style="text-align: center" id="item9">
                         <shiro:hasPermission name="report/add">
                             <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
@@ -122,6 +121,7 @@
 
 <table id="reportDetailTmp" style="display: none"
        class="table table-striped table-bordered table-hover table-checkable">
+    <input type="hidden" name="reportDetailId" class="reportDetailId">
     <tr>
         <td style="width: 20%">S/N</td>
         <td style="width: 80%">描述</td>
@@ -147,16 +147,27 @@
         <td class="proImg-td">
             <div class="col-md-3">
                 <a target="_blank"
-                   href="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png"><img
-                        src="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png"></a>
+                   href="${ctx}/assets/layouts/layout/img/bg/4.jpg"><img
+                        src="${ctx}/assets/layouts/layout/img/bg/4.jpg"></a>
             </div>
             <div class="col-md-3">
-                <a target="_blank" href="/img/top.png"><img src="/img/top.png"></a>
+                <a target="_blank" href="${ctx}/assets/layouts/layout/img/bg/5.jpg"><img
+                        src="${ctx}/assets/layouts/layout/img/bg/5.jpg"></a>
             </div>
             <div class="col-md-3">
                 <a target="_blank"
-                   href="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png"><img
-                        src="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png"></a>
+                   href="${ctx}/assets/layouts/layout/img/bg/1.jpg"><img
+                        src="${ctx}/assets/layouts/layout/img/bg/1.jpg"></a>
+            </div>
+            <div class="col-md-3">
+                <a target="_blank"
+                   href="${ctx}/assets/layouts/layout/img/bg/6.jpg"><img
+                        src="${ctx}/assets/layouts/layout/img/bg/6.jpg"></a>
+            </div>
+            <div class="col-md-3">
+                <a target="_blank"
+                   href="${ctx}/assets/layouts/layout/img/sidebar_arrow_icon_light_rtl.png"><img
+                        src="${ctx}/assets/layouts/layout/img/sidebar_arrow_icon_light_rtl.png"></a>
             </div>
         </td>
     </tr>
@@ -221,17 +232,17 @@
             },
             success: function (data) {
                 appendReportDetail(data.list);
+                $('.proImg-td div img').each(function () {
+                    $(this).load(function () {
+                        if (this.width > this.height) {
+                            $(this).addClass("width-max")
+                        } else {
+                            $(this).addClass("height-max")
+                        }
+                    });
+                });
             },
         })
-
-        $(".proImg-td div img").each(function () {
-            if (this.width > this.height) {
-                $(this).addClass("width-max")
-            } else {
-                $(this).addClass("height-max")
-            }
-        })
-
     })
 
 
@@ -241,6 +252,7 @@
                 var reportDetail = eval(this);
                 var progDetail = reportDetail.repairProgDetail;
                 var a = $("#reportDetailTmp").clone().toggle().removeAttr("id");
+                a.find(".reportDetailId").val(reportDetail.id);
                 a.find(".proOrderNo-td").html(progDetail.proOrderNo);
                 a.find(".proName-td").html(progDetail.proName);
                 a.find(".proDesc-td").html(progDetail.proDesc);
@@ -258,13 +270,8 @@
                 a.find(".description-td").html();
                 a.find(".proImg-td").html();
                 a.find(".proFile-td").html();
-                $("#marked").before(a);
+                $("#bootstrap_alerts_demo").before(a);
             })
-        } else {
-
         }
-
     }
-
-
 </script>

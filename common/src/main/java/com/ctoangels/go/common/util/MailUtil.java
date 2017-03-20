@@ -1,5 +1,6 @@
 package com.ctoangels.go.common.util;
 
+import com.ctoangels.go.common.modules.go.entity.Report;
 import com.ctoangels.go.common.modules.sys.entity.MailAuthenticator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,9 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.Security;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by lenovo on 2017/3/20.
@@ -246,5 +245,334 @@ public class MailUtil {
         }
         MailUtil.sendEmail(toAddress, text, "附件", multipart);
         excel.delete();
+    }
+
+
+    //发送每日报告邮件
+    public static void sendReportEmail(Report report, Integer[] reportDetailId) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("<html>");
+        sb.append("<head>");
+        sb.append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
+        sb.append("<title>Daily Report</title>");
+        sb.append("</head>");
+        sb.append("<body>");
+        sb.append("<table width='100%' cellpadding='0' cellspacing='0' bgcolor='ffffff'>");
+        sb.append("<tr>");
+        sb.append("<td>");
+        sb.append(
+                "<table id='top-message' style='border-top: solid 1px rgba(5, 5, 5, 0.2);border-left: solid 1px rgba(5, 5, 5, 0.2);border-right: solid 1px rgba(5, 5, 5, 0.2);' bgcolor='e4e4e4' cellpadding='10' cellspacing='0' width='600' align='center'>");
+        sb.append("<tbody>");
+        sb.append("<tr>");
+        sb.append("<td align='center' height='40px;'><span style='font-size: 24px;'><b>Daily Report</b></span></td>");
+        sb.append("</tr>");
+        sb.append("<tr>");
+        sb.append("<td align='right'><span style='font-size: 18px;'>");
+        // 设置发送时间
+        sb.append(DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        sb.append("</span></td>");
+        sb.append("</tr>");
+        sb.append("</tbody>");
+        sb.append("</table>");
+        sb.append(
+                "<table id='main' style='border-bottom: solid 1px rgba(5, 5, 5, 0.2);border-left: solid 1px rgba(5, 5, 5, 0.2);border-right: solid 1px rgba(5, 5, 5, 0.2);' bgcolor='e4e4e4' cellpadding='10' cellspacing='0' width='600' align='center'>");
+        sb.append("<tr>");
+        sb.append("<td>");
+        sb.append("<table style='width: 100%;border-spacing: 0;' bgcolor='#ffffff' >");
+        sb.append("<tbody>");
+        sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'><b>SHIP NAME</b>");
+        sb.append(" </td>");
+        sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        // 设置船名
+        sb.append("我是船名");
+        sb.append("</td>");
+        sb.append("</tr>");
+        sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'><b>Weather</b></td>");
+        sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        // 设置天气
+        sb.append(report.getWeather());
+        sb.append("</td>");
+        sb.append("</tr>");
+        sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        sb.append(" <td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        sb.append("<b>Temperature(°C)</b>");
+        sb.append(" </td>");
+        sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        // 设置温度
+        sb.append(report.getTemperature());
+        sb.append("</td>");
+
+        sb.append("</tr>");
+        sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        sb.append(" <td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'><b>Humidity(%)</b>");
+        sb.append("</td>");
+        sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+        // 设置湿度
+        sb.append(report.getHnmiaity());
+        sb.append("</td>");
+        sb.append("</tr>");
+        sb.append("</tbody>");
+        sb.append("</table>");
+        sb.append("</td>");
+        sb.append("</tr>");
+
+        // 设置MEMO
+        sb.append("<tr>");
+        sb.append("<td>");
+        sb.append("<div style=' background-color: #FFFFFF;margin-top: 5px;'>");
+        sb.append("<div style='padding: 3px;'>");
+        sb.append(" <span style='height: 2em ;line-height: 2em'><b>Memo</b></span>");
+        sb.append(" </div>");
+        sb.append("<div style='border-top: solid 1px rgba(5, 5, 5, 0.2);padding: 3px;'>");
+        sb.append(
+                "<p>" + "wowowowo" + "  " + DateUtil.formatDate(new Date(), "yyyy-MM-dd HH:mm") + "</p>");
+        String memo = report.getMemo();
+        if (memo == null || memo.equals("")) {
+            memo = "NONE";
+        }
+        sb.append("<p>" + memo + "</p>");
+        sb.append("</div>");
+
+        sb.append("</div>");
+        sb.append("</td>");
+        sb.append("</tr>");
+
+        // 设置明日计划
+        sb.append("<tr>");
+        sb.append("<td>");
+        sb.append("<div style=' background-color: #FFFFFF;margin-top: 5px;'>");
+        sb.append("<div style='padding: 3px;'>");
+        sb.append(" <span style='height: 2em ;line-height: 2em'><b>Tomorrow Plan</b></span>");
+        sb.append(" </div>");
+        sb.append("<div style='border-top: solid 1px rgba(5, 5, 5, 0.2);padding: 3px;'>");
+        String tomorrowPlan = report.getTomorrowPlan();
+        if (tomorrowPlan == null || tomorrowPlan.equals("")) {
+            tomorrowPlan = "NONE";
+        }
+        sb.append("<p>" + tomorrowPlan + "</p>");
+        sb.append("</div>");
+
+        sb.append("</div>");
+        sb.append("</td>");
+        sb.append("</tr>");
+
+        // 设置当日工作
+        sb.append("<tr>");
+        sb.append("<td>");
+        sb.append("<div style=' background-color: #FFFFFF;margin-top: 5px;'>");
+        sb.append("<div style='padding: 3px;'>");
+        sb.append(" <span style='height: 2em ;line-height: 2em'><b>The major job scope of the crew on duty</b></span>");
+        sb.append(" </div>");
+        sb.append("<div style='border-top: solid 1px rgba(5, 5, 5, 0.2);padding: 3px;'>");
+        String crewJob = report.getCrewJob();
+        if (crewJob == null || crewJob.equals("")) {
+            crewJob = "NONE";
+        }
+        sb.append("<p>" + crewJob + "</p>");
+        sb.append("</div>");
+
+        sb.append("</div>");
+        sb.append("</td>");
+        sb.append("</tr>");
+
+        // 设置检查员状态
+        sb.append("<tr>");
+        sb.append("<td>");
+        sb.append("<div style=' background-color: #FFFFFF;margin-top: 5px;'>");
+
+        sb.append("<div style='padding: 3px;'>");
+        sb.append(" <span style='height: 2em ;line-height: 2em'><b>The status with the inspector/surveyor</b></span>");
+        sb.append(" </div>");
+        sb.append("<div style='border-top: solid 1px rgba(5, 5, 5, 0.2);padding: 3px;'>");
+        String surveyorStatus = report.getSurveyorStatus();
+        if (surveyorStatus == null || surveyorStatus.equals("")) {
+            surveyorStatus = "NONE";
+        }
+        sb.append("<p>" + surveyorStatus + "</p>");
+        sb.append("</div>");
+        sb.append("</div>");
+        sb.append("</td>");
+        sb.append("</tr>");
+
+//        // 设置events
+//        if (report.getEvents() != null && report.getEvents().size() > 0) {
+//            sb.append("<tr>");
+//            sb.append("<td>");
+//            sb.append("<div style=' background-color: #FFFFFF;margin-top: 5px;'>");
+//            sb.append("<div style='padding: 3px;'>");
+//            sb.append("<span style='height: 2em ;line-height: 2em'><b>EVENT</b></span>");
+//            sb.append("</div>");
+//
+//            for (Event event : report.getEvents()) {
+//                sb.append("<div style='border-top: solid 1px rgba(5, 5, 5, 0.2);padding: 3px;'>");
+//                sb.append("<p>" + reporter + "  " + DateUtils.formatDate(event.getBuildTime(), "yyyy-MM-dd HH:mm")
+//                        + "</p>");
+//                sb.append("<p>" + event.getDescription() + "</p>");
+//                sb.append("</div>");
+//            }
+//
+//            sb.append("</div>");
+//            sb.append("</td>");
+//            sb.append("</tr>");
+//        }
+//
+//
+//
+//
+//        // 设置Item
+//        if (itemVos != null && itemVos.size() > 0) {
+//            //排序 找出新增项排在前面
+//            Collections.sort(itemVos,new Comparator<QuotationItemVo>() {
+//                @Override
+//                public int compare(QuotationItemVo o1, QuotationItemVo o2) {
+//
+//                    return o2.getIsAdd().compareTo(o1.getIsAdd());
+//                }
+//            });
+//            for (QuotationItemVo itemVo : itemVos) {
+//
+//                sb.append("<tr>");
+//                sb.append("<td>");
+//                sb.append("<table style='width: 100%;border-spacing: 0;margin-top: 5px;' bgcolor='#ffffff' > ");
+//                sb.append("<thead>");
+//                sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                sb.append("<th style='width: 25%'>S/N</th>");
+//                if(itemVo.getIsAdd().equals(1)){
+//                    sb.append("<th style='width: 75%'>ITEM DESCRIPTION <span style='color:red'> ADD </span></th>");
+//                }else{
+//                    sb.append("<th style='width: 75%'>ITEM DESCRIPTION</th>");
+//                }
+//                sb.append("</tr>");
+//                sb.append("</thead>");
+//                sb.append("<tbody>");
+//
+//                sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>"
+//                        + itemVo.getKeyNo() + "</td>");
+//                sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                sb.append(itemVo.getDescription());
+//                sb.append("</td>");
+//                sb.append("</tr>");
+//                sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>STATUS</td>");
+//                sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>"
+//                        + itemVo.getStatus() + "</td>");
+//                sb.append("</tr>");
+//                List<ReportItemMemoVo> memos = itemVo.getMemos();
+//
+//                if (memos.size() == 1) {
+//                    sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                    sb.append("<td  style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                    sb.append(" MEMO");
+//                    sb.append("</td>");
+//                    sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                    sb.append("<p>" + reporter + " "
+//                            + DateUtils.formatDate(memos.get(0).getCreateTime(), "yyyy-MM-dd HH:mm") + "</p>");
+//                    sb.append("<p>" + memos.get(0).getMemo() + "</p>");
+//                    if (memos.get(0).getMemoPics() != null && memos.get(0).getMemoPics().size() > 0) {
+//                        sb.append("<p>See the images :</p>");
+//                        int i = 1;
+//                        for (MemoMedia memoMedia : memos.get(0).getMemoPics()) {
+//                            sb.append("<p> " + i + "、<a href='" + memoMedia.getOss()
+//                                    + "' > chinese line </a> <a style='margin-left:10px' href='" + memoMedia.getS3()
+//                                    + "'> global line </a></p>");
+//                            i++;
+//                        }
+//                    }
+//                    MemoMedia audio = memos.get(0).getMemoAudio();
+//                    if (audio != null) {
+//                        sb.append("<p>download the audio:</p>");
+//                        sb.append("<p><a href='" + audio.getOss()
+//                                + "' > chinese line </a> <a style='margin-left:10px' href='" + audio.getS3()
+//                                + "' > global line </a></p>");
+//                    }
+//                    sb.append(" </td>");
+//                    sb.append("</tr>");
+//                } else if (memos.size() > 1) {
+//                    sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                    int length = memos.size() + 1;
+//                    sb.append("<td  rowspan='" + length
+//                            + "' style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                    sb.append(" MEMO");
+//                    sb.append("</td>");
+//                    sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                    sb.append("<p>" + reporter + " "
+//                            + DateUtils.formatDate(memos.get(0).getCreateTime(), "yyyy-MM-dd HH:mm") + "</p>");
+//                    sb.append("<p>" + memos.get(0).getMemo() + "</p>");
+//                    if (memos.get(0).getMemoPics() != null && memos.get(0).getMemoPics().size() > 0) {
+//                        sb.append("<p>See the images :</p>");
+//                        int m = 1;
+//                        for (MemoMedia memoMedia : memos.get(0).getMemoPics()) {
+//                            sb.append("<p>" + m + "、<a href='" + memoMedia.getOss()
+//                                    + "' > chinese line </a> <a style='margin-left:10px' href='" + memoMedia.getS3()
+//                                    + "'> global line </a></p>");
+//                            m++;
+//                        }
+//                    }
+//                    MemoMedia audio0 = memos.get(0).getMemoAudio();
+//                    if (audio0 != null) {
+//                        sb.append("<p>download the audio:</p>");
+//                        sb.append("<p><a href='" + audio0.getOss()
+//                                + "' > chinese line </a> <a style='margin-left:10px' href='" + audio0.getS3()
+//                                + "' > global line </a></p>");
+//                    }
+//                    sb.append(" </td>");
+//                    sb.append("</tr>");
+//                    for (int i = 1; i < memos.size(); i++) {
+//                        sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                        sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
+//                        sb.append("<p>" + reporter + " "
+//                                + DateUtils.formatDate(memos.get(i).getCreateTime(), "yyyy-MM-dd HH:mm") + "</p>");
+//                        sb.append("<p>" + memos.get(i).getMemo() + "</p>");
+//                        if (memos.get(i).getMemoPics() != null && memos.get(i).getMemoPics().size() > 0) {
+//                            sb.append("<p>See the images :</p>");
+//                            int m = 1;
+//                            for (MemoMedia memoMedia : memos.get(i).getMemoPics()) {
+//                                sb.append("<p>" + m + "、<a href='" + memoMedia.getOss()
+//                                        + "' > chinese line </a> <a style='margin-left:10px' href='" + memoMedia.getS3()
+//                                        + "'> global line </a></p>");
+//                                m++;
+//                            }
+//                        }
+//                        MemoMedia audio = memos.get(i).getMemoAudio();
+//                        if (audio != null) {
+//                            sb.append("<p>download the audio:</p>");
+//                            sb.append("<p><a href='" + audio.getOss()
+//                                    + "' > chinese line </a> <a style='margin-left:10px' href='" + audio.getS3()
+//                                    + "' > global line </a></p>");
+//                        }
+//                        sb.append("</td>");
+//                        sb.append("</tr>");
+//                    }
+//
+//                }
+//                sb.append(" </tbody>");
+//                sb.append("</table>");
+//                sb.append("</td>");
+//                sb.append("</tr>");
+//            }
+//        }
+
+        sb.append("</table>");
+        sb.append("</td>");
+        sb.append("</tr>");
+
+        sb.append("</table>");
+
+        sb.append(
+                "<table id='footer-message' style='padding-top:20px;' bgcolor='ffffff' cellpadding='0' cellspacing='0' width='600' align='center'>");
+        sb.append("<tbody>");
+        sb.append("<tr>");
+        sb.append("<td >GOSHIPYARD:<a href='http://www.goshipyard.com'>www.goshipyard.com</a></td>");
+        sb.append("</tr>");
+        sb.append("</tbody>");
+        sb.append("</table>");
+
+        sb.append("</body>");
+        sb.append("</html>");
+
+        sendEmail("1061147291@qq.com", sb.toString(), "每日报告", null);
     }
 }

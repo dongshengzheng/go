@@ -432,4 +432,10 @@
             alter table t_task modify column status INT COMMENT '任务状态:1进行中，0已结束,2未开始';
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-014">
+        <sql>
+            alter table t_report CHANGE publishTime publish_time date;
+            alter table t_report CHANGE generateTime generate_time date;
+        </sql>
+    </changeSet>
 </databaseChangeLog>

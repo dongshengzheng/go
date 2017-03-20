@@ -13,6 +13,11 @@
         width: 65%;
         margin: auto;
     }
+
+    table td, th {
+        text-align: center;
+    }
+
 </style>
 <go:navigater path="task"></go:navigater>
 <div class="row">
@@ -124,7 +129,7 @@
                 } else {
                     html += "<td><label  class='btn default'>未开始</label></td>"
                 }
-                html += "<td>" + "" + "</td>";
+                html += "<td>" + "<a class='btn default' href='' data-mode='dialog' >进入</a>" + "</td>";
                 html += "</tr>";
             })
         } else {
