@@ -7,6 +7,11 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <go:navigater path="repairSpec"></go:navigater>
+<style>
+    .htContextMenu {
+        z-index: 1060000;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -64,6 +69,28 @@
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
                 <button type="button" onclick="severCheck(this)" class="btn dark btn-outline">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="make" class="modal fade" tabindex="-1" data-backdrop="make" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4bccd8">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">请输入信息</h4>
+            </div>
+            <div class="modal-body">
+                <label>请输入船厂</label><input id="send_shipyard" class="form-control" placeholder="请输入正确的船厂" name="shipyard">
+            </div>
+            <div class="modal-body">
+                <label>请输入邮箱</label><div id="example1"  style=" height: 200px; overflow: hidden;"></div>
+                <input type="hidden" id="repairSpecId"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
+                <button type="button" onclick="sure(this)" class="btn dark btn-outline">确定</button>
             </div>
         </div>
     </div>
@@ -136,8 +163,7 @@
                             + '<a href="repairSpec/info?id=' + row.id + '" class="btn btn-sm margin-bottom-5 default mt-ladda-btn ladda-button" data-style="slide-down" data-target="navTab"><span class="ladda-label">查看</span></a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/makeProgress">
-                            + '<a href="repairProg/makeProgress?id=' + row.id +
-                            '" data-msg="确定生成吗？"  data-model="ajaxToDo"  class="btn btn-sm margin-bottom-5 green">生成维修进度</a>'
+                            + '<a href="#make" onclick="makeId(' + row.id + ')" data-toggle="modal"  class="btn btn-sm margin-bottom-5 green">生成维修进度</a>'
                             </shiro:hasPermission>
                             + '<div class="btn-group margin-top-5">'
                             + '<button class="btn btn-sm margin-bottom-5 dropdown-toggle blue" type="button" data-toggle="dropdown"> 更多 <i class="fa fa-angle-down"></i> </button> '
@@ -231,6 +257,76 @@
         return true;
     }
 
+    /*s生成维修进度所调用的方法*/
+    function sure(obj) {
+        var arr1=new Array();
+        var datas=handsontableData();
+        var j=0;
+        for(var i=0;i<datas.length;i++){
+            if(datas[i]==null||datas[i]==""){
+                continue;
+            }
+            var obj=new Object();
+            obj.email=datas[i];
+            arr1[j++]=obj;
+        }
+        var dataJson=JSON.stringify(arr1);
+
+        if (check1(arr1)) {
+            var repairSpecId=$("#repairSpecId").val();
+            var shipyardName=$("#shipyard").val();
+            $.ajax({
+                type:"post",
+                data:{
+                    id:repairSpecId,
+                    dataJson:dataJson,
+                    shipyardName:shipyardName
+                },
+                url:"repairProg/makeProgress",
+                success:function (data) {
+                    if(data){
+                        alert("成功");
+                        $(".close").click();
+                    }else {
+                        alert("提交失败");
+                    }
+                },
+                error:function () {
+                    alert("发生错误,请稍后再试");
+                    $(obj).prop("disabled", false);
+                }
+            });
+        }
+    }
+    function check1(attr) {
+        if(attr.length<=0){
+            $("#example1").tips({
+                side: 1,
+                msg: '邮箱不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            return false;
+        }
+        var datas=handsontableData();
+        for(var i=0;i<datas.length;i++){
+            if(datas[i]==null||datas[i]==""){
+                continue;
+            }
+            if (!checkMail(datas[i])) {
+                var j=i+1
+                $("#example1").tips({
+                    side: 1,
+                    msg: '第'+j+'行<fmt:message key="register_incorrect_email2"/>',
+                    bg: '#AE81FF',
+                    time: 3
+                });
+                return false;
+            }
+        }
+        return true;
+    }
+
     function checkMail(mail) {
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if (filter.test(mail)) {
@@ -243,6 +339,11 @@
     function addId(id) {
         console.log(id);
         $("#id").val(id);
+    }
+
+    function makeId(id) {
+        console.log(id);
+        $("#repairSpecId").val(id);
     }
 
     function refreshTable(toFirst) {
@@ -270,4 +371,35 @@
         UIButtons.init();
     });
 
+</script>
+<script>
+    var container = document.getElementById('example1'),
+            storedData = {},
+            savedKeys,
+            resetState,
+            stateLoaded,
+            hot;
+
+    hot = new Handsontable(container, {
+        rowHeaders: true,
+        colHeaders: true,
+        colWidths: [500],
+        minRows:2,
+        colHeaders: ["邮箱地址"],
+        columnSorting: true,
+        columns: [
+            {data: "des"},
+        ],
+        manualColumnMove: false,
+        manualColumnResize: true,
+        manualRowMove: true,
+        manualRowResize: true,
+        minSpareRows: 1,
+        contextMenu: true,
+        persistentState: true
+    });
+
+    function handsontableData() {
+        return hot.getDataAtCol(0);
+    }
 </script>

@@ -1,6 +1,7 @@
 package com.ctoangels.go.common.modules.go.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -8,7 +9,11 @@ import org.springframework.stereotype.Controller;
  *
  */
 @Controller
+@RequestMapping("task")
 public class TaskController {
 
-
+    @RequestMapping
+    public String record(){
+        return "go/task/record";
+    }
 }
