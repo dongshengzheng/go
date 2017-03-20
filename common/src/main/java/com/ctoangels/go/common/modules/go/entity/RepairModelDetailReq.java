@@ -42,6 +42,23 @@ public class RepairModelDetailReq implements Serializable {
     private String count;
 
     /**
+     * 单价
+     */
+    private Float tariff;
+
+    /**
+     * 系数
+     */
+    private Float discount;
+
+    /**
+     * 总价
+     */
+    private Float total;
+
+
+
+    /**
      * 维修工程单范本的id
      */
     @TableField(value = "repair_model_detail_id")
@@ -157,5 +174,29 @@ public class RepairModelDetailReq implements Serializable {
 
     public void setCount(String count) {
         this.count = count;
+    }
+
+    public Float getTariff() {
+        return tariff;
+    }
+
+    public void setTariff(Float tariff) {
+        this.tariff = tariff;
+    }
+
+    public Float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Float discount) {
+        this.discount = discount;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
     }
 }

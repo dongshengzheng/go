@@ -14,9 +14,13 @@
     }
     .borders{
         border: solid 1px #9C9C9C;
+        margin-bottom: 40px;
     }
+    textarea{ resize:none;}
 </style>
-<form action="" method="post" class="form-horizontal" id="defForm">
+
+<form action="task/add" method="post" class="form-horizontal" id="defForm">
+    <input name="repairProgDetailId" type="hidden" value="${progDetail.id}" id="progDetailId"/>
     <div class="profile-content">
         <div class="row col-md-11" >
             <div class="col-md-12"><h4>记录报告</h4></div>
@@ -25,9 +29,9 @@
                 <div class="timeline-body-content">
                     <table class="table table-bordered">
                         <tr>
-                            <td>D-001</td>
-                            <td>XXXXXX</td>
-                            <td>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>
+                            <td>${progDetail.proOrderNo}</td>
+                            <td>${progDetail.proName}</td>
+                            <td style="width: 50%">${progDetail.proDesc}</td>
                             <td><a href="#">工程状态修改</a></td>
                             <td><a href="#">工程详单查看</a></td>
                         </tr>
@@ -41,18 +45,17 @@
                        <div  id="example1"  style=" height: 250px; overflow: hidden;"></div>
                    </div>
                    <div class="col-md-3"style=" height: 250px;padding: 0px">
-                       <textarea style="width: 100%;height:100%;" placeholder="备注:"></textarea>
+                       <textarea name="memo" style="width: 100%;height:100%;" placeholder="备注:"></textarea>
                    </div>
                </div>
             </div>
             <div class="col-md-12 " ><h4>上传照片</h4></div>
             <div class="col-md-12 borders" >
-                <div class="col-md-4" style="padding: 5px;">
-                    <button id="upload_logo" ><img id="logo-img"
-                         src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${company.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
-                         style="display: block;width: 100px;height: 100px"
-                         onerror="nofind(1)"/></button>
-                    <input type="hidden" id="logo" name="logo" value="${company.logo}">
+                <div id="divId" style="margin: 10px">
+                    <button id="upload_img" >
+                        <img id="img" src="" style="width: 100px;height: 100px"
+                         onerror="nofind(1)"/>
+                    </button>
                 </div>
             </div>
             <div class="col-md-12"><h4>上传相关文件</h4></div>
@@ -67,20 +70,80 @@
                     </table>
                 </div>
             </div>
+            <div class="modal-footer" style="text-align: center">
+                <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
+                <button id="reset-btn" type="" class="btn blue">取消</button>
+            </div>
         </div>
     </div>
 </form>
 <script>
-    initUploaders_logo("upload_logo", "shipinfo", "${staticPath}/", "logo-img", "logo");
+    function delTr(obj) { //删除行  
+        $(obj).parent().parent().remove();
+    }
+    function severCheck() {
+        $("#defForm").ajaxSubmit({
+            data:{
+                dataJson:dataJson
+            },
+            success: function (data) {
+                if (data.success) {
+                    App.alert({
+                        container: "#bootstrap_alerts_demo",
+                        close: true,
+                        icon: 'fa fa-check',
+                        place: "append",
+                        message: "success",
+                        type: 'success',
+                        reset: true,
+                        focus: true,
+                        closeInSeconds: 10,
+                    })
+
+                } else {
+                    App.alert({
+                        container: "#detail_alert",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "提交失败,请稍后再试",
+                        type: 'danger',
+                        reset: true,
+                        focus: false,
+                        closeInSeconds: 5,
+                    })
+                }
+            },
+            error: function () {
+                App.alert({
+                    container: "#detail_alert",
+                    close: true,
+                    icon: 'fa fa-warning',
+                    place: "append",
+                    message: "系统繁忙,请稍后再试",
+                    type: 'warning',
+                    reset: true,
+                    focus: false,
+                    closeInSeconds: 5,
+                })
+                return;
+            }
+        });
+    }
+</script>
+<script>
+    initUploaders_report_img("upload_img", "shipinfo", "${staticPath}/", "img", "divId");
     initUploaders_attachment("attachment", "shipinfo", "${staticPath}/", "table_attachment","one");
 
-   /* var id=$("#id").val();*/
+    var id=$("#progDetailId").val();
     var width=$(window).width();
-    /*$("#example1").width(width*0.5);*/
     var dataJson;
     var h;
     $.ajax({
-        url:'modelDetail/reqs',
+        url:'repairProg/reqs',
+        data:{
+            id:id
+        },
         type:'POST', //GET
         async:true,    //或false,是否异步
 
@@ -104,20 +167,20 @@
                 colHeaders: ["要求和描述/材料规格","单位","数量","单价","系数","总价"],
                 columnSorting: true,
                 columns: [
-                    {data: "des"},
-                    {data: "unit"},
+                    {data: "des",readOnly:true},
+                    {data: "unit",readOnly:true},
                     {data: "count"},
-                    {data:  "tariff"},
-                    {data:  "discount"},
-                    {data:  "total"}
+                    {data:  "tariff",readOnly:true},
+                    {data:  "discount",readOnly:true},
+                    {data:  "total",readOnly:true}
                 ],
                 manualColumnMove: false,
                 manualColumnResize: true,
-                manualRowMove: true,
-                manualRowResize: true,
+                manualRowMove: false,
+                manualRowResize: false,
                 minSpareRows: 1,
-                contextMenu: true,
-                persistentState: true
+                contextMenu: false,
+                persistentState: false,
             });
             h=hot;
 
