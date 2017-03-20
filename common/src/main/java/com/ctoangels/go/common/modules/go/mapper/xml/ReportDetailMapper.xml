@@ -2,9 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.go.common.modules.go.mapper.ReportDetailMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
 		id, out_source AS outSource, repair_prog_id AS repairProgId, repair_prog_detail_id AS repairProgDetailId, report_id AS reportId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, udpate_date AS udpateDate, del_flag AS delFlag
 	</sql>
+
+
+    <select id="getListByTaskId" resultMap="repairDetailMap">
+        select d.* from t_report_detail d where d.repair_prog_id= (select t.repair_prog_id from t_task t where
+        t.id=#{0})
+    </select>
+
+    <resultMap id="repairDetailMap" type="ReportDetail">
+        <result property="id" column="id"></result>
+        <association property="repairProgDetail" column="repair_prog_detail_id"
+                     javaType="RepairProgDetail"
+                     select="com.ctoangels.go.common.modules.go.mapper.RepairProgDetailMapper.ById"></association>
+        <!--<collection property="" column="{model_id=model_id,code=code}" ofType=""-->
+        <!--select=""/>-->
+        <!--<collection property="" column="{repair_spec_id=repair_spec_id,code=code}" ofType=""-->
+        <!--select=""/>-->
+    </resultMap>
 
 </mapper>

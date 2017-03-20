@@ -3,6 +3,8 @@ package com.ctoangels.go.common.modules.go.service;
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
 import com.baomidou.framework.service.ISuperService;
 
+import java.util.List;
+
 /**
  *
  * ReportDetail 表数据服务层接口
@@ -10,5 +12,5 @@ import com.baomidou.framework.service.ISuperService;
  */
 public interface IReportDetailService extends ISuperService<ReportDetail> {
 
-
+    List<ReportDetail> getListByTaskId(Integer taskId);
 }

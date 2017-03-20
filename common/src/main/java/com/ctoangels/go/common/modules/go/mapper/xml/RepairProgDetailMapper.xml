@@ -28,4 +28,11 @@
          ORDER BY detail.pro_order_no
     </select>
 
+
+    <select id="ById" resultType="RepairProgDetail">
+        SELECT detail.id,detail.pro_order_no,detail.pro_name,detail.pro_desc
+        FROM t_repair_prog_detail detail
+        where detail.id=#{0}
+    </select>
+
 </mapper>
