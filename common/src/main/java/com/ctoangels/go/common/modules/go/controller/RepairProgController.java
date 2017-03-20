@@ -66,6 +66,9 @@ public class RepairProgController extends BaseController {
     @Autowired
     private ITaskService taskService;
 
+    @Autowired
+    private ITaskEmailService taskEmailService;
+
     @RequestMapping
     public String page() {
         return "go/repairProg/list";
@@ -198,17 +201,19 @@ public class RepairProgController extends BaseController {
     }
 
     //生成维修进度
-    @RequestMapping(value = "makeProgress", method = RequestMethod.GET)
+    @RequestMapping(value = "makeProgress", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject makeProg(@RequestParam(required = false) Integer id) throws InvocationTargetException, IllegalAccessException {
-        //查找维修工程单基本信息
-        RepairSpec repairSpec = repairSpecService.selectById(id);
-        RepairProg repairProg = new RepairProg();
-        BeanUtils.copyProperties(repairProg, repairSpec);
-        repairProg.setId(null);
-        repairProgService.insert(repairProg);
+    public JSONObject makeProg(@RequestParam(required = false) Integer id, @RequestParam(required = false) String shipyardName, @RequestParam(required = false) String dataJson) throws InvocationTargetException, IllegalAccessException {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            //查找维修工程单基本信息
+            RepairSpec repairSpec = repairSpecService.selectById(id);
+            RepairProg repairProg = new RepairProg();
+            BeanUtils.copyProperties(repairProg, repairSpec);
+            repairProg.setId(null);
+            repairProgService.insert(repairProg);
 
-        //查找维修详单的item信息
+            //查找维修详单的item信息
         /*EntityWrapper<RepairSpecItem> ew=new EntityWrapper<>();
         ew.addFilter("repair_spec_id={0}",id);
         List<RepairSpecItem> repairSpecItems=repairSpecItemService.selectList(ew);
@@ -224,52 +229,57 @@ public class RepairProgController extends BaseController {
         repairProgItemService.insertBatch(repairProgItems);*/
 
 
-        //查找维修详单的detail信息
-        EntityWrapper<RepairSpecDetail> ew2 = new EntityWrapper<>();
-        ew2.addFilter("repair_spec_id={0}", id);
-        List<RepairSpecDetail> repairSpecDetails = repairSpecDetailService.selectList(ew2);
-        if (repairSpecDetails.size() > 0) {
-            List<RepairProgDetail> repairProgDetails = new ArrayList<>();
-            for (RepairSpecDetail r : repairSpecDetails) {
-                RepairProgDetail repairProgDetail = new RepairProgDetail();
-                BeanUtils.copyProperties(repairProgDetail, r);
-                repairProgDetail.setId(null);
-                repairProgDetail.setRepairProgId(repairProg.getId());
-                repairProgDetails.add(repairProgDetail);
-            }
-            repairProgDetailService.insertBatch(repairProgDetails);
+            //查找维修详单的detail信息
+            EntityWrapper<RepairSpecDetail> ew2 = new EntityWrapper<>();
+            ew2.addFilter("repair_spec_id={0}", id);
+            List<RepairSpecDetail> repairSpecDetails = repairSpecDetailService.selectList(ew2);
+            if (repairSpecDetails.size() > 0) {
+                for (RepairSpecDetail r : repairSpecDetails) {
+                    RepairProgDetail repairProgDetail = new RepairProgDetail();
+                    BeanUtils.copyProperties(repairProgDetail, r);
+                    repairProgDetail.setId(null);
+                    repairProgDetail.setRepairProgId(repairProg.getId());
+
+                    repairProgDetailService.insert(repairProgDetail);
 
 
-            for (RepairSpecDetail detail : repairSpecDetails) {
-
-                //查找每个详单的req信息
-                EntityWrapper<RepairSpecDetailReq> ew3 = new EntityWrapper<>();
-                ew3.addFilter("repair_spec_detail_id={0}", detail.getId());
-                List<RepairSpecDetailReq> specReqs = repairSpecDetailReqService.selectList(ew3);
-                if (specReqs.size() > 0) {
-                    List<RepairProgDetailReq> progReqs = new ArrayList<>();
-                    for (RepairSpecDetailReq r : specReqs) {
-                        RepairProgDetailReq repairProgDetailReq = new RepairProgDetailReq();
-                        BeanUtils.copyProperties(repairProgDetailReq, r);
-                        repairProgDetailReq.setId(null);
-                        repairProgDetailReq.setRepairProgDetailId(r.getId());
-                        progReqs.add(repairProgDetailReq);
+                    //查找每个详单的req信息
+                    EntityWrapper<RepairSpecDetailReq> ew3 = new EntityWrapper<>();
+                    ew3.addFilter("repair_spec_detail_id={0}", r.getId());
+                    List<RepairSpecDetailReq> specReqs = repairSpecDetailReqService.selectList(ew3);
+                    if (specReqs.size() > 0) {
+                        List<RepairProgDetailReq> progReqs = new ArrayList<>();
+                        for (RepairSpecDetailReq req : specReqs) {
+                            RepairProgDetailReq repairProgDetailReq = new RepairProgDetailReq();
+                            BeanUtils.copyProperties(repairProgDetailReq, req);
+                            repairProgDetailReq.setId(null);
+                            repairProgDetailReq.setRepairProgDetailId(repairProgDetail.getId());
+                            progReqs.add(repairProgDetailReq);
+                        }
+                        repairProgDetailReqService.insertBatch(progReqs);
                     }
-                    repairProgDetailReqService.insertBatch(progReqs);
                 }
 
-            }
-        }
-        Task task = new Task();
-        task.setRepairProgId(repairProg.getId());
-        task.setCompanyId(getCurrentUser().getCompanyId());
-        task.setShipName(repairProg.getShipName());
-        task.setShipyard("");
-        task.setStatus(2);
-        taskService.insert(task);
-        JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put("status", 1);
+            }
+            Task task = new Task();
+            task.setRepairProgId(repairProg.getId());
+            task.setCompanyId(getCurrentUser().getCompanyId());
+            task.setShipName(repairProg.getShipName());
+            task.setShipyard(shipyardName);
+            task.setStatus(2);
+            taskService.insert(task);
+
+            List<TaskEmail> emails = JSONObject.parseArray(dataJson, TaskEmail.class);
+            for (TaskEmail e : emails) {
+                e.setTaskId(task.getId());
+            }
+            taskEmailService.insertBatch(emails);
+            jsonObject.put("mes", true);
+        } catch (Exception e) {
+            jsonObject.put("mes", false);
+        }
+
         return jsonObject;
     }
 

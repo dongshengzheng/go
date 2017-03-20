@@ -6,6 +6,9 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<<<<<<< HEAD
+<go:navigater path="progress"></go:navigater>
+=======
 <go:navigater path="task"></go:navigater>
 <div class="row">
     <div class="col-md-12">
@@ -140,3 +143,4 @@
     }
 
 </script>
+>>>>>>> 497d0bed1a096e1c26aa912dfbe0ff5799701611

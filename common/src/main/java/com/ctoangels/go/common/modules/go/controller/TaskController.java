@@ -13,6 +13,7 @@ import com.ctoangels.go.common.modules.go.service.ITaskService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +40,14 @@ public class TaskController extends BaseController {
 
     @RequestMapping
     public String page() {
-        return "go/task/list";
+        return "go/task/record";
     }
 
+  /*  @RequestMapping
+    public String page() {
+        return "go/task/list";
+    }
+    */
     @RequestMapping(value = "/list")
     @ResponseBody
     public JSONObject list(@RequestParam(required = false) String keyword) {
@@ -77,5 +83,4 @@ public class TaskController extends BaseController {
         jsonObject.put("detailList", detailList);
         return jsonObject;
     }
-
 }

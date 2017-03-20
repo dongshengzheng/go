@@ -12,6 +12,8 @@ expire = 0;
 g_object_name = '';
 g_object_name_type = 'random_name';
 now = timestamp = Date.parse(new Date()) / 1000;
+/*原名称*/
+nativeName="";
 
 function send_request(domain) {
     var xmlhttp = null;
@@ -59,6 +61,7 @@ function random_string(len) {
 }
 
 function get_suffix(filename) {
+    nativeName=filename;
     pos = filename.lastIndexOf('.');
     suffix = '';
     if (pos != -1) {
@@ -187,6 +190,40 @@ function initUploaders_img(buttonId, bucket, domain, imgId, inputId) {
             FileUploaded: function () {
                 $("#" + imgId).attr("src", "http://" + bucket + ".img-cn-shanghai.aliyuncs.com/" + g_object_name + "?x-oss-process=image/resize,m_fill,h_100,w_100");
                 $("#" + inputId).val(g_object_name);
+            }
+        }
+    });
+    uploader.init();
+}
+
+function initUploaders_attachment(buttonId, bucket, domain,tableId, trId ) {
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: buttonId,
+        flash_swf_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.swf',
+        silverlight_xap_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.xap',
+        url: 'http://oss.aliyuncs.com',
+        filters: {
+            mime_types: [ //上传pdf,txt和zip,rar文件
+                {title: "Zip files", extensions: "zip,rar"},
+                {title: "Text files", extensions:"txt,pdf"}
+            ],
+            max_file_size: '10mb', //最大只能上传10mb的文件
+            prevent_duplicates: true //不允许选取重复文件
+        },
+        init: {
+            FilesAdded: function (up) {
+                set_upload_param(up, '', false, domain);
+            },
+            BeforeUpload: function (up, file) {
+                set_upload_param(up, file.name, true, domain);
+            },
+            FileUploaded: function () {
+                http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/sc6YXwK8Ak.pdf
+                var tr="<tr><td>"+nativeName+"<a target='_blank' href='http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name + "'>"+nativeName+"<a/></td></tr>";
+
+                $("#"+trId).attr("rowspan",parseInt($("#"+trId).attr("rowspan"))+1);
+                $("#" + tableId +" tbody tr:last").after(tr);
             }
         }
     });
