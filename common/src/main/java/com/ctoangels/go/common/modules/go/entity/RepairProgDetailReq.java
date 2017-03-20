@@ -33,6 +33,21 @@ public class RepairProgDetailReq implements Serializable {
 	/** 数量 */
 	private String count;
 
+	/**
+	 * 单价
+	 */
+	private Float tariff;
+
+	/**
+	 * 系数
+	 */
+	private Float discount;
+
+	/**
+	 * 总价
+	 */
+	private Float total;
+
 	/** 维修进度详细的信息id */
 	@TableField(value = "repair_prog_detail_id")
 	private Integer repairProgDetailId;
@@ -138,4 +153,27 @@ public class RepairProgDetailReq implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public Float getTariff() {
+		return tariff;
+	}
+
+	public void setTariff(Float tariff) {
+		this.tariff = tariff;
+	}
+
+	public Float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Float discount) {
+		this.discount = discount;
+	}
+
+	public Float getTotal() {
+		return total;
+	}
+
+	public void setTotal(Float total) {
+		this.total = total;
+	}
 }

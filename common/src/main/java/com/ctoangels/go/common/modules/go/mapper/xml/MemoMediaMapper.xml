@@ -4,7 +4,7 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, report_detail_memo_id AS reportDetailMemoId, `type`, record_time AS recordTime, Oss, S3
+		id, report_detail_memo_id AS reportDetailMemoId, `type`, filename, record_time AS recordTime, oss, s3
 	</sql>
 
 </mapper>

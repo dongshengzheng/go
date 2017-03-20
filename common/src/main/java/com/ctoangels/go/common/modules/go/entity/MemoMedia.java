@@ -27,18 +27,21 @@ public class MemoMedia implements Serializable {
 	@TableField(value = "report_detail_memo_id")
 	private Integer reportDetailMemoId;
 
-	/** 媒体类型 ,0为图片，1为语音 */
+	/** 媒体类型 */
 	private String type;
+
+	/** 文件名称 */
+	private String filename;
 
 	/** 录音时间 */
 	@TableField(value = "record_time")
 	private Integer recordTime;
 
 	/** 阿里云路径 */
-	private String Oss;
+	private String oss;
 
 	/** 亚马孙路径 */
-	private String S3;
+	private String s3;
 
 
 	public Integer getId() {
@@ -73,20 +76,28 @@ public class MemoMedia implements Serializable {
 		this.recordTime = recordTime;
 	}
 
-	public String getOss() {
-		return this.Oss;
+
+	public String getFilename() {
+		return filename;
 	}
 
-	public void setOss(String Oss) {
-		this.Oss = Oss;
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getOss() {
+		return oss;
+	}
+
+	public void setOss(String oss) {
+		this.oss = oss;
 	}
 
 	public String getS3() {
-		return this.S3;
+		return s3;
 	}
 
-	public void setS3(String S3) {
-		this.S3 = S3;
+	public void setS3(String s3) {
+		this.s3 = s3;
 	}
-
 }

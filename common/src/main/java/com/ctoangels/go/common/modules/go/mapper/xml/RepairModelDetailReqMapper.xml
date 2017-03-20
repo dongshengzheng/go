@@ -4,7 +4,7 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, des, unit, `count`, repair_model_detail_id AS repairModelDetailId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, des, unit, `count`,tariff, discount, total, repair_model_detail_id AS repairModelDetailId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
     <delete id="deleteRepairModelDetailById"  parameterType="java.lang.Integer">
 		delete from t_repair_model_detail_req where repair_model_detail_id = #{id};
