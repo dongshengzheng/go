@@ -42,11 +42,6 @@ public class ReportController extends BaseController {
     @Autowired
     private IReportDetailService reportDetailService;
 
-    @Autowired
-    private IReportDetailStatusService reportDetailStatusService;
-
-    @Autowired
-    private IReportDetailMemoService reportDetailMemoService;
 
     @Autowired
     private IMemoMediaService memoMediaService;
@@ -121,27 +116,18 @@ public class ReportController extends BaseController {
 
     @RequestMapping(value = "/addRecord")
     @ResponseBody
-    public JSONObject add(ReportDetailMemo memo,
+    public JSONObject add(ReportDetail reportDetail,
                           @RequestParam(required = false) String fileName,
                           @RequestParam(required = false) String oss,
                           @RequestParam(required = false) Integer repairProgDetailId) {
         JSONObject jsonObject = new JSONObject();
         try {
-            ReportDetail reportDetail = new ReportDetail();
             reportDetail.setRepairProgDetailId(repairProgDetailId);
             reportDetail.setOutSource(0);
+            reportDetail.setSubmitStatus(0);
             reportDetail.setCreateDate(new Date());
             reportDetailService.insert(reportDetail);
 
-            ReportDetailStatus reportDetailStatus = new ReportDetailStatus();
-            reportDetailStatus.setReportDetailId(reportDetail.getId());
-            reportDetailStatus.setRepairProgDetailId(repairProgDetailId);
-            reportDetailStatus.setStatus(1);
-            reportDetailStatusService.insert(reportDetailStatus);
-
-            memo.setReportDetailId(reportDetail.getId());
-            memo.setCreateDate(new Date());
-            reportDetailMemoService.insert(memo);
 
             String[] fileNames = fileName.split(",");
             String[] osss = oss.split(",");
@@ -152,7 +138,7 @@ public class ReportController extends BaseController {
                 memoMedia.setType(fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()));
                 memoMedia.setFilename(fileNames[i]);
                 memoMedia.setOss(osss[i]);
-                memoMedia.setReportDetailMemoId(memo.getId());
+                memoMedia.setReportDetailMemoId(reportDetail.getId());
                 memoMedias.add(memoMedia);
             }
             memoMediaService.insertBatch(memoMedias);

@@ -1,9 +1,7 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
-import com.ctoangels.go.common.modules.go.entity.ReportDetailStatus;
 import com.ctoangels.go.common.modules.go.mapper.ReportDetailMapper;
-import com.ctoangels.go.common.modules.go.mapper.ReportDetailStatusMapper;
 import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +25,10 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
 
     @Autowired
     ReportDetailMapper reportDetailMapper;
-    @Autowired
-    ReportDetailStatusMapper reportDetailStatusMapper;
-
-
     @Override
     public boolean saveReportAndUpdateReportDetail(Report report, Integer[] reportDetailId) {
 
-        if (reportMapper.insert(report) < 0) {
+        /*if (reportMapper.insert(report) < 0) {
             return false;
         }
         if (reportDetailId != null && reportDetailId.length > 0) {
@@ -57,7 +51,7 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
                 }
             }
 
-        }
+        }*/
         return false;
     }
 }
