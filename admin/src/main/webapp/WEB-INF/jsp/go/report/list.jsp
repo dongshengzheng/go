@@ -17,6 +17,15 @@
                             每日报告
                         </div>
                     </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            船名: ${task.shipName}
+                        </div>
+                        <div class="col-md-4">
+                            维修单号:
+                        </div>
+                    </div>
                 </div>
                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
                        id="default_table">
@@ -75,7 +84,7 @@
                     "data": "temperature"
                 },
                 {
-                    "data": "hnmiaity"
+                    "data": "humidity"
                 }
             ],
 

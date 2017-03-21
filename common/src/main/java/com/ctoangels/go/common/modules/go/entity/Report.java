@@ -75,7 +75,7 @@ public class Report implements Serializable {
     /**
      * 湿度
      */
-    private String hnmiaity;
+    private String humidity;
 
     /**
      * memo
@@ -203,14 +203,6 @@ public class Report implements Serializable {
         this.temperature = temperature;
     }
 
-    public String getHnmiaity() {
-        return this.hnmiaity;
-    }
-
-    public void setHnmiaity(String hnmiaity) {
-        this.hnmiaity = hnmiaity;
-    }
-
     public String getMemo() {
         return this.memo;
     }
@@ -283,4 +275,11 @@ public class Report implements Serializable {
         this.delFlag = delFlag;
     }
 
+    public String getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(String humidity) {
+        this.humidity = humidity;
+    }
 }

@@ -51,7 +51,8 @@
                             </div>
                             <div class="col-md-4">
                                 汇报日期: <fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>
-                                <input value="<fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>"
+                                <input type="hidden"
+                                       value="<fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>"
                                        name="publishTime">
                             </div>
                         </div>
@@ -66,7 +67,7 @@
                         <tr>
                             <td><input class="form-control" name="weather"></td>
                             <td><input class="form-control" name="temperature"></td>
-                            <td><input class="form-control" name="hnmiaity"></td>
+                            <td><input class="form-control" name="humidity"></td>
                         </tr>
                     </table>
 
@@ -258,7 +259,7 @@
                 a.find(".proOrderNo-td").html(progDetail.proOrderNo);
                 a.find(".proName-td").html(progDetail.proName);
                 a.find(".proDesc-td").html(progDetail.proDesc);
-                var taskStatus = progDetail.taskStatus;
+                var taskStatus = reportDetail.taskStatus;
                 console.log(taskStatus);
                 if (taskStatus == 0) {
                     a.find(".taskStatus-td").html("已完成");

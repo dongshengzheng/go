@@ -310,7 +310,7 @@ public class MailUtil {
         sb.append("</td>");
         sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
         // 设置湿度
-        sb.append(report.getHnmiaity());
+        sb.append(report.getHumidity());
         sb.append("</td>");
         sb.append("</tr>");
         sb.append("</tbody>");
