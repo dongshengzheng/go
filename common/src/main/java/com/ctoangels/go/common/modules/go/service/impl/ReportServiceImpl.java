@@ -27,6 +27,7 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
 
     @Autowired
     ReportDetailMapper reportDetailMapper;
+
     @Autowired
     ReportDetailStatusMapper reportDetailStatusMapper;
 
