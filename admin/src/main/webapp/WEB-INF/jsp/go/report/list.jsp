@@ -80,38 +80,19 @@
             ],
 
             "drawCallback": function (settings) {
-                drawICheck('defaultCheck', 'chx_default');
                 defTable.column(0).nodes().each(function (cell, i) {
-                    cell.innerHTML = i + 1;
+                    i = i + 1;
+                    var page = defTable.page.info();
+                    var pageNo = page.page;
+                    var length = page.length;
+                    var columnIndex = (i + pageNo * length);
+                    cell.innerHTML = columnIndex;
+
                 });
             },
         });
 
-
-        $('#myInput').on('keyup', function () {
-            defTable.search(this.value).draw();
-        });
-
-
     });
-
-    function check(id, status) {
-        if (confirm("确定审核？")) {
-            $.post("/shipinfo/check", {id: id, status: status}, function () {
-                refreshTable();
-            });
-
-        }
-
-    }
-    //
-    //    function      slide(id, slide) {
-    //        if (confirm("确定提交？")) {
-    //            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
-    //                refreshTable();
-    //            });
-    //        }
-    //    }
 
 
     function refreshTable(toFirst) {
