@@ -69,6 +69,7 @@ public class ReportController extends BaseController {
             ew.like("ship_name", keyword);
         ew.setSqlSelect("id,publish_time,weather,temperature,hnmiaity");
         ew.addFilter("task_id={0}", taskId);
+        ew.orderBy("publish_time", false);
         Page<Report> page = reportService.selectPage(getPage(), ew);
         return jsonPage(page);
     }
@@ -135,7 +136,7 @@ public class ReportController extends BaseController {
             ReportDetailStatus reportDetailStatus = new ReportDetailStatus();
             reportDetailStatus.setReportDetailId(reportDetail.getId());
             reportDetailStatus.setRepairProgDetailId(repairProgDetailId);
-            reportDetailStatus.setTaskStatus(1);
+            reportDetailStatus.setStatus(1);
             reportDetailStatusService.insert(reportDetailStatus);
 
             memo.setReportDetailId(reportDetail.getId());

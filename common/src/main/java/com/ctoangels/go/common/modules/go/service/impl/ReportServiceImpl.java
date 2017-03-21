@@ -1,7 +1,10 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
+import com.ctoangels.go.common.modules.go.entity.ReportDetailStatus;
 import com.ctoangels.go.common.modules.go.mapper.ReportDetailMapper;
+import com.ctoangels.go.common.modules.go.mapper.ReportDetailStatusMapper;
+import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import com.ctoangels.go.common.modules.go.entity.Report;
 import com.ctoangels.go.common.modules.go.service.IReportService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +27,8 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
 
     @Autowired
     ReportDetailMapper reportDetailMapper;
+    @Autowired
+    ReportDetailStatusMapper reportDetailStatusMapper;
 
 
     @Override
@@ -34,12 +40,23 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
         if (reportDetailId != null && reportDetailId.length > 0) {
             List<Integer> list = java.util.Arrays.asList(reportDetailId);
             List<ReportDetail> detailList = reportDetailMapper.selectBatchIds(list);
+            Integer reportId = report.getId();
             for (ReportDetail detail : detailList) {
-                //TODO:更改detail状态为已提交
+                detail.setReportId(reportId);
             }
-            if (reportDetailMapper.updateBatchById(detailList) > 0) {
+            if (reportDetailMapper.updateBatchById(detailList) < 0) {
                 return false;
             }
+            List<ReportDetailStatus> statusList = reportDetailStatusMapper.getByReportDetailIds(list);
+            if (statusList != null && statusList.size() > 0) {
+                for (ReportDetailStatus status : statusList) {
+                    status.setStatus(Const.REPORT_DETAIL_SUBMIT_HAVE);
+                }
+                if (reportDetailStatusMapper.updateBatchById(statusList) < 0) {
+                    return false;
+                }
+            }
+
         }
         return false;
     }

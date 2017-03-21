@@ -80,4 +80,6 @@ public class Const {
     public static final Integer TASK_CANCEL = 3;//该项已取消
 
 
+    public static final Integer REPORT_DETAIL_SUBMIT_HAVE = 0;//报告详单已提交
+    public static final Integer REPORT_DETAIL_SUBMIT_NOT = 1;//报告详单未提交
 }

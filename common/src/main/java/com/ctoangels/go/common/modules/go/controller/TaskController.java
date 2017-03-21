@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
+import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,12 +36,6 @@ public class TaskController extends BaseController {
 
     @Autowired
     IRepairProgDetailService repairProgDetailService;
-
-
-
-
-
-
 
     @RequestMapping
     public String page() {
@@ -82,6 +77,5 @@ public class TaskController extends BaseController {
         jsonObject.put("detailList", detailList);
         return jsonObject;
     }
-
 
 }

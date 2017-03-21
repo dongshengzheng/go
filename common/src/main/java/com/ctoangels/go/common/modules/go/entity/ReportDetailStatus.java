@@ -25,8 +25,7 @@ public class ReportDetailStatus implements Serializable {
 	private Integer id;
 
 	/** 维修的任务状态 */
-	@TableField(value = "task_status")
-	private Integer taskStatus;
+	private Integer status;
 
 	/** 详单的报告id */
 	@TableField(value = "report_detail_id")
@@ -121,11 +120,11 @@ public class ReportDetailStatus implements Serializable {
 		this.delFlag = delFlag;
 	}
 
-	public Integer getTaskStatus() {
-		return taskStatus;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setTaskStatus(Integer taskStatus) {
-		this.taskStatus = taskStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }
