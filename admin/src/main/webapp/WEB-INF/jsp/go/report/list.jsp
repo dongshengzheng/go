@@ -23,7 +23,7 @@
                             船名: ${task.shipName}
                         </div>
                         <div class="col-md-4">
-                            维修单号:
+                            维修单号:XXXXX
                         </div>
                     </div>
                 </div>
