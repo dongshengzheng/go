@@ -87,6 +87,17 @@ public class ReportDetail implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    /*工程进度状态*/
+    @TableField(value = "taskStatus")
+    private Integer task_status;
+
+    /*是否已经提交状态*/
+    @TableField(value = "submit_status")
+    private Integer submitStatus;
+
+    /*备注信息*/
+    private String memo;
+
 
     public Integer getId() {
         return this.id;
@@ -176,4 +187,27 @@ public class ReportDetail implements Serializable {
         this.repairProgDetail = repairProgDetail;
     }
 
+    public Integer getTask_status() {
+        return task_status;
+    }
+
+    public void setTask_status(Integer task_status) {
+        this.task_status = task_status;
+    }
+
+    public Integer getSubmitStatus() {
+        return submitStatus;
+    }
+
+    public void setSubmitStatus(Integer submitStatus) {
+        this.submitStatus = submitStatus;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 }

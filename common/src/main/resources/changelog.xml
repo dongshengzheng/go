@@ -477,4 +477,24 @@
             alter table t_report_detail_status CHANGE column task_status status int(2) COMMENT '报告详单提交状态 0未提交 1提交';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-037">
+        <sql>
+            alter table t_report_detail add status INT COMMENT '工程进度状态';
+            alter table t_report_detail add submit INT COMMENT '是否已经提交状态';
+            alter table t_report_detail add memo TEXT COMMENT '是否已经提交状态';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-038">
+        <sql>
+            alter table t_report change hnmiaity humidity varchar(45) COMMENT '湿度';
+            DROP TABLE  t_report_detail_memo;
+            DROP TABLE  t_report_detail_status;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-039">
+        <sql>
+            alter table t_report_detail change status task_status INT COMMENT '工程进度状态';
+            alter table t_report_detail change submit submit_status INT COMMENT '是否已经提交状态';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
