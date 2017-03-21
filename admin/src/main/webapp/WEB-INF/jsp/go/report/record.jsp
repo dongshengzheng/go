@@ -19,7 +19,7 @@
     textarea{ resize:none;}
 </style>
 
-<form action="task/add" method="post" class="form-horizontal" id="defForm">
+<form action="report/addRecord" method="post" class="form-horizontal" id="defForm">
     <input name="repairProgDetailId" type="hidden" value="${progDetail.id}" id="progDetailId"/>
     <div class="profile-content">
         <div class="row col-md-11" >
@@ -54,7 +54,7 @@
                 <div id="divId" style="margin: 10px">
                     <button id="upload_img" >
                         <img id="img" src="" style="width: 100px;height: 100px"
-                         onerror="nofind(1)"/>
+                         onerror="nofind(4)"/>
                     </button>
                 </div>
             </div>

@@ -180,6 +180,8 @@
             img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-man.jpg";
         } else if (type == '3') {
             img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png";
+        } else if(type == '4'){
+            img.src = "http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg";
         }
     }
 

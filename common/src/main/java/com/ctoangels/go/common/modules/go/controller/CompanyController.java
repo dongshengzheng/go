@@ -52,6 +52,7 @@ public class CompanyController extends BaseController {
     @ResponseBody
     public JSONObject editComplete(Company company) {
         JSONObject jsonObject = new JSONObject();
+        company.setDelFlag(0);
         if (companyService.insertOrUpdate(company)) {
             jsonObject.put("success", true);
         } else {

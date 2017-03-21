@@ -37,34 +37,10 @@ public class TaskController extends BaseController {
     IRepairProgDetailService repairProgDetailService;
 
 
-    @Autowired
-    private IReportDetailService reportDetailService;
-
-    @Autowired
-    private IReportDetailStatusService reportDetailStatusService;
-
-    @Autowired
-    private IReportDetailMemoService reportDetailMemoService;
-
-    @Autowired
-    private IMemoMediaService memoMediaService;
 
 
-    @RequestMapping
-    public String page(Map map) {
-        //根据进度详单的id
-        int id = 9;
-        RepairProgDetail progDetail = repairProgDetailService.selectById(id);
-
-        map.put("progDetail", progDetail);
-        return "go/task/record";
-    }
 
 
-//    @RequestMapping
-//    public String page() {
-//        return "go/task/record";
-//    }
 
     @RequestMapping
     public String page() {
@@ -107,51 +83,5 @@ public class TaskController extends BaseController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/add")
-    @ResponseBody
-    public JSONObject add(ReportDetailMemo memo,
-                          @RequestParam(required = false) String fileName,
-                          @RequestParam(required = false) String oss,
-                          @RequestParam(required = false) Integer repairProgDetailId) {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            ReportDetail reportDetail = new ReportDetail();
-            reportDetail.setRepairProgDetailId(repairProgDetailId);
-            reportDetail.setOutSource(0);
-            reportDetail.setCreateDate(new Date());
-            reportDetailService.insert(reportDetail);
 
-            ReportDetailStatus reportDetailStatus = new ReportDetailStatus();
-            reportDetailStatus.setReportDetailId(reportDetail.getId());
-            reportDetailStatus.setRepairProgDetailId(repairProgDetailId);
-            reportDetailStatus.setTaskStatus(1);
-            reportDetailStatusService.insert(reportDetailStatus);
-
-            memo.setReportDetailId(reportDetail.getId());
-            memo.setCreateDate(new Date());
-            reportDetailMemoService.insert(memo);
-
-            String[] fileNames = fileName.split(",");
-            String[] osss = oss.split(",");
-
-            List<MemoMedia> memoMedias = new ArrayList<>();
-            for (int i = 0; i < fileNames.length; i++) {
-                MemoMedia memoMedia = new MemoMedia();
-                memoMedia.setType(fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()));
-                memoMedia.setFilename(fileNames[i]);
-                memoMedia.setOss(osss[i]);
-                memoMedia.setReportDetailMemoId(memo.getId());
-                memoMedias.add(memoMedia);
-            }
-            memoMediaService.insertBatch(memoMedias);
-
-            jsonObject.put("success", true);
-        } catch (Exception e) {
-            jsonObject.put("success", false);
-            e.printStackTrace();
-        }
-
-
-        return jsonObject;
-    }
 }

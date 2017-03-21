@@ -43,8 +43,13 @@
     var map = new BMap.Map("allmap");
     //地址解析的函数
     var value_address_1 = $('#address').html();
+    if(value_address_1==""){
+        value_address_1="北京市";
+    }
     myGeo.getPoint(value_address_1, function (point) {
+        console.log(point);
         if (point) {
+
             map.centerAndZoom(point, 15);
             map.addOverlay(new BMap.Marker(point));
         }else{

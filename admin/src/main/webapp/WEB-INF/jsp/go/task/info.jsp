@@ -115,6 +115,7 @@
         if (detailList != null && detailList.length > 0) {
             $(detailList).each(function () {
                 var detail = eval(this);
+                var detailId=detail.id;
                 html += "<tr>";
                 html += "<td>" + detail.proOrderNo + "</td>";
                 html += "<td>" + detail.proName + "</td>";
@@ -129,7 +130,7 @@
                 } else {
                     html += "<td><label  class='btn default'>未开始</label></td>"
                 }
-                html += "<td>" + "<a class='btn default' href='' data-mode='dialog' >进入</a>" + "</td>";
+                html += "<td>" + "<a data-target='navTab' class='btn default' href='report/addRecord?id="+detailId+"'  data-mode='dialog' >进入</a>" + "</td>";
                 html += "</tr>";
             })
         } else {
