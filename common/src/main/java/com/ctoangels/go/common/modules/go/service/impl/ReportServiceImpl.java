@@ -25,6 +25,9 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
 
     @Autowired
     ReportDetailMapper reportDetailMapper;
+
+
+
     @Override
     public boolean saveReportAndUpdateReportDetail(Report report, Integer[] reportDetailId) {
 
