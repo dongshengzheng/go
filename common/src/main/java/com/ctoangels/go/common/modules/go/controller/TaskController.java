@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
+import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,23 +49,6 @@ public class TaskController extends BaseController {
 
     @Autowired
     private IMemoMediaService memoMediaService;
-
-
-    @RequestMapping
-    public String page(Map map) {
-        //根据进度详单的id
-        int id = 9;
-        RepairProgDetail progDetail = repairProgDetailService.selectById(id);
-
-        map.put("progDetail", progDetail);
-        return "go/task/record";
-    }
-
-
-//    @RequestMapping
-//    public String page() {
-//        return "go/task/record";
-//    }
 
     @RequestMapping
     public String page() {
@@ -124,7 +108,7 @@ public class TaskController extends BaseController {
             ReportDetailStatus reportDetailStatus = new ReportDetailStatus();
             reportDetailStatus.setReportDetailId(reportDetail.getId());
             reportDetailStatus.setRepairProgDetailId(repairProgDetailId);
-            reportDetailStatus.setTaskStatus(1);
+            reportDetailStatus.setStatus(Const.REPORT_DETAIL_SUBMIT_NOT);
             reportDetailStatusService.insert(reportDetailStatus);
 
             memo.setReportDetailId(reportDetail.getId());

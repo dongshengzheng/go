@@ -471,4 +471,10 @@
             alter table t_memo_media change column S3 s3 varchar(200);
         </sql>
     </changeSet>
+
+    <changeSet author="WangShun" id="15950097942-015">
+        <sql>
+            alter table t_report_detail_status CHANGE column task_status status int(2) COMMENT '报告详单提交状态 0未提交 1提交';
+        </sql>
+    </changeSet>
 </databaseChangeLog>

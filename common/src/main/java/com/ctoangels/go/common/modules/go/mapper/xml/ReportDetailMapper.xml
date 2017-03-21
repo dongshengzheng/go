@@ -10,7 +10,7 @@
 
     <select id="getListByTaskId" resultMap="repairDetailMap">
         select d.* from t_report_detail d where d.repair_prog_id= (select t.repair_prog_id from t_task t where
-        t.id=#{0})
+        t.id=#{0}) and 1=(select s.status from t_report_detail_status s where s.report_detail_id=d.id )
     </select>
 
     <resultMap id="repairDetailMap" type="ReportDetail">

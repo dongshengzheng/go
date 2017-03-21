@@ -56,6 +56,7 @@ public class ReportDetail implements Serializable {
     @TableField(value = "report_id")
     private Integer reportId;
 
+
     /**
      * 创建者
      */
@@ -174,4 +175,5 @@ public class ReportDetail implements Serializable {
     public void setRepairProgDetail(RepairProgDetail repairProgDetail) {
         this.repairProgDetail = repairProgDetail;
     }
+
 }

@@ -51,6 +51,8 @@
                             </div>
                             <div class="col-md-4">
                                 汇报日期: <fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>
+                                <input value="<fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>"
+                                       name="publishTime">
                             </div>
                         </div>
                     </div>

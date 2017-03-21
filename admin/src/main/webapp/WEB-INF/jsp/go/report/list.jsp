@@ -6,7 +6,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="ship"></go:navigater>
+<go:navigater path="report"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -15,15 +15,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             每日报告
-                        </div>
-                        <div class="col-md-2">
-                            <div class="btn-group">
-                                <shiro:hasPermission name="ship/add">
-                                    <a href="ship/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
-                                    </a>
-                                </shiro:hasPermission>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -34,8 +25,8 @@
                         <th>序号</th>
                         <th>日期</th>
                         <th>天气</th>
-                        <th>温度</th>
-                        <th>湿度</th>
+                        <th>温度(℃)</th>
+                        <th>湿度(%)</th>
                         <th>所涉及单号</th>
                     </tr>
                     </thead>
@@ -86,23 +77,16 @@
                 {
                     "data": "hnmiaity"
                 }
-
-//                {
-//                    "data": "createDate", "type": "date",
-//                    "render": function (data) {
-//                        var date = new Date(data);
-//                        return date.Format("yyyy-MM-dd");
-//                    }
-//                },
             ],
 
             "drawCallback": function (settings) {
                 drawICheck('defaultCheck', 'chx_default');
+                defTable.column(0).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
             },
-            "initComplete": function () {
-//                initSearchForm(null, "请输入船厂名称");
-            }
         });
+
 
         $('#myInput').on('keyup', function () {
             defTable.search(this.value).draw();
