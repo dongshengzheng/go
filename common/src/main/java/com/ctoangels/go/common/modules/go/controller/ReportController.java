@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Report 控制层
@@ -38,7 +40,18 @@ public class ReportController extends BaseController {
     IReportService reportService;
 
     @Autowired
-    IReportDetailService reportDetailService;
+    private IReportDetailService reportDetailService;
+
+    @Autowired
+    private IReportDetailStatusService reportDetailStatusService;
+
+    @Autowired
+    private IReportDetailMemoService reportDetailMemoService;
+
+    @Autowired
+    private IMemoMediaService memoMediaService;
+
+
 
     @RequestMapping
     public String page(@RequestParam Integer taskId, ModelMap map) {
@@ -92,6 +105,65 @@ public class ReportController extends BaseController {
             jsonObject.put("msg", "出错");
             jsonObject.put("success", false);
         }
+        return jsonObject;
+    }
+
+
+    //记录汇报
+    @RequestMapping(value = "/addRecord",method = RequestMethod.GET)
+    public String pages(@RequestParam(required = false) Integer id, Map map) {
+        //根据进度详单的id
+        RepairProgDetail progDetail = repairProgDetailService.selectById(id);
+
+        map.put("progDetail", progDetail);
+        return "go/report/record";
+    }
+
+    @RequestMapping(value = "/addRecord")
+    @ResponseBody
+    public JSONObject add(ReportDetailMemo memo,
+                          @RequestParam(required = false) String fileName,
+                          @RequestParam(required = false) String oss,
+                          @RequestParam(required = false) Integer repairProgDetailId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            ReportDetail reportDetail = new ReportDetail();
+            reportDetail.setRepairProgDetailId(repairProgDetailId);
+            reportDetail.setOutSource(0);
+            reportDetail.setCreateDate(new Date());
+            reportDetailService.insert(reportDetail);
+
+            ReportDetailStatus reportDetailStatus = new ReportDetailStatus();
+            reportDetailStatus.setReportDetailId(reportDetail.getId());
+            reportDetailStatus.setRepairProgDetailId(repairProgDetailId);
+            reportDetailStatus.setStatus(1);
+            reportDetailStatusService.insert(reportDetailStatus);
+
+            memo.setReportDetailId(reportDetail.getId());
+            memo.setCreateDate(new Date());
+            reportDetailMemoService.insert(memo);
+
+            String[] fileNames = fileName.split(",");
+            String[] osss = oss.split(",");
+
+            List<MemoMedia> memoMedias = new ArrayList<>();
+            for (int i = 0; i < fileNames.length; i++) {
+                MemoMedia memoMedia = new MemoMedia();
+                memoMedia.setType(fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()));
+                memoMedia.setFilename(fileNames[i]);
+                memoMedia.setOss(osss[i]);
+                memoMedia.setReportDetailMemoId(memo.getId());
+                memoMedias.add(memoMedia);
+            }
+            memoMediaService.insertBatch(memoMedias);
+
+            jsonObject.put("success", true);
+        } catch (Exception e) {
+            jsonObject.put("success", false);
+            e.printStackTrace();
+        }
+
+
         return jsonObject;
     }
 
