@@ -88,4 +88,5 @@ public class Const {
     public static final Integer REPORT_DETAIL_FILE_TYPE_MP3 = 1;
     public static final Integer REPORT_DETAIL_FILE_TYPE_OTHER = 2;
 
+
 }

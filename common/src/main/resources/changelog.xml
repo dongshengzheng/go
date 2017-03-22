@@ -504,4 +504,39 @@
             alter table t_report ADD column ship_inspection varchar(200) COMMENT '船检情况';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-040">
+        <sql>
+            CREATE TABLE `t_report_detail_req` (
+            `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '修理要求/和材料规格的id',
+            `des` varchar(500) DEFAULT NULL COMMENT '要求描述/和材料规格',
+            `unit` varchar(45) DEFAULT NULL COMMENT '单位',
+            `count` varchar(45) DEFAULT NULL COMMENT '数量',
+            `repair_spec_detail_id` int(11) DEFAULT NULL COMMENT '维修详单的id',
+            `create_date` date DEFAULT NULL COMMENT '创建时间',
+            `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+            `update_date` date DEFAULT NULL COMMENT '修改时间',
+            `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+            `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+            `tariff` float DEFAULT NULL COMMENT '单价',
+            `discount` float DEFAULT NULL COMMENT '系数',
+            `total` float DEFAULT NULL COMMENT '总价',
+            `report_detail_id` int(11) DEFAULT NULL COMMENT '报告detail的id',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=787 DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-041">
+        <sql>
+            alter table t_memo_media change report_detail_memo_id report_detail_id INT COMMENT '报告detail的id';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-042">
+        <sql>
+            alter table t_report modify generate_time datetime COMMENT '上传时间';
+            alter table t_report modify create_date datetime COMMENT '创建时间';
+            alter table t_report modify update_date datetime COMMENT '更新时间';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
+
+
