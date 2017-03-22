@@ -22,6 +22,14 @@
 
 <form action="report/addRecord" method="post" class="form-horizontal" id="defForm">
     <input name="repairProgDetailId" type="hidden" value="${progDetail.id}" id="progDetailId"/>
+    <input type="hidden" value="${reportDetailId}" id="reportDetailId">
+
+    <%--更新时候用到--%>
+    <input name="id" type="hidden" value="${reportDetail.id}"/>
+
+
+
+
     <div class="profile-content">
         <div class="row col-md-11" >
             <div class="col-md-12"><h4>记录报告</h4></div>
@@ -118,24 +126,37 @@
         $("#info").click();
     }
     function severCheck() {
+        var arr1 = new Array();
+        var datas = handsontableData();
+        var j = 0;
+        for (var i = 0; i < datas.length; i++) {
+            if (datas[i][0] == null) {
+                continue;
+            }
+            var obj = new Object();
+            obj.des = datas[i][0];
+            obj.unit = datas[i][1];
+            obj.count = datas[i][2];
+            arr1[j++] = obj;
+        }
+        var dataJson = JSON.stringify(arr1);
         $("#defForm").ajaxSubmit({
-            data:{
-                dataJson:dataJson
+            data: {
+                dataJson: dataJson
             },
             success: function (data) {
                 if (data.success) {
                     App.alert({
-                        container: "#bootstrap_alerts_demo",
+                        container: "#detail_alert",
                         close: true,
-                        icon: 'fa fa-check',
+                        icon: 'fa fa-warning',
                         place: "append",
-                        message: "success",
+                        message: "提交成功",
                         type: 'success',
                         reset: true,
-                        focus: true,
-                        closeInSeconds: 10,
+                        focus: false,
+                        closeInSeconds: 5,
                     })
-
                 } else {
                     App.alert({
                         container: "#detail_alert",
@@ -172,13 +193,15 @@
     initUploaders_attachment("attachment", "shipinfo", "${staticPath}/", "table_attachment","one");
 
     var id=$("#progDetailId").val();
+    var reportDetailId=$("#reportDetailId").val();
     var width=$(window).width();
     var dataJson;
     var h;
     $.ajax({
-        url:'repairProg/reqs',
+        url:'report/reqs',
         data:{
-            id:id
+            id:id,
+            reportDetailId:reportDetailId
         },
         type:'POST', //GET
         async:true,    //或false,是否异步

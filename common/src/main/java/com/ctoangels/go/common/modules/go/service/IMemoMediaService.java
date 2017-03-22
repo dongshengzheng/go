@@ -10,5 +10,7 @@ import com.baomidou.framework.service.ISuperService;
  */
 public interface IMemoMediaService extends ISuperService<MemoMedia> {
 
+    Boolean deleteByReportDetailId(Integer reportDetailId);
+
 
 }

@@ -11,4 +11,5 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
 public interface MemoMediaMapper extends AutoMapper<MemoMedia> {
 
 
+    Boolean deleteByReportDetailId(Integer reportDetailId);
 }

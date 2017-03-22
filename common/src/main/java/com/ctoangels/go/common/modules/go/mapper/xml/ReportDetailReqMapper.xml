@@ -6,5 +6,8 @@
 	<sql id="Base_Column_List">
 		id, des, unit, `count`, repair_spec_detail_id AS repairSpecDetailId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, tariff, discount, total, report_detail_id AS reportDetailId
 	</sql>
+    <delete id="deletebyReportDetailId">
+		delete from t_report_detail_req where report_detail_id=#{0}
+	</delete>
 
 </mapper>
