@@ -2,6 +2,7 @@ package com.ctoangels.go.common.modules.go.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -89,16 +90,31 @@ public class Report implements Serializable {
     private String tomorrowPlan;
 
     /**
-     * 今日工作
+     * 船员工作
      */
     @TableField(value = "crew_job")
     private String crewJob;
+
+    /**
+     * 备忘
+     */
+    private String remark;
+
+    /**
+     * 船检情况
+     */
+    @TableField(value = "ship_inspection")
+    private String shipInspection;
 
     /**
      * 验船师状态
      */
     @TableField(value = "surveyor_status")
     private String surveyorStatus;
+
+
+    @TableField(exist = false)
+    private List<RepairProgDetail> progDetailList;
 
     /**
      * 创建者
@@ -281,5 +297,29 @@ public class Report implements Serializable {
 
     public void setHumidity(String humidity) {
         this.humidity = humidity;
+    }
+
+    public List<RepairProgDetail> getProgDetailList() {
+        return progDetailList;
+    }
+
+    public void setProgDetailList(List<RepairProgDetail> progDetailList) {
+        this.progDetailList = progDetailList;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getShipInspection() {
+        return shipInspection;
+    }
+
+    public void setShipInspection(String shipInspection) {
+        this.shipInspection = shipInspection;
     }
 }

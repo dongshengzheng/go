@@ -11,4 +11,6 @@ import java.util.List;
 public interface ReportDetailMapper extends AutoMapper<ReportDetail> {
 
     List<ReportDetail> getListByTaskId(Integer taskId);
+
+    List<ReportDetail> getListByReportId(Integer reportId);
 }

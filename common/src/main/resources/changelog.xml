@@ -487,14 +487,21 @@
     <changeSet author="LuZhen" id="17317309132-038">
         <sql>
             alter table t_report change hnmiaity humidity varchar(45) COMMENT '湿度';
-            DROP TABLE  t_report_detail_memo;
-            DROP TABLE  t_report_detail_status;
+            DROP TABLE t_report_detail_memo;
+            DROP TABLE t_report_detail_status;
         </sql>
     </changeSet>
     <changeSet author="LuZhen" id="17317309132-039">
         <sql>
             alter table t_report_detail change status task_status INT COMMENT '工程进度状态';
             alter table t_report_detail change submit submit_status INT COMMENT '是否已经提交状态';
+        </sql>
+    </changeSet>
+
+    <changeSet author="WangShun" id="15950097942-016">
+        <sql>
+            alter table t_report ADD column remark varchar(200) COMMENT '备忘';
+            alter table t_report ADD column ship_inspection varchar(200) COMMENT '船检情况';
         </sql>
     </changeSet>
 </databaseChangeLog>

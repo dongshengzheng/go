@@ -15,4 +15,8 @@ public interface RepairProgDetailMapper extends AutoMapper<RepairProgDetail> {
     List<ItemCount> getCount(Integer repairProgId);
 
     List<RepairProgDetail> getDetailByCatagory(Integer repairProgId, String catagory);
+
+    //根据reportId  获取相关详单
+    List<RepairProgDetail> getByReportId(Integer reportId);
+
 }

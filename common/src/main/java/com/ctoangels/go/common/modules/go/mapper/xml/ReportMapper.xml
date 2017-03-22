@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, task_id AS taskId, company_id AS companyId, publish_time AS publishTime, repair_prog_detail_id AS repairProgDetailId, generate_time AS generateTime, is_publish AS isPublish, weather, temperature, humidity, memo, tomorrow_plan AS tomorrowPlan, crew_job AS crewJob, surveyor_status AS surveyorStatus, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
+		id, task_id AS taskId, company_id AS companyId,remark,ship_inspection AS shipInspection, publish_time AS publishTime, repair_prog_detail_id AS repairProgDetailId, generate_time AS generateTime, is_publish AS isPublish, weather, temperature, humidity, memo, tomorrow_plan AS tomorrowPlan, crew_job AS crewJob, surveyor_status AS surveyorStatus, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
 	</sql>
 
 </mapper>

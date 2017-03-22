@@ -7,7 +7,6 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    Date now = new Date();
 %>
 <style>
     .proImg-td div {
@@ -29,8 +28,6 @@
     }
 </style>
 <form class="form-horizontal" action="report/add" method="post" id="defForm">
-    <input type="hidden" value="${task.id}" name="taskId">
-    <input type="hidden" value="${task.shipName}" name="shipName">
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -38,7 +35,7 @@
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-6">
-                                <h3>当日汇报填写提交</h3>
+                                <h3>查看汇报</h3>
                             </div>
                         </div>
                         <hr>
@@ -50,10 +47,7 @@
                                 维修单号:
                             </div>
                             <div class="col-md-4">
-                                汇报日期: <fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>
-                                <input type="hidden"
-                                       value="<fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>"
-                                       name="publishTime">
+                                汇报日期: ${report.publishTime}
                             </div>
                         </div>
                     </div>
@@ -65,37 +59,41 @@
                             <td style="width: 33%">湿度</td>
                         </tr>
                         <tr>
-                            <td><input class="form-control" name="weather"></td>
-                            <td><input class="form-control" name="temperature"></td>
-                            <td><input class="form-control" name="humidity"></td>
+                            <td>${report.weather}&nbsp;</td>
+                            <td>${report.temperature}&nbsp;</td>
+                            <td>${report.humidity}&nbsp;</td>
                         </tr>
                     </table>
 
                     <div class="form-group">
                         <div class="col-md-12">
                             <h4>备忘</h4>
-                            <textarea rows="6" class="form-control" style="resize: none" name="remark"></textarea>
+                            <textarea readonly rows="6" class="form-control" style="resize: none"
+                                      placeholder="暂无详细信息">${report.remark}</textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
                             <h4>船员主要工作</h4>
-                            <textarea rows="6" class="form-control" style="resize: none" name="crewJob"></textarea>
+                            <textarea readonly rows="6" class="form-control" style="resize: none"
+                                      placeholder="暂无详细信息">${report.crewJob}</textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
                             <h4>船检反馈情况</h4>
-                            <textarea rows="6" class="form-control" style="resize: none" name="shipInspection"></textarea>
+                            <textarea rows="6" class="form-control" style="resize: none" readonly
+                                      placeholder="暂无详细信息">${report.shipInspection}</textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
                             <h4>明日工作计划</h4>
-                            <textarea rows="6" class="form-control" style="resize: none" name="tomorrowPlan"></textarea>
+                            <textarea readonly rows="6" class="form-control" style="resize: none"
+                                      placeholder="暂无详细信息">${report.tomorrowPlan}</textarea>
                         </div>
                     </div>
 
@@ -105,14 +103,8 @@
                         </div>
                     </div>
 
-                    <div id="bootstrap_alerts_demo"></div>
-
                     <div class="modal-footer" style="text-align: center" id="item9">
-                        <shiro:hasPermission name="report/add">
-                            <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
-                        </shiro:hasPermission>
-                        <button id="reset-btn" type="reset" class="btn blue">清空</button>
-                        <a id="closeModal" class="btn default" data-dismiss="modal">取消</a>
+                        <a id="closeModal" class="btn default" data-dismiss="modal">关闭</a>
                     </div>
 
                 </div>
@@ -187,51 +179,13 @@
 
 
 <script>
-
-    function severCheck() {
-        $("#defForm").ajaxSubmit({
-            success: function (data) {
-                if (data.success) {
-                    alert("成功");
-                    $("#closeModal").click();
-                } else {
-                    App.alert({
-                        container: "#bootstrap_alerts_demo",
-                        close: true,
-                        icon: 'fa fa-warning',
-                        place: "append",
-                        message: "failure",
-                        type: 'danger',
-                        reset: true,
-                        focus: true,
-                        closeInSeconds: 10,
-                    })
-                }
-            },
-            error: function () {
-                App.alert({
-                    container: "#bootstrap_alerts_demo",
-                    close: true,
-                    icon: 'fa fa-warning',
-                    place: "append",
-                    message: "error",
-                    type: 'warning',
-                    reset: true,
-                    focus: true,
-                    closeInSeconds: 10,
-                })
-                return;
-            }
-        });
-    }
-
     $(function () {
-        var taskId =${task.id};
+        var reportId =${report.id};
         $.ajax({
             type: "GET",
-            url: 'report/getReportDetail',
+            url: 'report/info/getReportDetail',
             data: {
-                taskId: taskId
+                reportId: reportId
             },
             success: function (data) {
                 appendReportDetail(data.list);
@@ -260,7 +214,6 @@
                 a.find(".proName-td").html(progDetail.proName);
                 a.find(".proDesc-td").html(progDetail.proDesc);
                 var taskStatus = reportDetail.taskStatus;
-                console.log(taskStatus);
                 if (taskStatus == 0) {
                     a.find(".taskStatus-td").html("已完成");
                 } else if (taskStatus == 1) {
@@ -273,7 +226,7 @@
                 a.find(".description-td").html();
                 a.find(".proImg-td").html();
                 a.find(".proFile-td").html();
-                $("#bootstrap_alerts_demo").before(a);
+                $(".modal-footer").before(a);
             })
         }
     }

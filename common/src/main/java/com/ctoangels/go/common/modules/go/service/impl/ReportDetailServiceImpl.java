@@ -1,5 +1,6 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,10 @@ public class ReportDetailServiceImpl extends SuperServiceImpl<ReportDetailMapper
     @Override
     public List<ReportDetail> getListByTaskId(Integer taskId) {
         return reportDetailMapper.getListByTaskId(taskId);
+    }
+
+    @Override
+    public List<ReportDetail> getListByReportId(Integer reportId) {
+        return reportDetailMapper.getListByReportId(reportId);
     }
 }

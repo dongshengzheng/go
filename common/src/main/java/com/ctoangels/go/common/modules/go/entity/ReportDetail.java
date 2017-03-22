@@ -2,6 +2,7 @@ package com.ctoangels.go.common.modules.go.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -98,6 +99,18 @@ public class ReportDetail implements Serializable {
     /*备注信息*/
     private String memo;
 
+
+    /*图片集合*/
+    @TableField(exist = false)
+    private List<MemoMedia> imgList;
+
+    /*语音集合*/
+    @TableField(exist = false)
+    private List<MemoMedia> mp3List;
+
+    /*其他文件集合*/
+    @TableField(exist = false)
+    private List<MemoMedia> otherList;
 
     public Integer getId() {
         return this.id;
@@ -209,5 +222,29 @@ public class ReportDetail implements Serializable {
 
     public void setTaskStatus(Integer taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public List<MemoMedia> getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(List<MemoMedia> imgList) {
+        this.imgList = imgList;
+    }
+
+    public List<MemoMedia> getMp3List() {
+        return mp3List;
+    }
+
+    public void setMp3List(List<MemoMedia> mp3List) {
+        this.mp3List = mp3List;
+    }
+
+    public List<MemoMedia> getOtherList() {
+        return otherList;
+    }
+
+    public void setOtherList(List<MemoMedia> otherList) {
+        this.otherList = otherList;
     }
 }

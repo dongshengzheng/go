@@ -6,11 +6,11 @@ import com.baomidou.framework.service.ISuperService;
 import java.util.List;
 
 /**
- *
  * ReportDetail 表数据服务层接口
- *
  */
 public interface IReportDetailService extends ISuperService<ReportDetail> {
 
     List<ReportDetail> getListByTaskId(Integer taskId);
+
+    List<ReportDetail> getListByReportId(Integer reportId);
 }

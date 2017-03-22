@@ -28,4 +28,9 @@ public class RepairProgDetailServiceImpl extends SuperServiceImpl<RepairProgDeta
     public List<RepairProgDetail> getDetailByCatagory(Integer repairProgId, String catagory) {
         return repairProgDetailMapper.getDetailByCatagory(repairProgId, catagory);
     }
+
+    @Override
+    public List<RepairProgDetail> getByReportId(Integer reportId) {
+        return repairProgDetailMapper.getByReportId(reportId);
+    }
 }

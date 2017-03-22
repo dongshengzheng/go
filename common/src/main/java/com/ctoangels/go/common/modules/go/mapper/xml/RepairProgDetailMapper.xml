@@ -35,4 +35,10 @@
         where detail.id=#{0}
     </select>
 
+
+    <select id="getByReportId" resultType="RepairProgDetail">
+       SELECT pd.id,pd.pro_order_no from t_repair_prog_detail pd where pd.id in
+      ( SELECT d.repair_prog_detail_id FROM t_report_detail d where d.report_id=#{0})
+    </select>
+
 </mapper>

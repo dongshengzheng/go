@@ -16,4 +16,7 @@ public interface IRepairProgDetailService extends ISuperService<RepairProgDetail
 
     List<RepairProgDetail> getDetailByCatagory(Integer repairProgId, String catagory);
 
+    //根据reportId  获取相关详单
+    List<RepairProgDetail> getByReportId(Integer reportId);
+
 }

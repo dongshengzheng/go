@@ -13,15 +13,21 @@
         t.id=#{0}) and d.submit_status=1
     </select>
 
+    <select id="getListByReportId" resultMap="repairDetailMap">
+        select d.* from t_report_detail d where d.report_id=#{0}
+    </select>
+
     <resultMap id="repairDetailMap" type="ReportDetail">
         <result property="id" column="id"></result>
         <association property="repairProgDetail" column="repair_prog_detail_id"
                      javaType="RepairProgDetail"
                      select="com.ctoangels.go.common.modules.go.mapper.RepairProgDetailMapper.ById"></association>
-        <!--<collection property="" column="{model_id=model_id,code=code}" ofType=""-->
-        <!--select=""/>-->
-        <!--<collection property="" column="{repair_spec_id=repair_spec_id,code=code}" ofType=""-->
-        <!--select=""/>-->
+        <collection property="imgList" column="{report_detail_id=id,type=0}" ofType="MemoMedia"
+                    select="com.ctoangels.go.common.modules.go.mapper.MemoMediaMapper.getByReportDetailIdAndType"/>
+        <collection property="mp3List" column="{report_detail_id=id,type=1}" ofType="MemoMedia"
+                    select="com.ctoangels.go.common.modules.go.mapper.MemoMediaMapper.getByReportDetailIdAndType"/>
+        <collection property="otherList" column="{report_detail_id=id,type=2}" ofType="MemoMedia"
+                    select="com.ctoangels.go.common.modules.go.mapper.MemoMediaMapper.getByReportDetailIdAndType"/>
     </resultMap>
 
 </mapper>

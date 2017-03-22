@@ -6,6 +6,13 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<style>
+    .modal-dialog {
+        position: relative;
+        width: 65%;
+        margin: auto;
+    }
+</style>
 <go:navigater path="report"></go:navigater>
 <div class="row">
     <div class="col-md-12">
@@ -72,10 +79,6 @@
                 },
                 {
                     "data": "publishTime",
-                    "render": function (data) {
-                        var date = new Date(data);
-                        return date.Format("yyyy-MM-dd");
-                    }
                 },
                 {
                     "data": "weather"
@@ -85,11 +88,35 @@
                 },
                 {
                     "data": "humidity"
+                },
+                {
+                    "data": "progDetailList",
+                    "render": function (data) {
+                        var a = "";
+                        $(data).each(function () {
+                            a = a + this.proOrderNo + ",";
+                        })
+                        if (a.length > 0) {
+                            a = a.substring(a, a.length - 1);
+                        }
+                        return a;
+                    }
                 }
             ],
 
+            "columnDefs": [{
+                "targets": 1,
+                "render": function (data, type, row) {
+                    return ""
+                            <shiro:hasPermission name="report/info">
+                            + '<a href="report/info?id=' + row.id + '"  data-model="dialog">' + row.publishTime + '</a>'
+                            </shiro:hasPermission>
+                            ;
+                }
+            }],
+
             "drawCallback": function (settings) {
-                defTable.column(0).nodes().each(function (cell, i) {
+                defTable.column(0).nodes().each(function (cell, i, row) {
                     i = i + 1;
                     var page = defTable.page.info();
                     var pageNo = page.page;
@@ -100,7 +127,6 @@
                 });
             },
         });
-
     });
 
 

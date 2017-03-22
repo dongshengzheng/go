@@ -65,6 +65,11 @@ public class ReportController extends BaseController {
         ew.addFilter("task_id={0}", taskId);
         ew.orderBy("publish_time", false);
         Page<Report> page = reportService.selectPage(getPage(), ew);
+        //根据report获取reportDetail涉及的progDetail单号
+        for (Report r : page.getRecords()) {
+            List<RepairProgDetail> list = repairProgDetailService.getByReportId(r.getId());
+            r.setProgDetailList(repairProgDetailService.getByReportId(r.getId()));
+        }
         return jsonPage(page);
     }
 
@@ -102,13 +107,30 @@ public class ReportController extends BaseController {
         return jsonObject;
     }
 
+    @RequestMapping(value = "/info")
+    public String info(@RequestParam Integer id, ModelMap map) {
+        Report report = reportService.selectById(id);
+        map.put("report", report);
+        map.put("task", taskService.selectById(report.getTaskId()));
+        return "go/report/info";
+    }
+
+    @RequestMapping(value = "/info/getReportDetail")
+    @ResponseBody
+    public JSONObject infoGetReportDetail(@RequestParam Integer reportId) {
+        JSONObject jsonObject = new JSONObject();
+        //根据reportId拿到该报告提交的reportDetail
+        List<ReportDetail> list = reportDetailService.getListByReportId(reportId);
+        jsonObject.put("list", list);
+        return jsonObject;
+    }
+
 
     //记录汇报
     @RequestMapping(value = "/addRecord", method = RequestMethod.GET)
     public String pages(@RequestParam(required = false) Integer id, Map map) {
         //根据进度详单的id
         RepairProgDetail progDetail = repairProgDetailService.selectById(id);
-
         map.put("progDetail", progDetail);
         return "go/report/record";
     }
