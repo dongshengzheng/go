@@ -13,4 +13,6 @@ public interface ReportDetailMapper extends AutoMapper<ReportDetail> {
     List<ReportDetail> getListByTaskId(Integer taskId);
 
     List<ReportDetail> getListByReportId(Integer reportId);
+
+    ReportDetail selectMaxReportDetailByProgDetailIdAndCreateTime(Integer repairProgDetailId);
 }

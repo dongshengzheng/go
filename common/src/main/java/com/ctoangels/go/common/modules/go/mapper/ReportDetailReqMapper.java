@@ -11,4 +11,5 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
 public interface ReportDetailReqMapper extends AutoMapper<ReportDetailReq> {
 
 
+    Boolean deletebyReportDetailId(Integer reportDetailId);
 }

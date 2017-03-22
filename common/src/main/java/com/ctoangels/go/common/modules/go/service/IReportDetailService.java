@@ -13,4 +13,6 @@ public interface IReportDetailService extends ISuperService<ReportDetail> {
     List<ReportDetail> getListByTaskId(Integer taskId);
 
     List<ReportDetail> getListByReportId(Integer reportId);
+
+    ReportDetail selectMaxReportDetailByProgDetailIdAndCreateTime(Integer repairProgDetailId);
 }

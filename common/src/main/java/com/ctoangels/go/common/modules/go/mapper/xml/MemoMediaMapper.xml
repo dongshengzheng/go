@@ -6,6 +6,9 @@
     <sql id="Base_Column_List">
 		id, report_detail_id AS reportDetailId, `type`, filename, record_time AS recordTime, oss, s3
 	</sql>
+    <delete id="deleteByReportDetailId">
+		delete from t_memo_media where report_detail_id=#{0}
+	</delete>
 
     <select id="getByReportDetailIdAndType" parameterType="java.util.Map" resultType="MemoMedia">
 		SELECT m.* from t_memo_media m

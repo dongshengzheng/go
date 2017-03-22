@@ -56,6 +56,7 @@ public class ReportController extends BaseController {
     private IReportDetailReqService reportDetailReqService;
 
 
+
     @RequestMapping
     public String page(@RequestParam Integer taskId, ModelMap map) {
         Task task = taskService.selectById(taskId);
@@ -139,7 +140,7 @@ public class ReportController extends BaseController {
     public String pages(@RequestParam(required = false) Integer id, @RequestParam(required = false) Integer taskId, Map map) {
         //根据进度详单的id
         RepairProgDetail progDetail = repairProgDetailService.selectById(id);
-        //查看未提交的报告单，则进入就会使编辑的状态
+        //查看未提交的记录汇报单，则进入就会使编辑的状态
         EntityWrapper<ReportDetail> ew = getEntityWrapper();
         ew.addFilter("repair_prog_detail_id={0}", id);
         ew.addFilter("submit_status", Const.REPORT_DETAIL_SUBMIT_NOT);
@@ -149,6 +150,13 @@ public class ReportController extends BaseController {
             ew1.addFilter("report_detail_id={0}", reportDetail.getId());
             List<MemoMedia> reportDetailFiles = memoMediaService.selectList(ew1);
             map.put("reportDetailFiles", reportDetailFiles);
+            map.put("reportDetailId",reportDetail.getId());
+
+        }else {
+            //如果记录汇报单没有查到，则将上一次记录汇报单的id拿到
+            ReportDetail reportDetail1=reportDetailService.selectMaxReportDetailByProgDetailIdAndCreateTime(id);
+            map.put("reportDetailId",reportDetail1.getId());
+
 
         }
         map.put("progDetail", progDetail);
@@ -163,16 +171,24 @@ public class ReportController extends BaseController {
                           @RequestParam(required = false) String fileName,
                           @RequestParam(required = false) String oss,
                           @RequestParam(required = false) String fileType,
-                          @RequestParam(required = false) Integer repairProgDetailId) {
+                          @RequestParam(required = false) Integer repairProgDetailId,
+                          @RequestParam(required = false) String dataJson
+    ) {
         JSONObject jsonObject = new JSONObject();
         try {
+            if(reportDetail.getId()!=null){
+                memoMediaService.deleteByReportDetailId(reportDetail.getId());
+                reportDetailReqService.deletebyReportDetailId(reportDetail.getId());
+            }
+
+
             reportDetail.setRepairProgDetailId(repairProgDetailId);
             reportDetail.setOutSource(0);
             reportDetail.setSubmitStatus(Const.REPORT_DETAIL_SUBMIT_NOT);//报告详单未提交
             reportDetail.setTaskStatus(Const.TASK_NOT_START);//项目未开始
             reportDetail.setDelFlag(Const.DEL_FLAG_NORMAL);//表示正常
             reportDetail.setCreateDate(new Date());
-            reportDetailService.insert(reportDetail);
+            reportDetailService.insertOrUpdate(reportDetail);
 
 
             String[] fileNames = fileName.split(",");
@@ -190,6 +206,14 @@ public class ReportController extends BaseController {
             }
             memoMediaService.insertBatch(memoMedias);
 
+            List<ReportDetailReq> reqs = JSONObject.parseArray(dataJson, ReportDetailReq.class);
+            for(ReportDetailReq r:reqs){
+                r.setDelFlag(0);
+                r.setReportDetailId(reportDetail.getId());
+            }
+            reportDetailReqService.insertBatch(reqs);
+
+
             jsonObject.put("success", true);
         } catch (Exception e) {
             jsonObject.put("success", false);
@@ -203,44 +227,20 @@ public class ReportController extends BaseController {
     //获取repairModelDetailReq信息
     @RequestMapping(value = "/reqs", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject demo(@RequestParam(required = false) Integer ProgDetailId, @RequestParam(required = false) Integer reportDetailId) {
+    public JSONObject req(@RequestParam (required = false) Integer id , @RequestParam(required = false) Integer reportDetailId) {
         JSONObject jsonObject = new JSONObject();
         EntityWrapper<ReportDetailReq> ew = new EntityWrapper<>();
         ew.addFilter("report_detail_id={0}", reportDetailId);
         List<ReportDetailReq> reportReqs = reportDetailReqService.selectList(ew);
+        jsonObject.put("reqs", reportReqs);
 
-        if (reportReqs != null) {
+
+        if (reportReqs.size()<=0) {
             EntityWrapper<RepairProgDetailReq> ew1 = new EntityWrapper<>();
-            ew1.addFilter("repair_prog_detail_id={0}", ProgDetailId);
+            ew1.addFilter("repair_prog_detail_id={0}", id);
             List<RepairProgDetailReq> repairProgDetailReqs = repairProgDetailReqService.selectList(ew1);
             jsonObject.put("reqs", repairProgDetailReqs);
         }
-
-
-
-        /*EntityWrapper<ReportDetail> ew=getEntityWrapper();
-        ew.addFilter("repair_prog_detail_id={0}",id);
-        List<ReportDetail> reportDetails=reportDetailService.selectList(ew);
-        if(reportDetails.size()<=0){
-            EntityWrapper<RepairProgDetailReq> ew2=new EntityWrapper<>();
-            ew2.addFilter("repair_prog_detail_id={0}",progDetail.getId());
-            List<RepairProgDetailReq> progDetailReqs=repairProgDetailReqService.selectList(ew2);
-            if(progDetailReqs.size()>0){
-                List<ReportDetailReq>reportDetailReqs  = new ArrayList<>();
-                for (RepairProgDetailReq req : progDetailReqs) {
-                    ReportDetailReq reportDetailReq=new ReportDetailReq();
-                    BeanUtils.copyProperties(reportDetailReq, req);
-                    reportDetailReq.setId(null);
-                    repairProgDetailReq.setRepairProgDetailId(repairProgDetail.getId());
-                    progReqs.add(repairProgDetailReq);
-                }
-                repairProgDetailReqService.insertBatch(progReqs);
-            }
-
-
-            BeanUtils.copyProperties(repairProg, repairSpec);
-        }*/
-
 
         return jsonObject;
     }

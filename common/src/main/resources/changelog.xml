@@ -545,6 +545,21 @@
             INSERT INTO t_dict (type,value,des,del_flag) VALUES ("工程状态","3","已取消",0);
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-043">
+        <sql>
+            alter table t_report_detail change udpate_date update_date date ;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-044">
+        <sql>
+            alter table t_report_detail modify create_date datetime COMMENT '创建时间';
+            alter table t_report_detail modify update_date datetime COMMENT '更新时间';
+            alter table t_report_email modify create_date datetime COMMENT '创建时间';
+            alter table t_report_email modify update_date datetime COMMENT '更新时间';
+            alter table t_report_detail_req modify create_date datetime COMMENT '创建时间';
+            alter table t_report_detail_req modify update_date datetime COMMENT '更新时间';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

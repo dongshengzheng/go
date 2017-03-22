@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, out_source AS outSource, repair_prog_id AS repairProgId, repair_prog_detail_id AS repairProgDetailId, report_id AS reportId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, udpate_date AS udpateDate, del_flag AS delFlag, task_status AS taskStatus, submit_status AS submitStatus, memo
+		id, out_source AS outSource, repair_prog_id AS repairProgId, repair_prog_detail_id AS repairProgDetailId, report_id AS reportId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag, task_status AS taskStatus, submit_status AS submitStatus, memo
 	</sql>
 
 
@@ -15,6 +15,11 @@
 
     <select id="getListByReportId" resultMap="repairDetailMap">
         select d.*,0 AS img,1 AS mp3,2 AS other from t_report_detail d where d.report_id=#{0}
+    </select>
+
+    <select id="selectMaxReportDetailByProgDetailIdAndCreateTime"
+            resultType="com.ctoangels.go.common.modules.go.entity.ReportDetail">
+        select * from t_report_detail where repair_prog_detail_id=#{0} order by create_date desc limit 1;
     </select>
 
     <resultMap id="repairDetailMap" type="ReportDetail">

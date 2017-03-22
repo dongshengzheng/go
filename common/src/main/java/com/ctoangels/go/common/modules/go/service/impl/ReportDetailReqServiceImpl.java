@@ -1,5 +1,6 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ctoangels.go.common.modules.go.mapper.ReportDetailReqMapper;
@@ -15,5 +16,11 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
 @Service
 public class ReportDetailReqServiceImpl extends SuperServiceImpl<ReportDetailReqMapper, ReportDetailReq> implements IReportDetailReqService {
 
+    @Autowired
+    private ReportDetailReqMapper reportDetailReqMapper;
 
+    @Override
+    public Boolean deletebyReportDetailId(Integer reportDetailId) {
+        return reportDetailReqMapper.deletebyReportDetailId(reportDetailId);
+    }
 }

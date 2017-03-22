@@ -79,8 +79,8 @@ public class ReportDetail implements Serializable {
     /**
      * 更新时间
      */
-    @TableField(value = "udpate_date")
-    private Date udpateDate;
+    @TableField(value = "update_date")
+    private Date updateDate;
 
     /**
      * 状态0表示正常，1表示删除
@@ -176,12 +176,12 @@ public class ReportDetail implements Serializable {
         this.updateBy = updateBy;
     }
 
-    public Date getUdpateDate() {
-        return this.udpateDate;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUdpateDate(Date udpateDate) {
-        this.udpateDate = udpateDate;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     public Integer getDelFlag() {
