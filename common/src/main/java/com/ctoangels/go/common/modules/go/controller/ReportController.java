@@ -105,7 +105,6 @@ public class ReportController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         //TODO:1.保存report,2.更新reportDetail状态,3.发送每日报告邮件
         reportService.saveReportAndUpdateReportDetail(report, reportDetailId);//TODO:impl还未实现
-//        MailUtil.sendReportEmail(report, reportDetailId);//TODO:具体详细还未实现
         Boolean flag = true;
         if (flag) {
             jsonObject.put("success", true);

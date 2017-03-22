@@ -7,7 +7,7 @@
 		id, report_detail_id AS reportDetailId, `type`, filename, record_time AS recordTime, oss, s3
 	</sql>
 
-    <select id="getByReportDetailIdAndType" parameterType="java.util.Map">
+    <select id="getByReportDetailIdAndType" parameterType="java.util.Map" resultType="MemoMedia">
 		SELECT m.* from t_memo_media m
 		 WHERE m.report_detail_id=#{report_detail_id} and m.type=#{type}
 	</select>

@@ -145,25 +145,6 @@
                    href="${ctx}/assets/layouts/layout/img/bg/4.jpg"><img
                         src="${ctx}/assets/layouts/layout/img/bg/4.jpg"></a>
             </div>
-            <div class="col-md-3">
-                <a target="_blank" href="${ctx}/assets/layouts/layout/img/bg/5.jpg"><img
-                        src="${ctx}/assets/layouts/layout/img/bg/5.jpg"></a>
-            </div>
-            <div class="col-md-3">
-                <a target="_blank"
-                   href="${ctx}/assets/layouts/layout/img/bg/1.jpg"><img
-                        src="${ctx}/assets/layouts/layout/img/bg/1.jpg"></a>
-            </div>
-            <div class="col-md-3">
-                <a target="_blank"
-                   href="${ctx}/assets/layouts/layout/img/bg/6.jpg"><img
-                        src="${ctx}/assets/layouts/layout/img/bg/6.jpg"></a>
-            </div>
-            <div class="col-md-3">
-                <a target="_blank"
-                   href="${ctx}/assets/layouts/layout/img/sidebar_arrow_icon_light_rtl.png"><img
-                        src="${ctx}/assets/layouts/layout/img/sidebar_arrow_icon_light_rtl.png"></a>
-            </div>
         </td>
     </tr>
     <tr>
@@ -224,8 +205,19 @@
                     a.find(".taskStatus-td").html("未开始");
                 }
                 a.find(".description-td").html();
-                a.find(".proImg-td").html();
-                a.find(".proFile-td").html();
+                var imgHtml = "";
+                $(reportDetail.imgList).each(function () {
+                    imgHtml += "<div class='col-md-3'><a target='_blank' href='" + this.oss + "'><img src='" + this.oss + "'></a> </div>";
+                })
+                a.find(".proImg-td").html(imgHtml);
+                var fileHtml = "";
+                $(reportDetail.mp3List).each(function () {
+                    fileHtml += "<a download='' href='" + this.oss + "'>" + this.filename + "</a> &nbsp; ";
+                })
+                $(reportDetail.otherList).each(function () {
+                    fileHtml += "<a download='' href='" + this.oss + "'>" + this.filename + "</a> &nbsp;";
+                })
+                a.find(".proFile-td").html(fileHtml);
                 $(".modal-footer").before(a);
             })
         }

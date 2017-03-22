@@ -172,7 +172,7 @@
 
 </script>
 <script>
-    if(${mes}){
+    if (${mes}) {
         alert("没有该船厂的详细信息");
     }
 </script>

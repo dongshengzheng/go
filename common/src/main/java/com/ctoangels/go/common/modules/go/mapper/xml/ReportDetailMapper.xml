@@ -9,12 +9,12 @@
 
 
     <select id="getListByTaskId" resultMap="repairDetailMap">
-        select d.* from t_report_detail d where d.repair_prog_id= (select t.repair_prog_id from t_task t where
+        select d.* ,0 AS img,1 AS mp3,2 AS other from t_report_detail d where d.repair_prog_id= (select t.repair_prog_id from t_task t where
         t.id=#{0}) and d.submit_status=1
     </select>
 
     <select id="getListByReportId" resultMap="repairDetailMap">
-        select d.* from t_report_detail d where d.report_id=#{0}
+        select d.*,0 AS img,1 AS mp3,2 AS other from t_report_detail d where d.report_id=#{0}
     </select>
 
     <resultMap id="repairDetailMap" type="ReportDetail">
@@ -22,11 +22,11 @@
         <association property="repairProgDetail" column="repair_prog_detail_id"
                      javaType="RepairProgDetail"
                      select="com.ctoangels.go.common.modules.go.mapper.RepairProgDetailMapper.ById"></association>
-        <collection property="imgList" column="{report_detail_id=id,type=0}" ofType="MemoMedia"
+        <collection property="imgList" column="{report_detail_id=id,type=img}" ofType="MemoMedia"
                     select="com.ctoangels.go.common.modules.go.mapper.MemoMediaMapper.getByReportDetailIdAndType"/>
-        <collection property="mp3List" column="{report_detail_id=id,type=1}" ofType="MemoMedia"
+        <collection property="mp3List" column="{report_detail_id=id,type=mp3}" ofType="MemoMedia"
                     select="com.ctoangels.go.common.modules.go.mapper.MemoMediaMapper.getByReportDetailIdAndType"/>
-        <collection property="otherList" column="{report_detail_id=id,type=2}" ofType="MemoMedia"
+        <collection property="otherList" column="{report_detail_id=id,type=other}" ofType="MemoMedia"
                     select="com.ctoangels.go.common.modules.go.mapper.MemoMediaMapper.getByReportDetailIdAndType"/>
     </resultMap>
 

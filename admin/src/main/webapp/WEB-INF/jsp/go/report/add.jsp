@@ -88,7 +88,8 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <h4>船检反馈情况</h4>
-                            <textarea rows="6" class="form-control" style="resize: none" name="shipInspection"></textarea>
+                            <textarea rows="6" class="form-control" style="resize: none"
+                                      name="shipInspection"></textarea>
                         </div>
                     </div>
 
@@ -271,8 +272,19 @@
                     a.find(".taskStatus-td").html("未开始");
                 }
                 a.find(".description-td").html();
-                a.find(".proImg-td").html();
-                a.find(".proFile-td").html();
+                var imgHtml = "";
+                $(reportDetail.imgList).each(function () {
+                    imgHtml += "<div class='col-md-3'><a target='_blank' href='" + this.oss + "'><img src='" + this.oss + "'></a> </div>";
+                })
+                a.find(".proImg-td").html(imgHtml);
+                var fileHtml = "";
+                $(reportDetail.mp3List).each(function () {
+                    fileHtml += "<a download='' href='" + this.oss + "'>" + this.filename + "</a> &nbsp; ";
+                })
+                $(reportDetail.otherList).each(function () {
+                    fileHtml += "<a download='' href='" + this.oss + "'>" + this.filename + "</a> &nbsp;";
+                })
+                a.find(".proFile-td").html(fileHtml);
                 $("#bootstrap_alerts_demo").before(a);
             })
         }
