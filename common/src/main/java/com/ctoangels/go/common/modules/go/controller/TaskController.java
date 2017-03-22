@@ -63,6 +63,7 @@ public class TaskController extends BaseController {
         Task task = taskService.selectById(id);
         map.put("task", task);
         map.put("cataList", cataList);
+        map.put("taskId",id);
         return "go/task/info";
     }
 

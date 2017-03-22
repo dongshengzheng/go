@@ -112,6 +112,7 @@
         var tbody = $("#table" + (num * 1 + 1)).find("tbody");
         var detailList = eval(data.detailList);
         var html = "";
+        var taskId=${taskId};
         if (detailList != null && detailList.length > 0) {
             $(detailList).each(function () {
                 var detail = eval(this);
@@ -130,7 +131,7 @@
                 } else {
                     html += "<td><label  class='btn default'>未开始</label></td>"
                 }
-                html += "<td>" + "<a data-target='navTab' class='btn default' href='report/addRecord?id="+detailId+"'  data-mode='dialog' >进入</a>" + "</td>";
+                html += "<td>" + "<a data-target='navTab' class='btn default' href='report/addRecord?id="+detailId+"&taskId="+taskId+"'  data-mode='dialog' >进入</a>" + "</td>";
                 html += "</tr>";
             })
         } else {

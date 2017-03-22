@@ -3,6 +3,7 @@
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -45,12 +46,27 @@
                        <div  id="example1"  style=" height: 250px; overflow: hidden;"></div>
                    </div>
                    <div class="col-md-3"style=" height: 250px;padding: 0px">
-                       <textarea name="memo" style="width: 100%;height:100%;" placeholder="备注:"></textarea>
+                       <textarea name="memo" style="width: 100%;height:100%;" placeholder="备注:">${reportDetail.memo}</textarea>
                    </div>
                </div>
             </div>
             <div class="col-md-12 " ><h4>上传照片</h4></div>
             <div class="col-md-12 borders" >
+                <c:if test="${!empty reportDetailFiles}">
+                    <c:forEach items="${reportDetailFiles}" var="t">
+                        <c:if test="${t.type=='img'}">
+                            <div style="float:left;position:relative;margin: 10px">
+                                <input name="fileDiskName" type="hidden" value="" >
+                                <input name="fileName" type="hidden" value="${t.filename}"/>
+                                <input name="fileType" type="hidden" value="img">
+                                <input name="oss" type="hidden" value="${t.oss}"/>
+                                <span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;"></span>
+                                <img src="${t.oss}"style="width: 100px;height: 100px;"class="min-img" >
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+
                 <div id="divId" style="margin: 10px">
                     <button id="upload_img" >
                         <img id="img" src="" style="width: 100px;height: 100px"
@@ -64,22 +80,42 @@
                     <table class="table" id="table_attachment">
                        <tbody>
                            <tr>
-                               <td id="one" rowspan="1" width="100px"><input id="attachment" type="button" value="浏览本地"/></td>
+                               <td id="one" rowspan="100" width="100px"><input id="attachment" type="button" value="浏览本地"/></td>
                            </tr>
+                            <c:if test="${!empty reportDetailFiles}">
+                                <c:forEach items="${reportDetailFiles}" var="r">
+                                    <c:if test="${r.type=='attachment'}">
+                                       <tr>
+                                           <td style="width: 80%">${r.filename}<a target="_blank" href="${r.oss}">${r.filename}</a></td>
+                                           <td>
+                                               <button onclick="delTr(this)">删除</button>
+                                               <input name="fileDiskName" type="hidden" value="">
+                                               <input name="fileName" type="hidden" value="${r.filename}"/>
+                                               <input name="fileType" type="hidden" value="attachment"/>
+                                               <input name="oss" type="hidden" value="${r.oss}"/>
+                                           </td>
+                                       </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
                        </tbody>
                     </table>
                 </div>
             </div>
             <div class="modal-footer" style="text-align: center">
                 <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
-                <button id="reset-btn" type="" class="btn blue">取消</button>
+                <button  onclick="goBack()" class="btn blue">取消</button>
             </div>
         </div>
     </div>
 </form>
+<a id="info" href="task/info?id=${taskId}" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>'
 <script>
     function delTr(obj) { //删除行  
         $(obj).parent().parent().remove();
+    }
+    function goBack() {
+        $("#info").click();
     }
     function severCheck() {
         $("#defForm").ajaxSubmit({

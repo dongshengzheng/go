@@ -24,8 +24,8 @@ public class MemoMedia implements Serializable {
 	private Integer id;
 
 	/** memo id */
-	@TableField(value = "report_detail_memo_id")
-	private Integer reportDetailMemoId;
+	@TableField(value = "report_detail_id")
+	private Integer reportDetailId;
 
 	/** 媒体类型 */
 	private String type;
@@ -52,12 +52,12 @@ public class MemoMedia implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getReportDetailMemoId() {
-		return this.reportDetailMemoId;
+	public Integer getReportDetailId() {
+		return reportDetailId;
 	}
 
-	public void setReportDetailMemoId(Integer reportDetailMemoId) {
-		this.reportDetailMemoId = reportDetailMemoId;
+	public void setReportDetailId(Integer reportDetailId) {
+		this.reportDetailId = reportDetailId;
 	}
 
 	public String getType() {
