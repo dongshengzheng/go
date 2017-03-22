@@ -27,11 +27,10 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
     ReportDetailMapper reportDetailMapper;
 
 
-
     @Override
     public boolean saveReportAndUpdateReportDetail(Report report, Integer[] reportDetailId) {
 
-        /*if (reportMapper.insert(report) < 0) {
+        if (reportMapper.insert(report) < 0) {
             return false;
         }
         if (reportDetailId != null && reportDetailId.length > 0) {
@@ -39,22 +38,14 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
             List<ReportDetail> detailList = reportDetailMapper.selectBatchIds(list);
             Integer reportId = report.getId();
             for (ReportDetail detail : detailList) {
+                detail.setSubmitStatus(Const.REPORT_DETAIL_SUBMIT_HAVE);
                 detail.setReportId(reportId);
             }
             if (reportDetailMapper.updateBatchById(detailList) < 0) {
                 return false;
             }
-            List<ReportDetailStatus> statusList = reportDetailStatusMapper.getByReportDetailIds(list);
-            if (statusList != null && statusList.size() > 0) {
-                for (ReportDetailStatus status : statusList) {
-                    status.setStatus(Const.REPORT_DETAIL_SUBMIT_HAVE);
-                }
-                if (reportDetailStatusMapper.updateBatchById(statusList) < 0) {
-                    return false;
-                }
-            }
 
-        }*/
+        }
         return false;
     }
 }

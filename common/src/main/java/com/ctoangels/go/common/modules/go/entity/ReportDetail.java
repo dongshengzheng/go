@@ -187,7 +187,6 @@ public class ReportDetail implements Serializable {
         this.repairProgDetail = repairProgDetail;
     }
 
-
     public Integer getSubmitStatus() {
         return submitStatus;
     }

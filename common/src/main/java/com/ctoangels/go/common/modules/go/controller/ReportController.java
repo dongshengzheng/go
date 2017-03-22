@@ -56,7 +56,6 @@ public class ReportController extends BaseController {
     private IReportDetailReqService reportDetailReqService;
 
 
-
     @RequestMapping
     public String page(@RequestParam Integer taskId, ModelMap map) {
         Task task = taskService.selectById(taskId);
@@ -71,7 +70,7 @@ public class ReportController extends BaseController {
         EntityWrapper<Report> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.like("ship_name", keyword);
-        ew.setSqlSelect("id,publish_time,weather,temperature,hnmiaity");
+        ew.setSqlSelect("id,publish_time,weather,temperature,humidity");
         ew.addFilter("task_id={0}", taskId);
         ew.orderBy("publish_time", false);
         Page<Report> page = reportService.selectPage(getPage(), ew);
