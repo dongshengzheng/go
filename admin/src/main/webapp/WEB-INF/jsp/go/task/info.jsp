@@ -69,6 +69,7 @@
                                                 <th>工程描述</th>
                                                 <th>工程状态</th>
                                                 <th>记录汇报</th>
+                                                <th>前期汇报</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -112,11 +113,11 @@
         var tbody = $("#table" + (num * 1 + 1)).find("tbody");
         var detailList = eval(data.detailList);
         var html = "";
-        var taskId=${taskId};
+        var taskId =${taskId};
         if (detailList != null && detailList.length > 0) {
             $(detailList).each(function () {
                 var detail = eval(this);
-                var detailId=detail.id;
+                var detailId = detail.id;
                 html += "<tr>";
                 html += "<td>" + detail.proOrderNo + "</td>";
                 html += "<td>" + detail.proName + "</td>";
@@ -131,11 +132,12 @@
                 } else {
                     html += "<td><label  class='btn default'>未开始</label></td>"
                 }
-                html += "<td>" + "<a data-target='navTab' class='btn default' href='report/addRecord?id="+detailId+"&taskId="+taskId+"'  data-mode='dialog' >进入</a>" + "</td>";
+                html += "<td><a data-target='navTab' class='btn default' href='report/addRecord?id=" + detailId + "&taskId=" + taskId + "'>进入</a></td>";
+                html += "<td><a data-target='navTab' class='btn default' href='reportDetail/recentDetail?progDetailId=" + detailId + "&taskId=" + taskId + "'>查看</a></td>";
                 html += "</tr>";
             })
         } else {
-            html += "<tr><td colspan='5'>无详单信息</td><tr>"
+            html += "<tr><td colspan='6'>无详单信息</td><tr>"
         }
         tbody.html(html);
     }
