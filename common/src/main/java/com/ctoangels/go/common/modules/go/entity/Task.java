@@ -95,6 +95,12 @@ public class Task implements Serializable {
     @TableField(value = "max_prog_detail_id")
     private Integer maxProgDetailId;
 
+    /**
+     * 最近一次的报告
+     */
+    @TableField(exist = false)
+    private Report latestReport;
+
 
     public Integer getId() {
         return this.id;
@@ -206,5 +212,13 @@ public class Task implements Serializable {
 
     public void setEmailList(List<TaskEmail> emailList) {
         this.emailList = emailList;
+    }
+
+    public Report getLatestReport() {
+        return latestReport;
+    }
+
+    public void setLatestReport(Report latestReport) {
+        this.latestReport = latestReport;
     }
 }

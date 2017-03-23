@@ -11,4 +11,7 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
 public interface ReportMapper extends AutoMapper<Report> {
 
 
+    Report getLatestReport(Integer taskId);
+
+
 }

@@ -79,9 +79,7 @@ public class RepairProgController extends BaseController {
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         for (RepairProg prog : page.getRecords()) {
             prog.setPer(repairProgService.getPerById(prog.getId()));
-/*
             prog.setType(dictService.getDesByTypeAndValue("维修类型", prog.getType()));
-*/
         }
         return jsonPage(page);
     }
@@ -262,7 +260,8 @@ public class RepairProgController extends BaseController {
             task.setCompanyId(getCurrentUser().getCompanyId());
             task.setShipName(repairProg.getShipName());
             task.setShipyard(shipyardName);
-            task.setStatus(2);
+            task.setStatus(Const.TASK_NOT_START);
+            task.setDelFlag(Const.DEL_FLAG_NORMAL);
             taskService.insert(task);
 
             List<TaskEmail> emails = JSONObject.parseArray(dataJson, TaskEmail.class);

@@ -23,6 +23,7 @@
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.DetailNextProNo" alias="DetailNextProNo"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.Param" alias="Param"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.ParamValueVariable" alias="ParamValueVariable"/>
+        <typeAlias type="com.ctoangels.go.common.modules.go.entity.Report" alias="Report"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.ReportDetail" alias="ReportDetail"/>
         <typeAlias type="com.ctoangels.go.common.modules.go.entity.MemoMedia" alias="MemoMedia"/>
     </typeAliases>

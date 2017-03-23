@@ -122,12 +122,12 @@
         <td style="width: 80%">描述</td>
     </tr>
     <tr>
-        <td class="proOrderNo-td">D001</td>
-        <td class="proName-td">工程名称:XXXXXX</td>
+        <td class="proOrderNo-td"></td>
+        <td class="proName-td"></td>
     </tr>
     <tr>
-        <td></td>
-        <td class="proDesc-td">工程描述:XXXXXXXXXXXXXXXXXXX</td>
+        <td>工程描述</td>
+        <td class="proDesc-td"></td>
     </tr>
     <tr>
         <td>工程状态</td>
@@ -135,7 +135,7 @@
     </tr>
     <tr>
         <td>详情记录</td>
-        <td class="description-td">XXXXXXXXXX</td>
+        <td class="description-td"></td>
     </tr>
     <tr>
         <td>工程照片</td>
@@ -193,8 +193,9 @@
                 a.find(".reportDetailId").val(reportDetail.id);
                 a.find(".proOrderNo-td").html(progDetail.proOrderNo);
                 a.find(".proName-td").html(progDetail.proName);
-                a.find(".proDesc-td").html(progDetail.proDesc);
+                a.find(".proDesc-td").html(progDetail.proDesc + "&nbsp;");
                 var taskStatus = reportDetail.taskStatus;
+                console.log(taskStatus);
                 if (taskStatus == 0) {
                     a.find(".taskStatus-td").html("已完成");
                 } else if (taskStatus == 1) {
@@ -204,7 +205,7 @@
                 } else {
                     a.find(".taskStatus-td").html("未开始");
                 }
-                a.find(".description-td").html();
+                a.find(".description-td").html(reportDetail.memo);
                 var imgHtml = "";
                 $(reportDetail.imgList).each(function () {
                     imgHtml += "<div class='col-md-3'><a target='_blank' href='" + this.oss + "'><img src='" + this.oss + "'></a> </div>";

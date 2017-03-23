@@ -18,15 +18,6 @@
                         <div class="col-md-6">
                             维修工程管理
                         </div>
-                        <div class="col-md-2">
-                            <div class="btn-group">
-                                <shiro:hasPermission name="repairProg/add">
-                                    <a href="repairProg/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增维修工程进度
-                                    </a>
-                                </shiro:hasPermission>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
