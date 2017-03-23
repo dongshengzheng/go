@@ -6,6 +6,13 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<style>
+    .modal-dialog {
+        position: relative;
+        width: 65%;
+        margin: auto;
+    }
+</style>
 <go:navigater path="task"></go:navigater>
 <div class="row">
     <div class="col-md-12">
@@ -15,15 +22,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             维修工程单汇报
-                        </div>
-                        <div class="col-md-2">
-                            <div class="btn-group">
-                                <shiro:hasPermission name="ship/add">
-                                    <a href="ship/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增汇报信息
-                                    </a>
-                                </shiro:hasPermission>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,7 +88,13 @@
                     "data": "shipyard",
                 },
                 {
-                    "data": "shipyard",
+                    "data": "latestReport",
+                    "render": function (data) {
+                        if (data != null) {
+                            return '<a href="report/info?id=' + data.id + '"  data-model="dialog">' + data.publishTime + '</a>'
+                        }
+                        return "暂无报告信息";
+                    }
                 },
                 {
                     "data": "emailList",
@@ -117,13 +121,6 @@
                         return "<a href='task/info?id=" + data + "' data-target='navTab'>进入汇报</a>";
                     }
                 },
-//                {
-//                    "data": "createDate", "type": "date",
-//                    "render": function (data) {
-//                        var date = new Date(data);
-//                        return date.Format("yyyy-MM-dd");
-//                    }
-//                },
             ],
 
             "drawCallback": function (settings) {

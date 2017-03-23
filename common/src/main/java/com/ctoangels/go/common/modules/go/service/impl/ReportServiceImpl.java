@@ -1,5 +1,6 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
 import com.ctoangels.go.common.modules.go.entity.TaskEmail;
 import com.ctoangels.go.common.modules.go.mapper.ReportDetailMapper;
@@ -35,7 +36,6 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
 
     @Override
     public boolean saveReportAndUpdateReportDetail(Report report, Integer[] reportDetailId) {
-
         if (reportMapper.insert(report) < 0) {
             return false;
         }
@@ -62,5 +62,10 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
         }
         MailUtil.sendReportEmail(report, reportDetailList, emails);
         return true;
+    }
+
+    @Override
+    public Report getLatestReport(Integer taskId) {
+        return reportMapper.getLatestReport(taskId);
     }
 }

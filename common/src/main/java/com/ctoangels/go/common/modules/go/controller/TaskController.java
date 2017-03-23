@@ -38,6 +38,9 @@ public class TaskController extends BaseController {
     IDictService dictService;
 
     @Autowired
+    IReportService reportService;
+
+    @Autowired
     IRepairProgDetailService repairProgDetailService;
 
     @RequestMapping
@@ -58,6 +61,7 @@ public class TaskController extends BaseController {
         Page<Task> page = taskService.selectPage(getPage(), ew);
         for (Task task : page.getRecords()) {
             task.setEmailList(taskEmailService.getEmailList(task.getId()));
+            task.setLatestReport(reportService.getLatestReport(task.getId()));
         }
         return jsonPage(page);
     }

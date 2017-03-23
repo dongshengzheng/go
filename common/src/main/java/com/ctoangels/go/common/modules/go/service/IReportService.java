@@ -10,4 +10,6 @@ public interface IReportService extends ISuperService<Report> {
 
     boolean saveReportAndUpdateReportDetail(Report report, Integer[] reportDetailId);
 
+    Report getLatestReport(Integer taskId);
+
 }
