@@ -78,7 +78,11 @@
                     "data": "id"
                 },
                 {
-                    "data": "publishTime",
+                    "data": "publishTime", "type": "date",
+                    "render": function (data) {
+                        var date = new Date(data);
+                        return date.Format("yyyy-MM-dd");
+                    }
                 },
                 {
                     "data": "weather"

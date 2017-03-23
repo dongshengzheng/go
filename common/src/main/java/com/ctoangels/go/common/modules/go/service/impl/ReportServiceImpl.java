@@ -3,6 +3,7 @@ package com.ctoangels.go.common.modules.go.service.impl;
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
 import com.ctoangels.go.common.modules.go.mapper.ReportDetailMapper;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +45,9 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
             if (reportDetailMapper.updateBatchById(detailList) < 0) {
                 return false;
             }
-
         }
-        return false;
+        List<ReportDetail> reportDetailList = reportDetailMapper.getListByReportId(report.getId());
+        MailUtil.sendReportEmail(report, reportDetailList);
+        return true;
     }
 }

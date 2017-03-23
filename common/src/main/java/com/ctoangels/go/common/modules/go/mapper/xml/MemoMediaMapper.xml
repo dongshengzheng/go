@@ -10,7 +10,7 @@
 		delete from t_memo_media where report_detail_id=#{0}
 	</delete>
 
-    <select id="getByReportDetailIdAndType" parameterType="java.util.Map">
+    <select id="getByReportDetailIdAndType" parameterType="java.util.Map" resultType="MemoMedia">
 		SELECT m.* from t_memo_media m
 		 WHERE m.report_detail_id=#{report_detail_id} and m.type=#{type}
 	</select>
