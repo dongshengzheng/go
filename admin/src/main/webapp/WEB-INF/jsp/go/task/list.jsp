@@ -93,7 +93,17 @@
                     "data": "shipyard",
                 },
                 {
-                    "data": "shipyard",
+                    "data": "emailList",
+                    "render": function (data) {
+                        var emails = "";
+                        $(data).each(function () {
+                            emails += this.email + ",";
+                        })
+                        if (emails.length > 0) {
+                            emails = emails.substring(0, emails.length - 1);
+                        }
+                        return emails;
+                    }
                 },
                 {
                     "data": "id",

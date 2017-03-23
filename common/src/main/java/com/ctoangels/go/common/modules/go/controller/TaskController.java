@@ -32,6 +32,9 @@ public class TaskController extends BaseController {
     ITaskService taskService;
 
     @Autowired
+    ITaskEmailService taskEmailService;
+
+    @Autowired
     IDictService dictService;
 
     @Autowired
@@ -53,6 +56,9 @@ public class TaskController extends BaseController {
         ew.addFilter("company_id={0}", companyId);
         ew.orderBy("update_date", false);
         Page<Task> page = taskService.selectPage(getPage(), ew);
+        for (Task task : page.getRecords()) {
+            task.setEmailList(taskEmailService.getEmailList(task.getId()));
+        }
         return jsonPage(page);
     }
 
@@ -63,7 +69,7 @@ public class TaskController extends BaseController {
         Task task = taskService.selectById(id);
         map.put("task", task);
         map.put("cataList", cataList);
-        map.put("taskId",id);
+        map.put("taskId", id);
         return "go/task/info";
     }
 

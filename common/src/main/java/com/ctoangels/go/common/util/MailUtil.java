@@ -251,13 +251,14 @@ public class MailUtil {
 
 
     //发送每日报告邮件
-    public static void sendReportEmail(Report report, List<ReportDetail> reportDetailList) {
+    public static void sendReportEmail(Report report, List<ReportDetail> reportDetailList, String[] toAddress) {
         StringBuffer sb = new StringBuffer();
         sb.append("<html>");
         sb.append("<head>");
         sb.append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
         sb.append("<title>Daily Report</title>");
-        sb.append("<style>.img-div{float:left;width:48%}   img{max-width:100%;max-height:100%;}</style>");
+        sb.append("<style>.img-div{float:left;width:48%;margin-right:0.5%}   img{max-width:100%;max-height:100%;}</style>");
+//        sb.append("<link href='http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css' />");
         sb.append("</head>");
         sb.append("<body>");
         sb.append("<table width='100%' cellpadding='0' cellspacing='0' bgcolor='ffffff'>");
@@ -429,6 +430,7 @@ public class MailUtil {
                 sb.append("</td>");
                 sb.append("</tr>");
 
+
                 sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
                 sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>详情记录</td>");
                 sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
@@ -480,6 +482,6 @@ public class MailUtil {
         sb.append("</table>");
         sb.append("</body>");
         sb.append("</html>");
-        sendEmail("1061147291@qq.com", sb.toString(), "每日报告", null);
+        sendEmail(toAddress, sb.toString(), "每日报告", null);
     }
 }
