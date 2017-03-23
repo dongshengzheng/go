@@ -131,7 +131,7 @@
                 } else {
                     html += "<td><label  class='btn default'>未开始</label></td>"
                 }
-                html += "<td>" + "<a data-target='navTab' class='btn default' href='report/addRecord?id="+detailId+"&taskId="+taskId+"'  data-mode='dialog' >进入</a>" + "</td>";
+                html += "<td>" + "<a data-target='navTab'  class='btn default' href='report/addRecord?id="+detailId+"&taskId="+taskId+"'   >进入</a>" + "</td>";
                 html += "</tr>";
             })
         } else {
