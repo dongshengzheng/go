@@ -1,7 +1,9 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
+import com.ctoangels.go.common.modules.go.entity.TaskEmail;
 import com.ctoangels.go.common.modules.go.mapper.ReportDetailMapper;
+import com.ctoangels.go.common.modules.go.service.ITaskEmailService;
 import com.ctoangels.go.common.util.Const;
 import com.ctoangels.go.common.util.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
     @Autowired
     ReportDetailMapper reportDetailMapper;
 
+    @Autowired
+    ITaskEmailService taskEmailService;
+
 
     @Override
     public boolean saveReportAndUpdateReportDetail(Report report, Integer[] reportDetailId) {
@@ -47,7 +52,15 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
             }
         }
         List<ReportDetail> reportDetailList = reportDetailMapper.getListByReportId(report.getId());
-        MailUtil.sendReportEmail(report, reportDetailList);
+        List<TaskEmail> emailList = taskEmailService.getEmailList(report.getTaskId());
+        String[] emails = null;
+        if (emailList != null && emailList.size() > 0) {
+            emails = new String[emailList.size()];
+            for (int i = 0; i < emailList.size(); i++) {
+                emails[i] = emailList.get(i).getEmail();
+            }
+        }
+        MailUtil.sendReportEmail(report, reportDetailList, emails);
         return true;
     }
 }

@@ -29,6 +29,7 @@
     }
 </style>
 <form class="form-horizontal" action="report/add" method="post" id="defForm">
+    <input type="hidden" value="0" name="delFlag">
     <input type="hidden" value="${task.id}" name="taskId">
     <input type="hidden" value="${task.shipName}" name="shipName">
     <div class="row">
