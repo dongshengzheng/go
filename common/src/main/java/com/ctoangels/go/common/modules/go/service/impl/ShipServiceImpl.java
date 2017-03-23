@@ -27,4 +27,5 @@ public class ShipServiceImpl extends SuperServiceImpl<ShipMapper, Ship> implemen
         ew.addFilter("del_flag=0 and company_id={0}", companyId);
         return shipMapper.selectList(ew);
     }
+
 }

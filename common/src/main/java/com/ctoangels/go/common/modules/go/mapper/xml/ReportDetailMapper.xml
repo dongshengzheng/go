@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, out_source AS outSource, repair_prog_id AS repairProgId, repair_prog_detail_id AS repairProgDetailId, report_id AS reportId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag, task_status AS taskStatus, submit_status AS submitStatus, memo
+		id, out_source AS outSource, task_id AS taskId, repair_prog_detail_id AS repairProgDetailId, report_id AS reportId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag, task_status AS taskStatus, submit_status AS submitStatus, memo
 	</sql>
 
 

@@ -155,7 +155,10 @@ public class ReportController extends BaseController {
         }else {
             //如果记录汇报单没有查到，则将上一次记录汇报单的id拿到
             ReportDetail reportDetail1=reportDetailService.selectMaxReportDetailByProgDetailIdAndCreateTime(id);
-            map.put("reportDetailId",reportDetail1.getId());
+            //如果是空，则说明这条记录汇报时第一次进去
+            if(reportDetail1!=null){
+                map.put("reportDetailId",reportDetail1.getId());
+            }
 
 
         }

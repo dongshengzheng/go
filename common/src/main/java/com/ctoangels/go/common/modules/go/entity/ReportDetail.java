@@ -36,8 +36,8 @@ public class ReportDetail implements Serializable {
     /**
      * 维修进度id
      */
-    @TableField(value = "repair_prog_id")
-    private Integer repairProgId;
+    @TableField(value = "task_id")
+    private Integer taskId;
 
     /**
      * 维修进度详单的id
@@ -128,12 +128,12 @@ public class ReportDetail implements Serializable {
         this.outSource = outSource;
     }
 
-    public Integer getRepairProgId() {
-        return this.repairProgId;
+    public Integer getTaskId() {
+        return taskId;
     }
 
-    public void setRepairProgId(Integer repairProgId) {
-        this.repairProgId = repairProgId;
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
     }
 
     public Integer getRepairProgDetailId() {

@@ -79,7 +79,9 @@ public class RepairProgController extends BaseController {
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         for (RepairProg prog : page.getRecords()) {
             prog.setPer(repairProgService.getPerById(prog.getId()));
+/*
             prog.setType(dictService.getDesByTypeAndValue("维修类型", prog.getType()));
+*/
         }
         return jsonPage(page);
     }

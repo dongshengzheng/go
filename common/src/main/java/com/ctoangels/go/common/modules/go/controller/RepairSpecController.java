@@ -91,7 +91,7 @@ public class RepairSpecController extends BaseController {
         ew.orderBy("update_date", false);
         Page<RepairSpec> page = repairSpecService.selectPage(getPage(), ew);
         for (RepairSpec spec : page.getRecords()) {
-            spec.setType(dictService.getDesByTypeAndValue("维修类型", spec.getType()));
+//            spec.setType(dictService.getDesByTypeAndValue("维修类型", spec.getType()));
         }
         return jsonPage(page);
     }

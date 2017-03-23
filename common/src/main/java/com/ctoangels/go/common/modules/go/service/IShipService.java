@@ -12,4 +12,5 @@ public interface IShipService extends ISuperService<Ship> {
 
     List<Ship> getListByCompanyId(Integer companyId);
 
+
 }

@@ -66,7 +66,7 @@
                             <div style="float:left;position:relative;margin: 10px">
                                 <input name="fileDiskName" type="hidden" value="" >
                                 <input name="fileName" type="hidden" value="${t.filename}"/>
-                                <input name="fileType" type="hidden" value="img">
+                                <input name="fileType" type="hidden" value="0">
                                 <input name="oss" type="hidden" value="${t.oss}"/>
                                 <span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;"></span>
                                 <img src="${t.oss}"style="width: 100px;height: 100px;"class="min-img" >
@@ -99,7 +99,7 @@
                                                <button onclick="delTr(this)">删除</button>
                                                <input name="fileDiskName" type="hidden" value="">
                                                <input name="fileName" type="hidden" value="${r.filename}"/>
-                                               <input name="fileType" type="hidden" value="attachment"/>
+                                               <input name="fileType" type="hidden" value="2"/>
                                                <input name="oss" type="hidden" value="${r.oss}"/>
                                            </td>
                                        </tr>
