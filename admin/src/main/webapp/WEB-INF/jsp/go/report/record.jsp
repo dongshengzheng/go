@@ -18,6 +18,18 @@
         margin-bottom: 40px;
     }
     textarea{ resize:none;}
+    ul.dropdown-menu {
+        z-index: 100;
+    }
+    .modal-dialog {
+        position: relative;
+        width: 75%;
+        margin: auto;
+    }
+
+    .modal-content {
+        padding: 10px;
+    }
 </style>
 
 <form action="report/addRecord" method="post" class="form-horizontal" id="defForm">
@@ -56,7 +68,7 @@
                                     已取消
                                 </c:if>
                             </td>
-                            <td><a href="#">工程详单查看</a></td>
+                            <td><a  data-model="dialog" href="repairProg/progDetail?id=${progDetail.id}">工程详单查看</a></td>
                         </tr>
                     </table>
                 </div>
@@ -201,7 +213,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
+                <button id="close" type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
                 <button type="button" onclick="severCheck()" class="btn dark btn-outline">确定</button>
             </div>
         </div>
@@ -217,7 +229,6 @@
 
     function sure() {
         var taskStatus=$("input[type='radio']:checked").val();
-        alert(taskStatus)
         $("#taskStatus").val(taskStatus);
         return true;
     }
@@ -230,6 +241,7 @@
 
     function severCheck() {
         if(sure()){
+            $("#close").click();
             var arr1 = new Array();
             var datas = handsontableData();
             var j = 0;
@@ -261,6 +273,8 @@
                             focus: false,
                             closeInSeconds: 5,
                         })
+
+                        $("#info").click();
                     } else {
                         App.alert({
                             container: "#detail_alert",
