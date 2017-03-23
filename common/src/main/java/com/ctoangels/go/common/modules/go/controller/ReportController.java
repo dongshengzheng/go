@@ -185,7 +185,6 @@ public class ReportController extends BaseController {
 
             reportDetail.setOutSource(0);
             reportDetail.setSubmitStatus(Const.REPORT_DETAIL_SUBMIT_NOT);//报告详单未提交
-            reportDetail.setTaskStatus(Const.TASK_NOT_START);//项目未开始
             reportDetail.setDelFlag(Const.DEL_FLAG_NORMAL);//表示正常
             reportDetail.setCreateDate(new Date());
             reportDetailService.insertOrUpdate(reportDetail);
@@ -215,6 +214,12 @@ public class ReportController extends BaseController {
                 r.setReportDetailId(reportDetail.getId());
             }
             reportDetailReqService.insertBatch(reqs);
+
+            //修改repairProgDetail的状态
+            RepairProgDetail repairProgDetail=repairProgDetailService.selectById(reportDetail.getRepairProgDetailId());
+            repairProgDetail.setTaskStatus(reportDetail.getTaskStatus());
+            repairProgDetailService.updateById(repairProgDetail);
+
 
 
             jsonObject.put("success", true);

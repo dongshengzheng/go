@@ -8,7 +8,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="progress"></go:navigater>
+<go:navigater path="task"></go:navigater>
 <style>
     table ,tr,td{
         border: solid 2px #9C9C9C
@@ -27,6 +27,7 @@
     <%--更新时候用到--%>
     <input name="id" type="hidden" value="${reportDetail.id}"/>
     <input name="taskId" type="hidden" value="${taskId}"/>
+    <input name="taskStatus" value="" type="hidden" id="taskStatus">
 
 
 
@@ -43,13 +44,16 @@
                             <td style="width: 50%">${progDetail.proDesc}</td>
                             <td>
                                 <c:if test="${reportDetail.taskStatus == 0}">
-                                    项目未开始
+                                    已完成
                                 </c:if>
                                 <c:if test="${reportDetail.taskStatus == 1}">
                                     进行中
                                 </c:if>
-                                <c:if test="${reportDetail.taskStatus == null}">
+                                <c:if test="${reportDetail.taskStatus == null||reportDetail.taskStatus==2}">
                                     未开始
+                                </c:if>
+                                <c:if test="${reportDetail.taskStatus ==3}">
+                                    已取消
                                 </c:if>
                             </td>
                             <td><a href="#">工程详单查看</a></td>
@@ -72,7 +76,7 @@
             <div class="col-md-12 borders" >
                 <c:if test="${!empty reportDetailFiles}">
                     <c:forEach items="${reportDetailFiles}" var="t">
-                        <c:if test="${t.type=='img'}">
+                        <c:if test="${t.type==0}">
                             <div style="float:left;position:relative;margin: 10px">
                                 <input name="fileDiskName" type="hidden" value="" >
                                 <input name="fileName" type="hidden" value="${t.filename}"/>
@@ -102,7 +106,7 @@
                            </tr>
                             <c:if test="${!empty reportDetailFiles}">
                                 <c:forEach items="${reportDetailFiles}" var="r">
-                                    <c:if test="${r.type=='attachment'}">
+                                    <c:if test="${r.type==2}">
                                        <tr>
                                            <td style="width: 80%">${r.filename}<a target="_blank" href="${r.oss}">${r.filename}</a></td>
                                            <td>
@@ -121,8 +125,10 @@
                 </div>
             </div>
             <div class="modal-footer" style="text-align: center">
-                <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
-                <button  onclick="goBack()" class="btn blue">取消</button>
+                <button type="button" onclick="status()" class="btn btn-primary">提交</button>
+                <button type="button" onclick="goBack()" class="btn blue">取消</button>
+
+
             </div>
         </div>
     </div>
@@ -134,47 +140,86 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">请输入信息</h4>
             </div>
-            <div class="modal-body" style="margin-left: auto">
+            <div class="modal-body">
                 <div class="form-group form-md-radios">
-                    <label>Checkboxes</label>
-                    <div class="md-radio-inline">
+                    <label>请选择状态</label>
+                    <div class="md-radio-inline" style="margin-left: 50px">
                         <div class="md-radio">
-                            <input type="radio" id="radio6" name="radio2" class="md-radiobtn">
+                            <input type="radio" id="radio6" name="radio2" class="md-radiobtn" value="2"
+                            <c:if test="${reportDetail.taskStatus==2||reportDetail.taskStatus==null}">
+                                   checked
+                            </c:if>
+                            <c:if test="${reportDetail.taskStatus==0}">
+                                   disabled
+                            </c:if>
+                            >
                             <label for="radio6">
                                 <span></span>
                                 <span class="check"></span>
                                 <span class="box"></span> 未开始 </label>
                         </div>
                         <div class="md-radio">
-                            <input type="radio" id="radio7" name="radio2" class="md-radiobtn" checked>
+                            <input type="radio" id="radio7" name="radio2" class="md-radiobtn" value="1"
+                                <c:if test="${reportDetail.taskStatus==1}">
+                                       checked
+                                </c:if>
+                                <c:if test="${reportDetail.taskStatus==0}">
+                                       disabled
+                                </c:if>
+                            >
                             <label for="radio7">
                                 <span></span>
                                 <span class="check"></span>
                                 <span class="box"></span> 进行中 </label>
                         </div>
                         <div class="md-radio">
-                            <input type="radio" id="radio8" name="radio2" class="md-radiobtn">
+                            <input type="radio" id="radio8" name="radio2" class="md-radiobtn" value="0"
+                                <c:if test="${reportDetail.taskStatus==0}">
+                                    checked
+                                </c:if>
+                            >
                             <label for="radio8">
                                 <span></span>
                                 <span class="check"></span>
                                 <span class="box"></span> 已完成 </label>
+                        </div>
+                        <div class="md-radio">
+                            <input type="radio" id="radio9" name="radio2" class="md-radiobtn" value="3"
+                            <c:if test="${reportDetail.taskStatus==3}">
+                                   checked
+                            </c:if>
+                            <c:if test="${reportDetail.taskStatus==0}">
+                                   disabled
+                            </c:if>
+                            >
+                            <label for="radio8">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span> 已取消 </label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
-                <button type="button" onclick="sure(this)" class="btn dark btn-outline">确定</button>
+                <button type="button" onclick="severCheck()" class="btn dark btn-outline">确定</button>
             </div>
         </div>
     </div>
 </div>
+
 <a id="info" href="task/info?id=${taskId}" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>
 <a href="#make"  style="display:none" data-toggle="modal" id="box" class="btn btn-sm margin-bottom-5 green"></a>
 <script>
     function status() {
         $("#box").click();
-        return false;
+    }
+
+    function sure() {
+        var taskStatus=$("input[type='radio']:checked").val();
+        alert(taskStatus)
+        $("#taskStatus").val(taskStatus);
+        return true;
     }
     function delTr(obj) { //删除行  
         $(obj).parent().parent().remove();
@@ -184,7 +229,7 @@
     }
 
     function severCheck() {
-        if(status()){
+        if(sure()){
             var arr1 = new Array();
             var datas = handsontableData();
             var j = 0;
