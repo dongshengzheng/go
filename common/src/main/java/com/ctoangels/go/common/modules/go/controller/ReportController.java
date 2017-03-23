@@ -174,7 +174,6 @@ public class ReportController extends BaseController {
                           @RequestParam(required = false) String fileName,
                           @RequestParam(required = false) String oss,
                           @RequestParam(required = false) String fileType,
-                          @RequestParam(required = false) Integer repairProgDetailId,
                           @RequestParam(required = false) String dataJson
     ) {
         JSONObject jsonObject = new JSONObject();
@@ -184,8 +183,6 @@ public class ReportController extends BaseController {
                 reportDetailReqService.deletebyReportDetailId(reportDetail.getId());
             }
 
-
-            reportDetail.setRepairProgDetailId(repairProgDetailId);
             reportDetail.setOutSource(0);
             reportDetail.setSubmitStatus(Const.REPORT_DETAIL_SUBMIT_NOT);//报告详单未提交
             reportDetail.setTaskStatus(Const.TASK_NOT_START);//项目未开始
@@ -193,21 +190,24 @@ public class ReportController extends BaseController {
             reportDetail.setCreateDate(new Date());
             reportDetailService.insertOrUpdate(reportDetail);
 
+            if(fileName!=null){
+                String[] fileNames = fileName.split(",");
+                String[] osss = oss.split(",");
+                String[] fileTypes = fileType.split(",");
 
-            String[] fileNames = fileName.split(",");
-            String[] osss = oss.split(",");
-            String[] fileTypes = fileType.split(",");
-
-            List<MemoMedia> memoMedias = new ArrayList<>();
-            for (int i = 0; i < fileNames.length; i++) {
-                MemoMedia memoMedia = new MemoMedia();
-                memoMedia.setFilename(fileNames[i]);
-                memoMedia.setOss(osss[i]);
-                memoMedia.setType(fileTypes[i]);
-                memoMedia.setReportDetailId(reportDetail.getId());
-                memoMedias.add(memoMedia);
+                List<MemoMedia> memoMedias = new ArrayList<>();
+                for (int i = 0; i < fileNames.length; i++) {
+                    MemoMedia memoMedia = new MemoMedia();
+                    memoMedia.setFilename(fileNames[i]);
+                    memoMedia.setOss(osss[i]);
+                    memoMedia.setType(fileTypes[i]);
+                    memoMedia.setReportDetailId(reportDetail.getId());
+                    memoMedias.add(memoMedia);
+                }
+                memoMediaService.insertBatch(memoMedias);
             }
-            memoMediaService.insertBatch(memoMedias);
+
+
 
             List<ReportDetailReq> reqs = JSONObject.parseArray(dataJson, ReportDetailReq.class);
             for(ReportDetailReq r:reqs){

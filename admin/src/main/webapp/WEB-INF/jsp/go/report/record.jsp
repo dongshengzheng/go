@@ -26,7 +26,7 @@
 
     <%--更新时候用到--%>
     <input name="id" type="hidden" value="${reportDetail.id}"/>
-
+    <input name="taskId" type="hidden" value="${taskId}"/>
 
 
 
@@ -41,7 +41,17 @@
                             <td>${progDetail.proOrderNo}</td>
                             <td>${progDetail.proName}</td>
                             <td style="width: 50%">${progDetail.proDesc}</td>
-                            <td><a href="#">工程状态修改</a></td>
+                            <td>
+                                <c:if test="${reportDetail.taskStatus == 0}">
+                                    项目未开始
+                                </c:if>
+                                <c:if test="${reportDetail.taskStatus == 1}">
+                                    进行中
+                                </c:if>
+                                <c:if test="${reportDetail.taskStatus == null}">
+                                    未开始
+                                </c:if>
+                            </td>
                             <td><a href="#">工程详单查看</a></td>
                         </tr>
                     </table>
@@ -117,75 +127,126 @@
         </div>
     </div>
 </form>
-<a id="info" href="task/info?id=${taskId}" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>'
+<div id="make" class="modal fade" tabindex="-1" data-backdrop="make" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4bccd8">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">请输入信息</h4>
+            </div>
+            <div class="modal-body" style="margin-left: auto">
+                <div class="form-group form-md-radios">
+                    <label>Checkboxes</label>
+                    <div class="md-radio-inline">
+                        <div class="md-radio">
+                            <input type="radio" id="radio6" name="radio2" class="md-radiobtn">
+                            <label for="radio6">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span> 未开始 </label>
+                        </div>
+                        <div class="md-radio">
+                            <input type="radio" id="radio7" name="radio2" class="md-radiobtn" checked>
+                            <label for="radio7">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span> 进行中 </label>
+                        </div>
+                        <div class="md-radio">
+                            <input type="radio" id="radio8" name="radio2" class="md-radiobtn">
+                            <label for="radio8">
+                                <span></span>
+                                <span class="check"></span>
+                                <span class="box"></span> 已完成 </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
+                <button type="button" onclick="sure(this)" class="btn dark btn-outline">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="info" href="task/info?id=${taskId}" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>
+<a href="#make"  style="display:none" data-toggle="modal" id="box" class="btn btn-sm margin-bottom-5 green"></a>
 <script>
+    function status() {
+        $("#box").click();
+        return false;
+    }
     function delTr(obj) { //删除行  
         $(obj).parent().parent().remove();
     }
     function goBack() {
         $("#info").click();
     }
+
     function severCheck() {
-        var arr1 = new Array();
-        var datas = handsontableData();
-        var j = 0;
-        for (var i = 0; i < datas.length; i++) {
-            if (datas[i][0] == null) {
-                continue;
-            }
-            var obj = new Object();
-            obj.des = datas[i][0];
-            obj.unit = datas[i][1];
-            obj.count = datas[i][2];
-            arr1[j++] = obj;
-        }
-        var dataJson = JSON.stringify(arr1);
-        $("#defForm").ajaxSubmit({
-            data: {
-                dataJson: dataJson
-            },
-            success: function (data) {
-                if (data.success) {
-                    App.alert({
-                        container: "#detail_alert",
-                        close: true,
-                        icon: 'fa fa-warning',
-                        place: "append",
-                        message: "提交成功",
-                        type: 'success',
-                        reset: true,
-                        focus: false,
-                        closeInSeconds: 5,
-                    })
-                } else {
-                    App.alert({
-                        container: "#detail_alert",
-                        close: true,
-                        icon: 'fa fa-warning',
-                        place: "append",
-                        message: "提交失败,请稍后再试",
-                        type: 'danger',
-                        reset: true,
-                        focus: false,
-                        closeInSeconds: 5,
-                    })
+        if(status()){
+            var arr1 = new Array();
+            var datas = handsontableData();
+            var j = 0;
+            for (var i = 0; i < datas.length; i++) {
+                if (datas[i][0] == null) {
+                    continue;
                 }
-            },
-            error: function () {
-                App.alert({
-                    container: "#detail_alert",
-                    close: true,
-                    icon: 'fa fa-warning',
-                    place: "append",
-                    message: "系统繁忙,请稍后再试",
-                    type: 'warning',
-                    reset: true,
-                    focus: false,
-                    closeInSeconds: 5,
-                })
-                return;
+                var obj = new Object();
+                obj.des = datas[i][0];
+                obj.unit = datas[i][1];
+                obj.count = datas[i][2];
+                arr1[j++] = obj;
             }
-        });
+            var dataJson = JSON.stringify(arr1);
+            $("#defForm").ajaxSubmit({
+                data: {
+                    dataJson: dataJson
+                },
+                success: function (data) {
+                    if (data.success) {
+                        App.alert({
+                            container: "#detail_alert",
+                            close: true,
+                            icon: 'fa fa-warning',
+                            place: "append",
+                            message: "提交成功",
+                            type: 'success',
+                            reset: true,
+                            focus: false,
+                            closeInSeconds: 5,
+                        })
+                    } else {
+                        App.alert({
+                            container: "#detail_alert",
+                            close: true,
+                            icon: 'fa fa-warning',
+                            place: "append",
+                            message: "提交失败,请稍后再试",
+                            type: 'danger',
+                            reset: true,
+                            focus: false,
+                            closeInSeconds: 5,
+                        })
+                    }
+                },
+                error: function () {
+                    App.alert({
+                        container: "#detail_alert",
+                        close: true,
+                        icon: 'fa fa-warning',
+                        place: "append",
+                        message: "系统繁忙,请稍后再试",
+                        type: 'warning',
+                        reset: true,
+                        focus: false,
+                        closeInSeconds: 5,
+                    })
+                    return;
+                }
+            });
+        }
+
     }
 </script>
 <script>
