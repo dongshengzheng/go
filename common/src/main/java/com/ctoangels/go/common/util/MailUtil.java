@@ -430,6 +430,7 @@ public class MailUtil {
                 sb.append("</td>");
                 sb.append("</tr>");
 
+
                 sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
                 sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>详情记录</td>");
                 sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
