@@ -276,7 +276,7 @@
 
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_img("upload_img", "windyeel", "${staticPath}/", "imges", "img");
+    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "imges", "img");
 
     //服务器校验
     function saveInfo(a) {

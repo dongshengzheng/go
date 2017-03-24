@@ -411,7 +411,6 @@
                         tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>添加备注</a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
                     }
                     if (!(a.parentCode == 0 || a.content == "addrow")) {
-                        console.log(a.parentCode + "hahahahah" + a.content)
                         tr.find(".model-detail-select").attr("data-code", a.code).attr("data-catagory", a.catagory).toggle();
                     }
                     if (a.children != 0) {

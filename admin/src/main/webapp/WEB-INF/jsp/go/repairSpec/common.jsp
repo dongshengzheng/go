@@ -259,6 +259,7 @@
         var id = thisOne.val();
         var catagory = thisOne.attr("data-catagory");
         var code = thisOne.attr("data-code");
+        var proOrderNo = "";
         if (id == -1) {
             return;
         }
@@ -415,10 +416,8 @@
         oldRow.find(".code-td").html(newCode);
         //改input和textarea的name
         var current = a.attr('data-current');
-        console.log(current);
         var table = oldRow.parents("table");
         var index = table.attr("data-totalRow");
-        console.log(index);
         table.attr("data-totalRow", index * 1 + 1);
         newRow.find('textarea').each(function () {
             var name = a.attr('name');

@@ -150,12 +150,6 @@
         <td class="proFile-td"></td>
     </tr>
 </table>
-<div class="col-md-3" id="imgTmp" style="display: none">
-    <a target="_blank"
-       href="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png"><img
-            src="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png"></a>
-</div>
-
 
 <script>
     $(function () {

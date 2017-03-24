@@ -214,7 +214,7 @@
             <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
                 <p>插入图片或图纸</p>
                 <img id="imges"
-                     src="http://windyeel.img-cn-shanghai.aliyuncs.com/${modelDetails.img}?x-oss-process=image/resize,m_fill,h_100,w_100"
+                     src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${modelDetails.img}?x-oss-process=image/resize,m_fill,h_100,w_100"
                      style="display: block;width: 80%;height: 50%"
                      onerror="nofind(1)"/>
                 <input type="hidden" id="img" name="img" value="">
@@ -272,7 +272,7 @@
 
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_img("upload_img", "windyeel", "${staticPath}/", "imges", "img");
+    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "imges", "img");
 
     //服务器校验
     function saveInfo() {
