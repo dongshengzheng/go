@@ -37,10 +37,11 @@ public class ReportDetailController extends BaseController{
         EntityWrapper<ReportDetail> ew =getEntityWrapper();
         ew.addFilter("repair_prog_detail_id={0}",progDetailId);
         List<ReportDetail> reportDetails=reportDetailService.selectList(ew);
-        int size=reportDetails.size();
+
 
 
         map.put("progDetail",progDetail);
+        int size=reportDetails.size();
         map.put("size",size);
         map.put("reportDetails",reportDetails);
 
