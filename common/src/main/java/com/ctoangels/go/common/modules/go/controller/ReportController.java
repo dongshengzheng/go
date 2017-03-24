@@ -56,10 +56,8 @@ public class ReportController extends BaseController {
     private IReportDetailReqService reportDetailReqService;
 
 
-
-
     @RequestMapping
-    public String page(@RequestParam Integer taskId, ModelMap map) {
+    public String page(@RequestParam(required = false) Integer taskId, ModelMap map) {
         Task task = taskService.selectById(taskId);
         map.put("task", task);
         return "go/report/list";
@@ -151,14 +149,14 @@ public class ReportController extends BaseController {
             ew1.addFilter("report_detail_id={0}", reportDetail.getId());
             List<MemoMedia> reportDetailFiles = memoMediaService.selectList(ew1);
             map.put("reportDetailFiles", reportDetailFiles);
-            map.put("reportDetailId",reportDetail.getId());
+            map.put("reportDetailId", reportDetail.getId());
 
-        }else {
+        } else {
             //如果记录汇报单没有查到，则将上一次记录汇报单的id拿到
-            ReportDetail reportDetail1=reportDetailService.selectMaxReportDetailByProgDetailIdAndCreateTime(id);
+            ReportDetail reportDetail1 = reportDetailService.selectMaxReportDetailByProgDetailIdAndCreateTime(id);
             //如果是空，则说明这条记录汇报时第一次进去
-            if(reportDetail1!=null){
-                map.put("reportDetailId",reportDetail1.getId());
+            if (reportDetail1 != null) {
+                map.put("reportDetailId", reportDetail1.getId());
             }
 
 
@@ -179,7 +177,7 @@ public class ReportController extends BaseController {
     ) {
         JSONObject jsonObject = new JSONObject();
         try {
-            if(reportDetail.getId()!=null){
+            if (reportDetail.getId() != null) {
                 memoMediaService.deleteByReportDetailId(reportDetail.getId());
                 reportDetailReqService.deletebyReportDetailId(reportDetail.getId());
             }
@@ -190,7 +188,7 @@ public class ReportController extends BaseController {
             reportDetail.setCreateDate(new Date());
             reportDetailService.insertOrUpdate(reportDetail);
 
-            if(fileName!=null){
+            if (fileName != null) {
                 String[] fileNames = fileName.split(",");
                 String[] osss = oss.split(",");
                 String[] fileTypes = fileType.split(",");
@@ -208,19 +206,17 @@ public class ReportController extends BaseController {
             }
 
 
-
             List<ReportDetailReq> reqs = JSONObject.parseArray(dataJson, ReportDetailReq.class);
-            for(ReportDetailReq r:reqs){
+            for (ReportDetailReq r : reqs) {
                 r.setDelFlag(0);
                 r.setReportDetailId(reportDetail.getId());
             }
             reportDetailReqService.insertBatch(reqs);
 
             //修改repairProgDetail的状态
-            RepairProgDetail repairProgDetail=repairProgDetailService.selectById(reportDetail.getRepairProgDetailId());
+            RepairProgDetail repairProgDetail = repairProgDetailService.selectById(reportDetail.getRepairProgDetailId());
             repairProgDetail.setTaskStatus(reportDetail.getTaskStatus());
             repairProgDetailService.updateById(repairProgDetail);
-
 
 
             jsonObject.put("success", true);
@@ -236,7 +232,7 @@ public class ReportController extends BaseController {
     //获取repairModelDetailReq信息
     @RequestMapping(value = "/reqs", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject req(@RequestParam (required = false) Integer id , @RequestParam(required = false) Integer reportDetailId) {
+    public JSONObject req(@RequestParam(required = false) Integer id, @RequestParam(required = false) Integer reportDetailId) {
         JSONObject jsonObject = new JSONObject();
         EntityWrapper<ReportDetailReq> ew = new EntityWrapper<>();
         ew.addFilter("report_detail_id={0}", reportDetailId);
@@ -244,7 +240,7 @@ public class ReportController extends BaseController {
         jsonObject.put("reqs", reportReqs);
 
 
-        if (reportReqs.size()<=0) {
+        if (reportReqs.size() <= 0) {
             EntityWrapper<RepairProgDetailReq> ew1 = new EntityWrapper<>();
             ew1.addFilter("repair_prog_detail_id={0}", id);
             List<RepairProgDetailReq> repairProgDetailReqs = repairProgDetailReqService.selectList(ew1);
