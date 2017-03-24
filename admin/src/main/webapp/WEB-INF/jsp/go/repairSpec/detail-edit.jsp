@@ -75,6 +75,10 @@
     }
 
 </style>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title" style="color: white">维修详单</h4>
+</div>
 <form action="" method="post" class="form-horizontal" id="detail_form">
     <c:if test="${!empty detail}">
         <input id="id" name="id" type="hidden" value="${detail.id}"/>

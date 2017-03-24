@@ -28,6 +28,10 @@
         text-align: center;
     }
 </style>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title" style="color: white">当日汇报填写提交</h4>
+</div>
 <form class="form-horizontal" action="report/add" method="post" id="defForm">
     <input type="hidden" value="0" name="delFlag">
     <input type="hidden" value="${task.id}" name="taskId">
@@ -37,12 +41,6 @@
             <div class="portlet light bordered">
                 <div class="portlet-body">
                     <div class="table-toolbar">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3>当日汇报填写提交</h3>
-                            </div>
-                        </div>
-                        <hr>
                         <div class="row">
                             <div class="col-md-4">
                                 船名: ${task.shipName}
