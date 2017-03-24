@@ -183,7 +183,7 @@
         <td class="content-td">
         </td>
         <td class="detail-td">
-            <select class="model-detail-select" style="display: none" data-code="" data-catagory=""
+            <select class="model-detail-select" data-code="" data-catagory="" style="display: none"
                     onchange="getDetail(this)">
             </select>
         </td>
@@ -228,7 +228,10 @@
 <%--触发详单弹窗--%>
 <a style="display:none" href="repairSpecDetail/addModelDetail?shipName=&catagory=&code=" id="add-detail"
    data-model="dialog">新增详单</a>
-
+<input type="hidden" id="detailShipName">
+<input type="hidden" id="detailCatagory">
+<input type="hidden" id="detailCode">
+<input type="hidden" id="detailProOrderNo">
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
     <%--范本选择下拉列表的初始化及更新--%>
@@ -295,7 +298,13 @@
         }
         $(".marked-select").removeClass("marked-select");
         thisOne.addClass("marked-select");
-        $('#add-detail').attr("href", "repairSpecDetail/addModelDetail?shipName=" + shipName + "&catagory=" + catagory + "&code=" + code + "&proOrderNo=" + proOrderNo + "&id=" + id);
+        $("#detailShipName").val(shipName);
+        $("#detailCatagory").val(catagory);
+        $("#detailCode").val(code);
+        $("#detailProOrderNo").val(proOrderNo);
+//        var href = "repairSpecDetail/addModelDetail?shipName=" + shipName + "&catagory=" + catagory + "&code=" + code + "&proOrderNo=" + proOrderNo + "&id=" + id
+        var href = "repairSpecDetail/addModelDetail?id=" + id;
+        $('#add-detail').attr("href", href);
         $('#add-detail').click();
     }
 

@@ -8,6 +8,7 @@ import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -46,6 +47,9 @@ public class RepairModelDetailController extends BaseController {
     @Autowired
     private IRepairModelDetailService repairModelDetailService;
 
+    @Value("${static_path}")
+    private String staticPath;
+
     @RequestMapping
     public String page() {
         EntityWrapper<Dict> ew = new EntityWrapper<>();
@@ -77,8 +81,8 @@ public class RepairModelDetailController extends BaseController {
 
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String add(HttpSession session) {
-
+    public String add(HttpSession session, ModelMap map) {
+        map.put("staticPath", staticPath);
         return "go/modelDetail/add";
     }
 
@@ -147,7 +151,7 @@ public class RepairModelDetailController extends BaseController {
         ew.addFilter("repair_model_detail_id={0}", repairModelDetail.getId());
         List<RepairModelDetailReq> repairModelDetailReqs = repairModelDetailReqService.selectList(ew);
         modelMap.put("detailReqs", repairModelDetailReqs);
-
+        modelMap.put("staticPath", staticPath);
         if (operate.equals("look")) {
             return "go/modelDetail/info";
         } else {

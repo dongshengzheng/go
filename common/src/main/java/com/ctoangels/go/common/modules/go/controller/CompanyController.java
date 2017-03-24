@@ -10,6 +10,7 @@ import com.ctoangels.go.common.modules.go.service.ICompanyService;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.modules.sys.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -26,6 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CompanyController extends BaseController {
     @Autowired
     private ICompanyService companyService;
+
+    @Value("${static_path}")
+    private String staticPath;
 
     //查找当前的用户所在的公司
     @RequestMapping
@@ -45,6 +49,7 @@ public class CompanyController extends BaseController {
             Company company = companyService.selectById(companyId);
             map.put("company", company);
         }
+        map.put("staticPath", staticPath);
         return "go/company/edit";
     }
 

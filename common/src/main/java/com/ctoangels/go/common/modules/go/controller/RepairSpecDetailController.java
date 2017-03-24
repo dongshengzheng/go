@@ -8,6 +8,7 @@ import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import com.ctoangels.go.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,9 @@ public class RepairSpecDetailController extends BaseController {
     @Autowired
     IRepairModelDetailReqService repairModelDetailReqService;
 
+    @Value("${static_path}")
+    private String staticPath;
+
     /*在新增工程单模式下 新增维修范本或维修详单*/
     @RequestMapping(value = "/addModelDetail", method = RequestMethod.GET)
     public String add(ModelMap map, @RequestParam(required = false) Integer id) {
@@ -66,6 +70,7 @@ public class RepairSpecDetailController extends BaseController {
         List<Dict> reqDicts = dictService.selectList(ew1);
         map.put("repDicts", repDicts);
         map.put("reqDicts", reqDicts);
+        map.put("staticPath", staticPath);
         return "go/repairSpec/detail";
     }
 
@@ -147,6 +152,7 @@ public class RepairSpecDetailController extends BaseController {
         List<Dict> reqDicts = dictService.selectList(ew2);
         map.put("repDicts", repDicts);
         map.put("reqDicts", reqDicts);
+        map.put("staticPath", staticPath);
         return "go/repairSpec/detail-edit";
     }
 

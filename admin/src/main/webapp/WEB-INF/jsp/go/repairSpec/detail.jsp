@@ -92,32 +92,23 @@
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
-                    <label class="col-sm-7 control-label label-top">${param.shipName}</label>
-                    <input style="display: none" readonly id="shipName" name="shipName" type="text" maxlength="32"
-                           value="${param.shipName}"
-                           class="form-control required">
+                    <label id="shipNameLabel" class="col-sm-7 control-label label-top"></label>
+                    <input id="shipName" name="shipName" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
-                    <label class="col-sm-6 control-label label-top">${param.catagory}</label>
-                    <input style="display: none" readonly id="catagory" name="catagory" type="text" maxlength="32"
-                           value="${param.catagory}"
-                           class="form-control ">
+                    <label id="catagoryLabel" class="col-sm-6 control-label label-top"></label>
+                    <input id="catagory" name="catagory" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
-                    <label class="col-sm-6 control-label label-top">${param.code}</label>
-                    <input style="display: none" readonly id="code" name="code" type="text" maxlength="32"
-                           value="${param.code}"
-                           class="form-control required">
+                    <label id="codeLabel" class="col-sm-6 control-label label-top"></label>
+                    <input id="code" name="code" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
-                    <label class="col-sm-6 control-label label-top">${param.proOrderNo}</label>
-                    <input style="display: none" readonly id="proOrderNo" name="proOrderNo" type="text"
-                           maxlength="32"
-                           value="${param.proOrderNo}"
-                           class="form-control required">
+                    <label id="proOrderNoLabel" class="col-sm-6 control-label label-top"></label>
+                    <input id="proOrderNo" name="proOrderNo" type="hidden">
                 </div>
             </div>
         </div>
@@ -364,6 +355,18 @@
     }
 </script>
 <script>
+    $(function () {
+        $(".modal #shipName").val($("#detailShipName").val());
+        $(".modal #catagory").val($("#detailCatagory").val());
+        $(".modal #code").val($("#detailCode").val());
+        $(".modal #proOrderNo").val($("#detailProOrderNo").val());
+        $("#shipNameLabel").html($("#detailShipName").val());
+        $("#catagoryLabel").html($("#detailCatagory").val());
+        $("#codeLabel").html($("#detailCode").val());
+        $("#proOrderNoLabel").html($("#detailProOrderNo").val());
+    })
+
+
     var id = $("#id").attr("data-id");
     var width = $(window).width();
     $("#example1").width(width * 0.65);

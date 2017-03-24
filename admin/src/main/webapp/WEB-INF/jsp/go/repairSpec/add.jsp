@@ -132,17 +132,17 @@
                                                    class="form-control required" placeholder="请输入预估维修天数">
                                         </div>
                                     </div>
-                                   <%-- <div class="form-group col-md-6">
-                                        <label for="planCost" class="col-sm-3 control-label">
-                                            预估金额</label>
-                                        <div class="col-sm-7">
-                                            <input id="planCost" name="planCost" type="text"
-                                                   class="form-control required" placeholder="请输入预估维修金额">
-                                        </div>
-                                        <label class="col-sm-2 control-label"
-                                               style="padding-left: 5px;padding-right: 5px">
-                                            (单位:万元)</label>
-                                    </div>--%>
+                                    <%-- <div class="form-group col-md-6">
+                                         <label for="planCost" class="col-sm-3 control-label">
+                                             预估金额</label>
+                                         <div class="col-sm-7">
+                                             <input id="planCost" name="planCost" type="text"
+                                                    class="form-control required" placeholder="请输入预估维修金额">
+                                         </div>
+                                         <label class="col-sm-2 control-label"
+                                                style="padding-left: 5px;padding-right: 5px">
+                                             (单位:万元)</label>
+                                     </div>--%>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
@@ -409,7 +409,9 @@
                     }
                     if (a.parentCode == 0) {
                         tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>添加备注</a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
-                    } else {
+                    }
+                    if (!(a.parentCode == 0 || a.content == "addrow")) {
+                        console.log(a.parentCode + "hahahahah" + a.content)
                         tr.find(".model-detail-select").attr("data-code", a.code).attr("data-catagory", a.catagory).toggle();
                     }
                     if (a.children != 0) {
