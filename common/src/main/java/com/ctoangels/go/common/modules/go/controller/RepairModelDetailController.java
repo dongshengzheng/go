@@ -157,7 +157,6 @@ public class RepairModelDetailController extends BaseController {
         } else {
             return "go/modelDetail/edit";
         }
-
     }
 
 
