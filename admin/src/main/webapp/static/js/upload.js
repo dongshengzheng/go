@@ -15,7 +15,20 @@ now = timestamp = Date.parse(new Date()) / 1000;
 /*原名称*/
 nativeName="";
 
-function send_request(domain) {
+/*function send_request() {
+    $.ajax({
+        url:'oss/policy',
+        type:'GET',
+        success:function(data){
+            return data;
+            alert("ok");
+        },
+        error:function(xhr,textStatus){
+            alert("错误");
+        }
+    });
+}*/
+function send_request() {
     var xmlhttp = null;
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
@@ -25,7 +38,7 @@ function send_request(domain) {
     }
 
     if (xmlhttp != null) {
-        serverUrl = domain + 'oss/policy';
+        serverUrl = 'oss/policy';
         xmlhttp.open("GET", serverUrl, false);
         xmlhttp.send(null);
         return xmlhttp.responseText

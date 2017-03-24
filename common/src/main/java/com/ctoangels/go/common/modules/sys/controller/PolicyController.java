@@ -65,7 +65,7 @@ public class PolicyController {
             map.put("signature", postSignature);
             map.put("dir", dir);
             map.put("host", host);
-//            map.put("expire", String.valueOf(expireEndTime / 1000));
+            map.put("expire", String.valueOf(expireEndTime / 1000));
 
         } catch (Exception e) {
             e.printStackTrace();
