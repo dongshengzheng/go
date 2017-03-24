@@ -46,8 +46,7 @@
     <div class="profile-content">
         <div class="row col-md-11" >
             <div class="col-md-12"><h4>记录报告</h4></div>
-            <div class="col-md-12" style="padding-left:0px;padding-right: 0px
-">
+            <div class="col-md-12" style="padding-left:0px;padding-right: 0px">
                 <div class="timeline-body-content">
                     <table class="table table-bordered">
                         <tr>
@@ -139,8 +138,6 @@
             <div class="modal-footer" style="text-align: center">
                 <button type="button" onclick="status()" class="btn btn-primary">提交</button>
                 <button type="button" onclick="goBack()" class="btn blue">取消</button>
-
-
             </div>
         </div>
     </div>
