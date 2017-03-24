@@ -77,7 +77,7 @@
             <div class="col-md-12 borders">
                <div style="padding-top: 15px;padding-bottom: 15px">
                    <div class="col-md-9" style="padding: 0px">
-                       <div  id="example1"  style=" height: 250px; overflow: hidden;"></div>
+                       <div  id="example"  style=" height: 250px; overflow: hidden;"></div>
                    </div>
                    <div class="col-md-3"style=" height: 250px;padding: 0px">
                        <textarea name="memo" style="width: 100%;height:100%;" placeholder="备注:">${reportDetail.memo}</textarea>
@@ -330,7 +330,7 @@
             dataJson=data.reqs;
             console.log(dataJson);
             var datas = eval(dataJson);
-            var container = document.getElementById('example1'),
+            var container = document.getElementById('example'),
                     storedData = {},
                     savedKeys,
                     resetState,
