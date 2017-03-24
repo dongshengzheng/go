@@ -238,7 +238,7 @@ function initUploaders_attachment(buttonId, bucket, domain,tableId, trId ) {
                     '</td><td><button onclick="delTr(this)">删除</button>' +
                     '<input name="fileDiskName" type="hidden" value="' + g_object_name + '" >' +//文件存储磁盘的名称
                     '<input name="fileName" type="hidden" value="'+nativeName+'"/> '+//文件原名称
-                    '<input name="fileType" type="hidden" value="attachment"/>'+
+                    '<input name="fileType" type="hidden" value="2"/>'+
                     '<input name="oss" type="hidden" value="http://'+bucket+'.oss-cn-shanghai.aliyuncs.com/'+g_object_name+'"/> '+
                     '</td></tr>';
 
@@ -276,7 +276,7 @@ function initUploaders_report_img(buttonId, bucket, domain, imgId, divId) {
                 $("#" + divId).before('<div style="float:left;position:relative;margin: 10px">' +
                     '<input name="fileDiskName" type="hidden" value="' + g_object_name + '" >' +//文件存储磁盘的名称
                     '<input name="fileName" type="hidden" value="'+nativeName+'"/> '+//文件原名称
-                    '<input name="fileType" type="hidden" value="img">'+
+                    '<input name="fileType" type="hidden" value="0">'+
                     '<input name="oss" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '"/> '+
                     '<span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;"></span>' +
                     '<img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" ' +
