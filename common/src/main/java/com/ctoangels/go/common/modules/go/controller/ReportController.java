@@ -10,6 +10,7 @@ import com.ctoangels.go.common.util.Const;
 import com.ctoangels.go.common.util.MailUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -54,6 +55,10 @@ public class ReportController extends BaseController {
 
     @Autowired
     private IReportDetailReqService reportDetailReqService;
+
+
+    @Value("${static_path}")
+    private String staticPath;
 
 
     @RequestMapping
@@ -161,6 +166,7 @@ public class ReportController extends BaseController {
 
 
         }
+        map.put("staticPath", staticPath);
         map.put("progDetail", progDetail);
         map.put("reportDetail", reportDetail);
         map.put("taskId", taskId);
