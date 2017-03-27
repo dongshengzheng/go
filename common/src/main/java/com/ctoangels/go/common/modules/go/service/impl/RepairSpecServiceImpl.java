@@ -87,6 +87,7 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
             if (item.getId() != null) {
                 updateList.add(item);
             } else {
+                item.setRepairSpecId(repairSpec.getId());
                 insertList.add(item);
             }
         }

@@ -28,7 +28,7 @@
         SELECT item.* ,#{2} as model_id
         from t_repair_spec_item item
         WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and del_flag=0
-        Order by item.sort
+        Order by item.sort,item.code
     </select>
 
     <resultMap id="SpecItemMap2" type="RepairSpecItem">
@@ -45,6 +45,6 @@
         SELECT item.* ,#{2} as model_id
         from t_repair_spec_item item
         WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and item.status=0 and del_flag=0
-        Order by item.sort
+        Order by item.sort,item.code
     </select>
 </mapper>

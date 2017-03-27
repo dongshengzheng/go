@@ -400,6 +400,8 @@
         newRow.find(".model-detail-select").toggle();
         newRow.find(".unit-td input").toggle();
         newRow.find(".count-td input").toggle();
+        newRow.find(".item-id").val(null);
+
         var contentTd = newRow.find(".content-td");
         contentTd.find("button").remove();
         contentTd.find("input").val("");
