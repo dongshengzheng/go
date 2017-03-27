@@ -111,8 +111,6 @@
                name="type${outerVs.count}List[${itemVs.index}].catagory">
         <input type="hidden" value="${item.code}" class="item-code"
                name="type${outerVs.count}List[${itemVs.index}].code">
-        <input type="hidden" value="${item.unit}" class="item-unit"
-               name="type${outerVs.count}List[${itemVs.index}].unit">
         <input type="hidden" value="${item.parentCode}" class="item-parent"
                name="type${outerVs.count}List[${itemVs.index}].parentCode">
         <input type="hidden" value="${item.children}" class="item-children"
@@ -400,6 +398,8 @@
         var oldRow = a.parents("tr");
         var newRow = oldRow.clone();
         newRow.find(".model-detail-select").toggle();
+        newRow.find(".unit-td input").toggle();
+        newRow.find(".count-td input").toggle();
         var contentTd = newRow.find(".content-td");
         contentTd.find("button").remove();
         contentTd.find("input").val("");
@@ -413,26 +413,29 @@
         }
         newCode += numbers[numbers.length - 1] * 1 + 1;
         oldRow.find(".item-code").val(newCode);
+        oldRow.attr("data-code", newCode);
         oldRow.find(".code-td").html(newCode);
         //改input和textarea的name
         var current = a.attr('data-current');
         var table = oldRow.parents("table");
         var index = table.attr("data-totalRow");
         table.attr("data-totalRow", index * 1 + 1);
+        console.log(current + "===" + index);
         newRow.find('textarea').each(function () {
-            var name = a.attr('name');
+            var name = this.name;
             if (name != null) {
                 name = name.replace("[" + current + "]", "[" + index + "]");
-                a.attr('name', name);
+                this.name = name;
             }
         });
         newRow.find('input').each(function () {
-            var name = a.attr('name');
+            var name = this.name;
             if (name != null) {
                 name = name.replace("[" + current + "]", "[" + index + "]");
-                a.attr('name', name);
+                this.name = name;
             }
         });
+
         oldRow.before(newRow);
     }
 </script>

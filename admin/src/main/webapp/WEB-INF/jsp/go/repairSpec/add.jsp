@@ -13,9 +13,9 @@
         color: red;
     }
 
-    .portlet.box > .portlet-title > .tools > a.collapse {
-        background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);
-    }
+    <%--.portlet.box > .portlet-title > .tools > a.collapse {--%>
+        <%--background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);--%>
+    <%--}--%>
 
     .details-control {
         cursor: pointer;
@@ -279,8 +279,8 @@
                         tr.addClass("details-control-child");
                     }
                     tr.find(".code-td").html(a.code);
-                    var contentHtml = "<input value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
                     if (a.content != "addrow") {
+                        var contentHtml = "<input  value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
                         contentHtml += a.content;
                         var paramList = a.paramList;
                         if (paramList != null && paramList.length > 0) {
@@ -307,13 +307,18 @@
                         }
                         tr.find(".content-td").html(contentHtml);
                     } else {
-                        contentHtml += "<button onclick='addRow(this)' type='button' data-current='" + count + "' class='btn btn-sm blue'>新增 </button> ";
+                        var contentHtml = "<input onchange='inputControl(this)' class='input-control' value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
+                        contentHtml += "<button onclick='addRow(this)'  type='button' data-current='" + count + "' class='btn btn-sm blue'>新增</button> ";
                         tr.find(".content-td").html(contentHtml);
                     }
 
-                    tr.find(".unit-td").html(a.unit);
-                    if (a.unit != "") {
+                    if (a.unit != null && a.unit != "") {
+                        tr.find(".unit-td").html(a.unit + "<input value='" + a.unit + "' type='hidden' class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "unit'>");
                         tr.find(".count-td").html("<input class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "count'>");
+                    }
+                    if (a.content == "addrow") {
+                        tr.find(".unit-td").html("<input style='display:none' class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "unit'>");
+                        tr.find(".count-td").html("<input style='display:none' class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "count'>");
                     }
                     if (a.parentCode == 0) {
                         tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>添加备注</a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
@@ -327,7 +332,6 @@
                     tr.find(".true-status").val(1).prop("name", namePre + "status");
                     tr.find(".item-cata").val(a.catagory).prop("name", namePre + "catagory");
                     tr.find(".item-code").val(a.code).prop("name", namePre + "code");
-                    tr.find(".item-unit").val(a.unit).prop("name", namePre + "unit");
                     tr.find(".item-parent").val(a.parentCode).prop("name", namePre + "parentCode");
                     tr.find(".item-children").val(a.children).prop("name", namePre + "children");
                     tr.find(".item-sort").val(a.sort).prop("name", namePre + "sort");
@@ -371,8 +375,8 @@
                         tr.addClass("details-control-child").css("display", "none");
                     }
                     tr.find(".code-td").html(a.code);
-                    var contentHtml = "<input value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
                     if (a.content != "addrow") {
+                        var contentHtml = "<input  value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
                         contentHtml += a.content;
                         var paramList = a.paramList;
                         if (paramList != null && paramList.length > 0) {
@@ -399,14 +403,15 @@
                         }
                         tr.find(".content-td").html(contentHtml);
                     } else {
-                        contentHtml += "<button onclick='addRow(this)' type='button' data-current='" + count + "' class='btn btn-sm blue'>新增 </button>"
+                        var contentHtml = "<input  class='input-control' onchange='inputControl(this)'  value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
+                        contentHtml += "<button onclick='addRow(this)'  type='button' data-current='" + count + "' class='btn btn-sm blue'>新增 </button>"
                         tr.find(".content-td").html(contentHtml);
                     }
 
-                    tr.find(".unit-td").html(a.unit);
-                    if (a.unit != "") {
-                        tr.find(".count-td").html("<input class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "count'>");
-                    }
+//                    tr.find(".unit-td").html(a.unit);
+//                    if (a.unit != "") {
+//                        tr.find(".count-td").html("<input class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "count'>");
+//                    }
                     if (a.parentCode == 0) {
                         tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>添加备注</a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
                     }
