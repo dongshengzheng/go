@@ -3,6 +3,7 @@ package com.ctoangels.go.common.util;
 import com.ctoangels.go.common.modules.go.entity.MemoMedia;
 import com.ctoangels.go.common.modules.go.entity.Report;
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
+import com.ctoangels.go.common.modules.go.entity.Task;
 import com.ctoangels.go.common.modules.sys.entity.MailAuthenticator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -251,7 +252,7 @@ public class MailUtil {
 
 
     //发送每日报告邮件
-    public static void sendReportEmail(Report report, List<ReportDetail> reportDetailList, String[] toAddress) {
+    public static void sendReportEmail(Task task, Report report, List<ReportDetail> reportDetailList, String[] toAddress) {
         StringBuffer sb = new StringBuffer();
         sb.append("<html>");
         sb.append("<head>");
@@ -289,7 +290,7 @@ public class MailUtil {
         sb.append(" </td>");
         sb.append("<td style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");
         // 设置船名
-        sb.append("我是船名");
+        sb.append(task.getShipName());
         sb.append("</td>");
         sb.append("</tr>");
         sb.append("<tr style='border: solid 1px rgba(5, 5, 5, 0.2);padding: 3px 3px 3px 3px;'>");

@@ -401,7 +401,7 @@
         newRow.find(".unit-td input").toggle();
         newRow.find(".count-td input").toggle();
         newRow.find(".item-id").val(null);
-
+        newRow.find(".show-td").html("<a onclick='deleteRow(this)' class='btn btn-sm red'>删除</a>");
         var contentTd = newRow.find(".content-td");
         contentTd.find("button").remove();
         contentTd.find("input").val("");
@@ -465,6 +465,13 @@
     function deleteDetail(obj) {
         var tr = $(obj).parents("tr");
         var id = tr.find(".repairDetailId").val();
+        var code = tr.attr("data-parent");
+        tr.remove();
+        changeStatus(code);
+    }
+
+    function deleteRow(obj) {
+        var tr = $(obj).parents("tr");
         var code = tr.attr("data-parent");
         tr.remove();
         changeStatus(code);

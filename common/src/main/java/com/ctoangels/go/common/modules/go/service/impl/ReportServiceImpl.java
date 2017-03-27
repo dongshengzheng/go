@@ -2,9 +2,11 @@ package com.ctoangels.go.common.modules.go.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.go.entity.ReportDetail;
+import com.ctoangels.go.common.modules.go.entity.Task;
 import com.ctoangels.go.common.modules.go.entity.TaskEmail;
 import com.ctoangels.go.common.modules.go.mapper.ReportDetailMapper;
 import com.ctoangels.go.common.modules.go.service.ITaskEmailService;
+import com.ctoangels.go.common.modules.go.service.ITaskService;
 import com.ctoangels.go.common.util.Const;
 import com.ctoangels.go.common.util.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
 
     @Autowired
     ReportDetailMapper reportDetailMapper;
+
+    @Autowired
+    ITaskService taskService;
 
     @Autowired
     ITaskEmailService taskEmailService;
@@ -60,7 +65,8 @@ public class ReportServiceImpl extends SuperServiceImpl<ReportMapper, Report> im
                 emails[i] = emailList.get(i).getEmail();
             }
         }
-        MailUtil.sendReportEmail(report, reportDetailList, emails);
+        Task task = taskService.selectById(report.getTaskId());
+        MailUtil.sendReportEmail(task, report, reportDetailList, emails);
         return true;
     }
 
