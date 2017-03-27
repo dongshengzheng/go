@@ -73,6 +73,8 @@
     #remind {
         color: red;
     }
+    .left{ margin-top: 5px;border-right: dashed 1px #337ab7; }
+    .right{margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px}
 
 </style>
 <div class="modal-header">
@@ -94,28 +96,28 @@
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
-                    <label class="col-sm-5 control-label label-top">${detail.shipName}</label>
+                    <label style="width: auto;padding-left: 0px;" class="col-sm-5 control-label label-top" >${detail.shipName}</label>
                     <input style="display: none" readonly id="shipName" name="shipName" type="text" maxlength="32"
                            value="${detail.shipName}"
                            class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
-                    <label class="col-sm-6 control-label label-top">${detail.catagory}</label>
+                    <label style="width: auto;padding-left: 0px;" class="col-sm-6 control-label label-top">${detail.catagory}</label>
                     <input style="display: none" readonly id="catagory" name="catagory" type="text" maxlength="32"
                            value="${detail.catagory}"
                            class="form-control ">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
-                    <label class="col-sm-6 control-label label-top">${detail.code}</label>
+                    <label style="width: auto;padding-left: 0px;" class="col-sm-6 control-label label-top">${detail.code}</label>
                     <input style="display: none" readonly id="code" name="code" type="text" maxlength="32"
                            value="${detail.code}"
                            class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
-                    <label class="col-sm-6 control-label label-top">${detail.proOrderNo}</label>
+                    <label style="width: auto;padding-left: 0px;" class="col-sm-6 control-label label-top">${detail.proOrderNo}</label>
                     <input style="display: none" readonly id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
                            value="${detail.proOrderNo}"
                            class="form-control required">
@@ -123,7 +125,7 @@
             </div>
         </div>
         <div class="row">
-            <div style="margin-top: 5px;border-right: dashed 1px #337ab7;" class="col-md-8">
+            <div class="col-md-8 left">
                 <div style="width: 100%;">
                     <div><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：
@@ -207,7 +209,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
+            <div class="col-md-3 right">
                 <p>插入图片或图纸</p>
                 <img id="imges"
                      src=""
@@ -395,7 +397,7 @@
                 data: datas,
                 rowHeaders: true,
                 colHeaders: true,
-                colWidths: [600, 100, 100],
+                colWidths: [width*0.46, width*0.07, width*0.07],
                 minRows: 15,
                 colHeaders: ["要求和描述/材料规格", "单位", "数量"],
                 columnSorting: true,

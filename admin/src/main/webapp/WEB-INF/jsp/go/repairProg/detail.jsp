@@ -49,7 +49,14 @@
         margin-top: 20px;
     }
 
+    .left{ margin-top: 5px;border-right: dashed 1px #337ab7; }
+    .right{margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px}
+
 </style>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title" style="color: white">维修详单</h4>
+</div>
 <form action="" method="post" class="form-horizontal" id="defForm">
     <input type="hidden" value="${proDetail.id}" id="progDetailId"/>
     <div>
@@ -57,37 +64,29 @@
         <div style="height:40px;width: 100%;background-color: #C0C9CC" >
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
-                    <label for="shipName" class="col-sm-4 control-label label-top" >船名：</label>
-                    <div class="col-sm-7">
-                        <input disabled id="shipName" name="shipName" type="text" maxlength="32" value="${proDetail.shipName}"
-                               class="form-control required">
-                    </div>
+                    <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
+                    <label style="width: auto;padding-left: 0px;" id="shipNameLabel" class="col-sm-7 control-label label-top">${proDetail.shipName}</label>
+                    <input id="shipName" name="shipName" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
-                    <div class="col-sm-6">
-                        <input disabled id="catagory" name="catagory" type="text" maxlength="32" value="${proDetail.catagory}"
-                               class="form-control ">
-                    </div>
+                    <label style="width: auto;padding-left: 0px;" id="catagoryLabel" class="col-sm-6 control-label label-top">${proDetail.catagory}</label>
+                    <input id="catagory" name="catagory" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
-                    <div class="col-sm-6">
-                        <input disabled id="code" name="code" type="text" maxlength="32" value="${proDetail.code}"
-                               class="form-control required">
-                    </div>
+                    <label style="width: auto;padding-left: 0px;" id="codeLabel" class="col-sm-6 control-label label-top">${proDetail.code}</label>
+                    <input id="code" name="code" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
-                    <div class="col-sm-6">
-                        <input disabled id="proOrderNo" name="proOrderNo" type="text" maxlength="32" value="${proDetail.proOrderNo}"
-                               class="form-control required">
-                    </div>
+                    <label style="width: auto;padding-left: 0px;" id="proOrderNoLabel" class="col-sm-6 control-label label-top">${proDetail.proOrderNo}</label>
+                    <input id="proOrderNo" name="proOrderNo" type="hidden">
                 </div>
             </div>
         </div>
         <div class="row">
-            <div style="margin-top: 5px;border-right: dashed 1px #337ab7;" class="col-md-8">
+            <div   class="col-md-8 left">
                 <div style="width: 100%;">
                     <div ><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：<input disabled id="proName" type="text" name="proName" value="${proDetail.proName}"/></div>
@@ -167,7 +166,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
+            <div class="col-md-3 right">
                 <img id="imges"
                      src="http://windyeel.img-cn-shanghai.aliyuncs.com/${modelDetails.img}?x-oss-process=image/resize,m_fill,h_100,w_100"
                      style="display: block;width: 80%;height: 50%"
@@ -223,7 +222,7 @@
     $(document).ready(function () {
         var id=$("#progDetailId").val();
         var width=$(window).width();
-        var divWidth=$("#example1").width(width*0.65);
+        $("#example1").width(width*0.65);
         function json() {
             $.ajax({
                 url:'repairProg/reqs',
@@ -247,7 +246,7 @@
                         data: datas,
                         rowHeaders: true,
                         colHeaders: true,
-                        colWidths: [700,100,100],
+                        colWidths: [width*0.46, width*0.07, width*0.07],
                         minRows:15,
                         colHeaders: ["要求和描述/材料规格","单位","数量"],
                         columnSorting: true,

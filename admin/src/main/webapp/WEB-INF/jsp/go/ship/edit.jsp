@@ -176,12 +176,12 @@
                                             <label class="col-sm-3 control-label">(单位:米)</label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="gt" class="col-sm-3 control-label">总吨</label>
+                                            <label for="grt" class="col-sm-3 control-label">注册总吨</label>
                                             <div class="col-sm-6">
-                                                <input id="gt" name="gtt" type="text" maxlength="32"
+                                                <input id="grt" name="grt" type="text" maxlength="32"
                                                        class="form-control "
-                                                       value="${ship['gt']}"
-                                                       placeholder="请填写总吨">
+                                                       value="${ship.grt}"
+                                                       placeholder="请填写注册总吨">
                                             </div>
                                             <label class="col-sm-3 control-label">(单位:吨)</label>
                                         </div>

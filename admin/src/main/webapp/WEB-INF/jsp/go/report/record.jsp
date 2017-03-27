@@ -54,17 +54,17 @@
                             <td>${progDetail.proName}</td>
                             <td style="width: 50%">${progDetail.proDesc}</td>
                             <td>
-                                <c:if test="${reportDetail.taskStatus == 0}">
-                                    已完成
+                                <c:if test="${progDetail.taskStatus == 0}">
+                                    <label  class='btn green-jungle'>已完成</label>
                                 </c:if>
-                                <c:if test="${reportDetail.taskStatus == 1}">
-                                    进行中
+                                <c:if test="${progDetail.taskStatus == 1}">
+                                    <label  class='btn blue'>进行中</label>
                                 </c:if>
-                                <c:if test="${reportDetail.taskStatus == null||reportDetail.taskStatus==2}">
-                                    未开始
+                                <c:if test="${progDetail.taskStatus == null||progDetail.taskStatus==2}">
+                                    <label  class='btn default'>未开始</label>
                                 </c:if>
-                                <c:if test="${reportDetail.taskStatus ==3}">
-                                    已取消
+                                <c:if test="${progDetail.taskStatus ==3}">
+                                    <label  class='btn yellow'>已取消</label>
                                 </c:if>
                             </td>
                             <td><a  data-model="dialog" href="repairProg/progDetail?id=${progDetail.id}">工程详单查看</a></td>
@@ -94,18 +94,16 @@
                                 <input name="fileType" type="hidden" value="0">
                                 <input name="oss" type="hidden" value="${t.oss}"/>
                                 <span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;"></span>
-                                <img src="${t.oss}"style="width: 100px;height: 100px;"class="min-img" >
+                                <a href="${t.oss}" target="_blank"><img src="${t.oss}"style="width: 100px;height: 100px;"class="min-img" ></a>
                             </div>
                         </c:if>
                     </c:forEach>
                 </c:if>
 
-                <div id="divId" style="margin: 10px">
-                    <button id="upload_img" >
-                        <img id="img" src="" style="width: 100px;height: 100px"
+                    <button id="upload_img" style="margin: 10px" >
+                        <img  id="img" src="" style="width: 100px;height: 100px"
                          onerror="nofind(4)"/>
                     </button>
-                </div>
             </div>
             <div class="col-md-12"><h4>上传相关文件</h4></div>
             <div class="col-md-12 borders">
@@ -143,7 +141,7 @@
     </div>
 </form>
 <div id="make" class="modal fade" tabindex="-1" data-backdrop="make" data-keyboard="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 40%">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #4bccd8">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -155,10 +153,10 @@
                     <div class="md-radio-inline" style="margin-left: 50px">
                         <div class="md-radio">
                             <input type="radio" id="radio6" name="radio2" class="md-radiobtn" value="2"
-                            <c:if test="${reportDetail.taskStatus==2||reportDetail.taskStatus==null}">
+                            <c:if test="${progDetail.taskStatus==2||progDetail.taskStatus==null}">
                                    checked
                             </c:if>
-                            <c:if test="${reportDetail.taskStatus==0}">
+                            <c:if test="${progDetail.taskStatus==0}">
                                    disabled
                             </c:if>
                             >
@@ -169,10 +167,10 @@
                         </div>
                         <div class="md-radio">
                             <input type="radio" id="radio7" name="radio2" class="md-radiobtn" value="1"
-                                <c:if test="${reportDetail.taskStatus==1}">
+                                <c:if test="${progDetail.taskStatus==1}">
                                        checked
                                 </c:if>
-                                <c:if test="${reportDetail.taskStatus==0}">
+                                <c:if test="${progDetail.taskStatus==0}">
                                        disabled
                                 </c:if>
                             >
@@ -183,7 +181,7 @@
                         </div>
                         <div class="md-radio">
                             <input type="radio" id="radio8" name="radio2" class="md-radiobtn" value="0"
-                                <c:if test="${reportDetail.taskStatus==0}">
+                                <c:if test="${progDetail.taskStatus==0}">
                                     checked
                                 </c:if>
                             >
@@ -194,14 +192,14 @@
                         </div>
                         <div class="md-radio">
                             <input type="radio" id="radio9" name="radio2" class="md-radiobtn" value="3"
-                            <c:if test="${reportDetail.taskStatus==3}">
+                            <c:if test="${progDetail.taskStatus==3}">
                                    checked
                             </c:if>
-                            <c:if test="${reportDetail.taskStatus==0}">
+                            <c:if test="${progDetail.taskStatus==0}">
                                    disabled
                             </c:if>
                             >
-                            <label for="radio8">
+                            <label for="radio9">
                                 <span></span>
                                 <span class="check"></span>
                                 <span class="box"></span> 已取消 </label>
@@ -306,8 +304,14 @@
     }
 </script>
 <script>
-    initUploaders_report_img("upload_img", "shipinfo", "${staticPath}/", "img", "divId");
+    initUploaders_report_img("upload_img", "shipinfo", "${staticPath}/", "img", "upload_img");
     initUploaders_attachment("attachment", "shipinfo", "${staticPath}/", "table_attachment","one");
+
+    var flag=false;
+    var s=${progDetail.taskStatus};
+    if(s==0){
+        flag=true;
+    }
 
     var id=$("#progDetailId").val();
     var reportDetailId=$("#reportDetailId").val();
@@ -345,7 +349,7 @@
                 columns: [
                     {data: "des",readOnly:true},
                     {data: "unit",readOnly:true},
-                    {data: "count"},
+                    {data: "count",readOnly:flag},
                     {data:  "tariff",readOnly:true},
                     {data:  "discount",readOnly:true},
                     {data:  "total",readOnly:true}

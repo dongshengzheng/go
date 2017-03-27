@@ -57,22 +57,22 @@ public class Ship implements Serializable {
 	private String companyName;
 
 	/** 吃水 */
-	private Integer draft;
+	private String draft;
 
 	/** 载重吨 */
-	private Integer dwt;
+	private String dwt;
 
-	/** 总吨 */
-	private Integer gt;
+	/** 注册总吨 */
+	private String grt;
 
 	/** 型深 */
-	private Integer depth;
+	private String depth;
 
 	/** 船宽 */
-	private Integer beam;
+	private String beam;
 
 	/** 船长 */
-	private Integer loa;
+	private String loa;
 
 	/** 坞检时间 */
 	private String dd;
@@ -98,7 +98,7 @@ public class Ship implements Serializable {
 
 	/** 主机：缸径 */
 	@TableField(value = "me_cyl_bore")
-	private Integer meCylBore;
+	private String meCylBore;
 
 	/** 辅机：厂家 */
 	@TableField(value = "aux_maker")
@@ -118,7 +118,7 @@ public class Ship implements Serializable {
 
 	/** 辅机：缸径 */
 	@TableField(value = "aux_cyl_bore")
-	private Integer auxCylBore;
+	private String auxCylBore;
 
 	/** 锅炉：厂家 */
 	@TableField(value = "boiler_maker")
@@ -138,11 +138,11 @@ public class Ship implements Serializable {
 
 	/** 锅炉：热交换面积 */
 	@TableField(value = "boiler_heating_area")
-	private Integer boilerHeatingArea;
+	private String boilerHeatingArea;
 
 	/** 锅炉：蒸发量 */
 	@TableField(value = "boiler_evaporation")
-	private Integer boilerEvaporation;
+	private String boilerEvaporation;
 
 	/** 创建时间 */
 	@TableField(value = "create_date")
@@ -245,53 +245,6 @@ public class Ship implements Serializable {
 		this.companyName = companyName;
 	}
 
-	public Integer getDraft() {
-		return this.draft;
-	}
-
-	public void setDraft(Integer draft) {
-		this.draft = draft;
-	}
-
-	public Integer getDwt() {
-		return this.dwt;
-	}
-
-	public void setDwt(Integer dwt) {
-		this.dwt = dwt;
-	}
-
-	public Integer getGt() {
-		return this.gt;
-	}
-
-	public void setGt(Integer gt) {
-		this.gt = gt;
-	}
-
-	public Integer getDepth() {
-		return this.depth;
-	}
-
-	public void setDepth(Integer depth) {
-		this.depth = depth;
-	}
-
-	public Integer getBeam() {
-		return this.beam;
-	}
-
-	public void setBeam(Integer beam) {
-		this.beam = beam;
-	}
-
-	public Integer getLoa() {
-		return this.loa;
-	}
-
-	public void setLoa(Integer loa) {
-		this.loa = loa;
-	}
 
 	public String getMeMaker() {
 		return this.meMaker;
@@ -325,13 +278,6 @@ public class Ship implements Serializable {
 		this.meQty = meQty;
 	}
 
-	public Integer getMeCylBore() {
-		return this.meCylBore;
-	}
-
-	public void setMeCylBore(Integer meCylBore) {
-		this.meCylBore = meCylBore;
-	}
 
 	public String getAuxMaker() {
 		return this.auxMaker;
@@ -365,13 +311,6 @@ public class Ship implements Serializable {
 		this.auxQty = auxQty;
 	}
 
-	public Integer getAuxCylBore() {
-		return this.auxCylBore;
-	}
-
-	public void setAuxCylBore(Integer auxCylBore) {
-		this.auxCylBore = auxCylBore;
-	}
 
 	public String getBoilerMaker() {
 		return this.boilerMaker;
@@ -405,21 +344,6 @@ public class Ship implements Serializable {
 		this.boilerQty = boilerQty;
 	}
 
-	public Integer getBoilerHeatingArea() {
-		return this.boilerHeatingArea;
-	}
-
-	public void setBoilerHeatingArea(Integer boilerHeatingArea) {
-		this.boilerHeatingArea = boilerHeatingArea;
-	}
-
-	public Integer getBoilerEvaporation() {
-		return this.boilerEvaporation;
-	}
-
-	public void setBoilerEvaporation(Integer boilerEvaporation) {
-		this.boilerEvaporation = boilerEvaporation;
-	}
 
 	public Date getCreateDate() {
 		return this.createDate;
@@ -475,5 +399,86 @@ public class Ship implements Serializable {
 
 	public void setSs(String ss) {
 		this.ss = ss;
+	}
+
+
+	public String getDraft() {
+		return draft;
+	}
+
+	public void setDraft(String draft) {
+		this.draft = draft;
+	}
+
+	public String getDwt() {
+		return dwt;
+	}
+
+	public void setDwt(String dwt) {
+		this.dwt = dwt;
+	}
+
+	public String getGrt() {
+		return grt;
+	}
+
+	public void setGrt(String grt) {
+		this.grt = grt;
+	}
+
+	public String getDepth() {
+		return depth;
+	}
+
+	public void setDepth(String depth) {
+		this.depth = depth;
+	}
+
+	public String getBeam() {
+		return beam;
+	}
+
+	public void setBeam(String beam) {
+		this.beam = beam;
+	}
+
+	public String getLoa() {
+		return loa;
+	}
+
+	public void setLoa(String loa) {
+		this.loa = loa;
+	}
+
+	public String getMeCylBore() {
+		return meCylBore;
+	}
+
+	public void setMeCylBore(String meCylBore) {
+		this.meCylBore = meCylBore;
+	}
+
+	public String getAuxCylBore() {
+		return auxCylBore;
+	}
+
+	public void setAuxCylBore(String auxCylBore) {
+		this.auxCylBore = auxCylBore;
+	}
+
+	public String getBoilerHeatingArea() {
+		return boilerHeatingArea;
+	}
+
+	public void setBoilerHeatingArea(String boilerHeatingArea) {
+		this.boilerHeatingArea = boilerHeatingArea;
+	}
+
+	public String getBoilerEvaporation() {
+		return boilerEvaporation;
+	}
+
+	public void setBoilerEvaporation(String boilerEvaporation) {
+		this.boilerEvaporation = boilerEvaporation;
 	}
 }

@@ -566,6 +566,30 @@
             alter table t_report_detail change repair_prog_id task_id INT ;
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-046">
+        <sql>
+            alter table t_ship modify column draft varchar(45) COMMENT '吃水';
+            alter table t_ship modify column dwt varchar(45) COMMENT '载重吨';
+            alter table t_ship modify column gt varchar(45) COMMENT '注册总吨';
+            alter table t_ship modify column depth varchar(45) COMMENT '型深';
+            alter table t_ship modify column beam varchar(45) COMMENT '船宽';
+            alter table t_ship modify column loa varchar(45) COMMENT '船长';
+            alter table t_ship modify column me_cyl_bore varchar(45) COMMENT '主机：缸径';
+            alter table t_ship modify column aux_cyl_bore varchar(45) COMMENT '辅机：缸径';
+            alter table t_ship modify column boiler_heating_area varchar(45) COMMENT '锅炉：热交换面积';
+            alter table t_ship modify column boiler_evaporation varchar(45) COMMENT '锅炉：蒸发量';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-047">
+        <sql>
+            alter table t_ship change gt grt varchar(45) COMMENT '注册总吨';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-048">
+        <sql>
+            alter table t_repair_spec_item modify count varchar(45) COMMENT '数量';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

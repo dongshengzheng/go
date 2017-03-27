@@ -94,7 +94,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船厂名称");
+                initSearchForm(null, "请输入工程名称");
             }
         });
 
