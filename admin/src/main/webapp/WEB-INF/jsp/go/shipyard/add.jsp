@@ -105,7 +105,7 @@
     <div class="col-sm-2" >
         <p>公司logo</p>
         <img id="logo-img"
-             src="http://windyeel.img-cn-shanghai.aliyuncs.com/${shipyard.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
+             src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${shipyard.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
              style="display: block;width: 50%;height: 50%"
              onerror="nofind(1)"/>
         <input type="hidden" id="logo" name="logo" >
@@ -126,7 +126,7 @@
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_logo("upload_logo", "windyeel", "${staticPath}/", "logo-img", "logo");
+    initUploaders_logo("upload_logo", "shipinfo", "${staticPath}/", "logo-img", "logo");
 
     //服务器校验
     function severCheck() {

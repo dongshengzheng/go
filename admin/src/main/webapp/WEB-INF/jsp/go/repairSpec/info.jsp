@@ -9,9 +9,9 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <style>
-    .portlet.box > .portlet-title > .tools > a.collapse {
-        background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);
-    }
+    <%--.portlet.box > .portlet-title > .tools > a.collapse {--%>
+        <%--background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);--%>
+    <%--}--%>
 
     .table-striped > tbody > tr.details-control-child:nth-of-type(odd) {
         background-color: white;
@@ -258,6 +258,7 @@
                                 contentHtml += p.name;
                                 var str = "param" + pCount + "Val";
                                 var pValue = a[str];
+                                pValue = (pValue == null) ? "" : pValue;
                                 contentHtml += pValue + p.unit;
                             }
                         }

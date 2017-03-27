@@ -8,16 +8,19 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <style>
-    .col-sm-6{
+    .col-sm-6 {
         width: 60%;
     }
+
     .col-sm-2 {
         width: 39%;
     }
+
     .col-md-4 {
         width: 70%;
     }
-    .red{
+
+    .red {
         color: red;
     }
 
@@ -41,14 +44,16 @@
                     <span class="red"> * </span>
                 </label>
                 <div class="col-md-4">
-                    <input id="name" type="text" name="name" data-required="1" class="form-control" value="${privateShipyard.name}"/> </div>
+                    <input id="name" type="text" name="name" data-required="1" class="form-control"
+                           value="${privateShipyard.name}"/></div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">集团公司
                     <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
-                    <input name="groupCompany" type="text" class="form-control" value="${privateShipyard.groupCompany}"/> </div>
+                    <input name="groupCompany" type="text" class="form-control"
+                           value="${privateShipyard.groupCompany}"/></div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">国家
@@ -63,14 +68,14 @@
                     <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
-                    <input name="city" type="text" class="form-control" value="${privateShipyard.city}"/> </div>
+                    <input name="city" type="text" class="form-control" value="${privateShipyard.city}"/></div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">位置
                     <span class="red">  </span>
                 </label>
                 <div class="col-md-4">
-                    <input name="location" type="text" class="form-control" value="${privateShipyard.location}"/> </div>
+                    <input name="location" type="text" class="form-control" value="${privateShipyard.location}"/></div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3">联系电话
@@ -81,7 +86,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-phone"></i>
                         </span>
-                        <input id="tel" name="tel" type="text" class="form-control" value="${privateShipyard.tel}" />
+                        <input id="tel" name="tel" type="text" class="form-control" value="${privateShipyard.tel}"/>
                     </div>
                 </div>
             </div>
@@ -94,7 +99,8 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user"></i>
                         </span>
-                        <input id="contactName" name="contactName" type="text" class="form-control" value="${privateShipyard.contactName}"/>
+                        <input id="contactName" name="contactName" type="text" class="form-control"
+                               value="${privateShipyard.contactName}"/>
                     </div>
                 </div>
             </div>
@@ -107,18 +113,19 @@
                         <span class="input-group-addon">
                             <i class="fa fa-envelope"></i>
                         </span>
-                        <input id="email" type="text" class="form-control" name="email" placeholder="Email Address" value="${privateShipyard.email}"/> </div>
+                        <input id="email" type="text" class="form-control" name="email" placeholder="Email Address"
+                               value="${privateShipyard.email}"/></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-2" >
+    <div class="col-sm-2">
         <p>公司logo</p>
         <img id="logo-img"
-             src="http://windyeel.img-cn-shanghai.aliyuncs.com/${privateShipyard.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
+             src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${privateShipyard.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
              style="display: block;width: 50%;height: 50%"
              onerror="nofind(1)"/>
-        <input type="hidden" id="logo" name="logo" >
+        <input type="hidden" id="logo" name="logo">
         <br>
         <button id="upload_logo" class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
     </div>
@@ -136,7 +143,7 @@
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_logo("upload_logo", "windyeel", "${staticPath}/", "logo-img", "logo");
+    initUploaders_logo("upload_logo", "shipinfo", "${staticPath}/", "logo-img", "logo");
 
     //服务器校验
     function severCheck() {
