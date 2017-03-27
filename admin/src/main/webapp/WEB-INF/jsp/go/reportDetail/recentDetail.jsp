@@ -10,17 +10,23 @@
 <go:navigater path="reportDetail"></go:navigater>
 <go:navigater path="task"></go:navigater>
 <style>
-    table ,tr,td{
+   /* table, tr, td {
         border: solid 2px #9C9C9C
     }
-    .borders{
+
+    .borders {
         border: solid 1px #9C9C9C;
         margin-bottom: 40px;
+    }*/
+
+    textarea {
+        resize: none;
     }
-    textarea{ resize:none;}
+
     ul.dropdown-menu {
         z-index: 100;
     }
+
     .modal-dialog {
         position: relative;
         width: 75%;
@@ -37,7 +43,7 @@
     <input type="hidden" value="${reportDetailId}" id="reportDetailId">
 
     <div class="profile-content">
-        <div class="row col-md-11" >
+        <div class="row col-md-11">
             <div class="col-md-12"><h4>记录报告</h4></div>
             <div class="col-md-12" style="padding-left:0px;padding-right: 0px">
                 <div class="timeline-body-content">
@@ -48,19 +54,19 @@
                             <td style="width: 50%">${progDetail.proDesc}</td>
                             <td>
                                 <c:if test="${progDetail.taskStatus == 0}">
-                                    已完成
+                                    <label  class='btn green-jungle'>已完成</label>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus == 1}">
-                                    进行中
+                                    <label  class='btn blue'>进行中</label>
                                 </c:if>
-                                <c:if test="${progDetail.taskStatus == null||progDetail.taskStatus==2}">
-                                    未开始
+                                <c:if test="${progDetail.taskStatus == null||reportDetails[i].taskStatus==2}">
+                                    <label  class='btn default'>未开始</label>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus ==3}">
-                                    已取消
+                                    <label  class='btn yellow'>已取消</label>
                                 </c:if>
                             </td>
-                            <td><a  data-model="dialog" href="repairProg/progDetail?id=${progDetail.id}">工程详单查看</a></td>
+                            <td><a data-model="dialog" href="repairProg/progDetail?id=${progDetail.id}">工程详单查看</a></td>
                         </tr>
                     </table>
                 </div>
@@ -68,137 +74,143 @@
 
             <c:forEach var="i" begin="0" end="${size-1}" step="1" varStatus="d">
                 <fmt:formatDate value="${reportDetails[i].createDate}" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
-                <div class="col-md-12">${date}</div>
-                <div class="col-md-12"><h4>详情记录</h4></div>
-                <div class="col-md-12 borders">
-                    <div style="padding-top: 15px;padding-bottom: 15px">
-                        <div class="col-md-9" style="padding: 0px">
-                            <div  id="example${d.count}"  style=" height: 250px; overflow: hidden;"></div>
-                        </div>
-                        <div class="col-md-3"style=" height: 250px;padding: 0px">
-                            <textarea name="memo" style="width: 100%;height:100%;" placeholder="备注:">${reportDetails[i].memo}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 " ><h4>上传照片</h4></div>
-                <div class="col-md-12 borders" >
-                    <c:if test="${!empty reportDetailFiles}">
-                        <c:forEach items="${reportDetailFiles}" var="t">
-                            <c:if test="${t.type==0}">
-                                <div style="float:left;position:relative;margin: 10px">
-                                    <input name="fileDiskName" type="hidden" value="" >
-                                    <input name="fileName" type="hidden" value="${t.filename}"/>
-                                    <input name="fileType" type="hidden" value="0">
-                                    <input name="oss" type="hidden" value="${t.oss}"/>
-                                    <img src="${t.oss}"style="width: 100px;height: 100px;"class="min-img" >
-                                </div>
-                            </c:if>
-                        </c:forEach>
+                <div style="margin-top: 20px" class="col-sm-10"><h4 class="block"> ${date}</h4></div>
+                <div style="margin-top: 30px" class="col-sm-2">
+                    <c:if test="${reportDetails[i].taskStatus == 0}">
+                        <label  class='btn green-jungle'>已完成</label>
+                    </c:if>
+                    <c:if test="${reportDetails[i].taskStatus == 1}">
+                        <label  class='btn blue'>进行中</label>
+                    </c:if>
+                    <c:if test="${reportDetails[i].taskStatus == null||reportDetails[i].taskStatus==2}">
+                        <label  class='btn default'>未开始</label>
+                    </c:if>
+                    <c:if test="${reportDetails[i].taskStatus ==3}">
+                        <label  class='btn yellow'>已取消</label>
                     </c:if>
                 </div>
-                <div class="col-md-12"><h4>上传相关文件</h4></div>
-                <div class="col-md-12 borders">
-                    <div style="padding: 10px;">
-                        <table class="table" id="table_attachment">
-                            <tbody>
-                            <tr>
-                                <td id="one" rowspan="100" width="100px"><input id="attachment" type="button" value="浏览本地"/></td>
-                            </tr>
-                            <c:if test="${!empty reportDetailFiles}">
-                                <c:forEach items="${reportDetailFiles}" var="r">
-                                    <c:if test="${r.type==2}">
-                                        <tr>
-                                            <td style="width: 80%">${r.filename}<a target="_blank" href="${r.oss}">${r.filename}</a></td>
-                                            <td>
-                                                <input name="fileDiskName" type="hidden" value="">
-                                                <input name="fileName" type="hidden" value="${r.filename}"/>
-                                                <input name="fileType" type="hidden" value="2"/>
-                                                <input name="oss" type="hidden" value="${r.oss}"/>
-                                            </td>
-                                        </tr>
-                                    </c:if>
-                                </c:forEach>
-                            </c:if>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <div class="col-md-12 note note-success">
+                   <div class="col-md-12"><h4>详情记录</h4></div>
+                   <div class="col-md-12 borders">
+                       <div style="padding-top: 15px;padding-bottom: 15px">
+                           <div class="col-md-9" style="padding: 0px">
+                               <div id="handsontable${d.count}" data-id="${reportDetails[i].id}"
+                                    style=" height: 250px; overflow: hidden;"></div>
+                           </div>
+                           <div class="col-md-3" style=" height: 250px;padding: 0px">
+                            <textarea name="memo" style="width: 100%;height:100%;"
+                                      placeholder="备注:">${reportDetails[i].memo}</textarea>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-12 " style="margin-top: 40px"><h4>照片</h4></div>
+                   <div class="col-md-12">
+                       <c:if test="${!empty reportDetails[i].imgList}">
+                           <c:forEach items="${reportDetails[i].imgList}" var="t">
+                               <c:if test="${t.type==0}">
+                                   <div style="float:left;position:relative;margin: 10px">
+                                       <a href="${t.oss}" target="_blank"><img src="${t.oss}" style="width: 100px;height: 100px;" class="min-img"></a>
+                                   </div>
+                               </c:if>
+                           </c:forEach>
+                       </c:if>
+                   </div>
+                   <div class="col-md-12" style="margin-top: 40px"><h4>相关文件</h4></div>
+                   <div class="col-md-12">
+                       <div style="padding: 10px;">
+                           <table class="table" id="table_attachment">
+                               <tbody>
+                               <c:if test="${!empty reportDetails[i].otherList}">
+                                   <c:forEach items="${reportDetails[i].otherList}" var="r">
+                                       <c:if test="${r.type==2}">
+                                           <tr>
+                                               <td style="width: 80%"><a target="_blank" href="${r.oss}">${r.filename}</a>
+                                               </td>
+                                           </tr>
+                                       </c:if>
+                                   </c:forEach>
+                               </c:if>
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+               </div>
             </c:forEach>
 
 
-
             <div class="modal-footer" style="text-align: center">
-                <button type="button" onclick="goBack()" class="btn blue">取消</button>
             </div>
         </div>
     </div>
 </form>
 
 <a id="info" href="task/info?id=${taskId}" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>
-<a href="#make"  style="display:none" data-toggle="modal" id="box" class="btn btn-sm margin-bottom-5 green"></a>
+<a href="#make" style="display:none" data-toggle="modal" id="box" class="btn btn-sm margin-bottom-5 green"></a>
 
 <script>
-    var id=$("#progDetailId").val();
-    var reportDetailId=$("#reportDetailId").val();
-    var width=$(window).width();
-    var dataJson;
-    var h;
-    $.ajax({
-        url:'report/reqs',
-        data:{
-            id:id,
-            reportDetailId:reportDetailId
-        },
-        type:'POST', //GET
-        async:true,    //或false,是否异步
+    var size=${size};
+    for (var i = 1; i <= size; i++) {
+        handsontableData(i)
+    }
+    function handsontableData(i) {
+        var reportDetailId = $("#handsontable" + i).attr("data-id");
+        var width = $(window).width();
+        var dataJson;
+        $.ajax({
+            url: 'reportDetail/reqs',
+            data: {
+                reportDetailId: reportDetailId
+            },
+            type: 'POST', //GET
+            async: true,    //或false,是否异步
 
-        success:function(data){
-            dataJson=data.reqs;
-            console.log(dataJson);
-            var datas = eval(dataJson);
-            var container = document.getElementById('example1'),
-                    storedData = {},
-                    savedKeys,
-                    resetState,
-                    stateLoaded,
-                    hot;
+            success: function (data) {
 
-            hot = new Handsontable(container, {
-                data: datas,
-                rowHeaders: true,
-                colHeaders: true,
-                colWidths: [width*0.3,width*0.05,width*0.05,width*0.05,width*0.05,width*0.05],
-                minRows:10,
-                colHeaders: ["要求和描述/材料规格","单位","数量","单价","系数","总价"],
-                columnSorting: true,
-                columns: [
-                    {data: "des",readOnly:true},
-                    {data: "unit",readOnly:true},
-                    {data: "count"},
-                    {data:  "tariff",readOnly:true},
-                    {data:  "discount",readOnly:true},
-                    {data:  "total",readOnly:true}
-                ],
-                manualColumnMove: false,
-                manualColumnResize: true,
-                manualRowMove: false,
-                manualRowResize: false,
-                minSpareRows: 1,
-                contextMenu: false,
-                persistentState: false,
-            });
-            h=hot;
 
-            resetState = document.querySelector('.reset-state');
-            stateLoaded = document.querySelector('.state-loaded');
+                console.log(i)
+                dataJson = data.reqs;
+                console.log(dataJson);
+                var datas = eval(dataJson);
+                var container = document.getElementById('handsontable' + i),
+                        storedData = {},
+                        savedKeys,
+                        resetState,
+                        stateLoaded,
+                        hot;
 
-        },
-        error:function(xhr,textStatus){
-            console.log('错误');
-        }
-    });
-    function handsontableData() {
-        return h.getData();
+                hot = new Handsontable(container, {
+                    data: datas,
+                    rowHeaders: true,
+                    colHeaders: true,
+                    colWidths: [width * 0.3, width * 0.05, width * 0.05, width * 0.05, width * 0.05, width * 0.05],
+                    minRows: 10,
+                    colHeaders: ["要求和描述/材料规格", "单位", "数量", "单价", "系数", "总价"],
+                    columnSorting: true,
+                    columns: [
+                        {data: "des"},
+                        {data: "unit"},
+                        {data: "count"},
+                        {data: "tariff"},
+                        {data: "discount"},
+                        {data: "total"}
+                    ],
+                    manualColumnMove: false,
+                    manualColumnResize: true,
+                    manualRowMove: false,
+                    manualRowResize: false,
+                    minSpareRows: 1,
+                    contextMenu: false,
+                    persistentState: false,
+                    readOnly:true
+                });
+                flag = false;
+
+            },
+            error: function (xhr, textStatus) {
+                console.log('错误');
+            }
+        });
+
     }
 
 

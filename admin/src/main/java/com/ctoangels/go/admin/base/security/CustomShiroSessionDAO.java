@@ -23,6 +23,7 @@ public class CustomShiroSessionDAO extends AbstractSessionDAO {
     }
 
     public void setShiroSessionRepository(ShiroSessionRepository shiroSessionRepository) {
+        logger.info(shiroSessionRepository.toString());
         this.shiroSessionRepository = shiroSessionRepository;
     }
 

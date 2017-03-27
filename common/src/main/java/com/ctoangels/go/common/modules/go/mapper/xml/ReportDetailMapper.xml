@@ -20,6 +20,9 @@
             resultType="com.ctoangels.go.common.modules.go.entity.ReportDetail">
         select * from t_report_detail where repair_prog_detail_id=#{0} order by create_date desc limit 1;
     </select>
+    <select id="getListByRepairProgDetailId" resultMap="repairDetailMap">
+        select d.*,0 AS img,1 AS mp3,2 AS other from t_report_detail d where d.repair_prog_detail_id=#{0}
+    </select>
 
     <resultMap id="repairDetailMap" type="ReportDetail">
         <result property="id" column="id"></result>

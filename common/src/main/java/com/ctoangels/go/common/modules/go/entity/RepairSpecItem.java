@@ -62,7 +62,7 @@ public class RepairSpecItem implements Serializable {
     /**
      * 数量
      */
-    private Integer count;
+    private String count;
 
     /**
      * 备注
@@ -288,11 +288,11 @@ public class RepairSpecItem implements Serializable {
         this.unit = unit;
     }
 
-    public Integer getCount() {
-        return this.count;
+    public String getCount() {
+        return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(String count) {
         this.count = count;
     }
 

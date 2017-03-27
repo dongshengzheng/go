@@ -30,6 +30,11 @@ public class ReportDetailServiceImpl extends SuperServiceImpl<ReportDetailMapper
     }
 
     @Override
+    public List<ReportDetail> getListByRepairProgDetailId(Integer repairProgDetailId) {
+        return reportDetailMapper.getListByRepairProgDetailId(repairProgDetailId);
+    }
+
+    @Override
     public ReportDetail selectMaxReportDetailByProgDetailIdAndCreateTime(Integer repairProgDetailId) {
         return reportDetailMapper.selectMaxReportDetailByProgDetailIdAndCreateTime(repairProgDetailId);
     }

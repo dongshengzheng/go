@@ -262,8 +262,8 @@ function initUploaders_report_img(buttonId, bucket, domain, imgId, divId) {
                 {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
                 {title: "Zip files", extensions: "zip,rar"}
             ],
-            max_file_size: '10mb', //最大只能上传10mb的文件
-            prevent_duplicates: true //不允许选取重复文件
+            max_file_size: '100mb', //最大只能上传10mb的文件
+            prevent_duplicates: false //允许选取重复文件
         },
         init: {
             FilesAdded: function (up) {
@@ -279,8 +279,8 @@ function initUploaders_report_img(buttonId, bucket, domain, imgId, divId) {
                     '<input name="fileType" type="hidden" value="0">'+
                     '<input name="oss" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '"/> '+
                     '<span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;"></span>' +
-                    '<img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" ' +
-                    'style="width: 100px;height: 100px;"class="min-img" data-url="' + g_object_name + '" >' + '</div>');
+                    '<a href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" target="_blank"><img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" ' +
+                    'style="width: 100px;height: 100px;"></a>' + '</div>');
             }
         }
     });

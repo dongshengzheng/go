@@ -41,7 +41,7 @@ public class ShipController extends BaseController {
         EntityWrapper<Ship> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.like("name", keyword);
-        ew.setSqlSelect("id,name,imo,type,gt,ship_class,dd,ss");
+        ew.setSqlSelect("id,name,imo,type,grt,ship_class,dd,ss");
         ew.addFilter("company_id={0}", companyId);
         Page<Ship> page = shipService.selectPage(getPage(), ew);
 
