@@ -182,6 +182,7 @@
         </td>
         <td class="detail-td">
             <select class="model-detail-select" data-code="" data-catagory="" style="display: none"
+                    onfocus="clearSelect(this)" onblur="fillSelect(this)"
                     onchange="getDetail(this)">
             </select>
         </td>
@@ -240,7 +241,6 @@
             "type": 'get',
             "success": function (data) {
                 var html = "";
-                html += "<option value=-1>--请选择维修详单范本--</option>"
                 html += "<option value=0>--新增详单--</option>";
                 for (var i = 0; i < data.length; i++) {
                     html += "<option value=" + data[i].id + ">" + data[i].proName + "</option>"
@@ -248,6 +248,14 @@
                 $(".model-detail-select").html(html);
             }
         })
+    }
+
+    function clearSelect(obj) {
+        $(obj)[0].selectedIndex = -1;
+    }
+
+    function fillSelect(obj) {
+        $(obj)[0].selectedIndex = 0;
     }
 
 
