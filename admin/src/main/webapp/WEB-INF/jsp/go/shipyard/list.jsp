@@ -7,7 +7,11 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
     String ctx = request.getContextPath();
 %>
-
+<style>
+    table th,td {
+        text-align: center;
+    }
+</style>
 <go:navigater path="shipyard"></go:navigater>
 <div class="row">
     <div class="col-md-12">

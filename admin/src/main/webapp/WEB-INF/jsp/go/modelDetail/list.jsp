@@ -6,6 +6,11 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<style>
+    table th, td {
+        text-align: center;
+    }
+</style>
 <go:navigater path="modelDetail"></go:navigater>
 <div class="row">
     <div class="col-md-12">
@@ -18,9 +23,9 @@
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
-                                    <a href="modelDetail/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增范本信息
-                                    </a>
+                                <a href="modelDetail/add" data-target="navTab"
+                                   class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增范本信息
+                                </a>
                             </div>
                         </div>
                     </div>

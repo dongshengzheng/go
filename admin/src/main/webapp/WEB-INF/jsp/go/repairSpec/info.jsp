@@ -57,7 +57,9 @@
         top: 40%;
         z-index: 100;
     }
-
+     table th {
+         text-align: center;
+     }
 </style>
 <go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/edit" method="post"

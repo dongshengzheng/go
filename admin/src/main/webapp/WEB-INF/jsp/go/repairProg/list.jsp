@@ -7,6 +7,9 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <style>
+    table th,td {
+        text-align: center;
+    }
 </style>
 <go:navigater path="repairProg"></go:navigater>
 <div class="row">

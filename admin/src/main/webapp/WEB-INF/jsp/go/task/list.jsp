@@ -12,6 +12,10 @@
         width: 65%;
         margin: auto;
     }
+
+    table th,td {
+        text-align: center;
+    }
 </style>
 <go:navigater path="task"></go:navigater>
 <div class="row">

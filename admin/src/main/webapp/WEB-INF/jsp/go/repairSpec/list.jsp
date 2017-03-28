@@ -11,6 +11,9 @@
     .htContextMenu {
         z-index: 1060000;
     }
+     table th,td {
+         text-align: center;
+     }
 </style>
 <div class="row">
     <div class="col-md-12">

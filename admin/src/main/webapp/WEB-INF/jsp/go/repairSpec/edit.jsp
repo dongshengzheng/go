@@ -70,6 +70,10 @@
         padding-left: 15px;
     }
 
+     table th {
+         text-align: center;
+     }
+
 </style>
 <go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/edit" method="post"

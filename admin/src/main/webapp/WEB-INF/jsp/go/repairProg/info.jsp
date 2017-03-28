@@ -9,7 +9,7 @@
 %>
 <style>
     <%--.portlet.box > .portlet-title > .tools > a.collapse {--%>
-        <%--background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);--%>
+    <%--background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);--%>
     <%--}--%>
 
     .table-checkable tr.details-control-child > td:first-child {
@@ -37,6 +37,10 @@
 
     .modal-content {
         padding: 10px;
+    }
+
+    table th {
+        text-align: center;
     }
 </style>
 <go:navigater path="repairProg"></go:navigater>
