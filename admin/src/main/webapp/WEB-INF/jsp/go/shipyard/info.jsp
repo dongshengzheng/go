@@ -9,26 +9,42 @@
 %>
 <go:navigater path="yard"></go:navigater>
 <style>
-    .col-sm-6 ,.col-sm-12{
+    .col-sm-6, .col-sm-12 {
         font-size: 10px;
     }
-    .form-group{
+
+    .form-group {
         margin-bottom: 0px;
     }
-    .dock{
+
+    .dock {
         background-color: #9adad6;
     }
-    table th,td{ text-align:center}
-    .dataTables_length{
+
+    table th, td {
+        text-align: center
+    }
+
+    .dataTables_length {
         display: none;
     }
-    #wharfDetail_paginate,#berthDetail_paginate{
+
+    #wharfDetail_paginate, #berthDetail_paginate {
         display: none;
     }
-    #line1{  border-bottom:solid 2px #337ab7; height:1px;margin-top: 10px  }
-    #line2{ border-bottom:solid 2px #337ab7; height:1px;}
+
+    #line1 {
+        border-bottom: solid 2px #337ab7;
+        height: 1px;
+        margin-top: 10px
+    }
+
+    #line2 {
+        border-bottom: solid 2px #337ab7;
+        height: 1px;
+    }
 </style>
-<div><a href="shipyard" data-target="navTab"><img src="/img/top.png" /></a><span>查看船厂信息</span></div>
+<div><a href="shipyard" data-target="navTab"><img src="/img/top.png"/></a><span>查看船厂信息</span></div>
 <div id="line1"></div>
 <div style="margin-top: 20px;height: 50%">
     <div class="col-sm-5">
@@ -41,48 +57,49 @@
         <div class="timeline-body-content">
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">短名称：${shipyard.shortName}</label>
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">简称：${shipyard.shortName}</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">集团公司：${shipyard.groupCompany}</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">国家：${shipyard.country}</label>
-                </div>
-                <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">区域：${shipyard.area}</label>
+                    <label class="col-sm-12 control-label"
+                           style="padding-left: 0px;">集团公司：${shipyard.groupCompany}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">位置：${shipyard.location}</label>
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">国家：${shipyard.country}</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">地址：${shipyard.address}</label>
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">区域：${shipyard.area}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">经度：${shipyard.longitude}</label>
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">位置：${shipyard.location}</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">地址：${shipyard.address}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">经度：${shipyard.longitude}</label>
 
                 </div>
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">纬度：${shipyard.latitude}</label>
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">纬度：${shipyard.latitude}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">电话：${shipyard.tel}</label>
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">电话：${shipyard.tel}</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label"style="padding-left: 0px;">电子邮件：${shipyard.email}</label>
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">电子邮件：${shipyard.email}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label  class="col-sm-12 control-label" style="padding-left: 0px;">网站：${shipyard.website}</label>
+                    <label class="col-sm-12 control-label" style="padding-left: 0px;">网站：${shipyard.website}</label>
                 </div>
             </div>
         </div>
@@ -91,10 +108,10 @@
 <div class="col-sm-12" style="margin-left: 40%;margin-top: 40px">
     <ul class="nav nav-pills" style="margin-bottom: 0px">
         <li class="active">
-            <a href="#tab11" data-toggle="tab">一般信息</a>
+            <a href="#tab11" data-toggle="tab">基本信息</a>
         </li>
         <li>
-            <a href="#tab12" data-toggle="tab">设备信息</a>
+            <a href="#tab12" data-toggle="tab">设备设施</a>
         </li>
     </ul>
 </div>
@@ -105,15 +122,15 @@
         <div class="tabbable tabbable-tabdrop">
             <div class="tab-content">
                 <div class="tab-pane active" id="tab11">
-                    <div style="text-align:center">装换项目</div>
+                    <div style="text-align:center">业绩项目</div>
                     <div class="col-sm-4">
                         <div class="portlet-body">
-                            <center class="dock">convemsion项目</center>
+                            <center class="dock">conversion项目</center>
                             <table class="table table-hover">
                                 <thead>
-                                <tr >
-                                    <th > 序号 </th>
-                                    <th > 项目 </th>
+                                <tr>
+                                    <th> 序号</th>
+                                    <th> 项目</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -127,7 +144,7 @@
                                 </c:if>
                                 <c:if test="${!co}">
                                     <tr>
-                                        <td colspan="2"> 无Convemsion Projects 信息 </td>
+                                        <td colspan="2"> 无Convemsion Projects 信息</td>
                                     </tr>
                                 </c:if>
                                 </tbody>
@@ -136,58 +153,58 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="portlet-body">
-                                <center class="dock">修复工程</center>
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr >
-                                        <th > 序号 </th>
-                                        <th > 项目 </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:if test="${! empty repairs}" var="r">
-                                        <c:forEach items="${repairs}" var="re" varStatus="status">
-                                            <tr>
-                                                <td> ${status.count} </td>
-                                                <td> ${re.item} </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </c:if>
-                                    <c:if test="${!r}">
+                            <center class="dock">修复工程</center>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th> 序号</th>
+                                    <th> 项目</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:if test="${! empty repairs}" var="r">
+                                    <c:forEach items="${repairs}" var="re" varStatus="status">
                                         <tr>
-                                            <td colspan="2"> 无Repairing Projects 信息 </td>
+                                            <td> ${status.count} </td>
+                                            <td> ${re.item} </td>
                                         </tr>
-                                    </c:if>
-                                    </tbody>
-                                </table>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${!r}">
+                                    <tr>
+                                        <td colspan="2"> 无Repairing Projects 信息</td>
+                                    </tr>
+                                </c:if>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="portlet-body">
-                                <center class="dock">大客户</center>
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr >
-                                        <th > 序号 </th>
-                                        <th > 项目 </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:if test="${! empty majors}" var="m">
-                                        <c:forEach items="${majors}" var="ma" varStatus="status">
-                                            <tr>
-                                                <td> ${status.count} </td>
-                                                <td> ${ma.item} </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </c:if>
-                                    <c:if test="${!m}">
+                            <center class="dock">大客户</center>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th> 序号</th>
+                                    <th> 项目</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:if test="${! empty majors}" var="m">
+                                    <c:forEach items="${majors}" var="ma" varStatus="status">
                                         <tr>
-                                            <td colspan="2"> 无Major Projects 信息 </td>
+                                            <td> ${status.count} </td>
+                                            <td> ${ma.item} </td>
                                         </tr>
-                                    </c:if>
-                                    </tbody>
-                                </table>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${!m}">
+                                    <tr>
+                                        <td colspan="2"> 无Major Projects 信息</td>
+                                    </tr>
+                                </c:if>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -210,15 +227,15 @@
                                     <div class="portlet-body">
                                         <table class="table table-hover" id="wharfDetail">
                                             <thead class="dock">
-                                            <tr >
-                                                <th rowspan="2"> 序号 </th>
-                                                <th rowspan="2"> 类型 </th>
-                                                <th rowspan="2"> 姓名 </th>
-                                                <th rowspan="2"> 能力（T） </th>
-                                                <th rowspan="2"> 提升能力 </th>
+                                            <tr>
+                                                <th rowspan="2"> 序号</th>
+                                                <th rowspan="2"> 类型</th>
+                                                <th rowspan="2"> 姓名</th>
+                                                <th rowspan="2"> 能力（T）</th>
+                                                <th rowspan="2"> 提升能力</th>
                                                 <th colspan="3"> 维</th>
-                                                <th rowspan="2"> 起重机 </th>
-                                                <th rowspan="2"> 备注  </th>
+                                                <th rowspan="2"> 起重机</th>
+                                                <th rowspan="2"> 备注</th>
 
                                             </tr>
                                             <tr>
@@ -229,19 +246,19 @@
                                             </thead>
 
                                         </table>
-                                </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab_1_2">
                                 <div class="portlet-body">
                                     <table class="table table-hover" id="berthDetail">
                                         <thead class="dock">
-                                        <tr >
-                                            <th > 序号 </th>
-                                            <th > 总长（m） </th>
-                                            <th > 草案（m） </th>
-                                            <th > 能力（T） </th>
-                                            <th > 起重机 </th>
+                                        <tr>
+                                            <th> 序号</th>
+                                            <th> 总长（m）</th>
+                                            <th> 草案（m）</th>
+                                            <th> 能力（T）</th>
+                                            <th> 起重机</th>
 
                                         </tr>
                                         </thead>
@@ -249,56 +266,56 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab_1_3">
-                                <div >
+                                <div>
                                     <center class="dock">起重机信息</center>
                                     <div class="portlet-body" style="padding: 0px">
-                                    <div class="table-scrollable">
-                                        <table class="table table-hover">
-                                            <thead >
-                                            <tr >
-                                                <th > 序号 </th>
-                                                <th > 类型 </th>
-                                                <th > 能力（T） </th>
-                                                <th > 单元 </th>
-                                                <th > 备注 </th>
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <c:if test="${! empty cranes}" var="c">
-                                                <c:forEach items="${cranes}" var="cr" varStatus="status">
-                                                    <tr>
-                                                        <td> ${status.count} </td>
-                                                        <td> ${cr.type} </td>
-                                                        <td> ${cr.capacity} </td>
-                                                        <td> ${cr.unit} </td>
-                                                        <td> ${cr.remark}</td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </c:if>
-                                            <c:if test="${!c}">
+                                        <div class="table-scrollable">
+                                            <table class="table table-hover">
+                                                <thead>
                                                 <tr>
-                                                    <td colspan="5"> 无起重机信息 </td>
+                                                    <th> 序号</th>
+                                                    <th> 类型</th>
+                                                    <th> 能力（T）</th>
+                                                    <th> 单元</th>
+                                                    <th> 备注</th>
+
                                                 </tr>
-                                            </c:if>
-                                            <tr>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                <c:if test="${! empty cranes}" var="c">
+                                                    <c:forEach items="${cranes}" var="cr" varStatus="status">
+                                                        <tr>
+                                                            <td> ${status.count} </td>
+                                                            <td> ${cr.type} </td>
+                                                            <td> ${cr.capacity} </td>
+                                                            <td> ${cr.unit} </td>
+                                                            <td> ${cr.remark}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <c:if test="${!c}">
+                                                    <tr>
+                                                        <td colspan="5"> 无起重机信息</td>
+                                                    </tr>
+                                                </c:if>
+                                                <tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                                <div >
+                                <div>
                                     <center class="dock">拖船信息</center>
                                     <div class="portlet-body" style="padding: 0px">
                                         <div class="table-scrollable">
                                             <table class="table table-hover">
-                                                <thead >
-                                                <tr >
-                                                    <th > 序号 </th>
-                                                    <th > 类型 </th>
-                                                    <th > 能力（T） </th>
-                                                    <th > 单元 </th>
-                                                    <th > 备注 </th>
+                                                <thead>
+                                                <tr>
+                                                    <th> 序号</th>
+                                                    <th> 类型</th>
+                                                    <th> 能力（T）</th>
+                                                    <th> 单元</th>
+                                                    <th> 备注</th>
 
                                                 </tr>
                                                 </thead>
@@ -316,7 +333,7 @@
                                                 </c:if>
                                                 <c:if test="${!t}">
                                                     <tr>
-                                                        <td colspan="5"> 无拖船信息 </td>
+                                                        <td colspan="5"> 无拖船信息</td>
                                                     </tr>
                                                 </c:if>
                                                 </tbody>
@@ -324,7 +341,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div >
+                                <div>
                                     <center class="dock">其他信息</center>
                                     <div class="portlet-body" style="padding: 0px">
                                         <div class="table-scrollable">
@@ -340,7 +357,7 @@
                                                 </c:if>
                                                 <c:if test="${!o}">
                                                     <tr>
-                                                        <td colspan="2"> 无其他信息 </td>
+                                                        <td colspan="2"> 无其他信息</td>
                                                     </tr>
                                                 </c:if>
                                                 </tbody>
@@ -360,13 +377,13 @@
 <%--显示码头信息--%>
 <script type="text/javascript">
     var defTable;
-    var id=${shipyard.id};
+    var id =${shipyard.id};
     $(document).ready(function () {
         defTable = $('#wharfDetail').DataTable({
             "ordering": false,
             "autoWidth": false,
             "ajax": {
-                "url": "shipyard/wharf?id="+id,
+                "url": "shipyard/wharf?id=" + id,
                 "type": "post",
             },
             "language": {
@@ -414,17 +431,17 @@
 <%--显示泊位信息--%>
 <script type="text/javascript">
     var defTable;
-    var id=${shipyard.id};
+    var id =${shipyard.id};
     $(document).ready(function () {
         defTable = $('#berthDetail').DataTable({
             "ordering": false,
             "autoWidth": false,
             "ajax": {
-                "url": "shipyard/berth?id="+id,
+                "url": "shipyard/berth?id=" + id,
                 "type": "post",
             },
             "language": {
-                "url": "<%=basePath%>assets/global/plugins/datatables/cn.txt"
+                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
             },
             "columns": [
                 {
@@ -453,21 +470,21 @@
 <%--船厂信息的介绍的文字的展开和合并--%>
 <script type="text/javascript">
     Subt();
-    function Subt(){
+    function Subt() {
         var s = $("#des").html();
         $("#des").html("");
         $("#des").append("<span id='part'></span>");
         $("#part").after("<a id='info'></a>");
-        $("#part").html(s.substring(0,200));
-        $("#info").attr("href","##");
+        $("#part").html(s.substring(0, 200));
+        $("#info").attr("href", "##");
         $("#info").html(s.length > 200 ? "...[详细]" : "");
         $("#info").click(function () {
-            if ($("#info").html() == "...[详细]"){
+            if ($("#info").html() == "...[详细]") {
                 $("#info").html("收起");
                 $("#part").html(s);
-            }else{
+            } else {
                 $("#info").html("...[详细]");
-                $("#part").html(s.substring(0,200));
+                $("#part").html(s.substring(0, 200));
             }
         });
     }

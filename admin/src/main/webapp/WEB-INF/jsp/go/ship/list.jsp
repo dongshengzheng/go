@@ -63,7 +63,7 @@
                 }
             },
             "language": {
-                "url": "<%=basePath%>assets/global/plugins/datatables/cn.txt"
+                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
             },
 
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
@@ -92,13 +92,6 @@
                 {
                     "data": "ss",
                 },
-//                {
-//                    "data": "createDate", "type": "date",
-//                    "render": function (data) {
-//                        var date = new Date(data);
-//                        return date.Format("yyyy-MM-dd");
-//                    }
-//                },
             ],
 
             "columnDefs": [{
@@ -123,7 +116,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船舶名称");
+                initSearchForm(null, "请输入船舶名称或IMO号");
             }
         });
 

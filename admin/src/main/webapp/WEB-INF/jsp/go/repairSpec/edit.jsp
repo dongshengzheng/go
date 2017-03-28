@@ -183,10 +183,10 @@
                                                     ${catagory[outerVs.count-1].des}
                                             </div>
                                             <div class="tools">
-                                                <a href="javascript:;" class="collapse"> </a>
+                                                <a href="javascript:;" class="expand"> </a>
                                             </div>
                                         </div>
-                                        <div class="portlet-body">
+                                        <div class="portlet-body" style="display: none">
                                             <c:set var="type" value="type${outerVs.count}"></c:set>
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
                                                    id="table${outerVs.count}"
