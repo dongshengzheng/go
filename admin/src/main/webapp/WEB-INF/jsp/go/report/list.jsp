@@ -69,7 +69,7 @@
                 }
             },
             "language": {
-                "url": "<%=basePath%>assets/global/plugins/datatables/cn.txt"
+                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
             },
 
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],

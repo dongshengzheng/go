@@ -360,6 +360,11 @@
 
     $('.save-remark').on('click', function () {
         var text = $('#dialog-text').val();
+        if (text != null && text.trim().length > 0) {
+            $('.marked-add-remark').html("已备注");
+        } else {
+            $('.marked-add-remark').html("添加备注");
+        }
         $('.marked-add-remark').removeClass("marked-add-remark").siblings('.remark-text').text(text);
     })
 

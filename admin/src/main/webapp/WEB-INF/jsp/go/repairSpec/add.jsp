@@ -14,7 +14,7 @@
     }
 
     <%--.portlet.box > .portlet-title > .tools > a.collapse {--%>
-        <%--background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);--%>
+    <%--background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);--%>
     <%--}--%>
 
     .details-control {
@@ -180,10 +180,10 @@
                                                     ${cataList[outerVs.count-1].des}
                                             </div>
                                             <div class="tools">
-                                                <a href="javascript:;" class="collapse"> </a>
+                                                <a href="javascript:;" class="expand"> </a>
                                             </div>
                                         </div>
-                                        <div class="portlet-body">
+                                        <div class="portlet-body" style="display: none">
                                             <c:set var="type" value="type${outerVs.count}"></c:set>
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
                                                    id="table${outerVs.count}"
@@ -231,7 +231,7 @@
                             <shiro:hasPermission name="repairSpec/add">
                                 <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
                             </shiro:hasPermission>
-                            <button id="reset-btn" type="reset" class="btn blue">清空</button>
+                            <a class="btn blue" data-toggle="modal" href="#small">清空</a>
                             <a href="repairSpec" class="btn default" data-target="navTab">取消</a>
                         </div>
                     </div>
@@ -239,7 +239,23 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade bs-modal-sm" id="small" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">确认清空?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline cancel" data-dismiss="modal">取消</button>
+                    <button type="reset" onclick="closeModal()" class="btn green">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
+
 
 <%--用于工程单号--%>
 <input type="hidden" id="type1proOrderNo" value=1>
@@ -255,6 +271,11 @@
 
 
 <script>
+    function closeModal() {
+        console.log(11);
+        $("#small .cancel").click();
+    }
+
     <%--初始化通用服务item--%>
     $(function () {
         $.ajax({

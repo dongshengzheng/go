@@ -39,14 +39,13 @@ public class ShipController extends BaseController {
     public JSONObject list(Ship ship, @RequestParam(required = false) String keyword) {
         int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<Ship> ew = getEntityWrapper();
-        if (!StringUtils.isEmpty(keyword))
+        if (!StringUtils.isEmpty(keyword)) {
             ew.like("name", keyword);
+            ew.or("imo like {0}", "%" + keyword + "%");
+        }
         ew.setSqlSelect("id,name,imo,type,grt,ship_class,dd,ss");
         ew.addFilter("company_id={0}", companyId);
         Page<Ship> page = shipService.selectPage(getPage(), ew);
-
-
-
         return jsonPage(page);
     }
 

@@ -121,6 +121,7 @@
 
 
 <script src="${global}/plugins/bootstrap-dialog/bootstrap-dialog.min.js"></script>
+<script src="${global}/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 
 <script src="${global}/plugins/plupload-2.1.2/js/moxie.min.js"></script>

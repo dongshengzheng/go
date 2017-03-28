@@ -5,7 +5,9 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String ctx = request.getContextPath();
 %>
+
 <go:navigater path="shipyard"></go:navigater>
 <div class="row">
     <div class="col-md-12">
@@ -65,7 +67,7 @@
                 }
             },
             "language": {
-                "url": "<%=basePath%>assets/global/plugins/datatables/cn.txt"
+                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
             },
 
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
@@ -73,7 +75,7 @@
                 {
                     "data": "logo",
                     "render": function (logo) {
-                        return "<img src='<%=basePath%>assets/global/img/loading.gif'>"
+                        return "<img src='<%=basePath%>assets/layouts/layout/img/loading.gif'>"
                     }
                 },
                 {
@@ -100,13 +102,6 @@
                 {
                     "data": "email",
                 },
-//                {
-//                    "data": "createDate", "type": "date",
-//                    "render": function (data) {
-//                        var date = new Date(data);
-//                        return date.Format("yyyy-MM-dd");
-//                    }
-//                },
             ],
 
             "columnDefs": [{
@@ -138,37 +133,17 @@
         $('#myInput').on('keyup', function () {
             defTable.search(this.value).draw();
         });
-
-
     });
-
-    function check(id, status) {
-        if (confirm("确定审核？")) {
-            $.post("/shipinfo/check", {id: id, status: status}, function () {
-                refreshTable();
-            });
-
-        }
-
-    }
-    //
-    //    function      slide(id, slide) {
-    //        if (confirm("确定提交？")) {
-    //            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
-    //                refreshTable();
-    //            });
-    //        }
-    //    }
 
 
     function refreshTable(toFirst) {
-        //defaultTable.ajax.reload();
         if (toFirst) {//表格重绘，并跳转到第一页
             defTable.draw();
         } else {//表格重绘，保持在当前页
             defTable.draw(false);
         }
     }
+
 
 </script>
 <script>
