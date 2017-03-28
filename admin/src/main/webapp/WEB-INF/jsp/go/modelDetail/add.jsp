@@ -163,15 +163,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
-                <p>插入图片或图纸</p>
-                <img id="imges"
-                     src=""
-                     style="display: block;width: 80%;height: 50%"
-                     onerror="nofind(1)"/>
-                <input type="hidden" id="img" name="img" value="">
-                <br>
-                <button id="upload_img" class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
+            <div class="col-sm-4" id="imgNum">
+                <div style="margin-top: 5px"><span class="head">上传图片</span></div>
+                <div class="col-md-12" id="divId" style="margin-top: 20px;border: 1px dashed #337ab7;">
+                        <button id="upload_img" style="width: 100%"><img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/></button>
+                </div>
             </div>
 
         </div>
@@ -218,7 +214,7 @@
 <script type="text/javascript">
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "imges", "img");
+    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId","imgNum");
 
     //服务器校验
     function saveInfo(a) {

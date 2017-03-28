@@ -590,6 +590,39 @@
             alter table t_repair_spec_item modify count varchar(45) COMMENT '数量';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-049">
+        <sql>
+            alter table t_repair_model_detail drop column img;
+            alter table t_repair_prog_detail drop column img;
+            alter table t_repair_spec_detail drop column img;
+
+            CREATE TABLE IF NOT EXISTS `go`.`t_repair_spec_detail_memdia` (
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `repair_spec_detail_id` INT NULL,
+            `type` INT NULL,
+            `oss` VARCHAR(225) NULL,
+            `s3` VARCHAR(225) NULL,
+            `filename` VARCHAR(225) NULL,
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+
+            CREATE TABLE IF NOT EXISTS `go`.`t_repair_prog_detail_memdia` (
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `repair_prog_detail_id` INT NULL,
+            `type` INT NULL,
+            `oss` VARCHAR(225) NULL,
+            `s3` VARCHAR(225) NULL,
+            `filename` VARCHAR(225) NULL,
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-050">
+        <sql>
+            rename table t_repair_spec_detail_memdia to t_repair_spec_detail_media;
+            rename table t_repair_prog_detail_memdia to t_repair_prog_detail_media;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

@@ -105,8 +105,6 @@ public class RepairModelDetail implements Serializable {
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
-	/** 图片或是图纸 */
-	private String img;
 
 	/** 公司id */
 	@TableField(value = "company_id")
@@ -289,13 +287,7 @@ public class RepairModelDetail implements Serializable {
 		this.delFlag = delFlag;
 	}
 
-	public String getImg() {
-		return this.img;
-	}
 
-	public void setImg(String img) {
-		this.img = img;
-	}
 
 	public Integer getCompanyId() {
 		return companyId;

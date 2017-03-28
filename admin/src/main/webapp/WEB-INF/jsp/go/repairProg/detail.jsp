@@ -86,7 +86,6 @@
         <div style="height:40px;width: 100%;background-color: #C0C9CC">
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
-<<<<<<< HEAD
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
                     <label style="width: auto;padding-left: 0px;" id="shipNameLabel" class="col-sm-7 control-label label-top">${proDetail.shipName}</label>
                     <input id="shipName" name="shipName" type="hidden">
@@ -95,22 +94,6 @@
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
                     <label style="width: auto;padding-left: 0px;" id="catagoryLabel" class="col-sm-6 control-label label-top">${proDetail.catagory}</label>
                     <input id="catagory" name="catagory" type="hidden">
-=======
-                    <label for="shipName" class="col-sm-4 control-label label-top">船名：</label>
-                    <div class="col-sm-7">
-                        <input disabled id="shipName" name="shipName" type="text" maxlength="32"
-                               value="${proDetail.shipName}"
-                               class="form-control required">
-                    </div>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
-                    <div class="col-sm-6">
-                        <input disabled id="catagory" name="catagory" type="text" maxlength="32"
-                               value="${proDetail.catagory}"
-                               class="form-control ">
-                    </div>
->>>>>>> 31301d8392af38b195816d043f14e1a9d10ede16
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
@@ -119,16 +102,8 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
-<<<<<<< HEAD
                     <label style="width: auto;padding-left: 0px;" id="proOrderNoLabel" class="col-sm-6 control-label label-top">${proDetail.proOrderNo}</label>
                     <input id="proOrderNo" name="proOrderNo" type="hidden">
-=======
-                    <div class="col-sm-6">
-                        <input disabled id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
-                               value="${proDetail.proOrderNo}"
-                               class="form-control required">
-                    </div>
->>>>>>> 31301d8392af38b195816d043f14e1a9d10ede16
                 </div>
             </div>
         </div>

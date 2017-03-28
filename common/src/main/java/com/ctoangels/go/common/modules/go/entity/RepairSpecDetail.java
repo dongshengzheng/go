@@ -122,11 +122,6 @@ public class RepairSpecDetail implements Serializable {
     private String repairTechDesc;
 
     /**
-     * 图纸
-     */
-    private String img;
-
-    /**
      * 创建时间
      */
     @TableField(value = "create_date")
@@ -341,11 +336,4 @@ public class RepairSpecDetail implements Serializable {
         this.proOrderNo = proOrderNo;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
 }

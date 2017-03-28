@@ -108,7 +108,6 @@
                         </c:if>
                     </c:forEach>
                 </c:if>
-
                 <div id="divId" style="margin: 10px;overflow: hidden">
                     <button id="upload_img">
                         <img id="img" src="" style="width: 100px;height: 100px"
