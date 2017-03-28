@@ -9,6 +9,6 @@ import com.baomidou.framework.service.ISuperService;
  *
  */
 public interface IRepairSpecDetailMediaService extends ISuperService<RepairSpecDetailMedia> {
-
+    boolean deleteBySpecDetailId(Integer repairSpecDetailId);
 
 }

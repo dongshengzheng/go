@@ -6,5 +6,8 @@
 	<sql id="Base_Column_List">
 		id, repair_spec_detail_id AS repairSpecDetailId, `type`, oss, s3, filename
 	</sql>
+    <delete id="deleteBySpecDetailId">
+		delete from t_repair_spec_detail_media where repair_spec_detail_id = #{id};
+	</delete>
 
 </mapper>

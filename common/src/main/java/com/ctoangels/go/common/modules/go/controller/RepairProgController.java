@@ -62,6 +62,12 @@ public class RepairProgController extends BaseController {
     @Autowired
     private ITaskEmailService taskEmailService;
 
+    @Autowired
+    private IRepairSpecDetailMediaService repairSpecDetailMediaService;
+
+    @Autowired
+    private IRepairProgDetailMediaService repairProgDetailMediaService;
+
     @RequestMapping
     public String page() {
         return "go/repairProg/list";
@@ -196,7 +202,9 @@ public class RepairProgController extends BaseController {
     //生成维修进度
     @RequestMapping(value = "makeProgress", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject makeProg(@RequestParam(required = false) Integer id, @RequestParam(required = false) String shipyardName, @RequestParam(required = false) String dataJson) throws InvocationTargetException, IllegalAccessException {
+    public JSONObject makeProg(@RequestParam(required = false) Integer id,
+                               @RequestParam(required = false) String shipyardName,
+                               @RequestParam(required = false) String dataJson) throws InvocationTargetException, IllegalAccessException {
         JSONObject jsonObject = new JSONObject();
         try {
             //查找维修工程单基本信息
@@ -228,6 +236,7 @@ public class RepairProgController extends BaseController {
             List<RepairSpecDetail> repairSpecDetails = repairSpecDetailService.selectList(ew2);
             if (repairSpecDetails.size() > 0) {
                 for (RepairSpecDetail r : repairSpecDetails) {
+                    //将specDetail复制到progDetail中
                     RepairProgDetail repairProgDetail = new RepairProgDetail();
                     BeanUtils.copyProperties(repairProgDetail, r);
                     repairProgDetail.setId(null);
@@ -236,7 +245,7 @@ public class RepairProgController extends BaseController {
                     repairProgDetailService.insert(repairProgDetail);
 
 
-                    //查找每个详单的req信息
+                    //查找每个详单的req信息  将specDetailReq复制到progDetailReq中
                     EntityWrapper<RepairSpecDetailReq> ew3 = new EntityWrapper<>();
                     ew3.addFilter("repair_spec_detail_id={0}", r.getId());
                     List<RepairSpecDetailReq> specReqs = repairSpecDetailReqService.selectList(ew3);
@@ -251,6 +260,24 @@ public class RepairProgController extends BaseController {
                         }
                         repairProgDetailReqService.insertBatch(progReqs);
                     }
+
+                    //将specDetailMedia复制到progDetailMedia中
+                    EntityWrapper<RepairSpecDetailMedia> ew4=new EntityWrapper<>();
+                    ew4.addFilter("repair_spec_detail_id={0}", r.getId());
+                    List<RepairSpecDetailMedia> specMedias=repairSpecDetailMediaService.selectList(ew4);
+
+                    if(specMedias.size()>0){
+                        List<RepairProgDetailMedia> progMedias = new ArrayList<>();
+                        for (RepairSpecDetailMedia media : specMedias) {
+                            RepairProgDetailMedia repairProgDetailMedia = new RepairProgDetailMedia();
+                            BeanUtils.copyProperties(repairProgDetailMedia, media);
+                            repairProgDetailMedia.setId(null);
+                            repairProgDetailMedia.setRepairProgDetailId(repairProgDetail.getId());
+                            progMedias.add(repairProgDetailMedia);
+                        }
+                       repairProgDetailMediaService.insertBatch(progMedias);
+                    }
+
                 }
 
 
@@ -290,6 +317,12 @@ public class RepairProgController extends BaseController {
             String[] techs = repairTech.split(",");
             map.put("techs", techs);
         }
+
+        //图片
+        EntityWrapper<RepairProgDetailMedia> ew3=new EntityWrapper<>();
+        ew3.addFilter("repair_prog_detail_id={0}",id);
+        List<RepairProgDetailMedia> progDetailMedias =repairProgDetailMediaService.selectList(ew3);
+        map.put("progDetailMedias",progDetailMedias);
 
         EntityWrapper<Dict> ew1 = new EntityWrapper<>();
         ew1.addFilter("type={0}", "维修部位");

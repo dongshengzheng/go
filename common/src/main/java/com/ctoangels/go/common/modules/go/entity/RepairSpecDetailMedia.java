@@ -28,7 +28,7 @@ public class RepairSpecDetailMedia implements Serializable {
 	private Integer repairSpecDetailId;
 
 	/**  */
-	private Integer type;
+	private String type;
 
 	/**  */
 	private String oss;
@@ -56,11 +56,11 @@ public class RepairSpecDetailMedia implements Serializable {
 		this.repairSpecDetailId = repairSpecDetailId;
 	}
 
-	public Integer getType() {
-		return this.type;
+	public String getType() {
+		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

@@ -11,4 +11,5 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
 public interface RepairSpecDetailMediaMapper extends AutoMapper<RepairSpecDetailMedia> {
 
 
+    boolean deleteBySpecDetailId(Integer repairSpecDetailId);
 }

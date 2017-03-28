@@ -193,15 +193,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 right">
-                <img id="imges"
-                     src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${modelDetails.img}?x-oss-process=image/resize,m_fill,h_100,w_100"
-                     style="display: block;width: 80%;height: 50%"
-                     onerror="nofind(1)"/>
-                <input type="hidden" id="img" name="img" value="">
-                <br>
-                <button disabled <%--id="upload_img"--%> class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传
-                </button>
+            <div class="col-sm-4" id="imgNum">
+                <div style="margin-top: 5px"><span class="head">图片</span></div>
+                <c:if test="${progDetailMedias!=null}">
+                    <c:forEach var="p" items="${progDetailMedias}">
+                        <div class="col-md-12" style="margin-top: 20px;border: 1px dashed #337ab7;padding: 0px">
+                            <a target="_blank" href="${p.oss}">
+                                <img style="width:100%;height: 180px" src="${p.oss}"/></a></div>
+                    </c:forEach>
+                </c:if>
+
             </div>
 
         </div>
