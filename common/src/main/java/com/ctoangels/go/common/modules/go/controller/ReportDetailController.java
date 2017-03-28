@@ -44,7 +44,7 @@ public class ReportDetailController extends BaseController{
         int size=reportDetails.size();
         map.put("size",size);
         map.put("reportDetails",reportDetails);
-
+        map.put("taskId",taskId);
 
         return "go/reportDetail/recentDetail";
     }

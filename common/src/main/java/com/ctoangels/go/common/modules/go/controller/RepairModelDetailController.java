@@ -113,20 +113,6 @@ public class RepairModelDetailController extends BaseController {
         } catch (Exception e) {
             jsonObject.put("success", false);
         }
-
-        /*if () {
-            if(reqs.size()>0) {
-
-                for (RepairModelDetailReq r : reqs) {
-                    r.setRepairModelDetailId(repairModelDetail.getId());
-                }
-                repairModelDetailReqService.insertBatch(reqs);
-            }
-            jsonObject.put("success", true);
-        } else {
-            jsonObject.put("success", false);
-            jsonObject.put("msg", "添加时出错,请稍后再试");
-        }*/
         return jsonObject;
     }
 

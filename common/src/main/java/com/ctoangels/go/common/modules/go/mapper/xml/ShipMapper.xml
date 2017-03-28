@@ -7,3 +7,4 @@
 		id, company_id AS companyId, imo, `name`, `type`, ship_class AS shipClass, builder, build_year AS buildYear, call_sign AS callSign, company_name AS companyName, draft, dwt, grt, `depth`, beam, loa, dd, ss, me_maker AS meMaker, me_type AS meType, me_bhp_rpm AS meBhpRpm, me_qty AS meQty, me_cyl_bore AS meCylBore, aux_maker AS auxMaker, aux_type AS auxType, aux_rated_or AS auxRatedOr, aux_qty AS auxQty, aux_cyl_bore AS auxCylBore, boiler_maker AS boilerMaker, boiler_type AS boilerType, boiler_pressure AS boilerPressure, boiler_qty AS boilerQty, boiler_heating_area AS boilerHeatingArea, boiler_evaporation AS boilerEvaporation, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
+</mapper>
