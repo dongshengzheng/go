@@ -125,10 +125,6 @@ public class RepairProgDetail implements Serializable {
     @TableField(value = "pro_order_no")
     private String proOrderNo;
 
-    /**
-     * 图片或是图纸
-     */
-    private String img;
 
     /**
      * 创建时间
@@ -351,13 +347,6 @@ public class RepairProgDetail implements Serializable {
         this.proOrderNo = proOrderNo;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
 
     public Integer getTaskStatus() {
         return taskStatus;

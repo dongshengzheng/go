@@ -108,14 +108,8 @@
                         </c:if>
                     </c:forEach>
                 </c:if>
-<<<<<<< HEAD
-                <div id="divId" style="margin: 10px;overflow: hidden">
-                    <button id="upload_img" >
-=======
-
                 <div id="divId" style="margin: 10px;overflow: hidden">
                     <button id="upload_img">
->>>>>>> acb06eb0e43100febd8d91d5a0cf41bff658481f
                         <img id="img" src="" style="width: 100px;height: 100px"
                              onerror="nofind(4)"/>
                     </button>
