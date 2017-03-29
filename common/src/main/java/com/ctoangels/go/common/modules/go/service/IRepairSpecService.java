@@ -6,6 +6,7 @@ import com.ctoangels.go.common.modules.go.entity.RepairSpecItem;
 import com.ctoangels.go.common.modules.go.entity.RepairSpecItemList;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * RepairSpec 表数据服务层接口
@@ -14,6 +15,6 @@ public interface IRepairSpecService extends ISuperService<RepairSpec> {
 
     boolean saveRepairSpec(RepairSpec repairSpec);
 
-    boolean updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId);
+    Map<String, Object> updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId);
 
 }

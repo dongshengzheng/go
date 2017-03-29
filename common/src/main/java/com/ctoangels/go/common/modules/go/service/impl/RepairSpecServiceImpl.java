@@ -6,8 +6,10 @@ import com.ctoangels.go.common.modules.go.mapper.RepairModelItemMapper;
 import com.ctoangels.go.common.modules.go.mapper.RepairSpecDetailMapper;
 import com.ctoangels.go.common.modules.go.mapper.RepairSpecItemMapper;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.ItemId;
 import com.ctoangels.go.common.util.StringUtils;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * RepairSpec 表数据服务层接口实现类
@@ -102,9 +105,14 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
 //    }
 
     @Override
-    public boolean updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId) {
+    public Map<String, Object> updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId) {
+        Map<String, Object> result = new HashedMap();
+        List<ItemId> idList = new ArrayList<>();
         if (repairSpecMapper.updateById(repairSpec) < 0) {
-            return false;
+            result.put("success", false);
+            result.put("idList", idList);
+            return result;
+
         }
         List<RepairSpecItem> list = new ArrayList<>();
         list.addAll(specItemList.getType1List());
@@ -114,24 +122,32 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         list.addAll(specItemList.getType5List());
         list.addAll(specItemList.getType6List());
         list.addAll(specItemList.getType7List());
+        list.addAll(specItemList.getType8List());
         List<RepairSpecItem> updateList = new ArrayList<>();
         List<RepairSpecItem> insertList = new ArrayList<>();
         for (RepairSpecItem item : list) {
+            item.setRepairSpecId(repairSpec.getId());
             if (item.getId() != null) {
                 updateList.add(item);
             } else {
-                item.setRepairSpecId(repairSpec.getId());
                 insertList.add(item);
             }
         }
+
         if (insertList.size() > 0) {
             if (repairSpecItemMapper.insertBatch(insertList) < 0) {
-                return false;
+                result.put("success", false);
+                return result;
+            }
+            for (RepairSpecItem item : insertList) {
+                idList.add(new ItemId(item.getCode(), item.getId()));
             }
         }
+
         if (updateList.size() > 0) {
             if (repairSpecItemMapper.updateBatchById(updateList) < 0) {
-                return false;
+                result.put("success", false);
+                return result;
             }
         }
 
@@ -145,10 +161,11 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         if (oldList != null && oldList.size() > 0) {
             int a = repairSpecDetailMapper.updateBatchById(oldList);
             if (a < 0) {
-                return false;
+                result.put("success", false);
+                result.put("idList", idList);
+                return result;
             }
         }
-
 
         if (repairDetailId != null && repairDetailId.length > 0) {
             List<RepairSpecDetail> detailList = new ArrayList<>();
@@ -160,10 +177,14 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
                 detailList.add(detail);
             }
             if (repairSpecDetailMapper.updateBatchById(detailList) < 0) {
-                return false;
+                result.put("success", false);
+                result.put("idList", idList);
+                return result;
             }
         }
-        return true;
+        result.put("success", true);
+        result.put("idList", idList);
+        return result;
     }
 
 

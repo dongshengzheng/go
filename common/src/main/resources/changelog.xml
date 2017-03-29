@@ -642,6 +642,11 @@
             UPDATE sys_menu SET menu_icon = 'fa fa-ship' WHERE menu_name = '维修工程单';
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-020">
+        <sql>
+            UPDATE t_param SET unit = '' WHERE name = '注册总吨';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

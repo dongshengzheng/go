@@ -10,6 +10,7 @@ import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.ItemId;
 import com.ctoangels.go.common.util.MailUtil;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -37,6 +38,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -250,8 +252,10 @@ public class RepairSpecController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         repairSpec.setUpdateDate(new Date());
         repairSpec.setUpdateBy(getCurrentUser().getName());
-        if (repairSpecService.updateRepairSpec(repairSpec, specItems, repairDetailId)) {
+        Map<String, Object> result = repairSpecService.updateRepairSpec(repairSpec, specItems, repairDetailId);
+        if ((boolean) result.get("success")) {
             jsonObject.put("success", true);
+            jsonObject.put("idList", (List<ItemId>) result.get("idList"));
         } else {
             jsonObject.put("success", false);
             jsonObject.put("msg", "编辑时出错,请稍后再试");
