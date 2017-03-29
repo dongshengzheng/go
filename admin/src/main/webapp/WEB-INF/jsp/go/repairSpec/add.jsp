@@ -104,7 +104,7 @@
                                             船舶名称</label>
                                         <div class="col-sm-7">
                                             <select id="shipId" name="shipId" class="form-control select2">
-                                                <option value="0">请选择船舶</option>
+                                                <option value="0">请输入船舶名称或IMO号</option>
                                                 <c:forEach items="${shipList}" var="ship">
                                                     <option value="${ship.id}" data-name="${ship.name}">${ship.name}
                                                         imo:${ship.imo}</option>
@@ -271,13 +271,13 @@
 <input type="hidden" id="type7proOrderNo" value=1>
 <input type="hidden" id="type8proOrderNo" value=1>
 
-<jsp:include page="common.jsp"></jsp:include>
+<%--<jsp:include page="common.jsp"></jsp:include>--%>
 
-<a id="go-to-edit" href="repairSpec/edit?id=8" class="btn btn-sm margin-bottom-5" data-target="navTab"><span
+<a style="display:none" id="go-to-edit" href="repairSpec/edit?id=8" class="btn btn-sm margin-bottom-5"
+   data-target="navTab"><span
         class="ladda-label">编辑</span></a>
 <script>
     function closeModal() {
-        console.log(11);
         $("#small .cancel").click();
     }
 

@@ -17,29 +17,9 @@
     <%--background-image: url(<%=basePath%>assets/global/img/portlet-collapse-icon.png);--%>
     <%--}--%>
 
-    .details-control {
-        cursor: pointer;
-    }
-
-    .table-striped > tbody > tr.details-control-child:nth-of-type(odd) {
-        background-color: white;
-    }
-
-    .table-striped > tbody > tr.details-control-child:nth-of-type(even) {
-        background-color: #fbfcfd;
-    }
-
     .table-checkable tr.details-control-child > td:first-child {
         text-align: right;
         padding-right: 15px;
-    }
-
-    .table-striped > tbody > tr.details-control-child.detail-row:nth-of-type(odd) {
-        background-color: white;
-    }
-
-    .table-striped > tbody > tr.details-control-child.detail-row:nth-of-type(even) {
-        background-color: white;
     }
 
     .table-striped > tbody > tr.details-control-child:nth-of-type(odd) {
@@ -185,7 +165,8 @@
                                         <div class="portlet-title" style="background-color: #00aaaa">
                                             <div class="caption">
                                                 <i class="fa fa-cog"></i>
-                                                    ${catagory[outerVs.count-1].des}
+                                                    ${catagory[outerVs.count-1].des}&nbsp;<span
+                                                    class="checkedOrNot"></span>
                                             </div>
                                             <div class="tools">
                                                 <a href="javascript:;" class="expand"> </a>
@@ -305,6 +286,7 @@
                                 contentHtml += p.name;
                                 var str = "param" + pCount + "Val";
                                 var pValue = a[str];
+                                pValue = pValue == null ? "" : pValue;
                                 if (p.type == "text") {
                                     contentHtml += "<input value='" + pValue + "' onchange='inputControl(this)' name='" + namePre + str + "' class='input-control'>";
                                 } else if (p.type == "select") {
@@ -330,7 +312,7 @@
                     }
 
                     if (a.unit != null && a.unit != "") {
-                        tr.find(".unit-td").html(a.unit + "<input value='" + a.unit + "' type='hidden' class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "unit'>");
+                        tr.find(".unit-td").html(a.unit + "<input value='" + a.unit + "' type='hidden' name='" + namePre + "unit'>");
                         var aCount = a.count;
                         if (aCount == null) {
                             aCount = "";
@@ -356,6 +338,10 @@
                         tr.find(".status-control").prop("checked", true);
                     }
                     tr.find(".true-status").val(a.status).prop("name", namePre + "status");
+                    if (a.content == "addrow") {
+                        tr.find(".status-control").css("display", "none");
+                        tr.find(".true-status").removeClass("true-status");
+                    }
                     tr.find(".item-id").val(a.id).prop("name", namePre + "id");
                     tr.find(".item-cata").val(a.catagory).prop("name", namePre + "catagory");
                     tr.find(".item-code").val(a.code).prop("name", namePre + "code");
@@ -366,6 +352,7 @@
                     tbody.append(tr);
                     count++;
                 })
+                calStatus(table);
             },
         })
     })
@@ -418,6 +405,7 @@
                                 contentHtml += p.name;
                                 var str = "param" + pCount + "Val";
                                 var pValue = a[str];
+                                pValue = pValue == null ? "" : pValue;
                                 if (p.type == "text") {
                                     contentHtml += "<input value='" + pValue + "' onchange='inputControl(this)' name='" + namePre + str + "' class='input-control'>";
                                 } else if (p.type == "select") {
@@ -462,6 +450,10 @@
                         tr.find(".status-control").prop("checked", true);
                     }
                     tr.find(".true-status").val(a.status).prop("name", namePre + "status");
+                    if (a.content == "addrow") {
+                        tr.find(".status-control").css("display", "none");
+                        tr.find(".true-status").removeClass("true-status");
+                    }
                     tr.find(".item-id").val(a.id).prop("name", namePre + "id");
                     tr.find(".item-cata").val(a.catagory).prop("name", namePre + "catagory");
                     tr.find(".item-code").val(a.code).prop("name", namePre + "code");
@@ -482,12 +474,15 @@
                         detailRow.find(".editDetail").attr("href", "repairSpecDetail/editSpecDetail?id=" + detailId).html(detail.proName);
                         tr.after(detailRow);
                     }
+
                 })
+                calStatus(table);
             },
         })
     }
 
 
+    //保存
     function severCheck() {
         var shipId = $("#shipId").val();
         if (shipId == "0") {
@@ -543,5 +538,13 @@
         saveAlert("teal", "测试");
     });
 
+
+    //    $(".item .expand").on("click", function (event) {
+    //        $(this).parents(".item").siblings(".item").each(function () {
+    //            $(this).find(".tools a.collapse").click();
+    //        })
+    //        var id = "#" + $(this).parents(".item").prop("id")
+    //        $("a[data-item='" + id + "']").click();
+    //    })
 </script>
 
