@@ -18,7 +18,8 @@
                                 <c:when test="${not empty sub.menuUrl}">
                                     <li class="nav-item">
                                         <a href="${sub.menuUrl}" class="ajaxify nav-link">
-                                            <c:if test="${not empty sub.menuIcon }"><i class="${sub.menuIcon}"></i></c:if>
+                                            <c:if test="${not empty sub.menuIcon }"><i
+                                                    class="${sub.menuIcon}"></i></c:if>
                                             </i>${sub.menuName}</a>
                                     </li>
                                 </c:when>
