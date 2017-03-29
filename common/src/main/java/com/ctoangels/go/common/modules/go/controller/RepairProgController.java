@@ -240,6 +240,7 @@ public class RepairProgController extends BaseController {
                     RepairProgDetail repairProgDetail = new RepairProgDetail();
                     BeanUtils.copyProperties(repairProgDetail, r);
                     repairProgDetail.setId(null);
+                    repairProgDetail.setTaskStatus(Const.TASK_NOT_START);
                     repairProgDetail.setRepairProgId(repairProg.getId());
 
                     repairProgDetailService.insert(repairProgDetail);

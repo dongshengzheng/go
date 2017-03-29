@@ -48,45 +48,12 @@
         margin-left: 40%;
         margin-top: 20px;
     }
+    #divId{
+        margin-top: 20px;border: 1px dashed #337ab7;
+    }
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
-<script type="text/javascript">
-    $(function () {
-        $("#selectAll").change(function(){
-
-            $("#selectAll").prop("checked",this.checked);
-            if($("#selectAll").prop("checked")){
-                $(".td-checkbox").each(function () {
-                    $(this).prop("checked","checked");
-                });
-            }else{
-                $(".td-checkbox").each(function () {
-                    $(this).attr("checked",false);
-                });
-            }
-        });
-
-        $("#deletes").click(function(e){
-            //e.preventDefault();
-            var t=confirm("确定要删除吗？");
-            if(t) {
-                var count = 0;
-                $(".td-checkbox").each(function () {
-                    if ($(this).prop("checked")) {
-                        count++
-                        $(this).parent().parent().remove();
-                    }
-                });
-
-                if (count == 0) {
-                    alert("至少选择一个!");
-                    return;
-                }
-            }
-        });
-    });
-</script>
 <form action="" method="post" class="form-horizontal" id="defForm">
     <c:if test="${!empty modelDetails}">
         <input id="id" name="id" type="hidden" value="${modelDetails.id}"/>
@@ -211,21 +178,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
-                <p>插入图片或图纸</p>
-                <img id="imges"
-                     src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${modelDetails.img}?x-oss-process=image/resize,m_fill,h_100,w_100"
-                     style="display: block;width: 80%;height: 50%"
-                     onerror="nofind(1)"/>
-                <input type="hidden" id="img" name="img" value="">
-                <br>
-                <button  <%--id="upload_img"--%> class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
+            <div class="col-sm-4">
+                <div style="margin-top: 5px"><span class="head">上传图片</span></div>
+                <div class="col-md-12" id="divId">
+                    <button disabled id="upload_img" style="width: 100%">
+                        <img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/>
+                    </button>
+                </div>
             </div>
 
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div ><span class="head">请求材料规格</span></div>
+            <div ><span class="head">维修描述/材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
                 <div id="example1"  style=" height: 300px; overflow: hidden;"></div>
             </div>

@@ -48,6 +48,9 @@
         margin-left: 40%;
         margin-top: 20px;
     }
+    #divId{
+        margin-top: 20px;border: 1px dashed #337ab7;
+    }
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
@@ -164,17 +167,18 @@
                 </div>
             </div>
             <div class="col-sm-4" id="imgNum">
-                <input type="hidden" value="" id="num"/>
                 <div style="margin-top: 5px"><span class="head">上传图片</span></div>
-                <div class="col-md-12" id="divId" style="margin-top: 20px;border: 1px dashed #337ab7;">
-                        <button id="upload_img" style="width: 100%"><img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/></button>
+                <div class="col-md-12" id="divId" >
+                        <button disabled id="upload_img" style="width: 100%">
+                            <img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/>
+                        </button>
                 </div>
             </div>
 
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div ><span class="head">请求材料规格</span></div>
+            <div ><span class="head">维修描述/材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
                 <div id="example1"  style=" height: 300px; overflow: hidden;"></div>
             </div>
@@ -215,15 +219,15 @@
 <script type="text/javascript">
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId","imgNum");
-    function removeImg(obj) {
+    <%--initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId","imgNum");--%>
+   /* function removeImg(obj) {
         obj.parentNode.remove();
         var i=$("#imgNum").find("img").length;
         var j=$("#num").val();
         if(j==4&&i<4){
             $("#divId").show();
         }
-    }
+    }*/
 
     //服务器校验
     function saveInfo(a) {

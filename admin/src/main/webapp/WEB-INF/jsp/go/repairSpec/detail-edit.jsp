@@ -233,7 +233,7 @@
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div><span class="head">请求材料规格</span></div>
+            <div><span class="head">维修描述/材料规格</span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
                 <div id="example1" style=" height: 300px; overflow: hidden;"></div>
             </div>

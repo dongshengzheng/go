@@ -112,6 +112,7 @@ public class RepairModelDetailController extends BaseController {
             jsonObject.put("success", true);
         } catch (Exception e) {
             jsonObject.put("success", false);
+            e.printStackTrace();
         }
         return jsonObject;
     }
