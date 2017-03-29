@@ -439,6 +439,9 @@
                     }
                     if (!(a.parentCode == 0 || a.content == "addrow")) {
                         tr.find(".model-detail-select").attr("data-code", a.code).attr("data-catagory", a.catagory).toggle();
+                    } else if (a.content == "addrow") {
+                        tr.find(".model-detail-select").attr("data-code", a.code).attr("data-catagory", a.catagory);
+
                     }
                     if (a.children != 0) {
                         var td = tr.find(".show-td");
@@ -498,6 +501,11 @@
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
+                    $(data.idList).each(function () {
+                        console.log(this.id + "===" + this.code);
+                        var code = this.code;
+                        $("tr[data-code='" + code + "']").find(".item-id").val(this.id);
+                    })
                     saveAlert("teal", "保存成功(每五分钟会自动保存)");
                 } else {
                     saveAlert("ruby", "保存失败(每五分钟会自动保存)");

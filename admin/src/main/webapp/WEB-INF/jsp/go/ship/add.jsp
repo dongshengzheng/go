@@ -10,7 +10,12 @@
     .timeline .timeline-icon {
         padding: 0;
         text-align: center;
-        line-height: 80px
+        line-height: 80px;
+        background-color: #E9EDEF;
+    }
+
+    .timeline .timeline-body {
+        background-color: #E9EDEF;
     }
 
     .red {
@@ -175,7 +180,6 @@
                                                        class="form-control "
                                                        placeholder="请填写注册总吨">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:吨)</label>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="dd" class="col-sm-3 control-label">坞检</label>

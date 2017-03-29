@@ -713,7 +713,11 @@
             `type_id` int(4) DEFAULT NULL,
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-020">
+        <sql>
+            UPDATE t_param SET unit = '' WHERE name = '注册总吨';
         </sql>
     </changeSet>
 </databaseChangeLog>

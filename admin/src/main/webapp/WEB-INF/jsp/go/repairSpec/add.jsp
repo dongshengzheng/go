@@ -531,8 +531,7 @@
     $("#shipId").on("change", function () {
         $("#shipName").val($(this).find("option:selected").attr("data-name"));
     })
-</script>
-<script>
+
     <%--船只列表的初始化下拉框--%>
     if (App.isAngularJsApp() === false) {
         jQuery(document).ready(function () {
@@ -544,4 +543,6 @@
             });
         });
     }
+
+    $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 </script>

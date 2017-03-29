@@ -327,7 +327,6 @@
 
     $('#menu a').on('click', function () {
         $(document).scrollTop($($(this).attr('data-item')).offset().top - 300);
-        console.log("aaaaaaaa");
     })
 
     <%--显示备注--%>
@@ -385,7 +384,6 @@
         var a = $(obj);
         var oldRow = a.parents("tr");
         var newRow = oldRow.clone();
-        newRow.find(".model-detail-select").toggle();
         newRow.find(".unit-td input").toggle();
         newRow.find(".count-td input").toggle();
         newRow.find(".status-control").toggle();
@@ -412,7 +410,6 @@
         var table = oldRow.parents("table");
         var index = table.attr("data-totalRow");
         table.attr("data-totalRow", index * 1 + 1);
-        console.log(current + "===" + index);
         newRow.find('textarea').each(function () {
             var name = this.name;
             if (name != null) {
@@ -427,6 +424,7 @@
                 this.name = name;
             }
         });
+        newRow.find(".model-detail-select").attr("data-code", newCode).toggle();
         oldRow.before(newRow);
         calStatus(oldRow.parents("table"));
     }
@@ -517,7 +515,6 @@
             }
         })
         var text = checkedTotal + "/" + total;
-        console.log(text)
         table.parents(".item").find(".checkedOrNot").text(text);
     }
 </script>
