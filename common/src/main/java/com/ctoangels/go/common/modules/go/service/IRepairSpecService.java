@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface IRepairSpecService extends ISuperService<RepairSpec> {
 
-    boolean saveRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId);
+    boolean saveRepairSpec(RepairSpec repairSpec);
 
     boolean updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId);
 

@@ -623,6 +623,11 @@
             rename table t_repair_prog_detail_memdia to t_repair_prog_detail_media;
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-018">
+        <sql>
+            DELETE FROM t_dict WHERE type='维修类型' AND des='特检';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

@@ -112,17 +112,17 @@ public class RepairSpecController extends BaseController {
         return "go/repairSpec/add";
     }
 
-    @RequestMapping(value = "/getModelItem", method = RequestMethod.GET)
-    @ResponseBody
-    public JSONArray getModelItemList(String catagory) {
-        Integer modelId = 1;
-        List<RepairModelItem> list = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, catagory);
-        SerializerFeature feature = SerializerFeature.DisableCircularReferenceDetect;
-        String a = JSON.toJSONString(list, feature);
-        JSONArray jsonArray = JSONArray.parseArray(a);
-        return jsonArray;
-    }
-
+    //    @RequestMapping(value = "/getModelItem", method = RequestMethod.GET)
+//    @ResponseBody
+//    public JSONArray getModelItemList(String catagory) {
+//        Integer modelId = 1;
+//        List<RepairModelItem> list = repairModelItemService.byModelIdAndCatagoryContainParams(modelId, catagory);
+//        SerializerFeature feature = SerializerFeature.DisableCircularReferenceDetect;
+//        String a = JSON.toJSONString(list, feature);
+//        JSONArray jsonArray = JSONArray.parseArray(a);
+//        return jsonArray;
+//    }
+//
     @RequestMapping(value = "/getModelDetailList", method = RequestMethod.GET)
     @ResponseBody
     public List<RepairModelDetail> getModelDetailList() {
@@ -130,25 +130,44 @@ public class RepairSpecController extends BaseController {
         return repairModelDetailList;
     }
 
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject add(RepairSpec repairSpec,
-                          RepairSpecItemList specItems, Integer[] repairDetailId) {
+    public JSONObject add(RepairSpec repairSpec) {
         JSONObject jsonObject = new JSONObject();
         repairSpec.setCreateDate(new Date());
         repairSpec.setCreateBy(getCurrentUser().getName());
         repairSpec.setUpdateDate(new Date());
         repairSpec.setUpdateBy(getCurrentUser().getName());
         repairSpec.setDelFlag(Const.DEL_FLAG_NORMAL);
-        if (repairSpecService.saveRepairSpec(repairSpec, specItems, repairDetailId)) {
+        if (repairSpecService.saveRepairSpec(repairSpec)) {
             jsonObject.put("success", true);
+            jsonObject.put("specId", repairSpec.getId());
         } else {
             jsonObject.put("success", false);
             jsonObject.put("msg", "添加时出错,请稍后再试");
         }
         return jsonObject;
     }
+
+
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    @ResponseBody
+//    public JSONObject add(RepairSpec repairSpec,
+//                          RepairSpecItemList specItems, Integer[] repairDetailId) {
+//        JSONObject jsonObject = new JSONObject();
+//        repairSpec.setCreateDate(new Date());
+//        repairSpec.setCreateBy(getCurrentUser().getName());
+//        repairSpec.setUpdateDate(new Date());
+//        repairSpec.setUpdateBy(getCurrentUser().getName());
+//        repairSpec.setDelFlag(Const.DEL_FLAG_NORMAL);
+//        if (repairSpecService.saveRepairSpec(repairSpec, specItems, repairDetailId)) {
+//            jsonObject.put("success", true);
+//        } else {
+//            jsonObject.put("success", false);
+//            jsonObject.put("msg", "添加时出错,请稍后再试");
+//        }
+//        return jsonObject;
+//    }
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {

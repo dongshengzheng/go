@@ -1,20 +1,21 @@
 package com.ctoangels.go.common.modules.go.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.ctoangels.go.common.modules.go.entity.RepairSpecDetail;
-import com.ctoangels.go.common.modules.go.entity.RepairSpecItem;
-import com.ctoangels.go.common.modules.go.entity.RepairSpecItemList;
+import com.ctoangels.go.common.modules.go.entity.*;
+import com.ctoangels.go.common.modules.go.mapper.RepairModelItemMapper;
 import com.ctoangels.go.common.modules.go.mapper.RepairSpecDetailMapper;
 import com.ctoangels.go.common.modules.go.mapper.RepairSpecItemMapper;
+import com.ctoangels.go.common.util.Const;
 import com.ctoangels.go.common.util.StringUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ctoangels.go.common.modules.go.mapper.RepairSpecMapper;
-import com.ctoangels.go.common.modules.go.entity.RepairSpec;
 import com.ctoangels.go.common.modules.go.service.IRepairSpecService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,41 +33,73 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
     @Autowired
     RepairSpecDetailMapper repairSpecDetailMapper;
 
+    @Autowired
+    RepairModelItemMapper repairModelItemMapper;
+
     @Override
-    public boolean saveRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId) {
+    public boolean saveRepairSpec(RepairSpec repairSpec) {
         if (repairSpecMapper.insert(repairSpec) < 0) {
             return false;
         }
-        List<RepairSpecItem> list = new ArrayList<>();
-        list.addAll(specItemList.getType1List());
-        list.addAll(specItemList.getType2List());
-        list.addAll(specItemList.getType3List());
-        list.addAll(specItemList.getType4List());
-        list.addAll(specItemList.getType5List());
-        list.addAll(specItemList.getType6List());
-        list.addAll(specItemList.getType7List());
-        list.addAll(specItemList.getType8List());
-        for (RepairSpecItem item : list) {
-            item.setRepairSpecId(repairSpec.getId());
+        Integer specId = repairSpec.getId();
+        Integer modelId = repairSpec.getModelId();
+        EntityWrapper<RepairModelItem> ew = new EntityWrapper<>();
+        ew.addFilter("repair_model_id={0}", modelId);
+        List<RepairModelItem> modelItemList = repairModelItemMapper.selectList(ew);
+        List<RepairSpecItem> specItemList = new ArrayList<>();
+        for (RepairModelItem rmi : modelItemList) {
+            RepairSpecItem specItem = new RepairSpecItem();
+            try {
+                BeanUtils.copyProperties(specItem, rmi);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            specItem.setRepairSpecId(specId);
+            specItem.setStatus(1);
+            specItem.setDelFlag(Const.DEL_FLAG_NORMAL);
+            specItemList.add(specItem);
         }
-        if (repairSpecItemMapper.insertBatch(list) < 0) {
+        if (repairSpecItemMapper.insertBatch(specItemList) < 0) {
             return false;
-        }
-        if (repairDetailId != null && repairDetailId.length > 0) {
-            List<RepairSpecDetail> detailList = new ArrayList<>();
-            RepairSpecDetail detail;
-            Integer specId = repairSpec.getId();
-            for (Integer detailId : repairDetailId) {
-                detail = repairSpecDetailMapper.selectById(detailId);
-                detail.setRepairSpecId(specId);
-                detailList.add(detail);
-            }
-            if (repairSpecDetailMapper.updateBatchById(detailList) < 0) {
-                return false;
-            }
         }
         return true;
     }
+//    public boolean saveRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId) {
+//        if (repairSpecMapper.insert(repairSpec) < 0) {
+//            return false;
+//        }
+//        List<RepairSpecItem> list = new ArrayList<>();
+//        list.addAll(specItemList.getType1List());
+//        list.addAll(specItemList.getType2List());
+//        list.addAll(specItemList.getType3List());
+//        list.addAll(specItemList.getType4List());
+//        list.addAll(specItemList.getType5List());
+//        list.addAll(specItemList.getType6List());
+//        list.addAll(specItemList.getType7List());
+//        list.addAll(specItemList.getType8List());
+//        for (RepairSpecItem item : list) {
+//            item.setRepairSpecId(repairSpec.getId());
+//        }
+//        if (repairSpecItemMapper.insertBatch(list) < 0) {
+//            return false;
+//        }
+//        if (repairDetailId != null && repairDetailId.length > 0) {
+//            List<RepairSpecDetail> detailList = new ArrayList<>();
+//            RepairSpecDetail detail;
+//            Integer specId = repairSpec.getId();
+//            for (Integer detailId : repairDetailId) {
+//                detail = repairSpecDetailMapper.selectById(detailId);
+//                detail.setRepairSpecId(specId);
+//                detailList.add(detail);
+//            }
+//            if (repairSpecDetailMapper.updateBatchById(detailList) < 0) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
     @Override
     public boolean updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId) {

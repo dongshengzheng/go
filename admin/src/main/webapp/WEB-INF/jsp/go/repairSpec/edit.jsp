@@ -70,9 +70,9 @@
         padding-left: 15px;
     }
 
-     table th {
-         text-align: center;
-     }
+    table th {
+        text-align: center;
+    }
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
@@ -135,7 +135,8 @@
                                         <label for="planDays" class="col-sm-3 control-label">
                                             预估天数</label>
                                         <div class="col-sm-7">
-                                            <input id="planDays" name="planDays" type="text" ${repairSpec.planDays}
+                                            <input id="planDays" name="planDays" type="text"
+                                                   value="${repairSpec.planDays}"
                                                    class="form-control required" placeholder="请输入预估维修天数">
                                         </div>
                                     </div>
@@ -240,6 +241,7 @@
                             </shiro:hasPermission>
                             <button id="reset-btn" type="reset" class="btn blue">清空</button>
                             <a href="repairSpec" class="btn default" data-target="navTab">取消</a>
+                            <%--<button id="notific8_show" type="button">弹出</button>--%>
                         </div>
                     </div>
                 </div>
@@ -255,6 +257,9 @@
 </c:forEach>
 
 <jsp:include page="common.jsp"></jsp:include>
+
+
+<input type="hidden" value="specEditJsp" id="specEdit"/>
 <script>
     var specId = $("#specId").val();
     var modelId = $("#modelId").val();
@@ -498,45 +503,45 @@
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
-                    App.alert({
-                        container: "#bootstrap_alerts_demo",
-                        close: true,
-                        icon: 'fa fa-check',
-                        place: "append",
-                        message: "success",
-                        type: 'success',
-                        reset: true,
-                        focus: true,
-                        closeInSeconds: 10,
-                    })
+                    saveAlert("teal", "保存成功(每五分钟会自动保存)");
                 } else {
-                    App.alert({
-                        container: "#bootstrap_alerts_demo",
-                        close: true,
-                        icon: 'fa fa-warning',
-                        place: "append",
-                        message: "failure",
-                        type: 'danger',
-                        reset: true,
-                        focus: true,
-                        closeInSeconds: 10,
-                    })
+                    saveAlert("ruby", "保存失败(每五分钟会自动保存)");
                 }
             },
             error: function () {
-                App.alert({
-                    container: "#bootstrap_alerts_demo",
-                    close: true,
-                    icon: 'fa fa-warning',
-                    place: "append",
-                    message: "error",
-                    type: 'warning',
-                    reset: true,
-                    focus: true,
-                    closeInSeconds: 10,
-                })
+                saveAlert("tangerine", "系统错误,无法保存(每五分钟会自动保存)");
                 return;
             }
         });
     }
+
+    //自动保存
+    var autoSaveTime = 300000;
+    setTimeout(autoSave, autoSaveTime);
+    function autoSave() {
+        var value = $("#specEdit").val();
+        if (value == null || value != "specEditJsp") return;
+        severCheck();
+        setTimeout(autoSave, autoSaveTime);
+    }
+
+    function saveAlert(theme, msg) {
+        var settings = {
+            theme: theme,
+            sticky: false,
+            horizontalEdge: "top",
+            verticalEdge: "left"
+        }
+        if (!settings.sticky) {
+            settings.life = 3000;
+        }
+        $.notific8('zindex', 11500);
+        $.notific8(msg, settings);
+    }
+
+    $('#notific8_show').click(function (event) {
+        saveAlert("teal", "测试");
+    });
+
 </script>
+

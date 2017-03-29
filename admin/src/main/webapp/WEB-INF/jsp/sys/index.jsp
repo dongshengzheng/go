@@ -48,6 +48,7 @@
     <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css"/>
     <link href="${global}/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat2.css" rel="stylesheet" type="text/css"/>
     <link href="${global}/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${global}/plugins/jquery-notific8/jquery.notific8.min.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
 
@@ -135,6 +136,7 @@
 
 <script src="${global}/plugins/ladda/spin.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/ladda/ladda.min.js" type="text/javascript"></script>
+<script src="${global}/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
 
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
@@ -181,7 +183,7 @@
             img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-man.jpg";
         } else if (type == '3') {
             img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png";
-        } else if(type == '4'){
+        } else if (type == '4') {
             img.src = "http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg";
         }
     }
