@@ -634,6 +634,14 @@
             alter table t_repair_prog_detail_media modify type varchar(45);
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-019">
+        <sql>
+            UPDATE sys_menu SET menu_icon = 'fa fa-cog' WHERE menu_name = '系统配置';
+            UPDATE sys_menu SET menu_icon = 'fa fa-clock-o' WHERE menu_name = '维修进度';
+            UPDATE sys_menu SET menu_icon = 'fa fa-info' WHERE menu_name = '基础信息';
+            UPDATE sys_menu SET menu_icon = 'fa fa-ship' WHERE menu_name = '维修工程单';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 
