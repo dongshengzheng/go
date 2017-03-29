@@ -162,11 +162,10 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #4bccd8">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">请输入信息</h4>
+                <h4 class="modal-title">请选择状态</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group form-md-radios">
-                    <label>请选择状态</label>
                     <div class="md-radio-inline" style="margin-left: 50px">
                         <div class="md-radio">
                             <input type="radio" id="radio6" name="radio2" class="md-radiobtn" value="2"
