@@ -164,6 +164,7 @@
                 </div>
             </div>
             <div class="col-sm-4" id="imgNum">
+                <input type="hidden" value="" id="num"/>
                 <div style="margin-top: 5px"><span class="head">上传图片</span></div>
                 <div class="col-md-12" id="divId" style="margin-top: 20px;border: 1px dashed #337ab7;">
                         <button id="upload_img" style="width: 100%"><img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/></button>
@@ -215,6 +216,14 @@
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
     initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId","imgNum");
+    function removeImg(obj) {
+        obj.parentNode.remove();
+        var i=$("#imgNum").find("img").length;
+        var j=$("#num").val();
+        if(j==4&&i<4){
+            $("#divId").show();
+        }
+    }
 
     //服务器校验
     function saveInfo(a) {

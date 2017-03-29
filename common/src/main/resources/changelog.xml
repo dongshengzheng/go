@@ -628,6 +628,12 @@
             DELETE FROM t_dict WHERE type='维修类型' AND des='特检';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-051">
+        <sql>
+            alter table t_repair_spec_detail_media modify type varchar(45);
+            alter table t_repair_prog_detail_media modify type varchar(45);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

@@ -26,19 +26,22 @@ import java.util.List;
 @RequestMapping(value = "repairSpecDetail")
 public class RepairSpecDetailController extends BaseController {
     @Autowired
-    IRepairSpecDetailService repairSpecDetailService;
+    private IRepairSpecDetailService repairSpecDetailService;
 
     @Autowired
-    IRepairSpecDetailReqService repairSpecDetailReqService;
+    private IRepairSpecDetailReqService repairSpecDetailReqService;
 
     @Autowired
-    IDictService dictService;
+    private IDictService dictService;
 
     @Autowired
-    IRepairModelDetailService repairModelDetailService;
+    private IRepairModelDetailService repairModelDetailService;
 
     @Autowired
-    IRepairModelDetailReqService repairModelDetailReqService;
+    private IRepairModelDetailReqService repairModelDetailReqService;
+
+    @Autowired
+    private IRepairSpecDetailMediaService repairSpecDetailMediaService;
 
     @Value("${static_path}")
     private String staticPath;
@@ -60,6 +63,8 @@ public class RepairSpecDetailController extends BaseController {
                 String[] techList = repairTech.split(",");
                 map.put("techList", techList);
             }
+
+
             map.put("reqList", reqList);
         }
         EntityWrapper<Dict> ew = new EntityWrapper<>();
@@ -88,6 +93,7 @@ public class RepairSpecDetailController extends BaseController {
             for (RepairModelDetailReq r : reqs) {
                 r.setRepairModelDetailId(repairModelDetail.getId());
             }
+            repairModelDetailReqService.deleteRepairModelDetailById(repairModelDetail.getId());
             repairModelDetailReqService.insertBatch(reqs);
 
             jsonObject.put("success", true);
@@ -103,7 +109,11 @@ public class RepairSpecDetailController extends BaseController {
     /*保存为工程单的维修详单*/
     @RequestMapping(value = "/addSpecDetail", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject add(RepairSpecDetail repairSpecDetail, @RequestParam(required = false) String dataJson) {
+    public JSONObject add(RepairSpecDetail repairSpecDetail,
+                          @RequestParam(required = false) String dataJson,
+                          @RequestParam(required = false) String fileName,
+                          @RequestParam(required = false) String oss,
+                          @RequestParam(required = false) String fileType) {
         JSONObject jsonObject = new JSONObject();
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
         List<RepairSpecDetailReq> reqs = JSONObject.parseArray(dataJson, RepairSpecDetailReq.class);
@@ -113,8 +123,27 @@ public class RepairSpecDetailController extends BaseController {
                 for (RepairSpecDetailReq r : reqs) {
                     r.setRepairSpecDetailId(id);
                 }
+                repairSpecDetailReqService.deleteRepairSpecDetailReqById(repairSpecDetail.getId());
                 repairSpecDetailReqService.insertBatch(reqs);
             }
+            if (fileName != null) {
+                String[] fileNames = fileName.split(",");
+                String[] osss = oss.split(",");
+                String[] fileTypes = fileType.split(",");
+
+                List<RepairSpecDetailMedia> specDetailMedias = new ArrayList<>();
+                for (int i = 0; i < fileNames.length; i++) {
+                    RepairSpecDetailMedia specDetailMedia = new RepairSpecDetailMedia();
+                    specDetailMedia.setFilename(fileNames[i]);
+                    specDetailMedia.setOss(osss[i]);
+                    specDetailMedia.setType(fileTypes[i]);
+                    specDetailMedia.setRepairSpecDetailId(id);
+                    specDetailMedias.add(specDetailMedia);
+                }
+                repairSpecDetailMediaService.deleteBySpecDetailId(repairSpecDetail.getId());
+                repairSpecDetailMediaService.insertBatch(specDetailMedias);
+            }
+
             jsonObject.put("success", true);
             jsonObject.put("specDetail", true);
             jsonObject.put("repairSpecDetailId", id);
@@ -139,6 +168,14 @@ public class RepairSpecDetailController extends BaseController {
             String[] techList = repairTech.split(",");
             map.put("techList", techList);
         }
+        //图片
+        EntityWrapper<RepairSpecDetailMedia> ew3=new EntityWrapper<>();
+        ew3.addFilter("repair_spec_detail_id={0}",detail.getId());
+        List<RepairSpecDetailMedia> specDetailMedias =repairSpecDetailMediaService.selectList(ew3);
+        map.put("specDetailMedias",specDetailMedias);
+        map.put("size",specDetailMedias.size());
+
+
         map.put("detail", detail);
         EntityWrapper<RepairSpecDetailReq> ew = new EntityWrapper<>();
         ew.addFilter("repair_spec_detail_id={0}", detail.getId());
@@ -159,7 +196,11 @@ public class RepairSpecDetailController extends BaseController {
     /*更新维修详单*/
     @RequestMapping(value = "/editSpecDetail", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject editSpecDetailComplete(RepairSpecDetail repairSpecDetail, @RequestParam(required = false) String dataJson) {
+    public JSONObject editSpecDetailComplete(RepairSpecDetail repairSpecDetail,
+                                             @RequestParam(required = false) String dataJson,
+                                             @RequestParam(required = false) String fileName,
+                                             @RequestParam(required = false) String oss,
+                                             @RequestParam(required = false) String fileType) {
         JSONObject jsonObject = new JSONObject();
         List<RepairSpecDetailReq> reqs = JSONObject.parseArray(dataJson, RepairSpecDetailReq.class);
         repairSpecDetail.setDelFlag(Const.DEL_FLAG_NORMAL);
@@ -172,6 +213,23 @@ public class RepairSpecDetailController extends BaseController {
                 }
                 repairSpecDetailReqService.deleteRepairSpecDetailReqById(id);
                 repairSpecDetailReqService.insertBatch(reqs);
+            }
+            if (fileName != null) {
+                String[] fileNames = fileName.split(",");
+                String[] osss = oss.split(",");
+                String[] fileTypes = fileType.split(",");
+
+                List<RepairSpecDetailMedia> specDetailMedias = new ArrayList<>();
+                for (int i = 0; i < fileNames.length; i++) {
+                    RepairSpecDetailMedia specDetailMedia = new RepairSpecDetailMedia();
+                    specDetailMedia.setFilename(fileNames[i]);
+                    specDetailMedia.setOss(osss[i]);
+                    specDetailMedia.setType(fileTypes[i]);
+                    specDetailMedia.setRepairSpecDetailId(id);
+                    specDetailMedias.add(specDetailMedia);
+                }
+                repairSpecDetailMediaService.deleteBySpecDetailId(repairSpecDetail.getId());
+                repairSpecDetailMediaService.insertBatch(specDetailMedias);
             }
             jsonObject.put("success", true);
             jsonObject.put("specDetail", true);

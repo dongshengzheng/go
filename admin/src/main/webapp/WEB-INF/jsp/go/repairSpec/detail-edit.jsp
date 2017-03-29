@@ -83,8 +83,8 @@
 </div>
 <form action="" method="post" class="form-horizontal" id="detail_form">
     <c:if test="${!empty detail}">
-        <input id="id" name="id" type="hidden" value="${detail.id}"/>
-        <input id="id" name="repairSpecId" type="hidden" value="${detail.repairSpecId}"/>
+        <input id="detailId" name="id" type="hidden" value="${detail.id}"/>
+        <input id="repairSpecId" name="repairSpecId" type="hidden" value="${detail.repairSpecId}"/>
         <input id="createDate" name="createDate" type="hidden" value="<fmt:formatDate value='${detail.createDate}'
                         pattern="yyyy-MM-dd"/>"/>
         <input id="createBy" name="createBy" type="hidden" value="${detail.createBy}"/>
@@ -209,15 +209,25 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 right">
-                <p>插入图片或图纸</p>
-                <img id="imges"
-                     src=""
-                     style="display: block;width: 50%;height: 50%"
-                     onerror="nofind(1)"/>
-                <input type="hidden" id="img" name="img" value="">
-                <br>
-                <button id="upload_img" class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传</button>
+            <div class="col-sm-4" id="imgNum">
+                <input type="hidden" value="0" id="num"/>
+                <input type="hidden" value="${size}" id="size"/>
+                <div style="margin-top: 5px"><span class="head">上传图片</span></div>
+                <c:if test="${specDetailMedias!=null}">
+                    <c:forEach var="s" items="${specDetailMedias}">
+                        <div class="col-md-12" style="margin-top: 20px;border: 1px dashed #337ab7;padding: 0px">
+                        <input name="fileName" type="hidden" value="${s.filename}"/>
+                        <input name="fileType" type="hidden" value="0">
+                        <input name="oss" type="hidden" value="${s.oss}"/>
+                        <span onclick="removeImg(this)" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:0px;z-index: 999;"></span>
+                        <a target="_blank" href="${s.oss}">
+                        <img style="width:100%;height: 180px" src="${s.oss}"/></a></div>
+                    </c:forEach>
+                </c:if>
+
+                <div class="col-md-12" id="divId" style="margin-top: 20px;border: 1px dashed #337ab7;">
+                    <button id="upload_img" style="width: 100%"><img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/></button>
+                </div>
             </div>
 
         </div>
@@ -273,11 +283,25 @@
 </form>
 
 <script type="text/javascript">
-
+    if($("#size").val()==3){
+        $("#divId").hide();
+    }
 
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "imges", "img");
+    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId","imgNum");
+    function removeImg(obj) {
+        obj.parentNode.remove();
+
+        var i=$("#imgNum").find("img").length;
+        var j=$("#num").val();
+        if(j==0){
+            j=parseInt($("#size").val())+1;
+        }
+        if(j==4&&i<4){
+            $("#divId").show();
+        }
+    }
 
     //服务器校验
     function saveInfo(a) {
@@ -369,7 +393,7 @@
     }
 </script>
 <script>
-    var id = $("#id").val();
+    var id = $("#detailId").val();
     var width = $(window).width();
     $("#example1").width(width * 0.65);
     var d;

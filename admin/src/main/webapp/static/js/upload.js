@@ -191,7 +191,7 @@ function initUploaders_img(buttonId, bucket, domain, divId,imgNum) {
                 {title: "Zip files", extensions: "zip,rar"}
             ],
             max_file_size: '10mb', //最大只能上传10mb的文件
-            prevent_duplicates: true //不允许选取重复文件
+            prevent_duplicates: false //不允许选取重复文件
         },
         init: {
             FilesAdded: function (up) {
@@ -205,13 +205,16 @@ function initUploaders_img(buttonId, bucket, domain, divId,imgNum) {
                     '<input name="fileName" type="hidden" value="'+nativeName+'"/> '+//文件原名称
                     '<input name="fileType" type="hidden" value="0">'+
                     '<input name="oss" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '"/> '+
-                    '<span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:0px;z-index: 999;"></span>' +
+                    '<span onclick="removeImg(this)" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:0px;z-index: 999;"></span>' +
                     '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' +
                     '<img style="width:100%;height: 180px" src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '"/></a></div>');
                 var j=$("#"+imgNum).find("img").length;
                 if(j==4){
-                    $("#"+divId).remove();
+                    $("#"+divId).hide();
                 }
+                $("#num").val(j);
+
+
             }
         }
     });
