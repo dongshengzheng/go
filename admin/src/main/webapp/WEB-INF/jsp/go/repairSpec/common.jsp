@@ -75,32 +75,6 @@
             </button>
         </td>
     </tr>
-    <%--新增行模板--%>
-    <tr style="display: none;" id="item-row-temp1">
-        <td><input type="checkbox" disabled class="status-control"></td>
-        <td>code</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><a class="add-remark" data-toggle="modal" onclick="addRemark(this)" onmouseover="showRemark(this)"
-               onmouseout="showRemark(this)"
-               href="#responsive">添加备注</a>
-            <textarea class="remark-text" name="" cols="60" rows="10" wrap="hard" placeholder="暂未添加备注"
-                      style="display: none"></textarea></td>
-        <td></td>
-    </tr>
-    <tr style="display: none;" id="item-row-temp2">
-        <td><input type="checkbox" disabled class="status-control"></td>
-        <td>code</td>
-        <td></td>
-        <td></td>
-        <td><a class="add-remark" data-toggle="modal" onclick="addRemark(this)" onmouseover="showRemark(this)"
-               onmouseout="showRemark(this)"
-               href="#responsive">添加备注</a>
-            <textarea class="remark-text" name="" cols="60" rows="10" wrap="hard" placeholder="暂未添加备注"
-                      style="display: none"></textarea></td>
-        <td></td>
-    </tr>
 
 
     <%--通用服务item模板(编辑/新增)--%>
@@ -119,7 +93,7 @@
                name="type${outerVs.count}List[${itemVs.index}].sort">
         <input type="hidden" value="${item.src}" class="item-src"
                name="type${outerVs.count}List[${itemVs.index}].src">
-        <td>
+        <td class="status-td">
             <input type="checkbox" disabled
                    class="status-checkBox status-control">
             <input type="hidden" value="1" class="true-status"
@@ -170,7 +144,7 @@
                name="type${outerVs.count}List[${itemVs.index}].sort">
         <input type="hidden" value="${item.src}" class="item-src"
                name="type${outerVs.count}List[${itemVs.index}].src">
-        <td>
+        <td class="status-td">
             <input type="checkbox" disabled
                    class="status-checkBox status-control">
             <input type="hidden" value="1" class="true-status"
@@ -353,6 +327,7 @@
 
     $('#menu a').on('click', function () {
         $(document).scrollTop($($(this).attr('data-item')).offset().top - 300);
+        console.log("aaaaaaaa");
     })
 
     <%--显示备注--%>
@@ -413,6 +388,8 @@
         newRow.find(".model-detail-select").toggle();
         newRow.find(".unit-td input").toggle();
         newRow.find(".count-td input").toggle();
+        newRow.find(".status-control").toggle();
+        newRow.find(".status-td").find("input[type='hidden']").addClass("true-status");
         newRow.find(".item-id").val(null);
         newRow.find(".show-td").html("<a onclick='deleteRow(this)' class='btn btn-sm red'>删除</a>");
         var contentTd = newRow.find(".content-td");
@@ -450,8 +427,8 @@
                 this.name = name;
             }
         });
-
         oldRow.before(newRow);
+        calStatus(oldRow.parents("table"));
     }
 </script>
 
@@ -519,7 +496,28 @@
                 tr.find(".status-control").prop("checked", false);
                 tr.find(".true-status").val(1);
             }
-            changeStatus(tr.attr("data-parent"));
+            var nextCode = tr.attr("data-parent");
+            if (nextCode == null || nextCode == 0) {
+                calStatus(tr.parents("table"))
+                return;
+            }
+            changeStatus(nextCode);
         }
+    }
+
+
+    //计算勾选数
+    function calStatus(table) {
+        var trueStatusS = table.find(".true-status");
+        var total = trueStatusS.length;
+        var checkedTotal = 0;
+        trueStatusS.each(function () {
+            if ($(this).val() == 0) {
+                checkedTotal++;
+            }
+        })
+        var text = checkedTotal + "/" + total;
+        console.log(text)
+        table.parents(".item").find(".checkedOrNot").text(text);
     }
 </script>

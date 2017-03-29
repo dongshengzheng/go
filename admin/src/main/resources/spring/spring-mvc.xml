@@ -52,6 +52,7 @@
                         <value>DisableCircularReferenceDetect</value>
                         <value>WriteMapNullValue</value>
                         <value>QuoteFieldNames</value>
+                        <value>WriteNullStringAsEmpty</value>
                     </list>
                 </property>
             </bean>
