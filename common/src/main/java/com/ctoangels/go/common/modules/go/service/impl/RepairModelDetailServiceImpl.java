@@ -61,8 +61,8 @@ public class RepairModelDetailServiceImpl extends SuperServiceImpl<RepairModelDe
             for (RepairModelDetailReq r : reqs) {
                 r.setRepairModelDetailId(repairModelDetail.getId());
             }
+            repairModelDetailReqMapper.insertBatch(reqs);
         }
-        repairModelDetailReqMapper.insertBatch(reqs);
     }
 
 }

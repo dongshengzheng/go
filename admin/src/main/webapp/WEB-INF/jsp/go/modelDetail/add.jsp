@@ -208,7 +208,7 @@
             <div class="col-md-offset-3 col-md-9">
                 <div id="detail_alert"></div>
                 <button id="dump" type="button" class="btn green" onclick="saveInfo()" data-dump="#example1" data-instance="hot">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="reset" class="btn default"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="reset" type="reset" class="btn default"/>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="modelDetail" type="button" class="btn btn-default" data-target="navTab">取消
                 </a>
             </div>
@@ -254,6 +254,7 @@
                 },
                 success: function (data) {
                     if (data.success) {
+                        $("#reset").click();
                         App.alert({
                             container: "#bootstrap_alerts_demo",
                             close: true,
@@ -268,14 +269,14 @@
 
                     } else {
                         App.alert({
-                            container: "#detail_alert",
+                            container: "#bootstrap_alerts_demo",
                             close: true,
                             icon: 'fa fa-warning',
                             place: "append",
                             message: "提交失败,请稍后再试",
                             type: 'danger',
                             reset: true,
-                            focus: false,
+                            focus: true,
                             closeInSeconds: 5,
                         })
                     }
