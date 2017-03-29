@@ -121,7 +121,7 @@
                                                    class="form-control required" placeholder="无预估维修天数信息">
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                   <%-- <div class="form-group col-md-6">
                                         <label for="planCost" class="col-sm-3 control-label">
                                             预估金额</label>
                                         <div class="col-sm-7">
@@ -131,7 +131,7 @@
                                         <label class="col-sm-2 control-label"
                                                style="padding-left: 5px;padding-right: 5px">
                                             (单位:万元)</label>
-                                    </div>
+                                    </div>--%>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
