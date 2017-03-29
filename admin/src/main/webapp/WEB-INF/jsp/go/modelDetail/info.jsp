@@ -70,6 +70,9 @@
         margin-left: 40%;
         margin-top: 20px;
     }
+    #divId{
+        margin-top: 20px;border: 1px dashed #337ab7;
+    }
 
 </style>
 <go:navigater path="repairSpec"></go:navigater>
@@ -201,15 +204,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" style="margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px">
-                <img id="imges"
-                     src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${modelDetails.img}?x-oss-process=image/resize,m_fill,h_100,w_100"
-                     style="display: block;width: 80%;height: 50%"
-                     onerror="nofind(1)"/>
-                <input type="hidden" id="img" name="img" value="">
-                <br>
-                <button disabled <%--id="upload_img"--%> class="btn blue" type="button"><i class="fa fa-tv"></i> 本地上传
-                </button>
+            <div class="col-sm-4">
+                <div style="margin-top: 5px"><span class="head">上传图片</span></div>
+                <div class="col-md-12" id="divId">
+                    <button disabled id="upload_img" style="width: 100%">
+                        <img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/>
+                    </button>
+                </div>
             </div>
 
         </div>

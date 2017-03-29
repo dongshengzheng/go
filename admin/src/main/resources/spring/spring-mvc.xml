@@ -13,10 +13,12 @@
                             http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <task:annotation-driven/>
+
+
+
     <context:property-placeholder location="classpath:override.properties"/>
     <context:component-scan base-package="com.ctoangels.go.admin"/>
     <context:component-scan base-package="com.ctoangels.go.common"/>
-
     <mvc:default-servlet-handler/>
 
     <!-- 对静态资源文件的访问  restful-->
@@ -82,6 +84,7 @@
         <!-- cookie生效路径 -->
         <property name="sessionIdCookie.path" value="/"/>
     </bean>
+
 
 
 </beans>

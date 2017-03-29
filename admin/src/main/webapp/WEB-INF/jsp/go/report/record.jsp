@@ -36,6 +36,12 @@
     .modal-content {
         padding: 10px;
     }
+    .divImg{
+        float:left;position:relative;margin: 10px
+    }
+    .glyphicon .glyphicon-remove{
+        background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;
+    }
 </style>
 
 <form action="report/addRecord" method="post" class="form-horizontal" id="defForm">
@@ -94,13 +100,12 @@
                 <c:if test="${!empty reportDetailFiles}">
                     <c:forEach items="${reportDetailFiles}" var="t">
                         <c:if test="${t.type==0}">
-                            <div style="float:left;position:relative;margin: 10px">
+                            <div class="divImg">
                                 <input name="fileDiskName" type="hidden" value="">
                                 <input name="fileName" type="hidden" value="${t.filename}"/>
                                 <input name="fileType" type="hidden" value="0">
                                 <input name="oss" type="hidden" value="${t.oss}"/>
-                                <span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove"
-                                      style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;"></span>
+                                <span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove"></span>
                                 <a href="${t.oss}" target="_blank"><img src="${t.oss}"
                                                                         style="width: 100px;height: 100px;"
                                                                         class="min-img"></a>
@@ -319,6 +324,7 @@
     initUploaders_report_img("upload_img", "shipinfo", "${staticPath}/", "img", "divId");
     initUploaders_attachment("attachment", "shipinfo", "${staticPath}/", "table_attachment", "one");
 
+    //判断是否已经完成了，完成了，则excel都不可以从操作的
     var flag = false;
     var s =${progDetail.taskStatus};
     if (s == 0) {

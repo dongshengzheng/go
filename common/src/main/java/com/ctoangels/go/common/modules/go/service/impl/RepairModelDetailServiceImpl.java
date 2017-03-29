@@ -35,7 +35,7 @@ public class RepairModelDetailServiceImpl extends SuperServiceImpl<RepairModelDe
         return repairModelDetailMapper.selectList(ew);
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     @Override
     public void insertDetailAndDetailReq(RepairModelDetail repairModelDetail, List<RepairModelDetailReq> reqs) throws TransactionException {
         /*if(repairModelDetailMapper.insert(repairModelDetail)<0){
@@ -57,10 +57,12 @@ public class RepairModelDetailServiceImpl extends SuperServiceImpl<RepairModelDe
 
         }*/
         repairModelDetailMapper.insert(repairModelDetail);
-        for (RepairModelDetailReq r : reqs) {
-            r.setRepairModelDetailId(repairModelDetail.getId());
+        if(reqs.size()>0) {
+            for (RepairModelDetailReq r : reqs) {
+                r.setRepairModelDetailId(repairModelDetail.getId());
+            }
+            repairModelDetailReqMapper.insertBatch(reqs);
         }
-        repairModelDetailReqMapper.insertBatch(reqs);
     }
 
 }
