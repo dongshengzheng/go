@@ -12,7 +12,7 @@
         text-align: center;
     }
 </style>
-<go:navigater path="shipyard"></go:navigater>
+<go:navigater path="privateShipyard"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -24,8 +24,8 @@
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
-                                <shiro:hasPermission name="shipyard/add">
-                                    <a href="shipyard/add" data-target="navTab"
+                                <shiro:hasPermission name="privateShipyard/add">
+                                    <a href="privateShipyard/add" data-target="navTab"
                                        class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船厂信息
                                     </a>
                                 </shiro:hasPermission>
@@ -64,7 +64,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "shipyard/list",
+                "url": "privateShipyard/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
@@ -112,14 +112,14 @@
                 "targets": 9,
                 "render": function (data, type, row) {
                     return ""
-                            <shiro:hasPermission name="shipyard/look">
-                            + '<a href="shipyard/look?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
+                            <shiro:hasPermission name="privateShipyard/look">
+                            + '<a href="privateShipyard/look?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="shipyard/edit">
-                            + '<a href="shipyard/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
+                            <shiro:hasPermission name="privateShipyard/edit">
+                            + '<a href="privateShipyard/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="shipyard/delete">
-                            + '<a href="shipyard/delete?id=' + row.id +
+                            <shiro:hasPermission name="privateShipyard/delete">
+                            + '<a href="privateShipyard/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
                             </shiro:hasPermission>
                             ;

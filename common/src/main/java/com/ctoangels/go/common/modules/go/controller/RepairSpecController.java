@@ -304,7 +304,8 @@ public class RepairSpecController extends BaseController {
         List<RepairSpecDetail> detailList = null;
         String excelName = spec.getName() != null ? spec.getName() : spec.getShipName() + "工程单概述";
 
-        File modelExcel = new File("detailModel.xls");
+
+        File modelExcel = new File( getClass().getClassLoader().getResource("detailModel.xls").getFile());
         FileInputStream is = null; //文件流
         HSSFWorkbook wb = null;
         try {

@@ -98,7 +98,7 @@
         </div>
     </div>
 </div>
-
+<a href="repairProg" class="btn btn-sm grey-mint" data-target="navTab"  id="repairProg" style="display: none"></a>
 <script type="text/javascript">
     var defTable;
     $(document).ready(function () {
@@ -290,6 +290,7 @@
                     if(data){
                         alert("成功");
                         $(".close").click();
+                        $("#repairProg").click();
                     }else {
                         alert("提交失败");
                     }
