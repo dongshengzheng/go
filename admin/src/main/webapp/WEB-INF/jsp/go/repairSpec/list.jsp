@@ -11,9 +11,10 @@
     .htContextMenu {
         z-index: 1060000;
     }
-     table th,td {
-         text-align: center;
-     }
+
+    table th, td {
+        text-align: center;
+    }
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -85,10 +86,12 @@
                 <h4 class="modal-title">请输入信息</h4>
             </div>
             <div class="modal-body">
-                <label>请输入船厂</label><input id="send_shipyard" class="form-control" placeholder="请输入正确的船厂" name="shipyard">
+                <label>请输入船厂</label><input id="send_shipyard" class="form-control" placeholder="请输入正确的船厂"
+                                           name="shipyard">
             </div>
             <div class="modal-body">
-                <label>请输入邮箱</label><div id="example1"  style=" height: 200px; overflow: hidden;"></div>
+                <label>请输入邮箱</label>
+                <div id="example1" style=" height: 200px; overflow: hidden;"></div>
                 <input type="hidden" id="repairSpecId"/>
             </div>
             <div class="modal-footer">
@@ -205,7 +208,6 @@
         if (check()) {
             var email = $("#email").val();
             var id = $("#id").val();
-            $(obj).prop("disabled", true);
             $.ajax({
                 type: "POST",
                 url: 'repairSpec/exportExcel',
@@ -215,24 +217,16 @@
                 },
                 success: function (data) {
                     if ("success" == data.result) {
-                        alert("成功");
-                        $(".close").click();
+                        excelAlert("teal", "发送成功");
                     } else if ("email error" == data.result) {
-                        $("#email").tips({
-                            side: 1,
-                            msg: "<fmt:message key="register_incorrect_email2"/>",
-                            bg: '#FF5080',
-                            time: 15
-                        });
-                        $("#email").focus();
-                        $(obj).prop("disabled", false);
+                        excelAlert("ruby", "发送失败");
                     }
                 },
                 error: function () {
-                    alert("发生错误,请稍后再试");
-                    $(obj).prop("disabled", false);
+                    excelAlert("tangerine", "系统错误,发送失败");
                 }
             })
+            $(".close").click();
         }
     }
 
@@ -260,41 +254,57 @@
         return true;
     }
 
+    //发送工程单响应alert
+    function excelAlert(theme, msg) {
+        var settings = {
+            theme: theme,
+            sticky: false,
+            horizontalEdge: "top",
+            verticalEdge: "left"
+        }
+        if (!settings.sticky) {
+            settings.life = 3000;
+        }
+        $.notific8('zindex', 11500);
+        $.notific8(msg, settings);
+    }
+
+
     /*s生成维修进度所调用的方法*/
     function sure(obj) {
-        var arr1=new Array();
-        var datas=handsontableData();
-        var j=0;
-        for(var i=0;i<datas.length;i++){
-            if(datas[i]==null||datas[i]==""){
+        var arr1 = new Array();
+        var datas = handsontableData();
+        var j = 0;
+        for (var i = 0; i < datas.length; i++) {
+            if (datas[i] == null || datas[i] == "") {
                 continue;
             }
-            var obj=new Object();
-            obj.email=datas[i];
-            arr1[j++]=obj;
+            var obj = new Object();
+            obj.email = datas[i];
+            arr1[j++] = obj;
         }
-        var dataJson=JSON.stringify(arr1);
+        var dataJson = JSON.stringify(arr1);
 
         if (check1(arr1)) {
-            var repairSpecId=$("#repairSpecId").val();
-            var shipyardName=$("#shipyard").val();
+            var repairSpecId = $("#repairSpecId").val();
+            var shipyardName = $("#shipyard").val();
             $.ajax({
-                type:"post",
-                data:{
-                    id:repairSpecId,
-                    dataJson:dataJson,
-                    shipyardName:shipyardName
+                type: "post",
+                data: {
+                    id: repairSpecId,
+                    dataJson: dataJson,
+                    shipyardName: shipyardName
                 },
-                url:"repairProg/makeProgress",
-                success:function (data) {
-                    if(data){
+                url: "repairProg/makeProgress",
+                success: function (data) {
+                    if (data) {
                         alert("成功");
                         $(".close").click();
-                    }else {
+                    } else {
                         alert("提交失败");
                     }
                 },
-                error:function () {
+                error: function () {
                     alert("发生错误,请稍后再试");
                     $(obj).prop("disabled", false);
                 }
@@ -302,7 +312,7 @@
         }
     }
     function check1(attr) {
-        if(attr.length<=0){
+        if (attr.length <= 0) {
             $("#example1").tips({
                 side: 1,
                 msg: '邮箱不能为空',
@@ -311,16 +321,16 @@
             });
             return false;
         }
-        var datas=handsontableData();
-        for(var i=0;i<datas.length;i++){
-            if(datas[i]==null||datas[i]==""){
+        var datas = handsontableData();
+        for (var i = 0; i < datas.length; i++) {
+            if (datas[i] == null || datas[i] == "") {
                 continue;
             }
             if (!checkMail(datas[i])) {
-                var j=i+1
+                var j = i + 1
                 $("#example1").tips({
                     side: 1,
-                    msg: '第'+j+'行<fmt:message key="register_incorrect_email2"/>',
+                    msg: '第' + j + '行<fmt:message key="register_incorrect_email2"/>',
                     bg: '#AE81FF',
                     time: 3
                 });
@@ -387,11 +397,11 @@
         rowHeaders: true,
         colHeaders: true,
         colWidths: [500],
-        minRows:2,
-        colHeaders: ["邮箱地址"],
+        minRows: 2,
+        colHeaders: ["邮箱地址"],
         columnSorting: true,
-        columns: [
-            {data: "des"},
+        columns: [
+            {data: "des"},
         ],
         manualColumnMove: false,
         manualColumnResize: true,

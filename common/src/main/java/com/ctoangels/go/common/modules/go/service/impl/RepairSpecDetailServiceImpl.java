@@ -23,7 +23,6 @@ public class RepairSpecDetailServiceImpl extends SuperServiceImpl<RepairSpecDeta
     @Override
     public List<RepairSpecDetail> getListBySpecIdAndCatagory(Integer specId, String catagory) {
         EntityWrapper<RepairSpecDetail> ew = new EntityWrapper<>();
-        ew.setSqlSelect("id,pro_order_no,pro_name,pro_desc");
         ew.addFilter("repair_spec_id={0} and catagory={1} and del_flag=0 ", specId, catagory);
         return repairSpecDetailMapper.selectList(ew);
     }

@@ -190,7 +190,7 @@ public class MailUtil {
         //实例化一个bodypart用于封装内容
         BodyPart bodyPart = new MimeBodyPart();
         try {
-            bodyPart.setContent("<font color='red'>这个是带有附件的HTML内容</font>", "text/html;charset=utf8");
+            bodyPart.setContent(text, "text/html;charset=utf8");
             multipart.addBodyPart(bodyPart);
             //每一个部分实例化一个bodypart，故每个附件也需要实例化一个bodypart
             for (File file : files) {
@@ -225,7 +225,7 @@ public class MailUtil {
         //实例化一个bodypart用于封装内容
         BodyPart bodyPart = new MimeBodyPart();
         try {
-            bodyPart.setContent("<font color='red'>这个是带有附件的HTML内容</font>", "text/html;charset=utf8");
+            bodyPart.setContent(text, "text/html;charset=utf8");
             multipart.addBodyPart(bodyPart);
             //每一个部分实例化一个bodypart，故每个附件也需要实例化一个bodypart
             bodyPart = new MimeBodyPart();

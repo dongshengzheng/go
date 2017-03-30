@@ -542,10 +542,6 @@
         $.notific8(msg, settings);
     }
 
-    $('#notific8_show').click(function (event) {
-        saveAlert("teal", "测试");
-    });
-
 
     //    $(".item .expand").on("click", function (event) {
     //        $(this).parents(".item").siblings(".item").each(function () {

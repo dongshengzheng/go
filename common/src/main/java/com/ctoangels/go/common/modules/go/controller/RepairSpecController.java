@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ContextLoader;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.activation.DataHandler;
@@ -278,7 +279,7 @@ public class RepairSpecController extends BaseController {
         return jsonObject;
     }
 
-    //导出工程单excel
+    //发送工程单excel
     @RequestMapping(value = "/exportExcel", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject exportRepairSpecExcel(Integer id, String toAddress) {
@@ -289,7 +290,7 @@ public class RepairSpecController extends BaseController {
         Matcher m = p.matcher(toAddress);
         Boolean flag = m.matches();
         if (flag) {
-            MailUtil.sendSpecExcelEmail(toAddress, "111", exportSpecExcel(id));
+            MailUtil.sendSpecExcelEmail(toAddress, "工程单", exportSpecExcel(id));
             errInfo = "success";
         } else {
             errInfo = "email error";
@@ -303,8 +304,7 @@ public class RepairSpecController extends BaseController {
         RepairSpec spec = repairSpecService.selectById(specId);
         List<RepairSpecDetail> detailList = null;
         String excelName = spec.getName() != null ? spec.getName() : spec.getShipName() + "工程单概述";
-
-        File modelExcel = new File("detailModel.xls");
+        File modelExcel = new File(getClass().getClassLoader().getResource("detailModel444.xls").getFile());
         FileInputStream is = null; //文件流
         HSSFWorkbook wb = null;
         try {
@@ -321,10 +321,12 @@ public class RepairSpecController extends BaseController {
             int catagoryRowNum = 0;
             String catagory = dict.getDes();
             if (!"通用服务".equals(catagory)) {
+                detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
+                if (detailList == null || detailList.size() == 0) {
+                    continue;
+                }
                 HSSFSheet sheet = wb.createSheet(catagory);
                 sheet.setColumnWidth(1, 50 * 256);
-                detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
-
                 HSSFRow row = sheet.createRow((int) catagoryRowNum++);
                 HSSFCell cell = row.createCell((short) 0);
 
@@ -360,10 +362,13 @@ public class RepairSpecController extends BaseController {
                     row = sheet.createRow((int) catagoryRowNum++);
                 }
             } else {
+                List<RepairSpecItem> itemList = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId());
+                if (itemList == null || itemList.size() == 0) {
+                    continue;
+                }
                 HSSFSheet sheet = wb.createSheet(catagory);
                 sheet.setColumnWidth(1, 50 * 256);
                 sheet.setColumnWidth(4, 100 * 256);
-                List<RepairSpecItem> itemList = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId());
                 HSSFRow row = sheet.createRow((int) 0);
                 row.createCell((short) 0).setCellValue("项目号");
                 row.createCell((short) 1).setCellValue("维修内容");
@@ -455,15 +460,11 @@ public class RepairSpecController extends BaseController {
                         rValue = posList[r];
                         if (iValue.equals(rValue)) {
                             detailSheet.getRow(posRow).getCell(posCol).setCellValue(iDes);
-                            detailSheet.getRow(posRow).getCell(posCol + 1).setCellValue("√");
+                            posCol += 2;
                             break;
                         }
                     }
-                    if (r == posList.length) {
-                        detailSheet.getRow(posRow).getCell(posCol).setCellValue(iDes);
-                    }
-                    posCol += 2;
-                    if ((i + 1) % 4 == 0) {
+                    if (posCol == 10) {
                         posRow++;
                         posCol = 0;
                     }
@@ -487,15 +488,12 @@ public class RepairSpecController extends BaseController {
                         rValue = techList[r];
                         if (iValue.equals(rValue)) {
                             detailSheet.getRow(techRow).getCell(techCol).setCellValue(iDes);
-                            detailSheet.getRow(techRow).getCell(techCol + 1).setCellValue("√");
+                            techCol += 2;
                             break;
                         }
                     }
-                    if (r == techList.length) {
-                        detailSheet.getRow(techRow).getCell(techCol).setCellValue(iDes);
-                    }
-                    techCol += 2;
-                    if ((i + 1) % 4 == 0) {
+
+                    if (techCol == 10) {
                         techRow++;
                         techCol = 0;
                     }
