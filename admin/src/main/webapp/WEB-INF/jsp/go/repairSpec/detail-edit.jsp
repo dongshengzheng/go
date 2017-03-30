@@ -73,8 +73,17 @@
     #remind {
         color: red;
     }
-    .left{ margin-top: 5px;border-right: dashed 1px #337ab7; }
-    .right{margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px}
+
+    .left {
+        margin-top: 5px;
+        border-right: dashed 1px #337ab7;
+    }
+
+    .right {
+        margin-top: 5px;
+        border: 1px dashed #337ab7;
+        margin-left: 10px
+    }
 
 </style>
 <div class="modal-header">
@@ -96,28 +105,32 @@
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
-                    <label style="width: auto;padding-left: 0px;" class="col-sm-5 control-label label-top" >${detail.shipName}</label>
+                    <label style="width: auto;padding-left: 0px;"
+                           class="col-sm-5 control-label label-top">${detail.shipName}</label>
                     <input style="display: none" readonly id="shipName" name="shipName" type="text" maxlength="32"
                            value="${detail.shipName}"
                            class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
-                    <label style="width: auto;padding-left: 0px;" class="col-sm-6 control-label label-top">${detail.catagory}</label>
+                    <label style="width: auto;padding-left: 0px;"
+                           class="col-sm-6 control-label label-top">${detail.catagory}</label>
                     <input style="display: none" readonly id="catagory" name="catagory" type="text" maxlength="32"
                            value="${detail.catagory}"
                            class="form-control ">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
-                    <label style="width: auto;padding-left: 0px;" class="col-sm-6 control-label label-top">${detail.code}</label>
+                    <label style="width: auto;padding-left: 0px;"
+                           class="col-sm-6 control-label label-top">${detail.code}</label>
                     <input style="display: none" readonly id="code" name="code" type="text" maxlength="32"
                            value="${detail.code}"
                            class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
-                    <label style="width: auto;padding-left: 0px;" class="col-sm-6 control-label label-top">${detail.proOrderNo}</label>
+                    <label style="width: auto;padding-left: 0px;"
+                           class="col-sm-6 control-label label-top">${detail.proOrderNo}</label>
                     <input style="display: none" readonly id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
                            value="${detail.proOrderNo}"
                            class="form-control required">
@@ -216,17 +229,19 @@
                 <c:if test="${specDetailMedias!=null}">
                     <c:forEach var="s" items="${specDetailMedias}">
                         <div class="col-md-12" style="margin-top: 20px;border: 1px dashed #337ab7;padding: 0px">
-                        <input name="fileName" type="hidden" value="${s.filename}"/>
-                        <input name="fileType" type="hidden" value="0">
-                        <input name="oss" type="hidden" value="${s.oss}"/>
-                        <span onclick="removeImg(this)" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:0px;z-index: 999;"></span>
-                        <a target="_blank" href="${s.oss}">
-                        <img style="width:100%;height: 180px" src="${s.oss}"/></a></div>
+                            <input name="fileName" type="hidden" value="${s.filename}"/>
+                            <input name="fileType" type="hidden" value="0">
+                            <input name="oss" type="hidden" value="${s.oss}"/>
+                            <span onclick="removeImg(this)" class="glyphicon glyphicon-remove"
+                                  style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:0px;z-index: 999;"></span>
+                            <a target="_blank" href="${s.oss}">
+                                <img style="width:100%;height: 180px" src="${s.oss}"/></a></div>
                     </c:forEach>
                 </c:if>
 
                 <div class="col-md-12" id="divId" style="margin-top: 20px;border: 1px dashed #337ab7;">
-                    <button id="upload_img" style="width: 100%"><img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/></button>
+                    <button id="upload_img" style="width: 100%"><img src="" onerror="nofind(4)"
+                                                                     style="width:100%;height: 180px"/></button>
                 </div>
             </div>
 
@@ -283,22 +298,22 @@
 </form>
 
 <script type="text/javascript">
-    if($("#size").val()==3){
+    if ($("#size").val() == 3) {
         $("#divId").hide();
     }
 
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId","imgNum");
+    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId", "imgNum");
     function removeImg(obj) {
         obj.parentNode.remove();
 
-        var i=$("#imgNum").find("img").length;
-        var j=$("#num").val();
-        if(j==0){
-            j=parseInt($("#size").val())+1;
+        var i = $("#imgNum").find("img").length;
+        var j = $("#num").val();
+        if (j == 0) {
+            j = parseInt($("#size").val()) + 1;
         }
-        if(j==4&&i<4){
+        if (j == 4 && i < 4) {
             $("#divId").show();
         }
     }
@@ -407,7 +422,7 @@
         },
         success: function (data) {
             d = data.reqs;
-            var datas = eval(dataJson);
+            var datas = eval(d);
             console.log(d);
             var container = document.getElementById('example1'),
                     storedData = {},
@@ -420,7 +435,7 @@
                 data: datas,
                 rowHeaders: true,
                 colHeaders: true,
-                colWidths: [width*0.46, width*0.07, width*0.07],
+                colWidths: [width * 0.46, width * 0.07, width * 0.07],
                 minRows: 15,
                 colHeaders: ["要求和描述/材料规格", "单位", "数量"],
                 columnSorting: true,
