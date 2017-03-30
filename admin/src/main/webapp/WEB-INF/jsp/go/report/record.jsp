@@ -227,9 +227,27 @@
         </div>
     </div>
 </div>
+<div id="result" class="modal fade" tabindex="-1" data-backdrop="make" data-keyboard="false">
+    <div class="modal-dialog" style="width: 40%">
+        <div class="modal-content">
+            <input type="hidden" id="resultNum" value=""/>
+            <div class="modal-header" style="background-color: #4bccd8">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">提交结果</h4>
+            </div>
+            <div class="modal-body">
+                <h4><p id="reminder"></p></h4>
+            </div>
+            <div class="modal-footer">
+                <button onclick="resultClose()" type="button"  class="btn dark btn-outline">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <a id="info" href="task/info?id=${taskId}" class="btn btn-sm grey-mint" data-target="navTab" style="display: none"></a>
 <a href="#make" style="display:none" data-toggle="modal" id="box" class="btn btn-sm margin-bottom-5 green"></a>
+<a href="#result" style="display:none" data-toggle="modal" id="boxClose" class="btn btn-sm margin-bottom-5 green"></a>
 <script>
     function status() {
         $("#box").click();
@@ -246,10 +264,18 @@
     function goBack() {
         $("#info").click();
     }
+    function resultClose(){
+        if($('#resultNum').val()==1) {
+            $(".close").click();
+            setTimeout("$('#info').click();", 300);
+        }else{
+            $(".close").click();
+        }
+    }
 
     function severCheck() {
         if (sure()) {
-            $("#close").click();
+            var s=$(".close").click();
             var arr1 = new Array();
             var datas = handsontableData();
             var j = 0;
@@ -270,45 +296,20 @@
                 },
                 success: function (data) {
                     if (data.success) {
-                        App.alert({
-                            container: "#detail_alert",
-                            close: true,
-                            icon: 'fa fa-warning',
-                            place: "append",
-                            message: "提交成功",
-                            type: 'success',
-                            reset: true,
-                            focus: false,
-                            closeInSeconds: 5,
-                        })
-
-                        $("#info").click();
+                        $("#reminder").html("提交成功");
+                        $('#resultNum').val(1);
+                        $("#boxClose").click();
                     } else {
-                        App.alert({
-                            container: "#detail_alert",
-                            close: true,
-                            icon: 'fa fa-warning',
-                            place: "append",
-                            message: "提交失败,请稍后再试",
-                            type: 'danger',
-                            reset: true,
-                            focus: false,
-                            closeInSeconds: 5,
-                        })
+                        $("#reminder").html("提交失败");
+                        $('#resultNum').val(0);
+                        $("#boxClose").click();
                     }
                 },
                 error: function () {
-                    App.alert({
-                        container: "#detail_alert",
-                        close: true,
-                        icon: 'fa fa-warning',
-                        place: "append",
-                        message: "系统繁忙,请稍后再试",
-                        type: 'warning',
-                        reset: true,
-                        focus: false,
-                        closeInSeconds: 5,
-                    })
+                    $("#reminder").html("系统繁忙,请稍后再试");
+                    $('#resultNum').val(0);
+                    $("#boxClose").click();
+
                     return;
                 }
             });

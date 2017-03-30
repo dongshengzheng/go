@@ -299,6 +299,7 @@ public class RepairProgController extends BaseController {
             taskEmailService.insertBatch(emails);
             jsonObject.put("mes", true);
         } catch (Exception e) {
+            e.printStackTrace();
             jsonObject.put("mes", false);
         }
 

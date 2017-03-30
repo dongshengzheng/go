@@ -34,7 +34,7 @@ public class PublicShip implements Serializable {
 	private String name;
 
 	/** BuildYear 建造时间 */
-	private String buildYear;
+	private String buildyear;
 
 	/** Builder 建造者 */
 	private String builder;
@@ -255,12 +255,12 @@ public class PublicShip implements Serializable {
 		this.name = name;
 	}
 
-	public String getBuildYear() {
-		return this.buildYear;
+	public String getBuildyear() {
+		return buildyear;
 	}
 
-	public void setBuildYear(String buildYear) {
-		this.buildYear = buildYear;
+	public void setBuildyear(String buildyear) {
+		this.buildyear = buildyear;
 	}
 
 	public String getBuilder() {

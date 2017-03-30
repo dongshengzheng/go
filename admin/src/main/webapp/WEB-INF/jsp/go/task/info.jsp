@@ -64,12 +64,12 @@
                                                id="table${outerVs.count}">
                                             <thead>
                                             <tr>
-                                                <th>单号</th>
-                                                <th>工程名称</th>
-                                                <th>工程描述</th>
-                                                <th>工程状态</th>
-                                                <th>记录汇报</th>
-                                                <th>前期汇报</th>
+                                                <th style="width: 5%">单号</th>
+                                                <th style="width: 10%">工程名称</th>
+                                                <th style="width: 60%">工程描述</th>
+                                                <th style="width: 5%">工程状态</th>
+                                                <th style="width: 5%">记录汇报</th>
+                                                <th style="width: 5%">前期汇报</th>
                                             </tr>
                                             </thead>
                                             <tbody>

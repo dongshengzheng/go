@@ -125,10 +125,12 @@
 <table id="reportDetailTmp" style="display: none"
        class="table table-striped table-bordered table-hover table-checkable">
     <input type="hidden" name="reportDetailId" class="reportDetailId">
-    <tr>
-        <td style="width: 20%">S/N</td>
-        <td style="width: 80%">描述</td>
-    </tr>
+    <thead>
+        <tr style="background-color: #00a8c6">
+            <td style="width: 20%">S/N</td>
+            <td style="width: 80%">描述</td>
+        </tr>
+    </thead>
     <tr>
         <td class="proOrderNo-td"></td>
         <td class="proName-td"></td>

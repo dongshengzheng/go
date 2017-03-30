@@ -407,7 +407,7 @@
         },
         success: function (data) {
             d = data.reqs;
-            var datas = eval(dataJson);
+            var datas = eval(d);
             console.log(d);
             var container = document.getElementById('example1'),
                     storedData = {},

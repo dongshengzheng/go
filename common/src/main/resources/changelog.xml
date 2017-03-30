@@ -720,6 +720,12 @@
             UPDATE t_param SET unit = '' WHERE name = '注册总吨';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-053">
+        <sql>
+            alter table t_repair_prog_detail modify pro_desc text;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
 
 
