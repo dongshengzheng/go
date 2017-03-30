@@ -383,7 +383,7 @@
             "ordering": false,
             "autoWidth": false,
             "ajax": {
-                "url": "shipyard/wharf?id=" + id,
+                "url": "privateShipyard/wharf?id=" + id,
                 "type": "post",
             },
             "language": {
@@ -437,7 +437,7 @@
             "ordering": false,
             "autoWidth": false,
             "ajax": {
-                "url": "shipyard/berth?id=" + id,
+                "url": "privateShipyard/berth?id=" + id,
                 "type": "post",
             },
             "language": {

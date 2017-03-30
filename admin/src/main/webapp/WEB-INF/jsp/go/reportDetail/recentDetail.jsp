@@ -36,9 +36,6 @@
     .modal-content {
         padding: 10px;
     }
-   .quick-nav-trigger {
-       z-index: 0;
-   }
 </style>
 
 <form action="report/addRecord" method="post" class="form-horizontal" id="defForm">
@@ -62,7 +59,7 @@
                                 <c:if test="${progDetail.taskStatus == 1}">
                                     <label  class='btn blue'>进行中</label>
                                 </c:if>
-                                <c:if test="${progDetail.taskStatus == null||reportDetails[i].taskStatus==2}">
+                                <c:if test="${progDetail.taskStatus==2}">
                                     <label  class='btn default'>未开始</label>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus ==3}">
@@ -74,71 +71,78 @@
                     </table>
                 </div>
             </div>
-
-            <c:forEach var="i" begin="0" end="${size-1}" step="1" varStatus="d">
-                <fmt:formatDate value="${reportDetails[i].createDate}" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
-                <div style="margin-top: 20px" class="col-sm-10"><h4 class="block"> ${date}</h4></div>
-                <div style="margin-top: 30px" class="col-sm-2">
-                    <c:if test="${reportDetails[i].taskStatus == 0}">
-                        <label  class='btn green-jungle'>已完成</label>
-                    </c:if>
-                    <c:if test="${reportDetails[i].taskStatus == 1}">
-                        <label  class='btn blue'>进行中</label>
-                    </c:if>
-                    <c:if test="${reportDetails[i].taskStatus == null||reportDetails[i].taskStatus==2}">
-                        <label  class='btn default'>未开始</label>
-                    </c:if>
-                    <c:if test="${reportDetails[i].taskStatus ==3}">
-                        <label  class='btn yellow'>已取消</label>
-                    </c:if>
-                </div>
-                <div class="col-md-12 note note-success">
-                   <div class="col-md-12"><h4>详情记录</h4></div>
-                   <div class="col-md-12 borders">
-                       <div style="padding-top: 15px;padding-bottom: 15px">
-                           <div class="col-md-9" style="padding: 0px">
-                               <div id="handsontable${d.count}" data-id="${reportDetails[i].id}"
-                                    style=" height: 250px; overflow: hidden;"></div>
-                           </div>
-                           <div class="col-md-3" style=" height: 250px;padding: 0px">
+            <c:if test="${size>0}" var="s">
+                <c:forEach var="i" begin="0" end="${size-1}" step="1" varStatus="d">
+                    <fmt:formatDate value="${reportDetails[i].createDate}" var="date" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    <div style="margin-top: 20px" class="col-sm-10"><h4 class="block"> ${date}</h4></div>
+                    <div style="margin-top: 30px" class="col-sm-2">
+                        <c:if test="${reportDetails[i].taskStatus == 0}">
+                            <label  class='btn green-jungle'>已完成</label>
+                        </c:if>
+                        <c:if test="${reportDetails[i].taskStatus == 1}">
+                            <label  class='btn blue'>进行中</label>
+                        </c:if>
+                        <c:if test="${reportDetails[i].taskStatus == null||reportDetails[i].taskStatus==2}">
+                            <label  class='btn default'>未开始</label>
+                        </c:if>
+                        <c:if test="${reportDetails[i].taskStatus ==3}">
+                            <label  class='btn yellow'>已取消</label>
+                        </c:if>
+                    </div>
+                    <div class="col-md-12 note note-success">
+                        <div class="col-md-12"><h4>详情记录</h4></div>
+                        <div class="col-md-12 borders">
+                            <div style="padding-top: 15px;padding-bottom: 15px">
+                                <div class="col-md-9" style="padding: 0px">
+                                    <div id="handsontable${d.count}" data-id="${reportDetails[i].id}"
+                                         style=" height: 250px; overflow: hidden;"></div>
+                                </div>
+                                <div class="col-md-3" style=" height: 250px;padding: 0px">
                             <textarea name="memo" style="width: 100%;height:100%;"
                                       placeholder="备注:">${reportDetails[i].memo}</textarea>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="col-md-12 " style="margin-top: 40px"><h4>照片</h4></div>
-                   <div class="col-md-12">
-                       <c:if test="${!empty reportDetails[i].imgList}">
-                           <c:forEach items="${reportDetails[i].imgList}" var="t">
-                               <c:if test="${t.type==0}">
-                                   <div style="float:left;position:relative;margin: 10px">
-                                       <a href="${t.oss}" target="_blank"><img src="${t.oss}" style="width: 100px;height: 100px;" class="min-img"></a>
-                                   </div>
-                               </c:if>
-                           </c:forEach>
-                       </c:if>
-                   </div>
-                   <div class="col-md-12" style="margin-top: 40px"><h4>相关文件</h4></div>
-                   <div class="col-md-12">
-                       <div style="padding: 10px;">
-                           <table class="table" id="table_attachment">
-                               <tbody>
-                               <c:if test="${!empty reportDetails[i].otherList}">
-                                   <c:forEach items="${reportDetails[i].otherList}" var="r">
-                                       <c:if test="${r.type==2}">
-                                           <tr>
-                                               <td style="width: 80%"><a target="_blank" href="${r.oss}">${r.filename}</a>
-                                               </td>
-                                           </tr>
-                                       </c:if>
-                                   </c:forEach>
-                               </c:if>
-                               </tbody>
-                           </table>
-                       </div>
-                   </div>
-               </div>
-            </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 " style="margin-top: 40px"><h4>照片</h4></div>
+                        <div class="col-md-12">
+                            <c:if test="${!empty reportDetails[i].imgList}">
+                                <c:forEach items="${reportDetails[i].imgList}" var="t">
+                                    <c:if test="${t.type==0}">
+                                        <div style="float:left;position:relative;margin: 10px">
+                                            <a href="${t.oss}" target="_blank"><img src="${t.oss}" style="width: 100px;height: 100px;" class="min-img"></a>
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
+                        </div>
+                        <div class="col-md-12" style="margin-top: 40px"><h4>相关文件</h4></div>
+                        <div class="col-md-12">
+                            <div style="padding: 10px;">
+                                <table class="table" id="table_attachment">
+                                    <tbody>
+                                    <c:if test="${!empty reportDetails[i].otherList}">
+                                        <c:forEach items="${reportDetails[i].otherList}" var="r">
+                                            <c:if test="${r.type==2}">
+                                                <tr>
+                                                    <td style="width: 80%"><a target="_blank" href="${r.oss}">${r.filename}</a>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${! s}" >
+                <div class="col-md-12 note note-success">
+                    <h3>暂无前期报告</h3>
+                </div>
+            </c:if>
+
 
 
             <div class="modal-footer" style="text-align: center">
@@ -148,7 +152,7 @@
 </form>
 <nav class="quick-nav">
     <a class="quick-nav-trigger" data-target="navTab" href="task/info?id=${taskId}">
-        <span aria-hidden="true"></span>
+        <h3 style="position: absolute;color:white ">&nbsp;返回</h3>
     </a>
     <span aria-hidden="true" class="quick-nav-bg"></span>
 </nav>

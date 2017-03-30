@@ -39,9 +39,6 @@
     .divImg{
         float:left;position:relative;margin: 10px
     }
-    .glyphicon .glyphicon-remove{
-        background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;
-    }
 </style>
 
 <form action="report/addRecord" method="post" class="form-horizontal" id="defForm">
@@ -105,7 +102,7 @@
                                 <input name="fileName" type="hidden" value="${t.filename}"/>
                                 <input name="fileType" type="hidden" value="0">
                                 <input name="oss" type="hidden" value="${t.oss}"/>
-                                <span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove"></span>
+                                <span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:2px;z-index: 999;"></span>
                                 <a href="${t.oss}" target="_blank"><img src="${t.oss}"
                                                                         style="width: 100px;height: 100px;"
                                                                         class="min-img"></a>
@@ -152,7 +149,7 @@
             </div>
             <div class="modal-footer" style="text-align: center">
                 <button type="button" onclick="status()" class="btn btn-primary">提交</button>
-                <button type="button" onclick="goBack()" class="btn blue">取消</button>
+                <button type="button" onclick="goBack()" class="btn btn-default">取消</button>
             </div>
         </div>
     </div>
@@ -162,11 +159,10 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #4bccd8">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">请输入信息</h4>
+                <h4 class="modal-title">请选择状态</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group form-md-radios">
-                    <label>请选择状态</label>
                     <div class="md-radio-inline" style="margin-left: 50px">
                         <div class="md-radio">
                             <input type="radio" id="radio6" name="radio2" class="md-radiobtn" value="2"
