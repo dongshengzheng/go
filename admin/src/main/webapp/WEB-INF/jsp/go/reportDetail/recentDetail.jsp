@@ -36,9 +36,6 @@
     .modal-content {
         padding: 10px;
     }
-   .quick-nav-trigger {
-       z-index: 0;
-   }
 </style>
 
 <form action="report/addRecord" method="post" class="form-horizontal" id="defForm">
@@ -155,7 +152,7 @@
 </form>
 <nav class="quick-nav">
     <a class="quick-nav-trigger" data-target="navTab" href="task/info?id=${taskId}">
-        <span aria-hidden="true"></span>
+        <h3 style="position: absolute;color:white ">&nbsp;返回</h3>
     </a>
     <span aria-hidden="true" class="quick-nav-bg"></span>
 </nav>
