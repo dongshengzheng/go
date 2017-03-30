@@ -213,11 +213,13 @@ public class ReportController extends BaseController {
 
 
             List<ReportDetailReq> reqs = JSONObject.parseArray(dataJson, ReportDetailReq.class);
-            for (ReportDetailReq r : reqs) {
-                r.setDelFlag(0);
-                r.setReportDetailId(reportDetail.getId());
+            if(reqs.size()>0){
+                for (ReportDetailReq r : reqs) {
+                    r.setDelFlag(0);
+                    r.setReportDetailId(reportDetail.getId());
+                }
+                reportDetailReqService.insertBatch(reqs);
             }
-            reportDetailReqService.insertBatch(reqs);
 
             //修改repairProgDetail的状态
             RepairProgDetail repairProgDetail = repairProgDetailService.selectById(reportDetail.getRepairProgDetailId());

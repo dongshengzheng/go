@@ -290,7 +290,6 @@
                     if(data){
                         alert("成功");
                         $(".close").click();
-                        $("#repairProg").click();
                     }else {
                         alert("提交失败");
                     }
