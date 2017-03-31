@@ -80,7 +80,7 @@ public class RepairProgController extends BaseController {
         EntityWrapper<RepairProg> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.like("ship_name", keyword);
-        ew.setSqlSelect("id,ship_name,order_no,type,plan_start_date,plan_days,plan_cost,create_date,create_by");
+        ew.setSqlSelect("id,ship_name,shipyard_name,order_no,type,plan_start_date,plan_days,plan_cost,create_date,create_by");
         ew.addFilter("company_id={0}", companyId);
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         for (RepairProg prog : page.getRecords()) {

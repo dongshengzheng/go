@@ -77,7 +77,7 @@
                     "data": "type",
                 },
                 {
-                    "data": 1,
+                    "data": "shipyardName",
                 },
                 {
                     "data": "planStartDate", "type": "date",

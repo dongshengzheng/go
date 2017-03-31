@@ -55,11 +55,26 @@ public class TaskController extends BaseController {
         EntityWrapper<Task> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
             ew.like("ship_name", keyword);
-        ew.setSqlSelect("id,ship_name,status,shipyard");
+        ew.setSqlSelect("id,ship_name,status,shipyard,repair_prog_id");
         ew.addFilter("company_id={0}", companyId);
         ew.orderBy("update_date", false);
         Page<Task> page = taskService.selectPage(getPage(), ew);
         for (Task task : page.getRecords()) {
+            //判断该条任务中，详单是否有一条详单，则任务就在进行中
+            //判断改条任务中，所有的详单都是已完成，或者是已取消，则任务已完成
+            EntityWrapper<RepairProgDetail> ew1=getEntityWrapper();
+            ew1.addFilter("repair_prog_id={0}",task.getRepairProgId());
+            List<RepairProgDetail> progDetails=repairProgDetailService.selectList(ew1);
+            int[]a=new int[4];
+            for(RepairProgDetail p:progDetails){
+                a[p.getTaskStatus()]++;
+            }
+            if(a[0]+a[3]==progDetails.size()){
+                task.setStatus(Const.TASK_COMPLETE);
+            }
+            if(a[1]>0){
+                task.setStatus(Const.TASK_NOW);
+            }
             task.setEmailList(taskEmailService.getEmailList(task.getId()));
             task.setLatestReport(reportService.getLatestReport(task.getId()));
         }
