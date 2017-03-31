@@ -30,7 +30,7 @@
 
     #shipList {
         border: 1px solid;
-        width: 200px;
+        width: 400px;
         background-color: #E9EDEF;
     }
 
@@ -69,7 +69,8 @@
                                 <div class="timeline-body-arrow"></div>
                                 <span> 搜索船舶</span>
                                 <div style="display: inline-block">
-                                    <input id="keyword" type="text" autocomplete="off" disableautocomplete/>
+                                    <input style="width:300px;" id="keyword" type="text" placeholder="请输入船舶名称/imo/船舶呼号"
+                                           autocomplete="off" disableautocomplete/>
                                     <div id="div1" style="display:none;position:absolute;z-index: 1000">
                                         <ul id="shipList" style=" margin:0px;padding:0px;list-style-type:none;">
                                         </ul>
@@ -588,11 +589,11 @@
         return true;
     }
 
-    $(document).keyup(function (event) {
-        if (event.keyCode == 13) {
-            $("#to-recover").trigger("click");
-        }
-    });
+    //    $(document).keyup(function (event) {
+    //        if (event.keyCode == 13) {
+    //            $("#to-recover").trigger("click");
+    //        }
+    //    });
 
 
     //点击document隐藏下拉层
@@ -614,13 +615,12 @@
                 keyword: keyword
             },
             success: function (data) {
-                console.log(data.list.length);
                 var html = "";
                 if (data.list.length == 0) {
                     html += "<li>无该船舶信息</li>";
                 } else {
                     $(data.list).each(function () {
-                        html += "<li onclick='getInfo(this)' data-id=" + this.id + ">" + this.name + "&nbsp;:" + this.imo + "</li>";
+                        html += "<li onclick='getInfo(this)' data-id=" + this.id + ">" + this.name + "/" + this.imo + "/" + this.callsign + "</li>";
                     })
                 }
                 $("#shipList").html(html);
@@ -634,15 +634,15 @@
 
     //点击获取信息
     function getInfo(obj) {
-        var id=$(obj).attr("data-id");
+        var id = $(obj).attr("data-id");
         $.ajax({
-            url:"publicShip/searchOne",
-            type:"POST",
-            data:{
-                id:id
+            url: "publicShip/searchOne",
+            type: "POST",
+            data: {
+                id: id
             },
-            success:function (data) {
-                if(data.mes){
+            success: function (data) {
+                if (data.mes) {
                     $("#imo").val(data.mes.imo);
                     $("#name").val(data.mes.name);
                     $("#type").val(data.mes.category);
@@ -667,7 +667,7 @@
                     $("#auxRatedOr").val(data.mes.arated);
                     $("#auxQty").val(data.mes.aqty);
                     $("#auxCylBore").val(data.mes.acyl);
-                   /* $("#boilerMaker").val(data.mes.);*/
+                    /* $("#boilerMaker").val(data.mes.);*/
                     $("#boilerType").val(data.mes.ctype);
                     /*$("#boilerPressure").val(data.mes.);*/
                     $("#boilerHeatingArea").val(data.mes.baux);
@@ -681,20 +681,20 @@
     }
 
     function formatDate(str) {
-        if(str!=null&&str!=''){
+        if (str != null && str != '') {
             console.log(str);
-            var s=str.split("/");
-            var length=s.length;
-            var date="";
-            if(length==3){
-                date=s[2]+"-"+s[1]+"-"+s[0]
+            var s = str.split("/");
+            var length = s.length;
+            var date = "";
+            if (length == 3) {
+                date = s[2] + "-" + s[1] + "-" + s[0]
             }
-            if(length==2){
-                date=s[1]+"-"+s[0]+"-"+1;
+            if (length == 2) {
+                date = s[1] + "-" + s[0] + "-" + 1;
 
             }
-            if(length==1){
-                date=s[0]+"-"+1+"-"+1;
+            if (length == 1) {
+                date = s[0] + "-" + 1 + "-" + 1;
             }
         }
         return date;
