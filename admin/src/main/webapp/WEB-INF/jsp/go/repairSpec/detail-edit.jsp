@@ -436,7 +436,7 @@
                 rowHeaders: true,
                 colHeaders: true,
                 colWidths: [width * 0.46, width * 0.07, width * 0.07],
-                minRows: 15,
+                minRows: 10,
                 colHeaders: ["要求和描述/材料规格", "单位", "数量"],
                 columnSorting: true,
                 columns: [
