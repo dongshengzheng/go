@@ -71,7 +71,7 @@
         <td><input name="repairDetailId" class="repairDetailId" type="hidden"></td>
         <td></td>
         <td>
-            <button type="button" onclick="deleteDetail(this)">删除
+            <button type="button" class="btn btn-sm red" onclick="deleteDetail(this)">删除
             </button>
         </td>
     </tr>
@@ -275,7 +275,7 @@
         } else if (catagory == "其他") {
             var no = $("#type8proOrderNo").val();
             proOrderNo = "O-" + foo(no);
-            $("#type7proOrderNo").val(no * 1 + 1);
+            $("#type8proOrderNo").val(no * 1 + 1);
         }
         $(".marked-select").removeClass("marked-select");
         thisOne.addClass("marked-select");
@@ -424,7 +424,7 @@
                 this.name = name;
             }
         });
-        newRow.find(".model-detail-select").attr("data-code", newCode).toggle();
+        newRow.find(".model-detail-select").attr("data-code", oldCode).toggle();
         oldRow.before(newRow);
         calStatus(oldRow.parents("table"));
     }

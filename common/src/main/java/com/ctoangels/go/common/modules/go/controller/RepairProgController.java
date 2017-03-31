@@ -123,7 +123,8 @@ public class RepairProgController extends BaseController {
         List<RepairProgDetail> type6 = repairProgDetailService.getDetailByCatagory(id, "冷藏工程");
         List<RepairProgDetail> type7 = repairProgDetailService.getDetailByCatagory(id, "特种设备");
         List<RepairProgDetail> type8 = repairProgDetailService.getDetailByCatagory(id, "其他");
-        List<Dict> cataList = dictService.getListByType("维修工程大类");
+        List<RepairProgDetail> type9 = repairProgDetailService.getDetailByCatagory(id, "新增");
+        List<Dict> cataList = dictService.getListByType("维修进度大类");
         map.put("repairProg", repairProg);
         map.put("cataList", cataList);
         map.put("type1", type1);
@@ -134,6 +135,7 @@ public class RepairProgController extends BaseController {
         map.put("type6", type6);
         map.put("type7", type7);
         map.put("type8", type8);
+        map.put("type9", type9);
         return "go/repairProg/info";
     }
 
@@ -264,11 +266,11 @@ public class RepairProgController extends BaseController {
                     }
 
                     //将specDetailMedia复制到progDetailMedia中
-                    EntityWrapper<RepairSpecDetailMedia> ew4=new EntityWrapper<>();
+                    EntityWrapper<RepairSpecDetailMedia> ew4 = new EntityWrapper<>();
                     ew4.addFilter("repair_spec_detail_id={0}", r.getId());
-                    List<RepairSpecDetailMedia> specMedias=repairSpecDetailMediaService.selectList(ew4);
+                    List<RepairSpecDetailMedia> specMedias = repairSpecDetailMediaService.selectList(ew4);
 
-                    if(specMedias.size()>0){
+                    if (specMedias.size() > 0) {
                         List<RepairProgDetailMedia> progMedias = new ArrayList<>();
                         for (RepairSpecDetailMedia media : specMedias) {
                             RepairProgDetailMedia repairProgDetailMedia = new RepairProgDetailMedia();
@@ -277,7 +279,7 @@ public class RepairProgController extends BaseController {
                             repairProgDetailMedia.setRepairProgDetailId(repairProgDetail.getId());
                             progMedias.add(repairProgDetailMedia);
                         }
-                       repairProgDetailMediaService.insertBatch(progMedias);
+                        repairProgDetailMediaService.insertBatch(progMedias);
                     }
 
                 }
@@ -322,10 +324,10 @@ public class RepairProgController extends BaseController {
         }
 
         //图片
-        EntityWrapper<RepairProgDetailMedia> ew3=new EntityWrapper<>();
-        ew3.addFilter("repair_prog_detail_id={0}",id);
-        List<RepairProgDetailMedia> progDetailMedias =repairProgDetailMediaService.selectList(ew3);
-        map.put("progDetailMedias",progDetailMedias);
+        EntityWrapper<RepairProgDetailMedia> ew3 = new EntityWrapper<>();
+        ew3.addFilter("repair_prog_detail_id={0}", id);
+        List<RepairProgDetailMedia> progDetailMedias = repairProgDetailMediaService.selectList(ew3);
+        map.put("progDetailMedias", progDetailMedias);
 
         EntityWrapper<Dict> ew1 = new EntityWrapper<>();
         ew1.addFilter("type={0}", "维修部位");

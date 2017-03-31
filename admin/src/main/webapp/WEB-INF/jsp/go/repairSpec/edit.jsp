@@ -61,7 +61,7 @@
 </style>
 <go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/edit" method="post"
-      id="defForm" callfn="refreshTable">
+      id="specEditForm" callfn="refreshTable">
     <input id="specId" type="hidden" name="id" value="${repairSpec.id}">
     <input id="modelId" type="hidden" name="modelId" value="${repairSpec.modelId}">
     <input type="hidden" name="delFlag" value="${repairSpec.delFlag}">
@@ -245,8 +245,9 @@
 
 <jsp:include page="common.jsp"></jsp:include>
 
-
+<%--用于关闭自动保存的定时器--%>
 <input type="hidden" value="specEditJsp" id="specEdit"/>
+<input type="hidden" name="deleteItemId" id="deleteRowIdTemp"/>
 <script>
     var specId = $("#specId").val();
     var modelId = $("#modelId").val();
@@ -340,6 +341,12 @@
                         td.html("<a href='javascript:;' onclick='controlHidden(false,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only open-png' style='display: none'><i class='m-icon-swapdown m-icon-white'></i></a>" +
                                 "<a href='javascript:;' onclick='controlHidden(true,\"" + a.code + "\",this)' class='btn btn-circle blue m-icon m-icon-only close-png' > <i class='m-icon-swapup m-icon-white'></i></a>");
                     }
+                    if (a.src == 0 && a.content != "addrow") {
+                        var td = tr.find(".show-td");
+                        td.html("<a href='javascript:;' onclick='deleteNewRow(" + a.id + ",this)' class='btn btn-sm red'>删除</a>");
+                    }
+
+
                     if (a.status == "0") {
                         tr.find(".status-control").prop("checked", true);
                     }
@@ -463,6 +470,10 @@
                         tr.find(".status-control").css("display", "none");
                         tr.find(".true-status").removeClass("true-status");
                     }
+                    if (a.src == 0 && a.content != "addrow") {
+                        var td = tr.find(".show-td");
+                        td.html("<a href='javascript:;' onclick='deleteNewRow(" + a.id + ",this)' class='btn btn-sm red'>删除</a>");
+                    }
                     tr.find(".item-id").val(a.id).prop("name", namePre + "id");
                     tr.find(".item-cata").val(a.catagory).prop("name", namePre + "catagory");
                     tr.find(".item-code").val(a.code).prop("name", namePre + "code");
@@ -505,7 +516,7 @@
             return;
         }
         $("#submitButton").prop("disabled", true);
-        $("#defForm").ajaxSubmit({
+        $("#specEditForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
                     $(data.idList).each(function () {
@@ -552,12 +563,17 @@
     }
 
 
-    //    $(".item .expand").on("click", function (event) {
-    //        $(this).parents(".item").siblings(".item").each(function () {
-    //            $(this).find(".tools a.collapse").click();
-    //        })
-    //        var id = "#" + $(this).parents(".item").prop("id")
-    //        $("a[data-item='" + id + "']").click();
-    //    })
+    function deleteNewRow(itemId, obj) {
+        if (!window.confirm("确认删除?提醒:删除栏目会将栏目下的详单一并删除!"))return;
+        var tr = $(obj).parents("tr");
+        var code = tr.attr("data-code");
+        var pCode = tr.attr("data-parent");
+        var input = $("#deleteRowIdTemp").clone().removeAttr("id");
+        input.val(itemId);
+        $("#specEditForm").append(input);
+        $("tr[data-parent='" + code + "']").remove();
+        tr.remove();
+        changeStatus(pCode);
+    }
 </script>
 

@@ -9,7 +9,7 @@
 
     <!--根据id获取该工程总完成百分比-->
     <select id="getPerById" resultType="java.lang.Double">
-         SELECT SUM(case when detail.task_status=0 then 1 else 0 end)/nullif(count(*),0)*100 as per
+         SELECT SUM(case when detail.task_status=0 OR detail.task_status=3 then 1 else 0 end)/nullif(count(*),0)*100 as per
         from t_repair_prog_detail detail where detail.repair_prog_id=#{0}
     </select>
 

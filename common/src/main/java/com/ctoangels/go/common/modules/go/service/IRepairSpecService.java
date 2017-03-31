@@ -15,6 +15,6 @@ public interface IRepairSpecService extends ISuperService<RepairSpec> {
 
     boolean saveRepairSpec(RepairSpec repairSpec);
 
-    Map<String, Object> updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId);
+    Map<String, Object> updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId, Integer[] deleteItemId);
 
 }

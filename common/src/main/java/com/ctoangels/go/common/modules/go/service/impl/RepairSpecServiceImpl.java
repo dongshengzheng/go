@@ -19,6 +19,7 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -105,14 +106,13 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
 //    }
 
     @Override
-    public Map<String, Object> updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId) {
+    public Map<String, Object> updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId, Integer[] deleteItemId) {
         Map<String, Object> result = new HashedMap();
         List<ItemId> idList = new ArrayList<>();
         if (repairSpecMapper.updateById(repairSpec) < 0) {
             result.put("success", false);
             result.put("idList", idList);
             return result;
-
         }
         List<RepairSpecItem> list = new ArrayList<>();
         list.addAll(specItemList.getType1List());
@@ -182,6 +182,16 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
                 return result;
             }
         }
+
+        if (deleteItemId != null && deleteItemId.length > 0) {
+            List<Integer> delIdList = Arrays.asList(deleteItemId);
+            if (repairSpecItemMapper.deleteBatchIds(delIdList) < 0) {
+                result.put("success", false);
+                result.put("idList", idList);
+                return result;
+            }
+        }
+
         result.put("success", true);
         result.put("idList", idList);
         return result;
