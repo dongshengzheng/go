@@ -258,7 +258,7 @@ public class MailUtil {
         sb.append("<head>");
         sb.append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
         sb.append("<title>Daily Report</title>");
-        sb.append("<style>.img-div{float:left;width:48%;margin-right:0.5%}   img{max-width:100%;max-height:100%;}</style>");
+        sb.append("<style>.img-div{float:left;margin-right:0.5%}   img{max-width:50px;max-height:50px;}</style>");
 //        sb.append("<link href='http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css' />");
         sb.append("</head>");
         sb.append("<body>");

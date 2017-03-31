@@ -272,7 +272,7 @@
             var no = $("#type7proOrderNo").val();
             proOrderNo = "S-" + foo(no);
             $("#type7proOrderNo").val(no * 1 + 1);
-        } else if (catagory == "坞修工程") {
+        } else if (catagory == "其他") {
             var no = $("#type8proOrderNo").val();
             proOrderNo = "O-" + foo(no);
             $("#type7proOrderNo").val(no * 1 + 1);
@@ -443,7 +443,7 @@
         var code = tr.attr("data-code");
         var newRow = $("#detail-row-temp").clone().attr("data-parent", code).removeAttr("id").toggle();
         newRow.find(".repairDetailId").val(repairSpecDetailId);
-        newRow.find(".proNo").html(proOrderNo);
+        newRow.find(".proOrderNo").html(proOrderNo);
         var a = newRow.find(".editDetail");
         a.html(proName).attr("href", "repairSpecDetail/editSpecDetail?id=" + repairSpecDetailId);
         tr.after(newRow);

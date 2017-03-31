@@ -79,8 +79,17 @@
     .htContextMenu {
         z-index: 1060000;
     }
-    .left{ margin-top: 5px;border-right: dashed 1px #337ab7; }
-    .right{margin-top: 5px;border: 1px dashed #337ab7;margin-left: 10px}
+
+    .left {
+        margin-top: 5px;
+        border-right: dashed 1px #337ab7;
+    }
+
+    .right {
+        margin-top: 5px;
+        border: 1px dashed #337ab7;
+        margin-left: 10px
+    }
 
 </style>
 <div class="modal-header">
@@ -94,22 +103,26 @@
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
                     <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
-                    <label style="width: auto;padding-left: 0px;" id="shipNameLabel" class="col-sm-7 control-label label-top"></label>
+                    <label style="width: auto;padding-left: 0px;" id="shipNameLabel"
+                           class="col-sm-7 control-label label-top"></label>
                     <input id="shipName" name="shipName" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
-                    <label style="width: auto;padding-left: 0px;" id="catagoryLabel" class="col-sm-6 control-label label-top"></label>
+                    <label style="width: auto;padding-left: 0px;" id="catagoryLabel"
+                           class="col-sm-6 control-label label-top"></label>
                     <input id="catagory" name="catagory" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
-                    <label style="width: auto;padding-left: 0px;" id="codeLabel" class="col-sm-6 control-label label-top"></label>
+                    <label style="width: auto;padding-left: 0px;" id="codeLabel"
+                           class="col-sm-6 control-label label-top"></label>
                     <input id="code" name="code" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
-                    <label style="width: auto;padding-left: 0px;" id="proOrderNoLabel" class="col-sm-6 control-label label-top"></label>
+                    <label style="width: auto;padding-left: 0px;" id="proOrderNoLabel"
+                           class="col-sm-6 control-label label-top"></label>
                     <input id="proOrderNo" name="proOrderNo" type="hidden">
                 </div>
             </div>
@@ -203,7 +216,8 @@
                 <input type="hidden" value="" id="num"/>
                 <div style="margin-top: 5px"><span class="head">上传图片</span></div>
                 <div class="col-md-12" id="divId" style="margin-top: 20px;border: 1px dashed #337ab7;">
-                    <button id="upload_img" style="width: 100%"><img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/></button>
+                    <button id="upload_img" style="width: 100%"><img src="" onerror="nofind(4)"
+                                                                     style="width:100%;height: 180px"/></button>
                 </div>
             </div>
 
@@ -263,14 +277,14 @@
 <script type="text/javascript">
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
-    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId","imgNum");
+    initUploaders_img("upload_img", "shipinfo", "${staticPath}/", "divId", "imgNum");
     function removeImg(obj) {
         obj.parentNode.remove();
 
-        var i=$("#imgNum").find("img").length;
-        var j=$("#num").val();
-        console.log(i+":"+j);
-        if(j==4&&i<4){
+        var i = $("#imgNum").find("img").length;
+        var j = $("#num").val();
+        console.log(i + ":" + j);
+        if (j == 4 && i < 4) {
             console.log("进来了");
             $("#divId").show();
         }
@@ -306,7 +320,7 @@
                     if (data.success) {
                         //  保存为工程单详单
                         if (data.specDetail) {
-                            addDetail(data.repairSpecDetailId, $("#proName").val(), $("#proOrderNo").val());
+                            addDetail(data.repairSpecDetailId, $("#proName").val(), $("#detail_form #proOrderNo").val());
                             $('#close').click();
                         } else {
                             App.alert({
@@ -404,7 +418,7 @@
                 data: datas,
                 rowHeaders: true,
                 colHeaders: true,
-                colWidths: [width*0.46, width*0.07, width*0.07],
+                colWidths: [width * 0.46, width * 0.07, width * 0.07],
                 minRows: 15,
                 colHeaders: ["要求和描述/材料规格", "单位", "数量"],
                 columnSorting: true,

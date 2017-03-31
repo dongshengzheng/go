@@ -54,6 +54,10 @@
         text-align: center;
     }
 
+    tr td.proOrderNo {
+        text-align: right;
+    }
+
 </style>
 <go:navigater path="repairSpec"></go:navigater>
 <form class="form-horizontal" action="repairSpec/edit" method="post"
@@ -218,7 +222,9 @@
                         </div>
                         <div class="modal-footer" style="text-align: center" id="item9">
                             <shiro:hasPermission name="repairSpec/edit">
-                                <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
+                                <button id="submitButton" type="button" onclick="severCheck()" class="btn btn-primary">
+                                    提交
+                                </button>
                             </shiro:hasPermission>
                             <button id="reset-btn" type="reset" class="btn blue">清空</button>
                             <a href="repairSpec" class="btn default" data-target="navTab">取消</a>
@@ -498,6 +504,7 @@
             $("#shipId").focus();
             return;
         }
+        $("#submitButton").prop("disabled", true);
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
@@ -510,9 +517,11 @@
                 } else {
                     saveAlert("ruby", "保存失败(每五分钟会自动保存)");
                 }
+                $("#submitButton").prop("disabled", false);
             },
             error: function () {
                 saveAlert("tangerine", "系统错误,无法保存(每五分钟会自动保存)");
+                $("#submitButton").prop("disabled", false);
                 return;
             }
         });

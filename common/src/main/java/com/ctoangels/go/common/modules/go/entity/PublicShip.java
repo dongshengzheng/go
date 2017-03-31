@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import org.apache.poi.ss.formula.functions.T;
 
 /**
  *
@@ -96,7 +97,16 @@ public class PublicShip implements Serializable {
 	/** 总吨 */
 	private String ggt;
 
+	public String getBuildyear() {
+		return buildyear;
+	}
+
+	public void setBuildyear(String buildyear) {
+		this.buildyear = buildyear;
+	}
+
 	/** 载重吨 */
+
 	private String dwt;
 
 	/**  */
@@ -218,6 +228,9 @@ public class PublicShip implements Serializable {
 	/**  */
 	private String remark;
 
+	/*船舶分类*/
+    private String category;
+
 	/**  */
 	@TableField(value = "type_id")
 	private Integer typeId;
@@ -255,13 +268,6 @@ public class PublicShip implements Serializable {
 		this.name = name;
 	}
 
-	public String getBuildyear() {
-		return buildyear;
-	}
-
-	public void setBuildyear(String buildyear) {
-		this.buildyear = buildyear;
-	}
 
 	public String getBuilder() {
 		return this.builder;
@@ -751,4 +757,11 @@ public class PublicShip implements Serializable {
 		this.typeId = typeId;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 }

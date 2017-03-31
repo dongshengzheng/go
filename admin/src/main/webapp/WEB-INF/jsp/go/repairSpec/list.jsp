@@ -87,7 +87,7 @@
             </div>
             <div class="modal-body">
                 <label>请输入船厂</label><input id="send_shipyard" class="form-control" placeholder="请输入正确的船厂"
-                                           name="shipyard">
+                                           name="shipyardName">
             </div>
             <div class="modal-body">
                 <label>请输入邮箱</label>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -26,6 +27,16 @@
         padding-left: 5px;
         padding-right: 5px;
     }
+
+    #shipList {
+        border: 1px solid;
+        width: 200px;
+        background-color: #E9EDEF;
+    }
+
+    #shipList li {
+        padding: 2px;
+    }
 </style>
 <go:navigater path="ship"></go:navigater>
 <form class="form-horizontal" action="ship/add" method="post"
@@ -36,8 +47,14 @@
                 <div class="portlet-title tabbable-line">
                     <div id="bootstrap_alerts_demo"></div>
                     <div class="caption caption-md">
-                        <i class="icon-microphone font-green"></i>
-                        <span class="caption-subject bold font-green uppercase"> 新增船舶信息</span>
+                        <div style="display: inline-block">
+                            <i class="icon-microphone font-green"></i>
+                            <span class="caption-subject bold font-green uppercase"> 新增船舶信息</span>
+                        </div>
+
+                        <%--<select id="shipId" name="shipId" class="form-control select2">--%>
+                        <%--<option value="0">请输入船舶名称或IMO号</option>--%>
+                        <%--</select>--%>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -50,7 +67,16 @@
                             </div>
                             <div class="timeline-body">
                                 <div class="timeline-body-arrow"></div>
+                                <span> 搜索船舶</span>
+                                <div style="display: inline-block">
+                                    <input id="keyword" type="text" autocomplete="off" disableautocomplete/>
+                                    <div id="div1" style="display:none;position:absolute;z-index: 1000">
+                                        <ul id="shipList" style=" margin:0px;padding:0px;list-style-type:none;">
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="timeline-body-content">
+
                                     <div class="form-group col-md-6">
                                         <label for="name" class="col-sm-3 control-label">船舶名称<span class="red">* </span></label>
                                         <div class="col-sm-6">
@@ -567,4 +593,110 @@
             $("#to-recover").trigger("click");
         }
     });
+
+
+    //点击document隐藏下拉层
+    $(document).click(function (event) {
+        $("#div1").css("display", "none");
+    })
+
+
+    $("#keyword").on("keyup", function () {
+        var keyword = $(this).val();
+        if (keyword == null || (keyword = keyword.trim()) == "") {
+            return;
+        }
+        $.ajax({
+            url: 'publicShip/searchList',
+            type: 'GET',
+            async: true,
+            data: {
+                keyword: keyword
+            },
+            success: function (data) {
+                console.log(data.list.length);
+                var html = "";
+                if (data.list.length == 0) {
+                    html += "<li>无该船舶信息</li>";
+                } else {
+                    $(data.list).each(function () {
+                        html += "<li onclick='getInfo(this)' data-id=" + this.id + ">" + this.name + "&nbsp;:" + this.imo + "</li>";
+                    })
+                }
+                $("#shipList").html(html);
+                $("#div1").css("display", "inline-block");
+            },
+            error: function () {
+                console.log(2);
+            }
+        })
+    })
+
+    //点击获取信息
+    function getInfo(obj) {
+        var id=$(obj).attr("data-id");
+        $.ajax({
+            url:"publicShip/searchOne",
+            type:"POST",
+            data:{
+                id:id
+            },
+            success:function (data) {
+                if(data.mes){
+                    $("#imo").val(data.mes.imo);
+                    $("#name").val(data.mes.name);
+                    $("#type").val(data.mes.category);
+                    $("#shipClass").val(data.mes.classs);
+                    $("#builder").val(data.mes.builder);
+                    $("#callSign").val(data.mes.callsign);
+                    $("#buildYear").val(formatDate(data.mes.buildyear));
+                    $("#draft").val(data.mes.draft);
+                    $("#dwt").val(data.mes.dwt);
+                    $("#grt").val(data.mes.ggt);
+                    /*$("#depth").val(data.mes.);*/
+                    $("#beam").val(data.mes.beam);
+                    $("#loa").val(data.mes.loa);
+                    $("#dd").val(formatDate(data.mes.nextDd));
+                    $("#ss").val(formatDate(data.mes.nextSs));
+                    $("#meMaker").val(data.mes.engine);
+                    /*$("#meType").val(data.mes.mmype);*/
+                    $("#meBhpRpm").val(data.mes.mbr);
+                    $("#meQty").val(1);
+                    $("#auxMaker").val(data.mes.amake);
+                    $("#auxType").val(data.mes.atype);
+                    $("#auxRatedOr").val(data.mes.arated);
+                    $("#auxQty").val(data.mes.aqty);
+                    $("#auxCylBore").val(data.mes.acyl);
+                   /* $("#boilerMaker").val(data.mes.);*/
+                    $("#boilerType").val(data.mes.ctype);
+                    /*$("#boilerPressure").val(data.mes.);*/
+                    $("#boilerHeatingArea").val(data.mes.baux);
+                    $("#boilerEvaporation").val(data.mes.blarge);
+
+
+                }
+            }
+        });
+
+    }
+
+    function formatDate(str) {
+        if(str!=null&&str!=''){
+            console.log(str);
+            var s=str.split("/");
+            var length=s.length;
+            var date="";
+            if(length==3){
+                date=s[2]+"-"+s[1]+"-"+s[0]
+            }
+            if(length==2){
+                date=s[1]+"-"+s[0]+"-"+1;
+
+            }
+            if(length==1){
+                date=s[0]+"-"+1+"-"+1;
+            }
+        }
+        return date;
+    }
 </script>
