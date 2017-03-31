@@ -747,7 +747,8 @@
     </changeSet>
     <changeSet author="LuZhen" id="17317309132-055">
         <sql>
-            alter table t_public_ship add category varchar(45) not Null;
+            alter table t_public_ship add category varchar(45) Null;
+            alter table t_repair_prog add shipyard_name varchar(225) Null;
         </sql>
     </changeSet>
 

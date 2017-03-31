@@ -212,6 +212,7 @@ public class RepairProgController extends BaseController {
             RepairProg repairProg = new RepairProg();
             BeanUtils.copyProperties(repairProg, repairSpec);
             repairProg.setId(null);
+            repairProg.setShipyardName(shipyardName);
             repairProgService.insert(repairProg);
 
             //查找维修详单的item信息

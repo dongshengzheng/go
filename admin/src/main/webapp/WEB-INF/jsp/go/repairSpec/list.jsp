@@ -86,7 +86,7 @@
                 <h4 class="modal-title">请输入信息</h4>
             </div>
             <div class="modal-body">
-                <label>请输入船厂</label><input id="send_shipyard" class="form-control" placeholder="请输入正确的船厂"
+                <label>请输入船厂</label><input id="shipyardName" class="form-control" placeholder="请输入正确的船厂"
                                            name="shipyardName">
             </div>
             <div class="modal-body">
@@ -287,7 +287,7 @@
 
         if (check1(arr1)) {
             var repairSpecId = $("#repairSpecId").val();
-            var shipyardName = $("#shipyard").val();
+            var shipyardName = $("#shipyardName").val();
             $.ajax({
                 type: "post",
                 data: {
@@ -297,11 +297,12 @@
                 },
                 url: "repairProg/makeProgress",
                 success: function (data) {
-                    if (data) {
+                    if (data.mes) {
                         alert("成功");
                         $(".close").click();
                     } else {
                         alert("提交失败");
+                        $(".close").click();
                     }
                 },
                 error: function () {
