@@ -214,6 +214,7 @@ public class RepairProgController extends BaseController {
             RepairProg repairProg = new RepairProg();
             BeanUtils.copyProperties(repairProg, repairSpec);
             repairProg.setId(null);
+            repairProg.setShipyardName(shipyardName);
             repairProgService.insert(repairProg);
 
             //查找维修详单的item信息
@@ -301,6 +302,7 @@ public class RepairProgController extends BaseController {
             taskEmailService.insertBatch(emails);
             jsonObject.put("mes", true);
         } catch (Exception e) {
+            e.printStackTrace();
             jsonObject.put("mes", false);
         }
 

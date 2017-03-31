@@ -122,6 +122,12 @@ public class RepairProg implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    /**
+     * 船厂名称
+     */
+    @TableField(value = "shipyard_name")
+    private String shipyardName;
+
 
     public Integer getId() {
         return this.id;
@@ -257,5 +263,13 @@ public class RepairProg implements Serializable {
 
     public void setPer(Double per) {
         this.per = per;
+    }
+
+    public String getShipyardName() {
+        return shipyardName;
+    }
+
+    public void setShipyardName(String shipyardName) {
+        this.shipyardName = shipyardName;
     }
 }

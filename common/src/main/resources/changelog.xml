@@ -720,6 +720,39 @@
             UPDATE t_param SET unit = '' WHERE name = '注册总吨';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-053">
+        <sql>
+            alter table t_repair_prog_detail modify pro_desc text;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-054">
+        <sql>
+            CREATE TABLE `type` (
+            `id` int(4) NOT NULL AUTO_INCREMENT,
+            `category` varchar(30) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+            INSERT INTO `type` VALUES ('1', 'Bulker');
+            INSERT INTO `type` VALUES ('2', 'Tanker');
+            INSERT INTO `type` VALUES ('3', 'Gas');
+            INSERT INTO `type` VALUES ('4', 'Chemical');
+            INSERT INTO `type` VALUES ('5', 'Container');
+            INSERT INTO `type` VALUES ('6', 'Multi_Purpose');
+            INSERT INTO `type` VALUES ('7', 'Ro-Ro/PCC');
+            INSERT INTO `type` VALUES ('8', 'Reefer');
+
+            rename table type to t_ship_type;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-055">
+        <sql>
+            alter table t_public_ship add category varchar(45) Null;
+            alter table t_repair_prog add shipyard_name varchar(225) Null;
+        </sql>
+    </changeSet>
+
+
 </databaseChangeLog>
 
 
