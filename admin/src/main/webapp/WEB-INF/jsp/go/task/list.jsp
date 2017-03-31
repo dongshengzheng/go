@@ -13,7 +13,7 @@
         margin: auto;
     }
 
-    table th,td {
+    table th, td {
         text-align: center;
     }
 </style>
@@ -48,7 +48,6 @@
         </div>
     </div>
 </div>
-
 
 
 <script type="text/javascript">
@@ -119,15 +118,17 @@
                 {
                     "data": "id",
                     "render": function (data) {
-                        return "<a href='report?taskId=" + data + "' class='btn btn-sm blue' data-target='navTab'>查看</a>";
+                        return "<a href='task/info?id=" + data + "' data-target='navTab'>进入汇报</a>";
                     }
                 },
                 {
                     "data": "id",
                     "render": function (data) {
-                        return "<a href='task/info?id=" + data + "' data-target='navTab'>进入汇报</a>";
+                        return "<a href='report?taskId=" + data + "' class='btn btn-sm blue' data-target='navTab'>查看</a>" +
+                                "<a href='task/delete?id=" + data + "' data-msg='定删除吗？'  data-model='ajaxToDo' data-callback='refreshTable' class='btn btn-sm margin-bottom-5 red'>删除</a>";
                     }
                 },
+
             ],
 
             "drawCallback": function (settings) {

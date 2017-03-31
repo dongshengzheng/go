@@ -12,12 +12,13 @@
         (case detail.catagory when  "通用服务" then 1 when  "坞修工程" then 2
         when  "船体工程" then 3 when  "机械工程" then 4
         when  "电气工程" then 5 when  "冷藏工程" then 6
-        when  "特种设备" then 7 when  "其他" then 8 end ) as sort,
+        when  "特种设备" then 7 when  "其他" then 8
+        when  "新增" then 9 end ) as sort,
         SUM(case when detail.task_status=0 then 1 else 0 end) as complete,
         SUM(case when detail.task_status=1 then 1 else 0 end) as now,
         SUM(case when detail.task_status=2 then 1 else 0 end) as notStart,
         SUM(case when detail.task_status=3 then 1 else 0 end) as cancel,
-        cast(SUM(case when detail.task_status=0 then 1 else 0 end)/nullif(count(*),0)*100 as decimal(10,2)) as per
+        cast(SUM(case when detail.task_status=0 OR detail.task_status=3 then 1 else 0 end)/nullif(count(*),0)*100 as decimal(10,2)) as per
         from t_repair_prog_detail detail where detail.repair_prog_id=#{0} GROUP BY catagory ORDER BY sort
     </select>
 

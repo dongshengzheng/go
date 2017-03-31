@@ -39,7 +39,7 @@
         padding: 10px;
     }
 
-    table th {
+    table th, td {
         text-align: center;
     }
 </style>
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
 
-                            <c:forEach begin="1" end="8" varStatus="outerVs">
+                            <c:forEach begin="1" end="9" varStatus="outerVs">
                                 <c:set var="type" value="type${outerVs.count}"></c:set>
                                 <c:if test="${!empty requestScope[type]}">
                                     <div class="portlet-body">

@@ -9,12 +9,10 @@ import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,12 +67,27 @@ public class TaskController extends BaseController {
 
     @RequestMapping(value = "/info")
     public String info(@RequestParam Integer id, ModelMap map) {
-        List<Dict> cataList = dictService.getListByType("维修工程大类");
+        List<Dict> cataList = dictService.getListByType("维修进度大类");
         Task task = taskService.selectById(id);
         map.put("task", task);
         map.put("cataList", cataList);
         map.put("taskId", id);
         return "go/task/info";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject delete(@RequestParam(required = false) Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        Task task = taskService.selectById(id);
+        task.setDelFlag(Const.DEL_FLAG_DELETE);
+        if (taskService.updateById(task)) {
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+            jsonObject.put("msg", "删除错误,请稍后再试");
+        }
+        return jsonObject;
     }
 
     @RequestMapping(value = "/detailList")

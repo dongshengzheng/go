@@ -249,11 +249,11 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject edit(RepairSpec repairSpec,
-                           RepairSpecItemList specItems, Integer[] repairDetailId) {
+                           RepairSpecItemList specItems, Integer[] repairDetailId, Integer[] deleteItemId) {
         JSONObject jsonObject = new JSONObject();
         repairSpec.setUpdateDate(new Date());
         repairSpec.setUpdateBy(getCurrentUser().getName());
-        Map<String, Object> result = repairSpecService.updateRepairSpec(repairSpec, specItems, repairDetailId);
+        Map<String, Object> result = repairSpecService.updateRepairSpec(repairSpec, specItems, repairDetailId,deleteItemId);
         if ((boolean) result.get("success")) {
             jsonObject.put("success", true);
             jsonObject.put("idList", (List<ItemId>) result.get("idList"));
