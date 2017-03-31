@@ -483,19 +483,6 @@
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
-//                    $('#reset-btn').click();
-//                    App.alert({
-//                        container: "#bootstrap_alerts_demo",
-//                        close: true,
-//                        icon: 'fa fa-check',
-//                        place: "append",
-//                        message: "success",
-//                        type: 'success',
-//                        reset: true,
-//                        focus: true,
-//                        closeInSeconds: 10,
-//                    })
-                    alert("新增成功")
                     $("#go-to-edit").prop("href", "repairSpec/edit?id=" + data.specId).click();
                 } else {
                     App.alert({

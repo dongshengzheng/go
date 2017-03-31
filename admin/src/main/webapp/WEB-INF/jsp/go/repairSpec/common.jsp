@@ -459,10 +459,13 @@
     }
 
     function deleteRow(obj) {
+        if (!window.confirm("确认删除?提醒:删除栏目会将栏目下的详单一并删除!"))return;
         var tr = $(obj).parents("tr");
-        var code = tr.attr("data-parent");
+        var pCode = tr.attr("data-parent");
         tr.remove();
-        changeStatus(code);
+        var code = tr.attr("data-code");
+        $("tr[data-parent='" + code + "']").remove();
+        changeStatus(pCode);
     }
 
     function changeStatus(code) {
