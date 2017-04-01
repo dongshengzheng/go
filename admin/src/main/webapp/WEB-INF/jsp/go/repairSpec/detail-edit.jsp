@@ -142,7 +142,7 @@
                 <div style="width: 100%;">
                     <div><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：
-                        <input id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span
+                        <input style="width: 50%" id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span
                                 id="remind"></span>
                     </div>
                     <div class="col-md-12 div-left">工程描述：</div>

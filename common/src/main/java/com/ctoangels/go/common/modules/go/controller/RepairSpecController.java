@@ -253,7 +253,7 @@ public class RepairSpecController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         repairSpec.setUpdateDate(new Date());
         repairSpec.setUpdateBy(getCurrentUser().getName());
-        Map<String, Object> result = repairSpecService.updateRepairSpec(repairSpec, specItems, repairDetailId,deleteItemId);
+        Map<String, Object> result = repairSpecService.updateRepairSpec(repairSpec, specItems, repairDetailId, deleteItemId);
         if ((boolean) result.get("success")) {
             jsonObject.put("success", true);
             jsonObject.put("idList", (List<ItemId>) result.get("idList"));
@@ -334,6 +334,9 @@ public class RepairSpecController extends BaseController {
                 row.createCell((short) 1).setCellValue("详单内容");
                 row.createCell((short) 2).setCellValue("单位");
                 row.createCell((short) 3).setCellValue("数量");
+                row.createCell((short) 4).setCellValue("单价");
+                row.createCell((short) 5).setCellValue("总价");
+                row.createCell((short) 6).setCellValue("备注");
 
                 HSSFCellStyle linkStyle = wb.createCellStyle();
                 HSSFFont cellFont = wb.createFont();

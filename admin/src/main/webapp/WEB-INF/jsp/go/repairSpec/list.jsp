@@ -101,7 +101,7 @@
         </div>
     </div>
 </div>
-<a href="repairProg" class="btn btn-sm grey-mint" data-target="navTab"  id="repairProg" style="display: none"></a>
+<a href="repairProg" class="btn btn-sm grey-mint" data-target="navTab" id="repairProg" style="display: none"></a>
 <script type="text/javascript">
     var defTable;
     $(document).ready(function () {

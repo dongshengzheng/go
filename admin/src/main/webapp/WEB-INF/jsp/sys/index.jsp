@@ -193,7 +193,7 @@
         if (window.location.hash)
             url = window.location.hash.substring(1);
         else
-            url = "user";
+            url = "ship";
 
         if ($("a[href='" + url + "']").length > 0) {
             $("a[href='" + url + "']").click();

@@ -49,11 +49,20 @@
                 /code = anon
                 /login_login = anon
                 /logout = anon
-                /account/editName = anon
-                /account/editEmail = anon
-                /account/editEmail/sendCode == anon
-                /account/editPassword = anon
-                /account/editPhone = anon
+                /account/** = user
+                /ship/**=user
+                /privateShipyard/**=user
+                /company/**=user
+                /repairSpec/**=user
+                /repairProg/**=user
+                /modelDetail/**=user
+                /repairSpecDetail/**=user
+                /repairProgDetail/**=user
+                /publicShip/**=user
+                /oss/**=user
+                /report/**=user
+                /reportDetail/**=user
+                /task/**=user
                 /register_register = anon
                 /register/activateConfirm = anon
                 /sys/index = anon
