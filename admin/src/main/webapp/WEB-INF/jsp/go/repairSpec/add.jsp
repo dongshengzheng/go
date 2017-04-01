@@ -233,7 +233,10 @@
                         <%--</div>--%>
                         <div class="modal-footer" style="text-align: center" id="item9">
                             <shiro:hasPermission name="repairSpec/add">
-                                <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
+                                <a id="submitButton" type="button" onclick="severCheck()"
+                                   class="btn btn-primary mt-ladda-btn ladda-button" data-style="slide-down">
+                                    <span class="ladda-label">提交</span>
+                                </a>
                             </shiro:hasPermission>
                             <a class="btn blue" data-toggle="modal" href="#small">清空</a>
                             <a href="repairSpec" class="btn default" data-target="navTab">取消</a>
@@ -479,7 +482,7 @@
             $("#shipId").focus();
             return;
         }
-
+        $("#submitButton").prop("disabled", true);
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
@@ -496,6 +499,7 @@
                         focus: true,
                         closeInSeconds: 10,
                     })
+                    $("#submitButton").prop("disabled", false);
                 }
             },
             error: function () {
@@ -510,6 +514,7 @@
                     focus: true,
                     closeInSeconds: 10,
                 })
+                $("#submitButton").prop("disabled", false);
                 return;
             }
         });
@@ -532,4 +537,6 @@
     }
 
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+
+    Ladda.bind('.mt-ladda-btn', {timeout: 60000});
 </script>
