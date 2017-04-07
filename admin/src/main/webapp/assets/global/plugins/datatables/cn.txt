@@ -12,8 +12,8 @@
  	"sLoadingRecords": "载入中...",
  	"sInfoThousands":  ",",
  	"oPaginate": {
- 		"sFirst":    "首页",
- 		"sPrevious": "上页",
+ 		"sFirst":    "<fmt:message key='go_home_page'/>",
+ 		"sPrevious": "上页"
  		"sNext":     "下页",
  		"sLast":     "末页"
  	},

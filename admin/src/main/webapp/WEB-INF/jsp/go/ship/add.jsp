@@ -49,7 +49,7 @@
                     <div class="caption caption-md">
                         <div style="display: inline-block">
                             <i class="icon-microphone font-green"></i>
-                            <span class="caption-subject bold font-green uppercase"> 新增船舶信息</span>
+                            <span class="caption-subject bold font-green uppercase"> <fmt:message key="ship_addInfo"/></span><%--新增船舶信息--%>
                         </div>
 
                         <%--<select id="shipId" name="shipId" class="form-control select2">--%>
@@ -62,14 +62,14 @@
                         <div class="timeline-item">
                             <div class="timeline-badge">
                                 <div class="timeline-icon" style="">
-                                    概要信息
+                                    <fmt:message key="ship_outline_info"/><%--概要信息--%>
                                 </div>
                             </div>
                             <div class="timeline-body">
                                 <div class="timeline-body-arrow"></div>
                                 <span> 搜索船舶</span>
                                 <div style="display: inline-block">
-                                    <input style="width:300px;" id="keyword" type="text" placeholder="请输入船舶名称/imo/船舶呼号"
+                                    <input style="width:300px;" id="keyword" type="text" placeholder="<fmt:message key='ship_name_IMO_callsign_input'/>"<%--请输入船舶名称/imo/船舶呼号--%>
                                            autocomplete="off" disableautocomplete/>
                                     <div id="div1" style="display:none;position:absolute;z-index: 1000">
                                         <ul id="shipList" style=" margin:0px;padding:0px;list-style-type:none;">
@@ -79,19 +79,20 @@
                                 <div class="timeline-body-content">
 
                                     <div class="form-group col-md-6">
-                                        <label for="name" class="col-sm-3 control-label">船舶名称<span class="red">* </span></label>
+                                        <label for="name" class="col-sm-3 control-label"><fmt:message key="ship_name"/><%--船舶名称--%>
+                                            <span class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="name" name="name" type="text" maxlength="32"
                                                    class="form-control required"
-                                                   placeholder="请填写船舶名称">
+                                                   placeholder="<fmt:message key='ship_name_input'/>"><%--请填写船舶名称--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="builder" class="col-sm-3 control-label">建造船厂</label>
+                                        <label for="builder" class="col-sm-3 control-label"><fmt:message key='ship_builder'/></label><%--建造船厂--%>
                                         <div class="col-sm-6">
                                             <input id="builder" name="builder" type="text" maxlength="32"
                                                    class="form-control "
-                                                   placeholder="请填写建造船厂">
+                                                   placeholder="<fmt:message key='ship_builder_input'/>"><%--请填写建造船厂--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -100,44 +101,45 @@
                                         <div class="col-sm-6">
                                             <input id="imo" name="imo" type="text" maxlength="32"
                                                    class="form-control required"
-                                                   placeholder="请填写IMO">
+                                                   placeholder="<fmt:message key='ship_imo_input'/>"><%--请填写IMO--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="buildYear" class="col-sm-3 control-label">建造日期</label>
+                                        <label for="buildYear" class="col-sm-3 control-label"><fmt:message key='ship_built_year'/></label><%--建造日期--%>
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <input id="buildYear" name="buildYear" type="text"
                                                        class="form-control date-picker"
-                                                       placeholder="请选择建造日期">
+                                                       placeholder="<fmt:message key='ship_date_input'/>"><%--请选择建造日期--%>
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="shipClass" class="col-sm-3 control-label">船级社<span
+                                        <label for="shipClass" class="col-sm-3 control-label"><fmt:message key='ship_association'/><%--船级社--%><span
                                                 class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="shipClass" name="shipClass" type="text" maxlength="32"
                                                    class="form-control required"
-                                                   placeholder="请选择船级社">
+                                                   placeholder="<fmt:message key='ship_class_input'/>"><%--请选择船级社--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="callSign" class="col-sm-3 control-label">船舶呼号</label>
+                                        <label for="callSign" class="col-sm-3 control-label"><fmt:message key='ship_call_sign'/></label><%--船舶呼号--%>
                                         <div class="col-sm-6">
                                             <input id="callSign" name="callSign" type="text" maxlength="32"
                                                    class="form-control "
-                                                   placeholder="请填写船舶呼号">
+                                                   placeholder="<fmt:message key='ship_call_sign_input'/>"><%--请填写船舶呼号--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="type" class="col-sm-3 control-label">船舶类型<span class="red">* </span></label>
+                                        <label for="type" class="col-sm-3 control-label"><fmt:message key='ship_type'/><%--船舶类型--%>
+                                            <span class="red">* </span></label>
                                         <div class="col-sm-6">
                                             <input id="type" name="type" type="text" maxlength="32"
                                                    class="form-control required"
-                                                   placeholder="请选择船舶类型">
+                                                   placeholder="<fmt:message key='ship_type_input'/>"><%--请选择船舶类型--%>
                                         </div>
                                     </div>
                                 </div>
@@ -145,88 +147,88 @@
                             <div class="timeline-item">
                                 <div class="timeline-badge">
                                     <div class="timeline-icon">
-                                        船体信息
+                                        <fmt:message key="ship_hull_info"/> <%--船体信息--%>
                                     </div>
                                 </div>
                                 <div class="timeline-body">
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-content">
                                         <div class="form-group col-md-6">
-                                            <label for="loa" class="col-sm-3 control-label">船长<span
-                                                    class="red">* </span></label>
+                                            <label for="loa" class="col-sm-3 control-label"><fmt:message key="ship_loa"/><%--船长--%><%--<span
+                                                    class="red">* </span>--%></label>
                                             <div class="col-sm-6">
                                                 <input id="loa" name="loa" type="text" maxlength="32"
                                                        class="form-control required"
-                                                       placeholder="请填写船长">
+                                                       placeholder="<fmt:message key="ship_loa_input"/>"><%--请填写船长--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m"/> </label><%--(单位:米)--%>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="draft" class="col-sm-3 control-label">吃水<span
-                                                    class="red">* </span></label>
+                                            <label for="draft" class="col-sm-3 control-label"><fmt:message key="ship_draft"/><%--吃水--%>
+                                                <%--<span class="red">* </span>--%></label>
                                             <div class="col-sm-6">
                                                 <input id="draft" name="draft" type="text" maxlength="32"
                                                        class="form-control required"
-                                                       placeholder="请填写吃水深度">
+                                                       placeholder="<fmt:message key='ship_draft_input'/>"><%--请填写吃水深度--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m"/> </label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="beam" class="col-sm-3 control-label">船宽<span
-                                                    class="red">* </span></label>
+                                            <label for="beam" class="col-sm-3 control-label"><fmt:message key="ship_beam"/><%--船宽--%>
+                                                <%--<span class="red">* </span>--%></label>
                                             <div class="col-sm-6">
                                                 <input id="beam" name="beam" type="text" maxlength="32"
                                                        class="form-control required"
-                                                       placeholder="请填写船宽长度">
+                                                       placeholder="<fmt:message key='ship_beam_input'/>"><%--请填写船宽长度--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m"/><%--(单位:米)--%></label>
 
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="dwt" class="col-sm-3 control-label">载重吨</label>
+                                            <label for="dwt" class="col-sm-3 control-label"><fmt:message key="ship_dwt"/><%--载重吨--%></label>
                                             <div class="col-sm-6">
                                                 <input id="dwt" name="dwt" type="text" maxlength="32"
                                                        class="form-control "
-                                                       placeholder="请填写载重吨">
+                                                       placeholder="<fmt:message key='ship_dwt_input'/> "><%--请填写载重吨--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:吨)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_ton"/> <%--(单位:吨)--%></label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="depth" class="col-sm-3 control-label">型深</label>
+                                            <label for="depth" class="col-sm-3 control-label"><fmt:message key="ship_high"/> <%--型深--%></label>
                                             <div class="col-sm-6">
                                                 <input id="depth" name="depth" type="text" maxlength="32"
                                                        class="form-control "
-                                                       placeholder="请填写型深">
+                                                       placeholder="<fmt:message key='ship_high_input'/> "><%--请填写型深--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m"/> <%--(单位:米)--%></label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="grt" class="col-sm-3 control-label">注册总吨</label>
+                                            <label for="grt" class="col-sm-3 control-label"><fmt:message key="ship_gt"/> <%--注册总吨--%></label>
                                             <div class="col-sm-6">
                                                 <input id="grt" name="grt" type="text" maxlength="32"
                                                        class="form-control "
-                                                       placeholder="请填写注册总吨">
+                                                       placeholder="<fmt:message key='ship_gt_input'/>"><%--请填写注册总吨--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="dd" class="col-sm-3 control-label">坞检</label>
+                                            <label for="dd" class="col-sm-3 control-label"><fmt:message key="ship_dd"/> <%--坞检--%></label>
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <input id="dd" name="dd" type="text"
                                                            class="form-control date-picker"
-                                                           placeholder="请选择坞检日期">
+                                                           placeholder="<fmt:message key='ship_dd_input'/>"><%--请选择坞检日期--%>
                                                     <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="ss" class="col-sm-3 control-label">特检</label>
+                                            <label for="ss" class="col-sm-3 control-label"><fmt:message key="ship_ss"/> <%--特检--%></label>
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <input id="ss" name="ss" type="text"
                                                            class="form-control date-picker"
-                                                           placeholder="请选择特检日期">
+                                                           placeholder="<fmt:message key='ship_ss_input'/> "><%--请选择特检日期--%>
                                                     <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
@@ -238,58 +240,53 @@
                             <div class="timeline-item">
                                 <div class="timeline-badge">
                                     <div class="timeline-icon">
-                                        设备信息
+                                        <fmt:message key="ship_faci_info"/> <%--设备信息--%>
                                     </div>
                                 </div>
                                 <div class="timeline-body">
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-green-haze">主机</span>
+                                            <span class="timeline-body-alerttitle font-green-haze"><fmt:message key="ship_me"/> <%--主机--%></span>
                                         </div>
                                     </div>
                                     <div class="timeline-body-content">
                                         <div class="form-group col-md-6">
-                                            <label for="meMaker" class="col-sm-3 control-label">厂家</label>
+                                            <label for="meMaker" class="col-sm-3 control-label"><fmt:message key="ship_faci_maker"/> </label>
                                             <div class="col-sm-6">
                                                 <input id="meMaker" name="meMaker" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写厂家名称">
+                                                       class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="meType" class="col-sm-3 control-label">型号</label>
+                                            <label for="meType" class="col-sm-3 control-label"><fmt:message key="ship_faci_type"/> <%--型号--%></label>
                                             <div class="col-sm-6">
                                                 <input id="meType" name="meType" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写型号">
+                                                       class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="meBhpRpm" class="col-sm-3 control-label">马力/转速</label>
+                                            <label for="meBhpRpm" class="col-sm-3 control-label"><fmt:message key="ship_me_bhp_rpm"/> <%--马力/转速--%></label>
                                             <div class="col-sm-6">
                                                 <input id="meBhpRpm" name="meBhpRpm" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写马力/转速">
+                                                       class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="meQty" class="col-sm-3 control-label">数量</label>
+                                            <label for="meQty" class="col-sm-3 control-label"><fmt:message key="ship_faci_qty"/> <%--数量--%></label>
                                             <div class="col-sm-6">
                                                 <input id="meQty" name="meQty" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写数量">
+                                                       class="form-control ">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:台)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_set"/> <%--(单位:台)--%></label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="meCylBore" class="col-sm-3 control-label">缸径</label>
+                                            <label for="meCylBore" class="col-sm-3 control-label"><fmt:message key="ship_faci_cyl_bore"/> <%--缸径--%></label>
                                             <div class="col-sm-6">
                                                 <input id="meCylBore" name="meCylBore" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写缸径">
+                                                       class="form-control ">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:毫米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_mm"/> <%--(单位:毫米)--%></label>
                                         </div>
                                     </div>
                                 </div>
@@ -298,52 +295,47 @@
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-green-haze">辅机</span>
+                                            <span class="timeline-body-alerttitle font-green-haze"><fmt:message key="ship_aux"/> <%--辅机--%></span>
                                         </div>
                                     </div>
                                     <div class="timeline-body-content">
                                         <div class="form-group col-md-6">
-                                            <label for="auxMaker" class="col-sm-3 control-label">厂家</label>
+                                            <label for="auxMaker" class="col-sm-3 control-label"><fmt:message key="ship_faci_maker"/> </label>
                                             <div class="col-sm-6">
                                                 <input id="auxMaker" name="auxMaker" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写厂家名称">
+                                                       class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="auxType" class="col-sm-3 control-label">型号</label>
+                                            <label for="auxType" class="col-sm-3 control-label"><fmt:message key="ship_faci_type"/> <%--型号--%></label>
                                             <div class="col-sm-6">
                                                 <input id="auxType" name="auxType" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写型号">
+                                                       class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="auxRatedOr" class="col-sm-3 control-label">额定功率</label>
+                                            <label for="auxRatedOr" class="col-sm-3 control-label"><fmt:message key="ship_aux_rated_or"/> <%--额定功率--%></label>
                                             <div class="col-sm-6">
                                                 <input id="auxRatedOr" name="auxRatedOr" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写额定功率">
+                                                       class="form-control ">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:千瓦)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_kw"/> <%--(单位:千瓦)--%></label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="auxQty" class="col-sm-3 control-label">数量</label>
+                                            <label for="auxQty" class="col-sm-3 control-label"><fmt:message key="ship_faci_qty"/> <%--数量--%></label>
                                             <div class="col-sm-6">
                                                 <input id="auxQty" name="auxQty" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写数量">
+                                                       class="form-control ">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:台)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_set"/> <%--(单位:台)--%></label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="auxCylBore" class="col-sm-3 control-label">缸径</label>
+                                            <label for="auxCylBore" class="col-sm-3 control-label"><fmt:message key="ship_faci_cyl_bore"/> <%--缸径--%></label>
                                             <div class="col-sm-6">
                                                 <input id="auxCylBore" name="auxCylBore" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写缸径">
+                                                       class="form-control ">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:毫米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_mm"/> <%--(单位:毫米)--%></label>
                                         </div>
                                     </div>
                                 </div>
@@ -351,63 +343,57 @@
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-green-haze">锅炉</span>
+                                            <span class="timeline-body-alerttitle font-green-haze"><fmt:message key="ship_boiler"/> <%--锅炉--%></span>
                                         </div>
                                     </div>
                                     <div class="timeline-body-content">
                                         <div class="form-group col-md-6">
-                                            <label for="boilerMaker" class="col-sm-3 control-label">厂家</label>
+                                            <label for="boilerMaker" class="col-sm-3 control-label"><fmt:message key="ship_faci_maker"/> <%--厂家--%></label>
                                             <div class="col-sm-6">
                                                 <input id="boilerMaker" name="boilerMaker" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写厂家名称">
+                                                       class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerType" class="col-sm-3 control-label">型号</label>
+                                            <label for="boilerType" class="col-sm-3 control-label"><fmt:message key="ship_faci_type"/><%--型号--%></label>
                                             <div class="col-sm-6">
                                                 <input id="boilerType" name="boilerType" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写型号">
+                                                       class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerPressure" class="col-sm-3 control-label">工作压力</label>
+                                            <label for="boilerPressure" class="col-sm-3 control-label"><fmt:message key="ship_boiler_pressure"/> <%--工作压力--%></label>
                                             <div class="col-sm-6">
                                                 <input id="boilerPressure" name="boilerPressure" type="text"
                                                        maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写工作压力">
+                                                       class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerQty" class="col-sm-3 control-label">数量</label>
+                                            <label for="boilerQty" class="col-sm-3 control-label"><fmt:message key="ship_faci_qty"/> <%--数量--%></label>
                                             <div class="col-sm-6">
                                                 <input id="boilerQty" name="boilerQty" type="text" maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写数量">
+                                                       class="form-control ">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:台)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_set"/> <%--(单位:台)--%></label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerHeatingArea" class="col-sm-3 control-label">热交换面积</label>
+                                            <label for="boilerHeatingArea" class="col-sm-3 control-label"><fmt:message key="ship_boiler_heating_area"/> <%--热交换面积--%></label>
                                             <div class="col-sm-6">
                                                 <input id="boilerHeatingArea" name="boilerHeatingArea" type="text"
                                                        maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写热交换面积">
+                                                       class="form-control ">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:平方米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m2"/> <%--(单位:平方米)--%></label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerEvaporation" class="col-sm-3 control-label">蒸发量</label>
+                                            <label for="boilerEvaporation" class="col-sm-3 control-label"><fmt:message key="ship_boiler_evaporation"/><%--蒸发量--%></label>
                                             <div class="col-sm-6">
                                                 <input id="boilerEvaporation" name="boilerEvaporation" type="text"
                                                        maxlength="32"
-                                                       class="form-control "
-                                                       placeholder="请填写蒸发量">
+                                                       class="form-control ">
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:吨/时)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_ton_H"/> <%--(单位:吨/时)--%></label>
                                         </div>
                                     </div>
                                 </div>
@@ -415,7 +401,7 @@
                             <div class="timeline-item">
                                 <div class="timeline-badge">
                                     <div class="timeline-icon">
-                                        完成
+                                        <fmt:message key="ship_complete"/> <%--完成--%>
                                     </div>
                                 </div>
                                 <div class="timeline-body">
@@ -424,11 +410,11 @@
                                         <div class="timeline-body-head-caption">
                                             <shiro:hasPermission name="ship/add">
                                                 <button type="button" onclick="severCheck()" class="btn btn-primary">
-                                                    提交
+                                                    <fmt:message key="ship_submit"/> <%--提交--%>
                                                 </button>
                                             </shiro:hasPermission>
-                                            <button id="reset-btn" type="reset" class="btn blue">清空</button>
-                                            <a href="ship" type="button" class="btn btn-default" data-target="navTab">取消
+                                            <button id="reset-btn" type="reset" class="btn blue"><fmt:message key="ship_reset"/> <%--清空--%></button>
+                                            <a href="ship" type="button" class="btn btn-default" data-target="navTab"><fmt:message key="ship_cancel"/> <%--取消--%>
                                             </a>
                                         </div>
                                     </div>
@@ -505,7 +491,7 @@
         if ($("#name").val() == "") {
             $("#name").tips({
                 side: 2,
-                msg: '<fmt:message key="register_username_empty"/>',
+                msg: '<fmt:message key="ship_name_empty"/>',/*船名不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });
@@ -517,7 +503,7 @@
         if ($("#imo").val() == "") {
             $("#imo").tips({
                 side: 2,
-                msg: 'imo号不能为空',
+                msg: '<fmt:message key="ship_imo_empty"/> ',/*imo号不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });
@@ -529,7 +515,7 @@
         if ($("#shipClass").val() == "") {
             $("#shipClass").tips({
                 side: 2,
-                msg: 'shipClass不能为空',
+                msg: '<fmt:message key="ship_class_empty"/> ',/*船级社不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });
@@ -541,7 +527,7 @@
         if ($("#type").val() == "") {
             $("#type").tips({
                 side: 2,
-                msg: 'type不能为空',
+                msg: '<fmt:message key="ship_type_empty"/>',/*船舶类型不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });
@@ -550,7 +536,8 @@
         } else {
             $("#type").val(jQuery.trim($('#type').val()));
         }
-        if ($("#loa").val() == "") {
+
+       /* if ($("#loa").val() == "") {
             $("#loa").tips({
                 side: 2,
                 msg: 'loa不能为空',
@@ -585,7 +572,7 @@
             return false;
         } else {
             $("#beam").val(jQuery.trim($('#beam').val()));
-        }
+        }*/
         return true;
     }
 
@@ -617,7 +604,7 @@
             success: function (data) {
                 var html = "";
                 if (data.list.length == 0) {
-                    html += "<li>无该船舶信息</li>";
+                    html += "<li><fmt:message key="ship_info_no"/> </li>";
                 } else {
                     $(data.list).each(function () {
                         html += "<li onclick='getInfo(this)' data-id=" + this.id + ">" + this.name + "/" + this.imo + "/" + this.callsign + "</li>";

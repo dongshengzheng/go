@@ -72,10 +72,14 @@
     <style>
         @media screen and (min-width: 992px) {
             .page-sidebar {
+<<<<<<< HEAD
+                position: fixed;
+=======
                 width: 235px;
                 float: left;
                 position: fixed;
                 margin-right: -100%;
+>>>>>>> ab49f04b781ba292bf0021e85f3921dce58b5d20
             }
         }
     </style>

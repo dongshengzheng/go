@@ -23,7 +23,7 @@
                         <div class="col-md-2">
                             <div class="btn-group">
                                     <a href="ship/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> <fmt:message key="ship_addInfo"/><%--新增船舶信息--%>
                                     </a>
                             </div>
                         </div>
@@ -33,14 +33,14 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>船舶名称</th>
-                        <th>IMO</th>
-                        <th>船舶类型</th>
-                        <th>注册总吨</th>
-                        <th>船级社</th>
-                        <th>坞检</th>
-                        <th>特检</th>
-                        <th>操作</th>
+                        <th><fmt:message key="ship_name"/></th><%--船舶名称--%>
+                        <th><fmt:message key="ship_imo"/></th><%--IMO--%>
+                        <th><fmt:message key="ship_type"/></th><%--船舶类型--%>
+                        <th><fmt:message key="ship_gt"/></th><%--注册总吨--%>
+                        <th><fmt:message key="ship_association"/></th><%--船级社--%>
+                        <th><fmt:message key="ship_dd"/></th><%--坞检--%>
+                        <th><fmt:message key="ship_ss"/></th><%--特检--%>
+                        <th><fmt:message key="go_operation"/></th><%--操作--%>
                     </tr>
                     </thead>
                 </table>
@@ -101,14 +101,14 @@
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="ship/info">
-                            + '<a href="ship/info?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
+                            + '<a href="ship/info?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i><fmt:message key='go_check'/></a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="ship/edit">
-                            + '<a href="ship/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
+                            + '<a href="ship/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i><fmt:message key='go_editor'/></a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="ship/delete">
                             + '<a href="ship/delete?id=' + row.id +
-                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
+                            '" data-msg="<fmt:message key='ship_delete_confirm'/>"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red"><fmt:message key='go_delete'/></a>'
                             </shiro:hasPermission>
                             ;
                 }
@@ -118,7 +118,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船舶名称或IMO号");
+                initSearchForm(null, "<fmt:message key='ship_nameOrIMO_input'/> ");
             }
         });
 

@@ -36,9 +36,12 @@ public class RightsFilter extends AccessControlFilter {
             //if(url.equals("main/index")) return true;
             if (subject.getPrincipal() != null) {
                 // 判断该请求是否包含在要求过滤的列表中，如果是则判断访问的用户是否有权限访问资源。
-                if (url.startsWith("/")) url = url.substring(1);
-                if (url.endsWith("/list")) url = url.substring(0, url.lastIndexOf("/list"));
-                if (url.endsWith("/form")) url = url.substring(0, url.lastIndexOf("/form"));
+                if (url.startsWith("/"))
+                    url = url.substring(1);
+                if (url.endsWith("/list"))
+                    url = url.substring(0, url.lastIndexOf("/list"));
+                if (url.endsWith("/form"))
+                    url = url.substring(0, url.lastIndexOf("/form"));
                 boolean hasPermition = subject.isPermitted(url);
                 boolean isAdmin = subject.hasRole(Const.ADMIN_ROLE);
                 return (hasPermition || isAdmin);
