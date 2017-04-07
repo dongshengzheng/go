@@ -6,7 +6,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    long time =new Date().getTime();
+    long time = new Date().getTime();
 %>
 <go:navigater path="repairSpec"></go:navigater>
 <style>
@@ -29,10 +29,12 @@
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
+                                <shiro:hasPermission name="repairSpec/add">
                                     <a href="repairSpec/add?t=<%=time%>" data-target="navTab"
                                        class="btn btn-sm blue mt-ladda-btn ladda-button" data-style="slide-down">
                                         <span class="ladda-label"> <i class="fa fa-plus"></i> 新增维修工程单</span>
                                     </a>
+                                </shiro:hasPermission>
                             </div>
                         </div>
                     </div>

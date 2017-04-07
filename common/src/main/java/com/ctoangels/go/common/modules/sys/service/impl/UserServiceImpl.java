@@ -3,6 +3,8 @@ package com.ctoangels.go.common.modules.sys.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.go.common.modules.go.entity.Company;
+import com.ctoangels.go.common.modules.go.mapper.CompanyMapper;
 import com.ctoangels.go.common.modules.sys.mapper.RoleMapper;
 import com.ctoangels.go.common.modules.sys.mapper.UserMapper;
 import com.ctoangels.go.common.modules.sys.mapper.UserRoleMapper;
@@ -14,7 +16,7 @@ import com.ctoangels.go.common.modules.sys.mapper.UserMapper;
 import com.ctoangels.go.common.modules.sys.mapper.UserRoleMapper;
 import com.ctoangels.go.common.modules.sys.service.UserService;
 import com.ctoangels.go.common.util.Const;
-import org.apache.commons.lang.StringUtils;
+import com.ctoangels.go.common.util.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
@@ -43,6 +45,8 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     private RoleMapper roleMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
+    @Autowired
+    private CompanyMapper companyMapper;
 
     public List<Role> getRoles(Integer userId) {
         Map<String, Object> map = new HashMap<>();
@@ -65,7 +69,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
 
     public void editRole(User user) {
         String roleIds = user.getRoleIds();
-        if (StringUtils.isNotBlank(roleIds)) {
+        if (roleIds != null && roleIds.trim().length() > 0) {
             List<UserRole> list = new ArrayList<>();
             Integer userId = user.getId();
             String[] roleIdArr = roleIds.split(",");
@@ -112,33 +116,35 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     }
 
     @Override
-    public List<User> searchUsersByName(String name, Integer myId) {
-        return userMapper.searchUsersByName(name, myId);
-    }
+    public User getTryUser() {
+        User user = new User();
+        boolean flag = false;
+        String userName = "";
+        while (!flag) {
+            userName = StringUtils.getUUID32();
+            user.setName(userName);
+            user.setLoginName(userName);
+            User u = userMapper.selectOne(user);
+            flag = (u == null);
+        }
 
-    @Override
-    public User searchMyInfo(Integer myId) {
-        return userMapper.searchMyInfo(myId);
-    }
+        Company company = new Company();
+        company.setName("测试公司");
+        company.setDelFlag(Const.DEL_FLAG_NORMAL);
+        companyMapper.insert(company);
 
-    @Override
-    public List<User> searchFocusById(Integer id) {
-        return userMapper.searchFocusById(id);
-    }
+        String passwd = new SimpleHash("SHA-1", userName, "123456").toString(); // 密码加密
+        user.setPassword(passwd);
+        user.setCompanyId(company.getId());
+        user.setDelFlag(Const.DEL_FLAG_NORMAL);
+        userMapper.insert(user);
 
-    @Override
-    public List<User> searchUserByNameAndId(String info, Integer myId) {
-        return userMapper.searchUserByNameAndId(info, myId);
-    }
+        UserRole userRole = new UserRole();
+        userRole.setUserId(user.getId());
+        userRole.setRoleId(4);
+        userRoleMapper.insert(userRole);
 
-    @Override
-    public List<User> searchFollowUsersByUserId(Integer id) {
-        return userMapper.searchFollowUsersByUserId(id);
-    }
-
-    @Override
-    public List<User> searchFollowHistoryUsers(Integer followHistoryType, Integer targetId) {
-        return userMapper.searchFollowHistoryUsers(followHistoryType, targetId);
+        return user;
     }
 
 }
