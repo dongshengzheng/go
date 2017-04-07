@@ -32,7 +32,7 @@
                 <div class="portlet-title tabbable-line">
                     <div class="caption caption-md">
                         <i class="icon-microphone font-green"></i>
-                        <span class="caption-subject bold font-green uppercase"> 查看船舶信息</span>
+                        <span class="caption-subject bold font-green uppercase"> <fmt:message key="ship_search_info"/> <%--查看船舶信息--%></span>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -47,19 +47,19 @@
                                 <div class="timeline-body-arrow"></div>
                                 <div class="timeline-body-content">
                                     <div class="form-group col-md-6">
-                                        <label for="name" class="col-sm-3 control-label">船舶名称</label>
+                                        <label for="name" class="col-sm-3 control-label"><fmt:message key="ship_name"/><%--船舶名称--%></label>
                                         <div class="col-sm-6">
                                             <input disabled id="name" name="name" type="text" maxlength="32"
                                                    class="form-control required" value="${ship.name}"
-                                                   placeholder="暂无船舶名称">
+                                                   placeholder="<fmt:message key='ship_name_no'/> "><%--暂无船舶名称--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="builder" class="col-sm-3 control-label">建造船厂</label>
+                                        <label for="builder" class="col-sm-3 control-label"><fmt:message key='ship_builder'/></label><%--建造船厂--%>
                                         <div class="col-sm-6">
                                             <input disabled id="builder" name="builder" type="text" maxlength="32"
                                                    class="form-control" value="${ship.builder}"
-                                                   placeholder="暂无建造船厂">
+                                                   placeholder="<fmt:message key='ship_builder_no'/>"><%--暂无建造船厂--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -67,45 +67,44 @@
                                         <div class="col-sm-6">
                                             <input disabled id="imo" name="imo" type="text" maxlength="32"
                                                    class="form-control required" value="${ship.imo}"
-                                                   placeholder="暂无IMO">
+                                                   placeholder="<fmt:message key='ship_imo_no'/> "><%--暂无IMO--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="buildYear" class="col-sm-3 control-label">建造日期</label>
+                                        <label for="buildYear" class="col-sm-3 control-label"><fmt:message key='ship_built_year'/></label><%--建造日期--%>
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <input disabled id="buildYear" name="buildYear" type="text"
                                                        class="form-control date-picker"
-                                                       value="<fmt:formatDate value='${ship.buildYear}'
-                        pattern="yyyy-MM-dd"/>"
-                                                       placeholder="暂无建造日期">
+                                                       value="<fmt:formatDate value='${ship.buildYear}' pattern="yyyy-MM-dd"/>"
+                                                       placeholder="<fmt:message key='ship_build_year_no'/>"><%--暂无建造日期--%>
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="shipClass" class="col-sm-3 control-label">船级社</label>
+                                        <label for="shipClass" class="col-sm-3 control-label"><fmt:message key='ship_association'/></label><%--船级社--%>
                                         <div class="col-sm-6">
                                             <input disabled id="shipClass" name="shipClass" type="text" maxlength="32"
                                                    class="form-control required" value="${ship.shipClass}"
-                                                   placeholder="暂无船级社">
+                                                   placeholder="<fmt:message key='ship_class_no'/>"><%--暂无船级社--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="callSign" class="col-sm-3 control-label">船舶呼号</label>
+                                        <label for="callSign" class="col-sm-3 control-label"><fmt:message key="ship_call_sign"/> </label><%--船舶呼号--%>
                                         <div class="col-sm-6">
                                             <input disabled id="callSign" name="callSign" type="text" maxlength="32"
                                                    class="form-control " value="${ship.callSign}"
-                                                   placeholder="暂无船舶呼号">
+                                                   placeholder="<fmt:message key='ship_callSign_no'/>"><%--暂无船舶呼号--%>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="type" class="col-sm-3 control-label">船舶类型</label>
+                                        <label for="type" class="col-sm-3 control-label"><fmt:message key='ship_type'/><%--船舶类型--%></label>
                                         <div class="col-sm-6">
                                             <input disabled id="type" name="type" type="text" maxlength="32"
                                                    class="form-control required" value="${ship.type}"
-                                                   placeholder="暂无船舶类型">
+                                                   placeholder="<fmt:message key='ship_type_no'/>"><%--暂无船舶类型--%>
                                         </div>
                                     </div>
                                 </div>
@@ -113,74 +112,75 @@
                             <div class="timeline-item">
                                 <div class="timeline-badge">
                                     <div class="timeline-icon">
-                                        船体信息
+                                        <fmt:message key="ship_hull_info"/> <%--船体信息--%>
                                     </div>
                                 </div>
                                 <div class="timeline-body">
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-content">
                                         <div class="form-group col-md-6">
-                                            <label for="loa" class="col-sm-3 control-label">船长</label>
+                                            <label for="loa" class="col-sm-3 control-label"><fmt:message key="ship_loa"/><%--船长--%></label>
                                             <div class="col-sm-6">
                                                 <input disabled id="loa" name="loa" type="text" maxlength="32"
                                                        class="form-control required" value="${ship.loa}"
-                                                       placeholder="暂无船长">
+                                                       placeholder="<fmt:message key='ship_loa_no'/>"><%--暂无船长--%>
                                             </div>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m"/></label><%--(单位:米)--%>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="draft" class="col-sm-3 control-label">吃水</label>
+                                            <label for="draft" class="col-sm-3 control-label"><fmt:message key="ship_draft"/><%--吃水--%></label>
                                             <div class="col-sm-6">
                                                 <input disabled id="draft" name="draft" type="text" maxlength="32"
                                                        class="form-control required" value="${ship.draft}"
-                                                       placeholder="暂无吃水深度">
+                                                       placeholder="<fmt:message key='ship_draft_no'/> "><%--暂无吃水深度--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m"/></label><%--(单位:米)--%>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="beam" class="col-sm-3 control-label">船宽</label>
+                                            <label for="beam" class="col-sm-3 control-label"><fmt:message key="ship_beam"/></label><%--船宽--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="beam" name="beam" type="text" maxlength="32"
                                                        class="form-control required" value="${ship.beam}"
-                                                       placeholder="暂无船宽长度">
+                                                       placeholder="<fmt:message key='ship_beam_no'/> "><%--暂无船宽长度--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m"/></label><%--(单位:米)--%>
 
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="dwt" class="col-sm-3 control-label">载重吨</label>
+                                            <label for="dwt" class="col-sm-3 control-label"><fmt:message key="ship_dwt"/></label><%--载重吨--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="dwt" name="dwt" type="text" maxlength="32"
                                                        class="form-control " value="${ship.dwt}"
-                                                       placeholder="暂无载重吨">
+                                                       placeholder="<fmt:message key="ship_dwt_no"/>"><%--暂无载重吨--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:吨)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key='ship_unit_ton'/></label><%--(单位:吨)--%>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="depth" class="col-sm-3 control-label">型深</label>
+                                            <label for="depth" class="col-sm-3 control-label"><fmt:message key="ship_high"/></label><%--型深--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="depth" name="depth" type="text" maxlength="32"
                                                        class="form-control " value="${ship.depth}"
-                                                       placeholder="暂无型深">
+                                                       placeholder="<fmt:message key='ship_high_no'/>"><%--暂无型深--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key='ship_unit_m'/></label><%--(单位:米)--%>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="grt" class="col-sm-3 control-label">注册总吨</label>
+                                            <label for="grt" class="col-sm-3 control-label"><fmt:message key="ship_gt"/></label><%--注册总吨--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="grt" name="grt" type="text" maxlength="32"
                                                        class="form-control "
                                                        value="${ship.grt}"
-                                                       placeholder="暂无注册总吨">
+                                                       placeholder="<fmt:message key='ship_gt_no'/> "><%--暂无注册总吨--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="dd" class="col-sm-3 control-label">坞检</label>
+                                            <label for="dd" class="col-sm-3 control-label"><fmt:message key="ship_dd"/></label><%--坞检--%>
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <input disabled id="dd" name="dd" type="text"
                                                            class="form-control date-picker"
                                                            value="${ship.dd}"
-                                                           placeholder="暂无坞检日期">
+                                                           placeholder="<fmt:message key='ship_dd_no'/> "><%--暂无坞检日期--%>
                                                     <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
