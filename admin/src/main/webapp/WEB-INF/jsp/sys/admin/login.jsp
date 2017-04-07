@@ -35,11 +35,14 @@
     <link href="${global}/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
     <link href="${global}/css/plugins.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/static/css/login.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${global}/plugins/jquery-notific8/jquery.notific8.min.css" rel="stylesheet" type="text/css"/>
+
 
     <!-- Bootstrap 3.3.4 -->
     <script src="${global}/plugins/jquery.min.js" type="text/javascript"></script>
     <script src="${ctx}/static/js/jquery.cookie.js"></script>
     <script src="${ctx}/static/js/jquery.tips.js"></script>
+    <script src="${global}/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
     <link rel="shortcut icon" href="${ctx}/favicon.ico"/>
     <style>
         .login .content {
@@ -81,6 +84,8 @@
         <div class="form-actions">
             <button onclick="severCheck();" type="button" class="btn green">
                 <fmt:message key="sys.user.login"/></button>
+            <button onclick="tryOut()" type="button" class="btn green">
+                <fmt:message key="login_try_out"/></button>
         </div>
     </form>
 
@@ -277,6 +282,61 @@
             $("#code").focus();
         }
     });
+
+
+    function tryOut() {
+        $.ajax({
+            type: "GET",
+            url: "tryOut",
+            success: function (data) {
+                console.log(222);
+                if (data.success) {
+                    var loginName = data.user.name;
+                    var password = data.user.password;
+                    var sessionCode = data.sessionCode;
+                    var code = "ksbadmtn1f2izwqy" + loginName + ",00," + "123456" + "ipvb5cxat0zn9eg7" + ",00," + sessionCode;
+                    $.ajax({
+                        type: "POST",
+                        url: 'login_login',
+                        data: {
+                            keyData: code,
+                            tm: new Date().getTime()
+                        },
+                        dataType: 'json',
+                        cache: false,
+                        success: function (data) {
+                            if ("success" == data.result) {
+                                console.log(111);
+                                window.location.href = "<%=basePath%>";
+                            } else {
+                                tryAlert("tangerine", "系统错误,请稍后再试");
+                            }
+                        }
+                    })
+                } else {
+                    tryAlert("tangerine", "系统错误,请稍后再试");
+                }
+            },
+            error: function () {
+                tryAlert("tangerine", "系统错误,请稍后再试");
+            }
+        })
+    }
+
+
+    function tryAlert(theme, msg) {
+        var settings = {
+            theme: theme,
+            sticky: false,
+            horizontalEdge: "top",
+            verticalEdge: "left"
+        }
+        if (!settings.sticky) {
+            settings.life = 3000;
+        }
+        $.notific8('zindex', 11500);
+        $.notific8(msg, settings);
+    }
 
 </script>
 <script>

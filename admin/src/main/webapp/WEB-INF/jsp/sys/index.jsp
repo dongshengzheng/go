@@ -69,7 +69,16 @@
 
     <%--handsontable的CSS--%>
     <link rel="stylesheet" media="screen" href="${ctx}/static/css/handsontable/handsontable.css">
-
+    <style>
+        @media screen and (min-width: 992px) {
+            .page-sidebar {
+                width: 235px;
+                float: left;
+                position: fixed;
+                margin-right: -100%;
+            }
+        }
+    </style>
 </head>
 <body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
@@ -193,7 +202,7 @@
         if (window.location.hash)
             url = window.location.hash.substring(1);
         else
-            url = "ship";
+            url = "repairSpec";
 
         if ($("a[href='" + url + "']").length > 0) {
             $("a[href='" + url + "']").click();

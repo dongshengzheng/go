@@ -406,4 +406,22 @@ public class LoginController extends BaseController {
         return "sys/admin/login";
     }
 
+    //试用入口
+    @RequestMapping(value = "/tryOut", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject tryOut() {
+        JSONObject jsonObject = new JSONObject();
+        User user = userService.getTryUser();
+        if (user == null) {
+            jsonObject.put("success", false);
+        } else {
+            jsonObject.put("user", user);
+            jsonObject.put("success", true);
+            String sessionCode = (String) session.getAttribute(Const.SESSION_SECURITY_CODE);
+            jsonObject.put("sessionCode", sessionCode);
+        }
+
+        return jsonObject;
+    }
+
 }
