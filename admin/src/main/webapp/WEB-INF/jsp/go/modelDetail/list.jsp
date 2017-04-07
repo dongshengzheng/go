@@ -23,9 +23,11 @@
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
-                                <a href="modelDetail/add" data-target="navTab"
-                                   class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增范本信息
-                                </a>
+                                <shiro:hasPermission name="modelDetail/add">
+                                    <a href="modelDetail/add" data-target="navTab"
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增范本信息
+                                    </a>
+                                </shiro:hasPermission>
                             </div>
                         </div>
                     </div>
@@ -87,10 +89,16 @@
                 "targets": 4,
                 "render": function (data, type, row) {
                     return ""
+                            <shiro:hasPermission name="modelDetail/info">
                             + '<a href="modelDetail/info?id=' + row.id + '&operate=look" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
+                           </shiro:hasPermission>
+                            <shiro:hasPermission name="modelDetail/info">
                             + '<a href="modelDetail/info?id=' + row.id + '&operate=edit" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
+                           </shiro:hasPermission>
+                            <shiro:hasPermission name="modelDetail/delete">
                             + '<a href="modelDetail/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
+                            </shiro:hasPermission>
                             ;
                 }
             }],

@@ -11,7 +11,6 @@
         text-align: center;
     }
 </style>
-<go:navigater path="ship"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -23,11 +22,9 @@
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
-                                <shiro:hasPermission name="ship/add">
                                     <a href="ship/add" data-target="navTab"
                                        class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船舶信息
                                     </a>
-                                </shiro:hasPermission>
                             </div>
                         </div>
                     </div>

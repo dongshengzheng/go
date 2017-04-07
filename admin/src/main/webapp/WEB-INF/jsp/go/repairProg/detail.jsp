@@ -123,10 +123,8 @@
             <div class="col-md-8 left">
                 <div style="width: 100%;">
                     <div><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
-                    <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：<input style="width: 50%" disabled
-                                                                                         id="proName"
-                                                                                         type="text" name="proName"
-                                                                                         value="${proDetail.proName}"/>
+                    <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：
+                        <input style="width: 50%" disabled id="proName" type="text" name="proName" value="${proDetail.proName}"/>
                     </div>
                     <div class="col-md-12 div-left">工程描述：</div>
                     <div class="col-md-12" style="margin-left: 20px">

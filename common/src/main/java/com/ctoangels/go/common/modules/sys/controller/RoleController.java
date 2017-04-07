@@ -2,6 +2,7 @@ package com.ctoangels.go.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.go.common.modules.sys.entity.Role;
 import com.ctoangels.go.common.modules.sys.entity.RoleTree;
 import com.ctoangels.go.common.modules.sys.service.RoleService;
@@ -47,7 +48,8 @@ public class RoleController extends BaseController {
         EntityWrapper<Role> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(role.getRoleName()))
             ew.addFilter("role_name={0}",role.getRoleName());
-        return jsonPage(roleService.selectPage(getPage(), ew));
+        Page<Role> page = roleService.selectPage(getPage(), ew);
+        return jsonPage(page);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
