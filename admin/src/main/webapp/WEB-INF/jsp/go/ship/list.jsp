@@ -11,6 +11,7 @@
         text-align: center;
     }
 </style>
+<go:navigater path="ship"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -18,12 +19,12 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            船舶信息
+                            <fmt:message key="ship_ship_info"/> <%--船舶信息--%>
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
                                     <a href="ship/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> <fmt:message key="ship_addInfo"/><%--新增船舶信息--%>
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> <fmt:message key="ship_add_info"/><%--新增船舶信息--%>
                                     </a>
                             </div>
                         </div>
@@ -128,25 +129,6 @@
 
 
     });
-
-    function check(id, status) {
-        if (confirm("确定审核？")) {
-            $.post("/shipinfo/check", {id: id, status: status}, function () {
-                refreshTable();
-            });
-
-        }
-
-    }
-    //
-    //    function      slide(id, slide) {
-    //        if (confirm("确定提交？")) {
-    //            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
-    //                refreshTable();
-    //            });
-    //        }
-    //    }
-
 
     function refreshTable(toFirst) {
         //defaultTable.ajax.reload();

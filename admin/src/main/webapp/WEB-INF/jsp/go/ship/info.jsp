@@ -187,13 +187,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="ss" class="col-sm-3 control-label">特检</label>
+                                            <label for="ss" class="col-sm-3 control-label"><fmt:message key="ship_ss"/></label><%--特检--%>
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <input disabled id="ss" name="ss" type="text"
                                                            class="form-control date-picker"
                                                            value="${ship.ss}"
-                                                           placeholder="暂无特检日期">
+                                                           placeholder="<fmt:message key='ship_ss_no'/>"><%--暂无特检日期--%>
                                                     <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
@@ -212,56 +212,56 @@
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-green-haze">主机</span>
+                                            <span class="timeline-body-alerttitle font-green-haze"><fmt:message key="ship_me"/></span><%--主机--%>
                                         </div>
                                     </div>
                                     <div class="timeline-body-content">
                                         <div class="form-group col-md-6">
-                                            <label for="meMaker" class="col-sm-3 control-label">厂家</label>
+                                            <label for="meMaker" class="col-sm-3 control-label"><fmt:message key="ship_faci_maker"/></label>厂家
                                             <div class="col-sm-6">
                                                 <input disabled id="meMaker" name="meMaker" type="text" maxlength="32"
                                                        class="form-control "
                                                        value="${ship.meMaker}"
-                                                       placeholder="暂无厂家名称">
+                                                       placeholder="<fmt:message key='ship_faci_maker_no'/> "><%--暂无厂家名称--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="meType" class="col-sm-3 control-label">型号</label>
+                                            <label for="meType" class="col-sm-3 control-label"><fmt:message key="ship_faci_type"/></label><%--型号--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="meType" name="meType" type="text" maxlength="32"
                                                        class="form-control "
                                                        value="${ship.meType}"
-                                                       placeholder="暂无型号">
+                                                       placeholder="<fmt:message key='ship_faci_type_no'/>"><%--暂无型号--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="meBhpRpm" class="col-sm-3 control-label">马力/转速</label>
+                                            <label for="meBhpRpm" class="col-sm-3 control-label"><fmt:message key="ship_me_bhp_rpm"/></label><%--马力/转速--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="meBhpRpm" name="meBhpRpm" type="text" maxlength="32"
                                                        class="form-control "
                                                        value="${ship.meBhpRpm}"
-                                                       placeholder="暂无马力/转速">
+                                                       placeholder="<fmt:message key='ship_me_bhp_rpm_no'/>"><%--暂无马力/转速--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="meQty" class="col-sm-3 control-label">数量</label>
+                                            <label for="meQty" class="col-sm-3 control-label"><fmt:message key="ship_faci_qty"/></label><%--数量--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="meQty" name="meQty" type="text" maxlength="32"
                                                        class="form-control " value="${ship.meQty}"
-                                                       placeholder="暂无数量">
+                                                       placeholder="<fmt:message key='ship_faci_qty_no'/>"><%--暂无数量--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:台)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_set"/></label>(单位:台)
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="meCylBore" class="col-sm-3 control-label">缸径</label>
+                                            <label for="meCylBore" class="col-sm-3 control-label"><fmt:message key="ship_faci_cyl_bore"/></label><%--缸径--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="meCylBore" name="meCylBore" type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.meCylBore}"
-                                                       placeholder="暂无缸径">
+                                                       placeholder="<fmt:message key='ship_faci_cyl_bore_no'/>"><%--暂无缸径--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:毫米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key='ship_unit_mm'/> </label><%--(单位:毫米--%>
                                         </div>
                                     </div>
                                 </div>
@@ -270,59 +270,59 @@
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-green-haze">辅机</span>
+                                            <span class="timeline-body-alerttitle font-green-haze"><fmt:message key="ship_aux"/></span><%--辅机--%>
                                         </div>
                                     </div>
                                     <div class="timeline-body-content">
                                         <div class="form-group col-md-6">
-                                            <label for="auxMaker" class="col-sm-3 control-label">厂家</label>
+                                            <label for="auxMaker" class="col-sm-3 control-label"><fmt:message key="ship_faci_maker"/></label><%--厂家--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="auxMaker" name="auxMaker" type="text" maxlength="32"
                                                        class="form-control "
                                                        value="${ship.auxMaker}"
-                                                       placeholder="暂无厂家名称">
+                                                       placeholder="<fmt:message key='ship_faci_maker_no'/>"><%--暂无厂家名称--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="auxType" class="col-sm-3 control-label">型号</label>
+                                            <label for="auxType" class="col-sm-3 control-label"><fmt:message key="ship_faci_type"/></label><%--型号--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="auxType" name="auxType" type="text" maxlength="32"
                                                        class="form-control "
                                                        value="${ship.auxType}"
-                                                       placeholder="暂无型号">
+                                                       placeholder="<fmt:message key='ship_faci_type_no'/>">暂无型号
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="auxRatedOr" class="col-sm-3 control-label">额定功率</label>
+                                            <label for="auxRatedOr" class="col-sm-3 control-label"><fmt:message key="ship_aux_rated_or"/></label><%--额定功率--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="auxRatedOr" name="auxRatedOr" type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.auxRatedOr}"
-                                                       placeholder="暂无额定功率">
+                                                       placeholder="<fmt:message key='ship_aux_rated_or_no'/>"><%--暂无额定功率--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:千瓦)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_kw"/> </label><%--(单位:千瓦)--%>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="auxQty" class="col-sm-3 control-label">数量</label>
+                                            <label for="auxQty" class="col-sm-3 control-label"><fmt:message key="ship_faci_qty"/></label><%--数量--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="auxQty" name="auxQty" type="text" maxlength="32"
                                                        class="form-control "
                                                        value="${ship.auxQty}"
-                                                       placeholder="暂无数量">
+                                                       placeholder="<fmt:message key='ship_faci_qty_no'/> "><%--暂无数量--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:台)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_set"/> </label><%--(单位:台)--%>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="auxCylBore" class="col-sm-3 control-label">缸径</label>
+                                            <label for="auxCylBore" class="col-sm-3 control-label"><fmt:message key="ship_faci_cyl_bore"/></label><%--缸径--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="auxCylBore" name="auxCylBore" type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.auxCylBore}"
-                                                       placeholder="暂无缸径">
+                                                       placeholder="<fmt:message key='ship_faci_cyl_bore_no'/>"><%--暂无缸径--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:毫米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_mm"/> </label><%--(单位:毫米)--%>
                                         </div>
                                     </div>
                                 </div>
@@ -330,74 +330,74 @@
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <span class="timeline-body-alerttitle font-green-haze">锅炉</span>
+                                            <span class="timeline-body-alerttitle font-green-haze"><fmt:message key="ship_boiler"/></span><%--锅炉--%>
                                         </div>
                                     </div>
                                     <div class="timeline-body-content">
                                         <div class="form-group col-md-6">
-                                            <label for="boilerMaker" class="col-sm-3 control-label">厂家</label>
+                                            <label for="boilerMaker" class="col-sm-3 control-label"><fmt:message key="ship_faci_maker"/></label><%--厂家--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="boilerMaker" name="boilerMaker" type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.boilerMaker}"
-                                                       placeholder="暂无厂家名称">
+                                                       placeholder="<fmt:message key='ship_faci_maker_no'/>"><%--暂无厂家名称--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerType" class="col-sm-3 control-label">型号</label>
+                                            <label for="boilerType" class="col-sm-3 control-label"><fmt:message key="ship_faci_type"/></label><%--型号--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="boilerType" name="boilerType" type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.boilerType}"
-                                                       placeholder="暂无型号">
+                                                       placeholder="<fmt:message key='ship_faci_type_no'/>"><%--暂无型号--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerPressure" class="col-sm-3 control-label">工作压力</label>
+                                            <label for="boilerPressure" class="col-sm-3 control-label"><fmt:message key="ship_boiler_pressure"/></label><%--工作压力--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="boilerPressure" name="boilerPressure" type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.boilerPressure}"
-                                                       placeholder="暂无工作压力">
+                                                       placeholder="<fmt:message key='ship_boiler_pressure_no'/>"><%--暂无工作压力--%>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerQty" class="col-sm-3 control-label">数量</label>
+                                            <label for="boilerQty" class="col-sm-3 control-label"><fmt:message key="ship_faci_qty"/></label><%--数量--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="boilerQty" name="boilerQty" type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.boilerQty}"
-                                                       placeholder="暂无数量">
+                                                       placeholder="<fmt:message key='ship_faci_qty_no'/>">暂无数量
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:台)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key='ship_unit_set'/> </label><%--(单位:台)--%>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerHeatingArea" class="col-sm-3 control-label">热交换面积</label>
+                                            <label for="boilerHeatingArea" class="col-sm-3 control-label"><fmt:message key="ship_boiler_heating_area"/></label>热交换面积
                                             <div class="col-sm-6">
                                                 <input disabled id="boilerHeatingArea" name="boilerHeatingArea"
                                                        type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.boilerHeatingArea}"
-                                                       placeholder="暂无热交换面积">
+                                                       placeholder="<fmt:message key='ship_boiler_heating_area_no'/>"><%--暂无热交换面积--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:平方米)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_m2"/> </label>(单位:平方米)
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="boilerEvaporation" class="col-sm-3 control-label">蒸发量</label>
+                                            <label for="boilerEvaporation" class="col-sm-3 control-label"><fmt:message key="ship_boiler_evaporation"/></label><%--蒸发量--%>
                                             <div class="col-sm-6">
                                                 <input disabled id="boilerEvaporation" name="boilerEvaporation"
                                                        type="text"
                                                        maxlength="32"
                                                        class="form-control "
                                                        value="${ship.boilerEvaporation}"
-                                                       placeholder="暂无蒸发量">
+                                                       placeholder="<fmt:message key='ship_boiler_evaporation_no'/>"><%--暂无蒸发量--%>
                                             </div>
-                                            <label class="col-sm-3 control-label">(单位:吨/时)</label>
+                                            <label class="col-sm-3 control-label"><fmt:message key="ship_unit_ton_H" /></label><%--(单位:吨/时)--%>
                                         </div>
                                     </div>
                                 </div>
@@ -412,7 +412,7 @@
                                     <div class="timeline-body-arrow"></div>
                                     <div class="timeline-body-head">
                                         <div class="timeline-body-head-caption">
-                                            <a href="ship" type="button" class="btn btn-default" data-target="navTab">返回
+                                            <a href="ship" type="button" class="btn btn-default" data-target="navTab"><fmt:message key="ship_back"/> <%--返回--%>
                                             </a>
                                         </div>
                                     </div>
