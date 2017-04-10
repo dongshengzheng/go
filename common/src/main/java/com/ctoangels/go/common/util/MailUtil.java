@@ -84,8 +84,10 @@ public class MailUtil {
             Transport.send(message); //使用Transport静态方法发送邮件
         } catch (AddressException e) {
             //此处处理AddressException异常  [The exception thrown when a wrongly formatted address is encountered.]
+            e.printStackTrace();
         } catch (MessagingException e) {
             //此处处理MessagingException异常 [The base class for all exceptions thrown by the Messaging classes ]
+            e.printStackTrace();
         }
     }
 
