@@ -43,7 +43,7 @@
                 <div class="portlet-title tabbable-line">
                     <div class="caption caption-md">
                         <i class="icon-microphone font-green"></i>
-                        <span class="caption-subject bold font-green uppercase"> 编辑船舶信息</span>
+                        <span class="caption-subject bold font-green uppercase"> <fmt:message key="ship_edit_info"/> <%--编辑船舶信息--%></span>
                     </div>
                 </div>
                 <div class="portlet-body">

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.go.common.modules.go.mapper.EnquiryReqMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, code, category, content, unit, count, tariff, total,discount, remark, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag, enquiry_id AS enquiryId
+	</sql>
+
+</mapper>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <style>
     #menu {
@@ -45,16 +46,16 @@
 <%--右侧悬浮滚动条--%>
 <div id="menu">
     <ul>
-        <li><a data-item="#item0" class="cur">概要</a></li>
-        <li><a data-item="#item1">通用服务</a></li>
-        <li><a data-item="#item2">坞修工程</a></li>
-        <li><a data-item="#item3">船体工程</a></li>
-        <li><a data-item="#item4">机械工程</a></li>
-        <li><a data-item="#item5">电气工程</a></li>
-        <li><a data-item="#item6">冷藏工程</a></li>
-        <li><a data-item="#item7">特种设备</a></li>
-        <li><a data-item="#item8">其他</a></li>
-        <li><a data-item="#item9">完成</a></li>
+        <li><a data-item="#item0" class="cur"><fmt:message key="repair_summary"/> </a></li><%--概要--%>
+        <li><a data-item="#item1"><fmt:message key="repair_general_service"/></a></li><%--通用服务--%>
+        <li><a data-item="#item2"><fmt:message key="repair_dock_pro"/></a></li><%--坞修工程--%>
+        <li><a data-item="#item3"><fmt:message key="repair_hull_pro"/></a></li><%--船体工程--%>
+        <li><a data-item="#item4"><fmt:message key="repair_machinery_pro"/></a></li><%--机械工程--%>
+        <li><a data-item="#item5"><fmt:message key="repair_electical_pro"/></a></li><%--电气工程--%>
+        <li><a data-item="#item6"><fmt:message key="repair_refrigeration_pro"/></a></li><%--冷藏工程--%>
+        <li><a data-item="#item7"><fmt:message key="repqir_special_equ"/></a></li><%--特种设备--%>
+        <li><a data-item="#item8"><fmt:message key="repair_other"/></a></li><%--其他--%>
+        <li><a data-item="#item9"><fmt:message key="repair_complete"/></a></li><%--完成--%>
     </ul>
 </div>
 
@@ -65,13 +66,13 @@
         <td><input type="checkbox" disabled class="status-control"
                    style="display:none"
                    checked="checked"></td>
-        <td class="proOrderNo">维修详单</td>
+        <td class="proOrderNo"><fmt:message key="repair_spec_detail"/> <%--维修详单--%></td>
         <td><a class="editDetail" data-model="dialog"
                onclick="markDetailName(this)"></a></td>
         <td><input name="repairDetailId" class="repairDetailId" type="hidden"></td>
         <td></td>
         <td>
-            <button type="button" class="btn btn-sm red" onclick="deleteDetail(this)">删除
+            <button type="button" class="btn btn-sm red" onclick="deleteDetail(this)"><fmt:message key="repair_spec_delete"/><%--删除--%>
             </button>
         </td>
     </tr>
@@ -170,7 +171,7 @@
         <td class="proOrderNo-td"></td>
         <td class="proName-td"></td>
         <td class="proDesc-td"></td>
-        <td class="look-td"><a href="" data-model="dialog" onclick="lookDetail(this)">查看详细</a></td>
+        <td class="look-td"><a href="" data-model="dialog" onclick="lookDetail(this)"><fmt:message key="repair_spec_review_details"/> <%--查看详细--%></a></td>
     </tr>
 </table>
 
@@ -179,19 +180,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">添加备注</h4>
+                <h4 class="modal-title"><fmt:message key="repair_spec_add_remark"/> </h4><%--添加备注--%>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                             <textarea id="dialog-text" class="form-control" rows="10"
-                                      style="resize: none;" placeholder="请添加备注信息"></textarea>
+                                      style="resize: none;" placeholder="<fmt:message key='repair_spec_add_remark_info'/> "></textarea><%--请添加备注信息--%>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn dark btn-outline">取消</button>
-                <button type="button" data-dismiss="modal" class="btn green save-remark">确认</button>
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline"><fmt:message key="go_cancel"/> <%--取消--%></button>
+                <button type="button" data-dismiss="modal" class="btn green save-remark"><fmt:message key="go_confirm"/> <%--确认--%></button>
             </div>
         </div>
     </div>
@@ -200,7 +201,7 @@
 
 <%--触发详单弹窗--%>
 <a style="display:none" href="repairSpecDetail/addModelDetail?shipName=&catagory=&code=" id="add-detail"
-   data-model="dialog">新增详单</a>
+   data-model="dialog"><fmt:message key="repair_spec_detail_add"/> </a><%--新增详单--%>
 <input type="hidden" id="detailShipName">
 <input type="hidden" id="detailCatagory">
 <input type="hidden" id="detailCode">
@@ -389,7 +390,7 @@
         newRow.find(".status-control").toggle();
         newRow.find(".status-td").find("input[type='hidden']").addClass("true-status");
         newRow.find(".item-id").val(null);
-        newRow.find(".show-td").html("<a onclick='deleteRow(this)' class='btn btn-sm red'>删除</a>");
+        newRow.find(".show-td").html("<a onclick='deleteRow(this)' class='btn btn-sm red'><fmt:message key="repair_spec_delete"/></a>");/*删除*/
         var contentTd = newRow.find(".content-td");
         contentTd.find("button").remove();
         contentTd.find("input").val("");
@@ -459,7 +460,7 @@
     }
 
     function deleteRow(obj) {
-        if (!window.confirm("确认删除?提醒:删除栏目会将栏目下的详单一并删除!"))return;
+        if (!window.confirm("<fmt:message key='repair_spec_confirm_delete'/> "))return;/*确认删除?提醒:删除栏目会将栏目下的详单一并删除!*/
         var tr = $(obj).parents("tr");
         var pCode = tr.attr("data-parent");
         tr.remove();

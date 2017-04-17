@@ -3,6 +3,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -135,6 +136,15 @@
                 },
                 {
                     "data": "type",
+                    "render": function (data) {
+                        if(data==1){
+                            return "<fmt:message key="repair_temporary_repairs"/>";
+                        }else if(data=2){
+                            return "<fmt:message key="repair_dd"/>";
+                        }else {
+                            return "<fmt:message key="repair_remould"/>";
+                        }
+                    }
                 },
                 {
                     "data": "name",
@@ -185,7 +195,7 @@
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 red"><fmt:message key='go_delete'/> </a></li>'/*删除*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/enquiry">
-                            + '<li><a href="repairSpec/enquiry?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab"><fmt:message key='repair_spec_enquiry'/> </a></li>'/*询价*/
+                            + '<li><a href="enquiry/compare?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab">比价 </a></li>'/*询价*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/exportExcel">
                             + '<li><a onclick="addId(' + row.id + ')" href="#static" data-toggle="modal" class="btn btn-sm margin-bottom-5 yellow"><fmt:message key='repair_spec_send_excel'/> </a></li>'/*发送excel*/
@@ -238,7 +248,7 @@
         if (email == "") {
             $("#email").tips({
                 side: 1,
-                msg: '<fmt:message key="register_email_empty"/>',
+                msg: "<fmt:message key="register_email_empty"/>",
                 bg: '#AE81FF',
                 time: 3
             });
@@ -319,7 +329,7 @@
         if (attr.length <= 0) {
             $("#example1").tips({
                 side: 1,
-                msg: '<fmt:message key="register_email_empty"/>',/*邮箱不能为空*/
+                msg: "<fmt:message key="register_email_empty"/>",/*邮箱不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });

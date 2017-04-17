@@ -84,7 +84,7 @@ public class RepairSpecController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public JSONObject list(RepairSpec repairSpec, @RequestParam(required = false) String keyword) {
+    public JSONObject list(RepairSpec repairSpec, @RequestParam(required = false) String keyword,Map map) {
         int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<RepairSpec> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
@@ -93,9 +93,9 @@ public class RepairSpecController extends BaseController {
         ew.addFilter("company_id={0}", companyId);
         ew.orderBy("update_date", false);
         Page<RepairSpec> page = repairSpecService.selectPage(getPage(), ew);
-        for (RepairSpec spec : page.getRecords()) {
+        /*for (RepairSpec spec : page.getRecords()) {
             spec.setType(dictService.getDesByTypeAndValue("维修类型", spec.getType()));
-        }
+        }*/
         return jsonPage(page);
     }
 

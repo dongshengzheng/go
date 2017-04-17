@@ -25,7 +25,7 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            维修工程单汇报
+                            <fmt:message key="report_progress_report"/> <%--维修工程单汇报--%>
                         </div>
                     </div>
                 </div>
@@ -33,14 +33,14 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>船舶名称</th>
-                        <th>维修单号</th>
-                        <th>维修状态</th>
-                        <th>维修船厂</th>
-                        <th>最后报告日期</th>
-                        <th>汇报邮箱</th>
-                        <th>查看每日汇报</th>
-                        <th>工程汇报</th>
+                        <th><fmt:message key="repair_vessel_name"/> </th><%--船舶名称--%>
+                        <th><fmt:message key="repair_repc_num"/></th><%--维修单号--%>
+                        <th><fmt:message key="report_repair_status"/></th><%--维修状态--%>
+                        <th><fmt:message key="report_repair_shipyard"/></th><%--维修船厂--%>
+                        <th><fmt:message key="report_last_date"/></th><%--最后报告日期--%>
+                        <th><fmt:message key="report_email_address"/></th><%--汇报邮箱--%>
+                        <th><fmt:message key="report_view_daily_report"/></th><%--查看每日汇报--%>
+                        <th><fmt:message key="report_project_report"/></th><%--工程汇报--%>
                     </tr>
                     </thead>
                 </table>
@@ -82,11 +82,11 @@
                     "data": "status",
                     "render": function (data) {
                         if (data == 0) {
-                            return "已完成";
+                            return "<fmt:message key='progress_completed'/> ";/*已完成*/
                         } else if (data == 1) {
-                            return "进行中";
+                            return "<fmt:message key='progress_underway'/>";/*进行中*/
                         } else {
-                            return "未开始";
+                            return "<fmt:message key='progress_not_started'/>";/*未开始*/
                         }
                     }
                 },
@@ -99,7 +99,7 @@
                         if (data != null) {
                             return '<a href="report/info?id=' + data.id + '"  data-model="dialog">' + data.publishTime + '</a>'
                         }
-                        return "暂无报告信息";
+                        return "<fmt:message key='report_no_report_info'/>";/*暂无报告信息*/
                     }
                 },
                 {
@@ -118,14 +118,14 @@
                 {
                     "data": "id",
                     "render": function (data) {
-                        return "<a href='task/info?id=" + data + "' data-target='navTab'>进入汇报</a>";
+                        return "<a href='task/info?id=" + data + "' data-target='navTab'><fmt:message key='report_enter_report'/></a>";/*进入汇报*/
                     }
                 },
                 {
                     "data": "id",
                     "render": function (data) {
-                        return "<a href='report?taskId=" + data + "' class='btn btn-sm blue' data-target='navTab'>查看</a>" +
-                                "<a href='task/delete?id=" + data + "' data-msg='定删除吗？'  data-model='ajaxToDo' data-callback='refreshTable' class='btn btn-sm margin-bottom-5 red'>删除</a>";
+                        return "<a href='report?taskId=" + data + "' class='btn btn-sm blue' data-target='navTab'><fmt:message key="go_check"/> </a>" +/*查看*/
+                                "<a href='task/delete?id=" + data + "' data-msg='<fmt:message key="go_delete_confirm"/> '  data-model='ajaxToDo' data-callback='refreshTable' class='btn btn-sm margin-bottom-5 red'><fmt:message key="go_delete"/> </a>";/*确定删除吗？删除*/
                     }
                 },
 
@@ -135,7 +135,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船舶名称");
+                initSearchForm(null, "<fmt:message key="ship_name_input"/> ");/*请输入船舶名称*/
             }
         });
         $('#myInput').on('keyup', function () {

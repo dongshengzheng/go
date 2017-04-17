@@ -84,14 +84,14 @@
                         <div id="bootstrap_alerts_demo"></div>
                         <div class="caption caption-md">
                             <i class="fa fa-user"></i>
-                            <span class="caption-subject font-blue-madison bold uppercase"> 新增维修工程单</span>
+                            <span class="caption-subject font-blue-madison bold uppercase"><fmt:message key="repair_spec_add"/> </span><%--新增维修工程单--%>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="portlet box blue-dark" id="item0">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="fa fa-info"></i>工程单概要
+                                    <i class="fa fa-info"></i><fmt:message key="repair_spec_summary"/> <%--工程单概要--%>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"> </a>
@@ -101,10 +101,10 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="shipId" class="col-sm-3 control-label">
-                                            船舶名称</label>
+                                            <fmt:message key="repair_vessel_name"/> <%--船舶名称--%></label>
                                         <div class="col-sm-7">
                                             <select id="shipId" name="shipId" class="form-control select2">
-                                                <option value="0">请输入船舶名称或IMO号</option>
+                                                <option value="0"><fmt:message key="ship_nameOrIMO_input"/> </option><%--请输入船舶名称或IMO号--%>
                                                 <c:forEach items="${shipList}" var="ship">
                                                     <option value="${ship.id}" data-name="${ship.name}">${ship.name}
                                                         imo:${ship.imo}</option>
@@ -120,7 +120,7 @@
                                             <div class="input-group">
                                                 <input id="planStartDate" name="planStartDate" type="text"
                                                        class="form-control date-picker" readonly
-                                                       placeholder="请选择进厂日期">
+                                                       placeholder="<fmt:message key='repair_spec_enter_shipyard_date'/> "><%--请选择进厂日期--%>
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
@@ -130,10 +130,11 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="planDays" class="col-sm-3 control-label">
-                                            预估天数</label>
+                                            <fmt:message key="repair_spec_estimate_day"/> <%--预估天数--%></label>
                                         <div class="col-sm-7">
                                             <input id="planDays" name="planDays" type="text"
-                                                   class="form-control required" placeholder="请输入预估维修天数">
+                                                   class="form-control required"
+                                                   placeholder="<fmt:message key='repair_spec_estimate_day_input'/> "><%--请输入预估维修天数--%>
                                         </div>
                                     </div>
                                     <%-- <div class="form-group col-md-6">
@@ -151,13 +152,13 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="col-sm-3 control-label">
-                                            维修类型</label>
+                                            <fmt:message key="repair_spec_type"/> <%--维修类型--%></label>
                                         <div class="col-sm-9 icheck-inline">
                                             <c:forEach items="${typeList}" var="type" varStatus="vs">
                                                 <label>
                                                     <input type="radio" name="type"
                                                            value="${type.value}"
-                                                           <c:if test="${vs.count==1}">checked</c:if>> ${type.des}
+                                                           <c:if test="${vs.count==1}">checked</c:if>> <fmt:message key="${type.des}"/>
                                                     <span></span>
                                                 </label>
                                             </c:forEach>
@@ -235,11 +236,11 @@
                             <shiro:hasPermission name="repairSpec/add">
                                 <a id="submitButton" type="button" onclick="severCheck()"
                                    class="btn btn-primary mt-ladda-btn ladda-button" data-style="slide-down">
-                                    <span class="ladda-label">提交</span>
+                                    <span class="ladda-label"><fmt:message key="repair_spec_submit"/> </span><%--提交--%>
                                 </a>
                             </shiro:hasPermission>
-                            <a class="btn blue" data-toggle="modal" href="#small">清空</a>
-                            <a href="repairSpec" class="btn default" data-target="navTab">取消</a>
+                            <a class="btn blue" data-toggle="modal" href="#small"><fmt:message key="repair_spec_empty"/> </a><%--清空--%>
+                            <a href="repairSpec" class="btn default" data-target="navTab"><fmt:message key="repair_spec_cancel"/> </a><%--取消--%>
                         </div>
                     </div>
                 </div>
@@ -252,11 +253,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">确认清空?</h4>
+                    <h4 class="modal-title"><fmt:message key="repair_spec_confirm_empty"/> </h4><%--确认清空?--%>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark btn-outline cancel" data-dismiss="modal">取消</button>
-                    <button type="reset" onclick="closeModal()" class="btn green">确定</button>
+                    <button type="button" class="btn dark btn-outline cancel" data-dismiss="modal"><fmt:message key="repair_spec_cancel"/> </button><%--取消--%>
+                    <button type="reset" onclick="closeModal()" class="btn green"><fmt:message key="repair_spec_confirm"/> </button><%--确定--%>
                 </div>
             </div>
         </div>
@@ -278,7 +279,7 @@
 
 <a style="display:none" id="go-to-edit" href="repairSpec/edit?id=8" class="btn btn-sm margin-bottom-5"
    data-target="navTab"><span
-        class="ladda-label">编辑</span></a>
+        class="ladda-label"><fmt:message key="go_editor"/> </span></a><%--编辑--%>
 <script>
     function closeModal() {
         $("#small .cancel").click();
@@ -475,7 +476,7 @@
         if (shipId == "0") {
             $("#shipId").tips({
                 side: 1,
-                msg: "船舶不能为空",
+                msg: "<fmt:message key='ship_name_empty'/> ",/*船舶不能为空*/
                 bg: '#FF5080',
                 time: 15
             });

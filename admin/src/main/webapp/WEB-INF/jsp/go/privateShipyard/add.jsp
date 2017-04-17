@@ -127,8 +127,8 @@
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-3 col-md-9">
-                            <button type="button" class="btn green" onclick="severCheck()">提交</button>
-                            <input  type="reset" class="btn btn-default" value="重置"/>
+                            <button type="button" class="btn green" onclick="severCheck()"><fmt:message key="go_submit"/> <%--提交--%></button>
+                            <input  type="reset" class="btn btn-default" value="<fmt:message key='go_reset'/> "/>
 
                         </div>
                     </div>

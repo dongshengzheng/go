@@ -55,7 +55,7 @@
                     <div class="portlet-title tabbable-line">
                         <div class="caption caption-md">
                             <i class="fa fa-user"></i>
-                            <span class="caption-subject font-blue-madison bold uppercase"> 维修工程进度看板</span>
+                            <span class="caption-subject font-blue-madison bold uppercase"> <fmt:message key="progress_spectaculars"/> <%--维修工程进度看板--%></span>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -63,7 +63,7 @@
                         <div class="portlet box blue-dark">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="fa fa-info"></i>维修进度汇总
+                                    <i class="fa fa-info"></i><fmt:message key="progress_summarizing"/> <%--维修进度汇总--%>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"> </a>
@@ -74,13 +74,13 @@
                                        id="count_table">
                                     <thead>
                                     <tr>
-                                        <th style="width:14%">分类</th>
-                                        <th style="width:14%">项目总数</th>
-                                        <th style="width:14%">已完成</th>
-                                        <th style="width:14%">进行中</th>
-                                        <th style="width:14%">未开始</th>
-                                        <th style="width:14%">已取消</th>
-                                        <th style="width:16%">完成百分比</th>
+                                        <th style="width:14%"><fmt:message key="progress_classify"/> </th><%--分类--%>
+                                        <th style="width:14%"><fmt:message key="progress_ItemCount"/></th><%--项目总数--%>
+                                        <th style="width:14%"><fmt:message key="progress_completed"/></th><%--已完成--%>
+                                        <th style="width:14%"><fmt:message key="progress_underway"/></th><%--进行中--%>
+                                        <th style="width:14%"><fmt:message key="progress_not_started"/></th><%--未开始--%>
+                                        <th style="width:14%"><fmt:message key="progress_canceled"/></th><%--已取消--%>
+                                        <th style="width:16%"><fmt:message key="progress_percentage_completion"/></th><%--完成百分比--%>
                                     </tr>
                                     </thead>
                                 </table>
@@ -91,24 +91,24 @@
                         <div class="portlet box blue-dark">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="fa fa-cog"></i>维修工程进度看板
+                                    <i class="fa fa-cog"></i><fmt:message key="progress_spectaculars"/> <%--维修工程进度看板--%>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"> </a>
                                 </div>
                                 <div class="caption" style="float: right">
-                                    说明:
+                                    <fmt:message key="progress_explain"/> <%--说明--%>:
                                     <a class="btn btn-sm green-jungle disabled" style="padding: 2px 5px;opacity: 1">
-                                        已完成
+                                        <fmt:message key="progress_completed"/> <%--已完成--%>
                                     </a>
                                     <a class="btn btn-sm blue disabled" style="padding: 2px 5px;opacity: 1">
-                                        进行中
+                                        <fmt:message key="progress_underway"/><%--进行中--%>
                                     </a>
                                     <a class="btn btn-sm default disabled" style="padding: 2px 5px;opacity: 1">
-                                        未开始
+                                        <fmt:message key="progress_not_started"/><%--未开始--%>
                                     </a>
                                     <a class="btn btn-sm  yellow disabled" style="padding: 2px 5px;opacity: 1">
-                                        已取消
+                                        <fmt:message key="progress_canceled"/><%--已取消--%>
                                     </a>
                                 </div>
                             </div>
@@ -190,7 +190,7 @@
                         <%--维修工程进度看板结束--%>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <a href="repairProg" class="btn default" data-target="navTab">返回</a>
+                        <a href="repairProg" class="btn default" data-target="navTab"><fmt:message key="go_back"/> <%--返回--%></a>
                     </div>
                 </div>
             </div>
@@ -285,7 +285,7 @@
                     btn.removeClass().addClass("btn dropdown-toggle " + thisone.attr("data-color"));
                     btn.tips({
                         side: 1,
-                        msg: '修改成功',
+                        msg: '',/*修改成功*/
                         bg: '#6AC1F1',
                         time: 3
                     });
@@ -303,7 +303,7 @@
                 alert(2);
                 btn.tips({
                     side: 1,
-                    msg: "发生异常,请稍后再试",
+                    msg: "<fmt:message key='repair_spec_go_wrong'/> ",/*发生异常,请稍后再试*/
                     bg: '#6AC1F1',
                     time: 3
                 });

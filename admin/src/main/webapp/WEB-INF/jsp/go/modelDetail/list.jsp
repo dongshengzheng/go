@@ -19,13 +19,13 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            范本信息
+                            <fmt:message key="repair_specification_example"/> <%--维修范本单--%>
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
                                 <shiro:hasPermission name="modelDetail/add">
                                     <a href="modelDetail/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增范本信息
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> <fmt:message key="example_add"/> <%--新增范本信息--%>
                                     </a>
                                 </shiro:hasPermission>
                             </div>
@@ -36,11 +36,11 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>工程名称</th>
-                        <th>船名</th>
-                        <th>项目分类</th>
-                        <th>项目号</th>
-                        <th>操作</th>
+                        <th><fmt:message key="project_name"/> </th><%--工程名称--%>
+                        <th><fmt:message key="project_vessel_name"/></th><%--船名--%>
+                        <th><fmt:message key="project_category"/></th><%--项目分类--%>
+                        <th><fmt:message key="project_number"/></th><%--项目号--%>
+                        <th><fmt:message key="go_operation"/></th><%--操作--%>
                     </tr>
                     </thead>
                 </table>
@@ -90,14 +90,14 @@
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="modelDetail/info">
-                            + '<a href="modelDetail/info?id=' + row.id + '&operate=look" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
+                            + '<a href="modelDetail/info?id=' + row.id + '&operate=look" class="btn btn-sm grey-mint" data-target="navTab"></i><fmt:message key="go_search"/> </a>'
                            </shiro:hasPermission>
                             <shiro:hasPermission name="modelDetail/info">
-                            + '<a href="modelDetail/info?id=' + row.id + '&operate=edit" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
+                            + '<a href="modelDetail/info?id=' + row.id + '&operate=edit" class="btn  btn-sm blue" data-target="navTab"></i><fmt:message key="go_editor"/> </a>'/*编辑*/
                            </shiro:hasPermission>
                             <shiro:hasPermission name="modelDetail/delete">
                             + '<a href="modelDetail/delete?id=' + row.id +
-                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
+                            '" data-msg="<fmt:message key="go_delete_confirm"/> "  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red"><fmt:message key="go_delete"/> </a>'
                             </shiro:hasPermission>
                             ;
                 }
@@ -107,7 +107,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入工程名称");
+                initSearchForm(null, "<fmt:message key="project_enter_name"/> ");/*请输入工程名称*/
             }
         });
 

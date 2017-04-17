@@ -10,5 +10,5 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface EnquiryMapper extends AutoMapper<Enquiry> {
 
-
+    Enquiry selectByShipyardIdAndRepairSpecId(Integer shipyardId, Integer repairSpecId);
 }

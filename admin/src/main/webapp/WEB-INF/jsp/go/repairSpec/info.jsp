@@ -74,14 +74,14 @@
                         <div id="bootstrap_alerts_demo"></div>
                         <div class="caption caption-md">
                             <i class="fa fa-user"></i>
-                            <span class="caption-subject font-blue-madison bold uppercase"> 编辑维修工程单</span>
+                            <span class="caption-subject font-blue-madison bold uppercase"> <fmt:message key="repair_spec_review"/> <%--查看维修工程单--%></span>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="portlet box blue-dark" id="item0">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="fa fa-info"></i>工程单概要
+                                    <i class="fa fa-info"></i><fmt:message key="repair_spec_summary"/> <%--工程单概要--%>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"> </a>
@@ -91,11 +91,11 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="col-sm-3 control-label">
-                                            船舶名称</label>
+                                            <fmt:message key="repair_vessel_name"/> <%--船舶名称--%></label>
                                         <div class="col-sm-7">
                                             <input type="hidden" name="shipId" value="${repairSpec.shipId}">
                                             <input name="shipName" id="shipName" class="form-control" readonly
-                                                   value="${repairSpec.shipName}" placeholder="无船舶名称信息">
+                                                   value="${repairSpec.shipName}">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -105,7 +105,7 @@
                                                 <input id="planStartDate" name="planStartDate" type="text"
                                                        class="form-control" readonly
                                                        value="<fmt:formatDate value='${repairSpec.planStartDate}' pattern="yyyy-MM-dd"/>"
-                                                       placeholder="无进厂日期信息">
+                                                       placeholder="<fmt:message key='repair_spec_enter_shipyard_date_no'/> ">无进厂日期信息
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
@@ -118,7 +118,7 @@
                                             预估天数</label>
                                         <div class="col-sm-7">
                                             <input id="planDays" name="planDays" type="text" ${repairSpec.planDays}
-                                                   class="form-control required" placeholder="无预估维修天数信息">
+                                                   class="form-control required" placeholder="<fmt:message key="repair_spec_estimate_no"/> "><%--无预估维修天数信息--%>
                                         </div>
                                     </div>
                                    <%-- <div class="form-group col-md-6">
@@ -138,8 +138,7 @@
                                         <label class="col-sm-3 control-label">
                                             维修类型</label>
                                         <div class="col-sm-7">
-                                            <input value="${repairSpec.type}" class="form-control"
-                                                   placeholder="无预估维修类型信息">
+                                            <input value="${repairSpec.type}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +147,7 @@
                         <div class="portlet box blue-dark">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="fa fa-cog"></i>维修工程详细
+                                    <i class="fa fa-cog"></i><fmt:message key="repair_spec_information"/> <%--维修工程详细--%>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"> </a>
@@ -175,12 +174,12 @@
                                                 <c:if test="${outerVs.count==1}">
                                                     <thead>
                                                     <tr>
-                                                        <th style="width:10%">项目号</th>
-                                                        <th style="width:45%">维修内容</th>
-                                                        <th style="width:10%">单位</th>
-                                                        <th style="width:10%">数量</th>
-                                                        <th style="width:10%">备注</th>
-                                                        <th style="width:10%">操作</th>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_sn"/> </th><%--项目号--%>
+                                                        <th style="width:45%"><fmt:message key="repair_spec_description"/></th><%--维修内容--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_unit"/></th><%--单位--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_quantity"/></th><%--数量--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_remark"/></th><%--备注--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_operation"/></th><%--操作--%>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -191,10 +190,10 @@
                                                 <c:if test="${outerVs.count!=1}">
                                                     <thead>
                                                     <tr>
-                                                        <th style="width:10%">工程单号</th>
-                                                        <th style="width:15%">工程单名</th>
-                                                        <th style="width:65%">工程描述</th>
-                                                        <th style="width:10%">操作</th>
+                                                        <th style="width:10%"><fmt:message key="project_bill_number"/></th><%--工程单号--%>
+                                                        <th style="width:15%"><fmt:message key="project_name"/></th><%--工程单名--%>
+                                                        <th style="width:65%"><fmt:message key="project_describe"/></th><%--工程描述--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_operation"/></th><%--操作--%>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -208,7 +207,7 @@
                             </div>
                         </div>
                         <div class="modal-footer" style="text-align: center" id="item9">
-                            <a href="repairSpec" class="btn default" data-target="navTab">返回</a>
+                            <a href="repairSpec" class="btn default" data-target="navTab"><fmt:message key="epair_spec_back"/><fmt:message key="repair_spec_back"/> </a><%--返回--%>
                         </div>
                     </div>
                 </div>
@@ -268,7 +267,7 @@
                         tr.find(".unit-td").html(a.unit);
                         tr.find(".count-td").html(a.count);
                         if (a.parentCode == 0) {
-                            tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>查看备注</a> <textarea class='remark-text' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
+                            tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'><fmt:message key="repair_spec_review_remark"/> </a> <textarea class='remark-text' cols='60' rows='10' wrap='hard' placeholder='<fmt:message key="repair_spec_no_remark"/> ' style='display: none'></textarea>")/*查看备注  暂未添加备注*/
                         }
                         if (a.children != 0) {
                             var td = tr.find(".show-td");
@@ -280,7 +279,7 @@
                     })
                     tbody.find("input").prop("readonly", true);
                 } else {
-                    tbody.html("<tr><td colspan='6'>无项目信息</td></tr>")
+                    tbody.html("<tr><td colspan='6'><fmt:message key="repair_spec_project_info"/> </td></tr>")/*无项目信息*/
                 }
             },
         })
@@ -317,7 +316,7 @@
                         tbody.append(tr);
                     })
                 } else {
-                    tbody.html("<tr><td colspan='4'>无详单信息</td></tr>")
+                    tbody.html("<tr><td colspan='4'><fmt:message key="repair_spec_detail_info"/> </td></tr>")/*无详单信息*/
                 }
             },
         })

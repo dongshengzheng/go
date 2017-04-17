@@ -4,7 +4,11 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, title, supplier, quote_date AS quoteDate, quote_totle_price AS quoteTotlePrice, other_price AS otherPrice, discount, payment, invoice_type AS invoiceType, t_repair_spec_id AS tRepairSpecId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, title, supplier, quote_date AS quoteDate, quote_totle_price AS quoteTotlePrice, other_price AS otherPrice, discount, payment, invoice_type AS invoiceType, private_shipyard_id AS privateShipyardId, private_shipyard_name AS privateShipyardName, repair_spec_id AS repairSpecId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, file_name AS fileName
 	</sql>
+    <select id="selectByShipyardIdAndRepairSpecId"
+            resultType="com.ctoangels.go.common.modules.go.entity.Enquiry">
+		select * FROM t_enquiry where private_shipyard_id=#{0} and repair_spec_id=#{1}
+	</select>
 
 </mapper>

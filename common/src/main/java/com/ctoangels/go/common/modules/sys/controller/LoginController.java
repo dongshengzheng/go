@@ -30,6 +30,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 
 import javax.mail.Message;
@@ -38,6 +41,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Security;
 import java.util.*;
 
@@ -53,6 +58,9 @@ public class LoginController extends BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+
+    @Autowired
+    private SessionLocaleResolver resolver;
 
     @Autowired
     private UserService userService;
@@ -424,4 +432,22 @@ public class LoginController extends BaseController {
         return jsonObject;
     }
 
+
+    @RequestMapping("/language")
+    public ModelAndView language(HttpServletRequest request, HttpServletResponse response,String language){
+        language=language.toLowerCase();
+        if(language==null||language.equals("")){
+            return new ModelAndView("redirect:/");
+        }else{
+            if(language.equals("zh")){
+                resolver.setLocale(request, response, Locale.CHINA );
+            }else if(language.equals("en")){
+                resolver.setLocale(request, response, Locale.ENGLISH );
+            }else{
+                resolver.setLocale(request, response, Locale.CHINA );
+            }
+        }
+
+        return new ModelAndView("redirect:/");
+    }
 }

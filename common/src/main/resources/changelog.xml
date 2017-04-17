@@ -751,8 +751,12 @@
             alter table t_repair_prog add shipyard_name varchar(225) Null;
         </sql>
     </changeSet>
-
-
+    <changeSet author="LuZhen" id="17317309132-056">
+        <sql>
+            INSERT INTO `t_dict` VALUES (null,'维修部位', '14', '货仓', null, null, null, null, '0');
+            update t_dict set value=14 where id=15;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

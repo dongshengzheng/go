@@ -58,6 +58,8 @@
     <form role="form" method="post" action="" name="loginForm"
           id="loginForm">
         <h3 class="form-title"><fmt:message key="sys.user.plogin"/></h3>
+        <a href="language?language=en" data-target="model" >英文</a>
+        <a href="language?language=zh" data-target="model" >中文</a>
         <p><fmt:message key="login_no_account"/><a class="color-green" href="register"><fmt:message
                 key="sys.user.register"/></a>!</p>
         <div class="form-group">
@@ -82,9 +84,9 @@
                  style="width: 40%; height: 34px; margin-left: 12px;" src="">
         </div>
         <div class="form-actions">
-            <button onclick="severCheck();" type="button" class="btn green">
+            <button style="float: left" onclick="severCheck();" type="button" class="btn green">
                 <fmt:message key="sys.user.login"/></button>
-            <button onclick="tryOut()" type="button" class="btn green">
+            <button style="float: right" onclick="tryOut()" type="button" class="btn green">
                 <fmt:message key="login_try_out"/></button>
         </div>
     </form>
@@ -197,7 +199,7 @@
 
             $("#loginName").tips({
                 side: 2,
-                msg: '<fmt:message key="login_username_empty"/>',
+                msg: "<fmt:message key="login_username_empty"/>",
                 bg: '#AE81FF',
                 time: 3
             });
@@ -212,7 +214,7 @@
 
             $("#password").tips({
                 side: 2,
-                msg: '<fmt:message key="login_pwd_empty"/>',
+                msg: "<fmt:message key="login_pwd_empty"/>",
                 bg: '#AE81FF',
                 time: 3
             });
@@ -224,7 +226,7 @@
 
             $("#code").tips({
                 side: 1,
-                msg: '<fmt:message key="login_verifycode_empty"/>',
+                msg: "<fmt:message key="login_verifycode_empty"/>",
                 bg: '#AE81FF',
                 time: 3
             });

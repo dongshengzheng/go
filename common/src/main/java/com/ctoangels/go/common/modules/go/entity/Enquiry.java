@@ -52,9 +52,17 @@ public class Enquiry implements Serializable {
 	@TableField(value = "invoice_type")
 	private String invoiceType;
 
+	/** 维修船厂id */
+	@TableField(value = "private_shipyard_id")
+	private Integer privateShipyardId;
+
+	/** 维修船厂名称 */
+	@TableField(value = "private_shipyard_name")
+	private String privateShipyardName;
+
 	/** 维修工程单的id */
-	@TableField(value = "t_repair_spec_id")
-	private Integer tRepairSpecId;
+	@TableField(value = "repair_spec_id")
+	private Integer repairSpecId;
 
 	/** 创建时间 */
 	@TableField(value = "create_date")
@@ -76,6 +84,9 @@ public class Enquiry implements Serializable {
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
+	/** 文件名称 */
+	@TableField(value = "file_name")
+	private String fileName;
 
 	public Integer getId() {
 		return this.id;
@@ -149,13 +160,6 @@ public class Enquiry implements Serializable {
 		this.invoiceType = invoiceType;
 	}
 
-	public Integer getTRepairSpecId() {
-		return this.tRepairSpecId;
-	}
-
-	public void setTRepairSpecId(Integer tRepairSpecId) {
-		this.tRepairSpecId = tRepairSpecId;
-	}
 
 	public Date getCreateDate() {
 		return this.createDate;
@@ -197,4 +201,35 @@ public class Enquiry implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public Integer getPrivateShipyardId() {
+		return privateShipyardId;
+	}
+
+	public void setPrivateShipyardId(Integer privateShipyardId) {
+		this.privateShipyardId = privateShipyardId;
+	}
+
+	public String getPrivateShipyardName() {
+		return privateShipyardName;
+	}
+
+	public void setPrivateShipyardName(String privateShipyardName) {
+		this.privateShipyardName = privateShipyardName;
+	}
+
+	public Integer getRepairSpecId() {
+		return repairSpecId;
+	}
+
+	public void setRepairSpecId(Integer repairSpecId) {
+		this.repairSpecId = repairSpecId;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 }

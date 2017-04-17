@@ -6,4 +6,9 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="inquiry"></go:navigater>
+<style>
+    table th,td {
+        text-align: center;
+    }
+</style>
+<go:navigater path="enquiry"></go:navigater>

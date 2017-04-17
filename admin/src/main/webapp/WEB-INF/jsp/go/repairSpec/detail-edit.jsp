@@ -88,7 +88,7 @@
 </style>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title" style="color: white">维修详单</h4>
+    <h4 class="modal-title" style="color: white"><fmt:message key="repair_spec_detail"/><%--维修详单--%></h4>
 </div>
 <form action="" method="post" class="form-horizontal" id="detail_form">
     <c:if test="${!empty detail}">
@@ -104,7 +104,7 @@
         <div style="height:40px;width: 100%;background-color: #C0C9CC">
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
-                    <label for="shipName" class="col-sm-5 control-label label-top">船名：</label>
+                    <label for="shipName" class="col-sm-7 control-label label-top"><fmt:message key="project_vessel_name"/><%--船名--%>：</label>
                     <label style="width: auto;padding-left: 0px;"
                            class="col-sm-5 control-label label-top">${detail.shipName}</label>
                     <input style="display: none" readonly id="shipName" name="shipName" type="text" maxlength="32"
@@ -112,7 +112,7 @@
                            class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
+                    <label for="catagory" class="col-sm-6 control-label label-top"><fmt:message key="project_category"/><%--项目分类--%>：</label>
                     <label style="width: auto;padding-left: 0px;"
                            class="col-sm-6 control-label label-top">${detail.catagory}</label>
                     <input style="display: none" readonly id="catagory" name="catagory" type="text" maxlength="32"
@@ -120,17 +120,17 @@
                            class="form-control ">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
+                    <label for="code" class="col-sm-7 control-label label-top"><fmt:message key="project_number"/><%--项目号--%>：</label>
                     <label style="width: auto;padding-left: 0px;"
-                           class="col-sm-6 control-label label-top">${detail.code}</label>
+                           class="col-sm-5 control-label label-top">${detail.code}</label>
                     <input style="display: none" readonly id="code" name="code" type="text" maxlength="32"
                            value="${detail.code}"
                            class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
+                    <label for="proOrderNo" class="col-sm-8 control-label label-top"><fmt:message key="project_bill_number"/><%--项目单号--%>：</label>
                     <label style="width: auto;padding-left: 0px;"
-                           class="col-sm-6 control-label label-top">${detail.proOrderNo}</label>
+                           class="col-sm-4 control-label label-top">${detail.proOrderNo}</label>
                     <input style="display: none" readonly id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
                            value="${detail.proOrderNo}"
                            class="form-control required">
@@ -140,43 +140,43 @@
         <div class="row">
             <div class="col-md-8 left">
                 <div style="width: 100%;">
-                    <div><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
-                    <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：
+                    <div><span style="background-color: #C0C9CC;font-size: 20px"><fmt:message key="project_describe" /><%--工程项目描述--%></span></div>
+                    <div class="col-md-12 div-left" style="margin-top: 20px"><fmt:message key="project_name"/><%--工程名称--%>：
                         <input style="width: 50%" id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span
                                 id="remind"></span>
                     </div>
-                    <div class="col-md-12 div-left">工程描述：</div>
+                    <div class="col-md-12 div-left"><fmt:message key="project_describe"/><%--工程描述--%>：</div>
                     <div class="col-md-12" style="margin-left: 20px">
                         <textarea id="proDesc" class="form-control" rows="4" name="proDesc">${detail.proDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div><span class="head">设备信息</span></div>
+                    <div><span class="head"><span class="head"><fmt:message key="project_equipment_info"/><%--设备信息--%></span></div>
                     <div class="col-md-6">
                         <div class="form-group col-md-12">
-                            <label for="faciName" class="col-sm-6 control-label">设备名称:</label>
+                            <label for="faciName" class="col-sm-6 control-label"><fmt:message key="project_equipment_name"/><%--设备名称--%>:</label>
                             <div class="col-sm-6">
                                 <input id="faciName" name="faciName" type="text" value="${detail.faciName}"
                                        class="">
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="faciType" class="col-sm-6 control-label">设备型号:</label>
+                            <label for="faciType" class="col-sm-6 control-label"><fmt:message key="project_equipment_model"/><%--设备型号--%>:</label>
                             <div class="col-sm-6">
                                 <input id="faciType" name="faciType" type="text" value="${detail.faciType}"
                                        class="">
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="faciSrc" class="col-sm-6 control-label">厂家/国家:</label>
+                            <label for="faciSrc" class="col-sm-6 control-label"><fmt:message key="project_manufacturer_nation"/><%--厂家/国家--%>:</label>
                             <div class="col-sm-6">
                                 <input id="faciSrc" name="faciSrc" type="text" value="${detail.faciSrc}"
                                        class="">
                             </div>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="faciNo" class="col-sm-6 control-label">序列号:</label>
+                            <label for="faciNo" class="col-sm-6 control-label"><fmt:message key="project_serial_number"/><%--序列号--%>:</label>
                             <div class="col-sm-6">
                                 <input id="faciNo" name="faciNo" type="text" value="${detail.faciNo}"
                                        class="">
@@ -185,14 +185,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group" style="margin-left: 20px">
-                            <textarea class="form-control" rows="7" placeholder="请输入相关参数"
+                            <textarea class="form-control" rows="7" placeholder="<fmt:message key='project_related_parameters'/>> "<%--请输入相关参数--%>
                                       name="faciParam">${detail.faciParam}</textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div><span class="head">维修部位</span></div>
+                    <div><span class="head"><fmt:message key='project_repair_location'/><%--维修部位--%></span></div>
                     <div class="form-group col-md-12" style="margin-left: 3px;margin-top: 20px">
                         <c:forEach items="${repDicts}" var="r">
                             <div class="col-md-3">
@@ -203,20 +203,20 @@
                                            checked
                                     </c:if>
                                     </c:forEach>
-                                           name="repairPosition"> ${r.des}
+                                           name="repairPosition"> <fmt:message key="${r.des}"/>
                                     <span></span>
                                 </label>
                             </div>
                         </c:forEach>
                     </div>
                     <div class="col-md-12" style="margin-left: 20px">
-                        <textarea class="form-control" rows="4" placeholder="请输入详细位置"
+                        <textarea class="form-control" rows="4" placeholder="<fmt:message key='project_detail_location'/>"<%--请输入详细位置--%>
                                   name="repairPositionDesc">${detail.repairPositionDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div><span class="head">损坏程度</span></div>
+                    <div><span class="head"><fmt:message key='project_extent_damage'/><%--损坏程度--%></span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">
                         <textarea class="form-control" rows="4" name="damage">${detail.damage}</textarea>
                     </div>
@@ -225,7 +225,7 @@
             <div class="col-sm-4" id="imgNum">
                 <input type="hidden" value="0" id="num"/>
                 <input type="hidden" value="${size}" id="size"/>
-                <div style="margin-top: 5px"><span class="head">上传图片</span></div>
+                <div style="margin-top: 5px"><span class="head"><fmt:message key="project_upload_img"/><%--上传图片--%></span></div>
                 <c:if test="${specDetailMedias!=null}">
                     <c:forEach var="s" items="${specDetailMedias}">
                         <div class="col-md-12" style="margin-top: 20px;border: 1px dashed #337ab7;padding: 0px">
@@ -248,14 +248,14 @@
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div><span class="head">维修描述/材料规格</span></div>
+            <div><span class="head"><fmt:message key="project_repair_des_material_spec"/><%--维修描述/材料规格--%></span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
                 <div id="example1" style=" height: 300px; overflow: hidden;"></div>
             </div>
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div><span class="head">修理工艺</span></div>
+            <div><span class="head"><fmt:message key="project_repair_technology"/><%--修理工艺--%></span></div>
             <div class="form-group col-md-12 div-left" style="margin-top: 20px">
                 <c:forEach items="${reqDicts}" var="req">
                     <div class="col-md-3">
@@ -266,14 +266,14 @@
                                    checked
                             </c:if>
                             </c:forEach>
-                                   name="repairTech"> ${req.des}
+                                   name="repairTech"> <fmt:message key="${req.des}"/>
                             <span></span>
                         </label>
                     </div>
                 </c:forEach>
             </div>
             <div class="col-md-10 div-left">
-                <textarea class="form-control" rows="4" placeholder="请填写修理工艺"
+                <textarea class="form-control" rows="4" placeholder="<fmt:message key='project_repair_technology_input'/>"<%--请填写修理工艺--%>
                           name="repairTechDesc">${detail.repairTechDesc}</textarea>
             </div>
         </div>
@@ -284,13 +284,13 @@
             <div class="col-md-12" style="text-align: center">
                 <br>
                 <div id="detail_alert"></div>
-                <button type="button" class="btn green" onclick="saveInfo(1)">确定</button>
+                <button type="button" class="btn green" onclick="saveInfo(1)"><fmt:message key="go_confirm"/><%--确定--%></button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn green" onclick="saveInfo(2)">保存为范本</button>
+                <button type="button" class="btn green" onclick="saveInfo(2)"><fmt:message key="project_save_template"/><%--保存为范本--%></button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn default">重置</button>
+                <button type="button" class="btn default"><fmt:message key="go_reset"/><%--重置--%></button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="close" type="button" class="btn default" data-dismiss="modal">取消</button>
+                <button id="close" type="button" class="btn default" data-dismiss="modal"><fmt:message key="go_cancel"/><%--取消--%></button>
                 <br><br>
             </div>
         </div>
@@ -357,7 +357,7 @@
                                 close: true,
                                 icon: 'fa fa-warning',
                                 place: "append",
-                                message: "成功保存为范本",
+                                message: "<fmt:message key='project_success_template'/>",/*成功保存为范本*/
                                 type: 'success',
                                 reset: true,
                                 focus: false,
@@ -371,7 +371,7 @@
                             close: true,
                             icon: 'fa fa-warning',
                             place: "append",
-                            message: "提交失败,请稍后再试",
+                            message: "<fmt:message key='project_failure_submit'/>",/*提交失败,请稍后再试*/
                             type: 'danger',
                             reset: true,
                             focus: false,
@@ -385,7 +385,7 @@
                         close: true,
                         icon: 'fa fa-warning',
                         place: "append",
-                        message: "系统繁忙,请稍后再试",
+                        message: "<fmt:message key='project_system_busy'/>",/*系统繁忙,请稍后再试*/
                         type: 'warning',
                         reset: true,
                         focus: false,
@@ -399,7 +399,7 @@
     //客户端校验
     function check() {
         if ($("#proName").val() == "") {
-            $("#remind").html("*工程名称不能为空");
+            $("#remind").html("*<fmt:message key='project_name_empty'/>");/*工程名称不能为空*/
             $("#proName").focus();
             setTimeout("$('#remind').html('')", 3000);//延时3秒
             return false;
@@ -437,7 +437,7 @@
                 colHeaders: true,
                 colWidths: [width * 0.46, width * 0.07, width * 0.07],
                 minRows: 10,
-                colHeaders: ["要求和描述/材料规格", "单位", "数量"],
+                colHeaders: ["<fmt:message key='project_request'/> ", "<fmt:message key='project_unit'/>", "<fmt:message key='projec_quantity'/>"],/*"要求和描述/材料规格", "单位", "数量"*/
                 columnSorting: true,
                 columns: [
                     {data: "des"},
@@ -459,7 +459,7 @@
 
         },
         error: function (xhr, textStatus) {
-            console.log('错误');
+            console.log('<fmt:message key="go_error"/>');/*错误*/
         }
     });
     function handsontableData() {

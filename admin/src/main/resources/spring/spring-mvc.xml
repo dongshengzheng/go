@@ -64,7 +64,9 @@
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
     </mvc:interceptors>
 
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+       <!-- <property name="defaultLocale" value="en"/>-->
+    </bean>
     <bean id="exceptionResolver" class="com.ctoangels.go.admin.base.resolver.MyExceptionResolver"/>
     <!-- 上传拦截，如最大上传值及最小上传值 -->
     <bean id="multipartResolver"

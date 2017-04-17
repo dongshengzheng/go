@@ -44,7 +44,7 @@
 
     <div class="profile-content">
         <div class="row col-md-11">
-            <div class="col-md-12"><h4>记录报告</h4></div>
+            <div class="col-md-12"><h4><fmt:message key="report_record_report"/><%--记录报告--%></h4></div>
             <div class="col-md-12" style="padding-left:0px;padding-right: 0px">
                 <div class="timeline-body-content">
                     <table class="table table-bordered">
@@ -54,19 +54,19 @@
                             <td style="width: 50%">${progDetail.proDesc}</td>
                             <td>
                                 <c:if test="${progDetail.taskStatus == 0}">
-                                    <label  class='btn green-jungle'>已完成</label>
+                                    <label  class='btn green-jungle'><fmt:message key="progress_completed"/></label><%--已完成--%>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus == 1}">
-                                    <label  class='btn blue'>进行中</label>
+                                    <label  class='btn blue'><fmt:message key="progress_underway"/></label><%--进行中--%>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus==2}">
-                                    <label  class='btn default'>未开始</label>
+                                    <label  class='btn default'><fmt:message key="progress_not_started"/></label><%--未开始--%>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus ==3}">
-                                    <label  class='btn yellow'>已取消</label>
+                                    <label  class='btn yellow'><fmt:message key="progress_canceled"/></label><%--已取消--%>
                                 </c:if>
                             </td>
-                            <td><a data-model="dialog" href="repairProg/progDetail?id=${progDetail.id}">工程详单查看</a></td>
+                            <td><a data-model="dialog" href="repairProg/progDetail?id=${progDetail.id}">fmt:message key="report_review_spec_detail"/> </a></td><%--工程详单查看--%>
                         </tr>
                     </table>
                 </div>
@@ -77,20 +77,20 @@
                     <div style="margin-top: 20px" class="col-sm-10"><h4 class="block"> ${date}</h4></div>
                     <div style="margin-top: 30px" class="col-sm-2">
                         <c:if test="${reportDetails[i].taskStatus == 0}">
-                            <label  class='btn green-jungle'>已完成</label>
+                            <label  class='btn green-jungle'><fmt:message key="progress_completed"/></label><%--已完成--%>
                         </c:if>
                         <c:if test="${reportDetails[i].taskStatus == 1}">
-                            <label  class='btn blue'>进行中</label>
+                            <label  class='btn blue'><fmt:message key="progress_underway"/></label><%--进行中--%>
                         </c:if>
                         <c:if test="${reportDetails[i].taskStatus == null||reportDetails[i].taskStatus==2}">
-                            <label  class='btn default'>未开始</label>
+                            <label  class='btn default'><fmt:message key="progress_not_started"/></label><%--未开始--%>
                         </c:if>
                         <c:if test="${reportDetails[i].taskStatus ==3}">
-                            <label  class='btn yellow'>已取消</label>
+                            <label  class='btn yellow'><fmt:message key="progress_canceled"/></label><%--已取消--%>
                         </c:if>
                     </div>
                     <div class="col-md-12 note note-success">
-                        <div class="col-md-12"><h4>详情记录</h4></div>
+                        <div class="col-md-12"><h4><fmt:message key="report_details_recorded"/><%--详情记录--%></h4></div>
                         <div class="col-md-12 borders">
                             <div style="padding-top: 15px;padding-bottom: 15px">
                                 <div class="col-md-9" style="padding: 0px">
@@ -99,11 +99,11 @@
                                 </div>
                                 <div class="col-md-3" style=" height: 250px;padding: 0px">
                             <textarea name="memo" style="width: 100%;height:100%;"
-                                      placeholder="备注:">${reportDetails[i].memo}</textarea>
+                                      placeholder="<fmt:message key='report_memo'/>:">${reportDetails[i].memo}</textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 " style="margin-top: 40px"><h4>照片</h4></div>
+                        <div class="col-md-12 " style="margin-top: 40px"><h4><fmt:message key="report_photo"/> <%--照片--%></h4></div>
                         <div class="col-md-12">
                             <c:if test="${!empty reportDetails[i].imgList}">
                                 <c:forEach items="${reportDetails[i].imgList}" var="t">
@@ -115,7 +115,7 @@
                                 </c:forEach>
                             </c:if>
                         </div>
-                        <div class="col-md-12" style="margin-top: 40px"><h4>相关文件</h4></div>
+                        <div class="col-md-12" style="margin-top: 40px"><h4><fmt:message key="report_relevant_file"/> <%--相关文件--%></h4></div>
                         <div class="col-md-12">
                             <div style="padding: 10px;">
                                 <table class="table" id="table_attachment">
@@ -139,7 +139,7 @@
             </c:if>
             <c:if test="${! s}" >
                 <div class="col-md-12 note note-success">
-                    <h3>暂无前期报告</h3>
+                    <h3><fmt:message key="report_no_previous_report"/> <%--暂无前期报告--%></h3>
                 </div>
             </c:if>
 
@@ -152,7 +152,7 @@
 </form>
 <nav class="quick-nav">
     <a class="quick-nav-trigger" data-target="navTab" href="task/info?id=${taskId}">
-        <h3 style="position: absolute;color:white ">&nbsp;返回</h3>
+        <h3 style="position: absolute;color:white ">&nbsp;<fmt:message key="go_back"/> <%--返回--%></h3>
     </a>
     <span aria-hidden="true" class="quick-nav-bg"></span>
 </nav>
@@ -197,7 +197,8 @@
                     colHeaders: true,
                     colWidths: [width * 0.3, width * 0.05, width * 0.05, width * 0.05, width * 0.05, width * 0.05],
                     minRows: 9,
-                    colHeaders: ["要求和描述/材料规格", "单位", "数量", "单价", "系数", "总价"],
+                    colHeaders: ["<fmt:message key='project_repair_des_material_spec'/>","<fmt:message key='project_request'/>","<fmt:message key='project_unit'/>"
+                        ,"<fmt:message key='project_unit_price'/>","<fmt:message key='project_ratio'/>","<fmt:message key='project_total_price'/>"],/*"要求和描述/材料规格", "单位", "数量", "单价", "系数", "总价"*/
                     columnSorting: true,
                     columns: [
                         {data: "des"},

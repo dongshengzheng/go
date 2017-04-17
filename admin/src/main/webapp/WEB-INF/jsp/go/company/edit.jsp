@@ -169,9 +169,9 @@
                     </div>
                 </div>
                 <div class="modal-footer" style="text-align: center">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="go_cancel"/> <%--取消--%></button>
                     <shiro:hasPermission name="account/editName">
-                        <button type="button" onclick="severCheck()" class="btn btn-primary">保存</button>
+                        <button type="button" onclick="severCheck()" class="btn btn-primary"><fmt:message key="go_save"/> <%--保存--%></button>
                     </shiro:hasPermission>
                 </div>
             </div>

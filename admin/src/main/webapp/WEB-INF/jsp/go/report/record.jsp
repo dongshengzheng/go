@@ -53,7 +53,7 @@
 
     <div class="profile-content">
         <div class="row col-md-11">
-            <div class="col-md-12"><h4>记录报告</h4></div>
+            <div class="col-md-12"><h4><fmt:message key="report_record_report"/> <%--记录报告--%></h4></div>
             <div class="col-md-12" style="padding-left:0px;padding-right: 0px">
                 <div class="timeline-body-content">
                     <table class="table table-bordered">
@@ -63,24 +63,24 @@
                             <td style="width: 50%">${progDetail.proDesc}</td>
                             <td>
                                 <c:if test="${progDetail.taskStatus == 0}">
-                                    <label class='btn green-jungle'>已完成</label>
+                                    <label class='btn green-jungle'><fmt:message key="progress_completed"/> </label><%--已完成--%>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus == 1}">
-                                    <label class='btn blue'>进行中</label>
+                                    <label class='btn blue'><fmt:message key="progress_underway"/></label><%--进行中--%>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus == null||progDetail.taskStatus==2}">
-                                    <label class='btn default'>未开始</label>
+                                    <label class='btn default'><fmt:message key="progress_not_started"/></label><%--未开始--%>
                                 </c:if>
                                 <c:if test="${progDetail.taskStatus ==3}">
-                                    <label class='btn yellow'>已取消</label>
+                                    <label class='btn yellow'><fmt:message key="progress_canceled"/></label><%--已取消--%>
                                 </c:if>
                             </td>
-                            <td><a data-model="dialog" href="repairProg/progDetail?id=${progDetail.id}">工程详单查看</a></td>
+                            <td><a data-model="dialog" href="repairProg/progDetail?id=${progDetail.id}"><fmt:message key="report_review_spec_detail"/> </a></td><%--工程详单查看--%>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div class="col-md-12"><h4>详情记录</h4></div>
+            <div class="col-md-12"><h4><fmt:message key="report_details_recorded"/> <%--详情记录--%></h4></div>
             <div class="col-md-12 borders">
                 <div style="padding-top: 15px;padding-bottom: 15px">
                     <div class="col-md-9" style="padding: 0px">
@@ -88,11 +88,11 @@
                     </div>
                     <div class="col-md-3" style=" height: 250px;padding: 0px">
                         <textarea name="memo" style="width: 100%;height:100%;"
-                                  placeholder="备注:">${reportDetail.memo}</textarea>
+                                  placeholder="<fmt:message key='report_memo'/> :">${reportDetail.memo}</textarea><%--备注--%>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 "><h4>上传照片</h4></div>
+            <div class="col-md-12 "><h4><fmt:message key="report_upload_photo"/> <%--上传照片--%></h4></div>
             <div class="col-md-12 borders">
                 <c:if test="${!empty reportDetailFiles}">
                     <c:forEach items="${reportDetailFiles}" var="t">
@@ -117,13 +117,13 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-12"><h4>上传相关文件</h4></div>
+            <div class="col-md-12"><h4><fmt:message key="report_upload_relevant_file"/> <%--上传相关文件--%></h4></div>
             <div class="col-md-12 borders">
                 <div style="padding: 10px;">
                     <table class="table" id="table_attachment">
                         <tbody>
                         <tr>
-                            <td id="one" rowspan="100" width="100px"><input id="attachment" type="button" value="浏览本地"/>
+                            <td id="one" rowspan="100" width="100px"><input id="attachment" type="button" value="<fmt:message key='report_browse_local_file'/> "/><%--浏览本地--%>
                             </td>
                         </tr>
                         <c:if test="${!empty reportDetailFiles}">
@@ -133,7 +133,7 @@
                                         <td style="width: 80%">${r.filename}<a target="_blank"
                                                                                href="${r.oss}">${r.filename}</a></td>
                                         <td>
-                                            <button onclick="delTr(this)">删除</button>
+                                            <button onclick="delTr(this)"><fmt:message key="go_delete"/> </button><%--删除--%>
                                             <input name="fileDiskName" type="hidden" value="">
                                             <input name="fileName" type="hidden" value="${r.filename}"/>
                                             <input name="fileType" type="hidden" value="2"/>
@@ -148,8 +148,8 @@
                 </div>
             </div>
             <div class="modal-footer" style="text-align: center">
-                <button type="button" onclick="status()" class="btn btn-primary">提交</button>
-                <button type="button" onclick="goBack()" class="btn btn-default">取消</button>
+                <button type="button" onclick="status()" class="btn btn-primary"><fmt:message key="go_submit"/> <%--提交--%></button>
+                <button type="button" onclick="goBack()" class="btn btn-default"><fmt:message key="go_cancel"/> <%--取消--%></button>
             </div>
         </div>
     </div>
@@ -159,7 +159,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #4bccd8">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">请选择状态</h4>
+                <h4 class="modal-title"><fmt:message key="report_select_status"/> <%--请选择状态--%></h4>
             </div>
             <div class="modal-body">
                 <div class="form-group form-md-radios">
@@ -176,7 +176,7 @@
                             <label for="radio6">
                                 <span></span>
                                 <span class="check"></span>
-                                <span class="box"></span> 未开始 </label>
+                                <span class="box"></span> <fmt:message key="progress_not_started"/> <%--未开始--%> </label>
                         </div>
                         <div class="md-radio">
                             <input type="radio" id="radio7" name="radio2" class="md-radiobtn" value="1"
@@ -190,7 +190,7 @@
                             <label for="radio7">
                                 <span></span>
                                 <span class="check"></span>
-                                <span class="box"></span> 进行中 </label>
+                                <span class="box"></span> <fmt:message key="progress_underway"/><%--进行中--%> </label>
                         </div>
                         <div class="md-radio">
                             <input type="radio" id="radio8" name="radio2" class="md-radiobtn" value="0"
@@ -201,7 +201,7 @@
                             <label for="radio8">
                                 <span></span>
                                 <span class="check"></span>
-                                <span class="box"></span> 已完成 </label>
+                                <span class="box"></span> <fmt:message key="progress_completed"/><%--已完成--%> </label>
                         </div>
                         <div class="md-radio">
                             <input type="radio" id="radio9" name="radio2" class="md-radiobtn" value="3"
@@ -215,14 +215,14 @@
                             <label for="radio9">
                                 <span></span>
                                 <span class="check"></span>
-                                <span class="box"></span> 已取消 </label>
+                                <span class="box"></span> <fmt:message key="progress_canceled"/><%--已取消--%> </label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="close" type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
-                <button type="button" onclick="severCheck()" class="btn dark btn-outline">确定</button>
+                <button id="close" type="button" data-dismiss="modal" class="btn dark btn-outline"><fmt:message key="go_close"/> <%--关闭--%></button>
+                <button type="button" onclick="severCheck()" class="btn dark btn-outline"><fmt:message key="go_confirm"/> <%--确定--%></button>
             </div>
         </div>
     </div>
@@ -233,13 +233,13 @@
             <input type="hidden" id="resultNum" value=""/>
             <div class="modal-header" style="background-color: #4bccd8">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">提交结果</h4>
+                <h4 class="modal-title"><fmt:message key="report_submit_results"/> </h4><%--提交结果--%>
             </div>
             <div class="modal-body">
                 <h4><p id="reminder"></p></h4>
             </div>
             <div class="modal-footer">
-                <button onclick="resultClose()" type="button"  class="btn dark btn-outline">确定</button>
+                <button onclick="resultClose()" type="button"  class="btn dark btn-outline"><fmt:message key="go_confirm"/> <%--确定--%></button>
             </div>
         </div>
     </div>
@@ -296,17 +296,17 @@
                 },
                 success: function (data) {
                     if (data.success) {
-                        $("#reminder").html("提交成功");
+                        $("#reminder").html("<fmt:message key='report_submit_success'/> ");/*提交成功*/
                         $('#resultNum').val(1);
                         $("#boxClose").click();
                     } else {
-                        $("#reminder").html("提交失败");
+                        $("#reminder").html("<fmt:message key='report_submit_failure'/>");/*提交失败*/
                         $('#resultNum').val(0);
                         $("#boxClose").click();
                     }
                 },
                 error: function () {
-                    $("#reminder").html("系统繁忙,请稍后再试");
+                    $("#reminder").html("<fmt:message key='report_system_busy'/>");/*系统繁忙,请稍后再试*/
                     $('#resultNum').val(0);
                     $("#boxClose").click();
 
@@ -359,7 +359,8 @@
                 colHeaders: true,
                 colWidths: [width * 0.3, width * 0.05, width * 0.05, width * 0.05, width * 0.05, width * 0.05],
                 minRows: 9,
-                colHeaders: ["要求和描述/材料规格", "单位", "数量", "单价", "系数", "总价"],
+                colHeaders: ["<fmt:message key='project_repair_des_material_spec'/>","<fmt:message key='project_request'/>","<fmt:message key='project_unit'/>"
+                                ,"<fmt:message key='project_unit_price'/>","<fmt:message key='project_ratio'/>","<fmt:message key='project_total_price'/>"],/*"要求和描述/材料规格", "单位", "数量", "单价", "系数", "总价"*/
                 columnSorting: true,
                 columns: [
                     {data: "des", readOnly: true},
