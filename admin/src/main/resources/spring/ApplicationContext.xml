@@ -69,6 +69,7 @@
                 /sys/index = anon
                 /user/unauthorized = anon
                 /user/editPwd = anon
+                /test=anon
                 /** = gvrts
             </value>
         </property>

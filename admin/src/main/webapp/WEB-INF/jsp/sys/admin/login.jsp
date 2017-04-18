@@ -84,7 +84,7 @@
                  style="width: 40%; height: 34px; margin-left: 12px;" src="">
         </div>
         <div class="form-actions">
-            <button style="float: left" onclick="severCheck();" type="button" class="btn green">
+            <button style="float:left" onclick="severCheck();" type="button" class="btn green">
                 <fmt:message key="sys.user.login"/></button>
             <button style="float: right" onclick="tryOut()" type="button" class="btn green">
                 <fmt:message key="login_try_out"/></button>
@@ -102,6 +102,21 @@
 <script src="${global}/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 </body>
 <script type="text/javascript">
+    function changeLanguage(lang) {
+        $.ajax({
+            url: "changeLang",
+            lang: lang,
+            type: "GET",
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+
+            }
+        })
+    }
+
+
     //服务器校验
     function severCheck() {
         if (check()) {
@@ -287,12 +302,16 @@
 
 
     function tryOut() {
+        $("#tryBtn").prop("disabled", true);
         $.ajax({
             type: "GET",
             url: "tryOut",
             success: function (data) {
                 console.log(222);
                 if (data.success) {
+                    if (!window.confirm("试用将不会保存您本次的记录信息,如需使用更多功能,请向管理员索取账号密码!")) {
+                        return;
+                    }
                     var loginName = data.user.name;
                     var password = data.user.password;
                     var sessionCode = data.sessionCode;
@@ -308,7 +327,6 @@
                         cache: false,
                         success: function (data) {
                             if ("success" == data.result) {
-                                console.log(111);
                                 window.location.href = "<%=basePath%>";
                             } else {
                                 tryAlert("tangerine", "系统错误,请稍后再试");
@@ -321,7 +339,10 @@
             },
             error: function () {
                 tryAlert("tangerine", "系统错误,请稍后再试");
-            }
+            },
+            complete: function () {
+                $("#tryBtn").prop("disabled", false);
+            },
         })
     }
 

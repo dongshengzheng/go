@@ -69,6 +69,7 @@
 
     <%--handsontable的CSS--%>
     <link rel="stylesheet" media="screen" href="${ctx}/static/css/handsontable/handsontable.css">
+    <fmt:setLocale value="en_US"/>
     <style>
         @media screen and (min-width: 992px) {
             .page-sidebar {
@@ -203,7 +204,7 @@
         if (window.location.hash)
             url = window.location.hash.substring(1);
         else
-            url = "repairSpec";
+            url = "ship";
 
         if ($("a[href='" + url + "']").length > 0) {
             $("a[href='" + url + "']").click();

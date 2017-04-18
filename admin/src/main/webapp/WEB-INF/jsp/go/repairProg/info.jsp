@@ -39,9 +39,43 @@
         padding: 10px;
     }
 
-    table th, td {
+    .table > tbody > tr > td, th {
         text-align: center;
+        padding: 0;
     }
+
+    .irs-min, .irs-max, .irs-single {
+        top: 4px;
+        padding: 1px 3px;
+    }
+
+    .portlet .portlet {
+        margin-bottom: 3px;
+    }
+
+    .portlet-body .btn {
+        margin-bottom: 2px;
+    }
+
+    .portlet.box .portlet.box > .portlet-body {
+        padding: 4px 10px;
+    }
+
+    .portlet.box .portlet.box > .portlet-title {
+        padding: 0 5px;
+        max-height: 25px;
+        min-height: 25px;
+    }
+
+    .portlet-body .portlet-body .portlet.box > .portlet-title > .caption {
+        font-size: 10px;
+        padding: 3px 0px 0px 0px;
+    }
+
+    .portlet .portlet > .portlet-title > .tools {
+        padding: 3px 0 0px;
+    }
+
 </style>
 <go:navigater path="repairProg"></go:navigater>
 <input id="repairProgId" value="${repairProg.id}" type="hidden">
@@ -135,49 +169,10 @@
                                                              <c:if test="${detail.taskStatus==1}">blue</c:if>
                                                              <c:if test="${(detail.taskStatus==2)||(empty detail.taskStatus)}">default</c:if>
                                                              <c:if test="${detail.taskStatus==3}">yellow</c:if>"
-                                                               href="repairProg/progDetail?id=${detail.id}"
-                                                               data-model="dialog">${detail.proOrderNo}</a>
-                                                            <%--<div class="btn-group margin-bottom-5">--%>
-                                                            <%--<button class="btn dropdown-toggle--%>
-                                                            <%--<c:if test="${detail.taskStatus==0}">green-jungle</c:if>--%>
-                                                            <%--<c:if test="${detail.taskStatus==1}">blue</c:if>--%>
-                                                            <%--<c:if test="${detail.taskStatus==2}">default</c:if>--%>
-                                                            <%--<c:if test="${detail.taskStatus==3}">yellow</c:if>"--%>
-                                                            <%--type="button"--%>
-                                                            <%--data-toggle="dropdown"> ${detail.proOrderNo}--%>
-                                                            <%--<i class="fa fa-angle-down"></i>--%>
-                                                            <%--</button>--%>
-                                                            <%--<ul class="dropdown-menu" role="menu">--%>
-                                                            <%--<li>--%>
-                                                            <%--<a data-no="${detail.proOrderNo}"--%>
-                                                            <%--id="look_detail" href="javascript:;"--%>
-                                                            <%--class="btn change-status blue"> 查看详单 </a>--%>
-                                                            <%--</li>--%>
-                                                            <%--<li class="divider"></li>--%>
-                                                            <%--<li>--%>
-                                                            <%--<a href="javascript:;" data-color="green-jungle"--%>
-                                                            <%--data-status="0" data-id="${detail.id}"--%>
-                                                            <%--class="btn change-status green-jungle">--%>
-                                                            <%--已完成 </a>--%>
-                                                            <%--</li>--%>
-                                                            <%--<li>--%>
-                                                            <%--<a href="javascript:;" data-color="blue"--%>
-                                                            <%--data-status="1" data-id="${detail.id}"--%>
-                                                            <%--class="btn change-status blue"> 进行中 </a>--%>
-                                                            <%--</li>--%>
-                                                            <%--<li>--%>
-                                                            <%--<a href="javascript:;" data-color="default"--%>
-                                                            <%--data-status="2" data-id="${detail.id}"--%>
-                                                            <%--class="btn change-status default"> 未开始 </a>--%>
-                                                            <%--</li>--%>
-                                                            <%--<li>--%>
-                                                            <%--<a href="javascript:;" data-color="yellow"--%>
-                                                            <%--data-status="3" data-id="${detail.id}"--%>
-                                                            <%--class="btn change-status yellow ">--%>
-                                                            <%--已取消 </a>--%>
-                                                            <%--</li>--%>
-                                                            <%--</ul>--%>
-                                                            <%--</div>--%>
+                                                               <c:if test="${outerVs.current!=9}">href="repairProg/progDetail?id=${detail.id}"
+                                                               data-model="dialog"</c:if>
+                                                               <c:if test="${outerVs.current==9}">href="javascript:void(0)"</c:if>
+                                                            >${detail.proOrderNo}</a>
                                                         </c:forEach>
                                                     </div>
                                                 </div>
