@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <style>
     .btn-lg {
         text-align: center;
@@ -53,7 +54,7 @@
 
     $('.btn-lg').on('click', function () {
         $('#styleId').val($(this).attr('data-id'));
-        $('#style_color').attr('href', " ${ctx}/assets/layouts/layout/css/themes/" + $(this).html() + ".min.css");
+        $('#style_color').attr('href', "${ctx}/assets/layouts/layout/css/themes/" + $(this).html() + ".min.css");
     })
 
     $('#defForm').validate({

@@ -14,6 +14,9 @@ import com.ctoangels.go.common.util.Const;
 import com.ctoangels.go.common.util.MD5;
 import com.ctoangels.go.common.util.MailUtil;
 import com.ctoangels.go.common.util.Tools;
+import com.sun.corba.se.impl.resolver.LocalResolverImpl;
+import com.sun.corba.se.spi.resolver.LocalResolver;
+import org.apache.http.HttpResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -38,6 +41,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Security;
 import java.util.*;
 
@@ -423,5 +428,51 @@ public class LoginController extends BaseController {
 
         return jsonObject;
     }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @ResponseBody
+    public String test(HttpServletResponse response, String callback) {
+        JSONObject jsonObject = new JSONObject();
+        long time = new Date().getTime();
+        String result = "";
+        for (long i = 0; i < 100; i++) {
+            result += "[" + time + i * 1000L + "," + i * 5L + "],";
+        }
+        if (result.length() > 0) {
+            result.substring(0, result.length() - 1);
+        }
+        String data = callback + "([" + result + "])";
+//        jsonObject.put("callback", data);
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        return data;
+    }
+
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject test2(HttpServletResponse response, String callback) {
+        JSONObject jsonObject = new JSONObject();
+        long time = new Date().getTime();
+        List<Double[]> stringList = new ArrayList<>();
+        for (long i = 0; i < 100000; i++) {
+            stringList.add(new Double[]{(time + i * 10000D), Math.random() * 100 + i * 0.0005});
+        }
+        jsonObject.put("callback", stringList);
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/changeLang", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject changeLang(HttpServletResponse response, @RequestParam(required = false, defaultValue = "cn") String lang) {
+
+        JSONObject jsonObject = new JSONObject();
+        if ("cn".equals(lang)) {
+            session.setAttribute("WW_TRANS_I18N_LOCALE", Locale.CHINA);
+        } else if ("en".equals(lang)) {
+            session.setAttribute("WW_TRANS_I18N_LOCALE", Locale.ENGLISH);
+        }
+        return jsonObject;
+    }
+
 
 }

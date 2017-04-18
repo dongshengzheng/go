@@ -10,6 +10,7 @@ import com.ctoangels.go.common.modules.go.entity.*;
 import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
+import com.ctoangels.go.common.util.DateUtil;
 import com.ctoangels.go.common.util.ItemId;
 import com.ctoangels.go.common.util.MailUtil;
 import org.apache.poi.hssf.usermodel.*;
@@ -290,7 +291,13 @@ public class RepairSpecController extends BaseController {
         Matcher m = p.matcher(toAddress);
         Boolean flag = m.matches();
         if (flag) {
-            MailUtil.sendSpecExcelEmail(toAddress, "工程单", exportSpecExcel(id));
+            try {
+                MailUtil.sendSpecExcelEmail(toAddress, "工程单", exportSpecExcel(id));
+            } catch (Exception e) {
+                e.printStackTrace();
+                jsonObject.put("result", "nothing");
+                return jsonObject;
+            }
             errInfo = "success";
         } else {
             errInfo = "email error";
@@ -300,8 +307,10 @@ public class RepairSpecController extends BaseController {
     }
 
     //导出工程单excel
-    public File exportSpecExcel(Integer specId) {
+    public File exportSpecExcel(Integer specId) throws Exception {
         RepairSpec spec = repairSpecService.selectById(specId);
+        Integer shipId = spec.getShipId();
+        Ship ship = shipService.selectById(shipId);
         List<RepairSpecDetail> detailList = null;
         String excelName = spec.getName() != null ? spec.getName() : spec.getShipName() + "工程单概述";
         File modelExcel = new File(getClass().getClassLoader().getResource("detailModel.xls").getFile());
@@ -315,6 +324,50 @@ public class RepairSpecController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //船舶信息表
+        HSSFSheet shipSheet = wb.getSheetAt(1);
+        //船舶概要信息
+        shipSheet.getRow(1).getCell(2).setCellValue(ship.getName());//船名
+        shipSheet.getRow(1).getCell(5).setCellValue(ship.getBuilder());//建造船厂
+        shipSheet.getRow(2).getCell(2).setCellValue(ship.getImo());//imo
+        if (ship.getBuildYear() != null) {
+            shipSheet.getRow(2).getCell(5).setCellValue(DateUtil.formatDate(ship.getBuildYear()));//建造日期
+        }
+        shipSheet.getRow(3).getCell(2).setCellValue(ship.getShipClass());//船级社
+        shipSheet.getRow(3).getCell(5).setCellValue(ship.getCallSign());//船舶呼号
+        shipSheet.getRow(4).getCell(2).setCellValue(ship.getType());//船舶类型
+        //船体信息
+//        HSSFCell shipCell = null;
+        shipSheet.getRow(6).getCell(2).setCellValue(ship.getLoa());//船长
+        shipSheet.getRow(6).getCell(5).setCellValue(ship.getDraft());//吃水
+        shipSheet.getRow(7).getCell(2).setCellValue(ship.getBeam());//船宽
+        shipSheet.getRow(7).getCell(5).setCellValue(ship.getDwt());//载重吨
+        shipSheet.getRow(8).getCell(2).setCellValue(ship.getDepth());//型深
+        shipSheet.getRow(8).getCell(5).setCellValue(ship.getGrt());//注册总吨
+        shipSheet.getRow(9).getCell(2).setCellValue(ship.getDd());//坞检
+        shipSheet.getRow(9).getCell(5).setCellValue(ship.getSs());//特检
+//        //设备信息
+//        //主机
+        shipSheet.getRow(12).getCell(2).setCellValue(ship.getMeMaker());//厂家
+        shipSheet.getRow(12).getCell(5).setCellValue(ship.getMeType());//型号
+        shipSheet.getRow(13).getCell(2).setCellValue(ship.getMeBhpRpm());//马力/转速
+        shipSheet.getRow(13).getCell(5).setCellValue(ship.getMeQty());//数量
+        shipSheet.getRow(14).getCell(2).setCellValue(ship.getMeCylBore());//缸径
+//        //辅机
+//        shipSheet.getRow(16).getCell(2).setCellValue(ship.getAuxMaker());//厂家
+//        shipSheet.getRow(16).getCell(5).setCellValue(ship.getAuxType());//型号
+//        shipSheet.getRow(17).getCell(2).setCellValue(ship.getAuxRatedOr());//额定功率
+//        shipSheet.getRow(17).getCell(5).setCellValue(ship.getAuxQty());//数量
+//        shipSheet.getRow(18).getCell(2).setCellValue(ship.getAuxCylBore());//缸径
+//        //锅炉
+//        shipSheet.getRow(20).getCell(2).setCellValue(ship.getBoilerMaker());//厂家
+//        shipSheet.getRow(20).getCell(5).setCellValue(ship.getBoilerType());//型号
+//        shipSheet.getRow(21).getCell(2).setCellValue(ship.getBoilerPressure());//工作压力
+//        shipSheet.getRow(21).getCell(5).setCellValue(ship.getBoilerQty());//数量
+//        shipSheet.getRow(22).getCell(2).setCellValue(ship.getBoilerHeatingArea());//热交换面积
+//        shipSheet.getRow(22).getCell(5).setCellValue(ship.getBoilerEvaporation());//蒸发量
+
 
         List<Dict> dictList = dictService.getListByType("维修工程大类");
         for (Dict dict : dictList) {
@@ -377,7 +430,9 @@ public class RepairSpecController extends BaseController {
                 row.createCell((short) 1).setCellValue("维修内容");
                 row.createCell((short) 2).setCellValue("单位");
                 row.createCell((short) 3).setCellValue("数量");
-                row.createCell((short) 4).setCellValue("备注");
+                row.createCell((short) 4).setCellValue("单价");
+                row.createCell((short) 5).setCellValue("总价");
+                row.createCell((short) 6).setCellValue("备注");
 
                 for (RepairSpecItem item : itemList) {
                     row = sheet.createRow(sheet.getLastRowNum() + 1);
@@ -516,6 +571,7 @@ public class RepairSpecController extends BaseController {
         }
 
         wb.removeSheetAt(0);
+        wb.setActiveSheet(0);
 
         // 第六步，将文件存到指定位置
         try {

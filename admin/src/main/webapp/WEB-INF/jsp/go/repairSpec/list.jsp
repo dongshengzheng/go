@@ -222,6 +222,8 @@
                         excelAlert("teal", "发送成功");
                     } else if ("email error" == data.result) {
                         excelAlert("ruby", "发送失败");
+                    } else if ("nothing" == data.result) {
+                        excelAlert("ruby", "无任何可发送信息..");
                     }
                 },
                 error: function () {
