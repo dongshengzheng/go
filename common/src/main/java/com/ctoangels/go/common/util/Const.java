@@ -88,5 +88,10 @@ public class Const {
     public static final Integer REPORT_DETAIL_FILE_TYPE_MP3 = 1;
     public static final Integer REPORT_DETAIL_FILE_TYPE_OTHER = 2;
 
+    //中英文
+    public static final Integer MESSAGE_ZH=0;//中文
+    public static final Integer MESSAGE_EN=1;//英文
+
+
 
 }

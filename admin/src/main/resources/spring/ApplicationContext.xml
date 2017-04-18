@@ -63,6 +63,7 @@
                 /report/**=user
                 /reportDetail/**=user
                 /task/**=user
+                /enquiry/**=user
                 /register_register = anon
                 /register/activateConfirm = anon
                 /sys/index = anon

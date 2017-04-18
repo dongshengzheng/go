@@ -4,13 +4,13 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, catagory, code, content, unit, `count`, remark, info, copy, parent_code AS parentCode, `status`, repair_model_id AS repairModelId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, children, sort，src
+		id, catagory, code, content, unit, `count`, remark, info, copy, parent_code AS parentCode, `status`, repair_model_id AS repairModelId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, children, sort，src, `language`
 	</sql>
 
     <!--根据红本id以及维修项目类型获取items-->
     <select id="byModelIdAndCatagoryContainParams" resultMap="ItemMap">
 		SELECT item.* from t_repair_model_item item
-		WHERE item.repair_model_id=#{0} and item.catagory=#{1} and del_flag=0
+		WHERE item.repair_model_id=#{0} and item.catagory=#{1} and del_flag=0 and item.language=#{2}
 		Order by item.sort
 	</select>
 

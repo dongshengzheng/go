@@ -16,12 +16,14 @@ import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -36,10 +38,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -304,7 +303,17 @@ public class RepairSpecController extends BaseController {
         RepairSpec spec = repairSpecService.selectById(specId);
         List<RepairSpecDetail> detailList = null;
         String excelName = spec.getName() != null ? spec.getName() : spec.getShipName() + "工程单概述";
-        File modelExcel = new File(getClass().getClassLoader().getResource("detailModel.xls").getFile());
+
+
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+        File modelExcel=null;
+        if(language.equals("中文")){
+            modelExcel = new File(getClass().getClassLoader().getResource("detailModel_zh.xls").getFile());
+        }
+        if (language.equals("英文")){
+            modelExcel = new File(getClass().getClassLoader().getResource("detailModel_en.xls").getFile());
+        }
         FileInputStream is = null; //文件流
         HSSFWorkbook wb = null;
         try {

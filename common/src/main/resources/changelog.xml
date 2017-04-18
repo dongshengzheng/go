@@ -757,6 +757,11 @@
             update t_dict set value=14 where id=15;
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-057">
+        <sql>
+            alter table t_repair_model_item add language int;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

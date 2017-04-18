@@ -128,6 +128,8 @@ public class RepairModelItem implements Serializable {
     /*判断是红本的数据，还是自定义的数据1：红本数据；0自定义数据*/
     private Integer src;
 
+    /*判断是中英文0 表示中文；1表示英文*/
+    private Integer language;
 
     public Integer getId() {
         return this.id;
@@ -296,5 +298,13 @@ public class RepairModelItem implements Serializable {
 
     public void setSrc(Integer src) {
         this.src = src;
+    }
+
+    public Integer getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Integer language) {
+        this.language = language;
     }
 }

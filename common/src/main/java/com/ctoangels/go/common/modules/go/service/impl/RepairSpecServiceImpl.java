@@ -11,6 +11,7 @@ import com.ctoangels.go.common.util.StringUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.ctoangels.go.common.modules.go.mapper.RepairSpecMapper;
@@ -18,10 +19,7 @@ import com.ctoangels.go.common.modules.go.service.IRepairSpecService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * RepairSpec 表数据服务层接口实现类
@@ -48,8 +46,18 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         Integer specId = repairSpec.getId();
         Integer modelId = repairSpec.getModelId();
         EntityWrapper<RepairModelItem> ew = new EntityWrapper<>();
+        //判读中英文
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+        if(language.equals("中文")){
+            ew.addFilter("language={0}",Const.MESSAGE_ZH);
+        }
+        if (language.equals("英文")){
+            ew.addFilter("language={0}",Const.MESSAGE_EN);
+        }
         ew.addFilter("repair_model_id={0}", modelId);
         List<RepairModelItem> modelItemList = repairModelItemMapper.selectList(ew);
+
         List<RepairSpecItem> specItemList = new ArrayList<>();
         for (RepairModelItem rmi : modelItemList) {
             RepairSpecItem specItem = new RepairSpecItem();

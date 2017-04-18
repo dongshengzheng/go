@@ -9,7 +9,7 @@
                     <a href="javascript:;" class="nav-link nav-toggle">
 
                         <c:if test="${not empty menu.menuIcon }"><i class="${menu.menuIcon}"></i></c:if>
-                        <span class="title"><fmt:message key="${menu.menuName}"/> </span>
+                        <span class="title">${menu.menuName}</span>
                         <span class="selected"></span>
                         <span class="arrow"></span>
                     </a>
@@ -21,7 +21,7 @@
                                         <a href="${sub.menuUrl}" class="ajaxify nav-link">
                                             <c:if test="${not empty sub.menuIcon }"><i
                                                     class="${sub.menuIcon}"></i></c:if>
-                                            </i><fmt:message key="${sub.menuName}"/> </a>
+                                            </i>${sub.menuName}</a>
                                     </li>
                                 </c:when>
                                 <c:otherwise>

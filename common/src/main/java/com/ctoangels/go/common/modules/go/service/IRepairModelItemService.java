@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface IRepairModelItemService extends ISuperService<RepairModelItem> {
 
-    List<RepairModelItem> byModelIdAndCatagoryContainParams(Integer modelId, String catagory);
+    List<RepairModelItem> byModelIdAndCatagoryContainParams(Integer modelId, String catagory,Integer language);
 
 }

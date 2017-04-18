@@ -194,7 +194,7 @@
                             + '<li><a href="repairSpec/delete?id=' + row.id +
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 red"><fmt:message key='go_delete'/> </a></li>'/*删除*/
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="repairSpec/enquiry">
+                            <shiro:hasPermission name="enquiry/compare">
                             + '<li><a href="enquiry/compare?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab">比价 </a></li>'/*询价*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/exportExcel">
