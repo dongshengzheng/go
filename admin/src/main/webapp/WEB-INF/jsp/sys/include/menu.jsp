@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="page-sidebar-wrapper">
     <div class="page-sidebar navbar-collapse collapse">
         <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
@@ -8,7 +9,7 @@
                     <a href="javascript:;" class="nav-link nav-toggle">
 
                         <c:if test="${not empty menu.menuIcon }"><i class="${menu.menuIcon}"></i></c:if>
-                        <span class="title">${menu.menuName}</span>
+                        <span class="title"><fmt:message key="${menu.menuName}"/> </span>
                         <span class="selected"></span>
                         <span class="arrow"></span>
                     </a>
@@ -20,7 +21,7 @@
                                         <a href="${sub.menuUrl}" class="ajaxify nav-link">
                                             <c:if test="${not empty sub.menuIcon }"><i
                                                     class="${sub.menuIcon}"></i></c:if>
-                                            </i>${sub.menuName}</a>
+                                            </i><fmt:message key="${sub.menuName}"/> </a>
                                     </li>
                                 </c:when>
                                 <c:otherwise>

@@ -19,7 +19,7 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            维修工程管理
+                            <fmt:message key="progress_work_manag"/> <%--维修工程管理--%>
                         </div>
                     </div>
                 </div>
@@ -27,17 +27,17 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>船舶名称</th>
-                        <th>维修单号</th>
-                        <th>维修类别</th>
-                        <th>船厂</th>
-                        <th>计划进厂日期</th>
-                        <th>计划天数</th>
-                        <th>计划金额</th>
-                        <th>创建日期</th>
-                        <th>创建人</th>
-                        <th>工程总进度</th>
-                        <th>操作</th>
+                        <th><fmt:message key="repair_vessel_name"/></th><%--船舶名称--%>
+                        <th><fmt:message key="repair_repc_num"/></th><%--维修单号--%>
+                        <th><fmt:message key="repair_spec_type"/></th><%--维修类别--%>
+                        <th><fmt:message key="progress_shipyard"/></th><%--船厂--%>
+                        <th><fmt:message key="repair_spec_plan_date"/></th><%--计划进厂日期--%>
+                        <th><fmt:message key="repair_spec_plan_day"/></th><%--计划天数--%>
+                        <th><fmt:message key="repair_spec_plan_cost"/></th><%--计划金额--%>
+                        <th><fmt:message key="repair_spec_create_date"/></th><%--创建日期--%>
+                        <th><fmt:message key="repair_spec_creator"/></th><%--创建人--%>
+                        <th><fmt:message key="progress_general"/></th><%--工程总进度--%>
+                        <th><fmt:message key="go_operation"/></th><%--操作--%>
                     </tr>
                     </thead>
                 </table>
@@ -118,7 +118,7 @@
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="repairProg/info">
-                            + '<a href="repairProg/info?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看进度</a>'
+                            + '<a href="repairProg/info?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i><fmt:message key="progress_review_pro"/></a>'/*查看进度*/
                             </shiro:hasPermission>
                             ;
                 }
@@ -137,7 +137,7 @@
                 })
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船舶名称");
+                initSearchForm(null, "<fmt:message key='ship_name_input'/> ");/*请输入船舶名称*/
             }
         });
 

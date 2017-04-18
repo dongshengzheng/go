@@ -35,25 +35,25 @@
                     <div class="caption caption-md">
                         <i class="fa fa-info"></i>
                         <span class="caption-subject bold font-green uppercase"> <fmt:message
-                                key="company_check_info"></fmt:message> </span>
+                                key="company_check_info"/> </span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label"><i class="fa fa-building"></i>
-                                <fmt:message key="company_name"></fmt:message></label>
+                                <fmt:message key="company_name"/></label>
                             <div class="col-sm-7">
                                 <input id="name" name="name" type="text" maxlength="32" value="${company.name}"
                                        minlength="2" class="form-control required"
-                                       placeholder="<fmt:message key="company_fill_in_name"></fmt:message>">
+                                       placeholder="<fmt:message key="company_fill_in_name"/>">
                             </div>
                             <label class="col-sm-3 control-label"><span class="red">* </span><fmt:message
-                                    key="company_fill_in_name"></fmt:message></label>
+                                    key="company_fill_in_name"/></label>
                         </div>
                         <div class="form-group">
                             <label for="legalPerson" class="col-sm-2 control-label"><i class="fa fa-user"></i>
-                                <fmt:message key="company_legal_person"></fmt:message></label>
+                                <fmt:message key="company_legal_person"/></label>
                             <div class="col-sm-7">
                                 <input id="legalPerson" name="legalPerson" type="text" maxlength="32"
                                        value="${company.legalPerson}"
@@ -61,103 +61,103 @@
                                        placeholder="<fmt:message key="company_fill_in_legal"></fmt:message>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_legal"></fmt:message></label>
+                                    key="company_fill_in_legal"/></label>
                         </div>
                         <div class="form-group">
                             <label for="tel" class="col-sm-2 control-label"><i class="fa fa-phone"></i>
-                                <fmt:message key="company_tel"></fmt:message></label>
+                                <fmt:message key="company_tel"/></label>
                             <div class="col-sm-7">
                                 <input id="tel" name="tel" type="text" maxlength="32" value="${company.tel}"
                                        minlength="2" class="form-control required"
-                                       placeholder="<fmt:message key="company_fill_in_tel"></fmt:message>">
+                                       placeholder="<fmt:message key="company_fill_in_tel"/>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_tel"></fmt:message></label>
+                                    key="company_fill_in_tel"/></label>
                         </div>
                         <div class="form-group">
                             <label for="fax" class="col-sm-2 control-label"><i class="fa fa-fax"></i>
-                                <fmt:message key="company_fax"></fmt:message></label>
+                                <fmt:message key="company_fax"/></label>
                             <div class="col-sm-7">
                                 <input id="fax" name="fax" type="text" maxlength="32" value="${company.fax}"
                                        minlength="2" class="form-control required"
-                                       placeholder="<fmt:message key="company_fill_in_fax"></fmt:message>">
+                                       placeholder="<fmt:message key="company_fill_in_fax"/>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_fax"></fmt:message></label>
+                                    key="company_fill_in_fax"/></label>
                         </div>
                         <div class="form-group">
                             <label for="website" class="col-sm-2 control-label"><i class="fa fa-internet-explorer"></i>
-                                <fmt:message key="company_website"></fmt:message></label>
+                                <fmt:message key="company_website"/></label>
                             <div class="col-sm-7">
                                 <input id="website" name="website" type="text" maxlength="32" value="${company.website}"
                                        minlength="2" class="form-control required"
-                                       placeholder="<fmt:message key="company_fill_in_website"></fmt:message>">
+                                       placeholder="<fmt:message key="company_fill_in_website"/>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_website"></fmt:message></label>
+                                    key="company_fill_in_website"/></label>
                         </div>
                         <div class="form-group">
                             <label for="address" class="col-sm-2 control-label"><i class="fa fa-location-arrow"></i>
-                                <fmt:message key="company_address"></fmt:message></label>
+                                <fmt:message key="company_address"/></label>
                             <div class="col-sm-7">
                                 <input id="address" name="address" type="text" maxlength="32" value="${company.address}"
                                        minlength="2" class="form-control required"
-                                       placeholder="<fmt:message key="company_fill_in_address"></fmt:message>">
+                                       placeholder="<fmt:message key="company_fill_in_address"/>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_address"></fmt:message></label>
+                                    key="company_fill_in_address"/></label>
                         </div>
                         <div class="form-group">
                             <label for="postalCode" class="col-sm-2 control-label"><i class="fa fa-envelope"></i>
-                                <fmt:message key="company_postal_code"></fmt:message></label>
+                                <fmt:message key="company_postal_code"/></label>
                             <div class="col-sm-7">
                                 <input id="postalCode" name="postalCode" type="text" maxlength="32"
                                        value="${company.postalCode}"
                                        minlength="2" class="form-control required"
-                                       placeholder="<fmt:message key="company_fill_in_postal_code"></fmt:message>">
+                                       placeholder="<fmt:message key="company_fill_in_postal_code"/>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_postal_code"></fmt:message></label>
+                                    key="company_fill_in_postal_code"/></label>
                         </div>
                         <div class="form-group">
                             <label for="email" class="col-sm-2 control-label"><i class="fa fa-envelope"></i>
-                                <fmt:message key="company_email"></fmt:message></label>
+                                <fmt:message key="company_email"/></label>
                             <div class="col-sm-7">
                                 <input id="email" name="email" type="text" maxlength="32"
                                        value="${company.email}"
                                        minlength="2" class="form-control required" placeholder="<fmt:message
-                                    key="company_fill_in_email"></fmt:message>">
+                                    key="company_fill_in_email"/>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_email"></fmt:message></label>
+                                    key="company_fill_in_email"/></label>
                         </div>
                         <div class="form-group">
                             <label for="contactName" class="col-sm-2 control-label"><i class="fa fa-user"></i>
-                                <fmt:message key="company_contact_name"></fmt:message></label>
+                                <fmt:message key="company_contact_name"/></label>
                             <div class="col-sm-7">
                                 <input id="contactName" name="contactName" type="text" maxlength="32"
                                        value="${company.contactName}"
                                        minlength="2" class="form-control required"
-                                       placeholder="<fmt:message key="company_fill_in_contact_name"></fmt:message>">
+                                       placeholder="<fmt:message key="company_fill_in_contact_name"/>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_contact_name"></fmt:message></label>
+                                    key="company_fill_in_contact_name"/></label>
                         </div>
                         <div class="form-group">
                             <label for="contactTel" class="col-sm-2 control-label"><i class="fa fa-weixin"></i>
-                                <fmt:message key="company_contact_tel"></fmt:message></label>
+                                <fmt:message key="company_contact_tel"/></label>
                             <div class="col-sm-7">
                                 <input id="contactTel" name="contactTel" type="text" maxlength="32"
                                        value="${company.contactTel}"
                                        minlength="2" class="form-control required"
-                                       placeholder="<fmt:message key="company_fill_in_contact_phone"></fmt:message>">
+                                       placeholder="<fmt:message key="company_fill_in_contact_phone"/>">
                             </div>
                             <label class="col-sm-3 control-label"><fmt:message
-                                    key="company_fill_in_contact_phone"></fmt:message></label>
+                                    key="company_fill_in_contact_phone"/></label>
                         </div>
                     </div>
                     <div class="col-md-4" style="border-left: 1px dotted lightgrey;">
-                        <p><fmt:message key="company_logo"></fmt:message></p>
+                        <p><fmt:message key="company_logo"/></p>
                         <img id="logo-img"
                              src="http://shipinfo.img-cn-shanghai.aliyuncs.com/${company.logo}?x-oss-process=image/resize,m_fill,h_100,w_100"
                              style="display: block;width: 50%;height: 50%"
@@ -165,13 +165,13 @@
                         <input type="hidden" id="logo" name="logo" value="${company.logo}">
                         <br>
                         <button id="upload_logo" class="btn blue" type="button"><i class="fa fa-tv"></i> <fmt:message
-                                key="company_local_upload"></fmt:message></button>
+                                key="company_local_upload"/></button>
                     </div>
                 </div>
                 <div class="modal-footer" style="text-align: center">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><fmt:message key="go_cancel"/> <%--取消--%></button>
                     <shiro:hasPermission name="account/editName">
-                        <button type="button" onclick="severCheck()" class="btn btn-primary">保存</button>
+                        <button type="button" onclick="severCheck()" class="btn btn-primary"><fmt:message key="go_save"/> <%--保存--%></button>
                     </shiro:hasPermission>
                 </div>
             </div>
@@ -238,7 +238,7 @@
         if ($("#name").val() == "") {
             $("#name").tips({
                 side: 2,
-                msg: '公司名称不能为空',
+                msg: '<fmt:message key='shipyard_name_no'/> ',/*公司名称不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });

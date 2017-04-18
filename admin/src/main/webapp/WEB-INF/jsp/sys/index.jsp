@@ -74,6 +74,10 @@
         @media screen and (min-width: 992px) {
             .page-sidebar {
                 position: fixed;
+                width: 235px;
+                float: left;
+                position: fixed;
+                margin-right: -100%;
             }
         }
     </style>

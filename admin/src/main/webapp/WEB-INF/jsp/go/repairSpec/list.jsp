@@ -3,6 +3,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -25,14 +26,14 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            维修工程单
+                            <fmt:message key="repair_spec"/> <%--维修工程单--%>
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
                                 <shiro:hasPermission name="repairSpec/add">
                                     <a href="repairSpec/add?t=<%=time%>" data-target="navTab"
                                        class="btn btn-sm blue mt-ladda-btn ladda-button" data-style="slide-down">
-                                        <span class="ladda-label"> <i class="fa fa-plus"></i> 新增维修工程单</span>
+                                        <span class="ladda-label"> <i class="fa fa-plus"></i> <fmt:message key="repair_spec_add"/> <%--新增维修工程单--%></span>
                                     </a>
                                 </shiro:hasPermission>
                             </div>
@@ -43,16 +44,16 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>船舶名称</th>
-                        <th>维修单号</th>
-                        <th>维修类别</th>
-                        <th>公司名称</th>
-                        <th>计划进场日期</th>
-                        <th>计划天数</th>
-                        <th>计划金额</th>
-                        <th>创建日期</th>
-                        <th>创建人</th>
-                        <th>操作</th>
+                        <th><fmt:message key="repair_vessel_name"/> </th><%--船舶名称--%>
+                        <th><fmt:message key="repair_repc_num"/></th><%--维修单号--%>
+                        <th><fmt:message key="repair_spec_type"/></th><%--维修类别--%>
+                        <th><fmt:message key="repair_spec_company_type"/></th><%--公司名称--%>
+                        <th><fmt:message key="repair_spec_plan_date"/></th><%--计划进场日期--%>
+                        <th><fmt:message key="repair_spec_plan_day"/></th><%--计划天数--%>
+                        <th><fmt:message key="repair_spec_plan_cost"/></th><%--计划金额--%>
+                        <th><fmt:message key="repair_spec_create_date"/></th><%--创建日期--%>
+                        <th><fmt:message key="repair_spec_creator"/></th><%--创建人--%>
+                        <th><fmt:message key="go_operation"/></th><%--操作--%>
                     </tr>
                     </thead>
                 </table>
@@ -66,15 +67,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">请输入邮箱</h4>
+                <h4 class="modal-title"><fmt:message key="repair_spec_enter_email"/> </h4><%--请输入邮箱--%>
             </div>
             <div class="modal-body">
-                <input id="email" class="form-control" placeholder="请输入正确的邮箱" name="toAddress">
+                <input id="email" class="form-control" placeholder="<fmt:message key='repair_spec_enter_correct_email'/> " name="toAddress"><%--请输入正确的邮箱--%>
                 <input id="id" type="hidden" name="id">
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
-                <button type="button" onclick="severCheck(this)" class="btn dark btn-outline">发送</button>
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline"><fmt:message key="repair_spec_close"/> <%--关闭--%></button>
+                <button type="button" onclick="severCheck(this)" class="btn dark btn-outline"><fmt:message key="repair_spec_send"/> <%--发送--%></button>
             </div>
         </div>
     </div>
@@ -85,20 +86,21 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #4bccd8">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">请输入信息</h4>
+                <h4 class="modal-title"><fmt:message key="repair_spec_enter_info"/> <%--请输入信息--%></h4>
             </div>
             <div class="modal-body">
-                <label>请输入船厂</label><input id="shipyardName" class="form-control" placeholder="请输入正确的船厂"
+                <label><fmt:message key="repair_spec_enter_shipyard"/> <%--请输入船厂--%></label>
+                <input id="shipyardName" class="form-control" placeholder="<fmt:message key='repair_spec_enter_correct_shipyard'/> "<%--请输入正确的船厂--%>
                                            name="shipyardName">
             </div>
             <div class="modal-body">
-                <label>请输入邮箱</label>
+                <label><fmt:message key="repair_spec_enter_email"/> <%--请输入邮箱--%></label>
                 <div id="example1" style=" height: 200px; overflow: hidden;"></div>
                 <input type="hidden" id="repairSpecId"/>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
-                <button type="button" onclick="sure(this)" class="btn dark btn-outline">确定</button>
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline"><fmt:message key="repair_spec_close"/> <%--关闭--%></button>
+                <button type="button" onclick="sure(this)" class="btn dark btn-outline"><fmt:message key="repair_spec_confirm"/> <%--确定--%></button>
             </div>
         </div>
     </div>
@@ -134,6 +136,15 @@
                 },
                 {
                     "data": "type",
+                    "render": function (data) {
+                        if(data==1){
+                            return "<fmt:message key="repair_temporary_repairs"/>";
+                        }else if(data=2){
+                            return "<fmt:message key="repair_dd"/>";
+                        }else {
+                            return "<fmt:message key="repair_remould"/>";
+                        }
+                    }
                 },
                 {
                     "data": "name",
@@ -168,26 +179,26 @@
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="repairSpec/info">
-                            + '<a href="repairSpec/info?id=' + row.id + '" class="btn btn-sm margin-bottom-5 default mt-ladda-btn ladda-button" data-style="slide-down" data-target="navTab"><span class="ladda-label">查看</span></a>'
+                            + '<a href="repairSpec/info?id=' + row.id + '" class="btn btn-sm margin-bottom-5 default mt-ladda-btn ladda-button" data-style="slide-down" data-target="navTab"><span class="ladda-label"><fmt:message key='go_check'/> </span></a>'/*查看*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/makeProgress">
-                            + '<a href="#make" onclick="makeId(' + row.id + ')" data-toggle="modal"  class="btn btn-sm margin-bottom-5 green">生成维修进度</a>'
+                            + '<a href="#make" onclick="makeId(' + row.id + ')" data-toggle="modal"  class="btn btn-sm margin-bottom-5 green"><fmt:message key='repair_spec_prog'/> </a>'/*生成维修进度*/
                             </shiro:hasPermission>
                             + '<div class="btn-group margin-top-5">'
-                            + '<button class="btn btn-sm margin-bottom-5 dropdown-toggle blue" type="button" data-toggle="dropdown"> 更多 <i class="fa fa-angle-down"></i> </button> '
+                            + '<button class="btn btn-sm margin-bottom-5 dropdown-toggle blue" type="button" data-toggle="dropdown">  <fmt:message key='repair_spec_more'/> <i class="fa fa-angle-down"></i> </button> '/*更多*/
                             + '<ul class="dropdown-menu pull-right" role="menu"> '
                             <shiro:hasPermission name="repairSpec/edit">
-                            + '<li> <a href="repairSpec/edit?id=' + row.id + '" class="btn btn-sm margin-bottom-5 grey-mint mt-ladda-btn ladda-button" data-style="slide-down" data-target="navTab"><span class="ladda-label">编辑</span></a> </li> '
+                            + '<li> <a href="repairSpec/edit?id=' + row.id + '" class="btn btn-sm margin-bottom-5 grey-mint mt-ladda-btn ladda-button" data-style="slide-down" data-target="navTab"><span class="ladda-label"><fmt:message key='go_editor'/> </span></a> </li> '/*编辑*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/delete">
                             + '<li><a href="repairSpec/delete?id=' + row.id +
-                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 red">删除</a></li>'
+                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 red"><fmt:message key='go_delete'/> </a></li>'/*删除*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/enquiry">
-                            + '<li><a href="repairSpec/enquiry?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab">询价</a></li>'
+                            + '<li><a href="enquiry/compare?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab">比价 </a></li>'/*询价*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/exportExcel">
-                            + '<li><a onclick="addId(' + row.id + ')" href="#static" data-toggle="modal" class="btn btn-sm margin-bottom-5 yellow">发送excel</a></li>'
+                            + '<li><a onclick="addId(' + row.id + ')" href="#static" data-toggle="modal" class="btn btn-sm margin-bottom-5 yellow"><fmt:message key='repair_spec_send_excel'/> </a></li>'/*发送excel*/
                             </shiro:hasPermission>
                             + '</ul></div>';
 
@@ -198,7 +209,7 @@
                 Ladda.bind('.mt-ladda-btn', {timeout: 60000});
             },
             "initComplete": function () {
-                initSearchForm(null, "请输入船舶名称");
+                initSearchForm(null, "<fmt:message key='ship_name_input'/> ");/*请输入船舶名称*/
             }
         });
         $('#myInput').on('keyup', function () {
@@ -219,15 +230,13 @@
                 },
                 success: function (data) {
                     if ("success" == data.result) {
-                        excelAlert("teal", "发送成功");
+                        excelAlert("teal", "<fmt:message key='repair_spec_send_success'/> ");/*发送成功*/
                     } else if ("email error" == data.result) {
-                        excelAlert("ruby", "发送失败");
-                    } else if ("nothing" == data.result) {
-                        excelAlert("ruby", "无任何可发送信息..");
+                        excelAlert("ruby", "<fmt:message key='repair_spec_send_failure'/>");/*发送失败*/
                     }
                 },
                 error: function () {
-                    excelAlert("tangerine", "系统错误,发送失败");
+                    excelAlert("tangerine", "<fmt:message key='repair_spec_system_error'/>");/*系统错误,发送失败*/
                 }
             })
             $(".close").click();
@@ -239,7 +248,7 @@
         if (email == "") {
             $("#email").tips({
                 side: 1,
-                msg: '<fmt:message key="register_email_empty"/>',
+                msg: "<fmt:message key="register_email_empty"/>",
                 bg: '#AE81FF',
                 time: 3
             });
@@ -302,15 +311,15 @@
                 url: "repairProg/makeProgress",
                 success: function (data) {
                     if (data.mes) {
-                        alert("成功");
+                        alert("<fmt:message key='repair_spec_submit_success'/>");/*提交成功*/
                         $(".close").click();
                     } else {
-                        alert("提交失败");
+                        alert("<fmt:message key='repair_spec_submit_failure'/> ");/*提交失败*/
                         $(".close").click();
                     }
                 },
                 error: function () {
-                    alert("发生错误,请稍后再试");
+                    alert("<fmt:message key='repair_spec_go_wrong'/>");/*发生错误,请稍后再试*/
                     $(obj).prop("disabled", false);
                 }
             });
@@ -320,7 +329,7 @@
         if (attr.length <= 0) {
             $("#example1").tips({
                 side: 1,
-                msg: '邮箱不能为空',
+                msg: "<fmt:message key="register_email_empty"/>",/*邮箱不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });
@@ -403,7 +412,7 @@
         colHeaders: true,
         colWidths: [500],
         minRows: 2,
-        colHeaders: ["邮箱地址"],
+        colHeaders: ["<fmt:message key='repair_spec_email_address'/> "],/*邮箱地址*/
         columnSorting: true,
         columns: [
             {data: "des"},

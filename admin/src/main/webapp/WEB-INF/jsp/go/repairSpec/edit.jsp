@@ -78,14 +78,14 @@
                         <div id="bootstrap_alerts_demo"></div>
                         <div class="caption caption-md">
                             <i class="fa fa-user"></i>
-                            <span class="caption-subject font-blue-madison bold uppercase"> 编辑维修工程单</span>
+                            <span class="caption-subject font-blue-madison bold uppercase"> <fmt:message key="repair_spec_edit"/> <%--编辑维修工程单--%></span>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="portlet box blue-dark" id="item0">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="fa fa-info"></i>工程单概要
+                                    <i class="fa fa-info"></i><fmt:message key="repair_spec_summary"/> <%--工程单概要--%>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"> </a>
@@ -95,7 +95,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="col-sm-3 control-label">
-                                            船舶名称</label>
+                                            <fmt:message key="repair_vessel_name"/><%--船舶名称--%></label>
                                         <div class="col-sm-7">
                                             <input type="hidden" name="shipId" value="${repairSpec.shipId}">
                                             <input name="shipName" id="shipName" class="form-control" readonly
@@ -103,13 +103,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="planStartDate" class="col-sm-3 control-label">计划进场日期</label>
+                                        <label for="planStartDate" class="col-sm-3 control-label"><fmt:message key="repair_spec_plan_date"/> <%--计划进场日期--%></label>
                                         <div class="col-sm-7">
                                             <div class="input-group">
                                                 <input id="planStartDate" name="planStartDate" type="text"
                                                        class="form-control date-picker" readonly
                                                        value="<fmt:formatDate value='${repairSpec.planStartDate}' pattern="yyyy-MM-dd"/>"
-                                                       placeholder="请选择进厂日期"><span class="input-group-addon"><i
+                                                       placeholder="<fmt:message key='repair_spec_enter_shipyard_date'/> "><span class="input-group-addon"><i<%--请选择进厂日期--%>
                                                     class="fa fa-calendar"></i></span></div>
                                         </div>
                                     </div>
@@ -117,11 +117,11 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="planDays" class="col-sm-3 control-label">
-                                            预估天数</label>
+                                            <fmt:message key="repair_spec_plan_day"/> <%--预估天数--%></label>
                                         <div class="col-sm-7">
                                             <input id="planDays" name="planDays" type="text"
                                                    value="${repairSpec.planDays}"
-                                                   class="form-control required" placeholder="请输入预估维修天数">
+                                                   class="form-control required" placeholder="<fmt:message key='repair_spec_estimate_day_input'/> "><%--请输入预估维修天数--%>
                                         </div>
                                     </div>
                                     <%--<div class="form-group col-md-6">
@@ -139,13 +139,13 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="col-sm-3 control-label">
-                                            维修类型</label>
+                                            <fmt:message key="repair_spec_type"/> <%--维修类型--%></label>
                                         <div class="col-sm-9 icheck-inline">
                                             <c:forEach items="${typeList}" var="type" varStatus="vs">
                                                 <label>
                                                     <input type="radio" name="type"
                                                            value="${type.value}"
-                                                           <c:if test="${type.value==repairSpec.type}">checked</c:if>> ${type.des}
+                                                           <c:if test="${type.value==repairSpec.type}">checked</c:if>> <fmt:message key="${type.des}"/>
                                                     <span></span>
                                                 </label>
                                             </c:forEach>
@@ -157,7 +157,7 @@
                         <div class="portlet box blue-dark">
                             <div class="portlet-title">
                                 <div class="caption">
-                                    <i class="fa fa-cog"></i>维修工程详细
+                                    <i class="fa fa-cog"></i><fmt:message key="repair_spec_information"/> <%--维修工程详细--%>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"> </a>
@@ -169,7 +169,7 @@
                                         <div class="portlet-title" style="background-color: #00aaaa">
                                             <div class="caption">
                                                 <i class="fa fa-cog"></i>
-                                                    ${catagory[outerVs.count-1].des}&nbsp;<span
+                                                    <fmt:message key="${catagory[outerVs.count-1].des}"/>&nbsp;<span
                                                     class="checkedOrNot"></span>
                                             </div>
                                             <div class="tools">
@@ -186,12 +186,12 @@
                                                     <thead>
                                                     <tr>
                                                         <th style="width:5%">&nbsp;</th>
-                                                        <th style="width:10%">项目号</th>
-                                                        <th style="width:45%">维修内容</th>
-                                                        <th style="width:10%">单位</th>
-                                                        <th style="width:10%">数量</th>
-                                                        <th style="width:10%">备注</th>
-                                                        <th style="width:10%">操作</th>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_sn"/> </th><%--项目号--%>
+                                                        <th style="width:45%"><fmt:message key="repair_spec_description"/></th><%--维修内容--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_unit"/></th><%--单位--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_quantity"/></th><%--数量--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_remark"/></th><%--备注--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_operation"/></th><%--操作--%>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -203,11 +203,11 @@
                                                     <thead>
                                                     <tr>
                                                         <th style="width:5%">&nbsp;</th>
-                                                        <th style="width:10%">项目号</th>
-                                                        <th style="width:40%">维修内容</th>
-                                                        <th style="width:25%">维修详单</th>
-                                                        <th style="width:10%">备注</th>
-                                                        <th style="width:10%">操作</th>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_sn"/></th><%--项目号--%>
+                                                        <th style="width:40%"><fmt:message key="repair_spec_description"/></th><%--维修内容--%>
+                                                        <th style="width:25%"><fmt:message key="repair_spec_unit"/></th><%--维修详单--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_quantity"/></th><%--备注--%>
+                                                        <th style="width:10%"><fmt:message key="repair_spec_remark"/></th><%--操作--%>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -223,11 +223,11 @@
                         <div class="modal-footer" style="text-align: center" id="item9">
                             <shiro:hasPermission name="repairSpec/edit">
                                 <button id="submitButton" type="button" onclick="severCheck()" class="btn btn-primary">
-                                    提交
+                                   <fmt:message key="repair_spec_submit"/> <%-- 提交--%>
                                 </button>
                             </shiro:hasPermission>
-                            <button id="reset-btn" type="reset" class="btn blue">清空</button>
-                            <a href="repairSpec" class="btn default" data-target="navTab">取消</a>
+                            <button id="reset-btn" type="reset" class="btn blue"><fmt:message key="repair_spec_empty"/> <%--清空--%></button>
+                            <a href="repairSpec" class="btn default" data-target="navTab"><fmt:message key="repair_spec_cancel"/> <%--取消--%></a>
                             <%--<button id="notific8_show" type="button">弹出</button>--%>
                         </div>
                     </div>
@@ -281,7 +281,7 @@
                     tr.find(".code-td").html(a.code);
                     if (a.content != "addrow") {
                         var contentHtml = "<input  value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
-                        contentHtml += a.content;
+                        contentHtml +=a.content;
                         var paramList = a.paramList;
                         if (paramList != null && paramList.length > 0) {
                             for (var m = 0; m < paramList.length; m++) {
@@ -333,7 +333,7 @@
 
 
                     if (a.parentCode == 0) {
-                        tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>添加备注</a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
+                        tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'><fmt:message key='repair_spec_add_remark'/> </a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='<fmt:message key="repair_spec_no_remark"/> ' style='display: none'></textarea>")/*添加备注*//*暂未添加备注*/
                     }
                     if (a.children != 0) {
                         var td = tr.find(".show-td");
@@ -343,7 +343,7 @@
                     }
                     if (a.src == 0 && a.content != "addrow") {
                         var td = tr.find(".show-td");
-                        td.html("<a href='javascript:;' onclick='deleteNewRow(" + a.id + ",this)' class='btn btn-sm red'>删除</a>");
+                        td.html("<a href='javascript:;' onclick='deleteNewRow(" + a.id + ",this)' class='btn btn-sm red'><fmt:message key='repair_spec_delete'/> </a>");/*删除*/
                     }
 
 
@@ -439,7 +439,7 @@
                         tr.find(".content-td").html(contentHtml);
                     } else {
                         var contentHtml = "<input  class='input-control' onchange='inputControl(this)'  value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
-                        contentHtml += "<button onclick='addRow(this)'  type='button' data-current='" + count + "' class='btn btn-sm blue'>新增 </button>"
+                        contentHtml += "<button onclick='addRow(this)'  type='button' data-current='" + count + "' class='btn btn-sm blue'> <fmt:message key="repair_spec_append"/> </button>"/*新增*/
                         tr.find(".content-td").html(contentHtml);
                     }
 
@@ -448,7 +448,7 @@
 //                        tr.find(".count-td").html("<input class='col-md-12 input-control' onchange='inputControl(this)' name='" + namePre + "count'>");
 //                    }
                     if (a.parentCode == 0) {
-                        tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'>添加备注</a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='暂未添加备注' style='display: none'></textarea>")
+                        tr.find(".remark-td").html(" <a class='add-remark' data-toggle='modal' onclick='addRemark(this)' onmouseover='showRemark(this)'onmouseout='showRemark(this)'href='#responsive'><fmt:message key="repair_spec_add_remark"/> </a> <textarea class='remark-text' name='" + namePre + "remark' cols='60' rows='10' wrap='hard' placeholder='<fmt:message key="repair_spec_no_remark"/> ' style='display: none'></textarea>")/*添加备注 暂未添加备注*/
                     }
                     if (!(a.parentCode == 0 || a.content == "addrow")) {
                         tr.find(".model-detail-select").attr("data-code", a.code).attr("data-catagory", a.catagory).toggle();
@@ -472,7 +472,7 @@
                     }
                     if (a.src == 0 && a.content != "addrow") {
                         var td = tr.find(".show-td");
-                        td.html("<a href='javascript:;' onclick='deleteNewRow(" + a.id + ",this)' class='btn btn-sm red'>删除</a>");
+                        td.html("<a href='javascript:;' onclick='deleteNewRow(" + a.id + ",this)' class='btn btn-sm red'><fmt:message key="repair_spec_delete"/> </a>");/*删除*/
                     }
                     tr.find(".item-id").val(a.id).prop("name", namePre + "id");
                     tr.find(".item-cata").val(a.catagory).prop("name", namePre + "catagory");
@@ -508,7 +508,7 @@
         if (shipId == "0") {
             $("#shipId").tips({
                 side: 1,
-                msg: "船舶不能为空",
+                msg: "<fmt:message key="ship_name_empty"/> ",/*船舶不能为空*/
                 bg: '#FF5080',
                 time: 15
             });
@@ -524,14 +524,14 @@
                         var code = this.code;
                         $("tr[data-code='" + code + "']").find(".item-id").val(this.id);
                     })
-                    saveAlert("teal", "保存成功(每五分钟会自动保存)");
+                    saveAlert("teal", "<fmt:message key="repair_spec_add_success"/> ");/*保存成功(每五分钟会自动保存)*/
                 } else {
-                    saveAlert("ruby", "保存失败(每五分钟会自动保存)");
+                    saveAlert("ruby", "<fmt:message key="repair_spec_add_failure"/> ");/*保存失败(每五分钟会自动保存)*/
                 }
                 $("#submitButton").prop("disabled", false);
             },
             error: function () {
-                saveAlert("tangerine", "系统错误,无法保存(每五分钟会自动保存)");
+                saveAlert("tangerine", "<fmt:message key="repair_spec_no_add"/> ");/*系统错误,无法保存(每五分钟会自动保存)*/
                 $("#submitButton").prop("disabled", false);
                 return;
             }
@@ -564,7 +564,7 @@
 
 
     function deleteNewRow(itemId, obj) {
-        if (!window.confirm("确认删除?提醒:删除栏目会将栏目下的详单一并删除!"))return;
+        if (!window.confirm("<fmt:message key="repair_spec_confirm_delete"/> "))return;/*确认删除?提醒:删除栏目会将栏目下的详单一并删除!*/
         var tr = $(obj).parents("tr");
         var code = tr.attr("data-code");
         var pCode = tr.attr("data-parent");

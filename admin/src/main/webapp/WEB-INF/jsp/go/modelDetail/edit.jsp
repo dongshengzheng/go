@@ -68,29 +68,29 @@
         <div style="height:40px;width: 100%;background-color: #C0C9CC" >
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
-                    <label for="shipName" class="col-sm-4 control-label label-top" >船名：</label>
-                    <div class="col-sm-7">
+                    <label for="shipName" class="col-sm-6 control-label label-top" ><fmt:message key="project_vessel_name"/> <%--船名--%>：</label>
+                    <div class="col-sm-6">
                         <input  id="shipName" name="shipName" type="text" maxlength="32" value="${modelDetails.shipName}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="catagory" class="col-sm-6 control-label label-top">项目分类：</label>
+                    <label for="catagory" class="col-sm-6 control-label label-top"><fmt:message key="project_category"/><%--项目分类--%>：</label>
                     <div class="col-sm-6">
                         <input  id="catagory" name="catagory" type="text" maxlength="32" value="${modelDetails.catagory}"
                                class="form-control ">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="code" class="col-sm-6 control-label label-top">项目号：</label>
+                    <label for="code" class="col-sm-6 control-label label-top"><fmt:message key="project_number"/>：</label>
                     <div class="col-sm-6">
                         <input  id="code" name="code" type="text" maxlength="32" value="${modelDetails.code}"
                                class="form-control required">
                     </div>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="proOrderNo" class="col-sm-6 control-label label-top">项目单号：</label>
-                    <div class="col-sm-6">
+                    <label for="proOrderNo" class="col-sm-8 control-label label-top"><fmt:message key="project_bill_number"/><%--项目单号--%>：</label>
+                    <div class="col-sm-4">
                         <input  id="proOrderNo" name="proOrderNo" type="text" maxlength="32" value="${modelDetails.proOrderNo}"
                                class="form-control required">
                     </div>
@@ -100,55 +100,61 @@
         <div class="row">
             <div style="margin-top: 5px;border-right: dashed 1px #337ab7;" class="col-md-8">
                 <div style="width: 100%;">
-                    <div ><span style="background-color: #C0C9CC;font-size: 20px">工程项目描述</span></div>
-                    <div class="col-md-12 div-left" style="margin-top: 20px">工程名称：<input  id="proName" type="text" name="proName" value="${modelDetails.proName}"/></div>
-                    <div class="col-md-12 div-left">工程描述： </div>
+                    <div class="col-md-6"><span  class="head"><fmt:message key="project_describe" /><%--工程项目描述--%></span></div>
+                    <div class="col-md-12 div-left" style="margin-top: 20px"><fmt:message key="project_name"/> <%--工程名称--%>：
+                        <input  id="proName" type="text" name="proName" value="${modelDetails.proName}"/>
+                    </div>
+                    <div class="col-md-12 div-left"><fmt:message key="project_describe"/><%--工程描述--%>： </div>
                     <div class="col-md-12" style="margin-left: 20px">
                         <textarea  class="form-control" rows="4" name="proDesc">${modelDetails.proDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div ><span class="head">设备信息</span></div>
-                    <div class="col-md-6">
-                        <div class="form-group col-md-12">
-                            <label for="faciName" class="col-sm-6 control-label">设备名称:</label>
-                            <div class="col-sm-6">
-                                <input id="faciName"  name="faciName" type="text" value="${modelDetails.faciName}"
-                                       class="">
+                    <div class="col-md-6"><span class="head"><fmt:message key="project_equipment_info"/><%--设备信息--%></span></div>
+                    <div class="col-md-12" style="margin-top: 20px">
+                        <div class="col-md-6">
+                            <div class="form-group col-md-12">
+                                <label for="faciName" class="col-sm-6 control-label"><fmt:message key="project_equipment_name"/><%--设备名称--%>:</label>
+                                <div class="col-sm-6">
+                                    <input id="faciName"  name="faciName" type="text" value="${modelDetails.faciName}"
+                                           class="">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="faciType" class="col-sm-6 control-label"><fmt:message key="project_equipment_model"/><%--设备型号--%>:</label>
+                                <div class="col-sm-6">
+                                    <input  id="faciType" name="faciType" type="text" value="${modelDetails.faciType}"
+                                           class="">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="faciSrc" class="col-sm-6 control-label"><fmt:message key="project_manufacturer_nation"/><%--厂家/国家--%>:</label>
+                                <div class="col-sm-6">
+                                    <input  id="faciSrc" name="faciSrc" type="text" value="${modelDetails.faciSrc}"
+                                           class="">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="faciNo" class="col-sm-6 control-label"><fmt:message key="project_serial_number"/><%--序列号--%>:</label>
+                                <div class="col-sm-6">
+                                    <input   id="faciNo" name="faciNo" type="text" value="${modelDetails.faciNo}"
+                                             placeholder="<fmt:message key='project_related_parameters'/>" <%--请输入相关参数--%>
+                                            class="">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-12">
-                            <label for="faciType" class="col-sm-6 control-label">设备型号:</label>
-                            <div class="col-sm-6">
-                                <input  id="faciType" name="faciType" type="text" value="${modelDetails.faciType}"
-                                       class="">
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-left: 20px">
+                                <textarea  class="form-control" rows="7" placeholder="<fmt:message key='project_related_parameters'/> "
+                                           name="faciParam">${modelDetails.faciParam}</textarea><%--请输入相关参数--%>
                             </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="faciSrc" class="col-sm-6 control-label">厂家/国家:</label>
-                            <div class="col-sm-6">
-                                <input  id="faciSrc" name="faciSrc" type="text" value="${modelDetails.faciSrc}"
-                                       class="">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="faciNo" class="col-sm-6 control-label">序列号:</label>
-                            <div class="col-sm-6">
-                                <input   id="faciNo" name="faciNo" type="text" value="${modelDetails.faciNo}"
-                                        class="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group" style="margin-left: 20px">
-                            <textarea  class="form-control" rows="7" placeholder="请输入相关参数" name="faciParam">${modelDetails.faciParam}</textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div><span class="head" >维修部位</span></div>
+                    <div class="col-md-6"><span class="head" ><fmt:message key='project_repair_location'/><%--维修部位--%></span></div>
                     <div class="form-group col-md-12" style="margin-left: 3px;margin-top: 20px">
                         <c:forEach items="${repDicts}" var="r">
                             <div class="col-md-3">
@@ -159,7 +165,7 @@
                                            checked
                                     </c:if>
                                     </c:forEach>
-                                           name="repairPosition"> ${r.des}
+                                           name="repairPosition"> <fmt:message key="${r.des}"/>
                                     <span></span>
                                 </label>
                             </div>
@@ -167,19 +173,20 @@
 
                     </div>
                     <div class="col-md-12" style="margin-left: 20px">
-                        <textarea  class="form-control" rows="4" placeholder="请输入详细位置" name="repairPositionDesc">${modelDetails.repairPositionDesc}</textarea>
+                        <textarea  class="form-control" rows="4" placeholder="<fmt:message key='project_detail_location'/>"<%--请输入详细位置--%>
+                                   name="repairPositionDesc">${modelDetails.repairPositionDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div ><span class="head">损坏程度</span></div>
+                    <div class="col-md-6"><span class="head"><fmt:message key='project_extent_damage'/><%--损坏程度--%></span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">
                         <textarea class="form-control" rows="4" name="damage">${modelDetails.damage}</textarea>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
-                <div style="margin-top: 5px"><span class="head">上传图片</span></div>
+                <div style="margin-top: 5px"><span class="head"><fmt:message key="project_upload_img"/><%--上传图片--%></span></div>
                 <div class="col-md-12" id="divId">
                     <button disabled id="upload_img" style="width: 100%">
                         <img  src=""  onerror="nofind(4)" style="width:100%;height: 180px"/>
@@ -190,14 +197,14 @@
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div ><span class="head">维修描述/材料规格</span></div>
+            <div ><span class="head"><fmt:message key="project_repair_des_material_spec"/><%--维修描述/材料规格--%></span></div>
             <div class="col-md-12 div-left" style="margin-top: 20px">
                 <div id="example1"  style=" height: 300px; overflow: hidden;"></div>
             </div>
         </div>
         <div class="col-md-12 line1"></div>
         <div style="width: 100%;margin-top: 10px">
-            <div ><span class="head">修理工艺</span></div>
+            <div ><span class="head"><fmt:message key="project_repair_technology"/><%--修理工艺--%></span></div>
             <div class="form-group col-md-12 div-left" style="margin-top: 20px">
                 <c:forEach items="${reqDicts}" var="req">
                     <div class="col-md-3">
@@ -208,7 +215,7 @@
                                    checked
                             </c:if>
                             </c:forEach>
-                                   name="repairTech" > ${req.des}
+                                   name="repairTech" > <fmt:message key="${req.des}"/>
                             <span></span>
                         </label>
                     </div>
@@ -216,7 +223,8 @@
             </div>
 
             <div class="col-md-12 div-left">
-                <textarea  class="form-control" rows="4" placeholder="请填写修理工艺" name="repairTechDesc">${modelDetails.repairTechDesc}</textarea>
+                <textarea  class="form-control" rows="4" placeholder="<fmt:message key='project_repair_technology_input'/> " <%--请填写修理工艺--%>
+                           name="repairTechDesc">${modelDetails.repairTechDesc}</textarea>
             </div>
         </div>
     </div>
@@ -224,9 +232,9 @@
     <div class="form-actions"  >
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <button id="dump" type="button" class="btn green" onclick="saveInfo()" data-dump="#example1" data-instance="hot">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="reset" class="btn default" />&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="modelDetail" type="button" class="btn btn-default" data-target="navTab">取消
+                <button id="dump" type="button" class="btn green" onclick="saveInfo()" data-dump="#example1" data-instance="hot"><fmt:message key="go_submit"/> <%--提交--%></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="reset" type="reset" class="btn default" value="<fmt:message key='go_reset'/> "/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="modelDetail" type="button" class="btn btn-default" data-target="navTab"><fmt:message key="repair_spec_cancel"/> <%--取消--%>
                 </a>
             </div>
         </div>
@@ -290,7 +298,7 @@
         if ($("#proName").val() == "") {
             $("#proName").tips({
                 side: 2,
-                msg: '工程名称不能为空',
+                msg: '<fmt:message key="project_name_empty"/>',/*工程名称不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });
@@ -306,6 +314,8 @@
 <script>
         var id=$("#id").val();
         var width=$(window).width();
+        var widthOne=width*0.46;
+        var widthTwo=width*0.07;
         $("#example1").width(width*0.75);
         var dataJson;
         var h;
@@ -331,9 +341,9 @@
                     data: datas,
                     rowHeaders: true,
                     colHeaders: true,
-                    colWidths: [800,100,100],
+                    colWidths: [widthOne,widthTwo,widthTwo],
                     minRows:15,
-                    colHeaders: ["要求和描述/材料规格","单位","数量"],
+                    colHeaders: ["<fmt:message key='project_request'/> ", "<fmt:message key='project_unit'/>", "<fmt:message key='projec_quantity'/>"],
                     columnSorting: true,
                     columns: [
                         {data: "des"},

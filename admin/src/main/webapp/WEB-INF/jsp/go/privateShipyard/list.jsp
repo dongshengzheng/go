@@ -20,13 +20,13 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            船厂信息
+                            <fmt:message key="shipyard_info"/> <%--船厂信息--%>
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
                                 <shiro:hasPermission name="privateShipyard/add">
                                     <a href="privateShipyard/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船厂信息
+                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> <fmt:message key="shipyard_add_info"/> <%--新增船厂信息--%>
                                     </a>
                                 </shiro:hasPermission>
                             </div>
@@ -37,16 +37,16 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>Logo</th>
-                        <th>船厂名称</th>
-                        <th>集团公司</th>
-                        <th>国家</th>
-                        <th>城市</th>
-                        <th>位置</th>
-                        <th>联系电话</th>
-                        <th>联系人</th>
-                        <th>邮箱</th>
-                        <th>操作</th>
+                        <th><fmt:message key="shipyard_logo"/> </th><%--Logo--%>
+                        <th><fmt:message key="shipyard_name"/></th><%--船厂名称--%>
+                        <th><fmt:message key="shipyard_group"/></th><%--集团公司--%>
+                        <th><fmt:message key="shipyard_nation"/></th><%--国家--%>
+                        <th><fmt:message key="shipyard_city"/></th><%--城市--%>
+                        <th><fmt:message key="shipyard_location"/></th><%--位置--%>
+                        <th><fmt:message key="shipyard_contact_phone"/></th><%--联系电话--%>
+                        <th><fmt:message key="shipyard_pic"/></th><%--联系人--%>
+                        <th><fmt:message key="shipyard_email"/></th><%--邮箱--%>
+                        <th><fmt:message key="go_operation"/></th><%--操作--%>
                     </tr>
                     </thead>
                 </table>
@@ -113,14 +113,14 @@
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="privateShipyard/look">
-                            + '<a href="privateShipyard/look?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
+                            + '<a href="privateShipyard/look?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i><fmt:message key='go_check'/> </a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="privateShipyard/edit">
-                            + '<a href="privateShipyard/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
+                            + '<a href="privateShipyard/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i><fmt:message key='go_editor'/></a>'
                             </shiro:hasPermission>
                             <shiro:hasPermission name="privateShipyard/delete">
                             + '<a href="privateShipyard/delete?id=' + row.id +
-                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
+                            '" data-msg="<fmt:message key='shipyard_delete_confirm'/> "  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red"><fmt:message key='go_delete'/> </a>'
                             </shiro:hasPermission>
                             ;
                 }
@@ -130,7 +130,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "搜索船厂名称");
+                initSearchForm(null, "<fmt:message key='shipyard_search_name'/> ");/*搜索船厂名称*/
             }
         });
 
@@ -152,6 +152,6 @@
 </script>
 <script>
     if (${mes}) {
-        alert("没有该船厂的详细信息");
+        alert("<fmt:message key='shipyard_info_no'/> ");
     }
 </script>

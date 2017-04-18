@@ -21,7 +21,7 @@
 <form class="form-horizontal">
     <div class="row">
         <div  style="margin-bottom: 10px">
-            <img src="shanghai.aliyuncs.com/goshipyard/QbeHWzrMGY.jpg">&nbsp;&nbsp;&nbsp;<span>公司信息</span>
+            <img src="shanghai.aliyuncs.com/goshipyard/QbeHWzrMGY.jpg">&nbsp;&nbsp;&nbsp;<span><fmt:message key="company_details"/> <%--公司信息--%></span>
         </div>
         <div id="up">
             <img id="img" src="/img/ship.jpg"/>

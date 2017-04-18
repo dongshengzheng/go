@@ -49,7 +49,7 @@
                     <div class="caption caption-md">
                         <div style="display: inline-block">
                             <i class="icon-microphone font-green"></i>
-                            <span class="caption-subject bold font-green uppercase"> <fmt:message key="ship_addInfo"/></span><%--新增船舶信息--%>
+                            <span class="caption-subject bold font-green uppercase"> <fmt:message key="ship_add_info"/></span><%--新增船舶信息--%>
                         </div>
 
                         <%--<select id="shipId" name="shipId" class="form-control select2">--%>
@@ -223,7 +223,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="ss" class="col-sm-3 control-label"><fmt:message key="ship_ss"/> <%--特检--%></label>
+                                            <label for="ss" class="col-sm-3 control-label"> <%--特检--%></label>
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <input id="ss" name="ss" type="text"

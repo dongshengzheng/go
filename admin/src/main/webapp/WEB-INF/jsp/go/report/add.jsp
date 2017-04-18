@@ -30,7 +30,7 @@
 </style>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title" style="color: white">当日汇报填写提交</h4>
+    <h4 class="modal-title" style="color: white"><fmt:message key="report_input_submit_report"/> <%--当日汇报填写提交--%></h4>
 </div>
 <form class="form-horizontal" action="report/add" method="post" id="defForm">
     <input type="hidden" value="0" name="delFlag">
@@ -43,13 +43,13 @@
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-4">
-                                船名: ${task.shipName}
+                                <fmt:message key="repair_vessel_name"/> <%--船名--%>: ${task.shipName}
                             </div>
                             <div class="col-md-4">
-                                维修单号:
+                                <fmt:message key="repair_repc_num"/> <%--维修单号--%>:
                             </div>
                             <div class="col-md-4">
-                                汇报日期: <fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>
+                                <fmt:message key="report_date"/> <%--汇报日期--%>: <fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>
                                 <input type="hidden"
                                        value="<fmt:formatDate value="<%=now%>" pattern="yyyy-MM-dd"></fmt:formatDate>"
                                        name="publishTime">
@@ -59,9 +59,9 @@
 
                     <table class="table table-striped table-bordered table-hover table-checkable order-column">
                         <tr>
-                            <td style="width: 33%">天气</td>
-                            <td style="width: 33%">温度</td>
-                            <td style="width: 33%">湿度</td>
+                            <td style="width: 33%"><fmt:message key="report_weather"/> <%--天气--%></td>
+                            <td style="width: 33%"><fmt:message key="report_temperature"/> <%--温度--%></td>
+                            <td style="width: 33%"><fmt:message key="report_humidity"/> <%--湿度--%></td>
                         </tr>
                         <tr>
                             <td><input class="form-control" name="weather"></td>
@@ -72,21 +72,21 @@
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <h4>备忘</h4>
+                            <h4><fmt:message key="report_memo"/> <%--备忘--%></h4>
                             <textarea rows="6" class="form-control" style="resize: none" name="remark"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <h4>船员主要工作</h4>
+                            <h4><fmt:message key="report_main_work"/> <%--船员主要工作--%></h4>
                             <textarea rows="6" class="form-control" style="resize: none" name="crewJob"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <h4>船检反馈情况</h4>
+                            <h4><fmt:message key="report_substituting_feedback"/><%--船检反馈情况--%></h4>
                             <textarea rows="6" class="form-control" style="resize: none"
                                       name="shipInspection"></textarea>
                         </div>
@@ -94,14 +94,14 @@
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <h4>明日工作计划</h4>
+                            <h4><fmt:message key="report_tomorrow_work_plan"/><%--明日工作计划--%></h4>
                             <textarea rows="6" class="form-control" style="resize: none" name="tomorrowPlan"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <h4>当日详细工程汇报</h4>
+                            <h4><fmt:message key="report_detailed_engineering"/><%--当日详细工程汇报--%></h4>
                         </div>
                     </div>
 
@@ -109,10 +109,10 @@
 
                     <div class="modal-footer" style="text-align: center" id="item9">
                         <shiro:hasPermission name="report/add">
-                            <button type="button" onclick="severCheck()" class="btn btn-primary">提交</button>
+                            <button type="button" onclick="severCheck()" class="btn btn-primary"><fmt:message key="go_submit"/> <%--提交--%></button>
                         </shiro:hasPermission>
-                        <button id="reset-btn" type="reset" class="btn blue">清空</button>
-                        <a id="closeModal" class="btn default" data-dismiss="modal">取消</a>
+                        <button id="reset-btn" type="reset" class="btn blue"><fmt:message key="go_empty"/> <%--清空--%></button>
+                        <a id="closeModal" class="btn default" data-dismiss="modal"><fmt:message key="go_cancel"/> <%--取消--%></a>
                     </div>
 
                 </div>
@@ -128,7 +128,7 @@
     <thead>
         <tr style="background-color: #00a8c6">
             <td style="width: 20%">S/N</td>
-            <td style="width: 80%">描述</td>
+            <td style="width: 80%"><fmt:message key="report_description"/> <%--描述--%></td>
         </tr>
     </thead>
     <tr>
@@ -136,19 +136,19 @@
         <td class="proName-td"></td>
     </tr>
     <tr>
-        <td>工程描述</td>
+        <td><fmt:message key="project_describe"/><%--工程描述--%></td>
         <td class="proDesc-td"></td>
     </tr>
     <tr>
-        <td>工程状态</td>
-        <td class="taskStatus-td">已完成</td>
+        <td><fmt:message key="report_project_status"/><%--工程状态--%></td>
+        <td class="taskStatus-td"><fmt:message key="progress_completed"/><%--已完成--%></td>
     </tr>
     <tr>
-        <td>详情记录</td>
+        <td><fmt:message key="report_detail_records"/><%--详情记录--%></td>
         <td class="description-td"></td>
     </tr>
     <tr>
-        <td>工程照片</td>
+        <td><fmt:message key="report_images"/><%--工程照片--%></td>
         <td class="proImg-td">
             <div class="col-md-3">
                 <a target="_blank"
@@ -177,7 +177,7 @@
         </td>
     </tr>
     <tr>
-        <td>相关文件</td>
+        <td><fmt:message key="report_relevant_document"/> <%--相关文件--%></td>
         <td class="proFile-td"></td>
     </tr>
 </table>
@@ -188,7 +188,7 @@
         $("#defForm").ajaxSubmit({
             success: function (data) {
                 if (data.success) {
-                    alert("成功");
+                    alert("<fmt:message key='go_success'/> ");/*成功*/
                     $("#closeModal").click();
                 } else {
                     App.alert({
@@ -258,13 +258,13 @@
                 var taskStatus = reportDetail.taskStatus;
                 console.log(taskStatus);
                 if (taskStatus == 0) {
-                    a.find(".taskStatus-td").html("已完成");
+                    a.find(".taskStatus-td").html("<fmt:message key='progress_completed'/> ");/*已完成*/
                 } else if (taskStatus == 1) {
-                    a.find(".taskStatus-td").html("进行中");
+                    a.find(".taskStatus-td").html("<fmt:message key='progress_underway'/>");/*进行中*/
                 } else if (taskStatus == 3) {
-                    a.find(".taskStatus-td").html("已取消");
+                    a.find(".taskStatus-td").html("<fmt:message key='progress_canceled'/>");/*已取消*/
                 } else {
-                    a.find(".taskStatus-td").html("未开始");
+                    a.find(".taskStatus-td").html("<fmt:message key='progress_not_started'/>");/*未开始*/
                 }
                 a.find(".description-td").html(reportDetail.memo);
                 var imgHtml = "";

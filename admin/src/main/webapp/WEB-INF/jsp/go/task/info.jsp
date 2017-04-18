@@ -27,20 +27,20 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            工程汇报
+                            <fmt:message key="report_progress_report"/> <%--工程汇报--%>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-4">
-                            船名: ${task.shipName}
+                            <fmt:message key="repair_vessel_name"/> <%--船名--%>: ${task.shipName}
                         </div>
                         <div class="col-md-4">
-                            维修单号:
+                            <fmt:message key="repair_repc_num"/> <%--维修单号--%>:
                         </div>
                         <div class="col-md-4">
                             <a href="report/add?taskId=${task.id}"
-                               data-model="dialog">当日汇报提交</a>
+                               data-model="dialog"><fmt:message key="report_submit_report"/> <%--当日汇报提交--%></a>
                         </div>
                     </div>
                 </div>
@@ -64,12 +64,12 @@
                                                id="table${outerVs.count}">
                                             <thead>
                                             <tr>
-                                                <th style="width: 5%">单号</th>
-                                                <th style="width: 10%">工程名称</th>
-                                                <th style="width: 60%">工程描述</th>
-                                                <th style="width: 5%">工程状态</th>
-                                                <th style="width: 5%">记录汇报</th>
-                                                <th style="width: 5%">前期汇报</th>
+                                                <th style="width: 5%"><fmt:message key="project_bill_number"/> </th><%--单号--%>
+                                                <th style="width: 10%"><fmt:message key="project_name"/></th><%--工程名称--%>
+                                                <th style="width: 60%"><fmt:message key="project_describe"/></th><%--工程描述--%>
+                                                <th style="width: 5%"><fmt:message key="report_project_status"/></th><%--工程状态--%>
+                                                <th style="width: 5%"><fmt:message key="report_record_report"/></th><%--记录汇报--%>
+                                                <th style="width: 5%"><fmt:message key="report_prophase_report"/></th><%--前期汇报--%>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -90,28 +90,28 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #32c5d2;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">新增项目</h4>
+                <h4 class="modal-title"><fmt:message key="report_add_item"/> <%--新增项目--%></h4>
             </div>
             <form id="addNewForm" class="form-horizontal" action="repairProgDetail/addNew" method="post">
                 <input type="hidden" id="repairProgId" name="repairProgId" value="${task.repairProgId}">
                 <input type="hidden" id="proOrderNo" name="proOrderNo" value="">
-                <input type="hidden" name="catagory" value="新增">
+                <input type="hidden" name="catagory" value="<fmt:message key='repair_spec_append'/> "><%--新增--%>
                 <input type="hidden" name="taskStatus" value="2">
                 <input type="hidden" name="delFlag" value="0">
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="form-group">
-                            <label for="proName" class="col-sm-3 control-label">请输入工程名称</label>
+                            <label for="proName" class="col-sm-3 control-label"><fmt:message key="project_enter_name"/> <%--请输入工程名称--%></label>
                             <div class="col-sm-7">
                                 <input id="proName" name="proName" type="text" class="form-control required"
-                                       placeholder="请输入工程名称">
+                                       placeholder="<fmt:message key='project_enter_name'/> "><%--请输入工程名称--%>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="proDesc" class="col-sm-3 control-label">请输入工程描述</label>
+                            <label for="proDesc" class="col-sm-3 control-label"><fmt:message key="project_enter_des"/> <%--请输入工程描述--%></label>
                             <div class="col-sm-7">
                                 <input id="proDesc" name="proDesc" type="text" class="form-control required"
-                                       placeholder="请输入工程描述">
+                                       placeholder="<fmt:message key='project_enter_des'/>"><%--请输入工程描述--%>
                             </div>
                         </div>
                     </div>
@@ -132,9 +132,9 @@
         <td class="proOrderNo-td"></td>
         <td class="proName-td"></td>
         <td class="proDesc-td"></td>
-        <td class="proStatus-td"><label class='btn default'>未开始</label></td>
-        <td class="report-td"><a data-target="navTab" class="btn default" href="">进入</a></td>
-        <td class="recent-td"><a data-target="navTab" class="btn default" href="">查看</a></td>
+        <td class="proStatus-td"><label class='btn default'><fmt:message key="progress_not_started"/> <%--未开始--%></label></td>
+        <td class="report-td"><a data-target="navTab" class="btn default" href=""><fmt:message key="report_enter"/> <%--进入--%></a></td>
+        <td class="recent-td"><a data-target="navTab" class="btn default" href=""><fmt:message key="go_check"/> <%--查看--%></a></td>
     </tr>
 </table>
 <script>
@@ -177,16 +177,16 @@
                 html += "<td>" + detail.proDesc + "</td>";
                 var taskStatus = detail.taskStatus;
                 if (taskStatus == 0) {
-                    html += "<td><label  class='btn green-jungle'>已完成</label></td>"
+                    html += "<td><label  class='btn green-jungle'><fmt:message key="progress_completed"/> </label></td>"/*已完成*/
                 } else if (taskStatus == 1) {
-                    html += "<td><label  class='btn blue'>进行中</label></td>"
+                    html += "<td><label  class='btn blue'><fmt:message key="progress_underway"/></label></td>"/*进行中*/
                 } else if (taskStatus == 3) {
-                    html += "<td><label  class='btn yellow'>已取消</label></td>"
+                    html += "<td><label  class='btn yellow'><fmt:message key="progress_canceled"/></label></td>"/*已取消*/
                 } else {
-                    html += "<td><label  class='btn default'>未开始</label></td>"
+                    html += "<td><label  class='btn default'><fmt:message key="progress_not_started"/></label></td>"/*未开始*/
                 }
-                html += "<td><a data-target='navTab' class='btn default' href='report/addRecord?id=" + detailId + "&taskId=" + taskId + "'>进入</a></td>";
-                html += "<td><a data-target='navTab' class='btn default' href='reportDetail/recentDetail?progDetailId=" + detailId + "&taskId=" + taskId + "'>查看</a></td>";
+                html += "<td><a data-target='navTab' class='btn default' href='report/addRecord?id=" + detailId + "&taskId=" + taskId + "'><fmt:message key="report_enter"/> </a></td>";/*进入*/
+                html += "<td><a data-target='navTab' class='btn default' href='reportDetail/recentDetail?progDetailId=" + detailId + "&taskId=" + taskId + "'><fmt:message key="go_check"/> </a></td>";/*查看*/
                 html += "</tr>";
             })
             if (num != 8) {
@@ -205,7 +205,7 @@
                 console.log("nextNo:" + nextNo);
                 $("#nextADNo").val(nextNo * 1 + 1);
             }
-            html += "<tr><td colspan='6'><a id='addNewButton' class='btn btn-sm blue' href='#addNew' data-toggle='modal'>新增</a></td></tr>";
+            html += "<tr><td colspan='6'><a id='addNewButton' class='btn btn-sm blue' href='#addNew' data-toggle='modal'><fmt:message key="repair_spec_append"/> </a></td></tr>";/*新增*/
             tbody.html(html);
         }
     }
@@ -223,11 +223,11 @@
                         $("#proDesc").val("");
                         $("#addNew .btn-default").click();
                     } else {
-                        saveAlert("ruby", "新增失败,请稍后再试")
+                        saveAlert("ruby", "<fmt:message key="report_add_failure"/> ")/*新增失败,请稍后再试*/
                     }
                 },
                 error: function () {
-                    saveAlert("tangerine", "系统错误,请稍后再试")
+                    saveAlert("tangerine", "<fmt:message key='report_system_error'/> ")/*系统错误,请稍后再试*/
                 }
             })
         }
@@ -257,7 +257,7 @@
         if (proName == null || proName.trim() == "") {
             $("#proName").tips({
                 side: 2,
-                msg: '工程名称不能为空',
+                msg: '<fmt:message key="project_name_empty"/> ',/*工程名称不能为空*/
                 bg: '#AE81FF',
                 time: 3
             });

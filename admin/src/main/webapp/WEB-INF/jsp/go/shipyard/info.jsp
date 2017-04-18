@@ -43,8 +43,11 @@
         border-bottom: solid 2px #337ab7;
         height: 1px;
     }
+    .label_left{
+        padding-left: 0px;
+    }
 </style>
-<div><a href="shipyard" data-target="navTab"><img src="/img/top.png"/></a><span>查看船厂信息</span></div>
+<div><a href="shipyard" data-target="navTab"><img src="/img/top.png"/></a><span><fmt:message key="shipyard_review_info"/> <%--查看船厂信息--%></span></div>
 <div id="line1"></div>
 <div style="margin-top: 20px;height: 50%">
     <div class="col-sm-5">
@@ -57,49 +60,48 @@
         <div class="timeline-body-content">
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">简称：${shipyard.shortName}</label>
+                    <label class="col-sm-12 control-label label_left" ><fmt:message key="shipyard_short_name"/> <%--简称--%>：${shipyard.shortName}</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label"
-                           style="padding-left: 0px;">集团公司：${shipyard.groupCompany}</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">国家：${shipyard.country}</label>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">区域：${shipyard.area}</label>
+                    <label class="col-sm-12 control-label label_left"><fmt:message key="shipyard_group"/> <%--集团公司--%>：${shipyard.groupCompany}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">位置：${shipyard.location}</label>
+                    <label class="col-sm-12 control-label label_left"><fmt:message key="shipyard_nation"/> <%--国家--%>：${shipyard.country}</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">地址：${shipyard.address}</label>
+                    <label class="col-sm-12 control-label label_left" ><fmt:message key="shipyard_area"/> <%--区域--%>：${shipyard.area}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">经度：${shipyard.longitude}</label>
+                    <label class="col-sm-12 control-label label_left"><fmt:message key="shipyard_location"/> <%--位置--%>：${shipyard.location}</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="col-sm-12 control-label label_left"  ><fmt:message key="shipyard_address"/> <%--地址--%>：${shipyard.address}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="col-sm-12 control-label label_left"><fmt:message key="shipyard_longitude"/> <%--经度--%>：${shipyard.longitude}</label>
 
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">纬度：${shipyard.latitude}</label>
+                    <label class="col-sm-12 control-label label_left" ><fmt:message key="shipyard_latitude"/> <%--纬度--%>：${shipyard.latitude}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">电话：${shipyard.tel}</label>
+                    <label class="col-sm-12 control-label label_left" ><fmt:message key="shipyard_tel"/> <%--电话--%>：${shipyard.tel}</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">电子邮件：${shipyard.email}</label>
+                    <label class="col-sm-12 control-label label_left" ><fmt:message key="shipyard_email"/> <%--电子邮件--%>：${shipyard.email}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="col-sm-12 control-label" style="padding-left: 0px;">网站：${shipyard.website}</label>
+                    <label class="col-sm-12 control-label label_left"><fmt:message key="shipyard_website"/> <%--网站--%>：${shipyard.website}</label>
                 </div>
             </div>
         </div>
@@ -108,10 +110,10 @@
 <div class="col-sm-12" style="margin-left: 40%;margin-top: 40px">
     <ul class="nav nav-pills" style="margin-bottom: 0px">
         <li class="active">
-            <a href="#tab11" data-toggle="tab">基本信息</a>
+            <a href="#tab11" data-toggle="tab"><fmt:message key="shipyard_basic_det"/> <%--基本信息--%></a>
         </li>
         <li>
-            <a href="#tab12" data-toggle="tab">设备设施</a>
+            <a href="#tab12" data-toggle="tab"><fmt:message key="shipyard_faci_equipment"/> <%--设备设施--%></a>
         </li>
     </ul>
 </div>
@@ -122,15 +124,15 @@
         <div class="tabbable tabbable-tabdrop">
             <div class="tab-content">
                 <div class="tab-pane active" id="tab11">
-                    <div style="text-align:center">业绩项目</div>
+                    <div style="text-align:center"><fmt:message key="shipyard_result_pro"/> <%--业绩项目--%></div>
                     <div class="col-sm-4">
                         <div class="portlet-body">
-                            <center class="dock">conversion项目</center>
+                            <center class="dock"><fmt:message key="shipyard_convemsion_pro"/> <%--convemsion项目--%></center>
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th> 序号</th>
-                                    <th> 项目</th>
+                                    <th> <fmt:message key="shipyard_no"/> </th><%--序号--%>
+                                    <th><fmt:message key="shipyard_item"/> </th><%--项目--%>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -144,7 +146,7 @@
                                 </c:if>
                                 <c:if test="${!co}">
                                     <tr>
-                                        <td colspan="2"> 无Convemsion Projects 信息</td>
+                                        <td colspan="2"> <fmt:message key="shipyard_convemsion_pro_no"/> </td><%--无Convemsion Projects 信息--%>
                                     </tr>
                                 </c:if>
                                 </tbody>
@@ -153,12 +155,12 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="portlet-body">
-                            <center class="dock">修复工程</center>
+                            <center class="dock"><fmt:message key="shipyard_repairing_pro"/> <%--修复工程--%></center>
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th> 序号</th>
-                                    <th> 项目</th>
+                                    <th> <fmt:message key="shipyard_no"/> </th><%--序号--%>
+                                    <th><fmt:message key="shipyard_item"/> </th><%--项目--%>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -172,7 +174,7 @@
                                 </c:if>
                                 <c:if test="${!r}">
                                     <tr>
-                                        <td colspan="2"> 无Repairing Projects 信息</td>
+                                        <td colspan="2"><fmt:message key="shipyard_repairing_pro_no"/> </td><%--无修复工程信息--%>
                                     </tr>
                                 </c:if>
                                 </tbody>
@@ -181,12 +183,12 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="portlet-body">
-                            <center class="dock">大客户</center>
+                            <center class="dock"><fmt:message key="shipyard_major_clients"/> <%--重大项目--%></center>
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th> 序号</th>
-                                    <th> 项目</th>
+                                    <th> <fmt:message key="shipyard_no"/> </th><%--序号--%>
+                                    <th><fmt:message key="shipyard_item"/> </th><%--项目--%>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -200,7 +202,7 @@
                                 </c:if>
                                 <c:if test="${!m}">
                                     <tr>
-                                        <td colspan="2"> 无Major Projects 信息</td>
+                                        <td colspan="2"><fmt:message key="shipyard_major_clients_no"/> </td><%--无重大项目信息--%>
                                     </tr>
                                 </c:if>
                                 </tbody>
@@ -212,13 +214,13 @@
                     <div class="portlet-body">
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="#tab_1_1" data-toggle="tab"> 码头信息 </a>
+                                <a href="#tab_1_1" data-toggle="tab"> <fmt:message key="shipyard_dock_det"/> <%--码头信息--%> </a>
                             </li>
                             <li>
-                                <a href="#tab_1_2" data-toggle="tab"> 泊位信息 </a>
+                                <a href="#tab_1_2" data-toggle="tab"> <fmt:message key="shipyard_berth_det"/> <%--泊位信息--%> </a>
                             </li>
                             <li>
-                                <a href="#tab_1_3" data-toggle="tab"> 设施信息 </a>
+                                <a href="#tab_1_3" data-toggle="tab"> <fmt:message key="shipyard_facility_det"/> <%--设施信息--%> </a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -228,20 +230,20 @@
                                         <table class="table table-hover" id="wharfDetail">
                                             <thead class="dock">
                                             <tr>
-                                                <th rowspan="2"> 序号</th>
-                                                <th rowspan="2"> 类型</th>
-                                                <th rowspan="2"> 姓名</th>
-                                                <th rowspan="2"> 能力（T）</th>
-                                                <th rowspan="2"> 提升能力</th>
-                                                <th colspan="3"> 维</th>
-                                                <th rowspan="2"> 起重机</th>
-                                                <th rowspan="2"> 备注</th>
+                                                <th rowspan="2"> <fmt:message key="shipyard_dock_no"/> </th><%--序号--%>
+                                                <th rowspan="2"> <fmt:message key="shipyard_dock_type"/> </th><%--类型--%>
+                                                <th rowspan="2"> <fmt:message key="shipyard_dock_name"/> </th><%--姓名--%>
+                                                <th rowspan="2"> <fmt:message key="shipyard_dock_capacity"/> </th><%--能力（T）--%>
+                                                <th rowspan="2"> <fmt:message key="shipyard_dock_lift_capacity"/> </th><%--提升能力--%>
+                                                <th colspan="3"> <fmt:message key="shipyard_dock_dimension" /></th><%--维--%>
+                                                <th rowspan="2"> <fmt:message key="shipyard_dock_cranes"/> </th><%--起重机--%>
+                                                <th rowspan="2"> <fmt:message key="shipyard_dock_remark"/> </th><%--备注--%>
 
                                             </tr>
                                             <tr>
-                                                <th>长度（m）</th>
-                                                <th>宽度（m）</th>
-                                                <th>草案（m）</th>
+                                                <th><fmt:message key="shipyard_dock_length"/> <%--长度--%>（m）</th>
+                                                <th><fmt:message key="shipyard_dock_width"/> <%--宽度--%>（m）</th>
+                                                <th><fmt:message key="shipyard_dock_draft"/> <%--吃水--%>（m）</th>
                                             </tr>
                                             </thead>
 
@@ -254,11 +256,11 @@
                                     <table class="table table-hover" id="berthDetail">
                                         <thead class="dock">
                                         <tr>
-                                            <th> 序号</th>
-                                            <th> 总长（m）</th>
-                                            <th> 草案（m）</th>
-                                            <th> 能力（T）</th>
-                                            <th> 起重机</th>
+                                            <th> <fmt:message key="shipyard_berth_no"/> <%--序号--%></th>
+                                            <th> <fmt:message key="shipyard_berth_loa"/> <%--总长--%>（m）</th>
+                                            <th> <fmt:message key="shipyard_berth_draft"/><%--吃水--%>（m）</th>
+                                            <th> <fmt:message key="shipyard_berth_capacity"/><%--能力--%>（T）</th>
+                                            <th> <fmt:message key="shipyard_berth_cranes"/><%--起重机--%></th>
 
                                         </tr>
                                         </thead>
@@ -267,17 +269,17 @@
                             </div>
                             <div class="tab-pane fade" id="tab_1_3">
                                 <div>
-                                    <center class="dock">起重机信息</center>
+                                    <center class="dock"><fmt:message key="shipyard_cranes_det"/> <%--起重机信息--%></center>
                                     <div class="portlet-body" style="padding: 0px">
                                         <div class="table-scrollable">
                                             <table class="table table-hover">
                                                 <thead>
                                                 <tr>
-                                                    <th> 序号</th>
-                                                    <th> 类型</th>
-                                                    <th> 能力（T）</th>
-                                                    <th> 单元</th>
-                                                    <th> 备注</th>
+                                                    <th> <fmt:message key="shipyard_cranes_no"/> <%--序号--%></th>
+                                                    <th> <fmt:message key="shipyard_cranes_type"/><%--类型--%></th>
+                                                    <th> <fmt:message key="shipyard_cranes_capacity"/><%--能力--%>（T）</th>
+                                                    <th> <fmt:message key="shipyard_cranes_unit"/><%--单元--%></th>
+                                                    <th> <fmt:message key="shipyard_cranes_remark"/><%--备注--%></th>
 
                                                 </tr>
                                                 </thead>
@@ -295,7 +297,7 @@
                                                 </c:if>
                                                 <c:if test="${!c}">
                                                     <tr>
-                                                        <td colspan="5"> 无起重机信息</td>
+                                                        <td colspan="5"> <fmt:message key="shipyard_cranes_det_no"/> <%--无起重机信息--%></td>
                                                     </tr>
                                                 </c:if>
                                                 <tr>
@@ -305,17 +307,17 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <center class="dock">拖船信息</center>
+                                    <center class="dock"><fmt:message key="shipyard_tugboats_det"/> <%--拖船信息--%></center>
                                     <div class="portlet-body" style="padding: 0px">
                                         <div class="table-scrollable">
                                             <table class="table table-hover">
                                                 <thead>
                                                 <tr>
-                                                    <th> 序号</th>
-                                                    <th> 类型</th>
-                                                    <th> 能力（T）</th>
-                                                    <th> 单元</th>
-                                                    <th> 备注</th>
+                                                    <th> <fmt:message key="shipyard_tugboats_no"/> </th><%--序号--%>
+                                                    <th> <fmt:message key="shipyard_tugboats_type"/></th><%--类型--%>
+                                                    <th> <fmt:message key="shipyard_tugboats_capacity"/>（T）</th><%--能力--%>
+                                                    <th> <fmt:message key="shipyard_tugboats_unit"/></th><%--单元--%>
+                                                    <th> <fmt:message key="shipyard_tugboats_remark"/></th><%--备注--%>
 
                                                 </tr>
                                                 </thead>
@@ -333,7 +335,7 @@
                                                 </c:if>
                                                 <c:if test="${!t}">
                                                     <tr>
-                                                        <td colspan="5"> 无拖船信息</td>
+                                                        <td colspan="5"> <fmt:message key="shipyard_tugboats_det_no"/> </td><%--无拖船信息--%>
                                                     </tr>
                                                 </c:if>
                                                 </tbody>
@@ -342,7 +344,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <center class="dock">其他信息</center>
+                                    <center class="dock"><fmt:message key="shipyard_others_det"/> <%--其他信息--%></center>
                                     <div class="portlet-body" style="padding: 0px">
                                         <div class="table-scrollable">
                                             <table class="table table-hover">
@@ -357,7 +359,7 @@
                                                 </c:if>
                                                 <c:if test="${!o}">
                                                     <tr>
-                                                        <td colspan="2"> 无其他信息</td>
+                                                        <td colspan="2"> <fmt:message key="shipyard_others_det_no"/> </td><%--无其他信息--%>
                                                     </tr>
                                                 </c:if>
                                                 </tbody>
@@ -477,13 +479,13 @@
         $("#part").after("<a id='info'></a>");
         $("#part").html(s.substring(0, 200));
         $("#info").attr("href", "##");
-        $("#info").html(s.length > 200 ? "...[详细]" : "");
+        $("#info").html(s.length > 200 ? "...[<fmt:message key='shipyard_describe_detailed'/> ]" : "");/*详细*/
         $("#info").click(function () {
-            if ($("#info").html() == "...[详细]") {
-                $("#info").html("收起");
+            if ($("#info").html() == "...[<fmt:message key='shipyard_describe_detailed'/>]") {/*详细*/
+                $("#info").html("<fmt:message key='shipyard_describe_retract'/>");/*收起*/
                 $("#part").html(s);
             } else {
-                $("#info").html("...[详细]");
+                $("#info").html("...[<fmt:message key='shipyard_describe_detailed'/>]");/*详细*/
                 $("#part").html(s.substring(0, 200));
             }
         });

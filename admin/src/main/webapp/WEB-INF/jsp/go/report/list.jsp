@@ -25,16 +25,16 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            每日报告
+                            <fmt:message key="report_Daily"/> <%--每日报告--%>
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-4">
-                            船名: ${task.shipName}
+                            <fmt:message key="repair_vessel_name"/> <%--船名--%>: ${task.shipName}
                         </div>
                         <div class="col-md-4">
-                            维修单号:XXXXX
+                            <fmt:message key="repair_repc_num"/> <%--维修单号--%>:XXXXX
                         </div>
                     </div>
                 </div>
@@ -42,12 +42,12 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>序号</th>
-                        <th>日期</th>
-                        <th>天气</th>
-                        <th>温度(℃)</th>
-                        <th>湿度(%)</th>
-                        <th>所涉及单号</th>
+                        <th><fmt:message key="report_number"/> </th><%--序号--%>
+                        <th><fmt:message key="report_date"/></th><%--日期--%>
+                        <th><fmt:message key="report_weather"/></th><%--天气--%>
+                        <th><fmt:message key="report_temperature"/>(℃)</th><%--温度--%>
+                        <th><fmt:message key="report_humidity"/>(%)</th><%--湿度--%>
+                        <th><fmt:message key="report_relevant_bill_number"/></th><%--所涉及单号--%>
                     </tr>
                     </thead>
                 </table>
