@@ -7,7 +7,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<go:navigater path="owner"></go:navigater>
+<go:navigater path="company"></go:navigater>
 <style type="text/css">
     #img{width:90%;height:200px;}
     #allmap{height:300px;width:50%;}
@@ -19,26 +19,27 @@
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=sH45FS0Pd1v58SSDcltpILGWyLkSn959"></script>
 <form class="form-horizontal">
-    <div class="row">
+    <div class="row col-md-12">
         <div  style="margin-bottom: 10px">
-            <img src="shanghai.aliyuncs.com/goshipyard/QbeHWzrMGY.jpg">&nbsp;&nbsp;&nbsp;<span><fmt:message key="company_details"/> <%--公司信息--%></span>
+            <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/system/info.png">&nbsp;&nbsp;&nbsp;<span><fmt:message key="company_details"/> <%--公司信息--%></span>
         </div>
         <div id="up">
-            <img id="img" src="/img/ship.jpg"/>
+            <img id="img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/system/ship.jpg"/>
         </div>
         <div id="down">
+
             <div id="allmap"></div>
 
             <div id="companyInfo">
-                <div class="com-info"><span>${company.name}</span></div>
-                <div class="com-info"><span><fmt:message key="company_legal_person"/>：${company.legalPerson}</span></div>
-                <div class="com-info"><span><fmt:message key="company_tel"/>：${company.tel}</span></div>
-                <div class="com-info"><span><fmt:message key="company_website"/>：${company.website}</span></div>
-                <div class="com-info"><span><fmt:message key="company_address"/>：<span id="address">${company.address}</span></span></div>
-                <div class="com-info"><span><fmt:message key="company_postal_code"/>：${company.postalCode}</span></div>
-                <div class="com-info"><span><fmt:message key="company_contact_name"/>：${company.contactName}</span></div>
-                <div class="com-info"><span><fmt:message key="company_contact_tel"/>：${company.contactTel}</span></div>
-            </div>
+            <div class="com-info"><span>${company.name}</span></div>
+            <div class="com-info"><span><fmt:message key="company_legal_person"/>：${company.legalPerson}</span></div>
+            <div class="com-info"><span><fmt:message key="company_tel"/>：${company.tel}</span></div>
+            <div class="com-info"><span><fmt:message key="company_website"/>：${company.website}</span></div>
+            <div class="com-info"><span><fmt:message key="company_address"/>：<span id="address">${company.address}</span></span></div>
+            <div class="com-info"><span><fmt:message key="company_postal_code"/>：${company.postalCode}</span></div>
+            <div class="com-info"><span><fmt:message key="company_contact_name"/>：${company.contactName}</span></div>
+            <div class="com-info"><span><fmt:message key="company_contact_tel"/>：${company.contactTel}</span></div>
+        </div>
         </div>
     </div>
 </form>

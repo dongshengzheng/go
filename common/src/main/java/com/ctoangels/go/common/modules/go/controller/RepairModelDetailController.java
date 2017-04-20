@@ -52,17 +52,6 @@ public class RepairModelDetailController extends BaseController {
 
     @RequestMapping
     public String page() {
-        EntityWrapper<Dict> ew = new EntityWrapper<>();
-        ew.addFilter("type={0}", "维修部位");
-        List<Dict> repDicts = dictService.selectList(ew);
-
-        EntityWrapper<Dict> ew1 = new EntityWrapper<>();
-        ew1.addFilter("type={0}", "修理工艺");
-        List<Dict> reqDicts = dictService.selectList(ew1);
-
-        session.setAttribute("repDicts", repDicts);
-        session.setAttribute("reqDicts", reqDicts);
-
         return "go/modelDetail/list";
     }
 
@@ -83,6 +72,8 @@ public class RepairModelDetailController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(HttpSession session, ModelMap map) {
         map.put("staticPath", staticPath);
+        map.put("repDicts", dictService.selectByType("维修部位"));
+        map.put("reqDicts", dictService.selectByType("修理工艺"));
         return "go/modelDetail/add";
     }
 
@@ -139,6 +130,8 @@ public class RepairModelDetailController extends BaseController {
         List<RepairModelDetailReq> repairModelDetailReqs = repairModelDetailReqService.selectList(ew);
         modelMap.put("detailReqs", repairModelDetailReqs);
         modelMap.put("staticPath", staticPath);
+        modelMap.put("repDicts", dictService.selectByType("维修部位"));
+        modelMap.put("reqDicts", dictService.selectByType("修理工艺"));
         if (operate.equals("look")) {
             return "go/modelDetail/info";
         } else {

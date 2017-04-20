@@ -145,7 +145,7 @@
                                                 <label>
                                                     <input type="radio" name="type"
                                                            value="${type.value}"
-                                                           <c:if test="${type.value==repairSpec.type}">checked</c:if>> <fmt:message key="${type.des}"/>
+                                                           <c:if test="${type.value==repairSpec.type}">checked</c:if>>${type.des}
                                                     <span></span>
                                                 </label>
                                             </c:forEach>
@@ -169,8 +169,8 @@
                                         <div class="portlet-title" style="background-color: #00aaaa">
                                             <div class="caption">
                                                 <i class="fa fa-cog"></i>
-                                                    <fmt:message key="${catagory[outerVs.count-1].des}"/>&nbsp;<span
-                                                    class="checkedOrNot"></span>
+                                                    ${catagory[outerVs.count-1].des}
+                                                <span class="checkedOrNot"></span>
                                             </div>
                                             <div class="tools">
                                                 <a href="javascript:;" class="expand"> </a>

@@ -67,14 +67,8 @@ public class RepairSpecDetailController extends BaseController {
 
             map.put("reqList", reqList);
         }
-        EntityWrapper<Dict> ew = new EntityWrapper<>();
-        ew.addFilter("type={0}", "维修部位");
-        List<Dict> repDicts = dictService.selectList(ew);
-        EntityWrapper<Dict> ew1 = new EntityWrapper<>();
-        ew1.addFilter("type={0}", "修理工艺");
-        List<Dict> reqDicts = dictService.selectList(ew1);
-        map.put("repDicts", repDicts);
-        map.put("reqDicts", reqDicts);
+        map.put("repDicts", dictService.selectByType("维修部位"));
+        map.put("reqDicts", dictService.selectByType("修理工艺"));
         map.put("staticPath", staticPath);
         return "go/repairSpec/detail";
     }
@@ -181,14 +175,9 @@ public class RepairSpecDetailController extends BaseController {
         ew.addFilter("repair_spec_detail_id={0}", detail.getId());
         List<RepairSpecDetailReq> repairSpecDetailReqs = repairSpecDetailReqService.selectList(ew);
         map.put("reqList", repairSpecDetailReqs);
-        EntityWrapper<Dict> ew1 = new EntityWrapper<>();
-        ew1.addFilter("type={0}", "维修部位");
-        List<Dict> repDicts = dictService.selectList(ew1);
-        EntityWrapper<Dict> ew2 = new EntityWrapper<>();
-        ew2.addFilter("type={0}", "修理工艺");
-        List<Dict> reqDicts = dictService.selectList(ew2);
-        map.put("repDicts", repDicts);
-        map.put("reqDicts", reqDicts);
+
+        map.put("repDicts", dictService.selectByType("维修部位"));
+        map.put("reqDicts", dictService.selectByType("修理工艺"));
         map.put("staticPath", staticPath);
         return "go/repairSpec/detail-edit";
     }

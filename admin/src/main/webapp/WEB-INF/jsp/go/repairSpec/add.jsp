@@ -115,7 +115,7 @@
                                         <label class="col-sm-1 control-label"><span class="red">* </span></label>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="planStartDate" class="col-sm-3 control-label">计划进场日期</label>
+                                        <label for="planStartDate" class="col-sm-3 control-label"><fmt:message key="repair_spec_plan_date"/> <%--计划进场日期--%></label>
                                         <div class="col-sm-7">
                                             <div class="input-group">
                                                 <input id="planStartDate" name="planStartDate" type="text"
@@ -158,7 +158,7 @@
                                                 <label>
                                                     <input type="radio" name="type"
                                                            value="${type.value}"
-                                                           <c:if test="${vs.count==1}">checked</c:if>> <fmt:message key="${type.des}"/>
+                                                           <c:if test="${vs.count==1}">checked</c:if>> ${type.des}
                                                     <span></span>
                                                 </label>
                                             </c:forEach>

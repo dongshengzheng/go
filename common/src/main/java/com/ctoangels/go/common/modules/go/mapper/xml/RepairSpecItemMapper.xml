@@ -25,7 +25,7 @@
 
     <!--根据红本id以及维修项目类型获取维修单items的详细信息(含参数可选值)-->
     <select id="bySpecIdAndCatagoryWithParamsAndValue" resultMap="SpecItemMap2">
-        SELECT item.* ,#{2} as model_id
+        SELECT item.* ,#{2} as model_id, #{3} as param_language
         from t_repair_spec_item item
         WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and del_flag=0
         Order by item.sort,item.code
@@ -34,7 +34,7 @@
     <resultMap id="SpecItemMap2" type="RepairSpecItem">
         <result property="id" column="id"></result>
         <result property="code" column="code"></result>
-        <collection property="paramList" column="{model_id=model_id,code=code}" ofType="Param"
+        <collection property="paramList" column="{model_id=model_id,code=code,language=param_language}" ofType="Param"
                     select="com.ctoangels.go.common.modules.go.mapper.ParamMapper.byItemCodeContainParamValue"/>
         <collection property="detailList" column="{repair_spec_id=repair_spec_id,code=code}" ofType="RepairSpecDetail"
                     select="com.ctoangels.go.common.modules.go.mapper.RepairSpecDetailMapper.byItemCodeAndSpecId"/>
@@ -42,7 +42,7 @@
 
 
     <select id="bySpecIdAndCatagoryForInfo" resultMap="SpecItemMap2">
-        SELECT item.* ,#{2} as model_id
+        SELECT item.* ,#{2} as model_id ,#{3} as param_language
         from t_repair_spec_item item
         WHERE item.repair_spec_id=#{0} and item.catagory=#{1} and item.status=0 and del_flag=0
         Order by item.sort,item.code

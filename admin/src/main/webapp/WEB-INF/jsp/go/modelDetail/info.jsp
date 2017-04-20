@@ -185,7 +185,7 @@
                                            checked
                                     </c:if>
                                     </c:forEach>
-                                           name="repairPosition"> <fmt:message key="${r.des}"/>
+                                           name="repairPosition">${r.des}
                                     <span></span>
                                 </label>
                             </div>
@@ -235,7 +235,7 @@
                                    checked
                             </c:if>
                             </c:forEach>
-                                   name="repairTech"> <fmt:message key="${req.des}"/>
+                                   name="repairTech"> ${req.des}
                             <span></span>
                         </label>
                     </div>

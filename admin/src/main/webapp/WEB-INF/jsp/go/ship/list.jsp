@@ -2,6 +2,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page  isELIgnored="false"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -50,6 +51,11 @@
     </div>
 </div>
 <script type="text/javascript">
+    var language=${language};
+    var url="";
+    if(language==0){
+        url="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt";
+    }
     var defTable;
     $(document).ready(function () {
         defTable = $('#default_table').DataTable({
@@ -66,7 +72,7 @@
                 }
             },
             "language": {
-                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+                "url": url
             },
 
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],

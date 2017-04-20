@@ -10,7 +10,9 @@ import java.util.List;
  */
 public interface IDictService extends ISuperService<Dict> {
 
-    List<Dict> getListByType(String type);
+    List<Dict> getListByType(String type,Integer language);
 
-    String getDesByTypeAndValue(String type, String value);
+    String getDesByTypeAndValue(String type, String value,Integer language);
+
+    List<Dict> selectByType(String type);
 }

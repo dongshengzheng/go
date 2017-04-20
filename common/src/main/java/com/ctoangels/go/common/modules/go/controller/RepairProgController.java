@@ -9,6 +9,7 @@ import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -76,6 +79,10 @@ public class RepairProgController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public JSONObject list(RepairProg repairProg, @RequestParam(required = false) String keyword) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+
+
         int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<RepairProg> ew = getEntityWrapper();
         if (!StringUtils.isEmpty(keyword))
@@ -85,7 +92,13 @@ public class RepairProgController extends BaseController {
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         for (RepairProg prog : page.getRecords()) {
             prog.setPer(repairProgService.getPerById(prog.getId()));
-            prog.setType(dictService.getDesByTypeAndValue("维修类型", prog.getType()));
+            if(language.equals("中文")){
+                prog.setType(dictService.getDesByTypeAndValue("维修类型", prog.getType(),Const.MESSAGE_ZH));
+            }
+            if (language.equals("英文")){
+                prog.setType(dictService.getDesByTypeAndValue("维修类型", prog.getType(),Const.MESSAGE_EN));
+            }
+
         }
         return jsonPage(page);
     }
@@ -114,6 +127,9 @@ public class RepairProgController extends BaseController {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+
         RepairProg repairProg = repairProgService.selectById(id);
         List<RepairProgDetail> type1 = repairProgDetailService.getDetailByCatagory(id, "通用服务");
         List<RepairProgDetail> type2 = repairProgDetailService.getDetailByCatagory(id, "坞修工程");
@@ -124,7 +140,12 @@ public class RepairProgController extends BaseController {
         List<RepairProgDetail> type7 = repairProgDetailService.getDetailByCatagory(id, "特种设备");
         List<RepairProgDetail> type8 = repairProgDetailService.getDetailByCatagory(id, "其他");
         List<RepairProgDetail> type9 = repairProgDetailService.getDetailByCatagory(id, "新增");
-        List<Dict> cataList = dictService.getListByType("维修进度大类");
+        List<Dict> cataList=null;
+        if(language.equals("中文")){
+            cataList=dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
+        }else if (language.equals("英文")){
+            cataList=dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
+        }
         map.put("repairProg", repairProg);
         map.put("cataList", cataList);
         map.put("type1", type1);
@@ -329,16 +350,8 @@ public class RepairProgController extends BaseController {
         List<RepairProgDetailMedia> progDetailMedias = repairProgDetailMediaService.selectList(ew3);
         map.put("progDetailMedias", progDetailMedias);
 
-        EntityWrapper<Dict> ew1 = new EntityWrapper<>();
-        ew1.addFilter("type={0}", "维修部位");
-        List<Dict> repDicts = dictService.selectList(ew1);
-
-        EntityWrapper<Dict> ew2 = new EntityWrapper<>();
-        ew2.addFilter("type={0}", "修理工艺");
-        List<Dict> reqDicts = dictService.selectList(ew2);
-
-        map.put("repDicts", repDicts);
-        map.put("reqDicts", reqDicts);
+        map.put("repDicts", dictService.selectByType("维修部位"));
+        map.put("reqDicts", dictService.selectByType("修理工艺"));
 
         map.put("proDetail", progDetail);
         return "go/repairProg/detail";

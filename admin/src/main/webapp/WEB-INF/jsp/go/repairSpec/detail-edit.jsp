@@ -104,33 +104,34 @@
         <div style="height:40px;width: 100%;background-color: #C0C9CC">
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
-                    <label for="shipName" class="col-sm-7 control-label label-top"><fmt:message key="project_vessel_name"/><%--船名--%>：</label>
+                    <label for="shipName" class="control-label label-top"><fmt:message key="project_vessel_name"/><%--船名--%>：</label>
                     <label style="width: auto;padding-left: 0px;"
-                           class="col-sm-5 control-label label-top">${detail.shipName}</label>
+                           class="control-label label-top">${detail.shipName}</label>
                     <input style="display: none" readonly id="shipName" name="shipName" type="text" maxlength="32"
                            value="${detail.shipName}"
                            class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="catagory" class="col-sm-6 control-label label-top"><fmt:message key="project_category"/><%--项目分类--%>：</label>
+
+                    <label for="catagory" class="control-label label-top"><fmt:message key="project_category"/><%--项目分类--%>：</label>
                     <label style="width: auto;padding-left: 0px;"
-                           class="col-sm-6 control-label label-top">${detail.catagory}</label>
+                           class="control-label label-top">${detail.viewCatagory}</label>
                     <input style="display: none" readonly id="catagory" name="catagory" type="text" maxlength="32"
                            value="${detail.catagory}"
                            class="form-control ">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="code" class="col-sm-7 control-label label-top"><fmt:message key="project_number"/><%--项目号--%>：</label>
+                    <label for="code" class="control-label label-top"><fmt:message key="project_number"/><%--项目号--%>：</label>
                     <label style="width: auto;padding-left: 0px;"
-                           class="col-sm-5 control-label label-top">${detail.code}</label>
+                           class="control-label label-top">${detail.code}</label>
                     <input style="display: none" readonly id="code" name="code" type="text" maxlength="32"
                            value="${detail.code}"
                            class="form-control required">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="proOrderNo" class="col-sm-8 control-label label-top"><fmt:message key="project_bill_number"/><%--项目单号--%>：</label>
+                    <label for="proOrderNo" class="control-label label-top"><fmt:message key="project_bill_number"/><%--项目单号--%>：</label>
                     <label style="width: auto;padding-left: 0px;"
-                           class="col-sm-4 control-label label-top">${detail.proOrderNo}</label>
+                           class="ontrol-label label-top">${detail.proOrderNo}</label>
                     <input style="display: none" readonly id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
                            value="${detail.proOrderNo}"
                            class="form-control required">
@@ -203,7 +204,7 @@
                                            checked
                                     </c:if>
                                     </c:forEach>
-                                           name="repairPosition"> <fmt:message key="${r.des}"/>
+                                           name="repairPosition"> ${r.des}
                                     <span></span>
                                 </label>
                             </div>
@@ -266,7 +267,7 @@
                                    checked
                             </c:if>
                             </c:forEach>
-                                   name="repairTech"> <fmt:message key="${req.des}"/>
+                                   name="repairTech"> ${req.des}
                             <span></span>
                         </label>
                     </div>

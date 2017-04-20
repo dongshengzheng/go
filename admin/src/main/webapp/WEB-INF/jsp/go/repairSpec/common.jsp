@@ -204,6 +204,7 @@
    data-model="dialog"><fmt:message key="repair_spec_detail_add"/> </a><%--新增详单--%>
 <input type="hidden" id="detailShipName">
 <input type="hidden" id="detailCatagory">
+<input type="hidden" id="viewCatagory"/>
 <input type="hidden" id="detailCode">
 <input type="hidden" id="detailProOrderNo">
 <script>
@@ -235,6 +236,8 @@
 
 
     function getDetail(obj) {
+        var language=${language};
+        alert(language);
         var thisOne = $(obj);
         var shipName = $("#shipName").val();
         var id = thisOne.val();
@@ -245,38 +248,78 @@
             return;
         }
         //自增详单号
-        if (catagory == "通用服务") {
+        if (catagory == "通用服务" || catagory=="General Service") {
             var no = $("#type1proOrderNo").val();
             proOrderNo = "G-" + foo(no);
+            if(language==0){
+                $("#viewCatagory").val(catagory);
+            }else if(language==1){
+                $("#viewCatagory").val("General Service");
+            }
             $("#type1proOrderNo").val(no * 1 + 1);
-        } else if (catagory == "坞修工程") {
+        } else if (catagory == "坞修工程"|| catagory=="Dock Project") {
             var no = $("#type2proOrderNo").val();
             proOrderNo = "D-" + foo(no);
             $("#type2proOrderNo").val(no * 1 + 1);
-        } else if (catagory == "船体工程") {
+            if(language==0){
+                $("#viewCatagory").val(catagory);
+            }else if(language==1){
+                $("#viewCatagory").val("Dock Project");
+            }
+        } else if (catagory == "船体工程"|| catagory=="") {
             var no = $("#type3proOrderNo").val();
             proOrderNo = "H-" + foo(no);
             $("#type3proOrderNo").val(no * 1 + 1);
-        } else if (catagory == "机械工程") {
+            if(language==0){
+                $("#viewCatagory").val(catagory);
+            }else if(language==1){
+                $("#viewCatagory").val("Hull Project");
+            }
+        } else if (catagory == "机械工程"|| catagory=="Machinery Project") {
             var no = $("#type4proOrderNo").val();
             proOrderNo = "M-" + foo(no);
             $("#type4proOrderNo").val(no * 1 + 1);
-        } else if (catagory == "电气工程") {
+            if(language==0){
+                $("#viewCatagory").val(catagory);
+            }else if(language==1){
+                $("#viewCatagory").val("Machinery Project");
+            }
+        } else if (catagory == "电气工程"|| catagory=="Electical Project") {
             var no = $("#type5proOrderNo").val();
             proOrderNo = "E-" + foo(no);
             $("#type5proOrderNo").val(no * 1 + 1);
+            if(language==0){
+                $("#viewCatagory").val(catagory);
+            }else if(language==1){
+                $("#viewCatagory").val("Electical Project");
+            }
         } else if (catagory == "冷藏工程") {
             var no = $("#type6proOrderNo").val();
             proOrderNo = "R-" + foo(no);
             $("#type6proOrderNo").val(no * 1 + 1);
+            if(language==0){
+                $("#viewCatagory").val(catagory);
+            }else if(language==1){
+                $("#viewCatagory").val("Refrigeration Project");
+            }
         } else if (catagory == "特种设备") {
             var no = $("#type7proOrderNo").val();
             proOrderNo = "S-" + foo(no);
             $("#type7proOrderNo").val(no * 1 + 1);
+            if(language==0){
+                $("#viewCatagory").val(catagory);
+            }else if(language==1){
+                $("#viewCatagory").val("Special Equipment");
+            }
         } else if (catagory == "其他") {
             var no = $("#type8proOrderNo").val();
             proOrderNo = "O-" + foo(no);
             $("#type8proOrderNo").val(no * 1 + 1);
+            if(language==0){
+                $("#viewCatagory").val(catagory);
+            }else if(language==1){
+                $("#viewCatagory").val("Others");
+            }
         }
         $(".marked-select").removeClass("marked-select");
         thisOne.addClass("marked-select");

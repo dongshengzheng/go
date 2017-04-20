@@ -97,32 +97,33 @@
     <h4 class="modal-title" style="color: white"><fmt:message key="repair_spec_detail"/> </h4><%--维修详单--%>
 </div>
 <form action="" method="post" class="form-horizontal" id="detail_form">
+    <input id="view_catagory" name="viewCatagory" type="hidden"/>
     <div>
         <div class="line1"></div>
         <div style="height:40px;width: 100%;background-color: #C0C9CC">
             <div class="timeline-body-content">
                 <div class="form-group col-md-3">
-                    <label for="shipName" class="col-sm-7 control-label label-top"><fmt:message key="project_vessel_name"/> <%--船名--%>：</label>
+                    <label for="shipName" class="control-label label-top"><fmt:message key="project_vessel_name"/> <%--船名--%>：</label>
                     <label style="width: auto;padding-left: 0px;" id="shipNameLabel"
-                           class="col-sm-5 control-label label-top"></label>
+                           class="control-label label-top"></label>
                     <input id="shipName" name="shipName" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="catagory" class="col-sm-6 control-label label-top"><fmt:message key="project_category"/> <%--项目分类--%>：</label>
+                    <label for="catagory" class="control-label label-top"><fmt:message key="project_category"/> <%--项目分类--%>：</label>
                     <label style="width: auto;padding-left: 0px;" id="catagoryLabel"
-                           class="col-sm-6 control-label label-top"></label>
+                           class="control-label label-top"></label>
                     <input id="catagory" name="catagory" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="code" class="col-sm-6 control-label label-top"><fmt:message key="project_number"/> <%--项目号--%>：</label>
+                    <label for="code" class="control-label label-top"><fmt:message key="project_number"/> <%--项目号--%>：</label>
                     <label style="width: auto;padding-left: 0px;" id="codeLabel"
-                           class="col-sm-6 control-label label-top"></label>
+                           class="control-label label-top"></label>
                     <input id="code" name="code" type="hidden">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="proOrderNo" class="col-sm-8 control-label label-top"><fmt:message key="project_bill_number"/> <%--项目单号--%>：</label>
+                    <label for="proOrderNo" class="control-label label-top"><fmt:message key="project_bill_number"/> <%--项目单号--%>：</label>
                     <label style="width: auto;padding-left: 0px;" id="proOrderNoLabel"
-                           class="col-sm-4 control-label label-top"></label>
+                           class="control-label label-top"></label>
                     <input id="proOrderNo" name="proOrderNo" type="hidden">
                 </div>
             </div>
@@ -193,7 +194,7 @@
                                            checked
                                     </c:if>
                                     </c:forEach>
-                                           name="repairPosition"> <fmt:message key="${r.des}"/>
+                                           name="repairPosition">${r.des}
                                     <span></span>
                                 </label>
                             </div>
@@ -242,7 +243,7 @@
                                    checked
                             </c:if>
                             </c:forEach>
-                                   name="repairTech"> <fmt:message key="${req.des}"/>
+                                   name="repairTech"> ${req.des}
                             <span></span>
                         </label>
                     </div>
@@ -384,7 +385,10 @@
         $(".modal #code").val($("#detailCode").val());
         $(".modal #proOrderNo").val($("#detailProOrderNo").val());
         $("#shipNameLabel").html($("#detailShipName").val());
-        $("#catagoryLabel").html($("#detailCatagory").val());
+        $("#catagoryLabel").html( $("#viewCatagory").val());
+        /*用于显示类型的*/
+        $("#view_catagory").val( $("#viewCatagory").val());
+
         $("#codeLabel").html($("#detailCode").val());
         $("#proOrderNoLabel").html($("#detailProOrderNo").val());
     })

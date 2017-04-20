@@ -151,6 +151,12 @@ public class RepairSpecDetail implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    /**
+     * 显示的类型
+     */
+    @TableField(value = "view_catagory")
+    private String viewCatagory;
+
 
     public Integer getId() {
         return this.id;
@@ -336,4 +342,11 @@ public class RepairSpecDetail implements Serializable {
         this.proOrderNo = proOrderNo;
     }
 
+    public String getViewCatagory() {
+        return viewCatagory;
+    }
+
+    public void setViewCatagory(String viewCatagory) {
+        this.viewCatagory = viewCatagory;
+    }
 }

@@ -105,7 +105,7 @@
                                                 <input id="planStartDate" name="planStartDate" type="text"
                                                        class="form-control" readonly
                                                        value="<fmt:formatDate value='${repairSpec.planStartDate}' pattern="yyyy-MM-dd"/>"
-                                                       placeholder="<fmt:message key='repair_spec_enter_shipyard_date_no'/> ">无进厂日期信息
+                                                       placeholder="<fmt:message key='repair_spec_enter_shipyard_date_no'/> "><%--无进厂日期信息--%>
                                                 <span class="input-group-addon">
                                                                             <i class="fa fa-calendar"></i>
                                                                         </span></div>
@@ -207,7 +207,7 @@
                             </div>
                         </div>
                         <div class="modal-footer" style="text-align: center" id="item9">
-                            <a href="repairSpec" class="btn default" data-target="navTab"><fmt:message key="epair_spec_back"/><fmt:message key="repair_spec_back"/> </a><%--返回--%>
+                            <a href="repairSpec" class="btn default" data-target="navTab"><fmt:message key="go_back"/> </a><%--返回--%>
                         </div>
                     </div>
                 </div>

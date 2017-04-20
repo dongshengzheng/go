@@ -221,7 +221,7 @@ function initUploaders_img(buttonId, bucket, domain, divId,imgNum) {
     uploader.init();
 }
 
-function initUploaders_attachment(buttonId, bucket, domain, tableId, trId) {
+function initUploaders_attachment(buttonId, bucket, domain, tableId, trId,remove) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: buttonId,
@@ -233,7 +233,7 @@ function initUploaders_attachment(buttonId, bucket, domain, tableId, trId) {
                 {title: "Zip files", extensions: "zip,rar"},
                 {title: "Text files", extensions: "txt,pdf"}
             ],
-            max_file_size: '10mb', //最大只能上传10mb的文件
+            max_file_size: '100mb', //最大只能上传10mb的文件
             prevent_duplicates: true //不允许选取重复文件
         },
         init: {
@@ -247,7 +247,7 @@ function initUploaders_attachment(buttonId, bucket, domain, tableId, trId) {
                 var tr = '<tr>' +
                     '<td style="width: 80%">' + nativeName + '' +
                     '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
-                    '</td><td><button onclick="delTr(this)">删除</button>' +
+                    '</td><td><button onclick="delTr(this)">'+remove+'<!--删除--></button>' +
                     '<input name="fileDiskName" type="hidden" value="' + g_object_name + '" >' +//文件存储磁盘的名称
                     '<input name="fileName" type="hidden" value="' + nativeName + '"/> ' +//文件原名称
                     '<input name="fileType" type="hidden" value="2"/>' +
@@ -293,36 +293,6 @@ function initUploaders_report_img(buttonId, bucket, domain, imgId, divId) {
                     '<span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:4px;z-index: 999;"></span>' +
                     ' <a href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" target="_blank"><img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" ' +
                     'style="width: 100px;height: 100px;"></a>' + '</div>');
-            }
-        }
-    });
-    uploader.init();
-}
-
-/*导入excel报价单*/
-function initUploaders_report_img(buttonId, bucket, domain, imgId, divId) {
-    var uploader = new plupload.Uploader({
-        runtimes: 'html5,flash,silverlight,html4',
-        browse_button: buttonId,
-        flash_swf_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.swf',
-        silverlight_xap_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.xap',
-        url: 'http://oss.aliyuncs.com',
-        filters: {
-            mime_types: [ //只允许上传图片和zip,rar文件
-                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
-                {title: "Zip files", extensions: "zip,rar"}
-            ],
-            max_file_size: '10mb', //最大只能上传10mb的文件
-            prevent_duplicates: true //不允许选取重复文件
-        },
-        init: {
-            FilesAdded: function (up) {
-                set_upload_param(up, '', false, domain);
-            },
-            BeforeUpload: function (up, file) {
-                set_upload_param(up, file.name, true, domain);
-            },
-            FileUploaded: function () {
             }
         }
     });

@@ -319,7 +319,7 @@
 </script>
 <script>
     initUploaders_report_img("upload_img", "shipinfo", "${staticPath}/", "img", "divId");
-    initUploaders_attachment("attachment", "shipinfo", "${staticPath}/", "table_attachment", "one");
+    initUploaders_attachment("attachment", "shipinfo", "${staticPath}/", "table_attachment", "one","<fmt:message key="go_delete"/>");
 
     //判断是否已经完成了，完成了，则excel都不可以从操作的
     var flag = false;

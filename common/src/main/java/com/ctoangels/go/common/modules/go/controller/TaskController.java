@@ -8,16 +8,15 @@ import com.ctoangels.go.common.modules.go.service.*;
 import com.ctoangels.go.common.modules.sys.controller.BaseController;
 import com.ctoangels.go.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.util.*;
 
 /**
  * Task 控制层
@@ -82,7 +81,15 @@ public class TaskController extends BaseController {
 
     @RequestMapping(value = "/info")
     public String info(@RequestParam Integer id, ModelMap map) {
-        List<Dict> cataList = dictService.getListByType("维修进度大类");
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+        List<Dict> cataList=null;
+        if(language.equals("中文")){
+            cataList= dictService.getListByType("维修进度大类",Const.MESSAGE_ZH);
+        }else if (language.equals("英文")){
+            cataList= dictService.getListByType("维修进度大类",Const.MESSAGE_EN);
+        }
+
         Task task = taskService.selectById(id);
         map.put("task", task);
         map.put("cataList", cataList);

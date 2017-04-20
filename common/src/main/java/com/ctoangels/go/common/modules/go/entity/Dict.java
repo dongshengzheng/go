@@ -53,6 +53,8 @@ public class Dict implements Serializable {
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
+	private Integer language;
+
 
 	public Integer getId() {
 		return this.id;
@@ -126,4 +128,11 @@ public class Dict implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public Integer getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Integer language) {
+		this.language = language;
+	}
 }

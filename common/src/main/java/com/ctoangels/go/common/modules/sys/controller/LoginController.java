@@ -132,6 +132,16 @@ public class LoginController extends BaseController {
             // shiro管理的session
             Subject currentUser = SecurityUtils.getSubject();
             Session session = currentUser.getSession();
+            Locale locale=LocaleContextHolder.getLocale();
+            String language=locale.getDisplayLanguage();
+            if(language.equals("中文")){
+                session.setAttribute("language",0);
+            }else if (language.equals("英文")){
+                session.setAttribute("language",1);
+            }
+
+
+
             String sessionCode = (String) session.getAttribute(Const.SESSION_SECURITY_CODE); // 获取session中的验证码
             // TODO: 29/11/2016 此处明显有问题，后续进行逻辑修复：登录超过三次才显示验证码
             String code = keyDatas[2];
@@ -180,6 +190,9 @@ public class LoginController extends BaseController {
         } else {
             errInfo = "error"; // 缺少参数
         }
+
+
+
         jsonObject.put("result", errInfo);
         return jsonObject;
     }
@@ -341,6 +354,8 @@ public class LoginController extends BaseController {
     }
 
     private void initRights(User sysUser, Session session) {
+        Locale locale=LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
 
         try {
 
@@ -359,6 +374,9 @@ public class LoginController extends BaseController {
             List<Menu> menus = loginService.getRightsParentMenus(sysUser.getId());
             // menuList.addAll(menus);
             for (Menu menu : menus) {
+                if(language.equals("英文")){
+                    menu=changeLanguage(menu);
+                }
                 allRightsUrls.add(menu.getMenuUrl());
 
                 Map<String, Integer> params = new HashMap<>();
@@ -369,6 +387,9 @@ public class LoginController extends BaseController {
                 menu.setSubMenu(subMenus);
 
                 for (Menu subMenu : subMenus) {
+                    if(language.equals("英文")) {
+                        subMenu = changeLanguage(subMenu);
+                    }
                     allRightsUrls.add(subMenu.getMenuUrl());
                 }
 
@@ -500,5 +521,44 @@ public class LoginController extends BaseController {
         }
 
         return new ModelAndView("redirect:/");
+    }
+
+    private static Menu changeLanguage(Menu m){
+        if(m.getMenuName().equals("基础信息")){
+            m.setMenuName("Basic information");
+        }else if(m.getMenuName().equals("船舶信息")){
+            m.setMenuName("Vessel details");
+        }else if(m.getMenuName().equals("船厂信息")){
+            m.setMenuName("Shipyard details");
+        }else if(m.getMenuName().equals("公司信息")){
+            m.setMenuName("Company details");
+        }else if(m.getMenuName().equals("维修工程单")){
+            m.setMenuName("Repair specification");
+        }else if(m.getMenuName().equals("维修范本单")){
+            m.setMenuName("Repair specification example");
+        }else if(m.getMenuName().equals("工程单询价")){
+            m.setMenuName("Repair cost inquiry");
+        }else if(m.getMenuName().equals("工程单比价")){
+            m.setMenuName("Repair quotation comparison");
+        }else if(m.getMenuName().equals("维修进度")){
+            m.setMenuName("Repair progress");
+        }else if(m.getMenuName().equals("维修工程管理")){
+            m.setMenuName("Repair work management");
+        }else if(m.getMenuName().equals("维修进度汇报")){
+            m.setMenuName("Repair progress report");
+        }else if(m.getMenuName().equals("系统配置")){
+            m.setMenuName("System settings");
+        }else if(m.getMenuName().equals("账号设置")){
+            m.setMenuName("Account settings");
+        }else if(m.getMenuName().equals("公司资料")){
+            m.setMenuName("Company information");
+        }else if(m.getMenuName().equals("权限管理")){
+            m.setMenuName("Authority management");
+        }else if(m.getMenuName().equals("用户管理")){
+            m.setMenuName("User management");
+        }else if(m.getMenuName().equals("角色管理")){
+            m.setMenuName("Role management");
+        }
+        return m;
     }
 }

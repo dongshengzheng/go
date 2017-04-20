@@ -53,7 +53,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <fmt:formatDate value="${repairSpec.planStartDate}" pattern="yyyy-MM-dd" var="data"/>
-                                    <label for="planStartDate" class="col-sm-4 control-label">计划进场日期：</label>
+                                    <label for="planStartDate" class="col-sm-4 control-label"><fmt:message key="repair_spec_plan_date"/> <%--计划进场日期--%>：</label>
                                     <label style="width: auto;padding-left: 0px;" id="planStartDate"
                                            class="col-sm-5 control-label label-top">${data}</label>
                                 </div>
@@ -67,7 +67,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="planCost" class="col-sm-4 control-label">
-                                        预估费用： <%--预估费用--%></label>
+                                        <fmt:message key="repair_spec_plan_cost"/> ： <%--预估费用--%></label>
                                     <label style="width: auto;padding-left: 0px;" id="planCost"
                                            class="col-sm-5 control-label label-top">${repairSpec.planCost}</label>
                                 </div>
@@ -183,7 +183,7 @@
         if(check(obj)){
             $(obj).parent().ajaxSubmit({
                 success:function (data) {
-                    if(data.mes = 1){
+                    if(data.mes == 1){
                         $(obj).parent().parent().next().html("<h4 style='color: green'>SUCCESS</h4>");
                         $(obj).parent().parent().parent().find("input").attr("data-total",data.total);
                         $(obj).parent().parent().parent().find("input").attr("data-name",data.name);

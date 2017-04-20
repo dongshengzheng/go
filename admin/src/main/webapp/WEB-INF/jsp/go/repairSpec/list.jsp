@@ -233,6 +233,8 @@
                         excelAlert("teal", "<fmt:message key='repair_spec_send_success'/> ");/*发送成功*/
                     } else if ("email error" == data.result) {
                         excelAlert("ruby", "<fmt:message key='repair_spec_send_failure'/>");/*发送失败*/
+                    } else if ("nothing" == data.result) {
+                        excelAlert("ruby", "没有任何可发送结果");/*发送失败*/
                     }
                 },
                 error: function () {

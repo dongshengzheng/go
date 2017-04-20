@@ -16,6 +16,7 @@ import com.ctoangels.go.common.util.MailUtil;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -104,9 +105,20 @@ public class RepairSpecController extends BaseController {
         Integer modelId = 1;
         Integer companyId = getCurrentUser().getCompanyId();
         String companyName = companyService.selectById(companyId).getName();
-        List<Dict> cataList = dictService.getListByType("维修工程大类");
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+        List<Dict> cataList=null;
+        if(language.equals("中文")){
+            cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
+            map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_ZH));
+        }else if (language.equals("英文")){
+            cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
+            map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_EN));
+        }
+
+
+
         List<Ship> shipList = shipService.getListByCompanyId(companyId);
-        map.put("typeList", dictService.getListByType("维修类型"));
         map.put("modelId", modelId);
         map.put("companyId", companyId);
         map.put("companyName", companyName);
@@ -174,11 +186,24 @@ public class RepairSpecController extends BaseController {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(@RequestParam(required = false) Integer id, ModelMap map) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+
         RepairSpec repairSpec = repairSpecService.selectById(id);
-        repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType()));
-        List<Dict> cataList = dictService.getListByType("维修工程大类");
+        List<Dict> cataList=null;
+        if(language.equals("中文")){
+            repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType(),Const.MESSAGE_ZH));
+            cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
+            map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_ZH));
+            map.put("language",Const.MESSAGE_ZH);
+        }else if (language.equals("英文")){
+            repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType(),Const.MESSAGE_EN));
+            cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
+            map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_EN));
+            map.put("language",Const.MESSAGE_EN);
+        }
+
         map.put("repairSpec", repairSpec);
-        map.put("typeList", dictService.getListByType("维修类型"));
         map.put("cataList", cataList);
         return "go/repairSpec/info";
     }
@@ -188,12 +213,19 @@ public class RepairSpecController extends BaseController {
     public JSONArray getSpecInfoItem(String catagory, Integer specId, Integer modelId) {
         JSONArray jsonArray = null;
         SerializerFeature feature = SerializerFeature.DisableCircularReferenceDetect;
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
         if (!"通用服务".equals(catagory)) {
-            List<RepairSpecDetail> list = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
+            List<RepairSpecDetail> list=repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
             String a = JSON.toJSONString(list, feature);
             jsonArray = JSONArray.parseArray(a);
         } else {
-            List<RepairSpecItem> list = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, "通用服务", modelId);
+            List<RepairSpecItem> list = null;
+            if(language.equals("中文")){
+                list = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, "通用服务", modelId,Const.MESSAGE_ZH);
+            }else if (language.equals("英文")){
+                list = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, "通用服务", modelId,Const.MESSAGE_EN);
+            }
             String a = JSON.toJSONString(list, feature);
             jsonArray = JSONArray.parseArray(a);
         }
@@ -229,8 +261,19 @@ public class RepairSpecController extends BaseController {
     public String edit(@RequestParam(required = false) Integer id, ModelMap map) {
         RepairSpec repairSpec = repairSpecService.selectById(id);
         map.put("repairSpec", repairSpec);
-        List<Dict> cataList = dictService.getListByType("维修工程大类");
-        map.put("typeList", dictService.getListByType("维修类型"));
+        Locale locale=LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+        List<Dict> cataList=null;
+        if(language.equals("中文")){
+            cataList = dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
+            map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_ZH));
+            map.put("language",Const.MESSAGE_ZH);
+        }else if (language.equals("英文")){
+            cataList = dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
+            map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_EN));
+            map.put("language",Const.MESSAGE_EN);
+        }
+
         map.put("catagory", cataList);
         map.put("nextProNoList", repairSpecDetailService.getNextProNo(id));
         return "go/repairSpec/edit";
@@ -239,7 +282,16 @@ public class RepairSpecController extends BaseController {
     @RequestMapping(value = "/getSpecItem", method = RequestMethod.GET)
     @ResponseBody
     public JSONArray getSpecItemList(String catagory, Integer specId, Integer modelId) {
-        List<RepairSpecItem> list = repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(specId, catagory, modelId);
+        Locale locale = LocaleContextHolder.getLocale();
+        String language=locale.getDisplayLanguage();
+        List<RepairSpecItem> list=null;
+        if(language.equals("中文")){
+            list= repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(specId, catagory, modelId,Const.MESSAGE_ZH);
+        }
+        if (language.equals("英文")){
+            list= repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(specId, catagory, modelId,Const.MESSAGE_EN);
+        }
+
         SerializerFeature feature = SerializerFeature.DisableCircularReferenceDetect;
         String a = JSON.toJSONString(list, feature);
         JSONArray jsonArray = JSONArray.parseArray(a);
@@ -378,27 +430,49 @@ public class RepairSpecController extends BaseController {
 //        shipSheet.getRow(22).getCell(5).setCellValue(ship.getBoilerEvaporation());//蒸发量
 
 
-        List<Dict> dictList = dictService.getListByType("维修工程大类");
+        List<Dict> dictList = null;
+        dictList=dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
         for (Dict dict : dictList) {
             int catagoryRowNum = 0;
             String catagory = dict.getDes();
-            if (!"通用服务".equals(catagory)) {
-                detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
+            HSSFSheet sheet=null;
+            HSSFRow row=null;
+            HSSFCell cell=null;
+            if (!"通用服务".equals(catagory) ) {
+                    detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
+
                 if (detailList == null || detailList.size() == 0) {
                     continue;
                 }
-                HSSFSheet sheet = wb.createSheet(catagory);
-                sheet.setColumnWidth(1, 50 * 256);
-                HSSFRow row = sheet.createRow((int) catagoryRowNum++);
-                HSSFCell cell = row.createCell((short) 0);
 
-                row.createCell((short) 0).setCellValue("详单号");
-                row.createCell((short) 1).setCellValue("详单内容");
-                row.createCell((short) 2).setCellValue("单位");
-                row.createCell((short) 3).setCellValue("数量");
-                row.createCell((short) 4).setCellValue("单价");
-                row.createCell((short) 5).setCellValue("总价");
-                row.createCell((short) 6).setCellValue("备注");
+                if(language.equals("中文")){
+                    sheet= wb.createSheet(catagory);
+                    sheet.setColumnWidth(1, 50 * 256);
+                    row = sheet.createRow((int) catagoryRowNum++);
+                    cell = row.createCell((short) 0);
+
+                    row.createCell((short) 0).setCellValue("工程单号");
+                    row.createCell((short) 1).setCellValue("要求描述/材料规格");
+                    row.createCell((short) 2).setCellValue("单位");
+                    row.createCell((short) 3).setCellValue("数量");
+                    row.createCell((short) 4).setCellValue("单价");
+                    row.createCell((short) 5).setCellValue("总价");
+                    row.createCell((short) 6).setCellValue("备注");
+                } else if (language.equals("英文")){
+                    sheet= confirmCatagory(wb,catagory);
+                    sheet.setColumnWidth(1, 50 * 256);
+                    row = sheet.createRow((int) catagoryRowNum++);
+                    cell = row.createCell((short) 0);
+
+                    row.createCell((short) 0).setCellValue("Project bill number");
+                    row.createCell((short) 1).setCellValue("Requirement and description / material spec");
+                    row.createCell((short) 2).setCellValue("Unit");
+                    row.createCell((short) 3).setCellValue("Quantity");
+                    row.createCell((short) 4).setCellValue("Unit price");
+                    row.createCell((short) 5).setCellValue("Total price");
+                    row.createCell((short) 6).setCellValue("Remark");
+                }
+
 
                 HSSFCellStyle linkStyle = wb.createCellStyle();
                 HSSFFont cellFont = wb.createFont();
@@ -427,21 +501,44 @@ public class RepairSpecController extends BaseController {
                     row = sheet.createRow((int) catagoryRowNum++);
                 }
             } else {
-                List<RepairSpecItem> itemList = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId());
+                List<RepairSpecItem> itemList=null;
+                if(language.equals("中文")){
+                    itemList= repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId(),Const.MESSAGE_ZH);
+                }
+                else if(language.equals("英文")){
+                    itemList= repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId(),Const.MESSAGE_EN);
+                }
+
                 if (itemList == null || itemList.size() == 0) {
                     continue;
                 }
-                HSSFSheet sheet = wb.createSheet(catagory);
-                sheet.setColumnWidth(1, 50 * 256);
-                sheet.setColumnWidth(4, 100 * 256);
-                HSSFRow row = sheet.createRow((int) 0);
-                row.createCell((short) 0).setCellValue("项目号");
-                row.createCell((short) 1).setCellValue("维修内容");
-                row.createCell((short) 2).setCellValue("单位");
-                row.createCell((short) 3).setCellValue("数量");
-                row.createCell((short) 4).setCellValue("单价");
-                row.createCell((short) 5).setCellValue("总价");
-                row.createCell((short) 6).setCellValue("备注");
+
+                if(language.equals("中文")){
+                    sheet = wb.createSheet(catagory);
+                    sheet.setColumnWidth(1, 50 * 256);
+                    sheet.setColumnWidth(4, 100 * 256);
+                    row = sheet.createRow((int) 0);
+                    row.createCell((short) 0).setCellValue("项目号");
+                    row.createCell((short) 1).setCellValue("维修内容");
+                    row.createCell((short) 2).setCellValue("单位");
+                    row.createCell((short) 3).setCellValue("数量");
+                    row.createCell((short) 4).setCellValue("单价");
+                    row.createCell((short) 5).setCellValue("总价");
+                    row.createCell((short) 6).setCellValue("备注");
+                }else if (language.equals("英文")){
+                    sheet = wb.createSheet("General Service");
+                    sheet.setColumnWidth(1, 50 * 256);
+                    sheet.setColumnWidth(4, 100 * 256);
+                    row = sheet.createRow((int) 0);
+                    row.createCell((short) 0).setCellValue("Project number");
+                    row.createCell((short) 1).setCellValue("Maintenance capacity");
+                    row.createCell((short) 2).setCellValue("Unit");
+                    row.createCell((short) 3).setCellValue("Quantity");
+                    row.createCell((short) 4).setCellValue("Unit price");
+                    row.createCell((short) 5).setCellValue("Total price");
+                    row.createCell((short) 6).setCellValue("Remark");
+                }
+
 
                 for (RepairSpecItem item : itemList) {
                     row = sheet.createRow(sheet.getLastRowNum() + 1);
@@ -592,6 +689,29 @@ public class RepairSpecController extends BaseController {
         }
         File excel = new File(excelName + ".xls");
         return excel;
+    }
+
+
+    private HSSFSheet confirmCatagory(HSSFWorkbook wb,String catagory){
+        HSSFSheet sheet=null;
+        if(catagory.equals("坞修工程")){
+            sheet= wb.createSheet("Dock Project");
+        }else if (catagory.equals("船体工程")){
+            sheet= wb.createSheet("Hull Project");
+        }else if (catagory.equals("机械工程")){
+            sheet= wb.createSheet("Machinery Project");
+        }else if (catagory.equals("电气工程")){
+            sheet= wb.createSheet("Electical Project");
+        }else if (catagory.equals("冷藏工程")){
+            sheet= wb.createSheet("Refrigeration Project");
+        }else if (catagory.equals("特种设备")){
+            sheet= wb.createSheet("Special Equipment");
+        }else if (catagory.equals("其他")){
+            sheet= wb.createSheet("Others");
+        }
+
+
+        return sheet;
     }
 }
 

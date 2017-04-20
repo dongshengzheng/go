@@ -162,6 +162,12 @@ public class RepairProgDetail implements Serializable {
     @TableField(value = "task_status")
     private Integer taskStatus;
 
+    /**
+     * 任务状态
+     */
+    @TableField(value = "view_catagory")
+    private String viewCatagory;
+
 
     public Integer getId() {
         return this.id;
@@ -354,5 +360,13 @@ public class RepairProgDetail implements Serializable {
 
     public void setTaskStatus(Integer taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public String getViewCatagory() {
+        return viewCatagory;
+    }
+
+    public void setViewCatagory(String viewCatagory) {
+        this.viewCatagory = viewCatagory;
     }
 }

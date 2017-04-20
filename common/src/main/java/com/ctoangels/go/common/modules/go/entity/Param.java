@@ -92,6 +92,9 @@ public class Param implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    /*语言0表示中文，1表示英文*/
+    private Integer language;
+
 
     public Integer getId() {
         return this.id;
@@ -195,5 +198,13 @@ public class Param implements Serializable {
 
     public void setModelId(Integer modelId) {
         this.modelId = modelId;
+    }
+
+    public Integer getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Integer language) {
+        this.language = language;
     }
 }

@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, item_code AS itemCode, param_code AS paramCode, `name`, unit, `type`,model_id AS modelId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
+		id, item_code AS itemCode, param_code AS paramCode, `name`, unit, `type`,model_id AS modelId, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag, `language`
 	</sql>
 
     <select id="byItemCodeWithOutParamValue" resultType="Param" parameterType="java.util.Map">
@@ -14,7 +14,7 @@
 
     <select id="byItemCodeContainParamValue" resultMap="ParamMap" parameterType="java.util.Map">
 		SELECT p.* from t_param p
-		 WHERE p.item_code=#{code} and p.model_id=#{model_id} and del_flag=0
+		 WHERE p.item_code=#{code} and p.model_id=#{model_id} and del_flag=0 and p.language=#{language}
 	</select>
 
     <resultMap id="ParamMap" type="Param">

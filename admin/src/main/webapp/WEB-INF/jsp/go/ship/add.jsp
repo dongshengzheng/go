@@ -67,7 +67,7 @@
                             </div>
                             <div class="timeline-body">
                                 <div class="timeline-body-arrow"></div>
-                                <span> 搜索船舶</span>
+                                <span> <fmt:message key="ship_public_search"/> <%--搜索船舶--%></span>
                                 <div style="display: inline-block">
                                     <input style="width:300px;" id="keyword" type="text" placeholder="<fmt:message key='ship_name_IMO_callsign_input'/>"<%--请输入船舶名称/imo/船舶呼号--%>
                                            autocomplete="off" disableautocomplete/>
