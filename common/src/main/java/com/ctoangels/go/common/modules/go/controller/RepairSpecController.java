@@ -195,12 +195,10 @@ public class RepairSpecController extends BaseController {
             repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType(),Const.MESSAGE_ZH));
             cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_ZH));
-            map.put("language",Const.MESSAGE_ZH);
         }else if (language.equals("英文")){
             repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType(),Const.MESSAGE_EN));
             cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_EN));
-            map.put("language",Const.MESSAGE_EN);
         }
 
         map.put("repairSpec", repairSpec);
@@ -267,11 +265,9 @@ public class RepairSpecController extends BaseController {
         if(language.equals("中文")){
             cataList = dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_ZH));
-            map.put("language",Const.MESSAGE_ZH);
         }else if (language.equals("英文")){
             cataList = dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_EN));
-            map.put("language",Const.MESSAGE_EN);
         }
 
         map.put("catagory", cataList);
@@ -428,7 +424,9 @@ public class RepairSpecController extends BaseController {
 //        shipSheet.getRow(21).getCell(5).setCellValue(ship.getBoilerQty());//数量
 //        shipSheet.getRow(22).getCell(2).setCellValue(ship.getBoilerHeatingArea());//热交换面积
 //        shipSheet.getRow(22).getCell(5).setCellValue(ship.getBoilerEvaporation());//蒸发量
-
+        /*单元格自动换行*/
+        HSSFCellStyle s=wb.createCellStyle();
+        s.setWrapText(true);
 
         List<Dict> dictList = null;
         dictList=dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
@@ -497,6 +495,9 @@ public class RepairSpecController extends BaseController {
                         row.createCell((short) 1).setCellValue(r.getDes());
                         row.createCell((short) 2).setCellValue(r.getUnit());
                         row.createCell((short) 3).setCellValue(r.getCount());
+
+                        row.getCell(1).setCellStyle(s);
+
                     }
                     row = sheet.createRow((int) catagoryRowNum++);
                 }
@@ -516,7 +517,8 @@ public class RepairSpecController extends BaseController {
                 if(language.equals("中文")){
                     sheet = wb.createSheet(catagory);
                     sheet.setColumnWidth(1, 50 * 256);
-                    sheet.setColumnWidth(4, 100 * 256);
+                    sheet.setColumnWidth(4, 30 * 256);
+
                     row = sheet.createRow((int) 0);
                     row.createCell((short) 0).setCellValue("项目号");
                     row.createCell((short) 1).setCellValue("维修内容");
@@ -528,7 +530,7 @@ public class RepairSpecController extends BaseController {
                 }else if (language.equals("英文")){
                     sheet = wb.createSheet("General Service");
                     sheet.setColumnWidth(1, 50 * 256);
-                    sheet.setColumnWidth(4, 100 * 256);
+                    sheet.setColumnWidth(4, 30 * 256);
                     row = sheet.createRow((int) 0);
                     row.createCell((short) 0).setCellValue("Project number");
                     row.createCell((short) 1).setCellValue("Maintenance capacity");
@@ -545,6 +547,7 @@ public class RepairSpecController extends BaseController {
                     row.createCell((short) 0).setCellValue(item.getCode());
                     row.createCell((short) 1).setCellValue(item.getContent());
                     row.createCell((short) 2).setCellValue(item.getUnit());
+                    row.getCell(1).setCellStyle(s);//单元格自动换行
                     if (item.getCount() != null) {
                         row.createCell((short) 3).setCellValue(item.getCount());
                     }
@@ -669,6 +672,7 @@ public class RepairSpecController extends BaseController {
                 int startRow = 5;
                 for (RepairSpecDetailReq r : reqList) {
                     HSSFRow reqRow = detailSheet.getRow(startRow++);
+                    reqRow.getCell(9).setCellStyle(s);
                     reqRow.getCell(9).setCellValue(r.getDes());//要求和描述/材料
                     reqRow.getCell(14).setCellValue(r.getUnit());//单位
                     reqRow.getCell(15).setCellValue(r.getCount());//数量

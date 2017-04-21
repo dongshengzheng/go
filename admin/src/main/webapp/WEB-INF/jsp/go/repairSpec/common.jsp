@@ -237,7 +237,6 @@
 
     function getDetail(obj) {
         var language=${language};
-        alert(language);
         var thisOne = $(obj);
         var shipName = $("#shipName").val();
         var id = thisOne.val();

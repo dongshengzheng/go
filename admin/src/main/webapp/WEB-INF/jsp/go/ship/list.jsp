@@ -51,11 +51,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    var language=${language};
-    var url="";
-    if(language==0){
-        url="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt";
-    }
     var defTable;
     $(document).ready(function () {
         defTable = $('#default_table').DataTable({
@@ -72,7 +67,7 @@
                 }
             },
             "language": {
-                "url": url
+                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
             },
 
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
@@ -125,7 +120,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "<fmt:message key='ship_nameOrIMO_input'/> ");
+                initSearchForm(null, "<fmt:message key='ship_nameOrIMO_input'/> ","<fmt:message key='go_search' />");
             }
         });
 

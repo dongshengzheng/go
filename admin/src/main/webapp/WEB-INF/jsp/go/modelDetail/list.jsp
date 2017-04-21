@@ -90,7 +90,7 @@
                 "render": function (data, type, row) {
                     return ""
                             <shiro:hasPermission name="modelDetail/info">
-                            + '<a href="modelDetail/info?id=' + row.id + '&operate=look" class="btn btn-sm grey-mint" data-target="navTab"></i><fmt:message key="go_search"/> </a>'
+                            + '<a href="modelDetail/info?id=' + row.id + '&operate=look" class="btn btn-sm grey-mint" data-target="navTab"></i><fmt:message key="go_check"/> </a>'
                            </shiro:hasPermission>
                             <shiro:hasPermission name="modelDetail/info">
                             + '<a href="modelDetail/info?id=' + row.id + '&operate=edit" class="btn  btn-sm blue" data-target="navTab"></i><fmt:message key="go_editor"/> </a>'/*编辑*/
@@ -107,7 +107,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "<fmt:message key="project_enter_name"/> ");/*请输入工程名称*/
+                initSearchForm(null, "<fmt:message key="project_enter_name"/> ","<fmt:message key='go_search' />");/*请输入工程名称*/
             }
         });
 

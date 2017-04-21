@@ -162,7 +162,7 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 
 <%-- 自定义js文件--%>
-<script src="${ctx}/static/js/upload.js"></script>
+<script src="${ctx}/static/js/upload.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/jquery.form.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/jquery-gv-validate.js" type="text/javascript"></script>

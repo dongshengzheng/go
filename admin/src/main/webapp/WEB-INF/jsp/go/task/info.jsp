@@ -95,7 +95,7 @@
             <form id="addNewForm" class="form-horizontal" action="repairProgDetail/addNew" method="post">
                 <input type="hidden" id="repairProgId" name="repairProgId" value="${task.repairProgId}">
                 <input type="hidden" id="proOrderNo" name="proOrderNo" value="">
-                <input type="hidden" name="catagory" value="<fmt:message key='repair_spec_append'/> "><%--新增--%>
+                <input type="hidden" name="catagory" value="新增">
                 <input type="hidden" name="taskStatus" value="2">
                 <input type="hidden" name="delFlag" value="0">
                 <div class="modal-body">

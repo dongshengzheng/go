@@ -209,7 +209,7 @@
                 Ladda.bind('.mt-ladda-btn', {timeout: 60000});
             },
             "initComplete": function () {
-                initSearchForm(null, "<fmt:message key='ship_name_input'/> ");/*请输入船舶名称*/
+                initSearchForm(null, "<fmt:message key='ship_name_input'/> ","<fmt:message key='go_search' />");/*请输入船舶名称*/
             }
         });
         $('#myInput').on('keyup', function () {

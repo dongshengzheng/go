@@ -160,7 +160,7 @@
             "url": 'enquiry/shipyard',
             "type": 'get',
             "success": function (data) {
-                html += "<option value=0>--请选择船厂--</option>";
+                html += "<option value=0>--<fmt:message key='compare_select_shipyard'/> --</option>";/*请选择船厂*/
                 var data=data.shipyards;
                 for (var i = 0; i < data.length; i++) {
                     html += "<option value=" + data[i].id + ">" + data[i].name + "</option>"
@@ -170,7 +170,7 @@
                         '<form action="enquiry/importExcel" method="post" enctype="multipart/form-data">' +
                         '<input name="shipyardId" type="hidden" value=""/>'+
                         '<input name="repairSpecId" type="hidden" value="${repairSpec.id}"/>'+
-                        '<input  type="file" name="file" class="col-md-6" value="选择Excel"/>' +
+                        '<input  type="file" name="file" class="col-md-6" value="<fmt:message key='compare_select_excel'/> "/>' +/*选择Excel*/
                         '<button type="button" style="float: right;width: 40%" class="col-md-6 btn blue"  onclick="importExcel(this)">导入Excel</button></form></td>' +
                         '<td></td>'+
                         '</tr>';

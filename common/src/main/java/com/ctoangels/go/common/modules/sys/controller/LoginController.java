@@ -132,15 +132,6 @@ public class LoginController extends BaseController {
             // shiro管理的session
             Subject currentUser = SecurityUtils.getSubject();
             Session session = currentUser.getSession();
-            Locale locale=LocaleContextHolder.getLocale();
-            String language=locale.getDisplayLanguage();
-            if(language.equals("中文")){
-                session.setAttribute("language",0);
-            }else if (language.equals("英文")){
-                session.setAttribute("language",1);
-            }
-
-
 
             String sessionCode = (String) session.getAttribute(Const.SESSION_SECURITY_CODE); // 获取session中的验证码
             // TODO: 29/11/2016 此处明显有问题，后续进行逻辑修复：登录超过三次才显示验证码
@@ -356,6 +347,11 @@ public class LoginController extends BaseController {
     private void initRights(User sysUser, Session session) {
         Locale locale=LocaleContextHolder.getLocale();
         String language=locale.getDisplayLanguage();
+        if(language.equals("中文")){
+            session.setAttribute("language",0);
+        }else if (language.equals("英文")){
+            session.setAttribute("language",1);
+        }
 
         try {
 

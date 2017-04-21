@@ -40,7 +40,7 @@ function drawICheck(cId, oName) {
 
     });
 }
-function initSearchForm(others, placeholderText) {
+function initSearchForm(others, placeholderText,search) {
     others = others || "";
     placeholderText = placeholderText || "关键字搜索";
     $(".table-toolbar .row")
@@ -50,7 +50,7 @@ function initSearchForm(others, placeholderText) {
             + '<div class="input-group input-group-sm input-adjust">'
             + '<input type="text" placeholder="' + placeholderText + '" name="keyword" id="keyword" class="form-control">'
             + '<span class="input-group-btn">'
-            + '<button type="button" class="btn btn-primary btn-flat" id="mybtn" onclick="javacript:refreshTable(1);"><i class="fa fa-search"></i> 搜索</button>'
+            + '<button type="button" class="btn btn-primary btn-flat" id="mybtn" onclick="javacript:refreshTable(1);"><i class="fa fa-search"></i> '+search+'</button>'
             + '</span>' + '</div>')
             + '</div>';
     $("#defTool").keydown(function (e) {

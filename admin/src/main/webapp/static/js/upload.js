@@ -213,8 +213,6 @@ function initUploaders_img(buttonId, bucket, domain, divId,imgNum) {
                     $("#"+divId).hide();
                 }
                 $("#num").val(j);
-
-
             }
         }
     });

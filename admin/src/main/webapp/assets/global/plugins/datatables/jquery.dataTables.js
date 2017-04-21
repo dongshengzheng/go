@@ -3230,7 +3230,11 @@
         //add by tangq at 2015-7-18
         function _fnUpdateHtml(settings) {
             /* Show length about the table */
-            var tpl = "<span>，共 _TOTAL_ 条</span>"
+            var tpl = "<span>，共 _TOTAL_ 条</span>";
+            /*console.log($("#language"));
+            if($("#language")==1){
+                var tpl = "<span>，in total of _TOTAL_ entries</span>";
+            }*/
             var lengDiv = settings.aanFeatures.l;
             $(lengDiv).find("span").remove();
             $(lengDiv).find("label").after(_fnInfoMacros(settings, tpl));

@@ -130,7 +130,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "<fmt:message key='shipyard_search_name'/> ");/*搜索船厂名称*/
+                initSearchForm(null, "<fmt:message key='shipyard_search_name'/> ","<fmt:message key='go_search' />");/*搜索船厂名称*/
             }
         });
 

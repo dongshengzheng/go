@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -30,11 +31,11 @@
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
                                 <a href="javascript:;" data-url="user/editPwd" data-model='dialog'>
-                                    <i class="icon-user"></i>修改密码 </a>
+                                    <i class="icon-user"></i><fmt:message key="account_modify_password"/> <%--修改密码--%> </a>
                             </li>
                             <li>
                                 <a href="logout">
-                                    <i class="icon-key"></i> 退出 </a>
+                                    <i class="icon-key"></i> <fmt:message key="go_exit"/> <%--退出--%> </a>
                             </li>
                         </ul>
                     </li>

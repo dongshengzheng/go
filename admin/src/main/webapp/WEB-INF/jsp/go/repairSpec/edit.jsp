@@ -314,7 +314,7 @@
                         tr.find(".content-td").html(contentHtml);
                     } else {
                         var contentHtml = "<input  class='input-control' onchange='inputControl(this)'  value='" + a.content + "' type='hidden' name='" + namePre + "content'>";
-                        contentHtml += "<button onclick='addRow(this)'  type='button' data-current='" + count + "' class='btn btn-sm blue'>新增 </button>"
+                        contentHtml += "<button onclick='addRow(this)'  type='button' data-current='" + count + "' class='btn btn-sm blue'><fmt:message key="repair_spec_append"/> </button>"/*新增*/
                         tr.find(".content-td").html(contentHtml);
                     }
 
