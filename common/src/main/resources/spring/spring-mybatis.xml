@@ -14,7 +14,7 @@
 
 
     <!-- 阿里 druid数据库连接池 -->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+    <bean name="dataSource1" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <!-- 数据库基本信息配置 -->
         <property name="url" value="${url}"/>
         <property name="username" value="${username}"/>
@@ -45,6 +45,62 @@
         <!-- 关闭abanded连接时输出错误日志 -->
         <property name="logAbandoned" value="${logAbandoned}"/>
     </bean>
+
+    <!-- 阿里 druid数据库连接池 -->
+    <bean name="dataSource2" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <!-- 数据库基本信息配置 -->
+        <property name="url" value="${url2}"/>
+        <property name="username" value="${username2}"/>
+        <property name="password" value="${password2}"/>
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="filters" value="${filters}"/>
+        <!-- 最大并发连接数 -->
+        <property name="maxActive" value="${maxActive}"/>
+        <!-- 初始化连接数量 -->
+        <property name="initialSize" value="${initialSize}"/>
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${maxWait}"/>
+        <!-- 最小空闲连接数 -->
+        <property name="minIdle" value="${minIdle}"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"/>
+        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="testWhileIdle" value="${testWhileIdle}"/>
+        <property name="testOnBorrow" value="${testOnBorrow}"/>
+        <property name="testOnReturn" value="${testOnReturn}"/>
+        <property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}"/>
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandoned" value="${removeAbandoned}"/>
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"/>
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="${logAbandoned}"/>
+    </bean>
+
+    <bean id="dataSource" class="com.ctoangels.go.common.util.ThreadLocalRountingDataSource">
+        <property name="defaultTargetDataSource" ref="dataSource1"/>
+        <!--<property name="defaultTargetDataSource" ref="dataSource2"/>-->
+        <property name="targetDataSources">
+            <map key-type="com.ctoangels.go.common.util.DataSources">
+
+                <entry key="GOONLINE" value-ref="dataSource2"/>
+
+                <!--本项目数据库-->
+                <entry key="GOLOCAL" value-ref="dataSource1"/>
+                <!--30000+条船数据库-->
+
+                <!-- 这里还可以加多个dataSource -->
+            </map>
+        </property>
+    </bean>
+
+
+
+
+
+
 
     <!-- MyBatis SqlSessionFactoryBean 配置 -->
     <!-- 注意：这里使用的是MP的MybatisSqlSessionFactoryBean，而不是Mybatis的，因为MP需要进行相应代理 -->

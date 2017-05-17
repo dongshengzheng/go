@@ -58,8 +58,8 @@
     <form role="form" method="post" action="" name="loginForm"
           id="loginForm">
         <h3 class="form-title"><fmt:message key="sys.user.plogin"/></h3>
-        <a href="language?language=en" data-target="model" >英文</a>
-        <a href="language?language=zh" data-target="model" >中文</a>
+       <%-- <a href="language?language=en" data-target="model" >英文</a>
+        <a href="language?language=zh" data-target="model" >中文</a>--%>
         <p><fmt:message key="login_no_account"/><a class="color-green" href="register"><fmt:message
                 key="sys.user.register"/></a>!</p>
         <div class="form-group">

@@ -37,6 +37,10 @@
                                 <a href="logout">
                                     <i class="icon-key"></i> <fmt:message key="go_exit"/> <%--退出--%> </a>
                             </li>
+                            <li>
+                                <a href="javascript:sync()" id="sync">
+                                    <i class="fa fa-hourglass-2"></i> 同步 </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -45,3 +49,4 @@
     </div>
 </div>
 <div class="clearfix"> </div>
+

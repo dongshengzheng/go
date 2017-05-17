@@ -69,6 +69,9 @@ public class RepairSpecDetailController extends BaseController {
         }
         map.put("repDicts", dictService.selectByType("维修部位"));
         map.put("reqDicts", dictService.selectByType("修理工艺"));
+        map.put("preparerRoles",dictService.selectByType("填表人角色"));
+        map.put("directorRoles",dictService.selectByType("主管角色"));
+
         map.put("staticPath", staticPath);
         return "go/repairSpec/detail";
     }
@@ -178,6 +181,9 @@ public class RepairSpecDetailController extends BaseController {
 
         map.put("repDicts", dictService.selectByType("维修部位"));
         map.put("reqDicts", dictService.selectByType("修理工艺"));
+        map.put("preparerRoles",dictService.selectByType("填表人角色"));
+        map.put("directorRoles",dictService.selectByType("主管角色"));
+
         map.put("staticPath", staticPath);
         return "go/repairSpec/detail-edit";
     }

@@ -2,9 +2,8 @@ package com.ctoangels.go.common.modules.go.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.go.common.modules.go.entity.*;
-import com.ctoangels.go.common.modules.go.mapper.RepairModelItemMapper;
-import com.ctoangels.go.common.modules.go.mapper.RepairSpecDetailMapper;
-import com.ctoangels.go.common.modules.go.mapper.RepairSpecItemMapper;
+import com.ctoangels.go.common.modules.go.mapper.*;
+import com.ctoangels.go.common.modules.go.service.online.ISyncService;
 import com.ctoangels.go.common.util.Const;
 import com.ctoangels.go.common.util.ItemId;
 import com.ctoangels.go.common.util.StringUtils;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.ctoangels.go.common.modules.go.mapper.RepairSpecMapper;
 import com.ctoangels.go.common.modules.go.service.IRepairSpecService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
@@ -38,6 +36,18 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
     @Autowired
     RepairModelItemMapper repairModelItemMapper;
 
+    @Autowired
+    RepairSpecDetailMediaMapper repairSpecDetailMediaMapper;
+
+    @Autowired
+    RepairSpecDetailReqMapper repairSpecDetailReqMapper;
+
+    @Autowired
+    ShipMapper shipMapper;
+
+    @Autowired
+    ISyncService syncService;
+
     @Override
     public boolean saveRepairSpec(RepairSpec repairSpec) {
         if (repairSpecMapper.insert(repairSpec) < 0) {
@@ -49,10 +59,10 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         //判读中英文
         Locale locale = LocaleContextHolder.getLocale();
         String language=locale.getDisplayLanguage();
-        if(language.equals("中文")){
+        if(language.equals("中文")||language.equals("Chinese")){
             ew.addFilter("language={0}",Const.MESSAGE_ZH);
         }
-        if (language.equals("英文")){
+        if (language.equals("英文")||language.equals("English")){
             ew.addFilter("language={0}",Const.MESSAGE_EN);
         }
         ew.addFilter("repair_model_id={0}", modelId);
@@ -203,6 +213,78 @@ public class RepairSpecServiceImpl extends SuperServiceImpl<RepairSpecMapper, Re
         result.put("success", true);
         result.put("idList", idList);
         return result;
+    }
+
+    @Override
+    public boolean selectLocalSyncOnline(List<RepairSpec> repairSpecs) {
+        //查找本地数据的工程单
+
+
+        List<RepairSpecItem> repairSpecItems=null;
+        List<RepairSpecDetail> repairSpecDetails=null;
+        List<RepairSpecDetailMedia> repairSpecDetailMedias=null;
+        List<RepairSpecDetailReq> reqs=null;
+
+        if(repairSpecs.size()>0){
+            for(RepairSpec repairSpec:repairSpecs){
+                Integer repairSpecId=repairSpec.getId();
+                Integer shipId=repairSpec.getShipId();
+                Ship ship =shipMapper.selectById(shipId);
+                syncService.saveShipOne(ship);
+                repairSpec.setShipId(ship.getId());
+
+                syncService.insertRepairSpec(repairSpec);
+
+                //通过工程单获取所有的工程单的item
+                EntityWrapper<RepairSpecItem> ew1=new EntityWrapper();
+                ew1.addFilter("repair_spec_id={0} and del_flag={1}",repairSpecId,Const.DEL_FLAG_NORMAL);
+                repairSpecItems =repairSpecItemMapper.selectList(ew1);
+
+                for(RepairSpecItem repairSpecItem:repairSpecItems){
+                    repairSpecItem.setRepairSpecId(repairSpec.getId());
+                }
+                syncService.insertRepairSpecItem(repairSpecItems);
+
+
+                //通过工程单获取所有的详单
+                EntityWrapper<RepairSpecDetail> ew2=new EntityWrapper();
+                ew2.addFilter("repair_spec_id={0}",repairSpecId);
+                repairSpecDetails =repairSpecDetailMapper.selectList(ew2);
+
+                if(repairSpecDetails.size()>0){
+                    for(RepairSpecDetail repairSpecDetail:repairSpecDetails){
+                        Integer repairSpecDetailId=repairSpecDetail.getId();
+
+                        repairSpecDetail.setRepairSpecId(repairSpec.getId());
+                        syncService.insertRepairSpecDetail(repairSpecDetail);
+
+                        //通过详单id获取所有的media的信息
+                        EntityWrapper<RepairSpecDetailMedia> ew3=new EntityWrapper();
+                        ew3.addFilter("repair_spec_detail_id={0}",repairSpecDetailId);
+                        repairSpecDetailMedias =repairSpecDetailMediaMapper.selectList(ew3);
+
+                        for(RepairSpecDetailMedia repairSpecDetailMedia:repairSpecDetailMedias){
+                            repairSpecDetailMedia.setRepairSpecDetailId(repairSpecDetail.getId());
+                        }
+                        syncService.insertRepairSpecDetailMedia(repairSpecDetailMedias);
+
+
+                        //通过详单id获取所有的req信息
+                        EntityWrapper<RepairSpecDetailReq> ew4=new EntityWrapper();
+                        ew4.addFilter("repair_spec_detail_id={0}",repairSpecDetailId);
+                        reqs =repairSpecDetailReqMapper.selectList(ew4);
+
+                        for(RepairSpecDetailReq repairSpecDetailReq:reqs){
+                            repairSpecDetailReq.setRepairSpecDetailId(repairSpecDetail.getId());
+                        }
+                        syncService.insertRepairSpecDetailReq(reqs);
+
+                    }
+                }
+
+            }
+        }
+        return false;
     }
 
 

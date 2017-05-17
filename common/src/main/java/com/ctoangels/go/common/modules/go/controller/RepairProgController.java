@@ -92,10 +92,10 @@ public class RepairProgController extends BaseController {
         Page<RepairProg> page = repairProgService.selectPage(getPage(), ew);
         for (RepairProg prog : page.getRecords()) {
             prog.setPer(repairProgService.getPerById(prog.getId()));
-            if(language.equals("中文")){
+            if(language.equals("中文")||language.equals("Chinese")){
                 prog.setType(dictService.getDesByTypeAndValue("维修类型", prog.getType(),Const.MESSAGE_ZH));
             }
-            if (language.equals("英文")){
+            if (language.equals("英文")||language.equals("English")){
                 prog.setType(dictService.getDesByTypeAndValue("维修类型", prog.getType(),Const.MESSAGE_EN));
             }
 
@@ -141,9 +141,9 @@ public class RepairProgController extends BaseController {
         List<RepairProgDetail> type8 = repairProgDetailService.getDetailByCatagory(id, "其他");
         List<RepairProgDetail> type9 = repairProgDetailService.getDetailByCatagory(id, "新增");
         List<Dict> cataList=null;
-        if(language.equals("中文")){
+        if(language.equals("中文")||language.equals("Chinese")){
             cataList=dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
-        }else if (language.equals("英文")){
+        }else if (language.equals("英文")||language.equals("English")){
             cataList=dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
         }
         map.put("repairProg", repairProg);
@@ -350,6 +350,9 @@ public class RepairProgController extends BaseController {
         List<RepairProgDetailMedia> progDetailMedias = repairProgDetailMediaService.selectList(ew3);
         map.put("progDetailMedias", progDetailMedias);
 
+
+        map.put("preparerRoles",dictService.selectByType("填表人角色"));
+        map.put("directorRoles",dictService.selectByType("主管角色"));
         map.put("repDicts", dictService.selectByType("维修部位"));
         map.put("reqDicts", dictService.selectByType("修理工艺"));
 

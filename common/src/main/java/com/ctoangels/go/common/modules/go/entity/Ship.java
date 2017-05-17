@@ -164,6 +164,10 @@ public class Ship implements Serializable {
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
+	private Integer sw;
+
+	private String mac;
+
 
 	public Integer getId() {
 		return this.id;
@@ -480,5 +484,22 @@ public class Ship implements Serializable {
 
 	public void setBoilerEvaporation(String boilerEvaporation) {
 		this.boilerEvaporation = boilerEvaporation;
+	}
+
+
+	public Integer getSw() {
+		return sw;
+	}
+
+	public void setSw(Integer sw) {
+		this.sw = sw;
+	}
+
+	public String getMac() {
+		return mac;
+	}
+
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 }

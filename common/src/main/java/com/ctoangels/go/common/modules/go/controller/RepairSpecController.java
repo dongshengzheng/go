@@ -108,10 +108,10 @@ public class RepairSpecController extends BaseController {
         Locale locale = LocaleContextHolder.getLocale();
         String language=locale.getDisplayLanguage();
         List<Dict> cataList=null;
-        if(language.equals("中文")){
+        if(language.equals("中文")||language.equals("Chinese")){
             cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_ZH));
-        }else if (language.equals("英文")){
+        }else if (language.equals("英文")||language.equals("English")){
             cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_EN));
         }
@@ -191,11 +191,11 @@ public class RepairSpecController extends BaseController {
 
         RepairSpec repairSpec = repairSpecService.selectById(id);
         List<Dict> cataList=null;
-        if(language.equals("中文")){
+        if(language.equals("中文")||language.equals("Chinese")){
             repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType(),Const.MESSAGE_ZH));
             cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_ZH));
-        }else if (language.equals("英文")){
+        }else if (language.equals("英文")||language.equals("English")){
             repairSpec.setType(dictService.getDesByTypeAndValue("维修类型", repairSpec.getType(),Const.MESSAGE_EN));
             cataList= dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_EN));
@@ -219,9 +219,9 @@ public class RepairSpecController extends BaseController {
             jsonArray = JSONArray.parseArray(a);
         } else {
             List<RepairSpecItem> list = null;
-            if(language.equals("中文")){
+            if(language.equals("中文")||language.equals("Chinese")){
                 list = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, "通用服务", modelId,Const.MESSAGE_ZH);
-            }else if (language.equals("英文")){
+            }else if (language.equals("英文")||language.equals("English")){
                 list = repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, "通用服务", modelId,Const.MESSAGE_EN);
             }
             String a = JSON.toJSONString(list, feature);
@@ -262,10 +262,10 @@ public class RepairSpecController extends BaseController {
         Locale locale=LocaleContextHolder.getLocale();
         String language=locale.getDisplayLanguage();
         List<Dict> cataList=null;
-        if(language.equals("中文")){
+        if(language.equals("中文")||language.equals("Chinese")){
             cataList = dictService.getListByType("维修工程大类",Const.MESSAGE_ZH);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_ZH));
-        }else if (language.equals("英文")){
+        }else if (language.equals("英文")||language.equals("English")){
             cataList = dictService.getListByType("维修工程大类",Const.MESSAGE_EN);
             map.put("typeList", dictService.getListByType("维修类型",Const.MESSAGE_EN));
         }
@@ -281,10 +281,10 @@ public class RepairSpecController extends BaseController {
         Locale locale = LocaleContextHolder.getLocale();
         String language=locale.getDisplayLanguage();
         List<RepairSpecItem> list=null;
-        if(language.equals("中文")){
+        if(language.equals("中文")||language.equals("Chinese")){
             list= repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(specId, catagory, modelId,Const.MESSAGE_ZH);
         }
-        if (language.equals("英文")){
+        if (language.equals("英文")||language.equals("English")){
             list= repairSpecItemService.bySpecIdAndCatagoryWithParamsAndValue(specId, catagory, modelId,Const.MESSAGE_EN);
         }
 
@@ -365,10 +365,10 @@ public class RepairSpecController extends BaseController {
         Locale locale = LocaleContextHolder.getLocale();
         String language=locale.getDisplayLanguage();
         File modelExcel=null;
-        if(language.equals("中文")){
+        if(language.equals("中文")||language.equals("Chinese")){
             modelExcel = new File(getClass().getClassLoader().getResource("detailModel_zh.xls").getFile());
         }
-        if (language.equals("英文")){
+        if (language.equals("英文")||language.equals("English")){
             modelExcel = new File(getClass().getClassLoader().getResource("detailModel_en.xls").getFile());
         }
         FileInputStream is = null; //文件流
@@ -443,7 +443,7 @@ public class RepairSpecController extends BaseController {
                     continue;
                 }
 
-                if(language.equals("中文")){
+                if(language.equals("中文")||language.equals("Chinese")){
                     sheet= wb.createSheet(catagory);
                     sheet.setColumnWidth(1, 50 * 256);
                     row = sheet.createRow((int) catagoryRowNum++);
@@ -456,7 +456,7 @@ public class RepairSpecController extends BaseController {
                     row.createCell((short) 4).setCellValue("单价");
                     row.createCell((short) 5).setCellValue("总价");
                     row.createCell((short) 6).setCellValue("备注");
-                } else if (language.equals("英文")){
+                } else if (language.equals("英文")||language.equals("English")){
                     sheet= confirmCatagory(wb,catagory);
                     sheet.setColumnWidth(1, 50 * 256);
                     row = sheet.createRow((int) catagoryRowNum++);
@@ -503,10 +503,10 @@ public class RepairSpecController extends BaseController {
                 }
             } else {
                 List<RepairSpecItem> itemList=null;
-                if(language.equals("中文")){
+                if(language.equals("中文")||language.equals("Chinese")){
                     itemList= repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId(),Const.MESSAGE_ZH);
                 }
-                else if(language.equals("英文")){
+                else if(language.equals("英文")||language.equals("English")){
                     itemList= repairSpecItemService.bySpecIdAndCatagoryForInfo(specId, catagory, spec.getModelId(),Const.MESSAGE_EN);
                 }
 
@@ -514,7 +514,7 @@ public class RepairSpecController extends BaseController {
                     continue;
                 }
 
-                if(language.equals("中文")){
+                if(language.equals("中文")||language.equals("Chinese")){
                     sheet = wb.createSheet(catagory);
                     sheet.setColumnWidth(1, 50 * 256);
                     sheet.setColumnWidth(4, 30 * 256);
@@ -527,7 +527,7 @@ public class RepairSpecController extends BaseController {
                     row.createCell((short) 4).setCellValue("单价");
                     row.createCell((short) 5).setCellValue("总价");
                     row.createCell((short) 6).setCellValue("备注");
-                }else if (language.equals("英文")){
+                }else if (language.equals("英文")||language.equals("English")){
                     sheet = wb.createSheet("General Service");
                     sheet.setColumnWidth(1, 50 * 256);
                     sheet.setColumnWidth(4, 30 * 256);

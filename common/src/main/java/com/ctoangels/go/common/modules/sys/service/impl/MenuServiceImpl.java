@@ -41,7 +41,7 @@ public class MenuServiceImpl extends SuperServiceImpl<MenuMapper, Menu> implemen
         }
         Locale locale= LocaleContextHolder.getLocale();
         String language=locale.getDisplayLanguage();
-        if(language.equals("英文")){
+        if(language.equals("英文")||language.equals("English")){
             List<Menu> lists1 = new ArrayList<>(2);
             for (Menu m:lists){
                 Menu menu1=changeLanguage(m);

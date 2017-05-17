@@ -18,7 +18,10 @@
 
     <context:property-placeholder location="classpath:override.properties"/>
     <context:component-scan base-package="com.ctoangels.go.admin"/>
-    <context:component-scan base-package="com.ctoangels.go.common"/>
+    <context:component-scan base-package="com.ctoangels.go.common">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
     <mvc:default-servlet-handler/>
 
     <!-- 对静态资源文件的访问  restful-->
@@ -66,7 +69,7 @@
 
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="en"/>
+        <property name="defaultLocale" value="zh"/>
     </bean>
 
 

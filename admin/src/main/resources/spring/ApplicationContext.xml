@@ -10,6 +10,10 @@
 
     <import resource="spring-mybatis.xml"/>
 
+    <context:component-scan base-package="com.ctoangels.go.common">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="cacheSeconds" value="5"/>
         <property name="defaultEncoding" value="utf-8"/>
@@ -75,5 +79,18 @@
         </property>
     </bean>
     <!-- ================ Shiro end ================ -->
+
+    <!--aop-->
+    <aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>
+    <bean id="dataSourceInterceptor"
+          class="com.ctoangels.go.admin.base.interceptor.shiro.dataSourceSelect.DataSourceInterceptor"/>
+    <aop:config>
+        <aop:aspect ref="dataSourceInterceptor">
+            <aop:pointcut id="changeDataSource"
+                          expression="execution(* com.ctoangels.go.common.modules.go.service.online.*.*(..))"/>
+            <aop:before pointcut-ref="changeDataSource" method="doBefore"/>
+            <aop:after pointcut-ref="changeDataSource" method="doAfter"/>
+        </aop:aspect>
+    </aop:config>
 
 </beans>

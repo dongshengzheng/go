@@ -87,8 +87,8 @@
                                     <th style="width: 30%">选择船厂</th>
                                     <th style="width: 30%">导入Excel</th>
                                     <th style="width: 20%">
-                                        <button type="button" onclick="" class="btn red" id="deletes">删除</button>&nbsp;
-                                        <button  type="button" onclick="addTr(this)" class="btn green">添加</button>
+                                        <button type="button" onclick="" class="btn red" id="deletes"><fmt:message key="go_delete"/> <%--删除--%></button>&nbsp;
+                                        <button  type="button" onclick="addTr(this)" class="btn green"><fmt:message key="go_add"/> <%--添加--%></button>
                                     </th>
                                 </tr>
                             </thead>
@@ -99,7 +99,7 @@
                                         <tr class="addTr">
                                             <td ><input type="checkbox" class="td-checkbox" data-total="${e.quoteTotlePrice}" data-name="${e.privateShipyardName}"/></td>
                                             <td><select class="td-select" onchange="selectShipyard(this)">
-                                                <option value=0>--请选择船厂--</option>
+                                                <option value=0>--<fmt:message key="compare_select_shipyard"/> --</option><%--请选择船厂--%>
                                                 <c:forEach items="${shipyards}" var="s">
                                                     <option value="${s.id}"
                                                             <c:if test="${s.id==e.privateShipyardId}">
@@ -188,7 +188,7 @@
                         $(obj).parent().parent().parent().find("input").attr("data-total",data.total);
                         $(obj).parent().parent().parent().find("input").attr("data-name",data.name);
                     }else {
-                        $(obj).parent().parent().next().html("<h4 style='color: red'>ERROR或者Excel格式不正确</h4>");
+                        $(obj).parent().parent().next().html("<h4 style='color: red'><fmt:message key='compare_excel_error'/> </h4>");/*失败或者Excel格式不正确*/
                     }
                 }
             });
@@ -198,10 +198,10 @@
         var excel_file = $(obj).prev().val();
         var shipyardId=$(obj).parent().parent().parent().find("select").val();
         if (excel_file == "" || excel_file.length == 0) {
-            alert("请选择文件路径！");
+            alert("<fmt:message key='compare_select_file'/> ");/*请选择文件！*/
             return false;
         } else if(shipyardId == "" || shipyardId == 0){
-            alert("请选择船厂！");
+            alert("<fmt:message key='compare_select_shipyard'/> ");/*请选择船厂*/
             return false;
         } else {
             return true;
@@ -228,11 +228,11 @@
                 count++;
 
                 html2+= '<div class="form-group col-md-8">' +
-                        '<label class="control-label">船厂名称：</label>' +
+                        '<label class="control-label"><fmt:message key="shipyard_name"/>：</label>' + <!--船厂名称-->
                         '<label class="control-label">'+$(this).attr('data-name')+'</label>' +
                         '</div>' +
                         '<div class="form-group col-md-4">' +
-                        '<label  class="control-label">报价总额：</label>' +
+                        '<label  class="control-label"><fmt:message key='offer_total_amount'/>：</label>' +/*报价总额*/
                         '<label class="control-label">'+$(this).attr('data-total')+'</label>' +
                         '</div>'
 
@@ -240,7 +240,7 @@
             }
         });
         if (count == 0) {
-            alert("至少选择一个!");
+            alert("<fmt:message key='compare_select_one'/>");/*至少选择一个!*/
             return;
         }
         $("#modal-body").html(html2);
@@ -267,7 +267,7 @@
 
         $("#deletes").click(function(e){
             //e.preventDefault();
-            var t=confirm("确定要删除吗？");
+            var t=confirm("<fmt:message key='go_delete_confirm'/> ");/*确定要删除吗？*/
             if(t) {
                 if($("#selectAll").prop("checked")){
                     $("#selectAll").prop("checked",false);
@@ -281,7 +281,7 @@
                 });
 
                 if (count == 0) {
-                    alert("至少选择一个!");
+                    alert("<fmt:message key='compare_select_one'/> ");/*至少选择一个!*/
                     return;
                 }
             }
