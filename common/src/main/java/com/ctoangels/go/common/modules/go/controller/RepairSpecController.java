@@ -40,6 +40,8 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,6 +79,9 @@ public class RepairSpecController extends BaseController {
     @Autowired
     private IShipService shipService;
 
+
+    @Autowired
+    private IRepairSpecDetailMediaService repairSpecDetailMediaService;
 
     @RequestMapping
     public String page() {
@@ -582,6 +587,9 @@ public class RepairSpecController extends BaseController {
             }
         }
 
+        //获取填表人的角色
+        List<Dict> preparerRoles=dictService.selectByType("填表人角色");
+        List<Dict> directorRoles=dictService.selectByType("主管角色");
         for (Dict dict : dictList) {
             String catagory = dict.getDes();
             detailList = repairSpecDetailService.getListBySpecIdAndCatagory(specId, catagory);
@@ -596,25 +604,37 @@ public class RepairSpecController extends BaseController {
                 detailSheet.getRow(0).getCell(14).setCellValue(detail.getProOrderNo());//维修单号
                 detailSheet.getRow(4).getCell(1).setCellValue(detail.getProName());//工程名称
                 detailSheet.getRow(5).getCell(1).setCellValue(detail.getProDesc());//工程描述
-                detailSheet.getRow(13).getCell(1).setCellValue(detail.getFaciName());//设备名称
-                detailSheet.getRow(14).getCell(1).setCellValue(detail.getFaciType());//设备型号
-                detailSheet.getRow(15).getCell(1).setCellValue(detail.getFaciSrc());//设备来源 厂家/国家
-                detailSheet.getRow(16).getCell(1).setCellValue(detail.getFaciNo());//设备序列号
-                detailSheet.getRow(11).getCell(3).setCellValue(detail.getFaciParam());//设备相关参数
-                detailSheet.getRow(23).getCell(1).setCellValue(detail.getRepairPositionDesc());//维修详细位置
-                detailSheet.getRow(27).getCell(2).setCellValue(detail.getDamage());//损坏程度
-                detailSheet.getRow(40).getCell(1).setCellValue(detail.getRepairTechDesc());//修理工艺描述
+                detailSheet.getRow(4).getCell(11).setCellValue(detail.getFaciName());//设备名称
+                detailSheet.getRow(5).getCell(11).setCellValue(detail.getFaciType());//设备型号
+                detailSheet.getRow(6).getCell(11).setCellValue(detail.getFaciSrc());//设备来源 厂家/国家
+                detailSheet.getRow(8).getCell(11).setCellValue(detail.getFaciParam());//设备相关参数
+                detailSheet.getRow(17).getCell(1).setCellValue(detail.getRepairPositionDesc());//维修详细位置
+                detailSheet.getRow(31).getCell(2).setCellValue(detail.getDamage());//损坏程度
+                detailSheet.getRow(28).getCell(1).setCellValue(detail.getRepairTechDesc());//修理工艺描述
+
+                for(Dict d:preparerRoles){
+                    if(Integer.parseInt(d.getValue())==detail.getPreparerRole()){
+                        detailSheet.getRow(39).getCell(1).setCellValue(d.getDes());//填表人角色
+                        detailSheet.getRow(39).getCell(3).setCellValue(detail.getPreparer());//填表人
+                    }
+                }
+                for(Dict d1:directorRoles){
+                    if(Integer.parseInt(d1.getValue())==detail.getDirectorRole()){
+                        detailSheet.getRow(40).getCell(1).setCellValue(d1.getDes());//主管角色
+                        detailSheet.getRow(40).getCell(3).setCellValue(detail.getDirector());//船员主管
+                    }
+                }
+
+                detailSheet.getRow(41).getCell(1).setCellValue(detail.getDirector());//机务
 
                 //维修部位
-                Dict dict2 = new Dict();
-                dict2.setType("维修部位");
-                List<Dict> dictList1 = dictService.selectList(new EntityWrapper<>(dict2));
+                List<Dict> dictList1=dictService.selectByType("维修部位");
                 String[] posList = new String[0];
                 if (detail.getRepairPosition() != null) {
                     posList = detail.getRepairPosition().split(",");
                 }
 
-                int posRow = 19;
+                int posRow = 13;
                 int posCol = 0;
                 String iValue;
                 String rValue;
@@ -638,14 +658,12 @@ public class RepairSpecController extends BaseController {
                 }
 
                 //修理工艺
-                Dict dict3 = new Dict();
-                dict3.setType("修理工艺");
-                List<Dict> dictList2 = dictService.selectList(new EntityWrapper<>(dict3));
+                List<Dict> dictList2=dictService.selectByType("修理工艺");
                 String[] techList = new String[0];
                 if (detail.getRepairTech() != null) {
                     techList = detail.getRepairTech().split(",");
                 }
-                int techRow = 35;
+                int techRow = 23;
                 int techCol = 0;
                 for (int i = 0; i < dictList2.size(); i++) {
                     iValue = dictList2.get(i).getValue();
@@ -669,13 +687,35 @@ public class RepairSpecController extends BaseController {
                 RepairSpecDetailReq req = new RepairSpecDetailReq();
                 req.setRepairSpecDetailId(detail.getId());
                 List<RepairSpecDetailReq> reqList = repairSpecDetailReqService.selectList(new EntityWrapper<>(req));
-                int startRow = 5;
+                int startRow = 46;
                 for (RepairSpecDetailReq r : reqList) {
                     HSSFRow reqRow = detailSheet.getRow(startRow++);
-                    reqRow.getCell(9).setCellStyle(s);
-                    reqRow.getCell(9).setCellValue(r.getDes());//要求和描述/材料
-                    reqRow.getCell(14).setCellValue(r.getUnit());//单位
-                    reqRow.getCell(15).setCellValue(r.getCount());//数量
+                    reqRow.getCell(0).setCellStyle(s);
+                    reqRow.getCell(0).setCellValue(r.getDes());//要求和描述/材料
+                    reqRow.getCell(9).setCellValue(r.getUnit());//单位
+                    reqRow.getCell(13).setCellValue(r.getCount());//数量
+                }
+
+                //获取详单的图片信息
+                EntityWrapper<RepairSpecDetailMedia> ew=new EntityWrapper<>();
+                ew.addFilter("repair_spec_detail_id={0}",detail.getId());
+                List<RepairSpecDetailMedia> medias=repairSpecDetailMediaService.selectList(ew);
+                int row=0;
+                if(medias.size()>0){
+                    for(RepairSpecDetailMedia media:medias){
+                        URL url=new URL(media.getOss());
+                        HttpURLConnection conn= (HttpURLConnection) url.openConnection();//打开链接
+                        conn.setRequestMethod("GET");//设置请求方式
+                        conn.setConnectTimeout(5*1000);//设置超时响应时间
+                        InputStream inputStream=conn.getInputStream();//通过输入流获取图片数据
+                        byte[] data=readInputStream(inputStream);
+                        HSSFPatriarch patriarch=detailSheet.createDrawingPatriarch();
+                        HSSFClientAnchor anchor=new HSSFClientAnchor(0,0,1023,250,(short)9,16+row,(short) 15,23+row);
+                        row+=9;
+                        anchor.setAnchorType(2);
+                        patriarch.createPicture(anchor,wb.addPicture(data,HSSFWorkbook.PICTURE_TYPE_JPEG));
+
+                    }
                 }
             }
         }
@@ -716,6 +756,22 @@ public class RepairSpecController extends BaseController {
 
 
         return sheet;
+    }
+    private static byte[] readInputStream(InputStream inStream) throws Exception{
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        //创建一个Buffer字符串
+        byte[] buffer = new byte[1024];
+        //每次读取的字符串长度，如果为-1，代表全部读取完毕
+        int len = 0;
+        //使用一个输入流从buffer里把数据读取出来
+        while( (len=inStream.read(buffer)) != -1 ){
+            //用输出流往buffer里写入数据，中间参数代表从哪个位置开始读，len代表读取的长度
+            outStream.write(buffer, 0, len);
+        }
+        //关闭输入流
+        inStream.close();
+        //把outStream里的数据写入内存
+        return outStream.toByteArray();
     }
 }
 
