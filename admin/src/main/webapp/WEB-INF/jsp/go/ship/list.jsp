@@ -67,7 +67,7 @@
                 }
             },
             "language": {
-                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+                "url": "http://shipinfo.oss-cn-shanghai.aliyuncs.com/system/assets/global/plugins/datatables/cn.txt"
             },
 
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],

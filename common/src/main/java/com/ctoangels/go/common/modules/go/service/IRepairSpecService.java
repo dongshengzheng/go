@@ -17,4 +17,6 @@ public interface IRepairSpecService extends ISuperService<RepairSpec> {
 
     Map<String, Object> updateRepairSpec(RepairSpec repairSpec, RepairSpecItemList specItemList, Integer[] repairDetailId, Integer[] deleteItemId);
 
+    //查询本地数据同步到网上
+    boolean selectLocalSyncOnline(List<RepairSpec> repairSpecs);
 }

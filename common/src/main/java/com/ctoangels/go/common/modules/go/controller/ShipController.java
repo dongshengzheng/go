@@ -62,6 +62,7 @@ public class ShipController extends BaseController {
         ship.setCompanyId(company.getId());
         ship.setCompanyName(company.getName());
         ship.setDelFlag(Const.DEL_FLAG_NORMAL);
+        ship.setSw(0);//表示了修改，或者增加
         if (shipService.insert(ship)) {
             jsonObject.put("success", true);
         } else {

@@ -110,6 +110,26 @@ public class RepairModelDetail implements Serializable {
 	@TableField(value = "company_id")
 	private Integer companyId;
 
+	/** 脚手架数量*/
+	@TableField(value = "scaffold_num")
+	private String scaffoldNum;
+
+	/** 填表人角色*/
+	@TableField(value = "preparer_role")
+	private Integer preparerRole;
+
+	/** 填表人*/
+	private String preparer;
+
+	/** 船员主管角色*/
+	@TableField(value = "director_role")
+	private Integer directorRole;
+
+	/** 船员主管*/
+	private String director;
+
+	/** 机务*/
+	private String engineer;
 
 	public Integer getId() {
 		return this.id;
@@ -295,5 +315,53 @@ public class RepairModelDetail implements Serializable {
 
 	public void setCompanyId(Integer companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getScaffoldNum() {
+		return scaffoldNum;
+	}
+
+	public void setScaffoldNum(String scaffoldNum) {
+		this.scaffoldNum = scaffoldNum;
+	}
+
+	public Integer getPreparerRole() {
+		return preparerRole;
+	}
+
+	public void setPreparerRole(Integer preparerRole) {
+		this.preparerRole = preparerRole;
+	}
+
+	public String getPreparer() {
+		return preparer;
+	}
+
+	public void setPreparer(String preparer) {
+		this.preparer = preparer;
+	}
+
+	public Integer getDirectorRole() {
+		return directorRole;
+	}
+
+	public void setDirectorRole(Integer directorRole) {
+		this.directorRole = directorRole;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public String getEngineer() {
+		return engineer;
+	}
+
+	public void setEngineer(String engineer) {
+		this.engineer = engineer;
 	}
 }

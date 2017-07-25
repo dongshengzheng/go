@@ -84,9 +84,9 @@ public class TaskController extends BaseController {
         Locale locale = LocaleContextHolder.getLocale();
         String language=locale.getDisplayLanguage();
         List<Dict> cataList=null;
-        if(language.equals("中文")){
+        if(language.equals("中文")||language.equals("Chinese")){
             cataList= dictService.getListByType("维修进度大类",Const.MESSAGE_ZH);
-        }else if (language.equals("英文")){
+        }else if (language.equals("英文")||language.equals("English")){
             cataList= dictService.getListByType("维修进度大类",Const.MESSAGE_EN);
         }
 

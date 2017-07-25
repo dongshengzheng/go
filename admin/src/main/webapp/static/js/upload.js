@@ -201,13 +201,13 @@ function initUploaders_img(buttonId, bucket, domain, divId,imgNum) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
-                $("#"+divId).before('<div class="col-md-12" style="margin-top: 20px;border: 1px dashed #337ab7;padding: 0px">' +
+                $("#"+divId).before('<div class="col-md-12" style="margin-top: 10px;border: 1px dashed #337ab7;padding: 0px">' +
                     '<input name="fileName" type="hidden" value="'+nativeName+'"/> '+//文件原名称
                     '<input name="fileType" type="hidden" value="0">'+
                     '<input name="oss" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '"/> '+
                     '<span onclick="removeImg(this)" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:0px;z-index: 999;"></span>' +
                     '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' +
-                    '<img style="width:100%;height: 180px" src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '"/></a></div>');
+                    '<img style="width:100%;height: 100px" src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '"/></a></div>');
                 var j=$("#"+imgNum).find("img").length;
                 if(j==4){
                     $("#"+divId).hide();

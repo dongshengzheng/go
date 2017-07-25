@@ -53,7 +53,7 @@ public class PrivateShipyardController extends BaseController{
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public JSONObject list(@RequestParam(required = false) String keyword) {
+    public JSONObject list(PrivateShipyard privateShipyard,@RequestParam(required = false) String keyword) {
         int companyId = getCurrentUser().getCompanyId();
         EntityWrapper<PrivateShipyard> ew = getEntityWrapper();
         ew.addFilter("company_id={0}", companyId);

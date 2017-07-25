@@ -45,7 +45,7 @@ public class NavigaterTag extends TagSupport {
         try {
             Locale locale= LocaleContextHolder.getLocale();
             String language=locale.getDisplayLanguage();
-            if(language.equals("英文")){
+            if(language.equals("英文")||language.equals("English")){
                 title="HomePage";
             }
             writer.append("<div class='page-bar'><ul class='page-breadcrumb'>").append("	<li><a href='./'><i class='icon-home'></i> "+title+"</a></li>");

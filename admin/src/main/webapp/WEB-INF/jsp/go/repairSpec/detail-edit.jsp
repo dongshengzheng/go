@@ -84,6 +84,21 @@
         border: 1px dashed #337ab7;
         margin-left: 10px
     }
+    .divId {
+        margin-top: 10px;
+        border: 1px solid #337ab7;
+        height: 550px;
+    }
+    #divId{
+        border: 1px dashed #337ab7;
+        padding: 0px;
+        margin-top: 10px;
+    }
+    .div-signature{
+        margin-left: 10px;
+        float: left;
+        width: 30%;
+    }
 
 </style>
 <div class="modal-header">
@@ -103,38 +118,29 @@
         <div class="line1"></div>
         <div style="height:40px;width: 100%;background-color: #C0C9CC">
             <div class="timeline-body-content">
-                <div class="form-group col-md-3">
-                    <label for="shipName" class="control-label label-top"><fmt:message key="project_vessel_name"/><%--船名--%>：</label>
-                    <label style="width: auto;padding-left: 0px;"
+                <div class="form-group col-md-4">
+                    <label for="shipName" class="control-label label-top"><fmt:message key="project_vessel_name"/> <%--船名--%>：</label>
+                    <label style="width: auto;padding-left: 0px;" id="shipNameLabel"
                            class="control-label label-top">${detail.shipName}</label>
-                    <input style="display: none" readonly id="shipName" name="shipName" type="text" maxlength="32"
-                           value="${detail.shipName}"
-                           class="form-control required">
+                    <input id="shipName" name="shipName" type="hidden" value="${detail.shipName}">
                 </div>
-                <div class="form-group col-md-3">
-
-                    <label for="catagory" class="control-label label-top"><fmt:message key="project_category"/><%--项目分类--%>：</label>
-                    <label style="width: auto;padding-left: 0px;"
+                <div class="form-group col-md-4">
+                    <label for="catagory" class="control-label label-top"><fmt:message key="project_category"/> <%--项目分类--%>：</label>
+                    <label style="width: auto;padding-left: 0px;" id="catagoryLabel"
                            class="control-label label-top">${detail.viewCatagory}</label>
-                    <input style="display: none" readonly id="catagory" name="catagory" type="text" maxlength="32"
-                           value="${detail.catagory}"
-                           class="form-control ">
+                    <input id="catagory" name="catagory" type="hidden" value="${detail.catagory}">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="code" class="control-label label-top"><fmt:message key="project_number"/><%--项目号--%>：</label>
-                    <label style="width: auto;padding-left: 0px;"
+                <div style="display: none">
+                    <label for="code" class="control-label label-top"><fmt:message key="project_number"/> <%--项目号--%>：</label>
+                    <label style="width: auto;padding-left: 0px;" id="codeLabel"
                            class="control-label label-top">${detail.code}</label>
-                    <input style="display: none" readonly id="code" name="code" type="text" maxlength="32"
-                           value="${detail.code}"
-                           class="form-control required">
+                    <input id="code" name="code" type="hidden" value="${detail.code}">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="proOrderNo" class="control-label label-top"><fmt:message key="project_bill_number"/><%--项目单号--%>：</label>
-                    <label style="width: auto;padding-left: 0px;"
-                           class="ontrol-label label-top">${detail.proOrderNo}</label>
-                    <input style="display: none" readonly id="proOrderNo" name="proOrderNo" type="text" maxlength="32"
-                           value="${detail.proOrderNo}"
-                           class="form-control required">
+                <div class="form-group col-md-4">
+                    <label for="proOrderNo" class="control-label label-top"><fmt:message key="project_bill_number"/> <%--项目单号--%>：</label>
+                    <label style="width: auto;padding-left: 0px;" id="proOrderNoLabel"
+                           class="control-label label-top">${detail.proOrderNo}</label>
+                    <input id="proOrderNo" name="proOrderNo" type="hidden" value="${detail.proOrderNo}">
                 </div>
             </div>
         </div>
@@ -142,107 +148,171 @@
             <div class="col-md-8 left">
                 <div style="width: 100%;">
                     <div><span style="background-color: #C0C9CC;font-size: 20px"><fmt:message key="project_describe" /><%--工程项目描述--%></span></div>
-                    <div class="col-md-12 div-left" style="margin-top: 20px"><fmt:message key="project_name"/><%--工程名称--%>：
-                        <input style="width: 50%" id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span
+                    <div class="col-md-12 div-left" style="margin-top: 20px"><fmt:message key="project_name"/> <%--工程名称--%>：
+                        <input style="width: 70%" id="proName" type="text" name="proName" value="${detail.proName}"/>&nbsp;&nbsp;<span
                                 id="remind"></span>
                     </div>
-                    <div class="col-md-12 div-left"><fmt:message key="project_describe"/><%--工程描述--%>：</div>
+                    <div class="col-md-12 div-left"><fmt:message key="project_describe"/> <%--工程描述--%>：</div>
                     <div class="col-md-12" style="margin-left: 20px">
-                        <textarea id="proDesc" class="form-control" rows="4" name="proDesc">${detail.proDesc}</textarea>
-                    </div>
-                </div>
-                <div class="col-md-12 line1"></div>
-                <div style="width: 100%;">
-                    <div><span class="head"><span class="head"><fmt:message key="project_equipment_info"/><%--设备信息--%></span></div>
-                    <div class="col-md-6">
-                        <div class="form-group col-md-12">
-                            <label for="faciName" class="col-sm-6 control-label"><fmt:message key="project_equipment_name"/><%--设备名称--%>:</label>
-                            <div class="col-sm-6">
-                                <input id="faciName" name="faciName" type="text" value="${detail.faciName}"
-                                       class="">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="faciType" class="col-sm-6 control-label"><fmt:message key="project_equipment_model"/><%--设备型号--%>:</label>
-                            <div class="col-sm-6">
-                                <input id="faciType" name="faciType" type="text" value="${detail.faciType}"
-                                       class="">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="faciSrc" class="col-sm-6 control-label"><fmt:message key="project_manufacturer_nation"/><%--厂家/国家--%>:</label>
-                            <div class="col-sm-6">
-                                <input id="faciSrc" name="faciSrc" type="text" value="${detail.faciSrc}"
-                                       class="">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="faciNo" class="col-sm-6 control-label"><fmt:message key="project_serial_number"/><%--序列号--%>:</label>
-                            <div class="col-sm-6">
-                                <input id="faciNo" name="faciNo" type="text" value="${detail.faciNo}"
-                                       class="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group" style="margin-left: 20px">
-                            <textarea class="form-control" rows="7" placeholder="<fmt:message key='project_related_parameters'/>> "<%--请输入相关参数--%>
-                                      name="faciParam">${detail.faciParam}</textarea>
-                        </div>
+                        <textarea class="form-control" rows="2" name="proDesc">${detail.proDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
                     <div><span class="head"><fmt:message key='project_repair_location'/><%--维修部位--%></span></div>
-                    <div class="form-group col-md-12" style="margin-left: 3px;margin-top: 20px">
+                    <div class="form-group col-md-7" style="margin-left: 3px;margin-top: 20px">
                         <c:forEach items="${repDicts}" var="r">
                             <div class="col-md-3">
-                                <label class="mt-checkbox">
-                                    <input type="checkbox" value="${r.value}"
-                                    <c:forEach items="${positionList}" var="pos">
-                                    <c:if test="${pos==r.value}">
-                                           checked
-                                    </c:if>
-                                    </c:forEach>
-                                           name="repairPosition"> ${r.des}
-                                    <span></span>
-                                </label>
+                                <input type="checkbox" value="${r.value}"
+                                <c:forEach items="${positionList}" var="pos">
+                                <c:if test="${pos==r.value}">
+                                       checked
+                                </c:if>
+                                </c:forEach>
+                                       name="repairPosition">${r.des}
                             </div>
                         </c:forEach>
                     </div>
-                    <div class="col-md-12" style="margin-left: 20px">
+                    <div class="col-md-4" style="margin-left: 20px;margin-top: 20px">
                         <textarea class="form-control" rows="4" placeholder="<fmt:message key='project_detail_location'/>"<%--请输入详细位置--%>
                                   name="repairPositionDesc">${detail.repairPositionDesc}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 line1"></div>
+                <div style="width: 100%;margin-top: 10px">
+                    <div class="col-md-6"><span class="head"><fmt:message key="project_repair_technology"/> <%--修理工艺--%></span></div>
+                    <div class="form-group col-md-8 div-left" style="margin-top: 20px">
+                        <c:forEach items="${reqDicts}" var="req">
+                            <div class="col-md-4">
+                                <input type="checkbox" value="${req.value}"
+                                <c:forEach items="${techList}" var="tech">
+                                <c:if test="${tech==req.value}">
+                                       checked
+                                </c:if>
+                                </c:forEach>
+                                       name="repairTech"> ${req.des}
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-12 ">
+                            <textarea class="form-control" rows="4"
+                                      placeholder="请填写脚手架数量"
+                                      name="scaffoldNum">${detail.scaffoldNum}</textarea>
+                        </div>
+                        <div class="col-md-12 ">
+                            <textarea class="form-control" rows="4"
+                                      placeholder="<fmt:message key='project_repair_technology_input'/> " <%--请填写修理工艺--%>
+                                      name="repairTechDesc">${detail.repairTechDesc}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 line1"></div>
                 <div style="width: 100%;">
-                    <div><span class="head"><fmt:message key='project_extent_damage'/><%--损坏程度--%></span></div>
+                    <div class="col-md-6"><span class="head"><fmt:message key='project_extent_damage'/><%--损坏程度--%></span></div>
                     <div class="col-md-12 div-left" style="margin-top: 20px">
                         <textarea class="form-control" rows="4" name="damage">${detail.damage}</textarea>
                     </div>
                 </div>
+                <div class="col-md-12 line1"></div>
+                <div style="width: 100%;">
+                    <div class="col-md-6"><span class="head">签名</span></div>
+                    <div class="col-md-12 div-left" style="margin-top: 10px">
+                        <div class="div-signature">
+                            <label>填表人</label>
+                            <select name="preparerRole">
+                                <option value="0">--请选择--</option>
+                                <c:forEach items="${preparerRoles}" var="p">
+                                    <option value="${p.value}"
+                                            <c:if test="${detail.preparerRole==p.value}">
+                                                selected
+                                            </c:if>
+                                    >${p.des}</option>
+                                </c:forEach>
+                            </select>
+                            <input  type="text" name="preparer" value="${detail.preparer}" style="width: 30%"/>
+                        </div>
+                        <div class="div-signature">
+                            <label>船员主管</label>
+                            <select name="directorRole">
+                                <option value="0">--请选择--</option>
+                                <c:forEach items="${directorRoles}" var="d">
+                                    <option value="${d.value}"
+                                            <c:if test="${detail.preparerRole==d.value}">
+                                                selected
+                                            </c:if>
+                                    >${d.des}</option>
+                                </c:forEach>
+                            </select>
+                            <input  type="text" name="director" value="${detail.director}" style="width:30%"/>
+                        </div>
+                        <div class="div-signature">
+                            <label>机务</label>
+                            <input  type="text"name="engineer" value="${detail.engineer}" style="width:50%"/>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-4" id="imgNum">
+                <div style="width: 100%;">
+                    <div><span class="head"><fmt:message key="project_equipment_info"/> <%--设备信息--%></span></div>
+                    <div class="col-md-6">
+                        <div class="form-group col-md-12">
+                            <label for="faciName" class="col-sm-8 control-label"><fmt:message key="project_equipment_name"/> <%--设备名称--%>:</label>
+                            <div class="col-sm-4">
+                                <input id="faciName" name="faciName" type="text" value="${detail.faciName}"
+                                       class="">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="faciType" class="col-sm-8 control-label"><fmt:message key="project_equipment_model"/> <%--设备型号--%>:</label>
+                            <div class="col-sm-4">
+                                <input id="faciType" name="faciType" type="text" value="${detail.faciType}"
+                                       class="">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="faciSrc" class="col-sm-8 control-label"><fmt:message key="project_manufacturer_nation"/><%--厂家/国家--%>:</label>
+                            <div class="col-sm-4">
+                                <input id="faciSrc" name="faciSrc" type="text" value="${detail.faciSrc}"
+                                       class="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=col-md-6">
+                            <textarea class="form-control" rows="4"
+                                      placeholder="<fmt:message key='project_related_parameters'/> " <%--请填写其他参数--%>
+                                      name="faciParam">${detail.faciParam}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 line1"></div>
                 <input type="hidden" value="0" id="num"/>
                 <input type="hidden" value="${size}" id="size"/>
-                <div style="margin-top: 5px"><span class="head"><fmt:message key="project_upload_img"/><%--上传图片--%></span></div>
-                <c:if test="${specDetailMedias!=null}">
-                    <c:forEach var="s" items="${specDetailMedias}">
-                        <div class="col-md-12" style="margin-top: 20px;border: 1px dashed #337ab7;padding: 0px">
-                            <input name="fileName" type="hidden" value="${s.filename}"/>
-                            <input name="fileType" type="hidden" value="0">
-                            <input name="oss" type="hidden" value="${s.oss}"/>
-                            <span onclick="removeImg(this)" class="glyphicon glyphicon-remove"
-                                  style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:0px;z-index: 999;"></span>
-                            <a target="_blank" href="${s.oss}">
-                                <img style="width:100%;height: 180px" src="${s.oss}"/></a></div>
-                    </c:forEach>
-                </c:if>
 
-                <div class="col-md-12" id="divId" style="margin-top: 20px;border: 1px dashed #337ab7;">
-                    <button id="upload_img" style="width: 100%"><img src="" onerror="nofind(4)"
-                                                                     style="width:100%;height: 180px"/></button>
+
+                <div style="width: 100%">
+                    <div class="col-md-6" style="margin-top: 5px"><span class="head"><fmt:message
+                            key="project_upload_img"/><%--上传图片--%></span></div>
+
+                        <div class="col-md-12 divId">
+                            <c:if test="${specDetailMedias!=null}">
+                                <c:forEach var="s" items="${specDetailMedias}">
+                                    <div class="col-md-12" style="margin-top: 20px;border: 1px dashed #337ab7;padding: 0px">
+                                        <input name="fileName" type="hidden" value="${s.filename}"/>
+                                        <input name="fileType" type="hidden" value="0">
+                                        <input name="oss" type="hidden" value="${s.oss}"/>
+                                        <span onclick="removeImg(this)" class="glyphicon glyphicon-remove"
+                                              style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:0px;z-index: 999;"></span>
+                                        <a target="_blank" href="${s.oss}">
+                                            <img style="width:100%;height: 110px" src="${s.oss}"/></a></div>
+                                </c:forEach>
+                            </c:if>
+                            <div class="col-md-12"  id="divId" >
+                                <button id="upload_img" style="width: 100%">
+                                    <img src="" onerror="nofind(4)" style="width:100%;height: 110px"/>
+                                </button>
+                            </div>
+                        </div>
                 </div>
             </div>
 
@@ -255,29 +325,6 @@
             </div>
         </div>
         <div class="col-md-12 line1"></div>
-        <div style="width: 100%;margin-top: 10px">
-            <div><span class="head"><fmt:message key="project_repair_technology"/><%--修理工艺--%></span></div>
-            <div class="form-group col-md-12 div-left" style="margin-top: 20px">
-                <c:forEach items="${reqDicts}" var="req">
-                    <div class="col-md-3">
-                        <label class="mt-checkbox">
-                            <input type="checkbox" value="${req.value}"
-                            <c:forEach items="${techList}" var="tech">
-                            <c:if test="${tech==req.value}">
-                                   checked
-                            </c:if>
-                            </c:forEach>
-                                   name="repairTech"> ${req.des}
-                            <span></span>
-                        </label>
-                    </div>
-                </c:forEach>
-            </div>
-            <div class="col-md-10 div-left">
-                <textarea class="form-control" rows="4" placeholder="<fmt:message key='project_repair_technology_input'/>"<%--请填写修理工艺--%>
-                          name="repairTechDesc">${detail.repairTechDesc}</textarea>
-            </div>
-        </div>
     </div>
 
     <div class="form-actions">

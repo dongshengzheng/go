@@ -105,8 +105,12 @@
         </div>
     </div>
 </div>
+<div id="timg" class="col-md-12" style="text-align: center;">
+    <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/system/timg.gif"/>
+</div>
 <a href="repairProg" class="btn btn-sm grey-mint" data-target="navTab" id="repairProg" style="display: none"></a>
 <script type="text/javascript">
+    $("#timg").hide();
     var defTable;
     $(document).ready(function () {
         defTable = $('#default_table').DataTable({
@@ -195,7 +199,7 @@
                             '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm margin-bottom-5 red"><fmt:message key='go_delete'/> </a></li>'/*删除*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="enquiry/compare">
-                            + '<li><a href="enquiry/compare?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab">比价 </a></li>'/*询价*/
+                            + '<li><a href="enquiry/compare?id=' + row.id + '" class="btn btn-sm margin-bottom-5 blue" data-target="navTab">比价 </a></li>'/*比价*/
                             </shiro:hasPermission>
                             <shiro:hasPermission name="repairSpec/exportExcel">
                             + '<li><a onclick="addId(' + row.id + ')" href="#static" data-toggle="modal" class="btn btn-sm margin-bottom-5 yellow"><fmt:message key='repair_spec_send_excel'/> </a></li>'/*发送excel*/
@@ -267,6 +271,27 @@
             return false;
         }
         return true;
+    }
+
+    function sync() {
+        $("#timg").show();
+        $.ajax( {
+            url:"sync/loading",
+            type:"post",
+            success:function (data) {
+                if(data.mes){
+                    alert("同步成功！");
+                    $("#timg").hide();
+                }else {
+                    alert("无网络链接");
+                    $("#timg").hide();
+                }
+            },
+            error:function () {
+                alert("同步失败");
+                $("#timg").hide();
+            }
+        });
     }
 
     //发送工程单响应alert

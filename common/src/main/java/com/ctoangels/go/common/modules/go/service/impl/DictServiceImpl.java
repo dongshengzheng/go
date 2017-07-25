@@ -40,16 +40,26 @@ public class DictServiceImpl extends SuperServiceImpl<DictMapper, Dict> implemen
 
     @Override
     public List<Dict> selectByType(String type) {
-        Locale locale= LocaleContextHolder.getLocale();
-        String language=locale.getDisplayLanguage();
         EntityWrapper<Dict> ew = new EntityWrapper();
-        if(language.equals("中文")){
-            ew.addFilter("language={0}", Const.MESSAGE_ZH);
-        }else if(language.equals("英文")){
-            ew.addFilter("language={0}",Const.MESSAGE_EN);
+        List<Dict> dicts=null;
+        if(type.equals("填表人角色") || type.equals("主管角色")){
+            ew.addFilter("type={0}",type);
+            dicts=dictMapper.selectList(ew);
+        }else {
+            Locale locale=LocaleContextHolder.getLocale();
+            String language=locale.getDisplayLanguage();
+
+            if(language.equals("中文")||language.equals("Chinese")){
+                ew.addFilter("language={0}", Const.MESSAGE_ZH);
+            }else if(language.equals("英文")||language.equals("English")){
+                ew.addFilter("language={0}",Const.MESSAGE_EN);
+            }
+            ew.addFilter("type={0}",type);
+            dicts=dictMapper.selectList(ew);
         }
-        ew.addFilter("type={0}",type);
-        List<Dict> dicts=dictMapper.selectList(ew);
         return dicts;
+
+
+
     }
 }

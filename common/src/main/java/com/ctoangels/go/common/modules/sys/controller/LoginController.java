@@ -346,11 +346,9 @@ public class LoginController extends BaseController {
     private void initRights(User sysUser, Session session) {
         Locale locale = LocaleContextHolder.getLocale();
         String language = locale.getDisplayLanguage();
-        logger.info("哈哈哈哈哈哈哈哈");
-        logger.info("哈哈哈哈哈哈哈哈:" + language);
-        if (language.equals("中文")) {
+        if (language.equals("中文") || language.equals("Chinese")) {
             session.setAttribute("language", 0);
-        } else if (language.equals("英文")) {
+        } else if (language.equals("英文") || language.equals("English")) {
             session.setAttribute("language", 1);
         }
 
@@ -371,9 +369,10 @@ public class LoginController extends BaseController {
             List<Menu> menus = loginService.getRightsParentMenus(sysUser.getId());
             // menuList.addAll(menus);
             for (Menu menu : menus) {
-                if (language.equals("英文")) {
+                if (language.equals("英文") || language.equals("English")) {
                     menu = changeLanguage(menu);
                 }
+
                 allRightsUrls.add(menu.getMenuUrl());
 
                 Map<String, Integer> params = new HashMap<>();
@@ -384,7 +383,7 @@ public class LoginController extends BaseController {
                 menu.setSubMenu(subMenus);
 
                 for (Menu subMenu : subMenus) {
-                    if (language.equals("英文")) {
+                    if (language.equals("英文") || language.equals("English")) {
                         subMenu = changeLanguage(subMenu);
                     }
                     allRightsUrls.add(subMenu.getMenuUrl());

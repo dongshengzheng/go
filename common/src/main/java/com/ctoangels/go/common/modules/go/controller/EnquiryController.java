@@ -46,7 +46,7 @@ public class EnquiryController extends BaseController {
     private IEnquiryReqService enquiryReqService;
 
 
-    @RequestMapping
+   /* @RequestMapping
     public String page(){
         return "go/compare/import-excel";
     }
@@ -57,7 +57,7 @@ public class EnquiryController extends BaseController {
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("ss",1);
         return jsonObject;
-    }
+    }*/
 
     @RequestMapping("/compare")
     public String compare(@RequestParam(required = false) Integer id, ModelMap modelMap){
