@@ -17,7 +17,7 @@
         <jdbc.username>root</jdbc.username>
         <jdbc.password>root</jdbc.password>
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-        <spring.version>4.3.4.RELEASE</spring.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework.version>4.1.6.RELEASE</org.springframework.version>
     </properties>
